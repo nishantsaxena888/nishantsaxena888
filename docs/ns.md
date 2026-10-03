@@ -4,6 +4,51 @@
 > JSON **definitions** rendered by a generic engine. This doc is the complete
 > reference for the repo.
 
+## Nishant's Model
+
+### Points
+
+1. React will be the frontend — mobile, desktop and web responsive using shadcn, plus packaged desktop app (Electron/Tauri); it will be multilingual and multi-theme enabled, with offline mode and implicit sync.
+2. Even UI sessions (checkout, add-to-cart) are sources.
+3. The API layer derives layout, site — everything — from options.
+4. The same site can serve different sites — change the config and the component library in package.json and rebuild: multi-tenancy via build only.
+5. Components live in a separate library (package.json dependency); change the layout and you can produce anything.
+6. Authentication and authorization are implicit too — SSO identity in, RBAC enforced server-side, UI just consumes it (menus, fields, routes render per group permissions).
+
+### Details
+
+> **Knowledge base (discussion + Devin's understanding — for implementation):**
+>
+> - **Mock-first engine** (pt 3): `config.json` `mock: true` per endpoint+method
+>   → file mocks mirroring real response shapes. Contract freezes in mocks
+>   first; nishify backend implements it. `VITE_API_URL` + flags → live.
+> - **Package split in progress** (pt 5): `package.json` repointed `nishify` →
+>   `file:../../library/generic-marketplace` (vendored lib source with own
+>   components/engine/tenants + vite build + `fe-library-*.tgz` packs).
+>   Target: app repo = engine + config + mocks + tenant glue only. Pending:
+>   `node_modules/nishify` symlink still points to the dead old path — needs
+>   `npm install`; verify `../../` resolves correctly (may need `../library/`).
+> - **Sessions as local sources** (pt 2): `useGenericState` zustand stores
+>   configured by server JSON (`sessions[]` in configuration response);
+>   `useEntity` reads/writes the store instead of HTTP — a local source
+>   behind the same entity interface. Persisted as `<client>_gs_<name>`.
+> - **Offline + sync** (pt 1): offline = local sources serve; sync =
+>   source→source reconciliation. Needs `last_updated_at` delta contract,
+>   tombstones for deletes, conflict policy — see nishify.md details.
+> - **Open gaps (to fill via discussion)**: desktop packaging tech pick
+>   (Electron vs Tauri), offline storage engine (IndexedDB/SQLite/localStorage),
+>   PWA vs packaged app for offline mode, sync conflict policy.
+> - **OPTIONS-derived admin** (pt 3): `OPTIONS /{entity}` → `default-admin`
+>   renders table/form/filters — admin screens are free per entity.
+> - **Implicit authN/authZ (frontend half)**: SSO via Keycloak (`nish_auth`)
+>   or any OIDC — JWT in `localStorage.token`, `jwt-decode` expiry check in
+>   `Protected` (`/admin/:slug`); `logout_redirect` from config. Frontend
+>   enforcement is UX-only — real RBAC stays backend (row/column via query
+>   wrapper). UI side consumes it implicitly: OPTIONS responses arrive
+>   pre-filtered (hidden columns never sent), `admin_menu` `hide` flags +
+>   group perms drive which routes/menus render, forms only show writable
+>   fields. Design rule: client hides for UX, server denies for security.
+
 ## Repo Facts
 
 | | |

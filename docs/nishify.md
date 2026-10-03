@@ -34,9 +34,11 @@
    - AWS → S3, RDS
    - Google → BigQuery
    - In-house → memory, etc.
-5. React will be the frontend — mobile, desktop and web responsive using shadcn; it will be multilingual and multi-theme enabled.
+5. React will be the frontend — mobile, desktop and web responsive using shadcn; it will be multilingual and multi-theme enabled, with offline mode and implicit sync.
 6. The API layer is derived from options — layout, templates, everything derives from options, including authentication, authorization, multi-tenancy — all of it.
 7. Everything is configurable — UI, styling, libraries — and we build a combined library and plug-and-play with it, so anything can be built: Airbnb, grocery, e-commerce, skill development (like Uday AWS) — anything.
+8. Whatever we build — the entity builder itself, projects — is also an entity in itself, like RBAC.
+9. The same site can serve different sites — change the config and the component library in package.json and rebuild: multi-tenancy via build only.
 
 ### Details
 
@@ -104,6 +106,47 @@
 >   mirroring real response shapes). The contract freezes in mocks first; the
 >   nishify backend implements it. Flip `VITE_API_URL` + flags → same calls go
 >   live. Backend-up not required for frontend work.
+> - **Entity designer UI ("studio") = a DB design tool where the design IS the
+>   running system** — like dbdiagram/Workbench but the diagram generates a
+>   live API + admin + search index + migrations, not just documentation.
+>   Meta-circular extension:
+>   `/api/studio` already dumps `{client, order, entities}`; a designer UI =
+>   forms over the DSL shape (fields/`validate`, `foreign_key`, M2M
+>   `connection`, `kind`/`ref`/`ui`) + an `elastic_entities` editor (what
+>   fields index where, `follow_fk`, `searchable_fields`, `weights`,
+>   `exclude_if`) + ERD graph view (`eralchemy` already in requirements;
+>   `clients/*/erd_*.txt|png` exist). Write path: save DSL → rerun
+>   `code_generator` → models/tests/mocks regenerate → alembic migrate →
+>   live API. Friction: `entities.py` is Python (lambdas like `exclude_if`,
+>   `datetime` imports) — UI-driven editing needs a pure-JSON DSL or codegen
+>   as the writer, and serializable function templates.
+> - **Offline sync mechanics** (pt 5): offline = local sources serve; sync =
+>   source→source reconciliation (same mechanism as Postgres→ES indexer).
+>   `last_updated_at` is the core primitive — delta sync = server returns only
+>   `updated_at > last_sync` rows; conflicts resolve by timestamp (last-write-
+>   wins) or field-level merge; deletes need `deleted_at` tombstones or they
+>   vanish silently. `updated_at`/`version` should be implicit on every entity
+>   (like `id`), part of the options schema — not per-entity manual.
+> - **Implicit audit logging** — same write-through side-effect family as the
+>   indexer and accounting poster: every entity write → audit event (who via
+>   `{{user_id}}`, before/after diff, when, which entity), zero handler code.
+>   Already modeled: `pioneer` has `audit__audit_log_event` +
+>   `audit__audit_trail` — audit config and records are both entities. Pays
+>   off in debugging ("who changed what when"), compliance, and it doubles as
+>   a change-feed for sync. Config: per-entity `audit: true`, sensitive-field
+>   exclusions, retention — all DSL. Bonus: audit entities get free OPTIONS-
+>   derived admin screens ("activity" tab).
+> - **Accounting as the implicit base layer** (extends pt 7): for commerce
+>   products, accounting is the foundation — every business event (order,
+>   payment, refund, inventory move, purchase) is ultimately a ledger entry.
+>   Already modeled in repo: `pioneer` client has `accounting__account`,
+>   `accounting__journal_entry`, `accounting__ledger`,
+>   `accounting__reconciliation` + `finance__*` entities. Implicit +
+>   configurable = same write-through pattern as `AppIndexer`: entity write →
+>   config-declared debit/credit mapping → auto-posted journal entry. Indexer
+>   is the first derived side-effect; accounting poster would be the second —
+>   the ledger becomes the system's memory from which reports/tax/
+>   reconciliation derive.
 > - **Indexing = source→source sync**: `AppIndexer` is literally one
 >   source writing into another — Postgres write → refetch row →
 >   `serialize_row` → ES doc with `refresh="wait_for"` (real-time
