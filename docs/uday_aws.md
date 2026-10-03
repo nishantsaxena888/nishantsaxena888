@@ -5,6 +5,47 @@
 > progress/quiz/lab-note state to Postgres (or SQLite). All lesson content
 > lives in JS data files — the backend never serves content.
 
+## Nishant's Model
+
+### Points
+
+1. Everything is read from markdown — README-style content files; the app is a GitHub reader at its core.
+2. The reader is extended per component — each section type gets a dedicated engine (text, lab, terminal, quiz, diagram…).
+3. Used for a GitHub reader and other components — the same markdown + component pipeline serves different products.
+
+### Details
+
+> **Knowledge base (discussion + Devin's understanding — for implementation):**
+>
+> - **Markdown pipeline** (pt 1): `MCChapters.MD_MAP` → `fetchMarkdown` →
+>   `loadMarked` renders HTML → `renderMermaid` draws diagrams — same stack
+>   GitHub uses for READMEs (marked + mermaid + code highlighting).
+>   `details-popup` renders a chapter minus labs; `lab-popup` extracts only
+>   lab sections — same source file, two filtered views.
+> - **Extension mechanism** (pt 2): `LessonEngine` dispatches on
+>   `section.type` → a dedicated engine per component (`LabEngine` step
+>   machine, `TerminalEngine` regex command registry, `ConsoleSimulator`
+>   guided clicks, `QuizEngine`, `DiagramEngine` SVG, `ChallengeEngine`).
+>   New component = add a type + one engine class — no core changes.
+> - **Content is data** (pt 1 proof): 49 chapters = 49 `.md` files (28-section
+>   format); interactive parts live in `MODULE_XX_DATA.sections[]` JS data —
+>   adding a module = new data file + registry entry, zero engine code.
+> - **Markdown is extensible → components** (pt 2 next step): fenced blocks
+>   (```` ```mermaid ```` already → `renderMermaid`), raw HTML passthrough,
+>   custom marked renderers, frontmatter/`::directive` syntax — any of these
+>   can instantiate components. Same idea as MDX (markdown + JSX): a
+>   ```` ```quiz ```` or `::products` fence → componentMap lookup → React
+>   component — identical role to `section.type`/`def.type` dispatch.
+>   Markdown becomes another page-definition format alongside JSON.
+>   Currently interactive parts live in JS `MODULE_XX_DATA` sections — md
+>   fences are the natural migration path.
+> - **Bookmarked scrolling comes free**: headings → `MCUtils.slugify` →
+>   anchor IDs → TOC links scroll to sections + shareable `#section`
+>   deep-links (GitHub README anchors). Section-level navigation, progress
+>   tracking, and "jump to" links all build on the same slug convention.
+> - **Degrades gracefully**: API → localStorage, online → offline — the
+>   markdown+component layer never depends on the backend.
+
 ## Repo Facts
 
 | | |
