@@ -56,11 +56,17 @@ const ApiProvider = ({
     client: activeClient,
   });
 
-  const componentList: any =
-    componentMap[activeClient] || componentMap["default"];
+  const maps = componentMap[activeClient] || componentMap["default"];
+  // Surface-scoped maps: {site, admin}. A flat legacy map resolves for both.
+  const siteMap = maps?.site ?? maps ?? {};
+  const adminMap = maps?.admin ?? maps ?? {};
 
   return (
-    <RenderEngineProvider componentMap={componentList} formInput={formInput}>
+    <RenderEngineProvider
+      componentMap={siteMap}
+      adminComponentMap={adminMap}
+      formInput={formInput}
+    >
       {children}
     </RenderEngineProvider>
   );

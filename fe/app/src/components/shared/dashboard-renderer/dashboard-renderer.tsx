@@ -8,6 +8,7 @@ import { SiteHeader } from "@/components/site-header";
 import { useFormStyleStore } from "@/store/use-form-style";
 import DashboardControl from "@/tenants/admin/default-admin/utils/dashboard-control";
 import { MediaManager } from "@/tenants/admin/media-upload/media-manager";
+import { AdminSurfaceProvider } from "@/engine";
 
 export interface DashboardRendererProps {
   config: any;
@@ -22,7 +23,8 @@ export const DashboardRenderer = ({ config }: DashboardRendererProps) => {
   }
 
   return (
-    <SidebarProvider
+    <AdminSurfaceProvider>
+      <SidebarProvider
       side={styles.sidebarPosition}
       style={
         {
@@ -47,6 +49,7 @@ export const DashboardRenderer = ({ config }: DashboardRendererProps) => {
           </div>
         </div>
       </SidebarInset>
-    </SidebarProvider>
+      </SidebarProvider>
+    </AdminSurfaceProvider>
   );
 };
