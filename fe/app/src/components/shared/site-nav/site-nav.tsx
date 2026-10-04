@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import { useGenericState } from "@/store/use-generic-state";
 
 // Generic site-surface nav — the S-side counterpart of the admin sidebar.
 // Renders config.data.menu (public items, ordered) + client branding from
@@ -9,6 +10,10 @@ export const SiteNav = ({ config }: { config?: any }) => {
   const data = config?.data ?? config ?? {};
   const meta = data.meta || {};
   const siteName = data.site_name || meta.display_name || meta.client || "Site";
+  const sessionData = useGenericState((s: any) => s.data);
+
+  // Configured local-source sessions show as live badges (cart, progress…).
+  const sessions: any[] = Array.isArray(data.sessions) ? data.sessions : [];
 
   const items = (Array.isArray(data.menu) ? data.menu : [])
     .filter((i: any) => i.public !== false && !i.auth_page)
@@ -37,6 +42,23 @@ export const SiteNav = ({ config }: { config?: any }) => {
               >
                 {item.name}
               </Link>
+            );
+          })}
+        </div>
+        <div className="ml-auto flex items-center gap-2">
+          {sessions.map((s: any) => {
+            const items = sessionData?.[s.name];
+            const count = Array.isArray(items)
+              ? items.reduce((n: number, i: any) => n + (i?.qty ?? 1), 0)
+              : 0;
+            return (
+              <span
+                key={s.name}
+                className="rounded-full border border-border bg-muted px-2.5 py-1 text-xs text-muted-foreground"
+                title={`${s.name} session (local source)`}
+              >
+                {s.name}: {count}
+              </span>
             );
           })}
         </div>

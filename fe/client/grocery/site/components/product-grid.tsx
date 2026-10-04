@@ -1,6 +1,10 @@
 // grocery client — product grid. Rendered by RenderEngine with
 // properties.type = "dynamic"; actionData.data.products holds the
 // GET /api/product response ({items, page, size, total}).
+// "Add" writes to the "cart" session (configuration.json → sessions[]) —
+// a local source with array_upsert semantics, same useEntity contract.
+import { useEntity } from "@/engine";
+import { toast } from "@/lib/toast";
 
 const CATEGORY_HUES: Record<string, string> = {
   Produce: "bg-green-500/15 text-green-700",
@@ -12,6 +16,12 @@ const CATEGORY_HUES: Record<string, string> = {
 export const ProductGrid = ({ content, actionData }: any) => {
   const items = actionData?.data?.products?.items || [];
   const loading = actionData?.loading;
+  const { onPost } = useEntity("cart");
+
+  const addToCart = async (p: any) => {
+    await onPost({ ...p, qty: 1 });
+    toast.success(`${p.name} added to cart`);
+  };
 
   return (
     <div className="m-4">
@@ -50,6 +60,12 @@ export const ProductGrid = ({ content, actionData }: any) => {
                 )}
               </div>
             </div>
+            <button
+              onClick={() => addToCart(p)}
+              className="mt-3 w-full rounded-lg bg-primary py-1.5 text-xs font-medium text-primary-foreground transition-all hover:opacity-90 active:scale-[0.98]"
+            >
+              Add to cart
+            </button>
           </div>
         ))}
       </div>
