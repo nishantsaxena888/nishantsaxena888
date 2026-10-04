@@ -38,6 +38,9 @@ entities = {
         # Row-level rule filter: viewers only see pending todos; admin sees
         # everything. Caller params merge UNDER the scope (can't escape it).
         "filter": {"viewer": {"done__eq": "false"}},
+        # Field-level ACL: created_at hidden from viewers (stripped from
+        # rows AND the OPTIONS schema); still usable for scoping.
+        "field_acl": {"viewer": ["created_at"]},
         "fields": {
             "id":        {"type": "int", "primary_key": True},
             "title":     {"type": "str", "required": True},

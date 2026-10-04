@@ -93,7 +93,7 @@ export const FormRender = ({
       });
     };
 
-    let baseInputs = formSchema.inputs || formSchema.schema || formSchema.fields;
+    const baseInputs = formSchema.inputs || formSchema.schema || formSchema.fields;
     if (!baseInputs) return formSchema;
 
     return {

@@ -177,14 +177,16 @@ export const useForm = <T extends Record<string, any>>(initialValues: T, schema?
         case 'maxLength':
           if (typeof value === 'string' && value.length > rule.value) return rule.message;
           break;
-        case 'email':
+        case 'email': {
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           if (typeof value === 'string' && value && !emailRegex.test(value)) return rule.message;
           break;
-        case 'regex':
+        }
+        case 'regex': {
           const pattern = typeof rule.value === 'string' ? new RegExp(rule.value) : rule.value;
           if (pattern instanceof RegExp && !pattern.test(value)) return rule.message;
           break;
+        }
         case 'pattern':
           if (rule.value instanceof RegExp && !rule.value.test(value)) return rule.message;
           break;

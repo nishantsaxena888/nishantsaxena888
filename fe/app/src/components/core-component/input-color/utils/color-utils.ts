@@ -45,7 +45,8 @@ export function rgbToHex({ r, g, b, a }: RGB): string {
 export function rgbToHsv({ r, g, b, a }: RGB): HSV {
   r /= 255; g /= 255; b /= 255;
   const max = Math.max(r, g, b), min = Math.min(r, g, b);
-  let h = 0, s = 0, v = max;
+  let h = 0, s = 0;
+  const v = max;
   const d = max - min;
   s = max === 0 ? 0 : d / max;
   if (max !== min) {
@@ -85,7 +86,8 @@ export function hsvToRgb({ h, s, v, a }: HSV): RGB {
 export function rgbToHsl({ r, g, b, a }: RGB): HSL {
   r /= 255; g /= 255; b /= 255;
   const max = Math.max(r, g, b), min = Math.min(r, g, b);
-  let h = 0, s = 0, l = (max + min) / 2;
+  let h = 0, s = 0;
+  const l = (max + min) / 2;
   if (max !== min) {
     const d = max - min;
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);

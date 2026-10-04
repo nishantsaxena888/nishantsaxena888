@@ -26,7 +26,8 @@ export const InputSwitch = ({
   disabled,
   required,
 }: SwitchFieldProps) => {
-  const id = name || React.useId();
+  const generatedId = React.useId();
+  const id = name || generatedId;
 
   return (
     <div className={cn("flex items-center justify-between space-x-4", className)} style={style}>

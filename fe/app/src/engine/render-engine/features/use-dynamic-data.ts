@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { useState, useEffect, useCallback } from "react";
 import { type Definition } from "./types";
 import { apiClient } from "../../library/api";

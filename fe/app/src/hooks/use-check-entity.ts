@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-type MenuType = {};
+type MenuType = Record<string, unknown>;
 type MenuTypeType = {
   menu: MenuType[];
   isHome?: boolean;

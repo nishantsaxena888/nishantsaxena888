@@ -80,9 +80,11 @@ export const DefaultAdmin = (prop: any) => {
         });
         if (!ok) failed++;
       }
-      failed
-        ? toast.error(`${def.label || def.name} failed on ${failed} item(s)`)
-        : toast.success(`${def.label || def.name} done`);
+      if (failed) {
+        toast.error(`${def.label || def.name} failed on ${failed} item(s)`);
+      } else {
+        toast.success(`${def.label || def.name} done`);
+      }
     }
     setProcess(false);
     await reload();

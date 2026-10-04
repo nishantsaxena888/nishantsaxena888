@@ -49,9 +49,9 @@ export const useTimePicker = ({
 
         const parts = timeStr.trim().split(/[:\s]+/);
 
-        let hh = parts[0] || "12";
-        let mm = parts[1] || "00";
-        let ss = parts[2] || "00";
+        const hh = parts[0] || "12";
+        const mm = parts[1] || "00";
+        const ss = parts[2] || "00";
         let ampm = parts[parts.length - 1]?.toUpperCase() === "PM" ? "PM" : "AM";
 
         if (!timeStr.toUpperCase().includes("AM") && !timeStr.toUpperCase().includes("PM")) {

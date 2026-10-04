@@ -26,7 +26,8 @@ export const InputCheckbox = ({
   disabled,
   required,
 }: CheckboxFieldProps) => {
-  const id = name || React.useId();
+  const generatedId = React.useId();
+  const id = name || generatedId;
   
   return (
     <div className={cn("flex items-center space-x-2", className)} style={style}>

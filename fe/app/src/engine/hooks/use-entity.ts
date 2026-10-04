@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { useState, useCallback, useEffect } from "react";
 import { apiClient } from "../library/api";
 import { useGenericState } from "@/store/use-generic-state";

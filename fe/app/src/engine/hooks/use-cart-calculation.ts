@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { useGenericState } from "@/store/use-generic-state";
 import { useConfigStore } from "@/store/use-config-store";

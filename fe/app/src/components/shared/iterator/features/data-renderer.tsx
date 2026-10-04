@@ -2,7 +2,7 @@ import { Fragment } from "react/jsx-runtime";
 import { defaultFormat } from "./utils";
 import { getValueByPath } from "@/lib/get-value-by-path";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 export const DataRenderer = ({
   value,
   emptyText,

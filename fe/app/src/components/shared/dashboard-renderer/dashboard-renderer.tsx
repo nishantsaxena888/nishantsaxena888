@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import React from "react";
 import { NotFound } from "@/pages/not-found/not-found";
 import { useDashboardRenderer } from "./utils/use-dashboard-renderer";

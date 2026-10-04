@@ -148,7 +148,7 @@ export function ThemeProvider({
             if (typeof window !== 'undefined') {
                 localStorage.setItem(storageKey, newTheme)
             }
-        } catch (e) { }
+        } catch { /* storage unavailable */ }
 
         const foundOption = THEMES.find((t) => t.value === newTheme);
         const targetClient = clientOverride || foundOption?.client;

@@ -30,7 +30,7 @@ export const TypographyRenderer = ({
       const [label, type, target] = rawContent.split("||");
 
       switch (type) {
-        case "l": // Link
+        case "l": { // Link
           const isExternal =
             target?.startsWith("http") || target?.startsWith("mailto:");
 
@@ -57,6 +57,7 @@ export const TypographyRenderer = ({
               {label}
             </a>
           );
+        }
 
         case "b": // Bold
           return (

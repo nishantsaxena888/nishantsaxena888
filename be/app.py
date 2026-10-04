@@ -11,9 +11,13 @@
 # (everything is a source — implementation is secondary).
 from __future__ import annotations
 
+import base64
+import hashlib
+import hmac
 import importlib.util
 import json
 import os
+import time
 from pathlib import Path
 from typing import Any, Dict
 
@@ -95,7 +99,8 @@ SOURCES: Dict[str, Source] = _load_sources()
 app = FastAPI(title=f"{CLIENT_NAME} entity service", redirect_slashes=False)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[o.strip() for o in
+                   os.environ.get("CORS_ORIGINS", "*").split(",") if o.strip()],
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -119,22 +124,51 @@ def _src(entity: str) -> Source:
 #   entities.py per-entity "rbac": {"read": "*", "write": ["admin"]}
 #     absent → fully open (back-compat); "*" → any role incl. anonymous.
 # The Bearer token's `role` claim decides; no token → the default role.
-# Dev tokens are unsigned — decoding claims matches the frontend contract;
-# plug a real verifier at the same seam when a client adds real auth.
+# Tokens are HS256-signed (JWT_SECRET env, dev fallback) and expiry-checked
+# — unsigned/forged/expired tokens yield no claims → default role.
 # ---------------------------------------------------------------------------
+
+JWT_SECRET = os.environ.get("JWT_SECRET", "dev-secret")
+JWT_TTL = int(os.environ.get("JWT_TTL", "86400"))
+
+
+def _b64e(b: bytes) -> str:
+    return base64.urlsafe_b64encode(b).rstrip(b"=").decode()
+
+
+def _b64d(s: str):
+    return base64.urlsafe_b64decode(s + "=" * (-len(s) % 4))
+
+
+def _jwt_sign(payload: Dict[str, Any]) -> str:
+    head = _b64e(json.dumps({"alg": "HS256", "typ": "JWT"},
+                           separators=(",", ":")).encode())
+    body = _b64e(json.dumps(payload, separators=(",", ":"), default=str).encode())
+    sig = hmac.new(JWT_SECRET.encode(), f"{head}.{body}".encode(),
+                   hashlib.sha256).digest()
+    return f"{head}.{body}.{_b64e(sig)}"
+
+
+def _jwt_verify(token: str) -> Dict[str, Any]:
+    try:
+        head, body, sig = token.split(".")
+        expect = _b64e(hmac.new(JWT_SECRET.encode(), f"{head}.{body}".encode(),
+                                hashlib.sha256).digest())
+        if not hmac.compare_digest(expect, sig):
+            return {}
+        claims = json.loads(_b64d(body))
+        if claims.get("exp") and claims["exp"] < time.time():
+            return {}
+        return claims
+    except Exception:
+        return {}
 
 
 def _decode_claims(request: Request) -> Dict[str, Any]:
-    import base64
     auth = request.headers.get("authorization", "")
     if not auth.lower().startswith("bearer "):
         return {}
-    try:
-        payload = auth.split()[1].split(".")[1]
-        pad = "=" * (-len(payload) % 4)
-        return json.loads(base64.urlsafe_b64decode(payload + pad))
-    except Exception:
-        return {}
+    return _jwt_verify(auth.split(None, 1)[1])
 
 
 def _roles() -> Dict[str, Any]:
@@ -204,17 +238,66 @@ def _scoped_params(entity: str, request: Request):
     return QueryParams(urllib.parse.urlencode(merged))
 
 
+def _cmp(val: str, op: str, want: str) -> bool:
+    """Scope-op semantics shared by list gating — numeric compare when both
+    sides parse, else string compare."""
+    num = None
+    try:
+        num = (float(val), float(want))
+    except (TypeError, ValueError):
+        pass
+    if op == "eq":
+        return val == want
+    if op == "ne":
+        return val != want
+    if op == "in":
+        return val in [x.strip() for x in want.split(",")]
+    if op == "nin":
+        return val not in [x.strip() for x in want.split(",")]
+    if op == "contains":
+        return want in val
+    if num is not None:
+        if op == "gt":
+            return num[0] > num[1]
+        if op == "gte":
+            return num[0] >= num[1]
+        if op == "lt":
+            return num[0] < num[1]
+        if op == "lte":
+            return num[0] <= num[1]
+    return True
+
+
 def _in_scope(entity: str, request: Request, row: Dict[str, Any]) -> bool:
     for key, want in _scope(entity, request).items():
         field, _, op = key.partition("__")
-        op = op or "eq"
-        val = str(row.get(field)).lower()
-        want_s = str(want).lower()
-        if op == "eq" and val != want_s:
-            return False
-        if op == "in" and val not in [x.strip() for x in want_s.split(",")]:
+        if not _cmp(str(row.get(field)).lower(), op or "eq", str(want).lower()):
             return False
     return True
+
+
+# ---------------------------------------------------------------------------
+# Field-level RBAC — per-entity "field_acl": {role|*: [hidden field names]}.
+# Hidden fields are stripped from list/get/create/update responses and from
+# the OPTIONS UI schema (columns + form fields + schema.fields). Scope and
+# RBAC still see them — a hidden field may legitimately drive a filter.
+# ---------------------------------------------------------------------------
+
+
+def _hidden_fields(entity: str, request: Request) -> set:
+    acl = entities.get(entity, {}).get("field_acl") or {}
+    role = _role(request)
+    return set(acl.get("*") or ()) | set(acl.get(role) or ())
+
+
+def _strip_fields(row: Dict[str, Any], hidden: set) -> Dict[str, Any]:
+    return {k: v for k, v in row.items() if k not in hidden} if hidden else row
+
+
+def _strip_page(page: Dict[str, Any], hidden: set) -> Dict[str, Any]:
+    if not hidden:
+        return page
+    return {**page, "items": [_strip_fields(r, hidden) for r in page.get("items", [])]}
 
 
 @app.get("/")
@@ -257,21 +340,12 @@ def list_entities():
     return {"entities": ENTITIES_ORDER}
 
 
-def _dev_jwt(payload: Dict[str, Any]) -> str:
-    """Unsigned JWT — the frontend only decodes claims (jwt-decode);
-    signing is unnecessary for the dev/source-driven model. Swap for a
-    real signer when a client adds real auth."""
-    import base64, json as _json
-    def b64(o): return base64.urlsafe_b64encode(_json.dumps(o).encode()).rstrip(b"=").decode()
-    return f"{b64({'alg': 'none', 'typ': 'JWT'})}.{b64(payload)}.dev"
-
-
 @app.post("/api/login")
 @app.post("/api/login/")
 async def login(request: Request):
-    """Generic login — any credentials mint a dev token carrying the
-    claims the frontend reads (sub/email/exp). Real auth plugs in at the
-    same contract: POST → {token, user}."""
+    """Generic login — mints an HS256-signed JWT carrying the claims the
+    frontend reads (sub/email/role/exp). Real auth plugs in at the same
+    contract: POST → {token, user}."""
     body = await request.json()
     email = (body or {}).get("email") or (body or {}).get("username") or "user@local"
     # Role claim — body selects one of configuration.roles (rejected if
@@ -280,10 +354,9 @@ async def login(request: Request):
     declared = _roles()
     if role and role not in declared:
         raise HTTPException(400, f"Unknown role: {role} (roles: {sorted(declared)})")
-    import time
     payload = {"sub": email, "email": email, "role": role or _default_role(),
-               "exp": int(time.time()) + 86400}
-    return {"token": _dev_jwt(payload), "user": {"email": email, "name": email.split("@")[0]}}
+               "iat": int(time.time()), "exp": int(time.time()) + JWT_TTL}
+    return {"token": _jwt_sign(payload), "user": {"email": email, "name": email.split("@")[0]}}
 
 
 @app.get("/api/_search")
@@ -319,11 +392,23 @@ def options(entity: str, schema: str = "basic", request: Request = None):
     if entity not in entities:
         raise HTTPException(404, f"Unknown entity: {entity}")
     cfg = entities[entity]
+    hidden = _hidden_fields(entity, request) if request is not None else set()
+    ui = dict(cfg.get("ui", {}))
+    if hidden:
+        table = dict(ui.get("table") or {})
+        if table.get("columns"):
+            table["columns"] = [c for c in table["columns"] if c.get("key") not in hidden]
+            ui["table"] = table
+        form = dict(ui.get("form") or {})
+        if form.get("fields"):
+            form["fields"] = [f for f in form["fields"] if f.get("name") not in hidden]
+            ui["form"] = form
     return {
         "entity": entity,
         "name": entity,
-        "schema": {"fields": cfg["fields"], **({"ui": cfg.get("ui", {})} if schema == "full" else {})},
-        "content": cfg.get("ui", {}),
+        "schema": {"fields": {k: v for k, v in cfg["fields"].items() if k not in hidden},
+                   **({"ui": ui} if schema == "full" else {})},
+        "content": ui,
         # Optional full Definition[] — a custom admin screen. When present the
         # frontend renders these defs (resolved via the admin component map)
         # instead of the synthesized default-admin grid.
@@ -336,7 +421,8 @@ def list_items(entity: str, request: Request, response: Response):
     _check_rbac(entity, "read", request)
     src = _src(entity)
     response.headers["X-Data-Source"] = f"{entities[entity].get('source', 'json')}:{src.name}"
-    return src.list(entity, _scoped_params(entity, request))
+    return _strip_page(src.list(entity, _scoped_params(entity, request)),
+                       _hidden_fields(entity, request))
 
 
 def _get_scoped(entity: str, item_id: int, request: Request) -> Dict[str, Any]:
@@ -349,7 +435,8 @@ def _get_scoped(entity: str, item_id: int, request: Request) -> Dict[str, Any]:
 @app.get("/api/{entity}/{item_id}/")
 def get_item(entity: str, item_id: int, request: Request):
     _check_rbac(entity, "read", request)
-    return _get_scoped(entity, item_id, request)
+    return _strip_fields(_get_scoped(entity, item_id, request),
+                         _hidden_fields(entity, request))
 
 
 @app.post("/api/{entity}/")
@@ -358,14 +445,16 @@ async def create_item(entity: str, request: Request):
     payload: Dict[str, Any] = await request.json()
     if not isinstance(payload, dict):
         raise HTTPException(400, "JSON body must be an object")
-    return _src(entity).create(entity, payload)
+    return _strip_fields(_src(entity).create(entity, payload),
+                         _hidden_fields(entity, request))
 
 
 @app.put("/api/{entity}/{item_id}/")
 async def update_item(entity: str, item_id: int, request: Request):
     _check_rbac(entity, "write", request)
     _get_scoped(entity, item_id, request)
-    return _src(entity).update(entity, item_id, await request.json())
+    return _strip_fields(_src(entity).update(entity, item_id, await request.json()),
+                         _hidden_fields(entity, request))
 
 
 @app.delete("/api/{entity}/{item_id}")

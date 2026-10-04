@@ -11,7 +11,7 @@ export const useIterator = ({ data, columns, id }: any) => {
       if (stored) {
         try {
           parsed = JSON.parse(stored);
-        } catch (e) {}
+        } catch { /* malformed stored column prefs — use defaults */ }
       }
     }
     return {

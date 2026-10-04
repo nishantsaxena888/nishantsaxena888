@@ -20,19 +20,8 @@ import { useEngine } from '../../../engine/contexts/EngineContext';
 
 import { useSettings } from './hooks/use-settings';
 
-export function SettingsPage(props: any) {
-    const { content } = props;
-    const { t, currentLanguage } = useEngine();
-    const {
-        activeTab,
-        setActiveTab,
-        storeName,
-        defaultCurrency,
-        fastMode,
-        glassmorphism
-    } = useSettings(content);
-
-    const SettingItem = ({ icon: Icon, title, desc, children }: { icon: any, title: string, desc: string, children: React.ReactNode }) => (
+function SettingItem({ icon: Icon, title, desc, children }: { icon: any, title: string, desc: string, children: React.ReactNode }) {
+    return (
         <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-2xl border-2 bg-card/50 hover:bg-card hover:border-primary/30 transition-all gap-4">
             <div className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
@@ -48,6 +37,19 @@ export function SettingsPage(props: any) {
             </div>
         </div>
     );
+}
+
+export function SettingsPage(props: any) {
+    const { content } = props;
+    const { t, currentLanguage } = useEngine();
+    const {
+        activeTab,
+        setActiveTab,
+        storeName,
+        defaultCurrency,
+        fastMode,
+        glassmorphism
+    } = useSettings(content);
 
     const menuItems = [
         { id: 'general', icon: Globe, label: t('General', currentLanguage.code, 'ui') },

@@ -117,7 +117,7 @@ export const useGenericForm = (props: any) => {
       localStorage.removeItem("generic-form-action");
     }
     switch (action?.type) {
-      case "redirect":
+      case "redirect": {
         if (action?.login) {
           localStorage.setItem(
             "token",
@@ -137,6 +137,7 @@ export const useGenericForm = (props: any) => {
         }
         router(redirectPath);
         break;
+      }
 
       default:
         break;

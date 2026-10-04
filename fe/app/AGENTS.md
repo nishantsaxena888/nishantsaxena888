@@ -163,13 +163,19 @@ fe/client/<name>/mock/
   "write": ["admin"]}` in `entities.py` (absent → open). The Bearer JWT's
   `role` claim decides; no token → the `default: true` role.
   `POST /api/login` accepts `"role"` (validated against declared roles)
-  and embeds the claim.
+  and embeds the claim. Tokens are **HS256-signed** (`JWT_SECRET`,
+  `JWT_TTL` env) — unsigned/forged/expired tokens fall back to the
+  default role. `CORS_ORIGINS` env restricts origins (dev default `*`).
+- **Field-level ACL**: per-entity `"field_acl": {"viewer": ["created_at"]}`
+  hides fields — stripped from list/get/create/update rows AND from the
+  OPTIONS schema (columns, form fields). Scope/RBAC still see them.
 - **Row-level rule filters**: per-entity `"filter"` in `entities.py` maps
   role → forced query params (`{"viewer": {"done__eq": "false"},
   "*": {"region__eq": "west"}}` — `"*"` applies to every role and merges
   with the role's own rules). Scope params override caller params
   (callers can't escape), apply to list AND get/put/delete (out-of-scope
-  rows → 404). Ops supported in `_in_scope`: `eq`, `in`.
+  rows → 404). Scope ops (`_cmp`): `eq`, `ne`, `in`, `nin`, `contains`,
+  `gt`, `gte`, `lt`, `lte` (numeric when both sides parse).
 - **Frontend mirroring**: `menu`/`admin_menu` entries may carry
   `"roles": [...]` — `app-provider` filters them via
   `engine/library/rbac.ts` (token `role` claim or declared default).
@@ -359,3 +365,7 @@ Languages are **config-driven**: `configuration.language[]` =
   def.type names resolve, and dynamic action endpoints exist
 - `npm run lint` — eslint, both sides of the tenancy boundary
   (`fe/app` + `fe/client` via `fe/eslint.config.js`)
+- `node scripts/smoke-ui.mjs` — headless browser smoke across all client
+  routes (dev servers must be running)
+- `./verify.sh` (repo root) — one-shot static gate: python syntax, tsc,
+  eslint, check-mocks

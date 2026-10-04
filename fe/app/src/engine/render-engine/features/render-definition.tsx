@@ -19,7 +19,13 @@ export function RenderDefinition({ def, config }: RenderDefinitionProps) {
   const children = def.children?.map(child => (
     <RenderDefinition key={child.id} def={child} config={config} />
   )) || [];
-  
+
+  const actionData = React.useMemo(() => {
+    return def.properties.type === 'dynamic'
+      ? { data: apiData, loading, skeletonLoading, error, firstLoadError, action, searchParameters }
+      : undefined;
+  }, [def.properties.type, apiData, loading, skeletonLoading, error, firstLoadError, action, searchParameters]);
+
   if (skeletonLoading) {
     return (
       <div style={{ padding: '20px', textAlign: 'center', opacity: 0.7, minHeight: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -37,12 +43,6 @@ export function RenderDefinition({ def, config }: RenderDefinitionProps) {
   }
 
   if (Component) {
-  const actionData = React.useMemo(() => {
-    return def.properties.type === 'dynamic'
-      ? { data: apiData, loading, skeletonLoading, error, firstLoadError, action, searchParameters }
-      : undefined;
-  }, [def.properties.type, apiData, loading, skeletonLoading, error, firstLoadError, action, searchParameters]);
-
     return (
       <Component key={def.id} id={def.id} type={def.type} content={def.content} properties={def.properties} actionData={actionData} config={config} themeName={themeName}>
         {children}

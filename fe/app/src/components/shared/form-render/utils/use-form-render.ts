@@ -107,12 +107,13 @@ export const useFormRender = <T extends Record<string, any> = any>({
           case "pattern":
             isValid = !val || new RegExp(rule.value).test(val);
             break;
-          case "match":
+          case "match": {
             const targetVal = rule.value
               .split(".")
               .reduce((acc: any, part: string) => acc?.[part], fieldValues);
             isValid = val === targetVal;
             break;
+          }
           default:
             // Custom or unhandled rule
             break;

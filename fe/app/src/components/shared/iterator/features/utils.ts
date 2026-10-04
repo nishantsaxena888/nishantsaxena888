@@ -2,7 +2,7 @@ export function to12Hour(time: string): string {
   const m = time.match(/^(\d{1,2}):(\d{2})(?::(\d{2}))?$/);
   if (!m) throw new Error("Invalid time, expected HH:mm or HH:mm:ss");
 
-  let [_, hh, mm, ss] = m;
+  const [_, hh, mm, ss] = m;
   let h = Number(hh);
   if (h > 23 || Number(mm) > 59 || (ss && Number(ss) > 59)) {
     throw new Error("Out-of-range time");

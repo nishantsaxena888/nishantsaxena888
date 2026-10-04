@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { inputType } from "../input-type";
 import { DataRenderer } from "./data-renderer";
 

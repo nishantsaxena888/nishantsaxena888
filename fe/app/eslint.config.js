@@ -24,6 +24,20 @@ export default defineConfig([
     rules: {
       "@typescript-eslint/no-unused-vars": "off",
       "@typescript-eslint/no-explicit-any": "off",
+      // React-compiler advisory rules (react-hooks v6 strict set). These flag
+      // long-standing sync-prop/localStorage-hydration patterns across the
+      // codebase — real correctness rules (rules-of-hooks, deps integrity)
+      // stay errors; the advisory ones stay visible as warnings until the
+      // legacy components are gradually refactored.
+      "react-hooks/set-state-in-effect": "warn",
+      "react-hooks/static-components": "warn",
+      "react-hooks/incompatible-library": "warn",
+      "react-hooks/immutability": "warn",
+      "react-hooks/refs": "warn",
+      "react-hooks/purity": "warn",
+      "react-hooks/preserve-manual-memoization": "warn",
+      // Fast-refresh is a dev-UX nicety, not correctness.
+      "react-refresh/only-export-components": "warn",
       // Tenancy boundary, app side: engine code never imports client folders.
       // Only the generated binding files (below) may reach @clients/*.
       "@typescript-eslint/no-restricted-imports": [

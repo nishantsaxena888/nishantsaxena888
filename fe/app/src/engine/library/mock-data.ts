@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 // Per-client mock trees — fe/client/<name>/mock/<lang>/<endpoint>/<METHOD>/<response>.json
 // plus the per-client registry fe/client/<name>/mock/config.json
 // ({endpoint: {METHOD: {mock, response_type, status, delay, id, search_param}}}).
