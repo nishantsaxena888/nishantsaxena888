@@ -1,12 +1,12 @@
 import "./storefront.css";
 import { StorefrontHeader } from "./header";
-import { StorefrontHero } from "./hero-section";
-import { StorefrontProducts } from "./products";
+import { StorefrontBanner } from "./banner";
+import { StorefrontListing } from "./listing";
 import { StorefrontFooter } from "./footer";
-import { StorefrontCartView } from "./cart-view";
-import { StorefrontCheckout } from "./checkout";
-import { StorefrontProfile } from "./profile";
-import { StorefrontLoginLayout } from "./login-layout-1";
+import { StorefrontSessionList } from "./session-list";
+import { StorefrontFormSummary } from "./form-summary";
+import { StorefrontAccount } from "./account";
+import { StorefrontAuthLayout } from "./auth-layout";
 
 // Generic storefront building blocks — available to every client's site
 // surface. Type names are domain-neutral UI roles; the domain words
@@ -25,18 +25,18 @@ import { StorefrontLoginLayout } from "./login-layout-1";
 export const storefront_components = {
   // canonical, domain-neutral
   header: StorefrontHeader,
-  banner: StorefrontHero,
-  listing: StorefrontProducts,
+  banner: StorefrontBanner,
+  listing: StorefrontListing,
   footer: StorefrontFooter,
-  "session-list": StorefrontCartView,
-  "form-summary": StorefrontCheckout,
-  account: StorefrontProfile,
-  "auth-layout": StorefrontLoginLayout,
+  "session-list": StorefrontSessionList,
+  "form-summary": StorefrontFormSummary,
+  account: StorefrontAccount,
+  "auth-layout": StorefrontAuthLayout,
   // legacy aliases (same comps, old type names)
-  "hero-section": StorefrontHero,
-  products: StorefrontProducts,
-  "cart-view": StorefrontCartView,
-  checkout: StorefrontCheckout,
-  profile: StorefrontProfile,
-  "login-layout-1": StorefrontLoginLayout,
+  "hero-section": StorefrontBanner,
+  products: StorefrontListing,
+  "cart-view": StorefrontSessionList,
+  checkout: StorefrontFormSummary,
+  profile: StorefrontAccount,
+  "login-layout-1": StorefrontAuthLayout,
 };

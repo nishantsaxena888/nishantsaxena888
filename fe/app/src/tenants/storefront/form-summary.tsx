@@ -12,7 +12,7 @@ import { money, makeTr } from "./utils";
 // target entity (content.submit_entity, default "order") and clears the
 // session. Field labels come from content/translations — the comp has
 // no commerce-specific behavior beyond that contract.
-export const StorefrontCheckout = ({ content, properties }: any) => {
+export const StorefrontFormSummary = ({ content, properties }: any) => {
   const tr = makeTr(useLanguage().t);
   const navigate = useNavigate();
   const session = content?.session || properties?.session || "cart";
@@ -67,10 +67,10 @@ export const StorefrontCheckout = ({ content, properties }: any) => {
   );
 
   return (
-    <section className="sf-checkout">
+    <section className="sf-form-view">
       <h1>{content?.title || tr("checkout.title", "Checkout")}</h1>
-      <div className="sf-cart-layout">
-        <form className="sf-checkout-form" onSubmit={placeOrder}>
+      <div className="sf-summary-layout">
+        <form className="sf-summary-form" onSubmit={placeOrder}>
           <h3>{tr("checkout.contact", "Contact")}</h3>
           {field("name", tr("address.full_name", "Full name"))}
           {field("email", tr("auth.email", "Email"), { type: "email" })}
@@ -83,7 +83,7 @@ export const StorefrontCheckout = ({ content, properties }: any) => {
             {placing ? "…" : `${tr("checkout.place_order", "Place order")} · ${money(total, currency)}`}
           </button>
         </form>
-        <aside className="sf-cart-summary">
+        <aside className="sf-summary-panel">
           <h3>{items.length} item(s)</h3>
           {items.map((i: any) => (
             <div key={i.id} className="sf-summary-row">

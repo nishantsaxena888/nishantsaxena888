@@ -10,7 +10,7 @@ import { listOf, money, makeTr } from "./utils";
 // session — properties.session / content.session (default "cart") —
 // when that session is configured; otherwise it's a no-op with a toast,
 // so the comp stays usable for any entity list on any client.
-export const StorefrontProducts = ({ content, properties, actionData }: any) => {
+export const StorefrontListing = ({ content, properties, actionData }: any) => {
   const tr = makeTr(useLanguage().t);
   const products = listOf(actionData?.data?.data);
   const session = content?.session || properties?.session || "cart";
@@ -31,19 +31,19 @@ export const StorefrontProducts = ({ content, properties, actionData }: any) => 
     toast.success(tr("listing.added", `${p.name} added`));
   };
 
-  if (actionData?.loading) return <div className="sf-grid-loading">Loading…</div>;
+  if (actionData?.loading) return <div className="sf-list-loading">Loading…</div>;
 
   return (
-    <section className="sf-products">
+    <section className="sf-list">
       {content?.title && <h2>{content.title}</h2>}
-      <div className="sf-product-grid">
+      <div className="sf-list-grid">
         {products.map((p: any) => (
-          <article key={p.id ?? p.sku ?? p.name} className="sf-product-card">
-            {p.badge && <span className="sf-product-badge">{p.badge}</span>}
+          <article key={p.id ?? p.sku ?? p.name} className="sf-list-card">
+            {p.badge && <span className="sf-list-badge">{p.badge}</span>}
             {p.image && (
               <img src={p.image} alt={p.name} loading="lazy" />
             )}
-            <div className="sf-product-body">
+            <div className="sf-list-body">
               <h3>{p.name}</h3>
               {p.rating && (
                 <span className="sf-rating">
@@ -59,7 +59,7 @@ export const StorefrontProducts = ({ content, properties, actionData }: any) => 
                 )}
               </div>
               <button
-                className="sf-add-btn"
+                className="sf-action-btn"
                 disabled={p.stock === 0}
                 onClick={() => addToCart(p)}
               >

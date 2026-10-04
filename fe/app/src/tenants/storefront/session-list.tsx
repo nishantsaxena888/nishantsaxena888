@@ -11,7 +11,7 @@ import { money, makeTr } from "./utils";
 // properties.session (default "cart"), content.continue_url,
 // content.checkout_url — so the same comp serves any persisted
 // item collection (wishlist, compare, order draft).
-export const StorefrontCartView = ({ content, properties }: any) => {
+export const StorefrontSessionList = ({ content, properties }: any) => {
   const tr = makeTr(useLanguage().t);
   const session = content?.session || properties?.session || "cart";
   const continueUrl = content?.continue_url || "/shop";
@@ -34,7 +34,7 @@ export const StorefrontCartView = ({ content, properties }: any) => {
 
   if (!items.length) {
     return (
-      <section className="sf-cart-empty">
+      <section className="sf-session-empty">
         <h1>{content?.title || tr("cart.title", "Your cart")}</h1>
         <p>{tr("cart.empty", "Your cart is empty.")}</p>
         <Link to={continueUrl} className="sf-cta">
@@ -45,14 +45,14 @@ export const StorefrontCartView = ({ content, properties }: any) => {
   }
 
   return (
-    <section className="sf-cart">
+    <section className="sf-session">
       <h1>{content?.title || tr("cart.title", "Your cart")}</h1>
-      <div className="sf-cart-layout">
-        <ul className="sf-cart-items">
+      <div className="sf-summary-layout">
+        <ul className="sf-session-items">
           {items.map((i: any) => (
-            <li key={i.id} className="sf-cart-item">
+            <li key={i.id} className="sf-session-item">
               {i.image && <img src={i.image} alt={i.name} />}
-              <div className="sf-cart-item-info">
+              <div className="sf-session-item-info">
                 <strong>{i.name}</strong>
                 <span>{money(i.price, currency)}</span>
               </div>
@@ -74,7 +74,7 @@ export const StorefrontCartView = ({ content, properties }: any) => {
             </li>
           ))}
         </ul>
-        <aside className="sf-cart-summary">
+        <aside className="sf-summary-panel">
           <h3>{tr("checkout.order_summary", "Order summary")}</h3>
           <div className="sf-summary-row">
             <span>{tr("cart.subtotal", "Subtotal")}</span>
@@ -90,7 +90,7 @@ export const StorefrontCartView = ({ content, properties }: any) => {
               {money(total + (total > 30 ? 0 : 4.99), currency)}
             </strong>
           </div>
-          <Link to={checkoutUrl} className="sf-cta sf-checkout-btn">
+          <Link to={checkoutUrl} className="sf-cta sf-summary-btn">
             {tr("checkout.title", "Checkout")}
           </Link>
         </aside>

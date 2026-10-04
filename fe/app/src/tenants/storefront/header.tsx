@@ -233,10 +233,10 @@ export const StorefrontHeader = ({ content, actionData }: any) => {
           >
             <Heart className="h-5 w-5" />
           </button>
-          <Link to="/cart" className="sf-cart-pill">
+          <Link to="/cart" className="sf-session-pill">
             <ShoppingCart className="h-5 w-5" />
-            <span className="sf-cart-label">{tr("header.cart", "Cart")}</span>
-            {cartCount > 0 && <span className="sf-cart-badge">{cartCount}</span>}
+            <span className="sf-session-label">{tr("header.cart", "Cart")}</span>
+            {cartCount > 0 && <span className="sf-session-badge">{cartCount}</span>}
           </Link>
         </nav>
       </div>

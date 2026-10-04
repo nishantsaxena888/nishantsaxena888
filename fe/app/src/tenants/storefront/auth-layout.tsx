@@ -65,7 +65,7 @@ const renderFooterText = (text: string) => {
   });
 };
 
-export const StorefrontLoginLayout = ({ content }: any) => {
+export const StorefrontAuthLayout = ({ content }: any) => {
   const tr = makeTr(useLanguage().t);
   const navigate = useNavigate();
   const cfg = content?.config || {};

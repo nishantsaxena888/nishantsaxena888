@@ -8,7 +8,7 @@ import { listOf, money, makeTr } from "./utils";
 // Generic account page — profile form (saved to the configured user
 // entity, default "user") + recent orders from the order entity when the
 // def's action supplies it.
-export const StorefrontProfile = ({ content, actionData }: any) => {
+export const StorefrontAccount = ({ content, actionData }: any) => {
   const tr = makeTr(useLanguage().t);
   const currency = useConfigStore(
     (s: any) => s.config?.meta?.currency_symbol || "$",
@@ -43,10 +43,10 @@ export const StorefrontProfile = ({ content, actionData }: any) => {
   );
 
   return (
-    <section className="sf-profile">
+    <section className="sf-account-view">
       <h1>{content?.title || tr("profile.title", "My account")}</h1>
-      <div className="sf-cart-layout">
-        <form className="sf-checkout-form" onSubmit={save}>
+      <div className="sf-summary-layout">
+        <form className="sf-summary-form" onSubmit={save}>
           <h3>{tr("profile.title", "Profile")}</h3>
           {field("name", tr("address.full_name", "Full name"))}
           {field("email", tr("auth.email", "Email"), { type: "email" })}
@@ -54,7 +54,7 @@ export const StorefrontProfile = ({ content, actionData }: any) => {
           {field("address", tr("address.street", "Default address"))}
           <button className="sf-cta">Save</button>
         </form>
-        <aside className="sf-cart-summary">
+        <aside className="sf-summary-panel">
           <h3>{tr("profile.recent_orders", "Recent orders")}</h3>
           {orders.length === 0 && <p>{tr("profile.no_orders", "No orders yet.")}</p>}
           {orders.map((o: any) => (
