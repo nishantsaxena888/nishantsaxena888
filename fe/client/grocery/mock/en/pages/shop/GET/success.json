@@ -1,71 +1,152 @@
 {
-  "meta": {
-    "title": "All products"
-  },
-  "config": [
-    {
-      "id": "hdr",
-      "type": "header",
-      "properties": {
-        "level": "base",
-        "type": "dynamic",
-        "action": [
-          {
-            "key": "data",
-            "endpoint": "/header",
-            "method": "get",
-            "queryParams": {
-              "id": 1
-            }
-          },
-          {
-            "key": "category",
-            "endpoint": "/category",
-            "method": "get"
-          }
-        ]
-      },
-      "content": null
-    },
-    {
-      "id": "products-shop",
-      "type": "products",
-      "properties": {
-        "level": "base",
-        "type": "dynamic",
-        "action": [
-          {
-            "key": "data",
-            "endpoint": "product",
-            "method": "get",
-            "queryParams": {
-              "size": 24
-            }
-          }
-        ]
-      },
-      "content": {
-        "title": "All products"
+ "meta": {
+  "title": "All products"
+ },
+ "config": [
+  {
+   "id": "hdr",
+   "type": "header",
+   "properties": {
+    "level": "base",
+    "type": "dynamic",
+    "action": [
+     {
+      "key": "data",
+      "endpoint": "/header",
+      "method": "get",
+      "queryParams": {
+       "id": 1
       }
-    },
+     },
+     {
+      "key": "category",
+      "endpoint": "/category",
+      "method": "get"
+     }
+    ]
+   },
+   "content": null
+  },
+  {
+   "id": "shop-band",
+   "type": "section",
+   "properties": {
+    "level": "base",
+    "type": "static",
+    "background": "hsl(var(--muted))",
+    "padding": "32px 0"
+   },
+   "content": null,
+   "children": [
     {
-      "id": "ftr",
-      "type": "footer",
-      "properties": {
+     "id": "shop-wrap",
+     "type": "container",
+     "properties": {
+      "level": "base",
+      "type": "static",
+      "max_width": "1280px",
+      "padding": "0 24px"
+     },
+     "content": null,
+     "children": [
+      {
+       "id": "shop-grid",
+       "type": "grid",
+       "properties": {
         "level": "base",
-        "type": "dynamic",
-        "action": [
+        "type": "static",
+        "columns": 12,
+        "gap": "24px",
+        "align": "start"
+       },
+       "content": null,
+       "children": [
+        {
+         "id": "shop-side",
+         "type": "col",
+         "properties": {
+          "level": "base",
+          "type": "static",
+          "span": 3,
+          "span_md": 12
+         },
+         "content": null,
+         "children": [
           {
-            "key": "data",
-            "endpoint": "/footer",
-            "method": "get",
-            "queryParams": {
-              "id": 1
+           "id": "shop-promo",
+           "type": "hero-section",
+           "properties": {
+            "level": "base",
+            "type": "static"
+           },
+           "content": {
+            "hero": {
+             "title": "Fresh this week",
+             "subtitle": "Seasonal picks, locally sourced.",
+             "image": "https://images.unsplash.com/photo-1542838132-92c53300491e?w=600"
             }
+           }
           }
-        ]
-      },
-      "content": {}
+         ]
+        },
+        {
+         "id": "shop-main",
+         "type": "col",
+         "properties": {
+          "level": "base",
+          "type": "static",
+          "span": 9,
+          "span_md": 12
+         },
+         "content": null,
+         "children": [
+          {
+           "id": "products-shop",
+           "type": "products",
+           "properties": {
+            "level": "base",
+            "type": "dynamic",
+            "action": [
+             {
+              "key": "data",
+              "endpoint": "product",
+              "method": "get",
+              "queryParams": {
+               "size": 24
+              }
+             }
+            ]
+           },
+           "content": {
+            "title": "All products"
+           }
+          }
+         ]
+        }
+       ]
+      }
+     ]
     }
-  ]
+   ]
+  },
+  {
+   "id": "ftr",
+   "type": "footer",
+   "properties": {
+    "level": "base",
+    "type": "dynamic",
+    "action": [
+     {
+      "key": "data",
+      "endpoint": "/footer",
+      "method": "get",
+      "queryParams": {
+       "id": 1
+      }
+     }
+    ]
+   },
+   "content": {}
+  }
+ ]
 }

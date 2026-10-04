@@ -1,5 +1,6 @@
 import { default_admin_component } from "./admin/admin";
 import { storefront_components } from "./storefront";
+import { layout_components } from "./layout";
 import { client, site_tenant, admin_tenant } from "./active";
 import type { ClientTenant } from "./types";
 
@@ -11,13 +12,13 @@ import type { ClientTenant } from "./types";
 type Surfaces = Record<"site" | "admin", ClientTenant["components"]>;
 
 const surfaces: Surfaces = {
-  site: { ...storefront_components, ...site_tenant.components },
-  admin: { ...default_admin_component, ...admin_tenant.components },
+  site: { ...layout_components, ...storefront_components, ...site_tenant.components },
+  admin: { ...layout_components, ...default_admin_component, ...admin_tenant.components },
 };
 
 export const componentsMap: Record<string, Surfaces> = {
   [client]: surfaces,
-  default: { site: {}, admin: { ...default_admin_component } },
+  default: { site: {}, admin: { ...layout_components, ...default_admin_component } },
 };
 
 // Dev only: every client's surfaces are merged lazily so multiple dev
@@ -31,8 +32,8 @@ export const tenantsReady: Promise<void> = import.meta.env.DEV
   ? import("./dev-all").then(({ allClients }) => {
       for (const [name, t] of Object.entries(allClients)) {
         componentsMap[name] = {
-          site: { ...storefront_components, ...t.site.components },
-          admin: { ...default_admin_component, ...t.admin.components },
+          site: { ...layout_components, ...storefront_components, ...t.site.components },
+          admin: { ...layout_components, ...default_admin_component, ...t.admin.components },
         };
       }
     })

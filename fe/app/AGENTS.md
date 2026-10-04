@@ -151,6 +151,28 @@ same for sessions and sources.
 - Client-scoped CSS: `fe/client/<name>/{site,admin}/styles.css` — bundle
   only what that surface needs; theme values still come from style-config.
 
+
+## Layout primitives (config-driven page layout)
+
+`src/tenants/layout/` — structural-only comps merged into EVERY client's
+site+admin maps (before client comps, so clients can override). Page layout
+is pure JSON: defs nest via `children[]` (RenderDefinition already recurses).
+
+| def.type | Renders | Key properties (all optional) |
+|---|---|---|
+| `grid` | CSS grid, 12 cols | `columns`, `gap`, `row_gap`, `column_gap`, `align`, `justify`, `padding` |
+| `col` | grid cell — self-declares span | `span`, `span_md` (<=1024px), `span_sm` (<=640px), `order`, `align` |
+| `container` | centered max-width wrap | `max_width` (default 1200px), `padding` |
+| `section` | full-bleed band | `background`, `padding` |
+| `stack` | vertical flex | `gap`, `align`, `justify`, `direction`, `wrap` |
+| `spacer` | empty space | `height` (default 24px) |
+
+Every primitive also accepts `class_name` + `style` (inline overrides) and
+reads knobs from `content` or `properties`. Example: grocery `/shop` uses
+`section > container > grid > col(span 3, sidebar promo) + col(span 9,
+products)` — responsive stacking on mobile via `span_md`. Verified
+side-by-side at 1400px and stacked at 500px.
+
 ## Admin
 
 `/admin/:slug` → `Protected` (JWT `localStorage.token`, `jwt-decode` expiry;
