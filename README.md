@@ -102,18 +102,24 @@ cd fe/app && node scripts/check-mocks.mjs
 
 ## Add a client (`foo`)
 
-1. `be/client/foo/entities.py` — entities DSL (copy `hello`'s shape:
-   `fields` + `ui.table`/`ui.form` + `sample_data`)
+```bash
+cd fe/app && npm run client -- --new foo
+```
+
+scaffolds everything: `fe/client/foo/` (client.json manifest, site/admin
+tenants + styles) **and** `be/client/foo/` (entities.py +
+configuration.json with a working todo entity). Then:
+
+1. `be/client/foo/entities.py` — replace the todo with your entities
+   (`fields` + `ui.table`/`ui.form` + `sample_data`)
 2. `be/client/foo/configuration.json` — `menu`, `admin_menu`, `pages`,
    `themes`/`style-configs`, `sessions`, `admin`, `meta`
-3. `fe/client/foo/site/tenant.ts` — `export default { components: {...} }`
-   (see `fe/client/README.md` for the contract)
-4. `fe/client/foo/admin/tenant.ts` — `export default { components: {} }`
-   unless the client needs custom admin screens
-5. Optional: `site/styles.css` / `admin/styles.css` (auto-bundled when
-   present), `mock/` via `python be/tools/gen_mocks.py foo`
-6. `npm run client -- foo` and run. Optionally add a `build:foo` script
-   line in `fe/app/package.json`.
+3. `fe/client/foo/site/` — components + `site/tenant.ts` registrations
+4. Optional: `python be/tools/gen_mocks.py foo` then `mock: true` in
+   `fe/client/foo/client.json`; a `build:foo` script line in
+   `fe/app/package.json`
+5. `npm run client -- foo` (validates the manifest) and run — backend:
+   `CLIENT_NAME=foo`
 
 That's it — no engine code changes. Pages come from `pages` defs
 (`def.type` → component), admin screens come from entity OPTIONS.

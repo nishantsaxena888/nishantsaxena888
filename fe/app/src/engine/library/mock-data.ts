@@ -11,6 +11,8 @@
 import type { ApiConfigMap } from "./api";
 import { mockFiles as files } from "../../tenants/mock-active";
 
+const fileMap = files as Record<string, any>;
+
 type ResponseFiles = Record<string, any>;
 type EndpointMap = Record<string, ResponseFiles>; // METHOD -> file -> json
 type LangMap = Record<string, EndpointMap>;       // endpoint -> EndpointMap
@@ -21,12 +23,12 @@ export const mockData: LangMap = {};
 // The active client's endpoint registry (mock/config.json)
 export let mockConfig: ApiConfigMap = {};
 
-for (const path in files) {
+for (const path in fileMap) {
   // path: ../../../client/<name>/mock/<...>
   const rel = path.split("/mock/")[1];
   if (!rel) continue;
   const parts = rel.split("/").filter(Boolean);
-  const json = (files[path] as any)?.default ?? files[path];
+  const json = fileMap[path]?.default ?? fileMap[path];
 
   if (parts.length === 1 && parts[0] === "config.json") {
     mockConfig = json;

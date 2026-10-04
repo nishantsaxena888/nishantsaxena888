@@ -1,22 +1,44 @@
 # fe/client/<name> — client contract
 
-A client is a **dumb folder**: components + css. No logic, no install, no
-package.json — selection and wiring live in the generic `fe/app`.
+A client is a **dumb folder**: components + css + one manifest. No logic,
+no install, no package.json — selection and wiring live in the generic
+`fe/app`. New client: `npm run client -- --new <name>` scaffolds fe + be.
 
 ## Layout
 
 ```
 fe/client/<name>/
+  client.json               ← manifest — declares surfaces/styles/mock
   site/                     ← S surface — route "/" resolves def.type here
     tenant.ts               ← export default { components: {...} }
     components/             ← .tsx (+ use-*.ts hooks if logic grows)
-    styles.css              ← optional; auto-bundled when present
+    styles.css              ← bundled when manifest surfaces.site.styles
   admin/                    ← A surface — route "/admin" resolves def.type here
     tenant.ts               ← export default { components: {...} }
     components/             ← usually empty: generic OPTIONS admin wins
-    styles.css              ← optional; auto-bundled when present
+    styles.css              ← bundled when manifest surfaces.admin.styles
   mock/                     ← client-owned mocks (see Mocking below)
 ```
+
+## client.json (manifest)
+
+```json
+{
+  "name": "grocery",
+  "title": "Grocery Store",
+  "surfaces": {
+    "site":  { "styles": true },
+    "admin": { "styles": true }
+  },
+  "mock": true
+}
+```
+
+`npm run client -- <name>` reads this file, **validates** it (tenant.ts
+per surface; styles.css must exist where `styles: true`), then generates
+`tenants/active.ts` (tenant + style imports) and `tenants/mock-active.ts`
+(per-client mock glob — or `{}` when `mock: false`, which drops all mock
+code from the bundle). `name` must equal the folder name.
 
 ## tenant.ts contract
 

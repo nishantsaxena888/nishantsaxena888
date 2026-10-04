@@ -1,0 +1,13 @@
+{
+  "name": "uday",
+  "title": "Uday Learning",
+  "surfaces": {
+    "site": {
+      "styles": true
+    },
+    "admin": {
+      "styles": true
+    }
+  },
+  "mock": true
+}

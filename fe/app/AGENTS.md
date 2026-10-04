@@ -60,21 +60,25 @@ Key files:
 ```
 fe/app/                  ← generic engine, THE app (only package.json)
 fe/client/<name>/
+  client.json            ← manifest: {name, surfaces{site,admin}.styles, mock}
   site/    tenant.ts     ← { components: {def.type → Component} }
            components/     client site comps
-           styles.css      optional, auto-bundled when present
-           mock/           client-owned mock tree (see Mocking)
+           styles.css      bundled when manifest surfaces.site.styles
   admin/   tenant.ts     ← admin overrides; {} = generic admin only
            components/
-           styles.css      optional
+           styles.css      bundled when manifest surfaces.admin.styles
+  mock/                  ← client-owned mock tree (see Mocking)
 ```
 
-- **Switch client**: `npm run client -- <name>` regenerates
+- **Switch client**: `npm run client -- <name>` reads `client.json`,
+  validates it (tenants + declared styles exist), regenerates
   `src/tenants/active.ts` (tenant imports + styles.css imports) and
   `src/tenants/mock-active.ts` (mock glob literal → only this client's mock
-  JSON bundles). `getActiveClient()` = `VITE_CLIENT` env or the generated
-  client — **localStorage does NOT switch clients** (other clients' code is
-  not in the bundle).
+  JSON bundles; `{}` when manifest `mock: false`). `getActiveClient()` =
+  `VITE_CLIENT` env or the generated client — **localStorage does NOT
+  switch clients** (other clients' code is not in the bundle).
+- **New client**: `npm run client -- --new <name>` scaffolds
+  `fe/client/<name>/` + `be/client/<name>/` (working todo entity).
 - **Surface-scoped maps**: `componentsMap[client] = {site, admin}` in
   `src/tenants/index.ts`. Site routes resolve `def.type` against
   `site_tenant.components`; admin routes against

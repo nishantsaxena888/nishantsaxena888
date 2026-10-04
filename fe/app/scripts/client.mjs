@@ -1,43 +1,67 @@
-// Regenerates the generated bindings for a given client:
-//   src/tenants/active.ts      — site/admin tenant imports (+ optional styles)
-//   src/tenants/mock-active.ts — mock glob scoped to this client only
-//   node scripts/client.mjs <name>
-// or: npm run client -- <name>
-// The active client's fe/client/<name>/{site,admin}/tenant.ts must exist
-// (admin/tenant.ts may export { components: {} } — generic admin covers it).
-import { existsSync, writeFileSync } from "node:fs";
+// Client switcher + scaffolder. The client.json manifest in
+// fe/client/<name>/ is the contract — everything is derived from it.
+//
+//   npm run client -- <name>   switch active client (validate + generate)
+//   npm run client -- --new <name>   scaffold a new client (fe + be)
+//
+// Generates:
+//   src/tenants/active.ts      — tenant imports + declared styles imports
+//   src/tenants/mock-active.ts — mock glob (empty when manifest mock:false)
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const appDir = join(dirname(fileURLToPath(import.meta.url)), "..");
 const clientDir = join(appDir, "../client");
-const name = process.argv[2];
+const beDir = join(appDir, "../../be/client");
+const arg = process.argv[2];
+const name = process.argv[3] || process.argv[2];
 
-if (!name) {
-  console.error("usage: node scripts/client.mjs <client-name>");
-  process.exit(1);
+const SURFACES = ["site", "admin"];
+
+function readManifest(dir, name) {
+  const p = join(dir, name, "client.json");
+  if (!existsSync(p)) return null;
+  const m = JSON.parse(readFileSync(p, "utf8"));
+  if (m.name !== name) {
+    console.error(`client.json name "${m.name}" != folder "${name}"`);
+    process.exit(1);
+  }
+  return m;
 }
 
-const siteTenant = join(clientDir, name, "site/tenant.ts");
-const adminTenant = join(clientDir, name, "admin/tenant.ts");
-for (const f of [siteTenant, adminTenant]) {
-  if (!existsSync(f)) {
-    console.error(`missing: ${f}`);
-    console.error(`create fe/client/${name}/{site,admin}/tenant.ts first (see fe/client/README.md)`);
+function validate(name, m) {
+  const root = join(clientDir, name);
+  const missing = [];
+  for (const s of SURFACES) {
+    if (!existsSync(join(root, s, "tenant.ts")))
+      missing.push(`fe/client/${name}/${s}/tenant.ts`);
+    if (m.surfaces?.[s]?.styles && !existsSync(join(root, s, "styles.css")))
+      missing.push(`fe/client/${name}/${s}/styles.css (declared in client.json)`);
+  }
+  if (m.mock && !existsSync(join(root, "mock/config.json")))
+    console.warn(`warn: mock:true but fe/client/${name}/mock/config.json is missing — gen with be/tools/gen_mocks.py ${name}`);
+  if (missing.length) {
+    console.error("missing files:\n  " + missing.join("\n  "));
     process.exit(1);
   }
 }
 
-// Optional per-surface stylesheets — fe/client/<name>/{site,admin}/styles.css
-// is bundled only when present (convention, not required).
-const styleImports = ["site", "admin"]
-  .filter((s) => existsSync(join(clientDir, name, s, "styles.css")))
-  .map((s) => `import "@clients/${name}/${s}/styles.css";`)
-  .join("\n");
+function activate(name) {
+  const m = readManifest(clientDir, name);
+  if (!m) {
+    console.error(`missing: fe/client/${name}/client.json (see fe/client/README.md)`);
+    process.exit(1);
+  }
+  validate(name, m);
 
-writeFileSync(
-  join(appDir, "src/tenants/active.ts"),
-  `// GENERATED — do not edit by hand.
+  const styleImports = SURFACES.filter((s) => m.surfaces?.[s]?.styles)
+    .map((s) => `import "@clients/${name}/${s}/styles.css";`)
+    .join("\n");
+
+  writeFileSync(
+    join(appDir, "src/tenants/active.ts"),
+    `// GENERATED — do not edit by hand.
 // \`npm run client <name>\` (fe/app) rewrites this file to point at
 // fe/client/<name>/{site,admin}/. Importing statically keeps the
 // bundle lean: only the active client's code and styles are included.
@@ -45,18 +69,158 @@ ${styleImports ? styleImports + "\n" : ""}export const client = "${name}";
 export { default as site_tenant } from "@clients/${name}/site/tenant";
 export { default as admin_tenant } from "@clients/${name}/admin/tenant";
 `,
-);
+  );
 
-writeFileSync(
-  join(appDir, "src/tenants/mock-active.ts"),
-  `// GENERATED — do not edit by hand.
-// \`npm run client <name>\` rewrites this file. The glob pattern is literal
-// so only fe/client/${name}/mock/ is bundled — other clients' mock JSON is
-// never included in this client's build.
+  writeFileSync(
+    join(appDir, "src/tenants/mock-active.ts"),
+    `// GENERATED — do not edit by hand.
+// \`npm run client <name>\` rewrites this file.${m.mock ? ` The glob pattern is
+// literal so only fe/client/${name}/mock/ is bundled — other clients' mock
+// JSON is never included in this client's build.
 export const mockFiles = import.meta.glob("../../../client/${name}/mock/**/*.json", {
   eager: true,
-});
+});` : ` manifest mock:false — no mock
+// files are bundled; every apiClient call hits the real API.
+export const mockFiles: Record<string, unknown> = {};`}
 `,
-);
+  );
 
-console.log(`active client → ${name}`);
+  console.log(`active client → ${name} (${m.title || name})`);
+}
+
+function scaffold(name) {
+  const fe = join(clientDir, name);
+  const be = join(beDir, name);
+  if (existsSync(fe)) {
+    console.error(`exists: fe/client/${name}`);
+    process.exit(1);
+  }
+
+  const put = (p, s) => {
+    mkdirSync(dirname(p), { recursive: true });
+    writeFileSync(p, s);
+  };
+
+  // --- frontend: dumb folder — components + styles + manifest
+  put(join(fe, "client.json"),
+    JSON.stringify(
+      {
+        name,
+        title: name,
+        surfaces: { site: { styles: true }, admin: { styles: true } },
+        mock: false, // flip true after: python be/tools/gen_mocks.py <name>
+      },
+      null,
+      2,
+    ) + "\n",
+  );
+  for (const s of SURFACES) {
+    put(join(fe, s, "tenant.ts"),
+      `// ${name} ${s} tenant — ${s}-surface components (def.type → component).
+// See fe/client/README.md for the contract.
+export default {
+  components: {},
+};
+`);
+    put(join(fe, s, "styles.css"),
+      `/* ${name} ${s} surface — auto-bundled by \`npm run client -- ${name}\` */\n`);
+    mkdirSync(join(fe, s, "components"), { recursive: true });
+  }
+
+  // --- backend: entities + configuration (the actual product definition)
+  put(join(be, "entities.py"),
+    `# be/client/${name}/entities.py — entity DSL, the single source of truth.
+
+ENTITIES_ORDER = ["todo"]
+
+entities = {
+    "todo": {
+        "source": "json",
+        "fields": {
+            "id":    {"type": "int", "primary_key": True},
+            "title": {"type": "str", "required": True},
+            "done":  {"type": "bool", "default": False},
+        },
+        "ui": {
+            "table": {
+                "columns": [
+                    {"key": "id",    "label": "ID",    "sortable": True},
+                    {"key": "title", "label": "Title", "searchable": True},
+                    {"key": "done",  "label": "Done",  "type": "status"},
+                ],
+                "actions": ["open_form", "confirm_delete"],
+            },
+            "form": {
+                "fields": [
+                    {"name": "title", "componentType": "TextInput",
+                     "required": True, "colSpan": 2, "label": "Title"},
+                    {"name": "done",  "componentType": "Checkbox",
+                     "default": False, "label": "Done"},
+                ]
+            },
+        },
+        "sample_data": [
+            {"id": 1, "title": "First ${name} todo", "done": False},
+        ],
+    },
+}
+`);
+
+  put(join(be, "configuration.json"),
+    JSON.stringify(
+      {
+        meta: { client: name, site_name: name, title: name },
+        home_page: "pages/home",
+        admin: { require_auth: false, logout_redirect: "/" },
+        menu: [
+          { name: "Home", url: "/", entity: "pages/home", public: true, order: 0 },
+        ],
+        admin_menu: [
+          { name: "Todos", url: "/admin/todo", entity: "todo", icon: "list" },
+        ],
+        language: [{ name: "English", code: "en" }],
+        sessions: [],
+        themes: [
+          { value: "default", label: "Default", endpoint: "style-config/default" },
+        ],
+        "style-configs": {
+          default: {
+            styles: {
+              primary: "240 10% 10%",
+              "primary-foreground": "0 0% 98%",
+              background: "0 0% 100%",
+              foreground: "240 10% 10%",
+              card: "0 0% 100%",
+              "card-foreground": "240 10% 10%",
+              muted: "240 5% 96%",
+              "muted-foreground": "240 4% 46%",
+              border: "240 6% 90%",
+              destructive: "0 72% 51%",
+              radius: "0.5rem",
+            },
+          },
+        },
+        pages: {
+          home: {
+            meta: { title: name },
+            config: [],
+          },
+        },
+      },
+      null,
+      2,
+    ) + "\n",
+  );
+
+  console.log(`scaffolded ${name}:
+  fe/client/${name}/   client.json + site/ + admin/
+  be/client/${name}/   entities.py + configuration.json
+next: npm run client -- ${name}   then CLIENT_NAME=${name} on the backend`);
+}
+
+if (!arg) {
+  console.error("usage: node scripts/client.mjs <client-name> | --new <client-name>");
+  process.exit(1);
+}
+
+arg === "--new" ? scaffold(name) : activate(arg);

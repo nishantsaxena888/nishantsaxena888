@@ -1,0 +1,13 @@
+{
+  "name": "hello",
+  "title": "Hello",
+  "surfaces": {
+    "site": {
+      "styles": true
+    },
+    "admin": {
+      "styles": true
+    }
+  },
+  "mock": true
+}
