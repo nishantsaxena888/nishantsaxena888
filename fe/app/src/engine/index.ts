@@ -4,10 +4,3 @@ export type { RenderComponentProps, Definition } from './render-engine/features/
 export * from './hooks/use-entity';
 export * from './hooks/use-admin';
 export * from './contexts/EngineContext';
-
-// NEWLY EXTRACTED GLOBAL COMPONENTS
-export * from '../tenants/common/admin/ProfilePage';
-export * from '../tenants/common/admin/SettingsPage';
-export * from '../tenants/common/admin/AdminLayout';
-export * from '../tenants/common/entity-details';
-export * from '../tenants/common/home';

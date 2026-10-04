@@ -9,13 +9,13 @@ import { cn } from "@/lib/utils";
 import { type LucideProps, type LucideIcon } from 'lucide-react';
 import { DynamicIcon, dynamicIconImports, type IconName } from 'lucide-react/dynamic';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { iconsData } from "./icons-data";
+import type { IconData } from "./icons-data";
 import { useVirtualizer, type VirtualItem } from '@tanstack/react-virtual';
 import { Skeleton } from "@/components/ui/skeleton";
 import Fuse from 'fuse.js';
 import { useDebounceValue } from "usehooks-ts";
 
-export type IconData = typeof iconsData[number];
+export type { IconData };
 
 interface IconPickerProps extends Omit<React.ComponentPropsWithoutRef<typeof PopoverTrigger>, 'onSelect' | 'onOpenChange'> {
   value?: IconName
@@ -60,8 +60,6 @@ const useIconsData = () => {
     let isMounted = true;
 
     const loadIcons = async () => {
-      setIsLoading(true);
-
       const { iconsData } = await import('./icons-data');
       if (isMounted) {
         setIcons(iconsData.filter((icon: IconData) => {
