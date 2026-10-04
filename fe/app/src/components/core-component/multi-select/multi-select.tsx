@@ -42,11 +42,11 @@ export const MultiSelectField = ({
 }: MultiSelectFieldProps) => {
   const [internalValue, setInternalValue] = React.useState<string[]>(value || []);
 
-  React.useEffect(() => {
-    if (value !== undefined) {
-      setInternalValue(value);
-    }
-  }, [value]);
+  const [prevSyncedValue, setPrevSyncedValue] = React.useState(value);
+  if (value !== undefined && value !== prevSyncedValue) {
+    setPrevSyncedValue(value);
+    setInternalValue(value);
+  }
 
   const anchor = useComboboxAnchor();
 

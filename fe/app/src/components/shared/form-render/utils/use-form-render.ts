@@ -54,9 +54,11 @@ export const useFormRender = <T extends Record<string, any> = any>({
   );
 
   const populateDataStr = JSON.stringify(populateData);
-  useEffect(() => {
+  const [prevPopulateStr, setPrevPopulateStr] = useState(populateDataStr);
+  if (populateDataStr !== prevPopulateStr) {
+    setPrevPopulateStr(populateDataStr);
     setStateValues((populateData || {}) as T);
-  }, [populateDataStr]);
+  }
 
   useEffect(() => {
     if (serverError && Object.keys(serverError).length > 0) {

@@ -58,11 +58,11 @@ export const DateTimePicker = ({
 
   const [internalValue, setInternalValue] = React.useState<string | Date | undefined>(value);
 
-  React.useEffect(() => {
-    if (value !== undefined) {
-      setInternalValue(value);
-    }
-  }, [value]);
+  const [prevSyncedValue, setPrevSyncedValue] = React.useState(value);
+  if (value !== undefined && value !== prevSyncedValue) {
+    setPrevSyncedValue(value);
+    setInternalValue(value);
+  }
 
   const currentDateTime = React.useMemo(() => {
     if (!internalValue) return new Date();

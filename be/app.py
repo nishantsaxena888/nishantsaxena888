@@ -25,6 +25,7 @@ from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 
 from sources import HttpSource, JsonSource, Source, SqliteSource
+from ui_gen import derive_ui
 
 BASE_DIR = Path(__file__).parent
 CLIENT_NAME = os.environ.get("CLIENT_NAME", "hello")
@@ -393,7 +394,9 @@ def options(entity: str, schema: str = "basic", request: Request = None):
         raise HTTPException(404, f"Unknown entity: {entity}")
     cfg = entities[entity]
     hidden = _hidden_fields(entity, request) if request is not None else set()
-    ui = dict(cfg.get("ui", {}))
+    # Explicit cfg["ui"] wins per-section; anything missing is derived
+    # from the field DSL — a zero-config entity still gets a CRUD screen.
+    ui = derive_ui(cfg)
     if hidden:
         table = dict(ui.get("table") or {})
         if table.get("columns"):

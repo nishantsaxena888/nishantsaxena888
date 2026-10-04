@@ -61,11 +61,13 @@ export const useMediaUpload = (prop: any) => {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
+  const [prevAllowedType, setPrevAllowedType] = useState(prop?.allowedType);
+  if (prop?.allowedType !== prevAllowedType) {
+    setPrevAllowedType(prop?.allowedType);
     if (prop?.allowedType === "image") {
       setFilterType("image");
     }
-  }, [prop?.allowedType]);
+  }
 
   const selectedItem = useMemo(() => {
     if (selectedIds.length === 1) {

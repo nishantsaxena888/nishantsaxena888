@@ -72,11 +72,13 @@ export const InputDate = ({
     return true;
   };
 
-  React.useEffect(() => {
+  const [prevSyncedValue, setPrevSyncedValue] = React.useState(value);
+  if (value !== prevSyncedValue) {
+    setPrevSyncedValue(value);
     setDate(value);
     setMonth(value);
     setInputValue(formatDate(value));
-  }, [value]);
+  }
 
   return (
     <InputGroup style={style} className={cn("h-11 w-full rounded-lg app-input", (error || internalError) && "border-red-400 bg-red-50 text-red-900 focus-within:border-red-500", className)}>

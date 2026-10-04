@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import {
   Select,
@@ -35,11 +36,11 @@ export function SharedInlineSelect({
   const [internalValue, setInternalValue] = useState<string | undefined>(value);
 
   // Sync prop changes to internal state
-  useEffect(() => {
-    if (value !== undefined) {
-      setInternalValue(value);
-    }
-  }, [value]);
+  const [prevSyncedValue, setPrevSyncedValue] = React.useState(value);
+  if (value !== undefined && value !== prevSyncedValue) {
+    setPrevSyncedValue(value);
+    setInternalValue(value);
+  }
 
   const handleValueChange = (newVal: string) => {
     setInternalValue(newVal);

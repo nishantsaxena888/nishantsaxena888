@@ -46,11 +46,11 @@ export const MultiImageCheckboxField = ({
     value || [],
   );
 
-  React.useEffect(() => {
-    if (value !== undefined) {
-      setInternalValue(value);
-    }
-  }, [value]);
+  const [prevSyncedValue, setPrevSyncedValue] = React.useState(value);
+  if (value !== undefined && value !== prevSyncedValue) {
+    setPrevSyncedValue(value);
+    setInternalValue(value);
+  }
 
   const handleChange = (checked: boolean, val: string) => {
     const newValue = checked

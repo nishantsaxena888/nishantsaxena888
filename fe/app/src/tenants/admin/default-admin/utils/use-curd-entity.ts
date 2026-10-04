@@ -32,9 +32,11 @@ export const useCurdEntity = ({ config: extra, content }: any) => {
   const [searchValue, setSearchValue] = useState(config?.search || "");
   const [searchLoading, setSearchLoading] = useState(false);
 
-  useEffect(() => {
+  const [prevSearchConfig, setPrevSearchConfig] = useState(config?.search);
+  if (config?.search !== prevSearchConfig) {
+    setPrevSearchConfig(config?.search);
     setSearchValue(config?.search || "");
-  }, [config?.search]);
+  }
 
   useEffect(() => {
     const handler = setTimeout(async () => {

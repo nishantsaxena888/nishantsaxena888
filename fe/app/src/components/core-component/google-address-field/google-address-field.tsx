@@ -45,11 +45,11 @@ export const GoogleAddressField = ({
 
   const { isLoaded, getSuggestions, getPlaceDetails } = useGoogleAutocomplete(apiKey);
 
-  React.useEffect(() => {
-    if (value) {
-      setInternalAddress(value);
-    }
-  }, [value]);
+  const [prevSyncedValue, setPrevSyncedValue] = React.useState(value);
+  if (value && value !== prevSyncedValue) {
+    setPrevSyncedValue(value);
+    setInternalAddress(value);
+  }
 
   const updateAddress = (updates: Partial<Address>) => {
     const nextAddress = { ...internalAddress, ...updates };

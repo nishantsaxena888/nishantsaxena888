@@ -47,9 +47,11 @@ export const InputEmoji = ({
   );
   const [internalValue, setInternalValue] = React.useState(value);
 
-  React.useEffect(() => {
+  const [prevSyncedValue, setPrevSyncedValue] = React.useState(value);
+  if (value !== prevSyncedValue) {
+    setPrevSyncedValue(value);
     setInternalValue(value);
-  }, [value]);
+  }
 
   const filteredEmojis = React.useMemo(() => {
     if (!searchTerm) {

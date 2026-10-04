@@ -26,11 +26,11 @@ export const InputPriceRange = ({
   disabled = false,
 }: InputPriceRangeProps) => {
   const [internalValue, setInternalValue] = React.useState<[number, number]>(value || defaultValue);
-  React.useEffect(() => {
-    if (value) {
-      setInternalValue(value);
-    }
-  }, [value]);
+  const [prevSyncedValue, setPrevSyncedValue] = React.useState(value);
+  if (value && value !== prevSyncedValue) {
+    setPrevSyncedValue(value);
+    setInternalValue(value);
+  }
 
   const handleSliderChange = (newValues: number[]) => {
     const nextValue: [number, number] = [newValues[0], newValues[1]];

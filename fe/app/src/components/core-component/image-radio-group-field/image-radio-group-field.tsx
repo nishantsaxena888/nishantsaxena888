@@ -40,11 +40,11 @@ export const ImageRadioGroupField = ({
     value,
   );
 
-  React.useEffect(() => {
-    if (value !== undefined) {
-      setInternalValue(value);
-    }
-  }, [value]);
+  const [prevSyncedValue, setPrevSyncedValue] = React.useState(value);
+  if (value !== undefined && value !== prevSyncedValue) {
+    setPrevSyncedValue(value);
+    setInternalValue(value);
+  }
 
   const handleChange = (val: string) => {
     setInternalValue(val);

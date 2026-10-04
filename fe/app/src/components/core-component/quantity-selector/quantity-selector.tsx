@@ -36,11 +36,11 @@ export const QuantitySelector = ({
   const appliedButtonTheme = "app-quantity-button";
 
   // Sync internal state with controlled value prop
-  React.useEffect(() => {
-    if (value !== undefined) {
-      setInternalValue(value.toString());
-    }
-  }, [value]);
+  const [prevSyncedValue, setPrevSyncedValue] = React.useState(value);
+  if (value !== undefined && value !== prevSyncedValue) {
+    setPrevSyncedValue(value);
+    setInternalValue(value.toString());
+  }
 
   const updateValue = (nextVal: number) => {
     const clamped = Math.min(Math.max(nextVal, min), max);

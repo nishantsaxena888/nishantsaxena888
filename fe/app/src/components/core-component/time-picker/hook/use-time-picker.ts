@@ -23,9 +23,11 @@ export const useTimePicker = ({
     const [inputValue, setInputValue] = React.useState(value);
     const [internalError, setInternalError] = React.useState<string | undefined>(error);
 
-    React.useEffect(() => {
-        setInputValue(value);
-    }, [value]);
+    const [prevSyncedValue, setPrevSyncedValue] = React.useState(value);
+    if (value !== prevSyncedValue) {
+      setPrevSyncedValue(value);
+      setInputValue(value);
+    }
 
     const timeToSeconds = (timeStr: string) => {
         if (!timeStr) return -1;

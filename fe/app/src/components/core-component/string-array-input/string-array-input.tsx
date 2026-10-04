@@ -22,11 +22,11 @@ export function StringArrayInput({
   // Use internal state for uncontrolled playground compatibility
   const [internalValue, setInternalValue] = React.useState<string[]>(value || []);
 
-  React.useEffect(() => {
-    if (value !== undefined) {
-      setInternalValue(value);
-    }
-  }, [value]);
+  const [prevSyncedValue, setPrevSyncedValue] = React.useState(value);
+  if (value !== undefined && value !== prevSyncedValue) {
+    setPrevSyncedValue(value);
+    setInternalValue(value);
+  }
 
   const handleChange = (newVal: string[]) => {
     setInternalValue(newVal);

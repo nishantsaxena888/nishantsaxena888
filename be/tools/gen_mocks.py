@@ -17,6 +17,8 @@ import sys
 from pathlib import Path
 
 BE_DIR = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(BE_DIR))
+from ui_gen import derive_ui  # same helper the live OPTIONS endpoint uses
 FE_CLIENT = BE_DIR.parent / "fe" / "client"
 METHODS = ("GET", "OPTIONS", "POST", "PUT", "DELETE")
 
@@ -70,10 +72,13 @@ def gen_client(name: str):
         rows = list(spec.get("sample_data") or [])
         write(out, f"en/{entity}/GET/success.json",
               {"items": rows, "page": 1, "size": len(rows) or 20, "total": len(rows)})
+        ui = derive_ui(spec)
+        if spec.get("rbac"):
+            ui["rbac"] = spec["rbac"]
         options_body = {
             "entity": entity, "name": entity,
-            "schema": {"fields": spec["fields"], "ui": spec.get("ui", {})},
-            "content": spec.get("ui", {}),
+            "schema": {"fields": spec["fields"], "ui": ui},
+            "content": ui,
         }
         if spec.get("config"):
             options_body["config"] = spec["config"]
