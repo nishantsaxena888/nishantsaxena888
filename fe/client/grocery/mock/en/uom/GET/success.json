@@ -1,0 +1,7 @@
+{
+  "data": [
+    { "id": 1, "name": "Kilogram", "short_name": "KG", "description": "Unit of mass", "base_uom_id": null, "conversion_rate": 1, "status": "active" },
+    { "id": 2, "name": "Gram", "short_name": "G", "description": "1/1000 of a Kilogram", "base_uom_id": 1, "conversion_rate": 0.001, "status": "active" },
+    { "id": 3, "name": "Liter", "short_name": "L", "description": "Unit of volume", "base_uom_id": null, "conversion_rate": 1, "status": "active" }
+  ]
+}

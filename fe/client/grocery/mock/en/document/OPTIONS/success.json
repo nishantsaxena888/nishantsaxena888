@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "title": "Document Management",
+    "description": "Upload, view, and organize company and product documents."
+  },
+  "name": "document",
+  "config": [
+    {
+      "id": "document-admin-module",
+      "type": "media-upload",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "actions": [
+          {
+            "key": "data",
+            "endpoint": "/document",
+            "method": "get",
+            "queryParams": {},
+            "responseMapping": {}
+          }
+        ]
+      },
+      "content": {
+        "table": {
+          "columns": [
+            {
+              "key": "id",
+              "label": "ID",
+              "type": "text",
+              "sortable": true
+            },
+            {
+              "key": "name",
+              "label": "Document Name",
+              "type": "text",
+              "sortable": true,
+              "searchable": true
+            },
+            {
+              "key": "type",
+              "label": "Document Type",
+              "type": "text",
+              "sortable": true
+            },
+            {
+              "key": "status",
+              "label": "Status",
+              "type": "status",
+              "options": {
+                "active": { "label": "Active", "variant": "success" },
+                "inactive": { "label": "Inactive", "variant": "destructive" }
+              }
+            }
+          ],
+          "actions": [
+            {
+              "id": "edit-document",
+              "label": "Edit",
+              "type": "button",
+              "action": "open_form",
+              "variant": "ghost",
+              "icon": "EditIcon"
+            },
+            {
+              "id": "delete-document",
+              "label": "Delete",
+              "type": "button",
+              "action": "confirm_delete",
+              "variant": "destructive",
+              "icon": "TrashIcon"
+            }
+          ]
+        },
+        "form": {
+          "id": "document-form",
+          "title": "Document Details",
+          "layout": "default",
+          "columns": 2,
+          "fields": [
+            {
+              "name": "name",
+              "label": "Document Name",
+              "componentType": "TextInput",
+              "required": true,
+              "placeholder": "e.g. Privacy Policy, SOP...",
+              "colSpan": 1
+            },
+            {
+              "name": "type",
+              "label": "Document Type",
+              "componentType": "Select",
+              "defaultValue": "PDF",
+              "colSpan": 1,
+              "options": [
+                { "label": "PDF", "value": "PDF" },
+                { "label": "DOCX", "value": "DOCX" },
+                { "label": "XLSX", "value": "XLSX" },
+                { "label": "TXT", "value": "TXT" }
+              ]
+            },
+            {
+              "name": "status",
+              "label": "Status",
+              "componentType": "Select",
+              "defaultValue": "active",
+              "colSpan": 1,
+              "options": [
+                { "label": "Active", "value": "active" },
+                { "label": "Inactive", "value": "inactive" }
+              ]
+            }
+          ]
+        }
+      },
+      "children": []
+    }
+  ]
+}

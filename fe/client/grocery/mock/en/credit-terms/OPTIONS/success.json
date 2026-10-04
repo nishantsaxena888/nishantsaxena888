@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "title": "Credit Terms",
+    "description": "Manage payment credit terms."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "id", "label": "ID", "type": "text" },
+        { "key": "name", "label": "Name", "type": "text" },
+        { "key": "days", "label": "Days", "type": "text" },
+        { "key": "status", "label": "Status", "type": "status", "options": { "active": { "label": "Active", "variant": "success" }, "inactive": { "label": "Inactive", "variant": "destructive" } } }
+      ]
+    },
+    "form": {
+      "id": "credit-terms-form",
+      "title": "Credit Term Details",
+      "description": "Enter the credit term information.",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        { "name": "name", "label": "Term Name", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Term Name is required" }] },
+        { "name": "days", "label": "Number of Days", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Number of Days is required" }] },
+        { "name": "status", "label": "Status", "type": "select", "defaultValue": "active", "column": { "md": 6 }, "options": [ { "label": "Active", "value": "active" }, { "label": "Inactive", "value": "inactive" } ] }
+      ]
+    }
+  }
+}

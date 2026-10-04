@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "title": "Deal Management",
+    "description": "Configure and manage active storefront deals and assignments."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "id", "label": "ID", "type": "text" },
+        { "key": "title", "label": "Title", "type": "text" },
+        { "key": "type", "label": "Type", "type": "text" },
+        { "key": "value", "label": "Value", "type": "text" }
+      ]
+    },
+    "form": {
+      "id": "deal-form",
+      "title": "Deal Details",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        { "name": "title", "label": "Title", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required" }] },
+        { "name": "type", "label": "Type", "type": "select", "defaultValue": "user_discount", "column": { "md": 6 }, "options": [
+          { "label": "User Discount", "value": "user_discount" },
+          { "label": "Category Discount", "value": "category_discount" },
+          { "label": "Product Discount", "value": "product_discount" }
+        ] },
+        { "name": "value", "label": "Discount Value", "type": "number", "column": { "md": 6 }, "validation": [{ "rule": "required" }] },
+        {
+          "name": "assignment.user_id",
+          "label": "User",
+          "type": "dynamic-multi-select",
+          "column": { "md": 6 },
+          "config": {
+            "endpoint": "user",
+            "bindLabel": "name",
+            "bindValue": "id"
+          },
+          "visible": [
+            {
+              "field": "type",
+              "operator": "===",
+              "value": "user_discount"
+            }
+          ],
+          "validation": [{ "rule": "required" }]
+        },
+        {
+          "name": "assignment.category_id",
+          "label": "Category",
+          "type": "dynamic-multi-select",
+          "column": { "md": 6 },
+          "config": {
+            "endpoint": "category",
+            "bindLabel": "name",
+            "bindValue": "id"
+          },
+          "visible": [
+            {
+              "field": "type",
+              "operator": "===",
+              "value": "category_discount"
+            }
+          ],
+          "validation": [{ "rule": "required" }]
+        },
+        {
+          "name": "assignment.product_id",
+          "label": "Product",
+          "type": "dynamic-multi-select",
+          "column": { "md": 6 },
+          "config": {
+            "endpoint": "product",
+            "bindLabel": "name",
+            "bindValue": "id"
+          },
+          "visible": [
+            {
+              "field": "type",
+              "operator": "===",
+              "value": "product_discount"
+            }
+          ],
+          "validation": [{ "rule": "required" }]
+        }
+      ]
+    }
+  }
+}

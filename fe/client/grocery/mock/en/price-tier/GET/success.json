@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Retail",
+      "is_limited": false,
+      "start_date": "2024-01-01",
+      "end_date": "2025-12-31",
+      "status": "active"
+    },
+    {
+      "id": 2,
+      "name": "Wholesale",
+      "is_limited": true,
+      "start_date": "2024-06-01",
+      "end_date": "2024-12-31",
+      "status": "active"
+    }
+  ]
+}

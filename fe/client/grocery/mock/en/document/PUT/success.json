@@ -1,0 +1,13 @@
+{
+  "status_code": 200,
+  "message": "Document updated successfully!",
+  "data": {
+    "id": 1,
+    "name": "Updated Document Name",
+    "type": "PDF",
+    "status": "active",
+    "url": "/admin/document",
+    "file_name": "standard_operating_procedure_v2.pdf",
+    "description": "Updated document description."
+  }
+}

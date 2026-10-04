@@ -1,0 +1,6 @@
+{
+  "data": [
+    { "id": 1, "name": "Forklift", "description": "Standard industrial forklift", "status": "active" },
+    { "id": 2, "name": "Cold Storage Unit", "description": "Portable refrigeration unit", "status": "active" }
+  ]
+}

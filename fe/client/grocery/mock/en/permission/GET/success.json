@@ -1,0 +1,14 @@
+﻿{
+    "data":  [
+                 {
+                     "status":  "active",
+                     "name":  "permission Item 1",
+                     "id":  1
+                 },
+                 {
+                     "status":  "inactive",
+                     "name":  "permission Item 2",
+                     "id":  2
+                 }
+             ]
+}

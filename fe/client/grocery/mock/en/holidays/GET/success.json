@@ -1,0 +1,7 @@
+{
+  "data": [
+    { "id": 1, "name": "New Year's Day", "date": "2024-01-01", "status": "active" },
+    { "id": 2, "name": "Independence Day", "date": "2024-08-15", "status": "active" },
+    { "id": 3, "name": "Christmas", "date": "2024-12-25", "status": "active" }
+  ]
+}

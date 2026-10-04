@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "title": "Product Supplier Mapping",
+    "description": "Map products to supplier SKUs and related details."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "product_name",
+          "label": "Product Name"
+        },
+        {
+          "key": "supplier_name",
+          "label": "Supplier Name"
+        },
+        {
+          "key": "sku",
+          "label": "Product SKU"
+        },
+        {
+          "key": "supplier_sku",
+          "label": "Supplier SKU"
+        },
+        {
+          "key": "description",
+          "label": "Description"
+        },
+        {
+          "key": "last_supplied",
+          "label": "Last Supplied"
+        },
+        {
+          "key": "currency",
+          "label": "Currency"
+        }
+      ]
+    },
+    "form": {
+      "id": "product-supplier-mapping-form",
+      "title": "Product Supplier Mapping",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        {
+          "name": "product_id",
+          "label": "Product",
+          "type": "dynamic-select",
+          "column": {
+            "md": 6
+          },
+          "config": {
+            "endpoint": "product",
+            "bindLabel": "name",
+            "bindValue": "id",
+            "disabled": true
+          }
+        },
+        {
+          "name": "supplier_id",
+          "label": "Supplier",
+          "type": "dynamic-select",
+          "column": {
+            "md": 6
+          },
+          "config": {
+            "endpoint": "suppliers",
+            "bindLabel": "name",
+            "bindValue": "id"
+          }
+        },
+        {
+          "name": "sku",
+          "label": "Product SKU",
+          "type": "text",
+          "column": {
+            "md": 6
+          }
+        },
+        {
+          "name": "supplier_sku",
+          "label": "Supplier SKU",
+          "type": "text",
+          "column": {
+            "md": 6
+          }
+        },
+        {
+          "name": "description",
+          "label": "Description",
+          "type": "textarea",
+          "column": {
+            "md": 12
+          }
+        },
+        {
+          "name": "last_supplied",
+          "label": "Last Supplied",
+          "type": "date",
+          "column": {
+            "md": 6
+          }
+        },
+        {
+          "name": "currency",
+          "label": "Currency",
+          "type": "select",
+          "column": {
+            "md": 6
+          },
+          "options": [
+            {
+              "label": "USD",
+              "value": "USD"
+            },
+            {
+              "label": "EUR",
+              "value": "EUR"
+            },
+            {
+              "label": "SGD",
+              "value": "SGD"
+            }
+          ]
+        },
+        {
+          "name": "priority",
+          "label": "Priority",
+          "type": "number",
+          "column": {
+            "md": 6
+          },
+          "defaultValue": 100
+        },
+        {
+          "name": "created_at",
+          "label": "Created At",
+          "type": "date",
+          "column": {
+            "md": 6
+          }
+        }
+      ]
+    }
+  }
+}

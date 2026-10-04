@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "title": "Country Management",
+    "description": "Manage countries and their associated currencies."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "id", "label": "ID", "type": "text" },
+        { "key": "name", "label": "Name", "type": "text" },
+        { "key": "code", "label": "Code", "type": "text" },
+        { "key": "status", "label": "Status", "type": "status", "options": { "active": { "label": "Active", "variant": "success" }, "inactive": { "label": "Inactive", "variant": "destructive" } } }
+      ]
+    },
+    "form": {
+      "id": "country-form",
+      "title": "Country Details",
+      "description": "Enter the country information.",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        { "name": "name", "label": "Country Name", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Country Name is required" }] },
+        { "name": "code", "label": "Country Code", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Country Code is required" }] },
+        {
+          "name": "currency_id",
+          "label": "Currency",
+          "type": "dynamic-select",
+          "column": { "md": 6 },
+          "config": {
+            "bindValue": "id",
+            "bindLabel": "name",
+            "endpoint": "currency",
+            "method": "GET"
+          }
+        },
+        { "name": "status", "label": "Status", "type": "select", "defaultValue": "active", "column": { "md": 6 }, "options": [ { "label": "Active", "value": "active" }, { "label": "Inactive", "value": "inactive" } ] }
+      ]
+    }
+  }
+}

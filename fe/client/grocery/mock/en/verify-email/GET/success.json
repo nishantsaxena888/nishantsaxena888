@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "title": "Verify Email",
+    "description": "Confirm your identity"
+  },
+  "config": [
+    {
+      "id": "verify-email-layout",
+      "type": "login-layout-1",
+      "properties": {
+        "level": "base",
+        "type": "static"
+      },
+      "content": {
+        "name": "Inventure",
+        "imageURL": "/clients/grocery/default.webp",
+        "config": {
+          "endpoint": "verify-email",
+          "type": "verify-email-card",
+          "action": {
+            "type": "redirect",
+            "navigation": "/admin/overview",
+            "navigation_type": "navigate",
+            "login": true
+          }
+        },
+        "footerText": "Didn't receive code? {{Resend||l||/verify-email}}"
+      },
+      "children": []
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "data": [
+    { "id": 1, "name": "Cold Storage", "code": "CS", "description": "Temperature controlled facility", "status": "active" },
+    { "id": 2, "name": "Distribution Center", "code": "DC", "description": "Large scale distribution hub", "status": "active" },
+    { "id": 3, "name": "Bonded Warehouse", "code": "BW", "description": "Duty-free storage facility", "status": "active" }
+  ]
+}

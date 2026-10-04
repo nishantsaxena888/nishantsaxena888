@@ -1,0 +1,31 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "name": "English",
+      "code": "en",
+      "is_default": true,
+      "status": "active"
+    },
+    {
+      "id": "2",
+      "name": "Spanish",
+      "code": "es",
+      "is_default": false,
+      "status": "active"
+    },
+    {
+      "id": "3",
+      "name": "Hindi",
+      "code": "hi",
+      "is_default": false,
+      "status": "inactive"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "limit": 10,
+    "total": 3,
+    "totalPages": 1
+  }
+}

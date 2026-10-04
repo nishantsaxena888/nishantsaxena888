@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "title": "Promo Codes",
+    "description": "Fetch available promo codes"
+  },
+  "data": [
+    {
+      "code": "WELCOME10",
+      "description": "10% off your first order!",
+      "type": "percent",
+      "value": 0.1
+    },
+    {
+      "code": "SAVE50",
+      "description": "$50 off on orders above $500",
+      "type": "fixed",
+      "value": 50.0,
+      "conditions": {
+        "min_purchase": 500.0
+      }
+    },
+    {
+      "code": "FREE5",
+      "description": "$5.00 off flat discount!",
+      "type": "fixed",
+      "value": 5.0
+    },
+    {
+      "code": "FREESHIP",
+      "description": "Free shipping on orders over $25!",
+      "type": "free_shipping",
+      "conditions": {
+        "min_purchase": 25.0
+      }
+    },
+    {
+      "code": "BOGO1",
+      "description": "Buy 1 Get 1 Free on Organic Avocados!",
+      "type": "bogo_same",
+      "rules": {
+        "product_id": 1,
+        "buy_qty": 1,
+        "get_qty": 1
+      }
+    },
+    {
+      "code": "BOGO2",
+      "description": "Buy 2 Spinach, get 1 Tomato Free!",
+      "type": "bogo_diff",
+      "rules": {
+        "buy_product_id": 2,
+        "buy_qty": 2,
+        "get_product_id": 3,
+        "get_qty": 1
+      }
+    },
+    {
+      "code": "BOGOCAT",
+      "description": "Buy 3 Fresh Produce, get 1 Free!",
+      "type": "bogo_category",
+      "rules": {
+        "category_id": 4,
+        "buy_qty": 2,
+        "get_qty": 1
+      }
+    },
+    {
+      "code": "HEALTHY20",
+      "description": "20% off over $50 with Fresh Produce!",
+      "type": "percent",
+      "value": 0.2,
+      "conditions": {
+        "min_purchase": 50.0,
+        "require_categories": [4],
+        "relation": "AND"
+      }
+    }
+  ]
+}

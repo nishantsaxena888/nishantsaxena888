@@ -1,0 +1,91 @@
+{
+  "meta": {
+    "title": "Dashboard Control",
+    "description": "Manage dashboard widgets and layout."
+  },
+  "name": "dashboard",
+  "config": [
+    {
+      "id": "dashboard-admin-module",
+      "type": "default-admin",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "actions": [
+          {
+            "key": "data",
+            "endpoint": "/dashboard",
+            "method": "get",
+            "queryParams": {},
+            "responseMapping": {}
+          }
+        ]
+      },
+      "content": {
+        "table": {
+          "columns": [
+            {
+              "key": "id",
+              "label": "ID",
+              "type": "text",
+              "sortable": true
+            },
+            {
+              "key": "name",
+              "label": "Display Name",
+              "type": "text",
+              "sortable": true,
+              "searchable": true
+            },
+            {
+              "key": "status",
+              "label": "Status",
+              "type": "status",
+              "options": {
+                "active": { "label": "Active", "variant": "success" },
+                "inactive": { "label": "Inactive", "variant": "destructive" }
+              }
+            }
+          ],
+          "actions": [
+            {
+              "id": "edit-dash",
+              "label": "Edit",
+              "type": "button",
+              "action": "open_form",
+              "variant": "ghost",
+              "icon": "EditIcon"
+            }
+          ]
+        },
+        "form": {
+          "id": "dashboard-form",
+          "title": "Dashboard Item Details",
+          "layout": "default",
+          "columns": 2,
+          "fields": [
+            {
+              "name": "name",
+              "label": "Display Name",
+              "componentType": "TextInput",
+              "required": true,
+              "colSpan": 1
+            },
+            {
+              "name": "status",
+              "label": "Status",
+              "componentType": "Select",
+              "defaultValue": "active",
+              "colSpan": 1,
+              "options": [
+                { "label": "Active", "value": "active" },
+                { "label": "Inactive", "value": "inactive" }
+              ]
+            }
+          ]
+        }
+      },
+      "children": []
+    }
+  ]
+}

@@ -1,204 +1,553 @@
 {
-  "entity": "product",
-  "name": "product",
-  "schema": {
-    "fields": {
-      "id": {
-        "type": "int",
-        "primary_key": true
-      },
-      "name": {
-        "type": "str",
-        "required": true
-      },
-      "category": {
-        "type": "str",
-        "default": "Produce"
-      },
-      "price": {
-        "type": "float",
-        "default": 0.0
-      },
-      "stock": {
-        "type": "int",
-        "default": 0
-      },
-      "on_sale": {
-        "type": "bool",
-        "default": false
-      }
-    },
-    "ui": {
-      "table": {
-        "columns": [
-          {
-            "key": "id",
-            "label": "ID",
-            "sortable": true
-          },
-          {
-            "key": "name",
-            "label": "Name",
-            "searchable": true
-          },
-          {
-            "key": "category",
-            "label": "Category",
-            "type": "badge",
-            "variants": {
-              "Produce": "default",
-              "Dairy": "secondary",
-              "Bakery": "secondary",
-              "Drinks": "secondary"
-            }
-          },
-          {
-            "key": "price",
-            "label": "Price",
-            "sortable": true
-          },
-          {
-            "key": "stock",
-            "label": "Stock",
-            "sortable": true
-          },
-          {
-            "key": "on_sale",
-            "label": "On Sale",
-            "type": "status"
-          }
-        ],
-        "actions": [
-          "open_form",
-          "confirm_delete"
-        ]
-      },
-      "form": {
-        "fields": [
-          {
-            "name": "name",
-            "componentType": "TextInput",
-            "required": true,
-            "colSpan": 2,
-            "label": "Name"
-          },
-          {
-            "name": "category",
-            "componentType": "Select",
-            "options": [
-              "Produce",
-              "Dairy",
-              "Bakery",
-              "Drinks"
-            ],
-            "default": "Produce",
-            "label": "Category"
-          },
-          {
-            "name": "price",
-            "componentType": "TextInput",
-            "default": "0",
-            "label": "Price"
-          },
-          {
-            "name": "stock",
-            "componentType": "TextInput",
-            "default": "0",
-            "label": "Stock"
-          },
-          {
-            "name": "on_sale",
-            "componentType": "Checkbox",
-            "default": false,
-            "label": "On Sale"
-          }
-        ]
-      }
-    }
+  "meta": {
+    "title": "Product Management",
+    "description": "Maintain your product catalog, inventory, and pricing settings."
   },
   "content": {
     "table": {
       "columns": [
         {
-          "key": "id",
-          "label": "ID",
-          "sortable": true
+          "key": "sku",
+          "label": "SKU",
+          "type": "text"
         },
         {
           "key": "name",
-          "label": "Name",
-          "searchable": true
+          "label": "Product Name",
+          "type": "text"
         },
         {
-          "key": "category",
+          "key": "category_id",
           "label": "Category",
-          "type": "badge",
-          "variants": {
-            "Produce": "default",
-            "Dairy": "secondary",
-            "Bakery": "secondary",
-            "Drinks": "secondary"
-          }
+          "type": "text"
         },
         {
-          "key": "price",
-          "label": "Price",
-          "sortable": true
+          "key": "brand_id",
+          "label": "Brand",
+          "type": "text"
         },
         {
-          "key": "stock",
-          "label": "Stock",
-          "sortable": true
-        },
-        {
-          "key": "on_sale",
-          "label": "On Sale",
+          "key": "status",
+          "label": "Status",
           "type": "status"
         }
-      ],
-      "actions": [
-        "open_form",
-        "confirm_delete"
       ]
     },
     "form": {
-      "fields": [
+      "id": "product-form",
+      "title": "Product Details",
+      "formType": "tabs",
+      "tabOrientation": "vertical",
+      "layout": "default",
+      "columns": 3,
+      "inputs": [
         {
-          "name": "name",
-          "componentType": "TextInput",
-          "required": true,
-          "colSpan": 2,
-          "label": "Name"
+          "name": "general_info",
+          "label": "General Information",
+          "type": "group",
+          "column": {
+            "md": 12
+          },
+          "inputs": [
+            {
+              "name": "name",
+              "label": "Product Name",
+              "type": "text",
+              "column": {
+                "md": 6
+              },
+              "required": true
+            },
+            {
+              "name": "sku",
+              "label": "SKU",
+              "type": "text",
+              "column": {
+                "md": 6
+              },
+              "required": true
+            },
+            {
+              "name": "name_other",
+              "label": "Product Name (Other Language)",
+              "type": "text",
+              "column": {
+                "md": 6
+              }
+            },
+            {
+              "name": "short_name",
+              "label": "Short Name",
+              "type": "text",
+              "column": {
+                "md": 6
+              }
+            },
+            {
+              "name": "costing_method",
+              "label": "Costing Method",
+              "type": "select",
+              "column": {
+                "md": 4
+              },
+              "required": true,
+              "options": [
+                {
+                  "label": "FIFO",
+                  "value": "fifo"
+                },
+                {
+                  "label": "LIFO",
+                  "value": "lifo"
+                },
+                {
+                  "label": "Average",
+                  "value": "average"
+                }
+              ]
+            },
+            {
+              "name": "product_code",
+              "label": "Product Code",
+              "type": "text",
+              "column": {
+                "md": 4
+              }
+            },
+            {
+              "name": "uom_id",
+              "label": "Unit Of Measurement",
+              "type": "dynamic-select",
+              "column": {
+                "md": 4
+              },
+              "required": true,
+              "config": {
+                "endpoint": "uom",
+                "bindLabel": "name",
+                "bindValue": "id"
+              }
+            },
+            {
+              "name": "drop_shipping",
+              "label": "Drop Shipping",
+              "type": "select",
+              "column": {
+                "md": 6
+              },
+              "options": [
+                {
+                  "label": "No Drop Ship",
+                  "value": "none"
+                },
+                {
+                  "label": "Standard",
+                  "value": "standard"
+                }
+              ]
+            },
+            {
+              "name": "attribute_set",
+              "label": "Additional attributes Set",
+              "type": "select",
+              "column": {
+                "md": 6
+              },
+              "options": []
+            },
+            {
+              "name": "tags",
+              "label": "Tags",
+              "type": "text",
+              "column": {
+                "md": 6
+              }
+            },
+            {
+              "name": "inventory_type",
+              "label": "Inventory Type",
+              "type": "select",
+              "column": {
+                "md": 6
+              },
+              "options": [
+                {
+                  "label": "Inventory",
+                  "value": "inventory"
+                },
+                {
+                  "label": "Service",
+                  "value": "service"
+                }
+              ]
+            },
+            {
+              "name": "hs_code",
+              "label": "HS Code",
+              "type": "text",
+              "column": {
+                "md": 3
+              }
+            },
+            {
+              "name": "material",
+              "label": "Material",
+              "type": "text",
+              "column": {
+                "md": 3
+              }
+            },
+            {
+              "name": "status",
+              "label": "Status",
+              "type": "select",
+              "column": {
+                "md": 6
+              },
+              "options": [
+                {
+                  "label": "Active",
+                  "value": "active"
+                },
+                {
+                  "label": "Inactive",
+                  "value": "inactive"
+                }
+              ]
+            },
+            {
+              "name": "category_id",
+              "label": "Category",
+              "type": "dynamic-multi-select",
+              "column": {
+                "md": 6
+              },
+              "config": {
+                "endpoint": "category",
+                "bindLabel": "name",
+                "bindValue": "id"
+              }
+            },
+            {
+              "name": "sub_category_id",
+              "label": "SubCategory",
+              "type": "dynamic-multi-select",
+              "column": {
+                "md": 6
+              },
+              "config": {
+                "endpoint": "sub-category",
+                "bindLabel": "name",
+                "bindValue": "id",
+                "dependsOn": "category_id"
+              }
+            },
+            {
+              "name": "brand_id",
+              "label": "Brand",
+              "type": "dynamic-select",
+              "column": {
+                "md": 6
+              },
+              "config": {
+                "endpoint": "brand",
+                "bindLabel": "name",
+                "bindValue": "id"
+              }
+            },
+            {
+              "name": "min_reorder",
+              "label": "Minimum Before Reorder",
+              "type": "number",
+              "column": {
+                "md": 3
+              },
+              "defaultValue": 0
+            },
+            {
+              "name": "reorder_qty",
+              "label": "Reorder Qty",
+              "type": "number",
+              "column": {
+                "md": 3
+              },
+              "defaultValue": 0
+            },
+            {
+              "name": "description",
+              "label": "Description",
+              "type": "richtext",
+              "column": {
+                "md": 12
+              },
+              "required": true
+            },
+            {
+              "name": "short_description",
+              "label": "Short Description (Max characters 1000)",
+              "type": "richtext",
+              "column": {
+                "md": 12
+              },
+              "required": true
+            }
+          ]
         },
         {
-          "name": "category",
-          "componentType": "Select",
-          "options": [
-            "Produce",
-            "Dairy",
-            "Bakery",
-            "Drinks"
-          ],
-          "default": "Produce",
-          "label": "Category"
+          "name": "media_options",
+          "label": "Media & Options",
+          "type": "group",
+          "column": {
+            "md": 12
+          },
+          "inputs": [
+            {
+              "name": "images",
+              "label": "Product Image(s)",
+              "type": "gallery",
+              "column": {
+                "md": 12
+              },
+              "config": {
+                "allowedType": "image",
+                "multiple": true,
+                "add_label": "Add Image"
+              }
+            }
+          ]
         },
         {
-          "name": "price",
-          "componentType": "TextInput",
-          "default": "0",
-          "label": "Price"
+          "name": "pricing_tab",
+          "label": "Prices",
+          "type": "group",
+          "column": {
+            "md": 12
+          },
+          "inputs": [
+            {
+              "name": "base_price",
+              "label": "Base Price (SGD)",
+              "type": "number",
+              "column": {
+                "md": 4
+              },
+              "defaultValue": 0
+            },
+            {
+              "name": "cost_price",
+              "label": "Cost Price (SGD)",
+              "type": "number",
+              "column": {
+                "md": 4
+              },
+              "defaultValue": 0
+            },
+            {
+              "name": "price_tiers",
+              "label": "Price Tiers",
+              "type": "many-to-many",
+              "column": {
+                "md": 12
+              },
+              "config": {
+                "bindValue": "id",
+                "title": "Price Tiers",
+                "entity": "product-price-mapping",
+                "className": "flex-1",
+                "searchParameter": {
+                  "product_id": "id"
+                },
+                "emptyMessage": "Please select a price tier"
+              }
+            }
+          ]
         },
         {
-          "name": "stock",
-          "componentType": "TextInput",
-          "default": "0",
-          "label": "Stock"
+          "name": "dimensions_tab",
+          "label": "Dimensions",
+          "type": "group",
+          "column": {
+            "md": 12
+          },
+          "inputs": [
+            {
+              "name": "dim_uom_id",
+              "label": "Unit Of Measurement",
+              "type": "dynamic-select",
+              "column": {
+                "md": 4
+              },
+              "config": {
+                "endpoint": "uom",
+                "bindLabel": "name",
+                "bindValue": "id"
+              }
+            },
+            {
+              "name": "length",
+              "label": "Length",
+              "type": "number",
+              "column": {
+                "md": 2
+              },
+              "defaultValue": 0
+            },
+            {
+              "name": "width",
+              "label": "Width",
+              "type": "number",
+              "column": {
+                "md": 2
+              },
+              "defaultValue": 0
+            },
+            {
+              "name": "height",
+              "label": "Height",
+              "type": "number",
+              "column": {
+                "md": 2
+              },
+              "defaultValue": 0
+            },
+            {
+              "name": "capacity",
+              "label": "Capacity",
+              "type": "number",
+              "column": {
+                "md": 2
+              },
+              "defaultValue": 0
+            },
+            {
+              "name": "weight",
+              "label": "Weight",
+              "type": "number",
+              "column": {
+                "md": 6
+              },
+              "defaultValue": 0
+            },
+            {
+              "name": "weight_uom_id",
+              "label": "Weight UOM",
+              "type": "dynamic-select",
+              "column": {
+                "md": 6
+              },
+              "config": {
+                "endpoint": "uom",
+                "bindLabel": "name",
+                "bindValue": "id"
+              }
+            },
+            {
+              "name": "inner_qty",
+              "label": "Inner Carton Quantity",
+              "type": "number",
+              "column": {
+                "md": 6
+              },
+              "defaultValue": 0
+            },
+            {
+              "name": "outer_qty",
+              "label": "Outer Carton Quantity",
+              "type": "number",
+              "column": {
+                "md": 6
+              },
+              "defaultValue": 0
+            },
+            {
+              "name": "outer_length",
+              "label": "Volume Length",
+              "type": "number",
+              "column": {
+                "md": 3
+              },
+              "defaultValue": 0
+            },
+            {
+              "name": "outer_width",
+              "label": "Volume Width",
+              "type": "number",
+              "column": {
+                "md": 3
+              },
+              "defaultValue": 0
+            },
+            {
+              "name": "outer_height",
+              "label": "Volume Height",
+              "type": "number",
+              "column": {
+                "md": 3
+              },
+              "defaultValue": 0
+            },
+            {
+              "name": "outer_capacity",
+              "label": "Volume Capacity",
+              "type": "number",
+              "column": {
+                "md": 3
+              },
+              "defaultValue": 0
+            }
+          ]
         },
         {
-          "name": "on_sale",
-          "componentType": "Checkbox",
-          "default": false,
-          "label": "On Sale"
+          "name": "suppliers_tab",
+          "label": "Suppliers",
+          "type": "group",
+          "column": {
+            "md": 12
+          },
+          "inputs": [
+            {
+              "name": "product_suppliers",
+              "label": "Suppliers",
+              "type": "many-to-many",
+              "column": {
+                "md": 12
+              },
+              "config": {
+                "bindValue": "id",
+                "title": "Suppliers",
+                "entity": "product-supplier-mapping",
+                "className": "flex-1",
+                "searchParameter": {
+                  "product_id": "$id"
+                },
+                "emptyMessage": "Please select a supplier"
+              }
+            }
+          ]
+        },
+        {
+          "name": "attachments_tab",
+          "label": "Attachments",
+          "type": "group",
+          "column": {
+            "md": 12
+          },
+          "inputs": [
+            {
+              "name": "attachments",
+              "label": "Upload Documents",
+              "type": "gallery",
+              "column": {
+                "md": 12
+              },
+              "config": {
+                "allowedType": "all",
+                "multiple": true,
+                "add_label": "Add File",
+                "maxFiles": 3
+              }
+            }
+          ]
         }
       ]
     }

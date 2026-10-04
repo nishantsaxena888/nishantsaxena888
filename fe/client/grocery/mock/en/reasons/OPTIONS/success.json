@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "title": "Reason Codes",
+    "description": "Manage reasons for cancellations, returns, etc."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "id", "label": "ID", "type": "text" },
+        { "key": "name", "label": "Reason", "type": "text" },
+        { "key": "type", "label": "Type", "type": "text" },
+        { "key": "status", "label": "Status", "type": "status", "options": { "active": { "label": "Active", "variant": "success" }, "inactive": { "label": "Inactive", "variant": "destructive" } } }
+      ]
+    },
+    "form": {
+      "id": "reason-form",
+      "title": "Reason Details",
+      "description": "Enter the reason information.",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        { "name": "name", "label": "Reason Name", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Reason Name is required" }] },
+        { "name": "type", "label": "Reason Type", "type": "select", "column": { "md": 6 }, "options": [ { "label": "Return", "value": "Return" }, { "label": "Cancellation", "value": "Cancellation" }, { "label": "Other", "value": "Other" } ], "validation": [{ "rule": "required", "message": "Reason Type is required" }] },
+        { "name": "status", "label": "Status", "type": "select", "defaultValue": "active", "column": { "md": 6 }, "options": [ { "label": "Active", "value": "active" }, { "label": "Inactive", "value": "inactive" } ] }
+      ]
+    }
+  }
+}

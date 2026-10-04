@@ -1,0 +1,8 @@
+{
+  "data": [
+    { "id": 1, "name": "Paid", "status": "active" },
+    { "id": 2, "name": "Unpaid", "status": "active" },
+    { "id": 3, "name": "Partially Paid", "status": "active" },
+    { "id": 4, "name": "Refunded", "status": "active" }
+  ]
+}

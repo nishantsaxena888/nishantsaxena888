@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "title": "Warehouse Management",
+    "description": "Manage warehouse locations."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "id", "label": "ID", "type": "text" },
+        { "key": "name", "label": "Name", "type": "text" },
+        { "key": "status", "label": "Status", "type": "status", "options": { "active": { "label": "Active", "variant": "success" }, "inactive": { "label": "Inactive", "variant": "destructive" } } }
+      ]
+    },
+    "form": {
+      "id": "warehouse-form",
+      "title": "Warehouse Details",
+      "description": "Enter the warehouse information.",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        { "name": "name", "label": "Warehouse Name", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Warehouse Name is required" }] },
+        { "name": "description", "label": "Description", "type": "textarea", "column": { "md": 6 } },
+        {
+          "name": "warehouse_type_id",
+          "label": "Warehouse Type",
+          "type": "dynamic-select",
+          "column": { "md": 6 },
+          "config": {
+            "bindValue": "id",
+            "bindLabel": "name",
+            "endpoint": "warehouse-type",
+            "method": "GET"
+          }
+        },
+        {
+          "name": "customer_id",
+          "label": "Customer",
+          "type": "dynamic-select",
+          "column": { "md": 6 },
+          "config": {
+            "bindValue": "id",
+            "bindLabel": "name",
+            "endpoint": "customer",
+            "method": "GET"
+          }
+        },
+        {
+          "name": "address_id",
+          "label": "Address",
+          "type": "dynamic-select",
+          "column": { "md": 6 },
+          "config": {
+            "bindValue": "id",
+            "bindLabel": "street",
+            "endpoint": "address",
+            "method": "GET"
+          }
+        },
+        {
+          "name": "country_id",
+          "label": "Country",
+          "type": "dynamic-select",
+          "column": { "md": 6 },
+          "config": {
+            "bindValue": "id",
+            "bindLabel": "name",
+            "endpoint": "countries",
+            "method": "GET"
+          }
+        },
+        { "name": "status", "label": "Status", "type": "select", "defaultValue": "active", "column": { "md": 6 }, "options": [ { "label": "Active", "value": "active" }, { "label": "Inactive", "value": "inactive" } ] }
+      ]
+    }
+  }
+}

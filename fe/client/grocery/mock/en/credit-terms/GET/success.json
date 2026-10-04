@@ -1,0 +1,7 @@
+{
+  "data": [
+    { "id": 1, "name": "Net 30", "days": 30, "status": "active" },
+    { "id": 2, "name": "Net 60", "days": 60, "status": "active" },
+    { "id": 3, "name": "Due on Receipt", "days": 0, "status": "active" }
+  ]
+}

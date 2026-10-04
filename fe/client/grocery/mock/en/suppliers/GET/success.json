@@ -1,0 +1,30 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "supplier_type": "External",
+      "supplier_uen": "UEN12345678",
+      "supplier_code": "SUP001",
+      "name": "Global Traders Co.",
+      "currency_id": 1,
+      "payment_term_id": 1,
+      "default_carrier_id": 1,
+      "discount": 5,
+      "shipping_terms": "FOB",
+      "lead_days": 3,
+      "status": "active",
+      "delivery_cutoff_time": "18:00",
+      "tax_enabled": true,
+      "tax_inclusive": false,
+      "tax_code_id": 1,
+      "tax_number": "TX-999000",
+      "comments": "Preferred supplier for electronics.",
+      "peppol_id": "P-112233"
+    }
+  ],
+  "config": {
+    "total": 1,
+    "page": 1,
+    "itemPerPage": 10
+  }
+}

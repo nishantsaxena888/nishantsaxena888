@@ -1,22 +1,45 @@
 {
   "meta": {
-    "title": "Deals"
+    "title": "On sale"
   },
   "config": [
     {
-      "id": "grocery-grid-deals",
-      "type": "product-grid",
+      "id": "hdr",
+      "type": "header",
       "properties": {
         "level": "base",
         "type": "dynamic",
         "action": [
           {
-            "key": "products",
-            "endpoint": "product",
-            "method": "GET",
+            "key": "data",
+            "endpoint": "/header",
+            "method": "get",
             "queryParams": {
-              "size": 24,
-              "on_sale": true
+              "id": 1
+            }
+          },
+          {
+            "key": "category",
+            "endpoint": "/category",
+            "method": "get"
+          }
+        ]
+      },
+      "content": null
+    },
+    {
+      "id": "products-deals",
+      "type": "products",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "data",
+            "endpoint": "product",
+            "method": "get",
+            "queryParams": {
+              "size": 24
             }
           }
         ]
@@ -24,6 +47,25 @@
       "content": {
         "title": "On sale"
       }
+    },
+    {
+      "id": "ftr",
+      "type": "footer",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "data",
+            "endpoint": "/footer",
+            "method": "get",
+            "queryParams": {
+              "id": 1
+            }
+          }
+        ]
+      },
+      "content": {}
     }
   ]
 }

@@ -1,0 +1,31 @@
+{
+  "meta": {
+    "title": "Tax Code Management",
+    "description": "Manage tax codes and rates."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "id", "label": "ID", "type": "text" },
+        { "key": "name", "label": "Name", "type": "text" },
+        { "key": "rate", "label": "Rate (%)", "type": "text" },
+        { "key": "status", "label": "Status", "type": "status" }
+      ]
+    },
+    "form": {
+      "id": "tax-code-form",
+      "title": "Tax Code Details",
+      "description": "Enter the tax code information.",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        { "name": "name", "label": "Tax Name", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Tax Name is required" }] },
+        { "name": "rate", "label": "Tax Rate (%)", "type": "number", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Tax Rate is required" }] },
+        { "name": "description", "label": "Description", "type": "textarea", "column": { "md": 12 } },
+        { "name": "from_date", "label": "From Date", "type": "date", "column": { "md": 6 } },
+        { "name": "to_date", "label": "To Date", "type": "date", "column": { "md": 6 } },
+        { "name": "status", "label": "Status", "type": "select", "defaultValue": "active", "column": { "md": 12 }, "options": [ { "label": "Active", "value": "active" }, { "label": "Inactive", "value": "inactive" } ] }
+      ]
+    }
+  }
+}

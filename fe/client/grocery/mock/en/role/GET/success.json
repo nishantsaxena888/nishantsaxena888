@@ -1,0 +1,37 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Super Admin",
+      "description": "Full system access including security settings and user management.",
+      "permission_count": "All",
+      "status": "active"
+    },
+    {
+      "id": 2,
+      "name": "Inventory Manager",
+      "description": "Manage products, stock levels, and warehouse transactions.",
+      "permission_count": "24",
+      "status": "active"
+    },
+    {
+      "id": 3,
+      "name": "Salesperson",
+      "description": "Create orders, view customer info, and process payments.",
+      "permission_count": "12",
+      "status": "active"
+    },
+    {
+      "id": 4,
+      "name": "Accountant",
+      "description": "View financial transactions, generate invoices, and manage taxes.",
+      "permission_count": "18",
+      "status": "active"
+    }
+  ],
+  "config": {
+    "total": 4,
+    "page": 1,
+    "itemPerPage": 10
+  }
+}

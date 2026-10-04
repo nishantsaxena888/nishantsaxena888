@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "title": "Contact Management",
+    "description": "Manage business and personal contacts."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "name", "label": "NAME", "type": "text" },
+        { "key": "phone", "label": "PHONE", "type": "text" },
+        { "key": "designation", "label": "DESIGNATION", "type": "text" },
+        { "key": "fax", "label": "FAX", "type": "text" },
+        { "key": "email", "label": "EMAIL", "type": "email" },
+        { "key": "country_id", "label": "COUNTRY", "type": "text" },
+        { "key": "is_default", "label": "DEFAULT", "type": "boolean" },
+        { "key": "status", "label": "STATUS", "type": "status" }
+      ]
+    },
+    "form": {
+      "id": "contact-form",
+      "title": "Contact Details",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        { "name": "name", "label": "Name", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Name is required" }] },
+        { "name": "phone", "label": "Phone", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Phone is required" }] },
+        { "name": "designation", "label": "Designation", "type": "text", "column": { "md": 6 } },
+        { "name": "fax", "label": "Fax", "type": "text", "column": { "md": 6 } },
+        { "name": "email", "label": "Email", "type": "email", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Email is required" }] },
+        { 
+          "name": "country_id", 
+          "label": "Country", 
+          "type": "dynamic-select", 
+          "column": { "md": 6 },
+          "config": { "endpoint": "countries", "bindLabel": "name", "bindValue": "id" }
+        },
+        { "name": "is_default", "label": "Set as Default", "type": "switch", "column": { "md": 6 }, "defaultValue": false },
+        { "name": "status", "label": "Status", "type": "select", "defaultValue": "active", "column": { "md": 6 }, "options": [ { "label": "Active", "value": "active" }, { "label": "Inactive", "value": "inactive" } ] }
+      ]
+    }
+  }
+}

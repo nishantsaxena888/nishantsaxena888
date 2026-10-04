@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "title": "Holiday Management",
+    "description": "Manage public and company holidays."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "id", "label": "ID", "type": "text" },
+        { "key": "name", "label": "Holiday Name", "type": "text" },
+        { "key": "date", "label": "Date", "type": "date" },
+        { "key": "status", "label": "Status", "type": "status", "options": { "active": { "label": "Active", "variant": "success" }, "inactive": { "label": "Inactive", "variant": "destructive" } } }
+      ]
+    },
+    "form": {
+      "id": "holiday-form",
+      "title": "Holiday Details",
+      "description": "Enter the holiday information.",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        { "name": "name", "label": "Holiday Name", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Holiday Name is required" }] },
+        { "name": "date", "label": "Holiday Date", "type": "date", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Holiday Date is required" }] },
+        { "name": "status", "label": "Status", "type": "select", "defaultValue": "active", "column": { "md": 6 }, "options": [ { "label": "Active", "value": "active" }, { "label": "Inactive", "value": "inactive" } ] }
+      ]
+    }
+  }
+}

@@ -1,5 +1,498 @@
 {
+  "order": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "transaction": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "settings": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "home": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "tax-code": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "footer": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "deal": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
   "configuration": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "unit": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "warehouse-type": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "contact": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "role": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "credit-terms": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "style-config/grocery-light": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "style-config/default": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "style-config/grocery/color/emerald-grocery": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "style-config/grocery/color/grey-grocery": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "style-config/grocery/emerald-grocery": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "style-config/grocery/grey-grocery": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "style-config/client": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "suppliers": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "attribute": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "category": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "order-status": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "holidays": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "bins": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "brand": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "payment-status": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "tax": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "roles": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "language": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "user": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "document": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "delivery-types": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "product": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "checkout": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "discount": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "dashboard": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "special-equipments": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "verify-email": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "register": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "sub-category": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "address-type": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "profile": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "theme": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "forgot-password": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "address": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "menu": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "cart": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "promo-code": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "reset-password": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "carriers": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "product-price-mapping": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "countries": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "price-tier": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "warehouse": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "uom": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "overview": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "payment-modes": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "permission": {
+    "OPTIONS": {
+      "mock": true
+    },
     "GET": {
       "mock": true
     }
@@ -19,12 +512,34 @@
       "mock": true
     }
   },
-  "style-config/grocery-light": {
+  "product-supplier-mapping": {
+    "OPTIONS": {
+      "mock": true
+    },
     "GET": {
       "mock": true
     }
   },
-  "style-config/default": {
+  "slots": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "reasons": {
+    "OPTIONS": {
+      "mock": true
+    },
+    "GET": {
+      "mock": true
+    }
+  },
+  "currency": {
+    "OPTIONS": {
+      "mock": true
+    },
     "GET": {
       "mock": true
     }
@@ -34,88 +549,36 @@
       "mock": true
     }
   },
-  "overview": {
-    "GET": {
-      "mock": true
-    },
+  "login": {
     "OPTIONS": {
       "mock": true
     },
     "POST": {
       "mock": true
     },
-    "PUT": {
-      "mock": true
-    },
-    "DELETE": {
+    "GET": {
       "mock": true
     }
   },
-  "category": {
+  "header": {
     "GET": {
-      "mock": true
-    },
-    "OPTIONS": {
-      "mock": true
-    },
-    "POST": {
-      "mock": true
-    },
-    "PUT": {
-      "mock": true
-    },
-    "DELETE": {
-      "mock": true
-    }
-  },
-  "product": {
-    "GET": {
-      "mock": true
-    },
-    "OPTIONS": {
-      "mock": true
-    },
-    "POST": {
-      "mock": true
-    },
-    "PUT": {
-      "mock": true
-    },
-    "DELETE": {
       "mock": true
     }
   },
   "customer": {
-    "GET": {
-      "mock": true
-    },
     "OPTIONS": {
       "mock": true
     },
     "POST": {
       "mock": true
     },
+    "DELETE": {
+      "mock": true
+    },
     "PUT": {
       "mock": true
     },
-    "DELETE": {
-      "mock": true
-    }
-  },
-  "order": {
     "GET": {
-      "mock": true
-    },
-    "OPTIONS": {
-      "mock": true
-    },
-    "POST": {
-      "mock": true
-    },
-    "PUT": {
-      "mock": true
-    },
-    "DELETE": {
       "mock": true
     }
   }

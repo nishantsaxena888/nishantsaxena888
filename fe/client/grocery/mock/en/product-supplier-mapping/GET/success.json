@@ -1,0 +1,28 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "product_id": 1,
+      "product_name": "PROD-001",
+      "supplier_id": 1,
+      "supplier_name": "SUP-001",
+      "sku": "PROD-001",
+      "supplier_sku": "SUP-001-A",
+      "description": "Organic Apple",
+      "last_supplied": "2026-05-01",
+      "currency": "USD"
+    },
+    {
+      "id": 2,
+      "product_id": 2,
+      "supplier_id": 2,
+      "product_name": "PROD-002",
+      "supplier_name": "SUP-002",
+      "sku": "PROD-002",
+      "supplier_sku": "SUP-002-B",
+      "description": "Banana Bunch",
+      "last_supplied": "2026-04-28",
+      "currency": "EUR"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+[
+  { "label": "Super Admin", "value": "1" },
+  { "label": "Admin", "value": "2" },
+  { "label": "Manager", "value": "3" },
+  { "label": "Assistant Manager", "value": "4" },
+  { "label": "Supervisor", "value": "5" },
+  { "label": "Team Lead", "value": "6" },
+  { "label": "Senior Developer", "value": "7" },
+  { "label": "Developer", "value": "8" },
+  { "label": "Junior Developer", "value": "9" },
+  { "label": "QA Engineer", "value": "10" },
+  { "label": "Designer", "value": "11" },
+  { "label": "Product Manager", "value": "12" },
+  { "label": "Sales Manager", "value": "13" },
+  { "label": "Sales Representative", "value": "14" },
+  { "label": "Customer Support", "value": "15" },
+  { "label": "HR Manager", "value": "16" },
+  { "label": "Accountant", "value": "17" },
+  { "label": "Marketing Specialist", "value": "18" },
+  { "label": "Content Writer", "value": "19" },
+  { "label": "Data Analyst", "value": "20" }
+]

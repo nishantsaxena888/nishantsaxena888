@@ -1,0 +1,50 @@
+{
+  "config": [
+    {
+      "type": "reset-password-card",
+      "content": {
+        "form": {
+          "labels": {
+            "submit": "Update Password"
+          },
+          "submit_included": true,
+          "inputs": [
+            {
+              "name": "email",
+              "type": "hidden"
+            },
+            {
+              "name": "password",
+              "label": "New Password",
+              "type": "password",
+              "placeholder": "Enter new password",
+              "column": { "md": 12 },
+              "validation": [
+                { "rule": "required", "message": "Password is required" },
+                { "rule": "minLength", "value": 8, "message": "Min 8 characters" }
+              ]
+            },
+            {
+              "name": "confirm_password",
+              "label": "Confirm New Password",
+              "type": "password",
+              "placeholder": "Confirm new password",
+              "column": { "md": 12 },
+              "validation": [
+                { "rule": "required", "message": "Confirmation is required" }
+              ]
+            },
+            {
+              "name": "submit_btn",
+              "label": "",
+              "type": "submit",
+              "isNoneInput": true,
+              "button_label": "Update Password",
+              "column": { "md": 12 }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

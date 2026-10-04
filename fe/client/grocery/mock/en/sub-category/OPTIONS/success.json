@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "title": "Sub Category Management",
+    "description": "Manage sub-categories linked to main categories."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "id", "label": "ID", "type": "text" },
+        { "key": "name", "label": "Sub Category Name", "type": "text" },
+        { "key": "category_id", "label": "Main Category", "type": "text" },
+        { "key": "sequence", "label": "Sequence", "type": "text" },
+        { "key": "status", "label": "Status", "type": "status" }
+      ]
+    },
+    "form": {
+      "id": "sub-category-form",
+      "title": "Sub Category Details",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        { "name": "name", "label": "Sub Category Name", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required" }] },
+        { 
+          "name": "category_id", 
+          "label": "Main Category", 
+          "type": "dynamic-select", 
+          "column": { "md": 6 },
+          "config": { "endpoint": "category", "bindLabel": "name", "bindValue": "id" },
+          "validation": [{ "rule": "required" }]
+        },
+        { "name": "sequence", "label": "Sequence", "type": "number", "column": { "md": 6 }, "defaultValue": 0 },
+        { "name": "status", "label": "Status", "type": "select", "defaultValue": "active", "column": { "md": 6 }, "options": [ { "label": "Active", "value": "active" }, { "label": "Inactive", "value": "inactive" } ] }
+      ]
+    }
+  }
+}

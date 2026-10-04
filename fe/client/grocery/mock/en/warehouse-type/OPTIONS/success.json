@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "title": "Warehouse Type Management",
+    "description": "Manage different types of warehouse facilities."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "id", "label": "ID", "type": "text" },
+        { "key": "name", "label": "Type Name", "type": "text" },
+        { "key": "code", "label": "Code", "type": "text" },
+        { "key": "status", "label": "Status", "type": "status" }
+      ]
+    },
+    "form": {
+      "id": "warehouse-type-form",
+      "title": "Warehouse Type Details",
+      "inputs": [
+        { 
+          "name": "name", 
+          "label": "Type Name", 
+          "type": "text", 
+          "column": { "md": 6 }, 
+          "validation": [{ "rule": "required", "message": "Type Name is required" }] 
+        },
+        { 
+          "name": "code", 
+          "label": "Type Code", 
+          "type": "text", 
+          "column": { "md": 6 }, 
+          "validation": [{ "rule": "required", "message": "Type Code is required" }] 
+        },
+        { 
+          "name": "description", 
+          "label": "Description", 
+          "type": "textarea", 
+          "column": { "md": 12 } 
+        },
+        { 
+          "name": "status", 
+          "label": "Status", 
+          "type": "select", 
+          "defaultValue": "active", 
+          "column": { "md": 6 }, 
+          "options": [ 
+            { "label": "Active", "value": "active" }, 
+            { "label": "Inactive", "value": "inactive" } 
+          ] 
+        }
+      ]
+    }
+  }
+}

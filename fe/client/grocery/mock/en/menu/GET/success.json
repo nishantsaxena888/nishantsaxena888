@@ -1,0 +1,208 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "type": "menu",
+      "name": "Home",
+      "description": "Home description",
+      "url": "/",
+      "entity": "home",
+      "public": true,
+      "order": 0
+    },
+    {
+      "id": 2,
+      "type": "menu",
+      "name": "Cart",
+      "description": "Shopping Cart",
+      "url": "/cart",
+      "entity": "cart",
+      "public": true,
+      "order": 1
+    },
+    {
+      "id": 3,
+      "type": "menu",
+      "name": "Checkout",
+      "description": "Checkout description",
+      "url": "/checkout",
+      "entity": "checkout",
+      "public": true,
+      "order": 2
+    },
+    {
+      "id": 4,
+      "type": "menu",
+      "name": "Profile",
+      "description": "Customer Profile",
+      "url": "/my-account",
+      "entity": "profile",
+      "public": true,
+      "order": 3
+    },
+    {
+      "id": 5,
+      "type": "admin_menu",
+      "name": "Nishify App",
+      "description": "Dashboard description",
+      "url": "/admin/overview",
+      "entity": "dashboard"
+    },
+    {
+      "id": 6,
+      "type": "admin_menu",
+      "name": "Settings",
+      "description": "Dashboard description",
+      "url": "/admin/settings",
+      "entity": "settings",
+      "sub_menu": [
+        {
+          "name": "Configuration",
+          "description": "Dashboard description",
+          "url": "/admin/configuration",
+          "entity": "configuration"
+        },
+        {
+          "name": "Language",
+          "description": "Dashboard description",
+          "url": "/admin/language",
+          "entity": "language"
+        },
+        {
+          "name": "Theme",
+          "description": "Dashboard description",
+          "url": "/admin/theme",
+          "entity": "theme"
+        },
+        {
+          "name": "Menu",
+          "description": "Dashboard description",
+          "url": "/admin/menu",
+          "entity": "menu"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "type": "admin_menu",
+      "name": "User",
+      "description": "Dashboard description",
+      "url": "/admin/user",
+      "entity": "user",
+      "menu": [
+        {
+          "name": "Role",
+          "description": "Dashboard description",
+          "url": "/admin/role",
+          "entity": "role"
+        },
+        {
+          "name": "User",
+          "description": "Dashboard description",
+          "url": "/admin/user",
+          "entity": "user"
+        },
+        {
+          "name": "Permission",
+          "description": "Dashboard description",
+          "url": "/admin/permission",
+          "entity": "permission"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "type": "admin_menu",
+      "name": "Product",
+      "description": "Dashboard description",
+      "url": "/admin/product",
+      "entity": "product",
+      "menu": [
+        {
+          "name": "Category",
+          "description": "Dashboard description",
+          "url": "/admin/category",
+          "entity": "category"
+        },
+        {
+          "name": "Sub Category",
+          "description": "Dashboard description",
+          "url": "/admin/sub-category",
+          "entity": "sub-category"
+        },
+        {
+          "name": "Attribute",
+          "description": "Dashboard description",
+          "url": "/admin/attribute",
+          "entity": "attribute"
+        },
+        {
+          "name": "Brand",
+          "description": "Dashboard description",
+          "url": "/admin/brand",
+          "entity": "brand"
+        },
+        {
+          "name": "Unit",
+          "description": "Dashboard description",
+          "url": "/admin/unit",
+          "entity": "unit"
+        },
+        {
+          "name": "Tax",
+          "description": "Dashboard description",
+          "url": "/admin/tax",
+          "entity": "tax"
+        },
+        {
+          "name": "Discount",
+          "description": "Dashboard description",
+          "url": "/admin/discount",
+          "entity": "discount"
+        },
+        {
+          "name": "Promo Codes",
+          "description": "Promo Codes description",
+          "url": "/admin/promo-code",
+          "entity": "promo-code"
+        },
+        {
+          "name": "Deals",
+          "description": "Deals description",
+          "url": "/admin/deal",
+          "entity": "deal"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "type": "admin_menu",
+      "name": "Order",
+      "description": "Dashboard description",
+      "url": "/admin/order",
+      "entity": "order",
+      "menu": [
+        {
+          "name": "Order",
+          "description": "Dashboard description",
+          "url": "/admin/order",
+          "entity": "order"
+        },
+        {
+          "name": "Transaction",
+          "description": "Dashboard description",
+          "url": "/admin/transaction",
+          "entity": "transaction"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "type": "admin_menu",
+      "name": "Document",
+      "description": "Document description",
+      "url": "/admin/document",
+      "entity": "document"
+    }
+  ]
+}

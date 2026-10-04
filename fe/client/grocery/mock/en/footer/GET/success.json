@@ -1,0 +1,73 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "logoIcon": "🥦",
+      "name": "FreshMart",
+      "tagline": "Fresh groceries delivered to your door. Quality you can trust, prices you'll love.",
+      "categories": [
+        "Fresh Produce",
+        "Dairy & Eggs",
+        "Meat & Seafood",
+        "Bakery",
+        "Beverages"
+      ],
+      "socialLinks": [
+        {
+          "icon": "instagram",
+          "url": "https://instagram.com/freshmart"
+        },
+        {
+          "icon": "twitter",
+          "url": "https://twitter.com/freshmart"
+        },
+        {
+          "icon": "facebook",
+          "url": "https://facebook.com/freshmart"
+        },
+        {
+          "icon": "youtube",
+          "url": "https://youtube.com/freshmart"
+        }
+      ],
+      "navigationLinks": [
+        {
+          "label": "Shop All",
+          "target": "home"
+        },
+        {
+          "label": "My Profile",
+          "target": "profile"
+        },
+        {
+          "label": "Help Center",
+          "target": "help"
+        },
+        {
+          "label": "Track Order",
+          "target": "track-order"
+        }
+      ],
+      "legalLinks": [
+        {
+          "label": "Privacy Policy",
+          "target": "privacy"
+        },
+        {
+          "label": "Terms of Service",
+          "target": "terms"
+        },
+        {
+          "label": "Refund Policy",
+          "target": "refund"
+        }
+      ],
+      "newsletter": {
+        "enabled": true,
+        "heading": "Stay Fresh",
+        "description": "Get weekly deals and seasonal recipes delivered to your inbox."
+      },
+      "companyName": "FRESHMART INC."
+    }
+  ]
+}

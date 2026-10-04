@@ -1,0 +1,8 @@
+{
+  "data": [
+    { "id": 1, "name": "Cash", "status": "active" },
+    { "id": 2, "name": "Credit Card", "status": "active" },
+    { "id": 3, "name": "Bank Transfer", "status": "active" },
+    { "id": 4, "name": "UPI", "status": "active" }
+  ]
+}

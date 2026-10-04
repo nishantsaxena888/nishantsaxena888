@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "title": "Time Slots",
+    "description": "Manage delivery/service time slots."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "id", "label": "ID", "type": "text" },
+        { "key": "name", "label": "Slot Name", "type": "text" },
+        { "key": "schedule", "label": "Schedule", "type": "text" },
+        { "key": "status", "label": "Status", "type": "status" }
+      ]
+    },
+    "form": {
+      "id": "slot-form",
+      "title": "Slot Details",
+      "description": "Enter the slot information.",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        { "name": "name", "label": "Slot Name", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Slot Name is required" }] },
+        {
+          "name": "delivery_type_id",
+          "label": "Delivery Type",
+          "type": "dynamic-select",
+          "column": { "md": 6 },
+          "config": {
+            "bindValue": "id",
+            "bindLabel": "name",
+            "endpoint": "delivery-types",
+            "method": "GET"
+          }
+        },
+        { 
+          "name": "schedule", 
+          "label": "Schedule", 
+          "type": "select", 
+          "column": { "md": 6 },
+          "options": [
+            { "label": "Daily", "value": "Daily" },
+            { "label": "Weekly", "value": "Weekly" },
+            { "label": "Monthly", "value": "Monthly" }
+          ]
+        },
+        { "name": "is_default", "label": "Default Slot", "type": "switch", "defaultValue": false, "column": { "md": 6 } },
+        {
+          "name": "days",
+          "label": "Schedule Days",
+          "type": "multiCheckbox",
+          "column": { "md": 12 },
+          "options": [
+            { "label": "Monday", "value": "Monday" },
+            { "label": "Tuesday", "value": "Tuesday" },
+            { "label": "Wednesday", "value": "Wednesday" },
+            { "label": "Thursday", "value": "Thursday" },
+            { "label": "Friday", "value": "Friday" },
+            { "label": "Saturday", "value": "Saturday" },
+            { "label": "Sunday", "value": "Sunday" }
+          ]
+        },
+        { "name": "start_time", "label": "Start Time", "type": "time", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Start Time is required" }] },
+        { "name": "end_time", "label": "End Time", "type": "time", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "End Time is required" }] },
+        { "name": "status", "label": "Status", "type": "select", "defaultValue": "active", "column": { "md": 12 }, "options": [ { "label": "Active", "value": "active" }, { "label": "Inactive", "value": "inactive" } ] }
+      ]
+    }
+  }
+}

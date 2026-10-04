@@ -1,0 +1,103 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Standard Operating Procedure",
+      "type": "PDF",
+      "status": "active",
+      "url": "/admin/document",
+      "file_name": "standard_operating_procedure_v2.pdf",
+      "description": "Standard operating procedures and guidelines for staff onboarding."
+    },
+    {
+      "id": 2,
+      "name": "Terms of Service",
+      "type": "DOCX",
+      "status": "active",
+      "url": "/admin/document",
+      "file_name": "terms_of_service_2026.docx",
+      "description": "Company terms of service and customer compliance guidelines."
+    },
+    {
+      "id": 3,
+      "name": "Privacy Policy",
+      "type": "DOCX",
+      "status": "active",
+      "url": "/admin/document",
+      "file_name": "privacy_policy_v4.docx",
+      "description": "Customer privacy policies and data collection parameters."
+    },
+    {
+      "id": 4,
+      "name": "Employee Handbook",
+      "type": "PDF",
+      "status": "active",
+      "url": "/admin/document",
+      "file_name": "employee_handbook_latest.pdf",
+      "description": "Code of conduct, compliance, benefits, and workplace standards."
+    },
+    {
+      "id": 5,
+      "name": "Company Presentation 2026",
+      "type": "XLSX",
+      "status": "active",
+      "url": "/admin/document",
+      "file_name": "company_presentation_sheet.xlsx",
+      "description": "Quarterly operational results and target projections."
+    },
+    {
+      "id": 6,
+      "name": "Company Presentation 2026",
+      "type": "image",
+      "status": "active",
+      "url": "/clients/grocery/document/as.jpg",
+      "file_name": "company_presentation_sheet.xlsx",
+      "description": "Quarterly operational results and target projections."
+    },
+    {
+      "id": 7,
+      "name": "Company Presentation 2026",
+      "type": "image",
+      "status": "active",
+      "url": "/clients/grocery/document/asd.jpg",
+      "file_name": "company_presentation_sheet.xlsx",
+      "description": "Quarterly operational results and target projections."
+    },
+    {
+      "id": 8,
+      "name": "Company Presentation 2026",
+      "type": "image",
+      "status": "active",
+      "url": "/clients/grocery/document/bs.webp",
+      "file_name": "company_presentation_sheet.xlsx",
+      "description": "Quarterly operational results and target projections."
+    },
+    {
+      "id": 9,
+      "name": "Company Presentation 2026",
+      "type": "image",
+      "status": "active",
+      "url": "/clients/grocery/document/cd.png",
+      "file_name": "company_presentation_sheet.xlsx",
+      "description": "Quarterly operational results and target projections."
+    },
+    {
+      "id": 10,
+      "name": "Company Presentation 2026",
+      "type": "image",
+      "status": "active",
+      "url": "/clients/grocery/document/qw.png",
+      "file_name": "company_presentation_sheet.xlsx",
+      "description": "Quarterly operational results and target projections."
+    },
+    {
+      "id": 11,
+      "name": "Company Presentation 2026",
+      "type": "image",
+      "status": "active",
+      "url": "/clients/grocery/document/wqa.jpg",
+      "file_name": "company_presentation_sheet.xlsx",
+      "description": "Quarterly operational results and target projections."
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "status_code": 200,
+  "message": "Password updated successfully!",
+  "data": {
+    "status": "updated"
+  }
+}

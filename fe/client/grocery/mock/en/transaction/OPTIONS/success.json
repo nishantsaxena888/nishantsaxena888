@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "title": "Financial Transactions",
+    "description": "Ledger of all incoming and outgoing payments across the system."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "label": "TXN ID",
+          "key": "transaction_id",
+          "type": "text",
+          "styles": { "className": "font-mono text-xs" },
+          "sortable": true,
+          "searchable": true
+        },
+        {
+          "label": "Reference",
+          "key": "order_number",
+          "type": "badge",
+          "styles": { "variant": "outline" },
+          "searchable": true
+        },
+        {
+          "label": "Amount",
+          "key": "amount",
+          "type": "text",
+          "styles": { "className": "font-bold" }
+        },
+        {
+          "label": "Method",
+          "key": "method",
+          "type": "badge"
+        },
+        {
+          "label": "Status",
+          "key": "status",
+          "type": "status",
+          "options": {
+            "success": { "label": "Success", "variant": "success" },
+            "pending": { "label": "Pending", "variant": "warning" },
+            "failed": { "label": "Failed", "variant": "destructive" },
+            "refunded": { "label": "Refunded", "variant": "info" }
+          }
+        },
+        {
+          "label": "Date",
+          "key": "created_at",
+          "type": "text"
+        }
+      ]
+    },
+    "form": {
+      "title": "Transaction Details",
+      "description": "Log or view details of a financial transfer.",
+      "formType": "simple",
+      "inputs": [
+        {
+          "name": "transaction_id",
+          "label": "Transaction Hash/ID",
+          "type": "text",
+          "column": { "md": 6 },
+          "validation": [{ "rule": "required" }]
+        },
+        {
+          "name": "order_number",
+          "label": "Reference Order",
+          "type": "text",
+          "column": { "md": 6 },
+          "validation": [{ "rule": "required" }]
+        },
+        {
+          "name": "amount",
+          "label": "Transaction Amount",
+          "type": "number",
+          "column": { "md": 6 },
+          "validation": [{ "rule": "required" }]
+        },
+        {
+          "name": "method",
+          "label": "Payment Method",
+          "type": "select",
+          "column": { "md": 6 },
+          "options": [
+            { "label": "Bank Transfer", "value": "Bank Transfer" },
+            { "label": "Credit Card", "value": "Credit Card" },
+            { "label": "UPI", "value": "UPI" },
+            { "label": "Cash", "value": "Cash" }
+          ]
+        },
+        {
+          "name": "status",
+          "label": "Payment Status",
+          "type": "select",
+          "column": { "md": 12 },
+          "options": [
+            { "label": "Success", "value": "success" },
+            { "label": "Pending", "value": "pending" },
+            { "label": "Failed", "value": "failed" },
+            { "label": "Refunded", "value": "refunded" }
+          ]
+        },
+        {
+          "name": "notes",
+          "label": "Transaction Notes",
+          "type": "textarea",
+          "column": { "md": 12 }
+        }
+      ]
+    }
+  }
+}

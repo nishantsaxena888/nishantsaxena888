@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "title": "Forgot Password",
+    "description": "Recover your account access"
+  },
+  "config": [
+    {
+      "id": "forgot-password-layout",
+      "type": "login-layout-1",
+      "properties": {
+        "level": "base",
+        "type": "static"
+      },
+      "content": {
+        "name": "Inventure",
+        "imageURL": "/clients/grocery/default.webp",
+        "config": {
+          "endpoint": "forgot-password",
+          "type": "forgot-password-card",
+          "action": {
+            "type": "redirect",
+            "navigation": "/reset-password",
+            "navigation_type": "navigate",
+            "store_local_storage": ["email"]
+          }
+        },
+        "footerText": "Remember your password? {{Login||l||/login}}"
+      },
+      "children": []
+    }
+  ]
+}

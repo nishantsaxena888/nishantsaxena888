@@ -1,0 +1,6 @@
+{
+  "data": [
+    { "id": 1, "name": "Main Warehouse", "description": "Primary storage facility", "customer_id": 1, "address_id": 1, "country_id": 3, "status": "active" },
+    { "id": 2, "name": "London Hub", "description": "Regional distribution center", "customer_id": 2, "address_id": 2, "country_id": 2, "status": "active" }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "data": [
+    { "id": 1, "name": "Damaged Product", "type": "Return", "status": "active" },
+    { "id": 2, "name": "Wrong Item Sent", "type": "Return", "status": "active" },
+    { "id": 3, "name": "Customer Cancelled", "type": "Cancellation", "status": "active" },
+    { "id": 4, "name": "Out of Stock", "type": "Cancellation", "status": "active" }
+  ]
+}

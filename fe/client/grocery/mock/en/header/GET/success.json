@@ -1,0 +1,33 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "FreshMart",
+      "tagline": "Wholesale",
+      "type": "grocery",
+      "logoIcon": "🥦",
+      "logoUrl": "",
+      "hero": {
+        "headline": "Fresh Groceries, Delivered Fast",
+        "subheadline": "Farm-to-table quality at wholesale prices. Order before 2 PM for same-day delivery.",
+        "cta": "Shop Fresh Produce",
+        "badge": "🚚 Free delivery over $30"
+      },
+      "categories": [
+        "All Products",
+        "Fresh Produce",
+        "Dairy & Eggs",
+        "Meat & Seafood",
+        "Bakery",
+        "Beverages",
+        "Pantry",
+        "Frozen Foods",
+        "Snacks"
+      ],
+      "phone": "1-800-FRESHMART",
+      "hours": "Mon–Sat: 6 AM – 8 PM",
+      "topBarMessage": "Wholesale Pricing for Retailers & Distributors",
+      "freeDeliveryThreshold": 30
+    }
+  ]
+}

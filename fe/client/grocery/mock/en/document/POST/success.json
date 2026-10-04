@@ -1,0 +1,13 @@
+{
+  "status_code": 201,
+  "message": "Document created successfully!",
+  "data": {
+    "id": 6,
+    "name": "New Document",
+    "type": "PDF",
+    "status": "active",
+    "url": "/admin/document",
+    "file_name": "New Document",
+    "description": "Document management and catalog"
+  }
+}

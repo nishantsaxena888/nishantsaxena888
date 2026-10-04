@@ -1,102 +1,113 @@
 {
-  "entity": "category",
-  "name": "category",
-  "schema": {
-    "fields": {
-      "id": {
-        "type": "int",
-        "primary_key": true
-      },
-      "name": {
-        "type": "str",
-        "required": true
-      },
-      "code": {
-        "type": "str",
-        "unique": true
-      }
-    },
-    "ui": {
-      "table": {
-        "columns": [
-          {
-            "key": "id",
-            "label": "ID",
-            "sortable": true
-          },
-          {
-            "key": "name",
-            "label": "Name",
-            "searchable": true
-          },
-          {
-            "key": "code",
-            "label": "Code"
-          }
-        ],
-        "actions": [
-          "open_form",
-          "confirm_delete"
-        ]
-      },
-      "form": {
-        "fields": [
-          {
-            "name": "name",
-            "componentType": "TextInput",
-            "required": true,
-            "colSpan": 2,
-            "label": "Name"
-          },
-          {
-            "name": "code",
-            "componentType": "TextInput",
-            "required": true,
-            "label": "Code"
-          }
-        ]
-      }
-    }
+  "meta": {
+    "title": "Category Management",
+    "description": "Organize and manage product categories."
   },
-  "content": {
-    "table": {
-      "columns": [
-        {
-          "key": "id",
-          "label": "ID",
-          "sortable": true
+  "name": "category",
+  "config": [
+    {
+      "id": "category-admin-module",
+      "type": "default-admin",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "actions": [
+          {
+            "key": "data",
+            "endpoint": "/category",
+            "method": "get",
+            "queryParams": {},
+            "responseMapping": {}
+          }
+        ]
+      },
+      "content": {
+        "table": {
+          "columns": [
+            {
+              "key": "id",
+              "label": "ID",
+              "type": "text",
+              "sortable": true
+            },
+            {
+              "key": "name",
+              "label": "Name",
+              "type": "text",
+              "sortable": true,
+              "searchable": true
+            },
+            {
+              "key": "sequence",
+              "label": "Sequence",
+              "type": "text",
+              "sortable": true
+            },
+            {
+              "key": "status",
+              "label": "Status",
+              "type": "status",
+              "options": {
+                "active": { "label": "Active", "variant": "success" },
+                "inactive": { "label": "Inactive", "variant": "destructive" }
+              }
+            }
+          ],
+          "actions": [
+            {
+              "id": "edit-category",
+              "label": "Edit",
+              "type": "button",
+              "action": "open_form",
+              "variant": "ghost",
+              "icon": "EditIcon"
+            },
+            {
+              "id": "delete-category",
+              "label": "Delete",
+              "type": "button",
+              "action": "confirm_delete",
+              "variant": "destructive",
+              "icon": "TrashIcon"
+            }
+          ]
         },
-        {
-          "key": "name",
-          "label": "Name",
-          "searchable": true
-        },
-        {
-          "key": "code",
-          "label": "Code"
+        "form": {
+          "id": "category-form",
+          "title": "Category Details",
+          "layout": "default",
+          "columns": 2,
+          "fields": [
+            {
+              "name": "name",
+              "label": "Category Name",
+              "componentType": "TextInput",
+              "required": true,
+              "placeholder": "e.g. Beverages, Snacks...",
+              "colSpan": 1
+            },
+            {
+              "name": "sequence",
+              "label": "Sequence",
+              "componentType": "NumberInput",
+              "defaultValue": 0,
+              "colSpan": 1
+            },
+            {
+              "name": "status",
+              "label": "Status",
+              "componentType": "Select",
+              "defaultValue": "active",
+              "colSpan": 1,
+              "options": [
+                { "label": "Active", "value": "active" },
+                { "label": "Inactive", "value": "inactive" }
+              ]
+            }
+          ]
         }
-      ],
-      "actions": [
-        "open_form",
-        "confirm_delete"
-      ]
-    },
-    "form": {
-      "fields": [
-        {
-          "name": "name",
-          "componentType": "TextInput",
-          "required": true,
-          "colSpan": 2,
-          "label": "Name"
-        },
-        {
-          "name": "code",
-          "componentType": "TextInput",
-          "required": true,
-          "label": "Code"
-        }
-      ]
+      },
+      "children": []
     }
-  }
+  ]
 }

@@ -1,0 +1,7 @@
+{
+  "data": [
+    { "id": 1, "name": "Color", "description": "Product color variations", "status": "active" },
+    { "id": 2, "name": "Size", "description": "Product size dimensions", "status": "active" },
+    { "id": 3, "name": "Material", "description": "Fabric or material composition", "status": "active" }
+  ]
+}

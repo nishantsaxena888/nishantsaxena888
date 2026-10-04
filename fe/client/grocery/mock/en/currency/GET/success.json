@@ -1,0 +1,49 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "US Dollar",
+      "currency_code": "USD",
+      "active": true,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "created_by": "system"
+    },
+    {
+      "id": 2,
+      "name": "Euro",
+      "currency_code": "EUR",
+      "active": true,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "created_by": "system"
+    },
+    {
+      "id": 3,
+      "name": "British Pound",
+      "currency_code": "GBP",
+      "active": true,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "created_by": "system"
+    },
+    {
+      "id": 4,
+      "name": "Japanese Yen",
+      "currency_code": "JPY",
+      "active": true,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "created_by": "system"
+    },
+    {
+      "id": 5,
+      "name": "Indian Rupee",
+      "currency_code": "INR",
+      "active": true,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "created_by": "system"
+    }
+  ]
+}

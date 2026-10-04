@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "title": "Your cart"
+  },
+  "config": [
+    {
+      "id": "hdr",
+      "type": "header",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "data",
+            "endpoint": "/header",
+            "method": "get",
+            "queryParams": {
+              "id": 1
+            }
+          },
+          {
+            "key": "category",
+            "endpoint": "/category",
+            "method": "get"
+          }
+        ]
+      },
+      "content": null
+    },
+    {
+      "id": "cart",
+      "type": "cart-view",
+      "properties": {
+        "level": "base",
+        "type": "static"
+      },
+      "content": {
+        "title": "Your cart"
+      }
+    },
+    {
+      "id": "ftr",
+      "type": "footer",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "data",
+            "endpoint": "/footer",
+            "method": "get",
+            "queryParams": {
+              "id": 1
+            }
+          }
+        ]
+      },
+      "content": {}
+    }
+  ]
+}

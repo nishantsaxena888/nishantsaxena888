@@ -1,0 +1,7 @@
+{
+  "data": [
+    { "id": 1, "name": "Standard Delivery", "status": "active" },
+    { "id": 2, "name": "Express Delivery", "status": "active" },
+    { "id": 3, "name": "Self Pickup", "status": "active" }
+  ]
+}

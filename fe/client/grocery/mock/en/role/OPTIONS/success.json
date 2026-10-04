@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "title": "Access Roles",
+    "description": "Define system permissions and user access levels across the ERP."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "label": "Role Name",
+          "key": "name",
+          "type": "text",
+          "sortable": true,
+          "searchable": true
+        },
+        {
+          "label": "Description",
+          "key": "description",
+          "type": "text"
+        },
+        {
+          "label": "Permissions",
+          "key": "permission_count",
+          "type": "badge",
+          "styles": { "variant": "secondary" }
+        },
+        {
+          "label": "Status",
+          "key": "status",
+          "type": "status",
+          "options": {
+            "active": { "label": "Active", "variant": "success" },
+            "inactive": { "label": "Inactive", "variant": "destructive" }
+          }
+        }
+      ]
+    },
+    "form": {
+      "title": "Role Configuration",
+      "description": "Set security levels and functional access for user groups.",
+      "formType": "simple",
+      "inputs": [
+        {
+          "name": "name",
+          "label": "Role Name",
+          "type": "text",
+          "placeholder": "e.g. Sales Manager, Accountant",
+          "column": { "md": 6 },
+          "validation": [{ "rule": "required" }]
+        },
+        {
+          "name": "status",
+          "label": "Account Status",
+          "type": "select",
+          "column": { "md": 6 },
+          "defaultValue": "active",
+          "options": [
+            { "label": "Active", "value": "active" },
+            { "label": "Inactive", "value": "inactive" }
+          ]
+        },
+        {
+          "name": "description",
+          "label": "Role Description",
+          "type": "textarea",
+          "placeholder": "Briefly describe the responsibilities associated with this role...",
+          "column": { "md": 12 }
+        }
+      ]
+    }
+  }
+}

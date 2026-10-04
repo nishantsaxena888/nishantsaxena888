@@ -1,19 +1,43 @@
 {
   "meta": {
-    "title": "Shop"
+    "title": "All products"
   },
   "config": [
     {
-      "id": "grocery-grid-shop",
-      "type": "product-grid",
+      "id": "hdr",
+      "type": "header",
       "properties": {
         "level": "base",
         "type": "dynamic",
         "action": [
           {
-            "key": "products",
+            "key": "data",
+            "endpoint": "/header",
+            "method": "get",
+            "queryParams": {
+              "id": 1
+            }
+          },
+          {
+            "key": "category",
+            "endpoint": "/category",
+            "method": "get"
+          }
+        ]
+      },
+      "content": null
+    },
+    {
+      "id": "products-shop",
+      "type": "products",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "data",
             "endpoint": "product",
-            "method": "GET",
+            "method": "get",
             "queryParams": {
               "size": 24
             }
@@ -23,6 +47,25 @@
       "content": {
         "title": "All products"
       }
+    },
+    {
+      "id": "ftr",
+      "type": "footer",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "data",
+            "endpoint": "/footer",
+            "method": "get",
+            "queryParams": {
+              "id": 1
+            }
+          }
+        ]
+      },
+      "content": {}
     }
   ]
 }

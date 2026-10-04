@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "title": "Payment Modes",
+    "description": "Manage accepted payment methods."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "id", "label": "ID", "type": "text" },
+        { "key": "name", "label": "Mode Name", "type": "text" },
+        { "key": "status", "label": "Status", "type": "status", "options": { "active": { "label": "Active", "variant": "success" }, "inactive": { "label": "Inactive", "variant": "destructive" } } }
+      ]
+    },
+    "form": {
+      "id": "payment-modes-form",
+      "title": "Payment Mode Details",
+      "description": "Enter the payment mode information.",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        { "name": "name", "label": "Mode Name", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Mode Name is required" }] },
+        { "name": "status", "label": "Status", "type": "select", "defaultValue": "active", "column": { "md": 6 }, "options": [ { "label": "Active", "value": "active" }, { "label": "Inactive", "value": "inactive" } ] }
+      ]
+    }
+  }
+}

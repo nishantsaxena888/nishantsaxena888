@@ -1,169 +1,155 @@
 {
-  "entity": "order",
-  "name": "order",
-  "schema": {
-    "fields": {
-      "id": {
-        "type": "int",
-        "primary_key": true
-      },
-      "customer": {
-        "type": "str",
-        "required": true
-      },
-      "total": {
-        "type": "float",
-        "default": 0.0
-      },
-      "status": {
-        "type": "str",
-        "default": "pending",
-        "options": [
-          "pending",
-          "packed",
-          "delivered",
-          "cancelled"
-        ]
-      },
-      "created_at": {
-        "type": "datetime"
-      }
-    },
-    "ui": {
-      "table": {
-        "columns": [
-          {
-            "key": "id",
-            "label": "ID",
-            "sortable": true
-          },
-          {
-            "key": "customer",
-            "label": "Customer",
-            "searchable": true
-          },
-          {
-            "key": "total",
-            "label": "Total",
-            "sortable": true
-          },
-          {
-            "key": "status",
-            "label": "Status",
-            "type": "badge",
-            "variants": {
-              "pending": "default",
-              "packed": "secondary",
-              "delivered": "secondary",
-              "cancelled": "destructive"
-            }
-          },
-          {
-            "key": "created_at",
-            "label": "Created"
-          }
-        ],
-        "actions": [
-          "open_form",
-          "confirm_delete"
-        ]
-      },
-      "form": {
-        "fields": [
-          {
-            "name": "customer",
-            "componentType": "TextInput",
-            "required": true,
-            "colSpan": 2,
-            "label": "Customer"
-          },
-          {
-            "name": "total",
-            "componentType": "TextInput",
-            "default": "0",
-            "label": "Total"
-          },
-          {
-            "name": "status",
-            "componentType": "Select",
-            "options": [
-              "pending",
-              "packed",
-              "delivered",
-              "cancelled"
-            ],
-            "default": "pending",
-            "label": "Status"
-          }
-        ]
-      }
-    }
+  "meta": {
+    "title": "Sales Orders",
+    "description": "Track customer purchases, fulfillment status, and payment processing."
   },
   "content": {
     "table": {
       "columns": [
         {
-          "key": "id",
-          "label": "ID",
-          "sortable": true
-        },
-        {
-          "key": "customer",
-          "label": "Customer",
+          "label": "Order ID",
+          "key": "order_number",
+          "type": "badge",
+          "styles": {
+            "variant": "outline",
+            "className": "font-mono font-bold"
+          },
+          "sortable": true,
           "searchable": true
         },
         {
-          "key": "total",
-          "label": "Total",
+          "label": "Customer",
+          "key": "customer_name",
+          "type": "text",
+          "sortable": true,
+          "searchable": true
+        },
+        {
+          "label": "Date",
+          "key": "order_date",
+          "type": "text",
           "sortable": true
         },
         {
-          "key": "status",
-          "label": "Status",
-          "type": "badge",
-          "variants": {
-            "pending": "default",
-            "packed": "secondary",
-            "delivered": "secondary",
-            "cancelled": "destructive"
+          "label": "Total",
+          "key": "total_amount",
+          "type": "text",
+          "styles": {
+             "className": "font-bold text-slate-900"
           }
         },
         {
-          "key": "created_at",
-          "label": "Created"
+          "label": "Payment",
+          "key": "payment_status",
+          "type": "status",
+          "options": {
+            "paid": { "label": "Paid", "variant": "success" },
+            "pending": { "label": "Pending", "variant": "warning" },
+            "failed": { "label": "Failed", "variant": "destructive" },
+            "refunded": { "label": "Refunded", "variant": "secondary" }
+          }
+        },
+        {
+          "label": "Fulfillment",
+          "key": "status",
+          "type": "status",
+          "options": {
+            "delivered": { "label": "Delivered", "variant": "success" },
+            "shipped": { "label": "Shipped", "variant": "info" },
+            "processing": { "label": "Processing", "variant": "warning" },
+            "cancelled": { "label": "Cancelled", "variant": "destructive" }
+          }
         }
       ],
       "actions": [
-        "open_form",
-        "confirm_delete"
+        {
+          "id": "view-order",
+          "label": "View Invoice",
+          "type": "button",
+          "action": "open_link",
+          "variant": "outline",
+          "icon": "FileText"
+        }
       ]
     },
     "form": {
-      "fields": [
+      "title": "Sales Order Details",
+      "description": "Configure order items, shipping details, and billing information.",
+      "formType": "simple",
+      "inputs": [
         {
-          "name": "customer",
-          "componentType": "TextInput",
-          "required": true,
-          "colSpan": 2,
-          "label": "Customer"
+          "name": "order_number",
+          "label": "Order Number",
+          "type": "text",
+          "placeholder": "ORD-XXXX",
+          "column": { "md": 6 },
+          "validation": [{ "rule": "required" }]
         },
         {
-          "name": "total",
-          "componentType": "TextInput",
-          "default": "0",
-          "label": "Total"
+          "name": "order_date",
+          "label": "Transaction Date",
+          "type": "date",
+          "column": { "md": 6 },
+          "validation": [{ "rule": "required" }]
+        },
+        {
+          "name": "customer_id",
+          "label": "Customer",
+          "type": "dynamic-select",
+          "column": { "md": 12 },
+          "config": { "endpoint": "customer", "bindLabel": "name", "bindValue": "id" },
+          "validation": [{ "rule": "required" }]
+        },
+        {
+          "name": "total_amount",
+          "label": "Grand Total",
+          "type": "number",
+          "placeholder": "0.00",
+          "column": { "md": 6 },
+          "validation": [{ "rule": "required" }]
+        },
+        {
+          "name": "payment_method",
+          "label": "Payment Method",
+          "type": "select",
+          "column": { "md": 6 },
+          "options": [
+            { "label": "Credit Card", "value": "card" },
+            { "label": "Bank Transfer", "value": "bank" },
+            { "label": "Cash", "value": "cash" },
+            { "label": "UPI", "value": "upi" }
+          ]
+        },
+        {
+          "name": "payment_status",
+          "label": "Payment Status",
+          "type": "select",
+          "column": { "md": 6 },
+          "options": [
+            {"label": "Pending", "value": "pending"},
+            {"label": "Paid", "value": "paid"},
+            {"label": "Failed", "value": "failed"},
+            {"label": "Refunded", "value": "refunded"}
+          ]
         },
         {
           "name": "status",
-          "componentType": "Select",
+          "label": "Fulfillment Status",
+          "type": "select",
+          "column": { "md": 6 },
           "options": [
-            "pending",
-            "packed",
-            "delivered",
-            "cancelled"
-          ],
-          "default": "pending",
-          "label": "Status"
+            {"label": "Processing", "value": "processing"},
+            {"label": "Shipped", "value": "shipped"},
+            {"label": "Delivered", "value": "delivered"},
+            {"label": "Cancelled", "value": "cancelled"}
+          ]
+        },
+        {
+          "name": "notes",
+          "label": "Internal Notes",
+          "type": "textarea",
+          "placeholder": "Add any internal shipping or billing notes...",
+          "column": { "md": 12 }
         }
       ]
     }

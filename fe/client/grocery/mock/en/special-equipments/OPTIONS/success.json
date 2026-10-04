@@ -1,0 +1,27 @@
+{
+  "meta": {
+    "title": "Special Equipments",
+    "description": "Manage specialized equipments."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "id", "label": "ID", "type": "text" },
+        { "key": "name", "label": "Name", "type": "text" },
+        { "key": "status", "label": "Status", "type": "status", "options": { "active": { "label": "Active", "variant": "success" }, "inactive": { "label": "Inactive", "variant": "destructive" } } }
+      ]
+    },
+    "form": {
+      "id": "special-equipments-form",
+      "title": "Equipment Details",
+      "description": "Enter the equipment information.",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        { "name": "name", "label": "Equipment Name", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Equipment Name is required" }] },
+        { "name": "description", "label": "Description", "type": "textarea", "column": { "md": 6 } },
+        { "name": "status", "label": "Status", "type": "select", "defaultValue": "active", "column": { "md": 6 }, "options": [ { "label": "Active", "value": "active" }, { "label": "Inactive", "value": "inactive" } ] }
+      ]
+    }
+  }
+}

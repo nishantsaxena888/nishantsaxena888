@@ -7,9 +7,10 @@ export const HomePage = ({ config }: any) => {
     menu: config?.data?.menu || [],
     currentPage: "/",
   });
+  const hasOwnNav = config?.data?.site_nav === false;
   return (
     <>
-      <SiteNav config={config} />
+      {!hasOwnNav && <SiteNav config={config} />}
       <PageRenderer loading={loading} content={content} />
     </>
   );

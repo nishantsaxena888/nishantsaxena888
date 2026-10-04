@@ -1,0 +1,125 @@
+{
+  "meta": {
+    "title": "Currency Management",
+    "description": "Configure and manage currencies."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "type": "text",
+          "sortable": true
+        },
+        {
+          "key": "name",
+          "label": "Name",
+          "type": "text",
+          "sortable": true,
+          "searchable": true
+        },
+        {
+          "key": "currency_code",
+          "label": "Currency Code",
+          "type": "text",
+          "sortable": true,
+          "searchable": true
+        },
+        {
+          "key": "active",
+          "label": "Status",
+          "type": "status",
+          "options": {
+            "true": {
+              "label": "Active",
+              "variant": "success"
+            },
+            "false": {
+              "label": "Inactive",
+              "variant": "destructive"
+            }
+          }
+        },
+        {
+          "key": "created_at",
+          "label": "Created At",
+          "type": "date",
+          "sortable": true
+        },
+        {
+          "key": "created_by",
+          "label": "Created By",
+          "type": "text",
+          "sortable": true
+        }
+      ],
+      "actions": [
+        {
+          "id": "edit-currency",
+          "label": "Edit",
+          "type": "button",
+          "action": "open_form",
+          "variant": "ghost",
+          "icon": "EditIcon"
+        },
+        {
+          "id": "delete-currency",
+          "label": "Delete",
+          "type": "button",
+          "action": "confirm_delete",
+          "variant": "destructive",
+          "icon": "TrashIcon"
+        }
+      ]
+    },
+    "form": {
+      "id": "currency-form",
+      "title": "Currency Details",
+      "description": "Enter the currency details here.",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        {
+          "name": "name",
+          "label": "Currency Name",
+          "type": "text",
+          "placeholder": "e.g. US Dollar, Euro...",
+          "column": {
+            "md": 6
+          },
+          "validation": [
+            {
+              "rule": "required",
+              "message": "Currency Name is required"
+            }
+          ]
+        },
+        {
+          "name": "currency_code",
+          "label": "Currency Code",
+          "type": "text",
+          "placeholder": "e.g. USD, EUR...",
+          "column": {
+            "md": 6
+          },
+          "validation": [
+            {
+              "rule": "required",
+              "message": "Currency Code is required"
+            }
+          ]
+        },
+        {
+          "name": "active",
+          "label": "Active",
+          "type": "switch",
+          "defaultValue": true,
+          "column": {
+            "md": 12
+          }
+        }
+      ]
+    }
+  }
+}

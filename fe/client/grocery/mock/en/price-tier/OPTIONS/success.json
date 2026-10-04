@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "title": "Price Tier Management",
+    "description": "Manage different pricing levels and their validity periods."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "#",
+          "type": "text"
+        },
+        {
+          "key": "name",
+          "label": "PRICE TIER",
+          "type": "text"
+        },
+        {
+          "key": "is_limited",
+          "label": "LIMTED",
+          "type": "boolean"
+        },
+        {
+          "key": "start_date",
+          "label": "START DATE",
+          "type": "text"
+        },
+        {
+          "key": "end_date",
+          "label": "END DATE",
+          "type": "text"
+        },
+        {
+          "key": "status",
+          "label": "STATUS",
+          "type": "status"
+        },
+        {
+          "key": "priority",
+          "label": "Priority",
+          "type": "number",
+          "defaultValue": 100
+        },
+        {
+          "key": "created_at",
+          "label": "Created At",
+          "type": "date"
+        }
+      ]
+    },
+    "form": {
+      "id": "price-tier-form",
+      "title": "Price Tier Details",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        {
+          "name": "name",
+          "label": "Price Tier Name",
+          "type": "text",
+          "column": {
+            "md": 6
+          },
+          "validation": [
+            {
+              "rule": "required",
+              "message": "Price Tier Name is required"
+            }
+          ]
+        },
+        {
+          "name": "is_limited",
+          "label": "Limited?",
+          "type": "switch",
+          "column": {
+            "md": 6
+          },
+          "defaultValue": false
+        },
+        {
+          "name": "start_date",
+          "label": "Start Date",
+          "type": "date",
+          "column": {
+            "md": 6
+          },
+          "validation": [
+            {
+              "rule": "required"
+            }
+          ]
+        },
+        {
+          "name": "end_date",
+          "label": "End Date",
+          "type": "date",
+          "column": {
+            "md": 6
+          },
+          "validation": [
+            {
+              "rule": "required"
+            }
+          ]
+        },
+        {
+          "name": "status",
+          "label": "Status",
+          "type": "select",
+          "defaultValue": "active",
+          "column": {
+            "md": 6
+          },
+          "options": [
+            {
+              "label": "Active",
+              "value": "active"
+            },
+            {
+              "label": "Inactive",
+              "value": "inactive"
+            }
+          ]
+        },
+        {
+          "name": "priority",
+          "label": "Priority",
+          "type": "number",
+          "column": {
+            "md": 6
+          },
+          "validation": []
+        }
+      ]
+    }
+  }
+}

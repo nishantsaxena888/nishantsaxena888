@@ -1,0 +1,9 @@
+{
+  "data": [
+    { "id": 1, "name": "Pending", "status": "active" },
+    { "id": 2, "name": "Processing", "status": "active" },
+    { "id": 3, "name": "Shipped", "status": "active" },
+    { "id": 4, "name": "Delivered", "status": "active" },
+    { "id": 5, "name": "Cancelled", "status": "active" }
+  ]
+}

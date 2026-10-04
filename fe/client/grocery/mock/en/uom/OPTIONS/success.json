@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "title": "Unit of Measurement (UOM)",
+    "description": "Manage units of measurement."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "id", "label": "ID", "type": "text" },
+        { "key": "name", "label": "Name", "type": "text" },
+        { "key": "short_name", "label": "Short Name", "type": "text" },
+        { "key": "status", "label": "Status", "type": "status" }
+      ]
+    },
+    "form": {
+      "id": "uom-form",
+      "title": "UOM Details",
+      "description": "Enter the unit information.",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        { "name": "name", "label": "Unit Name", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Unit Name is required" }] },
+        { "name": "short_name", "label": "Short Name", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Short Name is required" }] },
+        { "name": "description", "label": "Description", "type": "textarea", "column": { "md": 12 } },
+        {
+          "name": "base_uom_id",
+          "label": "Base UOM",
+          "type": "dynamic-select",
+          "column": { "md": 6 },
+          "config": {
+            "bindValue": "id",
+            "bindLabel": "name",
+            "endpoint": "uom",
+            "method": "GET"
+          }
+        },
+        { "name": "conversion_rate", "label": "Conversion Rate", "type": "number", "column": { "md": 6 } },
+        { "name": "status", "label": "Status", "type": "select", "defaultValue": "active", "column": { "md": 12 }, "options": [ { "label": "Active", "value": "active" }, { "label": "Inactive", "value": "inactive" } ] }
+      ]
+    }
+  }
+}

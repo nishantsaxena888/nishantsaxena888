@@ -46,9 +46,12 @@ export const PublicRenderer = ({ config }: PublicRendererProps) => {
     return <NotFound />; // Or redirect to /login
   }
 
+  // Clients can supply their own header via page defs (e.g. a "header"
+  // component) — then the generic SiteNav stands down.
+  const hasOwnNav = config?.data?.site_nav === false;
   return (
     <>
-      <SiteNav config={config} />
+      {!hasOwnNav && <SiteNav config={config} />}
       <PageRenderer loading={loading} content={content} />
     </>
   );

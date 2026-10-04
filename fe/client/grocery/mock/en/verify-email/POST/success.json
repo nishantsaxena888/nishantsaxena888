@@ -1,0 +1,8 @@
+{
+  "status_code": 200,
+  "message": "Email verified successfully!",
+  "data": {
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "status": "verified"
+  }
+}

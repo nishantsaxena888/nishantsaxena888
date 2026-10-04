@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "title": "Address Type Management",
+    "description": "Manage different types of addresses."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "id", "label": "ID", "type": "text" },
+        { "key": "name", "label": "Type Name", "type": "text" },
+        { "key": "status", "label": "Status", "type": "status" }
+      ]
+    },
+    "form": {
+      "id": "address-type-form",
+      "title": "Address Type Details",
+      "inputs": [
+        { "name": "name", "label": "Type Name", "type": "text", "validation": [{ "rule": "required", "message": "Type Name is required" }] },
+        { "name": "status", "label": "Status", "type": "select", "defaultValue": "active", "options": [ { "label": "Active", "value": "active" }, { "label": "Inactive", "value": "inactive" } ] }
+      ]
+    }
+  }
+}

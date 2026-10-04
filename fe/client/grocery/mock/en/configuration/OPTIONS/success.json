@@ -1,0 +1,232 @@
+{
+  "meta": {
+    "title": "Configuration Management",
+    "description": "Manage global site settings"
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "site_name",
+          "label": "Site Name",
+          "type": "text"
+        },
+        {
+          "key": "description",
+          "label": "Description",
+          "type": "text"
+        }
+      ]
+    },
+    "form": {
+      "id": "configuration-form",
+      "title": "Configuration Settings",
+      "formType": "block",
+      "layout": "default",
+      "columns": 3,
+      "inputs": [
+        {
+          "name": "general_info",
+          "label": "General Information",
+          "type": "group",
+          "column": { "md": 12 },
+          "inputs": [
+            {
+              "name": "site_name",
+              "label": "Site Name",
+              "type": "text",
+              "column": { "md": 6 },
+              "required": true
+            },
+            {
+              "name": "description",
+              "label": "Description",
+              "type": "text",
+              "column": { "md": 6 },
+              "required": true
+            }
+          ]
+        },
+        {
+          "name": "branding_images",
+          "label": "Branding & Images",
+          "type": "group",
+          "column": { "md": 12 },
+          "inputs": [
+            {
+              "name": "logo",
+              "label": "Site Logo",
+              "type": "file",
+              "column": { "md": 6 },
+              "config": {
+                "allowedType": "image"
+              }
+            },
+            {
+              "name": "meta.logo",
+              "label": "Meta Logo",
+              "type": "file",
+              "column": { "md": 6 },
+              "config": {
+                "allowedType": "image"
+              }
+            },
+            {
+              "name": "meta.favicon",
+              "label": "Favicon",
+              "type": "file",
+              "column": { "md": 6 },
+              "config": {
+                "allowedType": "image"
+              }
+            },
+            {
+              "name": "meta.logoIcon",
+              "label": "Logo Icon",
+              "type": "file",
+              "column": { "md": 6 },
+              "config": {
+                "allowedType": "image"
+              }
+            }
+          ]
+        },
+        {
+          "name": "pages_routing",
+          "label": "Pages & Routing",
+          "type": "group",
+          "column": { "md": 12 },
+          "inputs": [
+            {
+              "name": "after_login_page",
+              "label": "After Login Page",
+              "type": "select",
+              "column": { "md": 4 },
+              "options": [
+                { "label": "Dashboard", "value": "/admin/overview" },
+                { "label": "Profile", "value": "/my-account" }
+              ]
+            },
+            {
+              "name": "login_page",
+              "label": "Login Page",
+              "type": "select",
+              "column": { "md": 4 },
+              "options": [
+                { "label": "Default Login", "value": "/login" }
+              ]
+            },
+            {
+              "name": "home_page",
+              "label": "Home Page",
+              "type": "select",
+              "column": { "md": 4 },
+              "options": [
+                { "label": "Default Home", "value": "/" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "meta_settings",
+          "label": "Metadata & Regional",
+          "type": "group",
+          "column": { "md": 12 },
+          "inputs": [
+            {
+              "name": "meta.client",
+              "label": "Client ID",
+              "type": "text",
+              "column": { "md": 4 }
+            },
+            {
+              "name": "meta.display_name",
+              "label": "Display Name",
+              "type": "text",
+              "column": { "md": 4 }
+            },
+            {
+              "name": "meta.theme",
+              "label": "Theme",
+              "type": "select",
+              "column": { "md": 4 },
+              "options": [
+                { "label": "Fashion Black", "value": "fashion-black" },
+                { "label": "Light", "value": "light" },
+                { "label": "Dark", "value": "dark" }
+              ]
+            },
+            {
+              "name": "meta.currency",
+              "label": "Currency",
+              "type": "text",
+              "column": { "md": 3 }
+            },
+            {
+              "name": "meta.currency_symbol",
+              "label": "Currency Symbol",
+              "type": "text",
+              "column": { "md": 3 }
+            },
+            {
+              "name": "meta.language",
+              "label": "Language",
+              "type": "text",
+              "column": { "md": 3 }
+            },
+            {
+              "name": "meta.timezone",
+              "label": "Timezone",
+              "type": "text",
+              "column": { "md": 3 }
+            },
+            {
+              "name": "meta.date_format",
+              "label": "Date Format",
+              "type": "text",
+              "column": { "md": 4 }
+            },
+            {
+              "name": "meta.time_format",
+              "label": "Time Format",
+              "type": "text",
+              "column": { "md": 4 }
+            },
+            {
+              "name": "meta.date_time_format",
+              "label": "Date Time Format",
+              "type": "text",
+              "column": { "md": 4 }
+            }
+          ]
+        },
+        {
+          "name": "admin_settings",
+          "label": "Admin Settings",
+          "type": "group",
+          "column": { "md": 12 },
+          "inputs": [
+            {
+              "name": "admin.login_redirect",
+              "label": "Admin Login Redirect",
+              "type": "text",
+              "column": { "md": 4 }
+            },
+            {
+              "name": "admin.logout_redirect",
+              "label": "Admin Logout Redirect",
+              "type": "text",
+              "column": { "md": 4 }
+            },
+            {
+              "name": "admin.my_profile",
+              "label": "Admin Profile Route",
+              "type": "text",
+              "column": { "md": 4 }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "meta": {
+    "title": "Language Management",
+    "description": "Configure system-wide languages and localization settings."
+  },
+  "name": "language",
+  "config": [
+    {
+      "id": "language-admin-module",
+      "type": "default-admin",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "actions": [
+          {
+            "key": "data",
+            "endpoint": "/language",
+            "method": "get",
+            "queryParams": {},
+            "responseMapping": {}
+          }
+        ]
+      },
+      "content": {
+        "table": {
+          "columns": [
+            {
+              "key": "name",
+              "label": "Language Name",
+              "type": "text",
+              "sortable": true,
+              "searchable": true
+            },
+            {
+              "key": "code",
+              "label": "ISO Code",
+              "type": "badge",
+              "styles": {
+                "variant": "outline",
+                "className": "font-black uppercase tracking-wider text-[10px]"
+              }
+            },
+            {
+              "key": "is_default",
+              "label": "Primary",
+              "type": "status",
+              "options": {
+                "true": { "label": "Default", "variant": "emerald" },
+                "false": { "label": "Optional", "variant": "secondary" }
+              }
+            },
+            {
+              "key": "status",
+              "label": "Status",
+              "type": "status",
+              "options": {
+                "active": { "label": "Active", "variant": "success" },
+                "inactive": { "label": "Inactive", "variant": "destructive" }
+              }
+            }
+          ],
+          "actions": [
+            {
+              "id": "edit-lang",
+              "label": "Edit",
+              "type": "button",
+              "action": "open_form",
+              "variant": "ghost",
+              "icon": "EditIcon"
+            },
+            {
+              "id": "delete-lang",
+              "label": "Delete",
+              "type": "button",
+              "action": "confirm_delete",
+              "variant": "destructive",
+              "icon": "TrashIcon"
+            }
+          ],
+          "filters": [
+            {
+              "name": "status",
+              "label": "Status",
+              "type": "select",
+              "options": [
+                { "label": "All", "value": "all" },
+                { "label": "Active", "value": "active" },
+                { "label": "Inactive", "value": "inactive" }
+              ]
+            }
+          ]
+        },
+        "form": {
+          "title": "Language Details",
+          "description": "Configure system-wide language and localization settings.",
+          "formType": "simple",
+          "labels": {
+            "cancel": "Cancel",
+            "reset": "Reset",
+            "submit": "Save Changes"
+          },
+          "inputs": [
+            {
+              "name": "name",
+              "label": "Language Name",
+              "type": "text",
+              "placeholder": "e.g. English, Español...",
+              "column": { "md": 6 },
+              "validation": [
+                { "rule": "required", "message": "Language name is required" }
+              ]
+            },
+            {
+              "name": "code",
+              "label": "Language Code (ISO)",
+              "type": "text",
+              "placeholder": "e.g. en, es, hi...",
+              "column": { "md": 6 },
+              "validation": [
+                { "rule": "required", "message": "ISO code is required" }
+              ]
+            },
+            {
+              "name": "is_default",
+              "label": "Set as Default Language",
+              "type": "switch",
+              "column": { "md": 12 },
+              "defaultValue": false
+            },
+            {
+              "name": "status",
+              "label": "Active Status",
+              "type": "select",
+              "defaultValue": "active",
+              "column": { "md": 12 },
+              "options": [
+                { "label": "Active", "value": "active" },
+                { "label": "Inactive", "value": "inactive" }
+              ]
+            }
+          ]
+        }
+      },
+      "children": []
+    }
+  ]
+}

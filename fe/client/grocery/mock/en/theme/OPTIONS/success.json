@@ -1,0 +1,37 @@
+﻿{
+    "content":  {
+                    "table":  {
+                                  "columns":  [
+                                                  {
+                                                      "label":  "ID",
+                                                      "key":  "id",
+                                                      "sortable":  true
+                                                  },
+                                                  {
+                                                      "label":  "Name",
+                                                      "key":  "name",
+                                                      "sortable":  true
+                                                  },
+                                                  {
+                                                      "label":  "Status",
+                                                      "key":  "status",
+                                                      "sortable":  true
+                                                  }
+                                              ]
+                              },
+                    "form":  {
+                                 "schema":  [
+                                                {
+                                                    "label":  "Name",
+                                                    "name":  "name",
+                                                    "kind":  "text"
+                                                },
+                                                {
+                                                    "label":  "Status",
+                                                    "name":  "status",
+                                                    "kind":  "text"
+                                                }
+                                            ]
+                             }
+                }
+}

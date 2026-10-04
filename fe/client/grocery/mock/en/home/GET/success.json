@@ -1,0 +1,171 @@
+{
+  "meta": {
+    "title": "Home Page",
+    "description": "Home Description"
+  },
+  "config": [
+    {
+      "id": "header",
+      "type": "header",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "data",
+            "endpoint": "/header",
+            "method": "get",
+            "queryParams": {
+              "id": 1
+            },
+            "responseMapping": {}
+          },
+          {
+            "key": "category",
+            "endpoint": "/category",
+            "method": "get",
+            "responseMapping": {
+              "bindLabel": "name",
+              "bindValue": "id"
+            }
+          }
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "hero-section",
+      "type": "hero-section",
+      "properties": {
+        "level": "base",
+        "type": "static"
+      },
+      "content": {
+        "name": "FreshMart",
+        "tagline": "Wholesale",
+        "type": "grocery",
+        "logoIcon": "🥦",
+        "hero": {
+          "headline": "Fresh Groceries, Delivered Fast",
+          "subheadline": "Farm-to-table quality at wholesale prices. Order before 2 PM for same-day delivery.",
+          "cta": "Shop Fresh Produce",
+          "badge": "🚚 Free delivery over $30"
+        },
+        "categories": [
+          "All Products",
+          "Fresh Produce",
+          "Dairy & Eggs",
+          "Meat & Seafood",
+          "Bakery",
+          "Beverages",
+          "Pantry",
+          "Frozen Foods",
+          "Snacks"
+        ],
+        "phone": "1-800-FRESHMART",
+        "hours": "Mon–Sat: 6 AM – 8 PM",
+        "topBarMessage": "Wholesale Pricing for Retailers & Distributors",
+        "freeDeliveryThreshold": 30,
+        "translations": {
+          "es": {
+            "name": "FreshMart",
+            "tagline": "Venta al por mayor",
+            "topBarMessage": "Precios de Mayoreo para Minoristas y Distribuidores",
+            "hero": {
+              "headline": "Grocies Frescos, Entrega Rápida",
+              "subheadline": "Calidad de la granja a la mesa a precios de mayorista. Ordene antes de las 2 p. m. para entrega el mismo día.",
+              "cta": "Comprar Productos Frescos",
+              "badge": "🚚 Entrega gratuita en pedidos superiores a $30"
+            }
+          }
+        }
+      },
+      "children": []
+    },
+    {
+      "id": "products",
+      "type": "products",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "data",
+            "endpoint": "/product",
+            "method": "get"
+          }
+        ]
+      },
+      "content": {
+        "entityConfig": {
+          "fields": {
+            "image": { "path": "image" },
+            "badge": { "path": "badge" },
+            "title": { "path": "name" },
+            "description": { "path": "description" },
+            "rating": { "path": "rating", "reviewsPath": "reviews" },
+            "price": { "path": "price", "originalPricePath": "originalPrice", "format": "currency", "symbol": "$" },
+            "inStock": { "path": "inStock" }
+          },
+          "actions": {
+            "primary": { "type": "addToCart", "label": "Add to Cart", "session": "cart" },
+            "secondary": { "type": "details", "label": "Details" },
+            "wishlist": { "type": "wishlist", "labelAdd": "Add to Wishlist", "labelRemove": "Remove from Wishlist", "session": "wishlist" }
+          },
+          "sessions": [
+            {
+              "name": "cart",
+              "source": "session",
+              "persist": true,
+              "method": "array_upsert",
+              "method_config": {
+                "match_key": "id",
+                "on_match": "increment",
+                "increment_field": "qty",
+                "default_fields": { "qty": 1 }
+              },
+              "field_mapping": {
+                "id": "id",
+                "unit_price": "price",
+                "name": "name",
+                "image": "image"
+              }
+            },
+            {
+              "name": "wishlist",
+              "source": "session",
+              "persist": true,
+              "method": "array_toggle",
+              "method_config": { "match_key": "id" }
+            }
+          ],
+          "labels": {
+            "noImage": "No Image"
+          }
+        }
+      },
+      "children": []
+    },
+    {
+      "id": "footer",
+      "type": "footer",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "data",
+            "endpoint": "/footer",
+            "method": "get",
+            "queryParams": {
+              "id": 1
+            },
+            "responseMapping": {}
+          }
+        ]
+      },
+      "content": {},
+      "children": []
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "label": "ID",
+          "key": "id",
+          "sortable": true
+        },
+        {
+          "label": "Name",
+          "key": "name",
+          "sortable": true
+        },
+        {
+          "label": "Type",
+          "key": "type",
+          "sortable": true
+        },
+        {
+          "label": "Description",
+          "key": "description",
+          "sortable": true
+        },
+        {
+          "label": "URL",
+          "key": "url",
+          "sortable": true
+        },
+        {
+          "label": "Entity",
+          "key": "entity",
+          "sortable": true
+        },
+        {
+          "label": "Icon",
+          "key": "icon",
+          "sortable": true
+        },
+        {
+          "label": "Parent",
+          "key": "parent",
+          "sortable": true
+        }
+      ]
+    },
+    "form": {
+      "inputs": [
+        {
+          "label": "Name",
+          "name": "name",
+          "type": "text",
+          "column": { "md": 4 },
+          "validation": [{ "rule": "required", "message": "Name is required" }]
+        },
+        {
+          "label": "Menu Type",
+          "name": "type",
+          "type": "select",
+          "column": { "md": 4 },
+          "options": [
+            { "label": "Public Menu", "value": "menu" },
+            { "label": "Admin Menu", "value": "admin_menu" }
+          ],
+          "validation": [{ "rule": "required", "message": "Menu Type is required" }]
+        },
+        {
+          "label": "Description",
+          "name": "description",
+          "type": "text",
+          "column": { "md": 4 }
+        },
+        {
+          "label": "URL",
+          "name": "url",
+          "type": "text",
+          "column": { "md": 4 }
+        },
+        {
+          "label": "Entity",
+          "name": "entity",
+          "type": "text",
+          "column": { "md": 4 }
+        },
+        {
+          "label": "Icon",
+          "name": "icon",
+          "type": "icon-picker",
+          "column": { "md": 4 }
+        },
+        {
+          "label": "Parent Menu",
+          "name": "parent",
+          "type": "dynamic-select",
+          "column": { "md": 4 },
+          "config": {
+            "endpoint": "menu",
+            "bindLabel": "name",
+            "bindValue": "id"
+          }
+        }
+      ]
+    }
+  }
+}

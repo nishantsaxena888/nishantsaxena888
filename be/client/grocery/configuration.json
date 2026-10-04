@@ -17,7 +17,7 @@
       "name": "Home",
       "description": "Storefront",
       "url": "/",
-      "entity": "pages/home",
+      "entity": "home",
       "public": true,
       "order": 0
     },
@@ -36,6 +36,80 @@
       "entity": "pages/deals",
       "public": true,
       "order": 2
+    },
+    {
+      "name": "Cart",
+      "description": "Your cart",
+      "url": "/cart",
+      "entity": "cart",
+      "public": true,
+      "order": 3,
+      "icon": "shopping-cart"
+    },
+    {
+      "name": "Checkout",
+      "description": "Checkout",
+      "url": "/checkout",
+      "entity": "checkout",
+      "public": true,
+      "order": 4,
+      "hide": true
+    },
+    {
+      "name": "Profile",
+      "description": "My account",
+      "url": "/my-account",
+      "entity": "profile",
+      "public": true,
+      "order": 5,
+      "hide": true
+    },
+    {
+      "name": "Login",
+      "description": "Sign in",
+      "url": "/login",
+      "entity": "login",
+      "public": true,
+      "order": 6,
+      "auth_page": true,
+      "hide": true
+    },
+    {
+      "name": "Signup",
+      "description": "Create account",
+      "url": "/register",
+      "entity": "register",
+      "public": true,
+      "order": 7,
+      "auth_page": true,
+      "hide": true
+    },
+    {
+      "name": "Forgot Password",
+      "description": "Reset password",
+      "url": "/forgot-password",
+      "entity": "forgot-password",
+      "public": true,
+      "order": 8,
+      "hide": true
+    },
+    {
+      "name": "Reset Password",
+      "description": "Set new password",
+      "url": "/reset-password",
+      "entity": "reset-password",
+      "public": true,
+      "order": 9,
+      "hide": true
+    },
+    {
+      "name": "Verify Email",
+      "description": "Verify email",
+      "url": "/verify-email",
+      "entity": "verify-email",
+      "public": true,
+      "order": 10,
+      "hide": true
     }
   ],
   "admin_menu": [
@@ -285,5 +359,6 @@
         }
       ]
     }
-  }
+  },
+  "site_nav": false
 }

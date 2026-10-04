@@ -1,0 +1,7 @@
+{
+  "status_code": 200,
+  "message": "Reset link sent successfully to your email.",
+  "data": {
+    "status": "sent"
+  }
+}

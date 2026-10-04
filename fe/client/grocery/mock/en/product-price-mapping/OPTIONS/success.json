@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "title": "Product Price Mapping",
+    "description": "Map products to price tiers and customer groups."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "type": "text"
+        },
+        {
+          "key": "product_id",
+          "label": "Product",
+          "type": "dynamic-select",
+          "config": {
+            "endpoint": "product",
+            "bindLabel": "name",
+            "bindValue": "id"
+          }
+        },
+        {
+          "key": "customer_id",
+          "label": "Customer",
+          "type": "dynamic-select",
+          "config": {
+            "endpoint": "customer",
+            "bindLabel": "name",
+            "bindValue": "id"
+          }
+        },
+        {
+          "key": "price_id",
+          "label": "Price Tier",
+          "type": "text"
+        },
+        {
+          "key": "price",
+          "label": "Price",
+          "type": "number"
+        },
+        {
+          "key": "priority",
+          "label": "Priority",
+          "type": "number"
+        },
+        {
+          "key": "is_active",
+          "label": "Active",
+          "type": "boolean"
+        }
+      ]
+    },
+    "form": {
+      "id": "product-price-mapping-form",
+      "title": "Product Price Mapping",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        {
+          "name": "product_id",
+          "label": "Product",
+          "type": "dynamic-select",
+          "column": {
+            "md": 6
+          },
+          "config": {
+            "endpoint": "product",
+            "bindLabel": "name",
+            "bindValue": "id",
+            "disabled": true
+          }
+        },
+        {
+          "name": "price_id",
+          "label": "Price Tier",
+          "type": "dynamic-select",
+          "column": {
+            "md": 6
+          },
+          "required": true,
+          "validation": [
+            {
+              "rule": "required",
+              "message": "Price Tier is required"
+            }
+          ],
+          "config": {
+            "endpoint": "price-tier",
+            "bindLabel": "name",
+            "bindValue": "id"
+          }
+        },
+        {
+          "name": "price_type",
+          "label": "Price Type",
+          "type": "select",
+          "column": {
+            "md": 6
+          },
+          "options": [
+            {
+              "label": "Standard",
+              "value": "standard"
+            },
+            {
+              "label": "Discount",
+              "value": "discount"
+            }
+          ]
+        },
+        {
+          "name": "price",
+          "label": "Price",
+          "type": "number",
+          "column": {
+            "md": 6
+          }
+        },
+        {
+          "name": "min_qty",
+          "label": "Min Qty",
+          "type": "number",
+          "column": {
+            "md": 6
+          }
+        },
+        {
+          "name": "max_qty",
+          "label": "Max Qty",
+          "type": "number",
+          "column": {
+            "md": 6
+          }
+        },
+        {
+          "name": "priority",
+          "label": "Priority",
+          "type": "number",
+          "column": {
+            "md": 6
+          },
+          "defaultValue": 100
+        },
+        {
+          "name": "start_date",
+          "label": "Start Date",
+          "type": "date",
+          "column": {
+            "md": 6
+          }
+        },
+        {
+          "name": "end_date",
+          "label": "End Date",
+          "type": "date",
+          "column": {
+            "md": 6
+          }
+        },
+        {
+          "name": "is_active",
+          "label": "Active",
+          "type": "switch",
+          "column": {
+            "md": 6
+          },
+          "defaultValue": true
+        },
+        {
+          "name": "created_at",
+          "label": "Created At",
+          "type": "date",
+          "column": {
+            "md": 6
+          },
+          "config": {
+            "hidden": true
+          }
+        }
+      ]
+    }
+  }
+}

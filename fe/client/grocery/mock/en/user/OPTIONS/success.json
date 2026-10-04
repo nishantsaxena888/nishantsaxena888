@@ -1,0 +1,184 @@
+{
+  "meta": {
+    "title": "Employee Directory",
+    "description": "Manage organization hierarchy, employee records, and system access."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "label": "Employee",
+          "key": "name",
+          "type": "text",
+          "sortable": true,
+          "searchable": true
+        },
+        {
+          "label": "Email",
+          "key": "email",
+          "type": "text"
+        },
+        {
+          "label": "Department",
+          "key": "department",
+          "type": "badge",
+          "styles": {
+            "variant": "outline",
+            "className": "bg-slate-50 text-slate-700 font-bold"
+          }
+        },
+        {
+          "label": "Role",
+          "key": "role",
+          "type": "badge",
+          "styles": {
+            "variant": "secondary"
+          }
+        },
+        {
+          "label": "Status",
+          "key": "status",
+          "type": "status",
+          "options": {
+            "active": { "label": "Active", "variant": "success" },
+            "on_leave": { "label": "On Leave", "variant": "warning" },
+            "terminated": { "label": "Terminated", "variant": "destructive" }
+          }
+        },
+        {
+          "label": "Joined",
+          "key": "join_date",
+          "type": "text"
+        }
+      ]
+    },
+    "form": {
+      "title": "Employee Information",
+      "description": "Complete the details below to manage staff access.",
+      "formType": "tabs",
+      "classNames": {
+        "tabs": {
+          "tabHeader": {
+            "base": "gap-x-10 mb-1 border-b-0 px-10 pt-5"
+          },
+          "base": " ",
+          "footer": {
+            "base": "mt-12 pt-3 border-t"
+          }
+        }
+      },
+      "inputs": [
+        {
+          "name": "basic_info",
+          "label": "Basic Info",
+          "type": "group",
+          "inputs": [
+            {
+              "name": "name",
+              "label": "Full Name",
+              "type": "text",
+              "placeholder": "Enter employee name",
+              "column": { "md": 6 },
+              "validation": [
+                { "rule": "required", "message": "Name is required" }
+              ]
+            },
+            {
+              "name": "email",
+              "label": "Work Email",
+              "type": "text",
+              "placeholder": "email@organization.com",
+              "column": { "md": 6 },
+              "validation": [
+                { "rule": "required", "message": "Email is required" },
+                { "rule": "email", "message": "Invalid email format" }
+              ]
+            },
+            {
+              "name": "phone",
+              "label": "Contact Number",
+              "type": "phone",
+              "column": { "md": 6 }
+            },
+            {
+              "name": "department",
+              "label": "Department",
+              "type": "select",
+              "column": { "md": 6 },
+              "options": [
+                { "label": "Sales", "value": "Sales" },
+                { "label": "Marketing", "value": "Marketing" },
+                { "label": "Engineering", "value": "Engineering" },
+                { "label": "HR", "value": "HR" },
+                { "label": "Operations", "value": "Operations" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "address_info",
+          "label": "Address",
+          "type": "group",
+          "inputs": [
+            {
+              "name": "address",
+              "label": "",
+              "type": "many-to-many",
+              "placeholder": "123 Business Way",
+              "column": { "md": 12 },
+              "config": {
+                "bindValue": "customer_id",
+                "title": "Address",
+                "entity": "address",
+                "className": "flex-1",
+                "searchParameter": { "customer_id": "$id" },
+                "emptyMessage": "Please select an address"
+              }
+            }
+          ]
+        },
+        {
+          "name": "account_info",
+          "label": "Account",
+          "type": "group",
+          "inputs": [
+            {
+              "name": "role",
+              "label": "System Role",
+              "type": "dynamic-select",
+              "column": { "md": 6 },
+              "config": {
+                "bindValue": "id",
+                "bindLabel": "name",
+                "endpoint": "role",
+                "method": "GET",
+                "pageSize": 10,
+                "searchParam": "search",
+                "pageParam": "page",
+                "limitParam": "limit"
+              }
+            },
+            {
+              "name": "join_date",
+              "label": "Join Date",
+              "type": "date",
+              "column": { "md": 6 }
+            },
+            {
+              "name": "status",
+              "label": "Employment Status",
+              "type": "select",
+              "column": { "md": 12 },
+              "defaultValue": "active",
+              "options": [
+                { "label": "Active", "value": "active" },
+                { "label": "On Leave", "value": "on_leave" },
+                { "label": "Terminated", "value": "terminated" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

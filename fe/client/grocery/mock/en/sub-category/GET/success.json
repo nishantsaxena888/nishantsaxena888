@@ -1,0 +1,7 @@
+{
+  "data": [
+    { "id": 1, "name": "Soft Drinks", "category_id": 1, "sequence": 1, "status": "active" },
+    { "id": 2, "name": "Energy Drinks", "category_id": 1, "sequence": 2, "status": "active" },
+    { "id": 3, "name": "Potato Chips", "category_id": 2, "sequence": 1, "status": "active" }
+  ]
+}

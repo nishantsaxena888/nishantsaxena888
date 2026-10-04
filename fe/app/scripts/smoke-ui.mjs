@@ -16,7 +16,8 @@ const DEFAULTS = [
 const ROUTES = {
   hello: ["/", "/admin", "/admin/todo", "/definitely-missing"],
   grocery: [
-    "/", "/shop", "/deals",
+    "/", "/shop", "/deals", "/cart", "/checkout", "/my-account",
+    "/login", "/register", "/forgot-password",
     "/admin", "/admin/overview", "/admin/product", "/admin/category",
     "/admin/order", "/admin/customer",
   ],

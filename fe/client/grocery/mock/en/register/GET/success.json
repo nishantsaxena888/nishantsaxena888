@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "title": "Create Account",
+    "description": "Join Inventure today"
+  },
+  "config": [
+    {
+      "id": "register-layout",
+      "type": "login-layout-1",
+      "properties": {
+        "level": "base",
+        "type": "static"
+      },
+      "content": {
+        "title": "Create Account",
+        "name": "Inventure",
+        "imageURL": "/clients/grocery/default.webp",
+        "config": {
+          "endpoint": "register",
+          "type": "register-card",
+          "action": {
+            "type": "redirect",
+            "navigation": "/admin/overview",
+            "navigation_type": "navigate",
+            "login": true
+          }
+        },
+        "footerText": "Already have an account? {{Login||l||/login}}"
+      },
+      "children": []
+    }
+  ]
+}

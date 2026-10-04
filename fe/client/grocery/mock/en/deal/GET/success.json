@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "title": "Active Deals",
+    "description": "Fetch active storefront deals and assignments"
+  },
+  "data": [
+    {
+      "id": "deal-user-arjun",
+      "title": "VIP Member Arjun's Special (15% Off Subtotal)",
+      "type": "user_discount",
+      "value": 0.15,
+      "assignment": {
+        "user_id": [1]
+      }
+    },
+    {
+      "id": "deal-category-produce",
+      "title": "Produce Bounty ($1.00 Off per Fresh Produce item)",
+      "type": "category_discount",
+      "value": 1.00,
+      "assignment": {
+        "category_id": [4]
+      }
+    },
+    {
+      "id": "deal-product-avocado",
+      "title": "Avocado Lovers Sale ($0.50 Off per Organic Avocado pack)",
+      "type": "product_discount",
+      "value": 0.50,
+      "assignment": {
+        "product_id": [1]
+      }
+    }
+  ]
+}

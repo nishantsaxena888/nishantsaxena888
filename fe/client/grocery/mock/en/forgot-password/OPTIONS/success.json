@@ -1,0 +1,44 @@
+{
+  "config": [
+    {
+      "type": "forgot-password-card",
+      "content": {
+        "form": {
+          "labels": {
+            "submit": "Send Reset Link"
+          },
+          "submit_included": true,
+          "inputs": [
+            {
+              "name": "email",
+              "label": "Email Address",
+              "type": "email",
+              "placeholder": "Enter your registered email",
+              "column": { "md": 12 },
+              "validation": [
+                { "rule": "required", "message": "Email is required" },
+                { "rule": "email", "message": "Invalid email format" }
+              ]
+            },
+            {
+              "name": "submit_btn",
+              "label": "",
+              "type": "submit",
+              "isNoneInput": true,
+              "button_label": "Send Reset Link",
+              "column": { "md": 12 }
+            },
+            {
+              "name": "link",
+              "label": "",
+              "type": "typography",
+              "isNoneInput": true,
+              "content": "Remember your password? {{Login||l||/login}}",
+              "column": { "md": 12 }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

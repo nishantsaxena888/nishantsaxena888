@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "title": "Reset Password",
+    "description": "Choose a new password"
+  },
+  "config": [
+    {
+      "id": "reset-password-layout",
+      "type": "login-layout-1",
+      "properties": {
+        "level": "base",
+        "type": "static"
+      },
+      "content": {
+        "name": "Inventure",
+        "imageURL": "/clients/grocery/default.webp",
+        "config": {
+          "endpoint": "reset-password",
+          "type": "reset-password-card",
+          "action": {
+            "type": "redirect",
+            "navigation": "/login",
+            "navigation_type": "navigate",
+            "remove_local_storage": ["email"],
+            "populate_from_local_storage": ["email"]
+          }
+        },
+        "footerText": "Back to {{Login||l||/login}}"
+      },
+      "children": []
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "data": [
+    { "id": 1, "name": "Billing Address", "status": "active" },
+    { "id": 2, "name": "Shipping Address", "status": "active" },
+    { "id": 3, "name": "Home Address", "status": "active" },
+    { "id": 4, "name": "Office Address", "status": "active" }
+  ]
+}

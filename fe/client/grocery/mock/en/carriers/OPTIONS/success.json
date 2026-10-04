@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "title": "Carrier Management",
+    "description": "Manage shipping carriers."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "id", "label": "ID", "type": "text" },
+        { "key": "name", "label": "Carrier Name", "type": "text" },
+        { "key": "status", "label": "Status", "type": "status", "options": { "active": { "label": "Active", "variant": "success" }, "inactive": { "label": "Inactive", "variant": "destructive" } } }
+      ]
+    },
+    "form": {
+      "id": "carrier-form",
+      "title": "Carrier Details",
+      "description": "Enter the carrier information.",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        { "name": "name", "label": "Carrier Name", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Carrier Name is required" }] },
+        {
+          "name": "delivery_type_id",
+          "label": "Delivery Type",
+          "type": "dynamic-select",
+          "column": { "md": 6 },
+          "config": {
+            "bindValue": "id",
+            "bindLabel": "name",
+            "endpoint": "delivery-types",
+            "method": "GET"
+          }
+        },
+        { "name": "status", "label": "Status", "type": "select", "defaultValue": "active", "column": { "md": 6 }, "options": [ { "label": "Active", "value": "active" }, { "label": "Inactive", "value": "inactive" } ] }
+      ]
+    }
+  }
+}

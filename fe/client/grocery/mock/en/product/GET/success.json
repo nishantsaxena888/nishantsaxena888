@@ -1,71 +1,336 @@
 {
-  "items": [
+  "data": [
     {
       "id": 1,
-      "name": "Apples (1kg)",
-      "category": "Produce",
-      "price": 3.49,
-      "stock": 42,
-      "on_sale": true
+      "sku": "PROD-001",
+      "name": "Organic Avocados (4 pack)",
+      "category_id": [
+        4
+      ],
+      "sub_category_id": [
+        1
+      ],
+      "brand_id": 1,
+      "price": 4.99,
+      "originalPrice": 6.49,
+      "rating": 4.8,
+      "reviews": 1234,
+      "image": "https://images.unsplash.com/photo-1519162808019-7de1683fa2ad?w=400&q=80",
+      "badge": "Organic",
+      "status": "active",
+      "description": "Creamy, perfectly ripe organic avocados sourced from California farms.",
+      "tags": [
+        "vegan",
+        "keto",
+        "organic"
+      ],
+      "stock": 5
     },
     {
       "id": 2,
-      "name": "Bananas (1kg)",
-      "category": "Produce",
-      "price": 1.99,
-      "stock": 67,
-      "on_sale": false
+      "sku": "PROD-002",
+      "name": "Baby Spinach (500g)",
+      "category_id": [
+        4
+      ],
+      "sub_category_id": [
+        1
+      ],
+      "brand_id": 1,
+      "price": 3.49,
+      "rating": 4.6,
+      "reviews": 876,
+      "image": "https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=400&q=80",
+      "badge": "Fresh",
+      "status": "active",
+      "description": "Tender baby spinach leaves, washed and ready to eat.",
+      "tags": [
+        "vegan",
+        "organic"
+      ],
+      "stock": 10
     },
     {
       "id": 3,
-      "name": "Whole Milk (1L)",
-      "category": "Dairy",
-      "price": 2.29,
-      "stock": 30,
-      "on_sale": false
+      "sku": "PROD-003",
+      "name": "Roma Tomatoes (1 kg)",
+      "category_id": [
+        4
+      ],
+      "sub_category_id": [
+        1
+      ],
+      "brand_id": 1,
+      "price": 2.99,
+      "rating": 4.5,
+      "reviews": 654,
+      "image": "https://images.unsplash.com/photo-1546094096-0df4bcabd337?w=400&q=80",
+      "badge": "Local",
+      "status": "active",
+      "description": "Sun-ripened Roma tomatoes, perfect for sauces and salads.",
+      "stock": 15
     },
     {
       "id": 4,
-      "name": "Cheddar (250g)",
-      "category": "Dairy",
-      "price": 4.79,
-      "stock": 18,
-      "on_sale": true
+      "sku": "PROD-004",
+      "name": "Free-Range Eggs (12 pack)",
+      "category_id": [
+        3
+      ],
+      "sub_category_id": [
+        2
+      ],
+      "brand_id": 2,
+      "price": 5.49,
+      "rating": 4.9,
+      "reviews": 2341,
+      "image": "https://images.unsplash.com/photo-1598965675045-45c5e72c7d05?w=400&q=80",
+      "badge": "Free-Range",
+      "status": "active",
+      "description": "Eggs from hens raised on open pastures, rich in omega-3.",
+      "stock": 8
     },
     {
       "id": 5,
-      "name": "Sourdough Loaf",
-      "category": "Bakery",
-      "price": 5.2,
-      "stock": 12,
-      "on_sale": false
+      "sku": "PROD-005",
+      "name": "Whole Milk (2L)",
+      "category_id": [
+        3
+      ],
+      "sub_category_id": [
+        2
+      ],
+      "brand_id": 2,
+      "price": 3.99,
+      "rating": 4.7,
+      "reviews": 987,
+      "image": "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=400&q=80",
+      "badge": "",
+      "status": "active",
+      "description": "Full-cream pasteurised whole milk from local dairy farms.",
+      "stock": 12
     },
     {
       "id": 6,
-      "name": "Croissants (4pk)",
-      "category": "Bakery",
-      "price": 3.6,
-      "stock": 20,
-      "on_sale": true
+      "sku": "PROD-006",
+      "name": "Greek Yoghurt (500g)",
+      "category_id": [
+        3
+      ],
+      "sub_category_id": [
+        2
+      ],
+      "brand_id": 2,
+      "price": 3.49,
+      "originalPrice": 4.49,
+      "rating": 4.7,
+      "reviews": 543,
+      "image": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&q=80",
+      "badge": "Sale",
+      "status": "active",
+      "description": "Thick and creamy Greek yoghurt, high in protein.",
+      "stock": 6
     },
     {
       "id": 7,
-      "name": "Orange Juice (1L)",
-      "category": "Drinks",
-      "price": 3.1,
-      "stock": 25,
-      "on_sale": false
+      "sku": "PROD-007",
+      "name": "Chicken Breast (1 kg)",
+      "category_id": [
+        5
+      ],
+      "sub_category_id": [
+        3
+      ],
+      "brand_id": 3,
+      "price": 8.99,
+      "rating": 4.6,
+      "reviews": 1123,
+      "image": "https://images.unsplash.com/photo-1604503468506-a8da13d11d36?w=400&q=80",
+      "badge": "Fresh",
+      "status": "active",
+      "description": "Skinless, boneless chicken breast — antibiotic-free.",
+      "stock": 4
     },
     {
       "id": 8,
-      "name": "Cola (2L)",
-      "category": "Drinks",
-      "price": 2.5,
-      "stock": 40,
-      "on_sale": false
+      "sku": "PROD-008",
+      "name": "Atlantic Salmon Fillet",
+      "category_id": [
+        5
+      ],
+      "sub_category_id": [
+        3
+      ],
+      "brand_id": 3,
+      "price": 12.99,
+      "rating": 4.8,
+      "reviews": 678,
+      "image": "https://images.unsplash.com/photo-1574781330855-d0db8cc6a79c?w=400&q=80",
+      "badge": "Premium",
+      "status": "active",
+      "description": "Fresh Atlantic salmon — wild-caught, skin-on fillet.",
+      "stock": 3
+    },
+    {
+      "id": 9,
+      "sku": "PROD-009",
+      "name": "Sourdough Loaf",
+      "category_id": [
+        6
+      ],
+      "sub_category_id": [
+        4
+      ],
+      "brand_id": 4,
+      "price": 5.99,
+      "rating": 4.7,
+      "reviews": 890,
+      "image": "https://images.unsplash.com/photo-1585478259715-4d3170c6c8b7?w=400&q=80",
+      "badge": "Baked Today",
+      "status": "active",
+      "description": "Stone-baked sourdough with a crisp crust and open crumb.",
+      "stock": 20
+    },
+    {
+      "id": 10,
+      "sku": "PROD-010",
+      "name": "Croissants (4 pack)",
+      "category_id": [
+        6
+      ],
+      "sub_category_id": [
+        4
+      ],
+      "brand_id": 4,
+      "price": 3.99,
+      "rating": 4.5,
+      "reviews": 432,
+      "image": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&q=80",
+      "badge": "",
+      "status": "active",
+      "description": "Flaky, buttery French-style croissants baked fresh daily.",
+      "stock": 7
+    },
+    {
+      "id": 11,
+      "sku": "PROD-011",
+      "name": "Orange Juice (1L)",
+      "category_id": [
+        1
+      ],
+      "sub_category_id": [
+        5
+      ],
+      "brand_id": 5,
+      "price": 3.49,
+      "rating": 4.4,
+      "reviews": 567,
+      "image": "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=400&q=80",
+      "badge": "No Added Sugar",
+      "status": "active",
+      "description": "Freshly squeezed orange juice, no preservatives.",
+      "stock": 9
+    },
+    {
+      "id": 12,
+      "sku": "PROD-012",
+      "name": "Sparkling Water (6 pack)",
+      "category_id": [
+        1
+      ],
+      "sub_category_id": [
+        5
+      ],
+      "brand_id": 5,
+      "price": 4.49,
+      "rating": 4.3,
+      "reviews": 321,
+      "image": "https://images.unsplash.com/photo-1599751449318-de7f3d27a0dd?w=400&q=80",
+      "badge": "",
+      "status": "active",
+      "description": "Natural mineral sparkling water, lightly carbonated.",
+      "stock": 11
+    },
+    {
+      "id": 13,
+      "sku": "PROD-013",
+      "name": "Extra Virgin Olive Oil",
+      "category_id": [
+        7
+      ],
+      "sub_category_id": [
+        6
+      ],
+      "brand_id": 6,
+      "price": 9.99,
+      "originalPrice": 13.99,
+      "rating": 4.9,
+      "reviews": 1456,
+      "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&q=80",
+      "badge": "Popular",
+      "status": "active",
+      "description": "Cold-pressed Greek EVOO, robust and fruity.",
+      "stock": 2
+    },
+    {
+      "id": 14,
+      "sku": "PROD-014",
+      "name": "Basmati Rice (2 kg)",
+      "category_id": [
+        7
+      ],
+      "sub_category_id": [
+        6
+      ],
+      "brand_id": 6,
+      "price": 6.99,
+      "rating": 4.6,
+      "reviews": 789,
+      "image": "https://images.unsplash.com/photo-1536304993881-ff86e0c9c99e?w=400&q=80",
+      "badge": "",
+      "status": "active",
+      "description": "Aged basmati rice, long-grain and aromatic.",
+      "stock": 14
+    },
+    {
+      "id": 15,
+      "sku": "PROD-015",
+      "name": "Frozen Peas (1 kg)",
+      "category_id": [
+        8
+      ],
+      "sub_category_id": [
+        7
+      ],
+      "brand_id": 7,
+      "price": 2.49,
+      "rating": 4.3,
+      "reviews": 234,
+      "image": "https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=400&q=80",
+      "badge": "",
+      "status": "active",
+      "description": "Garden peas flash-frozen at peak freshness.",
+      "stock": 13
+    },
+    {
+      "id": 16,
+      "sku": "PROD-016",
+      "name": "Dark Chocolate (85%)",
+      "category_id": [
+        2
+      ],
+      "sub_category_id": [
+        8
+      ],
+      "brand_id": 8,
+      "price": 2.99,
+      "rating": 4.8,
+      "reviews": 1789,
+      "image": "https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=400&q=80",
+      "badge": "Popular",
+      "status": "active",
+      "description": "Rich 85% dark chocolate — guilt-free indulgence.",
+      "stock": 18
     }
-  ],
-  "page": 1,
-  "size": 8,
-  "total": 8
+  ]
 }

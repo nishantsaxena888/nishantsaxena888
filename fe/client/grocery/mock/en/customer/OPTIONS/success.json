@@ -1,75 +1,7 @@
 {
-  "entity": "customer",
-  "name": "customer",
-  "schema": {
-    "fields": {
-      "id": {
-        "type": "int",
-        "primary_key": true
-      },
-      "name": {
-        "type": "str",
-        "required": true
-      },
-      "email": {
-        "type": "str"
-      },
-      "loyalty_points": {
-        "type": "int",
-        "default": 0
-      }
-    },
-    "ui": {
-      "table": {
-        "columns": [
-          {
-            "key": "id",
-            "label": "ID",
-            "sortable": true
-          },
-          {
-            "key": "name",
-            "label": "Name",
-            "searchable": true
-          },
-          {
-            "key": "email",
-            "label": "Email"
-          },
-          {
-            "key": "loyalty_points",
-            "label": "Points",
-            "sortable": true
-          }
-        ],
-        "actions": [
-          "open_form",
-          "confirm_delete"
-        ]
-      },
-      "form": {
-        "fields": [
-          {
-            "name": "name",
-            "componentType": "TextInput",
-            "required": true,
-            "colSpan": 2,
-            "label": "Name"
-          },
-          {
-            "name": "email",
-            "componentType": "TextInput",
-            "label": "Email"
-          },
-          {
-            "name": "loyalty_points",
-            "componentType": "TextInput",
-            "default": "0",
-            "label": "Loyalty Points"
-          }
-        ]
-      }
-    }
+  "meta": {
+    "title": "Customer Management",
+    "description": "Maintain customer profiles, B2B settings, and relationship history."
   },
   "content": {
     "table": {
@@ -77,47 +9,586 @@
         {
           "key": "id",
           "label": "ID",
-          "sortable": true
+          "type": "text"
         },
         {
           "key": "name",
-          "label": "Name",
-          "searchable": true
+          "label": "Customer Name",
+          "type": "text"
         },
         {
           "key": "email",
-          "label": "Email"
+          "label": "Email",
+          "type": "text"
         },
         {
-          "key": "loyalty_points",
-          "label": "Points",
-          "sortable": true
+          "key": "phone",
+          "label": "Phone",
+          "type": "text"
+        },
+        {
+          "key": "status",
+          "label": "Status",
+          "type": "status"
         }
-      ],
-      "actions": [
-        "open_form",
-        "confirm_delete"
       ]
     },
     "form": {
-      "fields": [
+      "id": "customer-form",
+      "title": "Customer Details",
+      "formType": "tabs",
+      "layout": "default",
+      "columns": 3,
+      "inputs": [
         {
-          "name": "name",
-          "componentType": "TextInput",
-          "required": true,
-          "colSpan": 2,
-          "label": "Name"
+          "name": "general_info",
+          "label": "General Information",
+          "type": "group",
+          "column": {
+            "md": 12
+          },
+          "inputs": [
+            {
+              "name": "customer_type",
+              "label": "Customer Type",
+              "type": "select",
+              "column": {
+                "md": 6
+              },
+              "required": true,
+              "options": [
+                {
+                  "label": "Retailer (B2B)",
+                  "value": "b2b"
+                },
+                {
+                  "label": "Consumer (B2C)",
+                  "value": "b2c"
+                }
+              ]
+            },
+            {
+              "name": "customer_code",
+              "label": "Customer Code",
+              "type": "text",
+              "column": {
+                "md": 6
+              }
+            },
+            {
+              "name": "name",
+              "label": "Name",
+              "type": "text",
+              "column": {
+                "md": 4
+              },
+              "required": true
+            },
+            {
+              "name": "uen",
+              "label": "UEN",
+              "type": "text",
+              "column": {
+                "md": 4
+              }
+            },
+            {
+              "name": "currency_id",
+              "label": "Currency",
+              "type": "dynamic-select",
+              "column": {
+                "md": 4
+              },
+              "required": true,
+              "config": {
+                "endpoint": "currency",
+                "bindLabel": "currency_code",
+                "bindValue": "id"
+              }
+            },
+            {
+              "name": "attribute_set",
+              "label": "Additional attributes Set",
+              "type": "select",
+              "column": {
+                "md": 6
+              },
+              "options": []
+            },
+            {
+              "name": "tags",
+              "label": "Tags",
+              "type": "text",
+              "column": {
+                "md": 6
+              }
+            },
+            {
+              "name": "approval_type",
+              "label": "Approval List Type for Customer Products",
+              "type": "select",
+              "column": {
+                "md": 6
+              },
+              "options": [
+                {
+                  "label": "Rejected Products",
+                  "value": "rejected"
+                },
+                {
+                  "label": "Approved Only",
+                  "value": "approved"
+                }
+              ]
+            },
+            {
+              "name": "discount_pct",
+              "label": "Discount %",
+              "type": "number",
+              "column": {
+                "md": 3
+              },
+              "defaultValue": 0
+            },
+            {
+              "name": "peppol_id",
+              "label": "Peppol ID",
+              "type": "text",
+              "column": {
+                "md": 3
+              }
+            },
+            {
+              "name": "status",
+              "label": "Status",
+              "type": "select",
+              "column": {
+                "md": 12
+              },
+              "options": [
+                {
+                  "label": "Active",
+                  "value": "active"
+                },
+                {
+                  "label": "Inactive",
+                  "value": "inactive"
+                }
+              ]
+            },
+            {
+              "name": "notes",
+              "label": "Notes",
+              "type": "textarea",
+              "column": {
+                "md": 12
+              }
+            }
+          ]
         },
         {
-          "name": "email",
-          "componentType": "TextInput",
-          "label": "Email"
+          "name": "b2b_settings_tab",
+          "label": "B2B Settings",
+          "type": "group",
+          "column": {
+            "md": 12
+          },
+          "inputs": [
+            {
+              "name": "price_tier_id",
+              "label": "Price Tier",
+              "type": "dynamic-select",
+              "column": {
+                "md": 6
+              },
+              "config": {
+                "endpoint": "price-tier",
+                "bindLabel": "name",
+                "bindValue": "id"
+              }
+            },
+            {
+              "name": "sale_status",
+              "label": "New Sale Status",
+              "type": "select",
+              "column": {
+                "md": 6
+              },
+              "options": [
+                {
+                  "label": "Pending",
+                  "value": "pending"
+                }
+              ]
+            },
+            {
+              "name": "delivery_type",
+              "label": "Default Delivery Type",
+              "type": "select",
+              "column": {
+                "md": 6
+              },
+              "options": [
+                {
+                  "label": "Delivery",
+                  "value": "delivery"
+                }
+              ]
+            },
+            {
+              "name": "payment_mode",
+              "label": "Payment Mode",
+              "type": "select",
+              "column": {
+                "md": 6
+              },
+              "options": []
+            },
+            {
+              "name": "credit_term_id",
+              "label": "Credit Term",
+              "type": "dynamic-select",
+              "column": {
+                "md": 6
+              },
+              "config": {
+                "endpoint": "credit-terms",
+                "bindLabel": "name",
+                "bindValue": "id"
+              }
+            },
+            {
+              "name": "sales_person_id",
+              "label": "Sales Person",
+              "type": "dynamic-select",
+              "column": {
+                "md": 6
+              },
+              "config": {
+                "endpoint": "user",
+                "bindLabel": "name",
+                "bindValue": "id"
+              }
+            },
+            {
+              "name": "max_credit",
+              "label": "Max Credit Limit",
+              "type": "number",
+              "column": {
+                "md": 6
+              },
+              "defaultValue": 0
+            },
+            {
+              "name": "min_order",
+              "label": "Min Order Amount",
+              "type": "number",
+              "column": {
+                "md": 6
+              },
+              "defaultValue": 0
+            },
+            {
+              "name": "max_order",
+              "label": "Max Order Amount",
+              "type": "number",
+              "column": {
+                "md": 6
+              },
+              "defaultValue": 0
+            },
+            {
+              "name": "free_delivery_min",
+              "label": "Min Order Amount For Free Delivery",
+              "type": "number",
+              "column": {
+                "md": 6
+              },
+              "defaultValue": 100
+            },
+            {
+              "name": "delivery_charge",
+              "label": "Default Delivery Charges",
+              "type": "number",
+              "column": {
+                "md": 6
+              },
+              "defaultValue": 10
+            },
+            {
+              "name": "outstanding",
+              "label": "Outstanding Amount",
+              "type": "number",
+              "column": {
+                "md": 6
+              },
+              "disabled": true,
+              "defaultValue": 0
+            },
+            {
+              "name": "tax_enabled",
+              "label": "Tax Enabled?",
+              "type": "switch",
+              "column": {
+                "md": 4
+              },
+              "defaultValue": true
+            },
+            {
+              "name": "tax_inclusive",
+              "label": "Tax Inclusive?",
+              "type": "switch",
+              "column": {
+                "md": 4
+              },
+              "defaultValue": false
+            },
+            {
+              "name": "tax_code_id",
+              "label": "Tax Code",
+              "type": "dynamic-select",
+              "column": {
+                "md": 4
+              },
+              "config": {
+                "endpoint": "tax-code",
+                "bindLabel": "name",
+                "bindValue": "id"
+              }
+            },
+            {
+              "name": "allow_onhold_order",
+              "label": "Allow Customers To Create New Order When Credit Onhold?",
+              "type": "switch",
+              "column": {
+                "md": 4
+              }
+            },
+            {
+              "name": "put_onhold",
+              "label": "Put On Credit Hold?",
+              "type": "switch",
+              "column": {
+                "md": 4
+              }
+            },
+            {
+              "name": "allow_backorder",
+              "label": "Allow Backorders?",
+              "type": "switch",
+              "column": {
+                "md": 4
+              },
+              "defaultValue": true
+            },
+            {
+              "name": "show_qty",
+              "label": "Show Available Qty?",
+              "type": "switch",
+              "column": {
+                "md": 4
+              }
+            },
+            {
+              "name": "show_image",
+              "label": "Show Product Image?",
+              "type": "switch",
+              "column": {
+                "md": 4
+              },
+              "defaultValue": true
+            },
+            {
+              "name": "show_tax",
+              "label": "Show Tax?",
+              "type": "switch",
+              "column": {
+                "md": 4
+              },
+              "defaultValue": true
+            },
+            {
+              "name": "show_categories",
+              "label": "Show Categories",
+              "type": "switch",
+              "column": {
+                "md": 4
+              },
+              "defaultValue": true
+            },
+            {
+              "name": "allow_online_pay",
+              "label": "Allow Online Payments?",
+              "type": "switch",
+              "column": {
+                "md": 4
+              }
+            },
+            {
+              "name": "show_out_of_stock",
+              "label": "Show Out of Stock Items?",
+              "type": "switch",
+              "column": {
+                "md": 4
+              }
+            },
+            {
+              "name": "show_min_qty",
+              "label": "Show Minimum Order Qty For Products?",
+              "type": "switch",
+              "column": {
+                "md": 4
+              }
+            }
+          ]
         },
         {
-          "name": "loyalty_points",
-          "componentType": "TextInput",
-          "default": "0",
-          "label": "Loyalty Points"
+          "name": "addresses_tab",
+          "label": "Addresses",
+          "type": "group",
+          "column": {
+            "md": 12
+          },
+          "inputs": [
+            {
+              "name": "addresses",
+              "label": "Customer Addresses",
+              "type": "many-to-many",
+              "column": {
+                "md": 12
+              },
+              "config": {
+                "bindValue": "customer_id",
+                "title": "Address",
+                "entity": "address",
+                "className": "flex-1",
+                "searchParameter": { "customer_id": "$id" },
+                "emptyMessage": "Please select an address"
+              }
+            }
+          ]
+        },
+        {
+          "name": "contacts_tab",
+          "label": "Contacts",
+          "type": "group",
+          "column": {
+            "md": 12
+          },
+          "inputs": [
+            {
+              "name": "contacts",
+              "label": "Customer Contacts",
+              "type": "many-to-many",
+              "column": {
+                "md": 12
+              },
+              "config": {
+                "bindValue": "customer_id",
+                "title": "Contact",
+                "entity": "contact",
+                "className": "flex-1",
+                "searchParameter": { "customer_id": "$id" },
+                "emptyMessage": "Please select a contact"
+              }
+            }
+          ]
+        },
+        {
+          "name": "branches_tab",
+          "label": "Branches",
+          "type": "group",
+          "column": {
+            "md": 12
+          },
+          "inputs": [
+            {
+              "name": "branches",
+              "label": "Customer Branches",
+              "type": "many-to-many",
+              "column": {
+                "md": 12
+              },
+              "config": {
+                "bindValue": "customer_id",
+                "title": "Branch",
+                "entity": "branch",
+                "className": "flex-1",
+                "searchParameter": { "customer_id": "$id" },
+                "emptyMessage": "Please select a branch"
+              }
+            }
+          ]
+        },
+        {
+          "name": "custom_prices_tab",
+          "label": "Custom Product Prices",
+          "type": "group",
+          "column": {
+            "md": 12
+          },
+          "inputs": [
+            {
+              "name": "custom_product_prices",
+              "label": "Custom Product Prices",
+              "type": "many-to-many",
+              "column": {
+                "md": 12
+              },
+              "config": {
+                "bindValue": "customer_id",
+                "title": "Custom Product Prices",
+                "entity": "product",
+                "className": "flex-1",
+                "searchParameter": { "customer_id": "$id" },
+                "emptyMessage": "Please select custom product prices"
+              }
+            }
+          ]
+        },
+        {
+          "name": "discounts_tab",
+          "label": "Discounts",
+          "type": "group",
+          "column": {
+            "md": 12
+          },
+          "inputs": [
+            {
+              "name": "discounts",
+              "label": "Discounts",
+              "type": "many-to-many",
+              "column": {
+                "md": 12
+              },
+              "config": {
+                "bindValue": "customer_id",
+                "title": "Discounts",
+                "entity": "discount",
+                "className": "flex-1",
+                "searchParameter": { "customer_id": "$id" },
+                "emptyMessage": "Please select a discount"
+              }
+            }
+          ]
+        },
+        {
+          "name": "attachments_tab",
+          "label": "Attachments",
+          "type": "group",
+          "column": {
+            "md": 12
+          },
+          "inputs": [
+            {
+              "name": "attachments",
+              "label": "Upload Images or PDFs",
+              "type": "file-upload",
+              "column": {
+                "md": 12
+              }
+            }
+          ]
         }
       ]
     }

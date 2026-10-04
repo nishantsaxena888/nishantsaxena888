@@ -1,0 +1,74 @@
+{
+  "meta": {
+    "title": "Address Management",
+    "description": "Manage user billing and shipping addresses."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "label": "Street", "key": "street", "type": "text" },
+        { "label": "City", "key": "city", "type": "text" },
+        { "label": "Type", "key": "address_type", "type": "badge" },
+        { "label": "Default", "key": "is_default", "type": "boolean" },
+        { "label": "Status", "key": "status", "type": "status" }
+      ]
+    },
+    "form": {
+      "title": "Address Details",
+      "inputs": [
+        {
+          "name": "street",
+          "label": "Street Address",
+          "type": "text",
+          "placeholder": "123 Business Way",
+          "column": { "md": 12 },
+          "validation": [{ "rule": "required" }]
+        },
+        {
+          "name": "city",
+          "label": "City",
+          "type": "text",
+          "placeholder": "New York",
+          "column": { "md": 4 },
+          "validation": [{ "rule": "required" }]
+        },
+        {
+          "name": "state",
+          "label": "State/Province",
+          "type": "text",
+          "placeholder": "NY",
+          "column": { "md": 4 },
+          "validation": [{ "rule": "required" }]
+        },
+        {
+          "name": "zip_code",
+          "label": "ZIP / Postal Code",
+          "type": "text",
+          "placeholder": "10001",
+          "column": { "md": 4 },
+          "validation": [{ "rule": "required" }]
+        },
+        {
+          "name": "address_type_id",
+          "label": "Address Type",
+          "type": "dynamic-select",
+          "column": { "md": 6 },
+          "config": {
+            "bindValue": "id",
+            "bindLabel": "name",
+            "endpoint": "address-type",
+            "method": "GET"
+          }
+        },
+        {
+          "name": "is_default",
+          "label": "Set as Default",
+          "type": "switch",
+          "column": { "md": 6 },
+          "defaultValue": false
+        },
+        { "name": "status", "label": "Status", "type": "select", "defaultValue": "active", "column": { "md": 12 }, "options": [ { "label": "Active", "value": "active" }, { "label": "Inactive", "value": "inactive" } ] }
+      ]
+    }
+  }
+}

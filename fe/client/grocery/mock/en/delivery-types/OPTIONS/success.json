@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "title": "Delivery Types",
+    "description": "Manage types of delivery services."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "id", "label": "ID", "type": "text" },
+        { "key": "name", "label": "Type Name", "type": "text" },
+        { "key": "status", "label": "Status", "type": "status", "options": { "active": { "label": "Active", "variant": "success" }, "inactive": { "label": "Inactive", "variant": "destructive" } } }
+      ]
+    },
+    "form": {
+      "id": "delivery-types-form",
+      "title": "Delivery Type Details",
+      "description": "Enter the delivery type information.",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        { "name": "name", "label": "Type Name", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Type Name is required" }] },
+        { "name": "status", "label": "Status", "type": "select", "defaultValue": "active", "column": { "md": 6 }, "options": [ { "label": "Active", "value": "active" }, { "label": "Inactive", "value": "inactive" } ] }
+      ]
+    }
+  }
+}

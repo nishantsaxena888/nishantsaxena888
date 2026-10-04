@@ -1,0 +1,7 @@
+{
+  "data": [
+    { "id": 1, "name": "Apple", "description": "Tech giant", "status": "active" },
+    { "id": 2, "name": "Samsung", "description": "Electronics", "status": "active" },
+    { "id": 3, "name": "Nike", "description": "Sportswear", "status": "active" }
+  ]
+}

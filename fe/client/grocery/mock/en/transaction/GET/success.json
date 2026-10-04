@@ -1,0 +1,36 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "transaction_id": "TXN_982347102",
+      "order_number": "ORD-2024-001",
+      "amount": "₹12,450.00",
+      "method": "UPI",
+      "status": "success",
+      "created_at": "2024-04-10 14:30"
+    },
+    {
+      "id": 2,
+      "transaction_id": "TXN_982347103",
+      "order_number": "ORD-2024-003",
+      "amount": "₹45,000.00",
+      "method": "Bank Transfer",
+      "status": "pending",
+      "created_at": "2024-04-15 11:20"
+    },
+    {
+      "id": 3,
+      "transaction_id": "TXN_982347104",
+      "order_number": "ORD-2024-005",
+      "amount": "₹18,900.00",
+      "method": "Credit Card",
+      "status": "success",
+      "created_at": "2024-04-20 09:45"
+    }
+  ],
+  "config": {
+    "total": 3,
+    "page": 1,
+    "itemPerPage": 10
+  }
+}

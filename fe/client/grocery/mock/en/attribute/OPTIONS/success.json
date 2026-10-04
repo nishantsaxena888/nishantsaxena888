@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "title": "Attribute Management",
+    "description": "Define and manage product attributes like Color, Size, etc."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "id", "label": "ID", "type": "text" },
+        { "key": "name", "label": "Attribute Name", "type": "text" },
+        { "key": "status", "label": "Status", "type": "status" }
+      ]
+    },
+    "form": {
+      "id": "attribute-form",
+      "title": "Attribute Details",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        { "name": "name", "label": "Attribute Name", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required" }] },
+        { "name": "status", "label": "Status", "type": "select", "defaultValue": "active", "column": { "md": 6 }, "options": [ { "label": "Active", "value": "active" }, { "label": "Inactive", "value": "inactive" } ] },
+        { "name": "description", "label": "Description", "type": "textarea", "column": { "md": 12 } }
+      ]
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "meta": {
+    "title": "Account Login",
+    "description": "Securely access your account using your credentials."
+  },
+  "name": "login",
+  "config": [
+    {
+      "id": "login-module",
+      "type": "login-card",
+      "properties": {
+        "level": "base",
+        "type": "static"
+      },
+      "content": {
+        "title": "Welcome Back",
+        "description": "Please enter your details to sign in.",
+        "form": {
+          "title": "Sign In",
+          "description": "Access your portal",
+          "formType": "simple",
+          "labels": {
+            "submit": "Sign In",
+            "cancel": "Forgot Password?",
+            "reset": "Create Account"
+          },
+          "submit_included": true,
+          "inputs": [
+            {
+              "name": "email",
+              "label": "Email Address",
+              "type": "email",
+              "placeholder": "you@example.com",
+              "column": { "md": 12 },
+              "validation": [
+                { "rule": "required", "message": "Email address is required" },
+                { "rule": "email", "message": "Please enter a valid email" }
+              ]
+            },
+            {
+              "name": "password",
+              "label": "Password",
+              "type": "password",
+              "placeholder": "••••••••",
+              "column": { "md": 12 },
+              "validation": [
+                { "rule": "required", "message": "Password is required" },
+                {
+                  "rule": "minLength",
+                  "value": 8,
+                  "message": "Password must be at least 8 characters"
+                }
+              ]
+            },
+            {
+              "name": "login_btn",
+              "label": "",
+              "type": "submit",
+              "isNoneInput": true,
+              "button_label": "Sign In",
+              "column": { "md": 12 }
+            },
+            {
+              "name": "link",
+              "label": "",
+              "type": "typography",
+              "isNoneInput": true,
+              "content": "New user? {{Sign up||l||/register}} {{||br}} Forgot your password? {{Reset password||l||/forgot-password}}",
+              "column": { "md": 12 }
+            }
+          ]
+        }
+      },
+      "children": []
+    }
+  ]
+}

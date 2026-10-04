@@ -1,0 +1,31 @@
+{
+  "meta": {
+    "title": "Login",
+    "description": "Home Description"
+  },
+  "config": [
+    {
+      "id": "login-layout-1",
+      "type": "login-layout-1",
+      "properties": {
+        "level": "base",
+        "type": "static"
+      },
+      "content": {
+        "name": "Inventure",
+        "imageURL": "/clients/grocery/default.webp",
+        "config": {
+          "endpoint": "login",
+          "type": "login-card",
+          "action": {
+            "type": "redirect",
+            "navigation": "/admin/overview",
+            "navigation_type": "navigate",
+            "login": true
+          }
+        }
+      },
+      "children": []
+    }
+  ]
+}

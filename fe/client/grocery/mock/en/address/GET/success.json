@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "street": "742 Evergreen Terrace",
+      "city": "Springfield",
+      "state": "IL",
+      "zip_code": "62704",
+      "address_type": "billing_address",
+      "is_default": true
+    },
+    {
+      "id": 2,
+      "street": "123 Fake St",
+      "city": "Springfield",
+      "state": "IL",
+      "zip_code": "62705",
+      "address_type": "shipping_address",
+      "is_default": false
+    }
+  ]
+}

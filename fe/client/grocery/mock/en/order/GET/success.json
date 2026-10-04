@@ -1,25 +1,31 @@
 {
-  "items": [
+  "data": [
     {
       "id": 1,
-      "customer": "Mina Park",
-      "total": 15.38,
-      "status": "packed"
+      "order_number": "ORD-2024-001",
+      "customer_id": 1,
+      "customer_name": "John Doe",
+      "order_date": "2024-04-10",
+      "total_amount": "$1,450.00",
+      "payment_status": "paid",
+      "status": "delivered",
+      "payment_method": "card"
     },
     {
       "id": 2,
-      "customer": "Theo Alvarez",
-      "total": 42.1,
-      "status": "pending"
-    },
-    {
-      "id": 3,
-      "customer": "Mina Park",
-      "total": 8.99,
-      "status": "delivered"
+      "order_number": "ORD-2024-002",
+      "customer_id": 2,
+      "customer_name": "Jane Smith",
+      "order_date": "2024-04-12",
+      "total_amount": "$520.00",
+      "payment_status": "pending",
+      "status": "processing",
+      "payment_method": "cash"
     }
   ],
-  "page": 1,
-  "size": 3,
-  "total": 3
+  "config": {
+    "total": 2,
+    "page": 1,
+    "itemPerPage": 10
+  }
 }

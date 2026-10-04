@@ -1,0 +1,162 @@
+{
+  "meta": {
+    "title": "Supplier Management",
+    "description": "Maintain supplier profiles and procurement settings."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "id", "label": "ID", "type": "text" },
+        { "key": "name", "label": "Name", "type": "text" },
+        { "key": "supplier_code", "label": "Code", "type": "text" },
+        { "key": "status", "label": "Status", "type": "status" }
+      ]
+    },
+    "form": {
+      "id": "supplier-form",
+      "title": "Supplier Details",
+      "formType": "tabs",
+      "layout": "default",
+      "columns": 3,
+      "inputs": [
+        {
+          "name": "general_info",
+          "label": "General Information",
+          "type": "group",
+          "column": { "md": 12 },
+          "inputs": [
+            { 
+              "name": "supplier_type", 
+              "label": "Supplier Type", 
+              "type": "select", 
+              "column": { "md": 4 }, 
+              "options": [
+                { "label": "External", "value": "External" },
+                { "label": "Internal", "value": "Internal" }
+              ],
+              "validation": [{ "rule": "required", "message": "Supplier Type is required" }]
+            },
+            { "name": "supplier_uen", "label": "Supplier UEN", "type": "text", "column": { "md": 4 }, "placeholder": "Supplier UEN" },
+            { "name": "supplier_code", "label": "Supplier Code", "type": "text", "column": { "md": 4 }, "placeholder": "Supplier Code" },
+            { "name": "name", "label": "Name", "type": "text", "column": { "md": 4 }, "placeholder": "Name", "validation": [{ "rule": "required", "message": "Name is required" }] },
+            { 
+              "name": "currency_id", 
+              "label": "Currency", 
+              "type": "dynamic-select", 
+              "column": { "md": 4 },
+              "config": { "endpoint": "currency", "bindLabel": "currency_code", "bindValue": "id" },
+              "validation": [{ "rule": "required", "message": "Currency is required" }]
+            },
+            { 
+              "name": "payment_term_id", 
+              "label": "Payment Term", 
+              "type": "dynamic-select", 
+              "column": { "md": 4 },
+              "config": { "endpoint": "credit-terms", "bindLabel": "name", "bindValue": "id" },
+              "validation": [{ "rule": "required", "message": "Payment Term is required" }]
+            },
+            { 
+              "name": "default_carrier_id", 
+              "label": "Default Carrier", 
+              "type": "dynamic-select", 
+              "column": { "md": 4 },
+              "config": { "endpoint": "carriers", "bindLabel": "name", "bindValue": "id" }
+            },
+            { "name": "discount", "label": "Discount (%)", "type": "number", "column": { "md": 4 }, "defaultValue": 0 },
+            { 
+              "name": "shipping_terms", 
+              "label": "Shipping Terms", 
+              "type": "select", 
+              "column": { "md": 4 },
+              "options": [
+                { "label": "FOB", "value": "FOB" },
+                { "label": "CIF", "value": "CIF" },
+                { "label": "EXW", "value": "EXW" }
+              ]
+            },
+            { "name": "lead_days", "label": "Lead Days", "type": "number", "column": { "md": 4 }, "defaultValue": 0 },
+            { 
+              "name": "status", 
+              "label": "Status", 
+              "type": "select", 
+              "defaultValue": "active", 
+              "column": { "md": 4 },
+              "options": [
+                { "label": "Active", "value": "active" },
+                { "label": "Inactive", "value": "inactive" }
+              ]
+            },
+            { "name": "delivery_cutoff_time", "label": "Delivery Cut off time", "type": "time", "column": { "md": 4 }, "placeholder": "18:00" },
+            { 
+              "name": "additional_attributes_set", 
+              "label": "Additional attributes Set", 
+              "type": "select", 
+              "column": { "md": 4 },
+              "options": [
+                { "label": "Set A", "value": "Set A" },
+                { "label": "Set B", "value": "Set B" }
+              ]
+            },
+            { "name": "tax_enabled", "label": "Tax Enabled?", "type": "switch", "column": { "md": 2 }, "defaultValue": true },
+            { "name": "tax_inclusive", "label": "Tax Inclusive?", "type": "switch", "column": { "md": 2 }, "defaultValue": false },
+            { 
+              "name": "tax_code_id", 
+              "label": "Tax Code", 
+              "type": "dynamic-select", 
+              "column": { "md": 4 },
+              "config": { "endpoint": "tax-code", "bindLabel": "name", "bindValue": "id" },
+              "validation": [{ "rule": "required", "message": "Tax Code is required" }]
+            },
+            { "name": "tax_number", "label": "Tax Number", "type": "text", "column": { "md": 4 }, "placeholder": "Tax Number" },
+            { "name": "comments", "label": "Comments", "type": "textarea", "column": { "md": 8 }, "placeholder": "Enter note here..." },
+            { "name": "peppol_id", "label": "Peppol id", "type": "text", "column": { "md": 4 }, "placeholder": "Peppol id" }
+          ]
+        },
+        {
+          "name": "addresses_tab",
+          "label": "Addresses",
+          "type": "group",
+          "column": { "md": 12 },
+          "inputs": [
+            {
+              "name": "address",
+              "label": "Supplier Addresses",
+              "type": "many-to-many",
+              "column": { "md": 12 },
+              "config": {
+                "bindValue": "supplier_id",
+                "title": "Supplier Addresses",
+                "entity": "address",
+                "className": "flex-1",
+                "searchParameter": { "supplier_id": "$id" },
+                "emptyMessage": "Please select a supplier address"
+              }
+            }
+          ]
+        },
+        {
+          "name": "contacts_tab",
+          "label": "Contacts",
+          "type": "group",
+          "column": { "md": 12 },
+          "inputs": [
+            {
+              "name": "contact",
+              "label": "Supplier Contacts",
+              "type": "many-to-many",
+              "column": { "md": 12 },
+              "config": {
+                "bindValue": "supplier_id",
+                "title": "Supplier Contacts",
+                "entity": "contact",
+                "className": "flex-1",
+                "searchParameter": { "supplier_id": "$id" },
+                "emptyMessage": "Please select a supplier contact"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

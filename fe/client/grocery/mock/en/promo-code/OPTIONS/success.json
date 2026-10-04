@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "title": "Promo Code Management",
+    "description": "Configure and manage storefront promo codes and conditions."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "code", "label": "Promo Code", "type": "text" },
+        { "key": "description", "label": "Description", "type": "text" },
+        { "key": "type", "label": "Type", "type": "text" },
+        { "key": "value", "label": "Value", "type": "text" }
+      ]
+    },
+    "form": {
+      "id": "promo-code-form",
+      "title": "Promo Code Details",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        { "name": "code", "label": "Promo Code", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required" }] },
+        { "name": "description", "label": "Description", "type": "text", "column": { "md": 6 } },
+        { "name": "type", "label": "Type", "type": "select", "defaultValue": "percent", "column": { "md": 6 }, "options": [
+          { "label": "Percent Discount", "value": "percent" },
+          { "label": "Fixed Discount", "value": "fixed" },
+          { "label": "Free Shipping", "value": "free_shipping" }
+        ] },
+        { "name": "value", "label": "Discount Value", "type": "number", "column": { "md": 6 }, "validation": [{ "rule": "required" }] }
+      ]
+    }
+  }
+}

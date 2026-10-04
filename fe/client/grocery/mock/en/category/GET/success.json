@@ -1,27 +1,12 @@
 {
-  "items": [
-    {
-      "id": 1,
-      "name": "Produce",
-      "code": "PROD"
-    },
-    {
-      "id": 2,
-      "name": "Dairy",
-      "code": "DAIR"
-    },
-    {
-      "id": 3,
-      "name": "Bakery",
-      "code": "BAKE"
-    },
-    {
-      "id": 4,
-      "name": "Drinks",
-      "code": "DRNK"
-    }
-  ],
-  "page": 1,
-  "size": 4,
-  "total": 4
+  "data": [
+    { "id": 1, "name": "Beverages", "sequence": 1, "status": "active" },
+    { "id": 2, "name": "Snacks", "sequence": 2, "status": "active" },
+    { "id": 3, "name": "Dairy & Eggs", "sequence": 3, "status": "active" },
+    { "id": 4, "name": "Fresh Produce", "sequence": 4, "status": "active" },
+    { "id": 5, "name": "Meat & Seafood", "sequence": 5, "status": "active" },
+    { "id": 6, "name": "Bakery", "sequence": 6, "status": "active" },
+    { "id": 7, "name": "Pantry", "sequence": 7, "status": "active" },
+    { "id": 8, "name": "Frozen Foods", "sequence": 8, "status": "active" }
+  ]
 }

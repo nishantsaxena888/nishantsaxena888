@@ -1,0 +1,92 @@
+{
+  "meta": {
+    "title": "Bin Management",
+    "description": "Manage bins within warehouses."
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "id", "label": "ID", "type": "text" },
+        { "key": "name", "label": "Bin Name", "type": "text" },
+        { "key": "warehouse_id", "label": "Warehouse", "type": "text" },
+        { "key": "status", "label": "Status", "type": "status" }
+      ]
+    },
+    "form": {
+      "id": "bin-form",
+      "title": "Bin Details",
+      "description": "Enter the bin information.",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        { "name": "name", "label": "Bin Name", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required", "message": "Bin Name is required" }] },
+        { "name": "description", "label": "Description", "type": "textarea", "column": { "md": 6 } },
+        {
+          "name": "warehouse_id",
+          "label": "Warehouse",
+          "type": "dynamic-select",
+          "column": { "md": 6 },
+          "config": {
+            "bindValue": "id",
+            "bindLabel": "name",
+            "endpoint": "warehouse",
+            "method": "GET"
+          },
+          "validation": [{ "rule": "required", "message": "Warehouse is required" }]
+        },
+        {
+          "name": "warehouse_type_id",
+          "label": "Warehouse Type",
+          "type": "dynamic-select",
+          "column": { "md": 6 },
+          "config": {
+            "bindValue": "id",
+            "bindLabel": "name",
+            "endpoint": "warehouse-type",
+            "method": "GET"
+          }
+        },
+        {
+          "name": "special_equipment_type_id",
+          "label": "Special Equipment Type",
+          "type": "dynamic-select",
+          "column": { "md": 6 },
+          "config": {
+            "bindValue": "id",
+            "bindLabel": "name",
+            "endpoint": "special-equipments",
+            "method": "GET"
+          }
+        },
+        { "name": "bin_ranking", "label": "Bin Ranking", "type": "number", "column": { "md": 6 } },
+        { "name": "maximum_cubeage", "label": "Maximum Cubeage", "type": "number", "column": { "md": 4 } },
+        { "name": "maximum_weight", "label": "Maximum Weight", "type": "number", "column": { "md": 4 } },
+        {
+          "name": "weight_uom_id",
+          "label": "Weight UOM",
+          "type": "dynamic-select",
+          "column": { "md": 4 },
+          "config": {
+            "bindValue": "id",
+            "bindLabel": "short_name",
+            "endpoint": "uom",
+            "method": "GET"
+          }
+        },
+        { 
+          "name": "block_movement", 
+          "label": "Block Movement", 
+          "type": "select", 
+          "column": { "md": 6 },
+          "options": [
+            { "label": "Inbound", "value": "Inbound" },
+            { "label": "Outbound", "value": "Outbound" },
+            { "label": "None", "value": "None" }
+          ]
+        },
+        { "name": "cross_dock_bin", "label": "Cross Dock Bin", "type": "switch", "defaultValue": false, "column": { "md": 6 } },
+        { "name": "status", "label": "Status", "type": "select", "defaultValue": "active", "column": { "md": 12 }, "options": [ { "label": "Active", "value": "active" }, { "label": "Inactive", "value": "inactive" } ] }
+      ]
+    }
+  }
+}
