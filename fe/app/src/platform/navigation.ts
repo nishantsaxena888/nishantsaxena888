@@ -1,17 +1,19 @@
-// Platform navigation — components call useNav() / <Anchor>, never the
-// router directly. The web impl binds react-router inside the provider;
-// an RN port binds react-navigation with the same surface:
+// Platform navigation — components call useNav() / <Anchor> / the hooks
+// below, never the router directly. The web impl binds react-router; an
+// RN port binds react-navigation with the same surface:
 //
-//   useNav()        → { navigate, goBack }   (react-router / react-navigation)
-//   <Anchor to>     → <Link> / <Pressable onPress>
+//   useNav()         → { navigate, goBack }
+//   useRouteParams() → route params   (react-router :params / RN route.params)
+//   usePath()        → current path   (location.pathname / RN route name)
+//   <Anchor to>      → <Link> / <Pressable onPress>
 //
 // navigate() outside components goes through the registered fallback so
 // non-hook code (thunks, utils) can navigate too once the app registers.
 import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 export interface Nav {
-  navigate: (to: string) => void;
+  navigate: (to: string, opts?: { replace?: boolean }) => void;
   goBack: () => void;
 }
 
@@ -20,13 +22,27 @@ export interface Nav {
 export function useNav(): Nav {
   const navigate = useNavigate();
   return {
-    navigate: useCallback((to: string) => navigate(to), [navigate]),
+    navigate: useCallback(
+      (to: string, opts?: { replace?: boolean }) => navigate(to, opts),
+      [navigate],
+    ),
     goBack: useCallback(() => navigate(-1), [navigate]),
   };
 }
 
-// Non-hook seam — registered once by the app shell (see ApiProvider wiring
-// if needed); RN registers its navigationRef.navigate instead.
+// Route params (:slug etc). RN port: useRoute().params.
+export function useRouteParams<T extends Record<string, string | undefined> =
+  Record<string, string | undefined>>(): T {
+  return useParams() as T;
+}
+
+// Current location path. RN port: current route name via useRoute().
+export function usePath(): string {
+  return useLocation().pathname;
+}
+
+// Non-hook seam — registered once by the app shell; RN registers its
+// navigationRef.navigate instead.
 let imperativeNav: Nav["navigate"] | null = null;
 export const registerNavigator = (fn: Nav["navigate"]) => {
   imperativeNav = fn;

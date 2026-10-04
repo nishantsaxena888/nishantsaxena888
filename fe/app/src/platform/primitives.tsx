@@ -88,7 +88,12 @@ export const Anchor = ({
   to,
   external,
   ...rest
-}: Base & { to: string; external?: boolean; onPress?: () => void }) =>
+}: Base & {
+  to: string;
+  external?: boolean;
+  onPress?: () => void;
+  onMouseEnter?: () => void;
+}) =>
   external ? (
     <a href={to} target="_blank" rel="noopener noreferrer" {...rest} />
   ) : (

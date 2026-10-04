@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNav } from "@/platform/navigation";
 import { DashboardRenderer } from "@/components/shared/dashboard-renderer";
 import { storage } from "@/platform/storage";
 
 const Protected = ({ config }: { config: any }) => {
-  const navigate = useNavigate();
+  const { navigate } = useNav();
   const token =
     typeof window !== "undefined" ? storage.getItem("token") : null;
 

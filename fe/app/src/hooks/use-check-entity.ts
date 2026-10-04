@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useRouteParams } from "@/platform/navigation";
 
 type MenuType = Record<string, unknown>;
 type MenuTypeType = {
@@ -6,7 +6,7 @@ type MenuTypeType = {
   isHome?: boolean;
 };
 export const useCheckEntity = ({ menu, isHome }: MenuTypeType) => {
-  const params = useParams();
+  const params = useRouteParams();
   console.log(params, menu, isHome);
   return {};
 };

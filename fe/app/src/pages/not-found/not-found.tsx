@@ -1,9 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Anchor, Pressable } from "@/platform/primitives";
+import { useNav } from "@/platform/navigation";
 import { Button } from "@/components/ui/button";
 import { Home, ArrowLeft, Ghost } from "lucide-react";
 
 export const NotFound = () => {
+  const { goBack } = useNav();
   return (
     <div className="min-h-svh w-full flex items-center justify-center bg-background relative overflow-hidden">
       {/* Dynamic Background Elements */}
@@ -43,20 +45,20 @@ export const NotFound = () => {
             size="lg"
             className="h-14 px-8 rounded-2xl font-bold gap-2 border-border/60 hover:bg-muted/50 transition-all active:scale-95"
           >
-            <Link to={-1 as any}>
+            <Pressable onPress={goBack}>
               <ArrowLeft className="h-4 w-4" />
               Go Back
-            </Link>
+            </Pressable>
           </Button>
           <Button
             asChild
             size="lg"
             className="h-14 px-8 rounded-2xl font-bold gap-2 shadow-xl shadow-primary/20 hover:scale-105 transition-all active:scale-95"
           >
-            <Link to="/">
+            <Anchor to="/">
               <Home className="h-4 w-4" />
               Return Home
-            </Link>
+            </Anchor>
           </Button>
         </div>
 

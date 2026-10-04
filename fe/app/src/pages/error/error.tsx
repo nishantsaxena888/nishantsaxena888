@@ -1,4 +1,6 @@
-import { useRouteError, useNavigate } from "react-router-dom";
+import { useRouteError } from "react-router-dom";
+import { useNav } from "@/platform/navigation";
+import { reloadApp } from "@/platform/host";
 import { motion, AnimatePresence } from "framer-motion";
 import { AlertCircle, ArrowLeft, RefreshCw, ChevronDown, ChevronUp, Terminal } from "lucide-react";
 import { useState } from "react";
@@ -6,7 +8,7 @@ import { Button } from "@/components/ui/button";
 
 export const Error = () => {
     const error: any = useRouteError();
-    const navigate = useNavigate();
+    const { navigate } = useNav();
     const [showDetails, setShowDetails] = useState(false);
 
     const errorMessage = error?.statusText || error?.message || "An unexpected error occurred";
@@ -55,7 +57,7 @@ export const Error = () => {
                         </Button>
                         <Button 
                             variant="outline"
-                            onClick={() => window.location.reload()}
+                            onClick={() => reloadApp()}
                             className="h-12 px-8 rounded-full font-bold border-white/10 hover:bg-white/5 transition-all text-white/80 flex items-center gap-2"
                         >
                             <RefreshCw className="w-4 h-4" />

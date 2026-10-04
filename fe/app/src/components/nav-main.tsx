@@ -1,4 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
+import { Anchor } from "@/platform/primitives";
+import { usePath } from "@/platform/navigation";
 import { ChevronRight } from "lucide-react";
 import {
   Collapsible,
@@ -43,7 +44,7 @@ export function NavMain({ items }: { items: NavItem[] }) {
 }
 
 function NavMenuItem({ item, depth = 0 }: { item: NavItem; depth?: number }) {
-  const { pathname } = useLocation();
+  const pathname = usePath();
 
   const hasSubMenu = !!item.items?.length;
 
@@ -103,9 +104,9 @@ function NavMenuItem({ item, depth = 0 }: { item: NavItem; depth?: number }) {
               "data-[active=true]:text-menu-active-foreground",
             )}
           >
-            <Link to={item.url} onMouseEnter={() => prefetchEntity(item.entity)}>
+            <Anchor to={item.url} onMouseEnter={() => prefetchEntity(item.entity)}>
               {iconAndTitle}
-            </Link>
+            </Anchor>
           </SidebarMenuButton>
         )}
 
@@ -160,9 +161,9 @@ function NavMenuItem({ item, depth = 0 }: { item: NavItem; depth?: number }) {
           isActive={active}
           className={active ? "font-bold text-primary" : "font-normal"}
         >
-          <Link to={item.url} onMouseEnter={() => prefetchEntity(item.entity)}>
+          <Anchor to={item.url} onMouseEnter={() => prefetchEntity(item.entity)}>
             <span>{item.title}</span>
-          </Link>
+          </Anchor>
         </SidebarMenuSubButton>
       )}
 

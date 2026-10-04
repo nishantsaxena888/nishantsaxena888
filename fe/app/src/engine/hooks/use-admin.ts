@@ -1,13 +1,14 @@
 import { useState, useEffect, useCallback } from "react";
 import { jwtDecode } from "jwt-decode";
-import { useNavigate } from "react-router-dom";
+import { useNav } from "@/platform/navigation";
+import { emitAppEvent } from "@/platform/host";
 import { useConfigStore } from "@/store/use-config-store";
 import { storage } from "@/platform/storage";
 
 export const useAdmin = () => {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const { navigate } = useNav();
   const config = useConfigStore((state) => state.config);
 
   const logout = useCallback(() => {
@@ -15,7 +16,7 @@ export const useAdmin = () => {
     setUser(null);
     setLoading(false);
     // Role is back to the default — re-filter menus.
-    window.dispatchEvent(new Event("auth-change"));
+    emitAppEvent("auth-change");
 
     // Dynamic redirect from config
     const redirectPath = config?.admin?.logout_redirect || "/login";

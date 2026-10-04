@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNav } from "@/platform/navigation";
+import { emitAppEvent } from "@/platform/host";
 import {
   MapPin,
   Heart,
@@ -1181,7 +1182,7 @@ export function AddressManager({ onSelectAddress, selectedAddressId, mode = 'man
   const saveAddresses = (newAddresses: Address[]) => {
     storage.setItem('shippingAddresses', JSON.stringify(newAddresses));
     setAddresses(newAddresses);
-    window.dispatchEvent(new CustomEvent('addressesUpdated'));
+    emitAppEvent('addressesUpdated');
   };
 
   const handleAddAddress = (e: React.FormEvent) => {
@@ -1750,7 +1751,7 @@ export function MyAccountView({
 
 export function CustomerProfilePage({ content, properties: directProperties }: any) {
   const { user: loggedInUser, logout, loading: authLoading } = useAdmin();
-  const navigate = useNavigate();
+  const { navigate } = useNav();
   const [profileData, setProfileData] = useState<any>(null);
   const wishlist = useGenericState((state: any) => state.data["wishlist"] || EMPTY_ARRAY);
 

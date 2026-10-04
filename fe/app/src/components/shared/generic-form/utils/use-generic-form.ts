@@ -2,7 +2,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { useEntity } from "@/engine";
 import { useFormStyleStore } from "@/store/use-form-style";
-import { useNavigate } from "react-router-dom";
+import { useNav } from "@/platform/navigation";
 import { useConfigStore } from "@/store/use-config-store";
 import { storage } from "@/platform/storage";
 
@@ -68,7 +68,7 @@ const DEFAULT_AUTH_FORMS: Record<string, any> = {
 };
 
 export const useGenericForm = (props: any) => {
-  const router = useNavigate();
+  const { navigate } = useNav();
   const config = useConfigStore((state) => state.config);
   const { themeName, styles } = useFormStyleStore();
   const endpoint = props?.config?.endpoint || "login";
@@ -136,7 +136,7 @@ export const useGenericForm = (props: any) => {
         ) {
           redirectPath = "/admin/overview";
         }
-        router(redirectPath);
+        navigate(redirectPath);
         break;
       }
 

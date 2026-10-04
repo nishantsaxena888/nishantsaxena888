@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
 import { useConfigStore } from "@/store/use-config-store";
 import { storage } from "@/platform/storage";
+import { reloadApp } from "@/platform/host";
 
 export type LanguageCode = string;
 
@@ -83,7 +84,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         setCurrentLanguage(lang);
         if (typeof window !== 'undefined') {
             storage.setItem('language', lang.code);
-            window.location.reload();
+            reloadApp();
         }
     }, []);
 

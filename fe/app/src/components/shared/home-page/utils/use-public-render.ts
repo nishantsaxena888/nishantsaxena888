@@ -1,9 +1,9 @@
 import { apiClient } from "@/engine";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useRouteParams } from "@/platform/navigation";
 
 export const usePublicRender = ({ menu, currentPage }: any) => {
-  const param = useParams();
+  const param = useRouteParams();
   const currentMenu = Array.isArray(menu) ? menu.find((item: any) => item.url === currentPage) : undefined;
 
   const [data, setData] = useState<any>(undefined);

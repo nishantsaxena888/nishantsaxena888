@@ -5,6 +5,7 @@ import { toast } from "@/lib/toast";
 import { makeTr } from "./utils";
 import { storage } from "@/platform/storage";
 import { useNav } from "@/platform/navigation";
+import { emitAppEvent } from "@/platform/host";
 import { Anchor, Image, Pressable, Text, TextInput, View } from "@/platform/primitives";
 
 // Generic auth screen (def type "login-layout-1"). content.config drives
@@ -115,7 +116,7 @@ export const StorefrontAuthLayout = ({ content }: any) => {
       storage.setItem("token", token);
       // Role claim may have changed — AppProvider re-fetches configuration
       // and re-filters menus for the new role.
-      window.dispatchEvent(new Event("auth-change"));
+      emitAppEvent("auth-change");
     }
     if (action.navigation) navigate(action.navigation);
     else navigate("/");

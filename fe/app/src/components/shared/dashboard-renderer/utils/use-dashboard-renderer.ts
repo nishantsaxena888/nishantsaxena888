@@ -1,7 +1,7 @@
-import { useParams } from "react-router-dom";
+import { useRouteParams } from "@/platform/navigation";
 
 export const useDashboardRenderer = (config: any) => {
-  const { slug } = useParams<{ slug: string }>();
+  const { slug } = useRouteParams<{ slug: string }>();
 
   const flattenVisibleMenu = (data: any[]) => {
     const result: any[] = [];

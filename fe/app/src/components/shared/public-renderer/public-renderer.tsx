@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNav, useRouteParams } from "@/platform/navigation";
 import { NotFound } from "@/pages/not-found/not-found";
 import { usePublicRender } from "../home-page/utils/use-public-render";
 import { PageRenderer } from "../dynamic-page/page-renderer";
@@ -11,8 +11,8 @@ export interface PublicRendererProps {
 }
 
 export const PublicRenderer = ({ config }: PublicRendererProps) => {
-  const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
+  const { slug } = useRouteParams<{ slug: string }>();
+  const { navigate } = useNav();
 
   const { data: content, loading } = usePublicRender({
     menu: config?.data?.menu || [],

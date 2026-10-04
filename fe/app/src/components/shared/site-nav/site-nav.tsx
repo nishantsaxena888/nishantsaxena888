@@ -1,4 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
+import { Anchor } from "@/platform/primitives";
+import { usePath } from "@/platform/navigation";
 import { useGenericState } from "@/store/use-generic-state";
 
 // Generic site-surface nav — the S-side counterpart of the admin sidebar.
@@ -6,7 +7,7 @@ import { useGenericState } from "@/store/use-generic-state";
 // config meta. Every public page gets it for free via the renderers —
 // a new menu entry becomes a link automatically.
 export const SiteNav = ({ config }: { config?: any }) => {
-  const location = useLocation();
+  const pathname = usePath();
   const data = config?.data ?? config ?? {};
   const meta = data.meta || {};
   const siteName = data.site_name || meta.display_name || meta.client || "Site";
@@ -24,14 +25,14 @@ export const SiteNav = ({ config }: { config?: any }) => {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur">
       <nav className="mx-auto flex h-14 max-w-6xl items-center gap-6 px-4">
-        <Link to="/" className="text-base font-bold text-foreground">
+        <Anchor to="/" className="text-base font-bold text-foreground">
           {siteName}
-        </Link>
+        </Anchor>
         <div className="flex items-center gap-1">
           {items.map((item: any) => {
-            const active = location.pathname === item.url;
+            const active = pathname === item.url;
             return (
-              <Link
+              <Anchor
                 key={item.url}
                 to={item.url}
                 className={`rounded-md px-3 py-1.5 text-sm transition-colors ${
@@ -41,7 +42,7 @@ export const SiteNav = ({ config }: { config?: any }) => {
                 }`}
               >
                 {item.name}
-              </Link>
+              </Anchor>
             );
           })}
         </div>

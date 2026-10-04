@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { useFormStyleStore } from "@/store/use-form-style";
 import { useCurdEntity } from "./utils/use-curd-entity";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNav } from "@/platform/navigation";
 import { Button } from "@/components/ui/button";
 import { Icon, type IconName } from "@/components/ui/icon-picker";
 import {
@@ -37,7 +37,7 @@ export const DefaultAdmin = (prop: any) => {
   } = useCurdEntity(prop);
 
   const { styles, themeName } = useFormStyleStore();
-  const navigate = useNavigate();
+  const { navigate } = useNav();
   const [selectedRows, setSelectedRows] = useState<any[]>([]);
 
   // Declarative table actions — OPTIONS content.table.row_actions /

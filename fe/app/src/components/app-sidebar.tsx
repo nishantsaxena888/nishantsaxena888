@@ -1,5 +1,6 @@
 import * as React from "react";
-import { useLocation, Link } from "react-router-dom";
+import { Anchor } from "@/platform/primitives";
+import { usePath } from "@/platform/navigation";
 import {
   LayoutDashboardIcon,
   Settings2Icon,
@@ -39,7 +40,7 @@ export function AppSidebar({
   config,
   ...props
 }: React.ComponentProps<typeof Sidebar> & { config?: any }) {
-  const location = useLocation();
+  const pathname = usePath();
 
   const meta = config?.data?.meta || config?.meta || {};
   const adminMenu = config?.data?.admin_menu || [];
@@ -51,8 +52,8 @@ export function AppSidebar({
       icon: item.icon || iconMap[item.entity],
       entity: item.entity,
       isActive:
-        location.pathname === item.url ||
-        location.pathname.startsWith(item.url + "/"),
+        pathname === item.url ||
+        pathname.startsWith(item.url + "/"),
       items: mapItems(item.sub_menu || item.menu || []),
     }));
   };
@@ -75,7 +76,7 @@ export function AppSidebar({
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <Link to="/admin/">
+              <Anchor to="/admin/">
                 {typeof meta.logo === "string" &&
                 meta.logo.trim() !== "" &&
                 meta.logo !== "/logo.png" ? (
@@ -113,7 +114,7 @@ export function AppSidebar({
                     {meta.display_name || "Acme Inc."}
                   </span>
                 </div>
-              </Link>
+              </Anchor>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

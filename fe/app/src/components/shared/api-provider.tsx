@@ -14,6 +14,7 @@ import {
 } from "@/tenants";
 import { useConfigStore } from "@/store/use-config-store";
 import { storage } from "@/platform/storage";
+import { emitAppEvent, onAppEvent } from "@/platform/host";
 
 export const getActiveClient = (): string => {
   if (import.meta.env.DEV) {
@@ -38,7 +39,7 @@ export const getActiveClient = (): string => {
 export const setActiveClient = (clientName: string) => {
   if (typeof window !== "undefined") {
     storage.setItem("vite-client", clientName);
-    window.dispatchEvent(new CustomEvent("client-change", { detail: clientName }));
+    emitAppEvent("client-change", clientName);
   }
 };
 
@@ -72,10 +73,11 @@ const ApiProvider = ({
       );
     };
 
-    window.addEventListener("client-change", handleClientChange);
+    const offClientChange = onAppEvent("client-change", handleClientChange);
+    // "storage" is a real DOM event (cross-tab sync) — stays window-level.
     window.addEventListener("storage", handleClientChange);
     return () => {
-      window.removeEventListener("client-change", handleClientChange);
+      offClientChange();
       window.removeEventListener("storage", handleClientChange);
     };
   }, []);

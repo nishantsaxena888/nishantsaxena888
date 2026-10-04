@@ -191,14 +191,19 @@ and **Electron**. Reusable storefront components never import
 | Module | Contract | Web impl | RN port | Electron |
 |---|---|---|---|---|
 | `storage.ts` | `storage.{get,set,remove}Item` sync facade; `setStorageBackend()` injects impl at boot | `localStorage` | `AsyncStorage` impl hydrated into memory at boot, injected via `setStorageBackend` | reuse web (or IPC-backed impl) |
-| `navigation.ts` | `useNav()` → `{navigate(path), goBack()}`; `registerNavigator`/`navTo` for non-hook callers | `useNavigate` (react-router) | `useNavigation` (react-navigation), path = route name + params | reuse web |
-| `primitives.tsx` | `View`, `Text`, `Pressable`, `Anchor`, `Image`, `TextInput` — RN-shaped API (`onPress`, `onChangeText`, `to`) | renders `div`/`span`/`button`/`a`/`img`/`input` (semantic via `as` prop) | `primitives.native.tsx` mapping to `View`/`Text`/`Pressable`/`Image`/`TextInput` | reuse web |
+| `navigation.ts` | `useNav()` → `{navigate(path, {replace}), goBack()}`; `useRouteParams()` → route params; `usePath()` → pathname; `registerNavigator`/`navTo` for non-hook callers | `useNavigate`/`useParams`/`useLocation` (react-router) | `useNavigation`/`useRoute` (react-navigation), path = route name + params | reuse web |
+| `host.ts` | `emitAppEvent(name, detail)` / `onAppEvent(name, cb)` → unsubscribe; `reloadApp()` — cross-cutting events (`auth-change`, `client-change`) never use `window` directly | DOM events + `location.reload` | EventEmitter / DeviceEventEmitter + state re-render | reuse web |
+| `primitives.tsx` | `View`, `Text`, `Pressable`, `Anchor`, `Image`, `TextInput`, `ScrollView` — RN-shaped API (`onPress`, `onChangeText`, `to`) | renders `div`/`span`/`button`/`a`/`img`/`input` (semantic via `as` prop) | `primitives.native.tsx` mapping to `View`/`Text`/`Pressable`/`Image`/`TextInput` | reuse web |
 
 Rules for new generic components:
 
 - Use `View`/`Text`/`Pressable`/`Anchor`/`TextInput` — not raw `div`/`a`
   (forms may use `View as="form"` + `Pressable type="submit"`).
-- Navigate via `useNav()` or `Anchor to=` — never `useNavigate`/`Link`.
+- Navigate via `useNav()`/`useRouteParams()`/`usePath()`/`Anchor` — never
+  `useNavigate`/`useParams`/`useLocation`/`Link` outside the router shell
+  (`create-router`, `app-router-provider`, error boundary).
+- Cross-cutting events via `emitAppEvent`/`onAppEvent`, reload via
+  `reloadApp` — never `window.dispatchEvent`/`location.reload`.
 - Persist via `storage` — never `localStorage` directly.
 - `className` is the web-styling hook; the native variant maps it to a
   `style` lookup — keep client visuals in `styles.css` classes.
