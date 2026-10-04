@@ -34,26 +34,34 @@ export function roleAllowed(allowed: any, role: string): boolean {
   return !Array.isArray(allowed) || allowed.includes("*") || allowed.includes(role);
 }
 
-// ---- Entity method RBAC -------------------------------------------------
-// Declarative permission spec, identical shape in mock OPTIONS and the real
-// backend response:
-//   "rbac": { "viewer": ["GET"], "editor": ["GET","POST","PUT"], "admin": ["*"] }
-//   "rbac": ["GET","POST"]            // flat list — applies to every role
-// Absent spec → everything allowed. A role key of "*" is the fallback for
-// unlisted roles; a method of "*" grants all. Methods are case-insensitive
-// ("GET" ↔ "get") so spec authors can use either convention.
-export type RbacSpec = Record<string, string[]> | string[] | undefined;
+// ---- Entity action RBAC -------------------------------------------------
+// Canonical spec shape is the BACKEND's (entities.py "rbac"): action →
+// role whitelist. Identical in mock OPTIONS and the real response:
+//   "rbac": {"read": "*", "write": ["admin","editor"]}
+// Absent spec or absent action → allowed; "*" → every role; a role list
+// containing "*" also grants all. The FE maps HTTP methods to the two
+// actions the server enforces — get/options/head → read, everything
+// mutating → write.
+export type RbacSpec = Record<string, string[] | string> | undefined;
 
-export function rbacMethods(spec: RbacSpec, role: string): Set<string> | null {
-  if (spec === undefined || spec === null) return null; // unrestricted
-  const list = Array.isArray(spec)
-    ? spec
-    : spec[role] || spec["*"] || [];
-  if (list.includes("*")) return null; // wildcard grant = unrestricted
-  return new Set(list.map((m) => String(m).toLowerCase()));
+const METHOD_TO_ACTION: Record<string, string> = {
+  get: "read",
+  options: "read",
+  head: "read",
+  post: "write",
+  put: "write",
+  patch: "write",
+  delete: "write",
+};
+
+export function actionAllowed(spec: RbacSpec, role: string, action: string): boolean {
+  const allowed = spec?.[action];
+  if (allowed === undefined || allowed === "*") return true;
+  const list = Array.isArray(allowed) ? allowed : [allowed];
+  return list.includes(role) || list.includes("*");
 }
 
 export function methodAllowed(spec: RbacSpec, role: string, method: string): boolean {
-  const allowed = rbacMethods(spec, role);
-  return allowed === null || allowed.has(String(method).toLowerCase());
+  const action = METHOD_TO_ACTION[String(method).toLowerCase()] ?? "write";
+  return actionAllowed(spec, role, action);
 }

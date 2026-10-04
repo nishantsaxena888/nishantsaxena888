@@ -18,7 +18,8 @@ vi.mock("../library/api", () => ({
 import { apiClient } from "../library/api";
 
 const RBAC = {
-  rbac: { item: { viewer: ["GET"], admin: ["*"] } },
+  // Backend-shaped spec: action → role whitelist (entities.py "rbac").
+  rbac: { item: { read: "*", write: ["admin"] } },
   roles: [{ name: "viewer", default: true }],
 };
 
@@ -49,7 +50,7 @@ describe("useEntity — centralized RBAC", () => {
 
   it("options.rbac prop overrides configuration rbac", async () => {
     const { result } = renderHook(() =>
-      useEntity("item", { rbac: { viewer: ["*"] } }),
+      useEntity("item", { rbac: { read: "*", write: "*" } }),
     );
     await waitFor(() => expect(result.current.isSkeleton).toBe(false));
     expect(result.current.can("delete")).toBe(true);

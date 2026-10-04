@@ -20,8 +20,9 @@ export interface UseEntityOptions {
   prefetch?: boolean;
   header?: Record<string, string>;
   disabledMethods?: ("get" | "post" | "put" | "patch" | "delete" | "options")[];
-  // Per-call-site permission override (e.g. OPTIONS `content.rbac` passed
-  // down by useCurdEntity). Falls back to configuration `rbac[entity]`.
+  // Per-call-site permission override (OPTIONS `content.rbac`, passed by
+  // useCurdEntity). Falls back to configuration `rbac[entity]`. Spec is
+  // the backend shape: {"read": "*", "write": ["admin","editor"]}.
   rbac?: RbacSpec;
 }
 

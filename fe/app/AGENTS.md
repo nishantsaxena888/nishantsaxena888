@@ -319,17 +319,19 @@ live in `src/engine/library/rbac.ts` (`currentRole`, `roleAllowed`,
 | Menu items | `menu[]`/`admin_menu[]` `.roles` | `visibleByRole` |
 | Actions | `table.row_actions[]`/`bulk_actions[]` `.roles` | `default-admin` filters |
 | Columns/fields | `columns[].roles`, `form.fields[].roles` | `default-admin` mirrors the server ACL (lets one static mock OPTIONS serve every role) |
-| Methods | `content.rbac` (OPTIONS) or `configuration.rbac[entity]` | **`useEntity`** — `can(method)` drives UI; denied calls return 403 without hitting the network |
+| Methods | `content.rbac` (OPTIONS, emitted by the backend from `entities.py`) or `configuration.rbac[entity]` | **`useEntity`** — `can(method)` drives UI; denied calls return 403 without hitting the network |
 
-Method spec (role → HTTP methods; `"*"` role = fallback for unlisted
-roles incl. anonymous, `"*"` method = all; case-insensitive):
+Method spec is the backend's own shape — action → role whitelist
+(`"*"` = every role, scalar allowed, case-insensitive methods; absent
+spec/action = allowed). The FE maps methods: `get`/`options`/`head` →
+`read`, `post`/`put`/`patch`/`delete` → `write` — the same two actions
+`_check_rbac` enforces server-side.
 
 ```json
-"rbac": {"*": ["GET","OPTIONS"], "editor": ["GET","POST","PUT"], "admin": ["*"]}
+"rbac": {"read": "*", "write": ["admin", "editor"]}
 ```
 
-or a flat `["GET","POST"]` = applies to every role. Sessions bypass
-method RBAC (local state; gate them via def `roles`).
+Sessions bypass method RBAC (local state; gate them via def `roles`).
 
 Declarative table actions (OPTIONS `content.table`, executed by the
 generic grid — no per-screen code):

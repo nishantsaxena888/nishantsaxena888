@@ -372,12 +372,9 @@
   ],
   "rbac": {
     "product": {
-      "*": [
-        "GET",
-        "OPTIONS"
-      ],
-      "admin": [
-        "*"
+      "read": "*",
+      "write": [
+        "admin"
       ]
     }
   }

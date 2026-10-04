@@ -3,9 +3,9 @@
 // (setStorageBackend) — the same seam an RN port injects AsyncStorage at.
 import { afterEach, describe, expect, it } from "vitest";
 import {
+  actionAllowed,
   currentRole,
   methodAllowed,
-  rbacMethods,
   roleAllowed,
   visibleByRole,
 } from "./rbac";
@@ -97,39 +97,34 @@ describe("roleAllowed (def-level gating)", () => {
   });
 });
 
-// Entity method RBAC — the spec OPTIONS/configuration carries; useEntity
-// gates every CRUD call on methodAllowed().
+// Entity action RBAC — canonical backend shape (entities.py "rbac"):
+// action → role whitelist. useEntity gates every CRUD call through
+// methodAllowed(); methods map to the two actions the server enforces.
 describe("methodAllowed (entity CRUD RBAC)", () => {
-  const spec = {
-    viewer: ["GET"],
-    editor: ["GET", "POST", "PUT"],
-    admin: ["*"],
-  };
+  const spec = { read: "*", write: ["admin", "editor"] };
 
   it.each([
     // [spec, role, method, allowed]
     [undefined, "viewer", "delete", true], // no spec → unrestricted
     [spec, "viewer", "get", true],
     [spec, "viewer", "GET", true], // case-insensitive
+    [spec, "viewer", "options", true], // options = read
     [spec, "viewer", "post", false],
     [spec, "viewer", "delete", false],
     [spec, "editor", "put", true],
-    [spec, "editor", "delete", false],
-    [spec, "admin", "delete", true], // "*" grants all
-    [spec, "admin", "options", true],
-    [["GET"], "anyone", "get", true], // flat list → all roles
-    [["GET"], "anyone", "post", false],
-    [{ "*": ["GET"] }, "nobody", "get", true], // "*" role = fallback
-    [{ "*": ["GET"] }, "nobody", "post", false],
+    [spec, "admin", "delete", true],
+    [{ read: ["admin"] }, "viewer", "get", false], // whitelist
+    [{ read: ["admin"] }, "viewer", "post", true], // absent action = allowed
+    [{ write: "*" }, "nobody", "delete", true], // "*" string = all roles
+    [{ write: ["*"] }, "nobody", "delete", true], // "*" in list = all roles
+    [{ write: "admin" }, "admin", "delete", true], // scalar role allowed
   ])("spec=%j role='%s' method='%s' → %s", (s, role, method, want) => {
     expect(methodAllowed(s as any, role, method)).toBe(want);
   });
 
-  it("rbacMethods returns null for unrestricted/wildcard", () => {
-    expect(rbacMethods(undefined, "viewer")).toBeNull();
-    expect(rbacMethods({ admin: ["*"] }, "admin")).toBeNull();
-    expect(rbacMethods({ viewer: ["GET"] }, "viewer")).toEqual(
-      new Set(["get"]),
-    );
+  it("actionAllowed exposes the raw action check", () => {
+    expect(actionAllowed(spec, "viewer", "read")).toBe(true);
+    expect(actionAllowed(spec, "viewer", "write")).toBe(false);
+    expect(actionAllowed(undefined, "x", "write")).toBe(true);
   });
 });

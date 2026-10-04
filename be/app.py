@@ -403,6 +403,10 @@ def options(entity: str, schema: str = "basic", request: Request = None):
         if form.get("fields"):
             form["fields"] = [f for f in form["fields"] if f.get("name") not in hidden]
             ui["form"] = form
+    # The entity's own rbac spec rides along in content — the FE gates
+    # buttons/calls on it (useEntity can()); enforcement stays here.
+    if cfg.get("rbac"):
+        ui["rbac"] = cfg["rbac"]
     return {
         "entity": entity,
         "name": entity,

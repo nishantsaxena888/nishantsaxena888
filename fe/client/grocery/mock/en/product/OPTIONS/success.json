@@ -594,17 +594,10 @@
       ]
     },
     "rbac": {
-      "viewer": [
-        "GET",
-        "OPTIONS"
-      ],
-      "editor": [
-        "GET",
-        "POST",
-        "PUT"
-      ],
-      "admin": [
-        "*"
+      "read": "*",
+      "write": [
+        "admin",
+        "editor"
       ]
     }
   }
