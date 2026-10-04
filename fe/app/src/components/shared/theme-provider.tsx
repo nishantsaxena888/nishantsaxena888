@@ -45,7 +45,12 @@ export function ThemeProvider({
         () => (Array.isArray(configThemes) ? configThemes : []),
         [configThemes],
     )
-    const fallbackTheme = defaultTheme || THEMES[0]?.value || "default"
+    // Precedence: user choice (localStorage) > client's first configured
+    // theme > defaultTheme prop. RootProvider passes defaultTheme="default"
+    // which must not shadow the client's own branded theme (e.g.
+    // grocery-light, uday-dark).
+    const fallbackTheme =
+        THEMES[0]?.value || defaultTheme || "default"
 
     const [theme, setTheme] = useState<Theme>(() => {
         try {
@@ -57,6 +62,16 @@ export function ThemeProvider({
             return fallbackTheme
         }
     })
+
+    // Config can arrive after mount (configuration fetch): if the user has
+    // not picked a theme, adopt the client's first configured one.
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+        const stored = localStorage.getItem(storageKey);
+        const first = THEMES[0]?.value;
+        if (!stored && first && theme !== first) setTheme(first);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [THEMES])
 
     const [isFetchingStyleConfig, setIsFetchingStyleConfig] = useState(false)
 
