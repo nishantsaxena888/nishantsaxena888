@@ -6,7 +6,7 @@ import { AdminSkeleton } from "./utils/admin-skeleton";
 import { toast } from "sonner";
 import { useFormStyleStore } from "@/store/use-form-style";
 import { useCurdEntity } from "./utils/use-curd-entity";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNav } from "@/platform/navigation";
 import { Button } from "@/components/ui/button";
 import { Icon, type IconName } from "@/components/ui/icon-picker";
@@ -49,6 +49,16 @@ export const DefaultAdmin = (prop: any) => {
 
   const reload = () =>
     onChangeHandle({ type: "page", value: config?.currentPage || 1 });
+
+  // Declarative polling — OPTIONS table.refresh_interval (seconds) keeps
+  // the list live without a custom component (orders, dashboards).
+  const refreshSec = table?.refresh_interval;
+  useEffect(() => {
+    if (typeof refreshSec !== "number" || refreshSec <= 0) return;
+    const id = setInterval(reload, refreshSec * 1000);
+    return () => clearInterval(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refreshSec]);
 
   const runAction = async (def: any, rows: any[]) => {
     if (def.confirm) {

@@ -326,6 +326,19 @@ generic grid — no per-screen code):
   `bulk_delete`. `confirm` gates via the confirm dialog. Row actions
   render as icon buttons beside Edit/Delete; bulk actions live in a
   toolbar that appears when `bulk_actions`/`export` are declared.
+- **`table.refresh_interval`** (seconds) polls the list — live order/
+  dashboard screens without custom code.
+- **Declarative columns**: `columns[].key` supports nested paths
+  (`"customer.name"` → `row.customer.name`) for relation display, and
+  `columns[].format` names a renderer since JSON can't carry functions:
+  `money` (+`currency`), `date`, `datetime`, `boolean`, `percent`,
+  `json`, `link` (+`link` template `"/shop?q={name}"`), `badge`
+  (+`badge_map` value→variant), `image`. A declared `format` overrides
+  the generic `DataRenderer` for that column.
+- **Conditional form fields**: an input's `visible` key takes a rule
+  `{field, operator, value}`, an array (AND), or `{conditions, logic}` —
+  ops mirror the backend filter ops (`eq/ne/in/nin/contains/gt/gte/lt/
+  lte/exists`, `===`/`!==`/`includes` aliases kept).
 
 Read-through caching (`engine/library/api-cache.ts`): OPTIONS cached for
 the session, GETs 30s TTL, mutations invalidate their endpoint prefix,

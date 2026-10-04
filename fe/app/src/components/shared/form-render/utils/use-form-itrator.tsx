@@ -1,45 +1,79 @@
 import { useRenderEngine } from "@/engine";
 
+// Field visibility rules — `visible` on a form input. Accepts a single
+// rule {field, operator, value}, an array, or {conditions, logic:"AND"|"OR"}.
+// Operators mirror the backend filter ops: eq/===, ne/!==, in/includes,
+// nin, contains, gt/gte/lt/lte (numeric), exists.
+export const evalVisibility = (visibleRules: any, values: any): boolean => {
+  if (!visibleRules) return true;
+
+  let rules: any[] = [];
+  let logic: "AND" | "OR" = "AND";
+
+  if (Array.isArray(visibleRules)) {
+    rules = visibleRules;
+  } else if (typeof visibleRules === "object" && visibleRules.conditions) {
+    rules = visibleRules.conditions;
+    logic = visibleRules.logic || "AND";
+  } else if (typeof visibleRules === "object" && visibleRules.field) {
+    rules = [visibleRules];
+  }
+
+  if (rules.length === 0) return true;
+
+  const results = rules.map((rule) => {
+    const fieldVal = rule.field
+      .split(".")
+      .reduce((acc: any, part: string) => acc?.[part], values);
+
+    const numeric =
+      !isNaN(Number(fieldVal)) && !isNaN(Number(rule.value));
+    switch (rule.operator) {
+      case "===":
+      case "eq":
+        return fieldVal === rule.value;
+      case "!==":
+      case "ne":
+        return fieldVal !== rule.value;
+      case "includes":
+      case "in":
+        return Array.isArray(fieldVal)
+          ? fieldVal.includes(rule.value)
+          : Array.isArray(rule.value)
+            ? rule.value.includes(fieldVal)
+            : String(fieldVal ?? "") === String(rule.value);
+      case "nin":
+        return Array.isArray(rule.value)
+          ? !rule.value.includes(fieldVal)
+          : String(fieldVal ?? "") !== String(rule.value);
+      case "contains":
+        return String(fieldVal ?? "")
+          .toLowerCase()
+          .includes(String(rule.value ?? "").toLowerCase());
+      case "gt":
+        return numeric && Number(fieldVal) > Number(rule.value);
+      case "gte":
+        return numeric && Number(fieldVal) >= Number(rule.value);
+      case "lt":
+        return numeric && Number(fieldVal) < Number(rule.value);
+      case "lte":
+        return numeric && Number(fieldVal) <= Number(rule.value);
+      case "exists":
+        return fieldVal !== undefined && fieldVal !== null && fieldVal !== "";
+      default:
+        return true;
+    }
+  });
+
+  return logic === "OR" ? results.some((r) => r) : results.every((r) => r);
+};
+
 export const useFormItrator = ({ inputs, control }: any) => {
   const {
     state: { values },
   } = control;
-  const checkVisibility = (visibleRules: any) => {
-    if (!visibleRules) return true;
-
-    let rules: any[] = [];
-    let logic: "AND" | "OR" = "AND";
-
-    if (Array.isArray(visibleRules)) {
-      rules = visibleRules;
-    } else if (typeof visibleRules === "object" && visibleRules.conditions) {
-      rules = visibleRules.conditions;
-      logic = visibleRules.logic || "AND";
-    }
-
-    if (rules.length === 0) return true;
-
-    const results = rules.map((rule) => {
-      const fieldVal = rule.field
-        .split(".")
-        .reduce((acc: any, part: string) => acc?.[part], values);
-
-      switch (rule.operator) {
-        case "===":
-          return fieldVal === rule.value;
-        case "!==":
-          return fieldVal !== rule.value;
-        case "includes":
-          return Array.isArray(fieldVal) && fieldVal.includes(rule.value);
-        case "exists":
-          return fieldVal !== undefined && fieldVal !== null && fieldVal !== "";
-        default:
-          return true;
-      }
-    });
-
-    return logic === "OR" ? results.some((r) => r) : results.every((r) => r);
-  };
+  const checkVisibility = (visibleRules: any) =>
+    evalVisibility(visibleRules, values);
 
   const getGridClasses = (column: any, grid?: string) => {
     if (grid) return grid;

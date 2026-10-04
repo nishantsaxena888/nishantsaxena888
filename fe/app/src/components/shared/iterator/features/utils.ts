@@ -51,6 +51,50 @@ export function toNumberForSum(v: unknown): number {
   return NaN;
 }
 
+// Nested path lookup — "customer.name" → row.customer.name. Powers
+// relation columns declared in OPTIONS (`key: "customer.name"`).
+export function getByPath(obj: any, path: string): any {
+  if (!path) return obj;
+  return path.split(".").reduce((acc, part) => acc?.[part], obj);
+}
+
+// Declarative cell formats — OPTIONS JSON can't carry functions, so
+// column.format names a formatter instead of column.render. Supported:
+// money | date | datetime | boolean | badge | percent | json.
+// `badge` + `link`/`image` are handled by the renderer (React nodes);
+// this returns text for the pure formats.
+export function formatCellValue(
+  value: any,
+  column: { format?: string; currency?: string; badge_map?: Record<string, string> },
+  emptyText = "—",
+): string {
+  switch (column.format) {
+    case "money": {
+      const n = typeof value === "number" ? value : parseFloat(value);
+      if (isNaN(n)) return emptyText;
+      return `${column.currency ?? "$"}${n.toFixed(2)}`;
+    }
+    case "date":
+      return value ? new Date(value).toLocaleDateString() : emptyText;
+    case "datetime":
+      return value ? new Date(value).toLocaleString() : emptyText;
+    case "boolean":
+      return value === null || value === undefined ? emptyText : value ? "Yes" : "No";
+    case "percent": {
+      const n = typeof value === "number" ? value : parseFloat(value);
+      return isNaN(n) ? emptyText : `${n}%`;
+    }
+    case "json":
+      return value === null || value === undefined
+        ? emptyText
+        : typeof value === "object"
+          ? JSON.stringify(value)
+          : String(value);
+    default:
+      return defaultFormat(value, emptyText);
+  }
+}
+
 export function textAlignClass(a?: "left" | "center" | "right") {
   return a === "right"
     ? "text-right"

@@ -14,12 +14,20 @@
         {
           "key": "name",
           "label": "Product Name",
-          "type": "text"
+          "type": "text",
+          "format": "link",
+          "link": "/shop?q={name}"
         },
         {
           "key": "category_id",
           "label": "Category",
           "type": "text"
+        },
+        {
+          "key": "price",
+          "label": "Price",
+          "format": "money",
+          "currency": "$"
         },
         {
           "key": "brand_id",
@@ -29,7 +37,13 @@
         {
           "key": "status",
           "label": "Status",
-          "type": "status"
+          "type": "status",
+          "format": "badge",
+          "badge_map": {
+            "active": "success",
+            "inactive": "secondary",
+            "draft": "warning"
+          }
         }
       ],
       "actions": [

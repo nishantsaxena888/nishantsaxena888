@@ -1,5 +1,6 @@
 import type { IteratorColumn } from "../type";
-import { defaultFormat } from "../utils";
+import { defaultFormat, getByPath, formatCellValue } from "../utils";
+import { Anchor } from "@/platform/primitives";
 import { TableHeader as IteratorTableHeader } from "./table-header";
 import {
   Table,
@@ -131,10 +132,45 @@ export const TableIterator = ({
                     </div>
                   </TableCell>
                   {visibleColumns.map((column: any, index: number) => {
-                    const value = row[column.key];
-                    const content = column.render
-                      ? column.render(value, row, rowIndex, emptyText)
-                      : defaultFormat(value, emptyText);
+                    // Nested path keys ("customer.name") read via getByPath —
+                    // relation columns declared in OPTIONS.
+                    const value = column.key?.includes(".")
+                      ? getByPath(row, column.key)
+                      : row[column.key];
+                    // Declared `format` wins over the generic render — it's
+                    // the JSON-serializable way to say "money/link/badge".
+                    const hasFormat =
+                      typeof column.format === "string" &&
+                      column.format !== "text";
+                    let content: any = hasFormat
+                      ? formatCellValue(value, column, emptyText)
+                      : column.render
+                        ? column.render(value, row, rowIndex, emptyText)
+                        : defaultFormat(value, emptyText);
+                    // React-valued declarative formats — OPTIONS JSON can't
+                    // carry render functions, so `format` names a renderer.
+                    if (column.format === "link" && value !== null && value !== undefined) {
+                      const to = (column.link || "/{id}").replace(
+                        /\{(\w+)\}/g,
+                        (_: string, k: string) => encodeURIComponent(getByPath(row, k) ?? ""),
+                      );
+                      content = (
+                        <Anchor to={to} className="text-primary underline-offset-2 hover:underline">
+                          {defaultFormat(value, emptyText)}
+                        </Anchor>
+                      );
+                    } else if (column.format === "badge" && value !== null && value !== undefined) {
+                      const variant = column.badge_map?.[String(value)] || "secondary";
+                      content = (
+                        <span className={`badge badge-${variant} inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium`}>
+                          {defaultFormat(value, emptyText)}
+                        </span>
+                      );
+                    } else if (column.format === "image" && value) {
+                      content = (
+                        <img src={value} alt={column.label || ""} className="h-8 w-8 rounded object-cover" />
+                      );
+                    }
                     const cellClass =
                       typeof configuration?.cellClassName === "function"
                         ? configuration.cellClassName(value, row, column)
