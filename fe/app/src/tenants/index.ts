@@ -3,6 +3,7 @@ import { storefront_components } from "./storefront";
 import { layout_components } from "./layout";
 import { client, site_tenant, admin_tenant } from "./active";
 import type { ClientTenant } from "./types";
+import { storage } from "@/platform/storage";
 
 // Per-client surface maps. The active client's surfaces live in
 // fe/client/<name>/{site,admin}/; site routes resolve def.type against
@@ -28,7 +29,7 @@ export const componentsMap: Record<string, Surfaces> = {
 export const requestedClient = (): string =>
   import.meta.env.VITE_CLIENT ||
   (typeof window !== "undefined" &&
-    localStorage.getItem("vite-client")) ||
+    storage.getItem("vite-client")) ||
   client;
 
 // Lazily attach a client's surfaces in dev. dev-all.ts carries one dynamic

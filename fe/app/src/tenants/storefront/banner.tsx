@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import { useLanguage } from "@/components/shared/language-provider";
+import { Anchor, Image, Text, View } from "@/platform/primitives";
 import { firstOf, makeTr } from "./utils";
 
 // Generic banner — the storefront hero pattern: rounded card, left-aligned
@@ -8,6 +8,7 @@ import { firstOf, makeTr } from "./utils";
 //   content.hero.{badge,headline,subheadline,cta,ctaUrl,explore,exploreUrl}
 //   content.icon / header record's logoIcon → right-side visual
 // content.* flat fields override the nested hero block.
+// Built on platform primitives — ports to RN unchanged.
 export const StorefrontBanner = ({ content, actionData }: any) => {
   const tr = makeTr(useLanguage().t);
   const header = firstOf(actionData?.data?.data) || {};
@@ -26,34 +27,34 @@ export const StorefrontBanner = ({ content, actionData }: any) => {
   const exploreUrl = content?.exploreUrl || hero.exploreUrl || "/shop";
 
   return (
-    <section className="sf-banner">
-      <div className="sf-banner-inner">
-        <div className="sf-banner-copy">
-          {badge && <span className="sf-banner-badge">{badge}</span>}
-          <h1>{headline}</h1>
-          {subheadline && <p>{subheadline}</p>}
-          <div className="sf-banner-actions">
+    <View as="section" className="sf-banner">
+      <View className="sf-banner-inner">
+        <View className="sf-banner-copy">
+          {badge && <Text className="sf-banner-badge">{badge}</Text>}
+          <Text as="h1">{headline}</Text>
+          {subheadline && <Text as="p">{subheadline}</Text>}
+          <View className="sf-banner-actions">
             {cta && (
-              <Link to={ctaUrl} className="sf-cta">
+              <Anchor to={ctaUrl} className="sf-cta">
                 {cta}
-              </Link>
+              </Anchor>
             )}
             {explore && (
-              <Link to={exploreUrl} className="sf-cta-outline">
+              <Anchor to={exploreUrl} className="sf-cta-outline">
                 {explore}
-              </Link>
+              </Anchor>
             )}
-          </div>
-        </div>
+          </View>
+        </View>
         {(icon || image) && (
-          <div className="sf-banner-visual" aria-hidden>
-            <div className="sf-banner-frame" />
-            <div className="sf-banner-figure">
-              {image ? <img src={image} alt="" /> : <span>{icon}</span>}
-            </div>
-          </div>
+          <View className="sf-banner-visual" aria-hidden>
+            <View className="sf-banner-frame" />
+            <View className="sf-banner-figure">
+              {image ? <Image src={image} alt="" /> : <Text>{icon}</Text>}
+            </View>
+          </View>
         )}
-      </div>
-    </section>
+      </View>
+    </View>
   );
 };

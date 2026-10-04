@@ -10,6 +10,7 @@ import {
   deduped,
   invalidateEndpoint,
 } from "./api-cache";
+import { storage } from "@/platform/storage";
 
 export type HttpMethod =
   | "get"
@@ -201,7 +202,7 @@ export const apiClient = async <T = any>(
     }
 
     if (typeof window !== "undefined") {
-      const token = localStorage.getItem("token");
+      const token = storage.getItem("token");
       if (
         token &&
         !mergedHeaders["Authorization"] &&

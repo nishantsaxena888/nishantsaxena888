@@ -4,6 +4,7 @@ import { useEntity } from "@/engine";
 import { useFormStyleStore } from "@/store/use-form-style";
 import { useNavigate } from "react-router-dom";
 import { useConfigStore } from "@/store/use-config-store";
+import { storage } from "@/platform/storage";
 
 const DEFAULT_AUTH_FORMS: Record<string, any> = {
   login: {
@@ -90,7 +91,7 @@ export const useGenericForm = (props: any) => {
       action.store_local_storage.forEach((key: string) => {
         toStore[key] = values[key];
       });
-      localStorage.setItem("generic-form-action", JSON.stringify(toStore));
+      storage.setItem("generic-form-action", JSON.stringify(toStore));
     }
 
     if (
@@ -98,28 +99,28 @@ export const useGenericForm = (props: any) => {
       Array.isArray(action.remove_local_storage)
     ) {
       try {
-        const storedStr = localStorage.getItem("generic-form-action");
+        const storedStr = storage.getItem("generic-form-action");
         if (storedStr) {
           const stored = JSON.parse(storedStr);
           action.remove_local_storage.forEach((key: string) => {
             delete stored[key];
           });
           if (Object.keys(stored).length > 0) {
-            localStorage.setItem("generic-form-action", JSON.stringify(stored));
+            storage.setItem("generic-form-action", JSON.stringify(stored));
           } else {
-            localStorage.removeItem("generic-form-action");
+            storage.removeItem("generic-form-action");
           }
         }
       } catch (e) {
         console.error(e);
       }
     } else if (action?.remove_local_storage === true) {
-      localStorage.removeItem("generic-form-action");
+      storage.removeItem("generic-form-action");
     }
     switch (action?.type) {
       case "redirect": {
         if (action?.login) {
-          localStorage.setItem(
+          storage.setItem(
             "token",
             formConfig?.access_token || "mock_token_" + Date.now(),
           );
@@ -196,7 +197,7 @@ export const useGenericForm = (props: any) => {
       return {};
     }
     try {
-      const stored = localStorage.getItem("generic-form-action");
+      const stored = storage.getItem("generic-form-action");
       if (stored) {
         const parsed = JSON.parse(stored);
         const result: any = {};

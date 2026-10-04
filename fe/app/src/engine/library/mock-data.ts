@@ -15,6 +15,7 @@
 import type { ApiConfigMap } from "./api";
 import { mockFiles } from "../../tenants/mock-active";
 import { client as bakedClient } from "../../tenants/active";
+import { storage } from "@/platform/storage";
 
 type ResponseFiles = Record<string, any>;
 type EndpointMap = Record<string, ResponseFiles>; // METHOD -> file -> json
@@ -76,7 +77,7 @@ export async function ensureClientMocks(name: string): Promise<void> {
 
 const requested =
   import.meta.env.VITE_CLIENT ||
-  (typeof window !== "undefined" && localStorage.getItem("vite-client")) ||
+  (typeof window !== "undefined" && storage.getItem("vite-client")) ||
   bakedClient;
 
 // Back-compat name — resolves once the requested client's mocks are in.

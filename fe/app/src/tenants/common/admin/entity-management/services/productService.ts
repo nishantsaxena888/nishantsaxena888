@@ -1,5 +1,6 @@
 import type { Product } from "../types";
 import productsMock from "../mock/products.json";
+import { storage } from "@/platform/storage";
 
 // Simulate API delay
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -8,16 +9,16 @@ const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 const STORAGE_KEY = 'pos_admin_products';
 
 const getStoredProducts = (): Product[] => {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = storage.getItem(STORAGE_KEY);
     if (!stored) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(productsMock));
+        storage.setItem(STORAGE_KEY, JSON.stringify(productsMock));
         return productsMock as Product[];
     }
     return JSON.parse(stored);
 };
 
 const setStoredProducts = (products: Product[]) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+    storage.setItem(STORAGE_KEY, JSON.stringify(products));
 };
 
 export const productService = {

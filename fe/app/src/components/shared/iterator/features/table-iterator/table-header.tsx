@@ -2,6 +2,7 @@ import React, { useState, useRef, useCallback, useEffect } from "react";
 import { TableHead } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 import { ChevronDownIcon, ChevronUpIcon, ChevronsUpDownIcon } from "lucide-react";
+import { storage } from "@/platform/storage";
 
 export const TableHeader = ({ data, tableId, sortConfig, onSort }: { data: any, tableId?: string, sortConfig?: { key?: string, direction?: "asc" | "desc" }, onSort?: (key: string) => void }) => {
   const columnKey = data.key;
@@ -9,7 +10,7 @@ export const TableHeader = ({ data, tableId, sortConfig, onSort }: { data: any, 
 
   const [width, setWidth] = useState(() => {
     if (storageKey) {
-      const stored = localStorage.getItem(storageKey);
+      const stored = storage.getItem(storageKey);
       if (stored && !isNaN(Number(stored))) {
         return Number(stored);
       }
@@ -47,7 +48,7 @@ export const TableHeader = ({ data, tableId, sortConfig, onSort }: { data: any, 
 
   useEffect(() => {
     if (storageKey) {
-      localStorage.setItem(storageKey, String(width));
+      storage.setItem(storageKey, String(width));
     }
   }, [width, storageKey]);
 

@@ -6,6 +6,9 @@ import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
+  // ELECTRON=1 → relative base so the bundle loads over file:// inside
+  // Electron's BrowserWindow; web builds stay root-absolute.
+  base: process.env.ELECTRON ? "./" : "/",
   plugins: [
     react(),
     tailwindcss(),

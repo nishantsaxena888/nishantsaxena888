@@ -13,6 +13,7 @@ import {
   tenantsReady,
 } from "@/tenants";
 import { useConfigStore } from "@/store/use-config-store";
+import { storage } from "@/platform/storage";
 
 export const getActiveClient = (): string => {
   if (import.meta.env.DEV) {
@@ -23,10 +24,10 @@ export const getActiveClient = (): string => {
     // leaving the app with an empty component map.
     const cached =
       typeof window !== "undefined"
-        ? localStorage.getItem("vite-client")
+        ? storage.getItem("vite-client")
         : null;
     if (cached && componentsMap[cached]) return cached;
-    if (cached) localStorage.removeItem("vite-client");
+    if (cached) storage.removeItem("vite-client");
     if (import.meta.env.VITE_CLIENT && componentsMap[import.meta.env.VITE_CLIENT])
       return import.meta.env.VITE_CLIENT;
   }
@@ -36,7 +37,7 @@ export const getActiveClient = (): string => {
 
 export const setActiveClient = (clientName: string) => {
   if (typeof window !== "undefined") {
-    localStorage.setItem("vite-client", clientName);
+    storage.setItem("vite-client", clientName);
     window.dispatchEvent(new CustomEvent("client-change", { detail: clientName }));
   }
 };

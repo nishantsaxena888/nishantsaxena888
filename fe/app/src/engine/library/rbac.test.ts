@@ -1,8 +1,9 @@
 // RBAC helpers — role from JWT claim, config default, menu visibility.
-// Pure + node-env: window/localStorage are stubbed only where the token
-// path is under test, so the file stays portable to non-DOM runtimes.
+// Pure + node-env: the storage backend is stubbed via the platform seam
+// (setStorageBackend) — the same seam an RN port injects AsyncStorage at.
 import { afterEach, describe, expect, it } from "vitest";
 import { currentRole, visibleByRole } from "./rbac";
+import { setStorageBackend, useMemoryStorage } from "@/platform/storage";
 
 const tokenWith = (claims: object) => {
   const b64 = (o: object) => btoa(JSON.stringify(o)).replace(/=+$/, "");
@@ -11,12 +12,16 @@ const tokenWith = (claims: object) => {
 
 const withToken = (token: string | null) => {
   (globalThis as any).window = {};
-  (globalThis as any).localStorage = { getItem: () => token };
+  setStorageBackend({
+    getItem: () => token,
+    setItem: () => {},
+    removeItem: () => {},
+  });
 };
 
 afterEach(() => {
   delete (globalThis as any).window;
-  delete (globalThis as any).localStorage;
+  useMemoryStorage();
 });
 
 describe("currentRole", () => {

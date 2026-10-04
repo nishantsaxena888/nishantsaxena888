@@ -182,6 +182,29 @@ fe/client/<name>/mock/
   Hiding is UX only; the backend is the enforcement. Login/logout
   dispatch `auth-change` → configuration refetches and menus re-filter.
 
+## Platform abstraction (`src/platform/`)
+
+The seam that makes generic code portable across **web**, **React Native**,
+and **Electron**. Reusable storefront components never import
+`react-router-dom` or touch `localStorage` directly — they use these:
+
+| Module | Contract | Web impl | RN port | Electron |
+|---|---|---|---|---|
+| `storage.ts` | `storage.{get,set,remove}Item` sync facade; `setStorageBackend()` injects impl at boot | `localStorage` | `AsyncStorage` impl hydrated into memory at boot, injected via `setStorageBackend` | reuse web (or IPC-backed impl) |
+| `navigation.ts` | `useNav()` → `{navigate(path), goBack()}`; `registerNavigator`/`navTo` for non-hook callers | `useNavigate` (react-router) | `useNavigation` (react-navigation), path = route name + params | reuse web |
+| `primitives.tsx` | `View`, `Text`, `Pressable`, `Anchor`, `Image`, `TextInput` — RN-shaped API (`onPress`, `onChangeText`, `to`) | renders `div`/`span`/`button`/`a`/`img`/`input` (semantic via `as` prop) | `primitives.native.tsx` mapping to `View`/`Text`/`Pressable`/`Image`/`TextInput` | reuse web |
+
+Rules for new generic components:
+
+- Use `View`/`Text`/`Pressable`/`Anchor`/`TextInput` — not raw `div`/`a`
+  (forms may use `View as="form"` + `Pressable type="submit"`).
+- Navigate via `useNav()` or `Anchor to=` — never `useNavigate`/`Link`.
+- Persist via `storage` — never `localStorage` directly.
+- `className` is the web-styling hook; the native variant maps it to a
+  `style` lookup — keep client visuals in `styles.css` classes.
+- Electron runs the same web bundle (`ELECTRON=1 npm run build` →
+  relative asset base for `file://` loading).
+
 ## Sessions (client-side state)
 
 `configuration` returns `sessions[]`:
@@ -366,8 +389,9 @@ the React-Native/desktop ports unchanged:
   strategies), api-cache (TTL/dedupe/invalidation), rbac (role + menu
   visibility), api/mock resolution (strict/loose/auto, lang fallback,
   status/response_type/id), declarative-actions (interpolate + dispatch),
-  tenant merge order + legacy aliases. Anything an RN port reuses is
-  tested here — these files must never import React/DOM APIs.
+  tenant merge order + legacy aliases, platform storage backend swap.
+  Anything an RN port reuses is tested here — these files must never
+  import React/DOM APIs.
 - **`*.test.tsx` — jsdom.** View-layer contract only: def.type →
   component mapping, children recursion, error/loading surfaces,
   component props → rendered output. External seams (apiClient, stores,

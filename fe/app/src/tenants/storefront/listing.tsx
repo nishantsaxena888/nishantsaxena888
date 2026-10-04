@@ -3,6 +3,7 @@ import { useEntity } from "@/engine";
 import { useConfigStore } from "@/store/use-config-store";
 import { useLanguage } from "@/components/shared/language-provider";
 import { toast } from "@/lib/toast";
+import { Image, Pressable, Text, View } from "@/platform/primitives";
 import { listOf, money, makeTr } from "./utils";
 
 // Generic card-grid listing. Items come from the def's dynamic action
@@ -10,6 +11,7 @@ import { listOf, money, makeTr } from "./utils";
 // session — properties.session / content.session (default "cart") —
 // when that session is configured; otherwise it's a no-op with a toast,
 // so the comp stays usable for any entity list on any client.
+// Platform primitives — ports to RN unchanged.
 export const StorefrontListing = ({ content, properties, actionData }: any) => {
   const tr = makeTr(useLanguage().t);
   const products = listOf(actionData?.data?.data);
@@ -31,49 +33,49 @@ export const StorefrontListing = ({ content, properties, actionData }: any) => {
     toast.success(tr("listing.added", `${p.name} added`));
   };
 
-  if (actionData?.loading) return <div className="sf-list-loading">Loading…</div>;
+  if (actionData?.loading) return <View className="sf-list-loading"><Text>Loading…</Text></View>;
 
   return (
-    <section className="sf-list">
-      {content?.title && <h2>{content.title}</h2>}
-      <div className="sf-list-grid">
+    <View as="section" className="sf-list">
+      {content?.title && <Text as="h2">{content.title}</Text>}
+      <View className="sf-list-grid">
         {products.map((p: any) => (
-          <article key={p.id ?? p.sku ?? p.name} className="sf-list-card">
-            {p.badge && <span className="sf-list-badge">{p.badge}</span>}
+          <View as="article" key={p.id ?? p.sku ?? p.name} className="sf-list-card">
+            {p.badge && <Text className="sf-list-badge">{p.badge}</Text>}
             {p.image && (
-              <img src={p.image} alt={p.name} loading="lazy" />
+              <Image src={p.image} alt={p.name} loading="lazy" />
             )}
-            <div className="sf-list-body">
-              <h3>{p.name}</h3>
+            <View className="sf-list-body">
+              <Text as="h3">{p.name}</Text>
               {p.rating && (
-                <span className="sf-rating">
+                <Text className="sf-rating">
                   <Star className="h-3.5 w-3.5" /> {p.rating}
                   {p.reviews ? ` (${p.reviews})` : ""}
-                </span>
+                </Text>
               )}
-              {p.description && <p>{p.description}</p>}
-              <div className="sf-price-row">
-                <strong>{money(p.price, currency)}</strong>
+              {p.description && <Text as="p">{p.description}</Text>}
+              <View className="sf-price-row">
+                <Text as="strong">{money(p.price, currency)}</Text>
                 {p.originalPrice && p.originalPrice > p.price && (
-                  <s>{money(p.originalPrice, currency)}</s>
+                  <Text as="s">{money(p.originalPrice, currency)}</Text>
                 )}
-              </div>
-              <button
+              </View>
+              <Pressable
                 className="sf-action-btn"
                 disabled={p.stock === 0}
-                onClick={() => addToCart(p)}
+                onPress={() => addToCart(p)}
               >
                 {p.stock === 0
                   ? tr("listing.out_of_stock", "Out of stock")
                   : tr("listing.add_to_cart", "Add to cart")}
-              </button>
-            </div>
-          </article>
+              </Pressable>
+            </View>
+          </View>
         ))}
-      </div>
+      </View>
       {!actionData?.loading && products.length === 0 && (
-        <p className="sf-empty">{tr("listing.empty", "No items found.")}</p>
+        <Text as="p" className="sf-empty">{tr("listing.empty", "No items found.")}</Text>
       )}
-    </section>
+    </View>
   );
 };

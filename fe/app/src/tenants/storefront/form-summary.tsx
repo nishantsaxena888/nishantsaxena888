@@ -1,10 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { useEntity } from "@/engine";
 import { useGenericState } from "@/store/use-generic-state";
 import { useConfigStore } from "@/store/use-config-store";
 import { toast } from "@/lib/toast";
 import { useLanguage } from "@/components/shared/language-provider";
+import { useNav } from "@/platform/navigation";
+import { Pressable, Text, TextInput, View } from "@/platform/primitives";
 import { money, makeTr } from "./utils";
 
 // Generic form + summary flow. Renders a form beside a summary of a
@@ -14,7 +15,7 @@ import { money, makeTr } from "./utils";
 // no commerce-specific behavior beyond that contract.
 export const StorefrontFormSummary = ({ content, properties }: any) => {
   const tr = makeTr(useLanguage().t);
-  const navigate = useNavigate();
+  const { navigate } = useNav();
   const session = content?.session || properties?.session || "cart";
   const cartData = useGenericState((s: any) => s.data?.[session]);
   const items = Array.isArray(cartData) ? cartData : [];
@@ -32,11 +33,11 @@ export const StorefrontFormSummary = ({ content, properties }: any) => {
     0,
   );
 
-  const set = (k: string) => (e: any) =>
-    setForm((f) => ({ ...f, [k]: e.target.value }));
+  const set = (k: string) => (v: string) =>
+    setForm((f) => ({ ...f, [k]: v }));
 
-  const placeOrder = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const placeOrder = async (e?: React.FormEvent) => {
+    e?.preventDefault();
     if (!items.length) {
       toast.info(tr("cart.empty", "Your cart is empty"));
       return;
@@ -60,45 +61,45 @@ export const StorefrontFormSummary = ({ content, properties }: any) => {
   };
 
   const field = (key: string, label: string, extra: any = {}) => (
-    <label className="sf-field" key={key}>
-      <span>{label}</span>
-      <input required onChange={set(key)} {...extra} />
-    </label>
+    <View as="label" className="sf-field" key={key}>
+      <Text>{label}</Text>
+      <TextInput required onChangeText={set(key)} {...extra} />
+    </View>
   );
 
   return (
-    <section className="sf-form-view">
-      <h1>{content?.title || tr("checkout.title", "Checkout")}</h1>
-      <div className="sf-summary-layout">
-        <form className="sf-summary-form" onSubmit={placeOrder}>
-          <h3>{tr("checkout.contact", "Contact")}</h3>
+    <View as="section" className="sf-form-view">
+      <Text as="h1">{content?.title || tr("checkout.title", "Checkout")}</Text>
+      <View className="sf-summary-layout">
+        <View as="form" className="sf-summary-form" onSubmit={placeOrder}>
+          <Text as="h3">{tr("checkout.contact", "Contact")}</Text>
           {field("name", tr("address.full_name", "Full name"))}
           {field("email", tr("auth.email", "Email"), { type: "email" })}
           {field("phone", tr("address.phone", "Phone"), { type: "tel" })}
-          <h3>{tr("address.delivery_title", "Delivery")}</h3>
+          <Text as="h3">{tr("address.delivery_title", "Delivery")}</Text>
           {field("address", tr("address.street", "Address"))}
           {field("city", tr("address.city", "City"))}
           {field("zip", tr("address.zip", "ZIP / PIN"))}
-          <button className="sf-cta" disabled={placing}>
+          <Pressable type="submit" className="sf-cta" disabled={placing}>
             {placing ? "…" : `${tr("checkout.place_order", "Place order")} · ${money(total, currency)}`}
-          </button>
-        </form>
-        <aside className="sf-summary-panel">
-          <h3>{items.length} item(s)</h3>
+          </Pressable>
+        </View>
+        <View as="aside" className="sf-summary-panel">
+          <Text as="h3">{items.length} item(s)</Text>
           {items.map((i: any) => (
-            <div key={i.id} className="sf-summary-row">
-              <span>
+            <View key={i.id} className="sf-summary-row">
+              <Text>
                 {i.name} × {i.qty ?? 1}
-              </span>
-              <strong>{money((i.price ?? 0) * (i.qty ?? 1), currency)}</strong>
-            </div>
+              </Text>
+              <Text as="strong">{money((i.price ?? 0) * (i.qty ?? 1), currency)}</Text>
+            </View>
           ))}
-          <div className="sf-summary-total">
-            <span>{tr("cart.total", "Total")}</span>
-            <strong>{money(total, currency)}</strong>
-          </div>
-        </aside>
-      </div>
-    </section>
+          <View className="sf-summary-total">
+            <Text>{tr("cart.total", "Total")}</Text>
+            <Text as="strong">{money(total, currency)}</Text>
+          </View>
+        </View>
+      </View>
+    </View>
   );
 };

@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef, useMemo, useEffect } from 'react';
 import type { FieldSchema, FormSchema, ValidationRule } from './types';
+import { storage } from "@/platform/storage";
 
 /**
  * Utility to get value from nested object by path
@@ -63,7 +64,7 @@ export const useForm = <T extends Record<string, any>>(initialValues: T, schema?
     if (!schema?.persistence) return initialValues;
     
     try {
-      const persisted = localStorage.getItem(`form_persist_${schema.persistence.key}`);
+      const persisted = storage.getItem(`form_persist_${schema.persistence.key}`);
       if (persisted) {
         const parsed = JSON.parse(persisted);
         const merge = (target: any, source: any) => {
@@ -103,7 +104,7 @@ export const useForm = <T extends Record<string, any>>(initialValues: T, schema?
     const persistFields = schema.persistence.fields;
 
     if (!persistFields) {
-      localStorage.setItem(`form_persist_${schema.persistence.key}`, JSON.stringify(values));
+      storage.setItem(`form_persist_${schema.persistence.key}`, JSON.stringify(values));
     } else {
       persistFields.forEach(name => {
         const val = getByPath(values, name);
@@ -111,7 +112,7 @@ export const useForm = <T extends Record<string, any>>(initialValues: T, schema?
           setByPath(dataToPersist, name, val);
         }
       });
-      localStorage.setItem(`form_persist_${schema.persistence.key}`, JSON.stringify(dataToPersist));
+      storage.setItem(`form_persist_${schema.persistence.key}`, JSON.stringify(dataToPersist));
     }
   }, [values, schema?.persistence]);
 
@@ -337,7 +338,7 @@ export const useForm = <T extends Record<string, any>>(initialValues: T, schema?
     setValues(initialValues);
     setErrors({});
     if (schema?.persistence?.key) {
-      localStorage.removeItem(`form_persistence_${schema.persistence.key}`);
+      storage.removeItem(`form_persistence_${schema.persistence.key}`);
     }
   }, [initialValues, schema?.persistence?.key]);
 

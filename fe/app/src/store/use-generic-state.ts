@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { storage } from "@/platform/storage";
 
 export interface GenericStateConfig {
   onUpdate?: (key: string, value: any, nextData: Record<string, any>) => void;
@@ -76,7 +77,7 @@ export const useGenericState = create<GenericStateStore>((set: any) => ({
 
       if (storeConfig.persistentKeys?.includes(key)) {
         try {
-          localStorage.setItem(getStorageKey(key), JSON.stringify(finalValue));
+          storage.setItem(getStorageKey(key), JSON.stringify(finalValue));
         } catch (error) {
           console.error(`[Generic State] Failed to persist key "${key}" to localStorage:`, error);
         }
@@ -102,7 +103,7 @@ export const useGenericState = create<GenericStateStore>((set: any) => ({
       if (storeConfig.persistentKeys) {
         storeConfig.persistentKeys.forEach((key) => {
           try {
-            const valStr = localStorage.getItem(getStorageKey(key));
+            const valStr = storage.getItem(getStorageKey(key));
             if (valStr !== null) {
               persistedData[key] = JSON.parse(valStr);
             }
@@ -128,7 +129,7 @@ export const useGenericState = create<GenericStateStore>((set: any) => ({
 
       if (storeConfig.persistentKeys?.includes(key)) {
         try {
-          localStorage.removeItem(getStorageKey(key));
+          storage.removeItem(getStorageKey(key));
         } catch (error) {
           console.error(`[Generic State] Failed to clear persistent key "${key}" from localStorage:`, error);
         }

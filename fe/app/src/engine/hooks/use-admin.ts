@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { useConfigStore } from "@/store/use-config-store";
+import { storage } from "@/platform/storage";
 
 export const useAdmin = () => {
   const [user, setUser] = useState<any>(null);
@@ -10,7 +11,7 @@ export const useAdmin = () => {
   const config = useConfigStore((state) => state.config);
 
   const logout = useCallback(() => {
-    localStorage.removeItem("token");
+    storage.removeItem("token");
     setUser(null);
     setLoading(false);
     // Role is back to the default — re-filter menus.
@@ -22,7 +23,7 @@ export const useAdmin = () => {
   }, [navigate, config]);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = storage.getItem("token");
     
     if (token) {
       try {
@@ -51,6 +52,6 @@ export const useAdmin = () => {
     logout,
     loading,
     isAuthenticated: !!user,
-    token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
+    token: typeof window !== "undefined" ? storage.getItem("token") : null,
   };
 };

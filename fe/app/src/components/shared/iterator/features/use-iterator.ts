@@ -1,4 +1,5 @@
 import { useMemo, useState, useEffect } from "react";
+import { storage } from "@/platform/storage";
 
 export const useIterator = ({ data, columns, id }: any) => {
   const getStorageKey = () => (id ? `table-${id}-config` : null);
@@ -7,7 +8,7 @@ export const useIterator = ({ data, columns, id }: any) => {
     const key = getStorageKey();
     let parsed: any = null;
     if (key) {
-      const stored = localStorage.getItem(key);
+      const stored = storage.getItem(key);
       if (stored) {
         try {
           parsed = JSON.parse(stored);
@@ -23,7 +24,7 @@ export const useIterator = ({ data, columns, id }: any) => {
   useEffect(() => {
     const key = getStorageKey();
     if (key) {
-      localStorage.setItem(key, JSON.stringify(columnConfig));
+      storage.setItem(key, JSON.stringify(columnConfig));
     }
   }, [columnConfig, id]);
 

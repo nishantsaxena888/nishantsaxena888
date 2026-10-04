@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
 import { useConfigStore } from "@/store/use-config-store";
+import { storage } from "@/platform/storage";
 
 export type LanguageCode = string;
 
@@ -54,7 +55,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     useEffect(() => {
         const savedCode = typeof window !== 'undefined'
-            ? (localStorage.getItem('language') as LanguageCode)
+            ? (storage.getItem('language') as LanguageCode)
             : null;
         const found = languages.find(l => l.code === savedCode);
         // Adopt the saved code when valid, otherwise the client's first
@@ -81,7 +82,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const handleSetLanguage = useCallback((lang: Language) => {
         setCurrentLanguage(lang);
         if (typeof window !== 'undefined') {
-            localStorage.setItem('language', lang.code);
+            storage.setItem('language', lang.code);
             window.location.reload();
         }
     }, []);

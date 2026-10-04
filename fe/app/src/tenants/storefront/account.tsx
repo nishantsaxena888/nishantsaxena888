@@ -4,6 +4,8 @@ import { useConfigStore } from "@/store/use-config-store";
 import { toast } from "@/lib/toast";
 import { useLanguage } from "@/components/shared/language-provider";
 import { listOf, money, makeTr } from "./utils";
+import { storage } from "@/platform/storage";
+import { Pressable, Text, TextInput, View } from "@/platform/primitives";
 
 // Generic account page — profile form (saved to the configured user
 // entity, default "user") + recent orders from the order entity when the
@@ -17,56 +19,56 @@ export const StorefrontAccount = ({ content, actionData }: any) => {
   const user = useEntity(userEntity);
   const [form, setForm] = React.useState<Record<string, string>>(() => {
     try {
-      return JSON.parse(localStorage.getItem("profile") || "{}");
+      return JSON.parse(storage.getItem("profile") || "{}");
     } catch {
       return {};
     }
   });
   const orders = listOf(actionData?.data?.orders);
 
-  const set = (k: string) => (e: any) =>
-    setForm((f) => ({ ...f, [k]: e.target.value }));
+  const set = (k: string) => (v: string) =>
+    setForm((f) => ({ ...f, [k]: v }));
 
-  const save = async (e: React.FormEvent) => {
-    e.preventDefault();
-    localStorage.setItem("profile", JSON.stringify(form));
+  const save = async (e?: React.FormEvent) => {
+    e?.preventDefault();
+    storage.setItem("profile", JSON.stringify(form));
     const res = await user.onPost(form).catch(() => null);
     if (res?.error) toast.error(tr("profile.save_error", "Could not save profile"));
     else toast.success(tr("profile.saved", "Profile saved"));
   };
 
   const field = (key: string, label: string, extra: any = {}) => (
-    <label className="sf-field" key={key}>
-      <span>{label}</span>
-      <input value={form[key] || ""} onChange={set(key)} {...extra} />
-    </label>
+    <View as="label" className="sf-field" key={key}>
+      <Text>{label}</Text>
+      <TextInput value={form[key] || ""} onChangeText={set(key)} {...extra} />
+    </View>
   );
 
   return (
-    <section className="sf-account-view">
-      <h1>{content?.title || tr("profile.title", "My account")}</h1>
-      <div className="sf-summary-layout">
-        <form className="sf-summary-form" onSubmit={save}>
-          <h3>{tr("profile.title", "Profile")}</h3>
+    <View as="section" className="sf-account-view">
+      <Text as="h1">{content?.title || tr("profile.title", "My account")}</Text>
+      <View className="sf-summary-layout">
+        <View as="form" className="sf-summary-form" onSubmit={save}>
+          <Text as="h3">{tr("profile.title", "Profile")}</Text>
           {field("name", tr("address.full_name", "Full name"))}
           {field("email", tr("auth.email", "Email"), { type: "email" })}
           {field("phone", tr("address.phone", "Phone"), { type: "tel" })}
           {field("address", tr("address.street", "Default address"))}
-          <button className="sf-cta">Save</button>
-        </form>
-        <aside className="sf-summary-panel">
-          <h3>{tr("profile.recent_orders", "Recent orders")}</h3>
-          {orders.length === 0 && <p>{tr("profile.no_orders", "No orders yet.")}</p>}
+          <Pressable type="submit" className="sf-cta">Save</Pressable>
+        </View>
+        <View as="aside" className="sf-summary-panel">
+          <Text as="h3">{tr("profile.recent_orders", "Recent orders")}</Text>
+          {orders.length === 0 && <Text as="p">{tr("profile.no_orders", "No orders yet.")}</Text>}
           {orders.map((o: any) => (
-            <div key={o.id} className="sf-summary-row">
-              <span>
+            <View key={o.id} className="sf-summary-row">
+              <Text>
                 #{o.id} · {o.status || "placed"}
-              </span>
-              <strong>{money(o.total, currency)}</strong>
-            </div>
+              </Text>
+              <Text as="strong">{money(o.total, currency)}</Text>
+            </View>
           ))}
-        </aside>
-      </div>
-    </section>
+        </View>
+      </View>
+    </View>
   );
 };

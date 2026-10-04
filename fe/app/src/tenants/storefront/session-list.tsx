@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
 import { Trash2 } from "lucide-react";
 import { useEntity } from "@/engine";
 import { useGenericState } from "@/store/use-generic-state";
 import { useConfigStore } from "@/store/use-config-store";
 import { useLanguage } from "@/components/shared/language-provider";
+import { Anchor, Image, Pressable, Text, View } from "@/platform/primitives";
 import { money, makeTr } from "./utils";
 
 // Generic session-backed item list (a "cart" by config). The session
@@ -11,6 +11,7 @@ import { money, makeTr } from "./utils";
 // properties.session (default "cart"), content.continue_url,
 // content.checkout_url — so the same comp serves any persisted
 // item collection (wishlist, compare, order draft).
+// Platform primitives — ports to RN unchanged.
 export const StorefrontSessionList = ({ content, properties }: any) => {
   const tr = makeTr(useLanguage().t);
   const session = content?.session || properties?.session || "cart";
@@ -34,67 +35,67 @@ export const StorefrontSessionList = ({ content, properties }: any) => {
 
   if (!items.length) {
     return (
-      <section className="sf-session-empty">
-        <h1>{content?.title || tr("cart.title", "Your cart")}</h1>
-        <p>{tr("cart.empty", "Your cart is empty.")}</p>
-        <Link to={continueUrl} className="sf-cta">
+      <View as="section" className="sf-session-empty">
+        <Text as="h1">{content?.title || tr("cart.title", "Your cart")}</Text>
+        <Text as="p">{tr("cart.empty", "Your cart is empty.")}</Text>
+        <Anchor to={continueUrl} className="sf-cta">
           {tr("cart.continue_shopping", "Continue shopping")}
-        </Link>
-      </section>
+        </Anchor>
+      </View>
     );
   }
 
   return (
-    <section className="sf-session">
-      <h1>{content?.title || tr("cart.title", "Your cart")}</h1>
-      <div className="sf-summary-layout">
-        <ul className="sf-session-items">
+    <View as="section" className="sf-session">
+      <Text as="h1">{content?.title || tr("cart.title", "Your cart")}</Text>
+      <View className="sf-summary-layout">
+        <View as="ul" className="sf-session-items">
           {items.map((i: any) => (
-            <li key={i.id} className="sf-session-item">
-              {i.image && <img src={i.image} alt={i.name} />}
-              <div className="sf-session-item-info">
-                <strong>{i.name}</strong>
-                <span>{money(i.price, currency)}</span>
-              </div>
-              <div className="sf-qty">
-                <button onClick={() => setQty(i, (i.qty ?? 1) - 1)}>−</button>
-                <span>{i.qty ?? 1}</span>
-                <button onClick={() => setQty(i, (i.qty ?? 1) + 1)}>+</button>
-              </div>
-              <strong className="sf-line-total">
+            <View as="li" key={i.id} className="sf-session-item">
+              {i.image && <Image src={i.image} alt={i.name} />}
+              <View className="sf-session-item-info">
+                <Text as="strong">{i.name}</Text>
+                <Text>{money(i.price, currency)}</Text>
+              </View>
+              <View className="sf-qty">
+                <Pressable onPress={() => setQty(i, (i.qty ?? 1) - 1)}>−</Pressable>
+                <Text>{i.qty ?? 1}</Text>
+                <Pressable onPress={() => setQty(i, (i.qty ?? 1) + 1)}>+</Pressable>
+              </View>
+              <Text as="strong" className="sf-line-total">
                 {money((i.price ?? 0) * (i.qty ?? 1), currency)}
-              </strong>
-              <button
+              </Text>
+              <Pressable
                 className="sf-remove"
                 aria-label={tr("cart.remove", "Remove")}
-                onClick={() => cart.onDelete(i.id)}
+                onPress={() => cart.onDelete(i.id)}
               >
                 <Trash2 className="h-4 w-4" />
-              </button>
-            </li>
+              </Pressable>
+            </View>
           ))}
-        </ul>
-        <aside className="sf-summary-panel">
-          <h3>{tr("checkout.order_summary", "Order summary")}</h3>
-          <div className="sf-summary-row">
-            <span>{tr("cart.subtotal", "Subtotal")}</span>
-            <strong>{money(total, currency)}</strong>
-          </div>
-          <div className="sf-summary-row">
-            <span>{tr("cart.shipping", "Shipping")}</span>
-            <strong>{total > 30 ? "Free" : money(4.99, currency)}</strong>
-          </div>
-          <div className="sf-summary-total">
-            <span>{tr("cart.total", "Total")}</span>
-            <strong>
+        </View>
+        <View as="aside" className="sf-summary-panel">
+          <Text as="h3">{tr("checkout.order_summary", "Order summary")}</Text>
+          <View className="sf-summary-row">
+            <Text>{tr("cart.subtotal", "Subtotal")}</Text>
+            <Text as="strong">{money(total, currency)}</Text>
+          </View>
+          <View className="sf-summary-row">
+            <Text>{tr("cart.shipping", "Shipping")}</Text>
+            <Text as="strong">{total > 30 ? "Free" : money(4.99, currency)}</Text>
+          </View>
+          <View className="sf-summary-total">
+            <Text>{tr("cart.total", "Total")}</Text>
+            <Text as="strong">
               {money(total + (total > 30 ? 0 : 4.99), currency)}
-            </strong>
-          </div>
-          <Link to={checkoutUrl} className="sf-cta sf-summary-btn">
+            </Text>
+          </View>
+          <Anchor to={checkoutUrl} className="sf-cta sf-summary-btn">
             {tr("checkout.title", "Checkout")}
-          </Link>
-        </aside>
-      </div>
-    </section>
+          </Anchor>
+        </View>
+      </View>
+    </View>
   );
 };

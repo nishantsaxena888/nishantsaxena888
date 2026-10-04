@@ -70,6 +70,7 @@ import {
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { storage } from "@/platform/storage";
 
 // ─── Types & Interfaces ───────────────────────────────────────────────────────
 
@@ -1171,14 +1172,14 @@ export function AddressManager({ onSelectAddress, selectedAddressId, mode = 'man
   ];
 
   useEffect(() => {
-    const savedAddresses = localStorage.getItem('shippingAddresses');
+    const savedAddresses = storage.getItem('shippingAddresses');
     if (savedAddresses) {
       setAddresses(JSON.parse(savedAddresses));
     }
   }, []);
 
   const saveAddresses = (newAddresses: Address[]) => {
-    localStorage.setItem('shippingAddresses', JSON.stringify(newAddresses));
+    storage.setItem('shippingAddresses', JSON.stringify(newAddresses));
     setAddresses(newAddresses);
     window.dispatchEvent(new CustomEvent('addressesUpdated'));
   };
@@ -1765,7 +1766,7 @@ export function CustomerProfilePage({ content, properties: directProperties }: a
   }, [loggedInUser, authLoading, navigate]);
 
   useEffect(() => {
-    const saved = localStorage.getItem("user_profile_data");
+    const saved = storage.getItem("user_profile_data");
     if (saved) {
       try {
         setProfileData(JSON.parse(saved));
@@ -1776,7 +1777,7 @@ export function CustomerProfilePage({ content, properties: directProperties }: a
   }, []);
 
   useEffect(() => {
-    const saved = localStorage.getItem("user_profile_data");
+    const saved = storage.getItem("user_profile_data");
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
@@ -1830,7 +1831,7 @@ export function CustomerProfilePage({ content, properties: directProperties }: a
   };
 
   // Get shipping addresses count from localStorage
-  const savedAddressesStr = localStorage.getItem("shippingAddresses");
+  const savedAddressesStr = storage.getItem("shippingAddresses");
   const savedAddressesCount = savedAddressesStr ? JSON.parse(savedAddressesStr).length : 0;
 
   const stats: MyAccountStats = {
@@ -1859,7 +1860,7 @@ export function CustomerProfilePage({ content, properties: directProperties }: a
 
   const handleSaveProfile = (updatedUser: { name: string; email: string }) => {
     setUserProfile(updatedUser);
-    const existing = localStorage.getItem("user_profile_data");
+    const existing = storage.getItem("user_profile_data");
     let currentData: any = {};
     if (existing) {
       try {
@@ -1876,7 +1877,7 @@ export function CustomerProfilePage({ content, properties: directProperties }: a
         email: updatedUser.email
       }
     };
-    localStorage.setItem("user_profile_data", JSON.stringify(merged));
+    storage.setItem("user_profile_data", JSON.stringify(merged));
   };
 
   return (

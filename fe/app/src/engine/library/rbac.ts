@@ -3,13 +3,14 @@
 // only drives UI filtering (menu/admin_menu entries with `roles: []`).
 // Absent configuration.roles or absent item.roles → visible to everyone.
 import { jwtDecode } from "jwt-decode";
+import { storage } from "@/platform/storage";
 
 // The role the current user holds: token claim, else the client's
 // declared default role, else the first declared role, else "anonymous".
 export function currentRole(config?: any): string {
   try {
     const token =
-      typeof window !== "undefined" ? localStorage.getItem("token") : null;
+      typeof window !== "undefined" ? storage.getItem("token") : null;
     const claim = token ? (jwtDecode(token) as any)?.role : null;
     if (claim) return claim;
   } catch {

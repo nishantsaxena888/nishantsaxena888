@@ -4,6 +4,7 @@ import { NotFound } from "@/pages/not-found/not-found";
 import { usePublicRender } from "../home-page/utils/use-public-render";
 import { PageRenderer } from "../dynamic-page/page-renderer";
 import { SiteNav } from "../site-nav/site-nav";
+import { storage } from "@/platform/storage";
 
 export interface PublicRendererProps {
   config: any;
@@ -19,7 +20,7 @@ export const PublicRenderer = ({ config }: PublicRendererProps) => {
   });
 
   const token =
-    typeof window !== "undefined" ? localStorage.getItem("token") : null;
+    typeof window !== "undefined" ? storage.getItem("token") : null;
 
   // Find the menu item that matches the slug
   const menuList = Array.isArray(config?.data?.menu) ? config.data.menu : [];

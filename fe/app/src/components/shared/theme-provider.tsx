@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState, useMemo, useCallback } 
 import { apiClient } from "@/engine/library/api"
 import { setActiveClient } from "./api-provider"
 import { useConfigStore } from "@/store/use-config-store"
+import { storage } from "@/platform/storage";
 
 export type Theme = string
 
@@ -57,7 +58,7 @@ export function ThemeProvider({
     const [theme, setTheme] = useState<Theme>(() => {
         try {
             if (typeof window !== 'undefined') {
-                return (localStorage.getItem(storageKey) as Theme) || fallbackTheme
+                return (storage.getItem(storageKey) as Theme) || fallbackTheme
             }
             return fallbackTheme
         } catch (e) {
@@ -71,12 +72,12 @@ export function ThemeProvider({
     // stale "fashion-black" after a config switch).
     useEffect(() => {
         if (typeof window === "undefined") return;
-        const stored = localStorage.getItem(storageKey);
+        const stored = storage.getItem(storageKey);
         const first = THEMES[0]?.value;
         const valid = stored && THEMES.some((t) => t.value === stored);
         if (!valid && first && theme !== first) {
             setTheme(first);
-            localStorage.setItem(storageKey, first);
+            storage.setItem(storageKey, first);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [THEMES])
@@ -146,7 +147,7 @@ export function ThemeProvider({
     const handleSetTheme = useCallback((newTheme: Theme, clientOverride?: string) => {
         try {
             if (typeof window !== 'undefined') {
-                localStorage.setItem(storageKey, newTheme)
+                storage.setItem(storageKey, newTheme)
             }
         } catch { /* storage unavailable */ }
 

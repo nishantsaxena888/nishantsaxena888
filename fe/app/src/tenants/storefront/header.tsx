@@ -1,11 +1,13 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { Search, ShoppingCart, User, Heart, Clock, X, Zap } from "lucide-react";
 import { useGenericState } from "@/store/use-generic-state";
 import { useLanguage } from "@/components/shared/language-provider";
 import { LanguageSwitcher } from "@/components/core-component/language-selector/language-switcher";
 import { useConfigStore } from "@/store/use-config-store";
 import { listOf, firstOf, makeTr } from "./utils";
+import { storage } from "@/platform/storage";
+import { useNav } from "@/platform/navigation";
+import { Anchor, Image, Pressable, Text, TextInput, View } from "@/platform/primitives";
 
 // Generic storefront header — matches the reference storefront layout:
 //   topbar (tagline | phone | hours)
@@ -18,8 +20,10 @@ import { listOf, firstOf, makeTr } from "./utils";
 // Cart badge reads the registered "cart" session; sign-in target comes
 // from configuration.admin.login_path. If a client defines no cart
 // session or no auth page, those controls simply render inertly.
+// Platform primitives — ports to RN unchanged (mouse-specific handlers
+// on suggestion rows are the only web-only bits; RN uses onPress).
 export const StorefrontHeader = ({ content, actionData }: any) => {
-  const navigate = useNavigate();
+  const { navigate } = useNav();
   const tr = makeTr(useLanguage().t);
   const config = useConfigStore((s: any) => s.config);
   const header = firstOf(actionData?.data?.data) || content?.data || {};
@@ -35,7 +39,7 @@ export const StorefrontHeader = ({ content, actionData }: any) => {
   const [showSugg, setShowSugg] = React.useState(false);
   const [recent, setRecent] = React.useState<string[]>(() => {
     try {
-      return (JSON.parse(localStorage.getItem("recentSearches") || "[]") as string[])
+      return (JSON.parse(storage.getItem("recentSearches") || "[]") as string[])
         .filter((s) => s && s.trim());
     } catch {
       return [];
@@ -54,7 +58,7 @@ export const StorefrontHeader = ({ content, actionData }: any) => {
   const saveRecent = (term: string) => {
     const next = [term, ...recent.filter((s) => s !== term)].slice(0, 5);
     setRecent(next);
-    localStorage.setItem("recentSearches", JSON.stringify(next));
+    storage.setItem("recentSearches", JSON.stringify(next));
   };
 
   // Category → category-filtered listing; term → query-filtered listing.
@@ -74,185 +78,175 @@ export const StorefrontHeader = ({ content, actionData }: any) => {
     config?.admin?.login_path || config?.admin?.dashboard_path || "/login";
 
   const suggestions = (
-    <div className="sf-sugg">
+    <View className="sf-sugg">
       {q && filteredCats.length > 0 && (
-        <div className="sf-sugg-section">
-          <div className="sf-sugg-label">
-            {tr("search.suggested_categories", "Suggested Categories")}
-          </div>
+        <View className="sf-sugg-section">
+          <View className="sf-sugg-label">
+            <Text>{tr("search.suggested_categories", "Suggested Categories")}</Text>
+          </View>
           {filteredCats.map((c: any) => (
-            <button
+            <Pressable
               key={c.id ?? c.name}
-              onMouseDown={(e) => {
-                e.preventDefault();
-                selectSearch(c.name, true);
-              }}
+              onPress={() => selectSearch(c.name, true)}
               className="sf-sugg-row"
             >
-              <span className="sf-sugg-ic">
+              <Text className="sf-sugg-ic">
                 <Search className="h-4 w-4" />
-              </span>
-              <span className="sf-sugg-name">{c.name}</span>
-            </button>
+              </Text>
+              <Text className="sf-sugg-name">{c.name}</Text>
+            </Pressable>
           ))}
-        </div>
+        </View>
       )}
       {!q && recent.length > 0 && (
-        <div className="sf-sugg-section">
-          <div className="sf-sugg-label">
-            <span>{tr("search.recent", "Recent Searches")}</span>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
+        <View className="sf-sugg-section">
+          <View className="sf-sugg-label">
+            <Text>{tr("search.recent", "Recent Searches")}</Text>
+            <Pressable
+              onPress={(e?: any) => {
+                e?.stopPropagation?.();
                 setRecent([]);
-                localStorage.removeItem("recentSearches");
+                storage.removeItem("recentSearches");
               }}
             >
               {tr("search.clear_all", "Clear All")}
-            </button>
-          </div>
+            </Pressable>
+          </View>
           {recent.map((term) => (
-            <div key={term} className="sf-sugg-rowwrap">
-              <button
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  selectSearch(term);
-                }}
+            <View key={term} className="sf-sugg-rowwrap">
+              <Pressable
+                onPress={() => selectSearch(term)}
                 className="sf-sugg-row"
               >
-                <span className="sf-sugg-ic sf-sugg-ic-muted">
+                <Text className="sf-sugg-ic sf-sugg-ic-muted">
                   <Clock className="h-4 w-4" />
-                </span>
-                <span className="sf-sugg-name">{term}</span>
-              </button>
-              <button
+                </Text>
+                <Text className="sf-sugg-name">{term}</Text>
+              </Pressable>
+              <Pressable
                 className="sf-sugg-x"
-                onClick={(e) => {
-                  e.stopPropagation();
+                onPress={(e?: any) => {
+                  e?.stopPropagation?.();
                   const next = recent.filter((s) => s !== term);
                   setRecent(next);
-                  localStorage.setItem("recentSearches", JSON.stringify(next));
+                  storage.setItem("recentSearches", JSON.stringify(next));
                 }}
               >
                 <X className="h-4 w-4" />
-              </button>
-            </div>
+              </Pressable>
+            </View>
           ))}
-        </div>
+        </View>
       )}
       {!q && catList.length > 0 && (
-        <div className="sf-sugg-cats">
-          <div className="sf-sugg-label">{tr("search.categories", "Categories")}</div>
-          <div className="sf-sugg-grid">
+        <View className="sf-sugg-cats">
+          <View className="sf-sugg-label"><Text>{tr("search.categories", "Categories")}</Text></View>
+          <View className="sf-sugg-grid">
             {catList.slice(0, 4).map((c: any) => (
-              <button
+              <Pressable
                 key={c.id ?? c.name}
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  selectSearch(c.name, true);
-                }}
+                onPress={() => selectSearch(c.name, true)}
                 className="sf-sugg-card"
               >
-                <span className="sf-sugg-ic sf-sugg-ic-big">
+                <Text className="sf-sugg-ic sf-sugg-ic-big">
                   <Zap className="h-5 w-5" />
-                </span>
-                <span className="sf-sugg-cardname">{c.name}</span>
-              </button>
+                </Text>
+                <Text className="sf-sugg-cardname">{c.name}</Text>
+              </Pressable>
             ))}
-          </div>
-        </div>
+          </View>
+        </View>
       )}
-    </div>
+    </View>
   );
 
   const searchBox = (mobile = false) => (
-    <form
+    <View
+      as="form"
       className={`sf-search ${mobile ? "sf-search-mobile" : "sf-search-desktop"}`}
-      onSubmit={(e) => {
+      onSubmit={(e: any) => {
         e.preventDefault();
         selectSearch(q);
       }}
     >
-      <input
+      <TextInput
         value={q}
-        onChange={(e) => setQ(e.target.value)}
+        onChangeText={setQ}
         onFocus={() => setShowSugg(true)}
         onBlur={() => setTimeout(() => setShowSugg(false), 200)}
         placeholder={tr("search.placeholder", "Search for products...")}
       />
-      <button type="submit" aria-label={tr("search.placeholder", "Search")}>
+      <Pressable type="submit" aria-label={tr("search.placeholder", "Search")}>
         <Search className="h-4 w-4" />
-      </button>
+      </Pressable>
       {showSugg && suggestions}
-    </form>
+    </View>
   );
 
   return (
-    <header className="sf-header">
+    <View as="header" className="sf-header">
       {(header.topBarMessage || header.phone || header.hours) && (
-        <div className="sf-topbar">
-          <span>{header.topBarMessage}</span>
-          <span className="sf-topbar-contact">
-            {header.phone && <span>{header.phone}</span>}
-            {header.hours && <span>{header.hours}</span>}
-          </span>
-        </div>
+        <View className="sf-topbar">
+          <Text>{header.topBarMessage}</Text>
+          <Text className="sf-topbar-contact">
+            {header.phone && <Text>{header.phone}</Text>}
+            {header.hours && <Text>{header.hours}</Text>}
+          </Text>
+        </View>
       )}
-      <div className="sf-header-main">
-        <Link to="/" className="sf-logo">
-          <span className="sf-logo-iconbox">
+      <View className="sf-header-main">
+        <Anchor to="/" className="sf-logo">
+          <Text className="sf-logo-iconbox">
             {header.logoUrl ? (
-              <img src={header.logoUrl} alt={header.name} />
+              <Image src={header.logoUrl} alt={header.name} />
             ) : (
-              <span className="sf-logo-icon">{header.logoIcon || "🛒"}</span>
+              <Text className="sf-logo-icon">{header.logoIcon || "🛒"}</Text>
             )}
-          </span>
-          <span className="sf-logo-text">
-            <strong>{header.name || "Store"}</strong>
-            {header.tagline && <em>{header.tagline}</em>}
-          </span>
-        </Link>
+          </Text>
+          <Text className="sf-logo-text">
+            <Text as="strong">{header.name || "Store"}</Text>
+            {header.tagline && <Text as="em">{header.tagline}</Text>}
+          </Text>
+        </Anchor>
         {searchBox(false)}
-        <nav className="sf-header-actions">
+        <View as="nav" className="sf-header-actions">
           <LanguageSwitcher />
-          <button
-            type="button"
+          <Pressable
             className="sf-signin"
-            onClick={() => navigate(signInPath)}
+            onPress={() => navigate(signInPath)}
           >
             <User className="h-4 w-4" />
-            <span className="sf-signin-label">
+            <Text className="sf-signin-label">
               {tr("header.sign_in", "Sign In")}
-            </span>
-          </button>
-          <button
-            type="button"
+            </Text>
+          </Pressable>
+          <Pressable
             className="sf-fav"
             aria-label={tr("header.wishlist", "Wishlist")}
-            onClick={() => navigate("/my-account")}
+            onPress={() => navigate("/my-account")}
           >
             <Heart className="h-5 w-5" />
-          </button>
-          <Link to="/cart" className="sf-session-pill">
+          </Pressable>
+          <Anchor to="/cart" className="sf-session-pill">
             <ShoppingCart className="h-5 w-5" />
-            <span className="sf-session-label">{tr("header.cart", "Cart")}</span>
-            {cartCount > 0 && <span className="sf-session-badge">{cartCount}</span>}
-          </Link>
-        </nav>
-      </div>
+            <Text className="sf-session-label">{tr("header.cart", "Cart")}</Text>
+            {cartCount > 0 && <Text className="sf-session-badge">{cartCount}</Text>}
+          </Anchor>
+        </View>
+      </View>
       {searchBox(true)}
       {categories.length > 0 && (
-        <nav className="sf-catnav">
+        <View as="nav" className="sf-catnav">
           {categories.map((c: any) => {
             const label = typeof c === "string" ? c : c.name;
             return (
-              <Link key={label} to={`/shop?category=${encodeURIComponent(label)}`}>
+              <Anchor key={label} to={`/shop?category=${encodeURIComponent(label)}`}>
                 {label}
-              </Link>
+              </Anchor>
             );
           })}
-        </nav>
+        </View>
       )}
-    </header>
+    </View>
   );
 };

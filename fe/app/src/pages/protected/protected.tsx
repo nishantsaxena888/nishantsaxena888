@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { DashboardRenderer } from "@/components/shared/dashboard-renderer";
+import { storage } from "@/platform/storage";
 
 const Protected = ({ config }: { config: any }) => {
   const navigate = useNavigate();
   const token =
-    typeof window !== "undefined" ? localStorage.getItem("token") : null;
+    typeof window !== "undefined" ? storage.getItem("token") : null;
 
   // Auth is config-driven: admin.require_auth=false → public admin (hello).
   const requireAuth = config?.data?.admin?.require_auth !== false;
