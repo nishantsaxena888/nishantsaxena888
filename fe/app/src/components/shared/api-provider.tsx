@@ -8,10 +8,10 @@ import {
 import { client as bakedClient } from "@/tenants/active";
 
 export const getActiveClient = (): string => {
-  if (typeof window !== "undefined") {
-    const cachedClient = localStorage.getItem("vite-client");
-    if (cachedClient) return cachedClient;
-  }
+  // Clients compile in per build (tenants/active.ts) — a localStorage
+  // override can't work (the other client's components are not in the
+  // bundle) and would mix one client's mocks with another's components.
+  // Switch with `npm run client -- <name>` instead.
   return import.meta.env.VITE_CLIENT || bakedClient;
 };
 
