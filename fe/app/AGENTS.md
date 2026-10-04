@@ -356,6 +356,32 @@ Languages are **config-driven**: `configuration.language[]` =
 - Headless UI smoke: `node scripts/smoke-ui.mjs` (needs the dev servers;
   playwright is a devDependency).
 
+## Testing
+
+Vitest + Testing Library (`npm run test`, watch: `test:watch`). The suite
+is split by *portability*, not by folder — this is what carries tests to
+the React-Native/desktop ports unchanged:
+
+- **`*.test.ts` — node env, zero DOM.** Pure contracts: reducers (session
+  strategies), api-cache (TTL/dedupe/invalidation), rbac (role + menu
+  visibility), api/mock resolution (strict/loose/auto, lang fallback,
+  status/response_type/id), declarative-actions (interpolate + dispatch),
+  tenant merge order + legacy aliases. Anything an RN port reuses is
+  tested here — these files must never import React/DOM APIs.
+- **`*.test.tsx` — jsdom.** View-layer contract only: def.type →
+  component mapping, children recursion, error/loading surfaces,
+  component props → rendered output. External seams (apiClient, stores,
+  useEntity, language) are vi.mocked, so a port swaps the harness, not
+  the assertions.
+
+Data-driven convention: `it.each` tables — add a row, not a test.
+New-behaviour flow (TDD): write the table row/test → watch it fail →
+implement → `npm run test`. Coverage: `npx vitest run --coverage`.
+
+Two real bugs were caught by this suite already: cache keys were not
+language-namespaced (stale data on lang switch) — fixed by carrying the
+lang in the cache namespace.
+
 ## Commands
 
 - `npm run dev` — vite dev server (:5173, `/api` proxied to :8100)
@@ -363,6 +389,7 @@ Languages are **config-driven**: `configuration.language[]` =
 - `npm run build` / `npm run build:<name>` — `tsc -b && vite build`
 - `node scripts/check-mocks.mjs` — validate flagged mock files exist,
   def.type names resolve, and dynamic action endpoints exist
+- `npm run test` / `test:watch` — vitest contract suite (see Testing)
 - `npm run lint` — eslint, both sides of the tenancy boundary
   (`fe/app` + `fe/client` via `fe/eslint.config.js`)
 - `node scripts/smoke-ui.mjs` — headless browser smoke across all client

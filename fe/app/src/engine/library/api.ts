@@ -137,9 +137,12 @@ export const apiClient = async <T = any>(
   // Read-through cache — OPTIONS are session-stable, GETs short-TTL.
   // Mutations invalidate their endpoint prefix so writes never leave
   // stale reads behind. Dedupe merges prefetch + render calls into one.
+  // The cache namespace carries the language too — switching lang
+  // mid-session must not serve the previous language's rows.
+  const cacheNs = `${globalApiClient}#${globalApiLang}`;
   const isRead = method === "get" || method === "options";
   const key = isRead
-    ? apiCacheKey(globalApiClient, endpoint, method, { id, ...searchParameter })
+    ? apiCacheKey(cacheNs, endpoint, method, { id, ...searchParameter })
     : "";
   if (isRead) {
     const hit = cacheRead(key);
@@ -149,7 +152,7 @@ export const apiClient = async <T = any>(
   if (isRead && !response.error) {
     (method === "options" ? cacheSchema : cacheWrite)(key, response);
   }
-  if (!isRead && !response.error) invalidateEndpoint(globalApiClient, endpoint);
+  if (!isRead && !response.error) invalidateEndpoint(cacheNs, endpoint);
   return response;
 
   async function run() {

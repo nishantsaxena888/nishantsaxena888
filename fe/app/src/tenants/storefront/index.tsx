@@ -35,6 +35,7 @@ export const storefront_components = {
   // legacy aliases (same comps, old type names)
   "hero-section": StorefrontBanner,
   products: StorefrontListing,
+  "product-grid": StorefrontListing,
   "cart-view": StorefrontSessionList,
   checkout: StorefrontFormSummary,
   profile: StorefrontAccount,
