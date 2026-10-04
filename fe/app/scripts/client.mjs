@@ -85,6 +85,32 @@ export const mockFiles: Record<string, unknown> = {};`}
 `,
   );
 
+  // React Native twin — Metro resolves .native.ts first. import.meta.glob
+  // is Vite-only; Metro's equivalent is require.context (needs a literal
+  // path, so this file is generated per client exactly like the web one).
+  writeFileSync(
+    join(appDir, "src/tenants/mock-active.native.ts"),
+    `// GENERATED — do not edit by hand.
+// \`npm run client <name>\` rewrites this file. Native variant of
+// mock-active.ts — import.meta.glob is Vite-only; require.context is the
+// Metro equivalent (synchronous like eager:true). Keys are rewritten to
+// the same ../../../client/... shape loadGlobs expects.${m.mock ? `
+const ctx = (require as any).context(
+  "../../../client/${name}/mock",
+  true,
+  /\\.json$/,
+);
+export const mockFiles: Record<string, unknown> = Object.fromEntries(
+  ctx.keys().map((k: string) => [
+    \`../../../client/${name}/mock/\${k.replace(/^\\.\\//, "")}\`,
+    ctx(k),
+  ]),
+);` : `
+// manifest mock:false — no mock files bundled; every call hits the API.
+export const mockFiles: Record<string, unknown> = {};`}
+`,
+  );
+
   // Dev-all bindings: lazy per-client loaders in one generated file.
   // Only imported under import.meta.env.DEV, so production builds
   // tree-shake it away entirely — prod stays single-client lean. Lazy
@@ -129,6 +155,28 @@ export const mockGlobs: Record<string, () => Promise<unknown>> =
   import.meta.glob("../../../client/*/mock/**/*.json");
 `;
   writeFileSync(join(appDir, "src/tenants/dev-all.ts"), dev);
+
+  // Native twin — same loaders (dynamic import() works on Metro), but
+  // mockGlobs comes from require.context instead of import.meta.glob.
+  // require.context is synchronous; keys are wrapped in () => Promise so
+  // ensureClientMocks keeps its lazy contract.
+  const devNative =
+    `// GENERATED — do not edit by hand. Native variant of dev-all.ts;
+// require.context replaces import.meta.glob (see mock-active.native.ts).
+` + dev.split("export const mockGlobs")[0] + `const __ctx = (require as any).context(
+  "../../../client",
+  true,
+  /\\/mock\\/.*\\.json$/,
+);
+export const mockGlobs: Record<string, () => Promise<unknown>> =
+  Object.fromEntries(
+    __ctx.keys().map((k: string) => [
+      \`../../../client/\${k.replace(/^\\.\\//, "")}\`,
+      () => Promise.resolve(__ctx(k)),
+    ]),
+  );
+`;
+  writeFileSync(join(appDir, "src/tenants/dev-all.native.ts"), devNative);
 
   console.log(`active client → ${name} (${m.title || name})`);
 }

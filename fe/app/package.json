@@ -95,7 +95,7 @@
     "vitest": "^3.2.4"
   },
   "main": "electron/main.cjs",
-  "electron-builder": {
+  "build": {
     "appId": "com.nishify.app",
     "productName": "nishify",
     "directories": {
@@ -125,5 +125,7 @@
         "AppImage"
       ]
     }
-  }
+  },
+  "description": "JSON-driven white-label platform engine",
+  "author": "nishify"
 }

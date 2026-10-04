@@ -10,3 +10,7 @@ be/client/*/data.json
 node_modules/
 dist/
 *.local
+
+# platform build artifacts
+fe/app/release/
+fe/native/dist-export/
