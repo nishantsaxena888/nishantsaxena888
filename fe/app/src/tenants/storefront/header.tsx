@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Search, ShoppingCart, User, Heart } from "lucide-react";
+import { Search, ShoppingCart, User, Heart, Clock, X, Zap } from "lucide-react";
 import { useGenericState } from "@/store/use-generic-state";
 import { useLanguage } from "@/components/shared/language-provider";
 import { LanguageSwitcher } from "@/components/core-component/language-selector/language-switcher";
@@ -32,26 +32,158 @@ export const StorefrontHeader = ({ content, actionData }: any) => {
     ? cartItems.reduce((n: number, i: any) => n + (i.qty ?? 1), 0)
     : 0;
   const [q, setQ] = React.useState("");
+  const [showSugg, setShowSugg] = React.useState(false);
+  const [recent, setRecent] = React.useState<string[]>(() => {
+    try {
+      return (JSON.parse(localStorage.getItem("recentSearches") || "[]") as string[])
+        .filter((s) => s && s.trim());
+    } catch {
+      return [];
+    }
+  });
+
+  const catList = categories.map((c: any, i: number) =>
+    typeof c === "object" && c !== null ? c : { id: i, name: String(c) },
+  );
+  const filteredCats = q
+    ? catList.filter((c: any) =>
+        c.name?.toLowerCase().includes(q.toLowerCase()),
+      )
+    : [];
+
+  const saveRecent = (term: string) => {
+    const next = [term, ...recent.filter((s) => s !== term)].slice(0, 5);
+    setRecent(next);
+    localStorage.setItem("recentSearches", JSON.stringify(next));
+  };
+
+  // Category → category-filtered listing; term → query-filtered listing.
+  const selectSearch = (term: string, isCategory = false) => {
+    if (!term.trim() && !isCategory) return setShowSugg(false);
+    setQ(term);
+    setShowSugg(false);
+    saveRecent(term);
+    navigate(
+      isCategory
+        ? `/shop?category=${encodeURIComponent(term)}`
+        : `/shop?q=${encodeURIComponent(term)}`,
+    );
+  };
 
   const signInPath =
     config?.admin?.login_path || config?.admin?.dashboard_path || "/login";
+
+  const suggestions = (
+    <div className="sf-sugg">
+      {q && filteredCats.length > 0 && (
+        <div className="sf-sugg-section">
+          <div className="sf-sugg-label">
+            {tr("search.suggested_categories", "Suggested Categories")}
+          </div>
+          {filteredCats.map((c: any) => (
+            <button
+              key={c.id ?? c.name}
+              onMouseDown={(e) => {
+                e.preventDefault();
+                selectSearch(c.name, true);
+              }}
+              className="sf-sugg-row"
+            >
+              <span className="sf-sugg-ic">
+                <Search className="h-4 w-4" />
+              </span>
+              <span className="sf-sugg-name">{c.name}</span>
+            </button>
+          ))}
+        </div>
+      )}
+      {!q && recent.length > 0 && (
+        <div className="sf-sugg-section">
+          <div className="sf-sugg-label">
+            <span>{tr("search.recent", "Recent Searches")}</span>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setRecent([]);
+                localStorage.removeItem("recentSearches");
+              }}
+            >
+              {tr("search.clear_all", "Clear All")}
+            </button>
+          </div>
+          {recent.map((term) => (
+            <div key={term} className="sf-sugg-rowwrap">
+              <button
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  selectSearch(term);
+                }}
+                className="sf-sugg-row"
+              >
+                <span className="sf-sugg-ic sf-sugg-ic-muted">
+                  <Clock className="h-4 w-4" />
+                </span>
+                <span className="sf-sugg-name">{term}</span>
+              </button>
+              <button
+                className="sf-sugg-x"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const next = recent.filter((s) => s !== term);
+                  setRecent(next);
+                  localStorage.setItem("recentSearches", JSON.stringify(next));
+                }}
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+      {!q && catList.length > 0 && (
+        <div className="sf-sugg-cats">
+          <div className="sf-sugg-label">{tr("search.categories", "Categories")}</div>
+          <div className="sf-sugg-grid">
+            {catList.slice(0, 4).map((c: any) => (
+              <button
+                key={c.id ?? c.name}
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  selectSearch(c.name, true);
+                }}
+                className="sf-sugg-card"
+              >
+                <span className="sf-sugg-ic sf-sugg-ic-big">
+                  <Zap className="h-5 w-5" />
+                </span>
+                <span className="sf-sugg-cardname">{c.name}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
 
   const searchBox = (mobile = false) => (
     <form
       className={`sf-search ${mobile ? "sf-search-mobile" : "sf-search-desktop"}`}
       onSubmit={(e) => {
         e.preventDefault();
-        if (q.trim()) navigate(`/shop?q=${encodeURIComponent(q.trim())}`);
+        selectSearch(q);
       }}
     >
       <input
         value={q}
         onChange={(e) => setQ(e.target.value)}
+        onFocus={() => setShowSugg(true)}
+        onBlur={() => setTimeout(() => setShowSugg(false), 200)}
         placeholder={tr("search.placeholder", "Search for products...")}
       />
       <button type="submit" aria-label={tr("search.placeholder", "Search")}>
         <Search className="h-4 w-4" />
       </button>
+      {showSugg && suggestions}
     </form>
   );
 
