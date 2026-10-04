@@ -6,10 +6,10 @@
 // Bundling:
 //   PROD — tenants/mock-active.ts glob (generated) covers ONLY the baked
 //          client; other clients' mock JSON is never in the bundle.
-//   DEV  — tenants/dev-all.ts adds every client's glob so parallel dev
-//          servers can serve any client without regenerating. The
-//          import.meta.env.DEV guard is statically replaced → dropped
-//          from prod bundles.
+//   DEV  — tenants/dev-all.ts exports one lazy () => import() per mock
+//          file across every client. ensureClientMocks(client) imports
+//          only the requested client's prefix, so a tree of thousands of
+//          clients never ships its mocks up front.
 // A client with no mock/ folder gets an empty map and every call falls
 // through to the real API — the ApiResponse contract never changes.
 import type { ApiConfigMap } from "./api";
@@ -54,12 +54,32 @@ function loadGlobs(globsByClient: Record<string, Record<string, any>>) {
   }
 }
 
-// Baked client loads synchronously. Dev adds every client's globs lazily —
-// mockReady must resolve before resolveMock reads the maps (api.ts awaits
-// it). No top-level await: a TLA here deadlocks the module graph
-// (mock-data → dev-all → client comps → @/engine → api → mock-data).
+// Baked client loads synchronously — its glob is eager in mock-active.ts.
 loadGlobs({ [bakedClient]: mockFiles as Record<string, any> });
 
-export const mockReady: Promise<void> = import.meta.env.DEV
-  ? import("../../tenants/dev-all").then(({ mockGlobs }) => loadGlobs(mockGlobs))
-  : Promise.resolve();
+const mocksLoaded = new Set<string>([bakedClient]);
+
+// Dev: import every mock file under ../../../client/<name>/mock/ on first
+// use. Idempotent; apiClient awaits this before resolveMock reads maps.
+export async function ensureClientMocks(name: string): Promise<void> {
+  if (!import.meta.env.DEV || !name || mocksLoaded.has(name)) return;
+  mocksLoaded.add(name);
+  const { mockGlobs } = await import("../../tenants/dev-all");
+  const prefix = `../../../client/${name}/mock/`;
+  const loaded = await Promise.all(
+    Object.entries(mockGlobs)
+      .filter(([p]) => p.startsWith(prefix))
+      .map(async ([p, load]) => [p, await load()] as const),
+  );
+  loadGlobs({ [name]: Object.fromEntries(loaded) });
+}
+
+const requested =
+  import.meta.env.VITE_CLIENT ||
+  (typeof window !== "undefined" && localStorage.getItem("vite-client")) ||
+  bakedClient;
+
+// Back-compat name — resolves once the requested client's mocks are in.
+// apiClient calls ensureClientMocks(globalApiClient) per request anyway,
+// so switching clients mid-session also loads on demand.
+export const mockReady: Promise<void> = ensureClientMocks(requested);

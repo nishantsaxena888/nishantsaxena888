@@ -32,6 +32,9 @@ entities = {
 
     "todo": {
         "source": "json",   # implementation is secondary — swap sources freely
+        # RBAC demo: anyone (incl. anonymous) reads, only the "admin" role
+        # writes. Roles are declared in configuration.json "roles".
+        "rbac": {"read": "*", "write": ["admin"]},
         "fields": {
             "id":        {"type": "int", "primary_key": True},
             "title":     {"type": "str", "required": True},

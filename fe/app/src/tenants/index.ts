@@ -21,20 +21,52 @@ export const componentsMap: Record<string, Surfaces> = {
   default: { site: {}, admin: { ...layout_components, ...default_admin_component } },
 };
 
-// Dev only: every client's surfaces are merged lazily so multiple dev
-// servers (or localStorage["vite-client"]) can run different clients off
-// the same tree without regenerating. Runtime import, not top-level
-// await — a TLA here deadlocks the graph (index → dev-all → client comps
-// → @/engine → api → mock-data → dev-all). ApiProvider awaits
-// tenantsReady before reading the map. The DEV guard is statically
-// replaced at build — prod never includes dev-all.ts.
+// Which client the runtime is asking for — VITE_CLIENT beats
+// localStorage["vite-client"], baked client is the fallback. Deliberately
+// does NOT check componentsMap: callers use this to know WHAT to load via
+// ensureClient before looking anything up.
+export const requestedClient = (): string =>
+  import.meta.env.VITE_CLIENT ||
+  (typeof window !== "undefined" &&
+    localStorage.getItem("vite-client")) ||
+  client;
+
+// Lazily attach a client's surfaces in dev. dev-all.ts carries one dynamic
+// import() per client — tenant code AND styles become separate chunks, so
+// a tree of thousands of clients costs nothing until it is requested.
+// Prod never sees dev-all (the DEV guard is statically replaced at build);
+// the baked client stays eagerly bundled via active.ts.
+export async function ensureClient(name: string): Promise<void> {
+  if (
+    !import.meta.env.DEV ||
+    !name ||
+    name === "default" ||
+    componentsMap[name]
+  ) {
+    return;
+  }
+  const { clientLoaders } = await import("./dev-all");
+  const l = clientLoaders[name];
+  if (!l) return;
+  const [site, admin] = await Promise.all([l.site(), l.admin()]);
+  await Promise.all(l.styles.map((load) => load()));
+  componentsMap[name] = {
+    site: {
+      ...layout_components,
+      ...storefront_components,
+      ...site.default.components,
+    },
+    admin: {
+      ...layout_components,
+      ...default_admin_component,
+      ...admin.default.components,
+    },
+  };
+}
+
+// Resolved by ApiProvider before first render so a requested client
+// (VITE_CLIENT/localStorage) has its map ready. No top-level await — the
+// promise never blocks module evaluation.
 export const tenantsReady: Promise<void> = import.meta.env.DEV
-  ? import("./dev-all").then(({ allClients }) => {
-      for (const [name, t] of Object.entries(allClients)) {
-        componentsMap[name] = {
-          site: { ...layout_components, ...storefront_components, ...t.site.components },
-          admin: { ...layout_components, ...default_admin_component, ...t.admin.components },
-        };
-      }
-    })
+  ? ensureClient(requestedClient())
   : Promise.resolve();

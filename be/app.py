@@ -20,7 +20,7 @@ from typing import Any, Dict
 from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 
-from sources import JsonSource, Source
+from sources import HttpSource, JsonSource, Source, SqliteSource
 
 BASE_DIR = Path(__file__).parent
 CLIENT_NAME = os.environ.get("CLIENT_NAME", "hello")
@@ -38,11 +38,59 @@ def _load_client_entities(client_dir: Path):
 
 entities, ENTITIES_ORDER = _load_client_entities(CLIENT_DIR)
 
-# Source registry — entity's "source" key in the DSL picks one of these.
-# Client data file lives next to its entities.py.
-SOURCES: Dict[str, Source] = {
-    "json": JsonSource(CLIENT_DIR / "data.json", entities),
-}
+
+def _client_config() -> Dict[str, Any]:
+    f = CLIENT_DIR / "configuration.json"
+    return json.loads(f.read_text()) if f.exists() else {}
+
+
+_CONFIG = _client_config()
+
+# ---------------------------------------------------------------------------
+# Named data sources — "db selection per business requirement".
+#
+# be/client/<name>/datasources.json declares named sources:
+#   {"json":  {"kind": "json",   "path": "data.json"},
+#    "shop":  {"kind": "sqlite", "path": "shop.db"},
+#    "crm":   {"kind": "http",   "base_url": "https://api.example.com",
+#              "headers": {"Authorization": "Bearer ..."}}}
+# An entity's DSL "source" key names one entry; absent file → a single
+# "json" source on data.json (old behaviour preserved).
+# ---------------------------------------------------------------------------
+
+
+def _mk_json(cfg: Dict[str, Any]) -> Source:
+    return JsonSource(CLIENT_DIR / cfg.get("path", "data.json"), entities)
+
+
+def _mk_sqlite(cfg: Dict[str, Any]) -> Source:
+    return SqliteSource(CLIENT_DIR / cfg.get("path", "data.db"), entities)
+
+
+def _mk_http(cfg: Dict[str, Any]) -> Source:
+    return HttpSource(cfg["base_url"], cfg.get("headers"))
+
+
+KIND_FACTORIES = {"json": _mk_json, "sqlite": _mk_sqlite, "http": _mk_http}
+
+
+def _load_sources() -> Dict[str, Source]:
+    f = CLIENT_DIR / "datasources.json"
+    declared = json.loads(f.read_text()) if f.exists() else {
+        "json": {"kind": "json", "path": "data.json"},
+    }
+    out: Dict[str, Source] = {}
+    for name, cfg in declared.items():
+        factory = KIND_FACTORIES.get(cfg.get("kind", "json"))
+        if factory is None:
+            raise RuntimeError(
+                f"{CLIENT_NAME}: unknown source kind {cfg.get('kind')!r} "
+                f"for source {name!r} (kinds: {sorted(KIND_FACTORIES)})")
+        out[name] = factory(cfg)
+    return out
+
+
+SOURCES: Dict[str, Source] = _load_sources()
 
 app = FastAPI(title=f"{CLIENT_NAME} entity service", redirect_slashes=False)
 app.add_middleware(
@@ -57,17 +105,76 @@ app.add_middleware(
 def _src(entity: str) -> Source:
     if entity not in entities:
         raise HTTPException(404, f"Unknown entity: {entity}")
-    return SOURCES[entities[entity].get("source", "json")]
+    name = entities[entity].get("source") or next(iter(SOURCES))
+    if name not in SOURCES:
+        raise HTTPException(500, f"Entity '{entity}' uses undeclared source '{name}'")
+    return SOURCES[name]
+
+
+# ---------------------------------------------------------------------------
+# RBAC — config-driven, enforced server-side on the entity surface.
+#
+#   configuration.json "roles": ["anonymous", "viewer", "admin"]
+#     (list of names, or objects {"name": ..., "default": true})
+#   entities.py per-entity "rbac": {"read": "*", "write": ["admin"]}
+#     absent → fully open (back-compat); "*" → any role incl. anonymous.
+# The Bearer token's `role` claim decides; no token → the default role.
+# Dev tokens are unsigned — decoding claims matches the frontend contract;
+# plug a real verifier at the same seam when a client adds real auth.
+# ---------------------------------------------------------------------------
+
+
+def _decode_claims(request: Request) -> Dict[str, Any]:
+    import base64
+    auth = request.headers.get("authorization", "")
+    if not auth.lower().startswith("bearer "):
+        return {}
+    try:
+        payload = auth.split()[1].split(".")[1]
+        pad = "=" * (-len(payload) % 4)
+        return json.loads(base64.urlsafe_b64decode(payload + pad))
+    except Exception:
+        return {}
+
+
+def _roles() -> Dict[str, Any]:
+    roles = _CONFIG.get("roles") or []
+    out: Dict[str, Any] = {}
+    for r in roles:
+        if isinstance(r, str):
+            out[r] = {}
+        elif isinstance(r, dict) and r.get("name"):
+            out[r["name"]] = r
+    return out
+
+
+def _default_role() -> str:
+    roles = _roles()
+    for name, r in roles.items():
+        if r.get("default"):
+            return name
+    return next(iter(roles), "anonymous")
+
+
+def _role(request: Request) -> str:
+    return _decode_claims(request).get("role") or _default_role()
+
+
+def _check_rbac(entity: str, action: str, request: Request) -> None:
+    spec = entities.get(entity, {}).get("rbac")
+    if not spec:
+        return
+    allowed = spec.get(action, "*")
+    if allowed == "*":
+        return
+    role = _role(request)
+    if role not in (allowed if isinstance(allowed, list) else [allowed]):
+        raise HTTPException(403, f"Role '{role}' cannot {action} '{entity}'")
 
 
 @app.get("/")
 def root():
     return {"ok": True, "service": f"{CLIENT_NAME}-entity-api", "entities": ENTITIES_ORDER}
-
-
-def _client_config() -> Dict[str, Any]:
-    f = CLIENT_DIR / "configuration.json"
-    return json.loads(f.read_text()) if f.exists() else {}
 
 
 @app.get("/api/configuration")
@@ -122,8 +229,15 @@ async def login(request: Request):
     same contract: POST → {token, user}."""
     body = await request.json()
     email = (body or {}).get("email") or (body or {}).get("username") or "user@local"
+    # Role claim — body selects one of configuration.roles (rejected if
+    # undeclared); no selection → the default role. RBAC reads this claim.
+    role = (body or {}).get("role")
+    declared = _roles()
+    if role and role not in declared:
+        raise HTTPException(400, f"Unknown role: {role} (roles: {sorted(declared)})")
     import time
-    payload = {"sub": email, "email": email, "exp": int(time.time()) + 86400}
+    payload = {"sub": email, "email": email, "role": role or _default_role(),
+               "exp": int(time.time()) + 86400}
     return {"token": _dev_jwt(payload), "user": {"email": email, "name": email.split("@")[0]}}
 
 
@@ -154,7 +268,9 @@ def federated_search(q: str = "", size: int = 5):
 
 
 @app.get("/api/{entity}/options/")
-def options(entity: str, schema: str = "basic"):
+def options(entity: str, schema: str = "basic", request: Request = None):
+    if request is not None:
+        _check_rbac(entity, "read", request)
     if entity not in entities:
         raise HTTPException(404, f"Unknown entity: {entity}")
     cfg = entities[entity]
@@ -172,17 +288,21 @@ def options(entity: str, schema: str = "basic"):
 
 @app.get("/api/{entity}/")
 def list_items(entity: str, request: Request, response: Response):
-    response.headers["X-Data-Source"] = _src(entity).name
-    return _src(entity).list(entity, request.query_params)
+    _check_rbac(entity, "read", request)
+    src = _src(entity)
+    response.headers["X-Data-Source"] = f"{entities[entity].get('source', 'json')}:{src.name}"
+    return src.list(entity, request.query_params)
 
 
 @app.get("/api/{entity}/{item_id}/")
-def get_item(entity: str, item_id: int):
+def get_item(entity: str, item_id: int, request: Request):
+    _check_rbac(entity, "read", request)
     return _src(entity).get(entity, item_id)
 
 
 @app.post("/api/{entity}/")
 async def create_item(entity: str, request: Request):
+    _check_rbac(entity, "write", request)
     payload: Dict[str, Any] = await request.json()
     if not isinstance(payload, dict):
         raise HTTPException(400, "JSON body must be an object")
@@ -191,12 +311,14 @@ async def create_item(entity: str, request: Request):
 
 @app.put("/api/{entity}/{item_id}/")
 async def update_item(entity: str, item_id: int, request: Request):
+    _check_rbac(entity, "write", request)
     return _src(entity).update(entity, item_id, await request.json())
 
 
 @app.delete("/api/{entity}/{item_id}")
 @app.delete("/api/{entity}/{item_id}/")
-def delete_item(entity: str, item_id: int):
+def delete_item(entity: str, item_id: int, request: Request):
+    _check_rbac(entity, "write", request)
     return _src(entity).delete(entity, item_id)
 
 

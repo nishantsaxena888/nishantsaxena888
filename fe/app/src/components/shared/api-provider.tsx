@@ -6,7 +6,12 @@ import {
   setApiConfiguration,
 } from "@/engine";
 import { client as bakedClient } from "@/tenants/active";
-import { componentsMap, tenantsReady } from "@/tenants";
+import {
+  componentsMap,
+  ensureClient,
+  requestedClient,
+  tenantsReady,
+} from "@/tenants";
 import { useConfigStore } from "@/store/use-config-store";
 
 export const getActiveClient = (): string => {
@@ -59,7 +64,11 @@ const ApiProvider = ({
 
   React.useEffect(() => {
     const handleClientChange = () => {
-      setClientState(getActiveClient());
+      // Dev: the newly requested client's tenant/styles may not be loaded
+      // yet — attach them lazily, then resolve the active name.
+      ensureClient(requestedClient()).then(() =>
+        setClientState(getActiveClient()),
+      );
     };
 
     window.addEventListener("client-change", handleClientChange);

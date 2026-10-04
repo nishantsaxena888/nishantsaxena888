@@ -497,11 +497,6 @@
       "mock": true
     }
   },
-  "pages/home": {
-    "GET": {
-      "mock": true
-    }
-  },
   "pages/shop": {
     "GET": {
       "mock": true

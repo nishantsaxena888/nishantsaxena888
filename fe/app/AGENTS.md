@@ -74,27 +74,42 @@ fe/client/<name>/
   validates it (tenants + declared styles exist), regenerates
   `src/tenants/active.ts` (tenant imports + styles.css imports) and
   `src/tenants/mock-active.ts` (mock glob literal → only this client's mock
-  JSON bundles; `{}` when manifest `mock: false`). `getActiveClient()` =
-  `VITE_CLIENT` env or the generated client — **localStorage does NOT
-  switch clients** (other clients' code is not in the bundle).
+  JSON bundles; `{}` when manifest `mock: false`).
+- **Dev multi-client (lazy)**: `src/tenants/dev-all.ts` (generated) holds
+  one `() => import()` per client's tenant + styles — every client is its
+  own chunk. `ensureClient(name)` in `tenants/index.ts` attaches a client
+  on demand (initial `requestedClient()`, and on `client-change`/`storage`
+  events in ApiProvider). `ensureClientMocks(name)` in
+  `engine/library/mock-data.ts` lazy-loads that client's mock tree the
+  same way (per-request inside apiClient). A tree of thousands of clients
+  costs nothing until requested; prod never sees dev-all (the
+  `import.meta.env.DEV` guard is statically replaced).
 - **New client**: `npm run client -- --new <name>` scaffolds
-  `fe/client/<name>/` + `be/client/<name>/` (working todo entity).
+  `fe/client/<name>/` + `be/client/<name>/` (working todo entity +
+  `datasources.json` + `roles`).
+- **Boundary is enforced by eslint**: app code cannot import `@clients/*`
+  (only the three generated `src/tenants/{active,dev-all,mock-active}.ts`
+  may); client code can import only React + relative paths (+ type-only
+  imports — `RenderComponentProps`/`ClientTenant` from
+  `src/tenants/types.ts`). `npm run lint` covers both sides
+  (`fe/eslint.config.js` is the client-side entry — eslint only lints
+  under its base path).
 - **Surface-scoped maps**: `componentsMap[client] = {site, admin}` in
   `src/tenants/index.ts`. Site routes resolve `def.type` against
-  `storefront_components + site_tenant.components`; admin routes against
-  `default_admin_component + admin_tenant.components` via
-  `AdminSurfaceProvider` mounted at `DashboardRenderer`.
-- **Storefront tenant** (`src/tenants/storefront/`): generic commerce
-  blocks available to every site surface — `header`, `hero-section`,
-  `products`, `footer`, `cart-view`, `checkout`, `profile`,
-  `login-layout-1` (all five auth card variants via
-  `content.config.type`). Def types match the source naming so page
-  definitions port verbatim. A client can override any of them by
-  registering the same `def.type` in its own site tenant.
+  `layout + storefront + site_tenant.components`; admin routes against
+  `layout + default_admin + admin_tenant.components` via
+  `AdminSurfaceProvider` mounted at `DashboardRenderer`. Client wins —
+  registering the same `def.type` overrides the generic comp.
+- **Storefront tenant** (`src/tenants/storefront/`): generic site blocks
+  available to every site surface — canonical `header`, `banner`,
+  `listing`, `session-list`, `form-summary`, `account`, `auth-layout`,
+  `footer` (legacy aliases resolve: `hero-section`, `products`,
+  `cart-view`, `checkout`, `profile`, `login-layout-1`).
 - **`site_nav` config flag**: `configuration.site_nav === false` stands
   the generic `SiteNav` down — clients whose pages bring their own
   `header`/`footer` defs set this (grocery does).
-- `ClientTenant` contract: `src/tenants/types.ts`.
+- `ClientTenant`/`RenderComponentProps`/`ClientManifest` contract:
+  `src/tenants/types.ts`.
 - Per-client builds: `npm run build:hello|grocery|uday` → `dist/<name>`.
 
 ## Mocking (client-owned, removable)
@@ -119,6 +134,37 @@ fe/client/<name>/mock/
   `node scripts/check-mocks.mjs` (fe/app).
 - Remove mocks later = delete `mock/` + drop the mock lines from
   `scripts/client.mjs` output — nothing else references them.
+
+## Backend: named data sources + RBAC (be/)
+
+- **`be/client/<name>/datasources.json`** declares named sources —
+  "db selection per business requirement":
+
+  ```json
+  {"json":  {"kind": "json",   "path": "data.json"},
+   "shop":  {"kind": "sqlite", "path": "shop.db"},
+   "crm":   {"kind": "http",   "base_url": "https://api.example.com",
+             "headers": {"Authorization": "Bearer ..."}}}
+  ```
+
+  An entity's DSL `"source"` key names one entry; missing file → single
+  `json` source on `data.json`. Kinds live in `be/sources.py`
+  (`JsonSource`, `SqliteSource` — one table per entity, `HttpSource` —
+  proxies the entity contract upstream); a `postgres` kind = one more
+  class + registry entry. `X-Data-Source` response header shows
+  `name:kind` per request.
+- **RBAC** is config-driven and enforced server-side:
+  `configuration.json` `"roles": [{"name": "viewer", "default": true},
+  {"name": "admin"}]`; per-entity `"rbac": {"read": "*",
+  "write": ["admin"]}` in `entities.py` (absent → open). The Bearer JWT's
+  `role` claim decides; no token → the `default: true` role.
+  `POST /api/login` accepts `"role"` (validated against declared roles)
+  and embeds the claim.
+- **Frontend mirroring**: `menu`/`admin_menu` entries may carry
+  `"roles": [...]` — `app-provider` filters them via
+  `engine/library/rbac.ts` (token `role` claim or declared default).
+  Hiding is UX only; the backend is the enforcement. Login/logout
+  dispatch `auth-change` → configuration refetches and menus re-filter.
 
 ## Sessions (client-side state)
 
@@ -272,5 +318,7 @@ Languages are **config-driven**: `configuration.language[]` =
 - `npm run dev` — vite dev server (:5173, `/api` proxied to :8100)
 - `npm run client -- <name>` — switch active client (regenerates bindings)
 - `npm run build` / `npm run build:<name>` — `tsc -b && vite build`
-- `node scripts/check-mocks.mjs` — validate flagged mock files exist
-- `npm run lint` — eslint
+- `node scripts/check-mocks.mjs` — validate flagged mock files exist,
+  def.type names resolve, and dynamic action endpoints exist
+- `npm run lint` — eslint, both sides of the tenancy boundary
+  (`fe/app` + `fe/client` via `fe/eslint.config.js`)

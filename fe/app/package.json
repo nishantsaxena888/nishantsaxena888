@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
+    "lint": "eslint . && cd .. && ./app/node_modules/.bin/eslint client",
     "preview": "vite preview",
     "client": "node scripts/client.mjs",
     "build:hello": "node scripts/client.mjs hello && tsc -b && vite build --outDir dist/hello",

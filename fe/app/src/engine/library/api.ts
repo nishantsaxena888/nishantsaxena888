@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { type AxiosRequestConfig, AxiosError } from "axios";
-import { mockConfigByClient, mockDataByClient, mockReady } from "./mock-data";
+import { ensureClientMocks, mockConfigByClient, mockDataByClient } from "./mock-data";
 
 export type HttpMethod =
   | "get"
@@ -245,7 +245,9 @@ async function resolveMock(
   // Registry from the active client's mock/config.json (bundled via the
   // generated tenant globs). In dev the per-client trees load lazily —
   // wait for them so a mock:true flag isn't read before its files are in.
-  await mockReady;
+  // Per-request (not a one-shot promise) so switching clients mid-session
+  // also loads that client's tree on demand.
+  await ensureClientMocks(globalApiClient);
   const registry = mockConfigByClient[globalApiClient];
   if (!registry) return null;
 

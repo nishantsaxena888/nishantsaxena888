@@ -111,11 +111,15 @@ fe/app. Delete `mock/` when the real API takes over.
 ## Rules
 
 - Cross-client-useful → `fe/app` (generic). Only-this-client → here.
+- **Boundary (eslint-enforced)**: client code imports React packages +
+  own-folder relative paths only. No `@/` engine imports, no `../` into
+  other clients — type-only imports of the contract
+  (`RenderComponentProps`, `ClientTenant` in `fe/app/src/tenants/types.ts`)
+  are allowed. Everything the component needs arrives via props; when a
+  capability is missing, add it generically in `fe/app` and pass it down.
 - Admin needs nothing: `admin/tenant.ts` exports `{ components: {} }` and
   the OPTIONS-driven `default-admin` + media manager cover CRUD screens.
   Add a client admin comp only for screens beyond the generic grid.
-- Engine deps through the `@/` alias only (`useEntity`, `@/lib/toast`) —
-  client folders are outside `src/`, so `sonner` etc. don't resolve here.
 - CSS: prefer theme vars (`bg-primary`, `text-foreground`…) — values come
   from the client's `style-configs`. Bespoke css → `site/styles.css` /
   `admin/styles.css`; `npm run client -- <name>` bundles them

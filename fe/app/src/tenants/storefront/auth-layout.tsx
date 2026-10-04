@@ -111,6 +111,9 @@ export const StorefrontAuthLayout = ({ content }: any) => {
       // returns a real JWT); otherwise mint an unsigned dev one.
       const token = res?.data?.token || devJwt(form.email || "user@local");
       localStorage.setItem("token", token);
+      // Role claim may have changed — AppProvider re-fetches configuration
+      // and re-filters menus for the new role.
+      window.dispatchEvent(new Event("auth-change"));
     }
     if (action.navigation) navigate(action.navigation);
     else navigate("/");

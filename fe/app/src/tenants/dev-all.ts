@@ -1,27 +1,36 @@
 // GENERATED — do not edit by hand.
 // `npm run client <name>` rewrites this file. Dev only: imported under
-// import.meta.env.DEV so prod builds drop it completely.
-import grocery_site from "@clients/grocery/site/tenant";
-import grocery_admin from "@clients/grocery/admin/tenant";
-import "@clients/grocery/site/styles.css";
-import "@clients/grocery/admin/styles.css";
-import hello_site from "@clients/hello/site/tenant";
-import hello_admin from "@clients/hello/admin/tenant";
-import "@clients/hello/site/styles.css";
-import "@clients/hello/admin/styles.css";
-import uday_site from "@clients/uday/site/tenant";
-import uday_admin from "@clients/uday/admin/tenant";
-import "@clients/uday/site/styles.css";
-import "@clients/uday/admin/styles.css";
+// import.meta.env.DEV so prod builds drop it completely. Dynamic imports
+// (not static) — dev-all never eagerly bundles any client's code.
+import type { ClientTenant } from "./types";
 
-export const allClients = {
-  grocery: { site: grocery_site, admin: grocery_admin },
-  hello: { site: hello_site, admin: hello_admin },
-  uday: { site: uday_site, admin: uday_admin },
+type TenantModule = { default: ClientTenant };
+type ClientLoader = {
+  site: () => Promise<TenantModule>;
+  admin: () => Promise<TenantModule>;
+  styles: (() => Promise<unknown>)[];
 };
 
-export const mockGlobs = {
-  grocery: import.meta.glob("../../../client/grocery/mock/**/*.json", { eager: true }),
-  hello: import.meta.glob("../../../client/hello/mock/**/*.json", { eager: true }),
-  uday: import.meta.glob("../../../client/uday/mock/**/*.json", { eager: true }),
+export const clientLoaders: Record<string, ClientLoader> = {
+  grocery: {
+    site: () => import("@clients/grocery/site/tenant"),
+    admin: () => import("@clients/grocery/admin/tenant"),
+    styles: [() => import("@clients/grocery/site/styles.css"), () => import("@clients/grocery/admin/styles.css")],
+  },
+  hello: {
+    site: () => import("@clients/hello/site/tenant"),
+    admin: () => import("@clients/hello/admin/tenant"),
+    styles: [() => import("@clients/hello/site/styles.css"), () => import("@clients/hello/admin/styles.css")],
+  },
+  uday: {
+    site: () => import("@clients/uday/site/tenant"),
+    admin: () => import("@clients/uday/admin/tenant"),
+    styles: [() => import("@clients/uday/site/styles.css"), () => import("@clients/uday/admin/styles.css")],
+  },
 };
+
+// Lazy mock glob — one () => import() per JSON file, keyed by
+// ../../../client/<name>/mock/<...> path. ensureClientMocks in
+// engine/library/mock-data.ts loads only the requested client's prefix.
+export const mockGlobs: Record<string, () => Promise<unknown>> =
+  import.meta.glob("../../../client/*/mock/**/*.json");

@@ -35,7 +35,10 @@
       "description": "Todo admin",
       "url": "/admin/todo",
       "entity": "todo",
-      "icon": "list"
+      "icon": "list",
+      "roles": [
+        "admin"
+      ]
     }
   ],
   "language": [
@@ -114,5 +117,14 @@
         }
       ]
     }
-  }
+  },
+  "roles": [
+    {
+      "name": "viewer",
+      "default": true
+    },
+    {
+      "name": "admin"
+    }
+  ]
 }

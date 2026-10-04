@@ -85,35 +85,49 @@ export const mockFiles: Record<string, unknown> = {};`}
 `,
   );
 
-  // Dev-all bindings: every client's tenants/styles/mocks in one generated
-  // file. Only imported under import.meta.env.DEV, so production builds
-  // tree-shake it away entirely — prod stays single-client lean.
+  // Dev-all bindings: lazy per-client loaders in one generated file.
+  // Only imported under import.meta.env.DEV, so production builds
+  // tree-shake it away entirely — prod stays single-client lean. Lazy
+  // import()s keep every client in its own chunk, so a tree of thousands
+  // of clients costs nothing until ensureClient() requests one.
   const names = readdirSync(clientDir)
     .filter((d) => existsSync(join(clientDir, d, "client.json")))
     .sort();
 
   let dev = `// GENERATED — do not edit by hand.
 // \`npm run client <name>\` rewrites this file. Dev only: imported under
-// import.meta.env.DEV so prod builds drop it completely.
+// import.meta.env.DEV so prod builds drop it completely. Dynamic imports
+// (not static) — dev-all never eagerly bundles any client's code.
+import type { ClientTenant } from "./types";
+
+type TenantModule = { default: ClientTenant };
+type ClientLoader = {
+  site: () => Promise<TenantModule>;
+  admin: () => Promise<TenantModule>;
+  styles: (() => Promise<unknown>)[];
+};
+
+export const clientLoaders: Record<string, ClientLoader> = {
 `;
-  const entries = [];
-  const globs = [];
   for (const n of names) {
     const manifest = readManifest(clientDir, n);
-    dev += `import ${n}_site from "@clients/${n}/site/tenant";\n`;
-    dev += `import ${n}_admin from "@clients/${n}/admin/tenant";\n`;
-    for (const s of SURFACES) {
-      if (manifest?.surfaces?.[s]?.styles)
-        dev += `import "@clients/${n}/${s}/styles.css";\n`;
-    }
-    entries.push(`  ${n}: { site: ${n}_site, admin: ${n}_admin },`);
-    if (manifest?.mock)
-      globs.push(
-        `  ${n}: import.meta.glob("../../../client/${n}/mock/**/*.json", { eager: true }),`,
-      );
+    const styleLoads = SURFACES.filter((s) => manifest?.surfaces?.[s]?.styles)
+      .map((s) => `() => import("@clients/${n}/${s}/styles.css")`)
+      .join(", ");
+    dev += `  ${n}: {
+    site: () => import("@clients/${n}/site/tenant"),
+    admin: () => import("@clients/${n}/admin/tenant"),
+    styles: [${styleLoads}],
+  },\n`;
   }
-  dev += `\nexport const allClients = {\n${entries.join("\n")}\n};\n`;
-  dev += `\nexport const mockGlobs = {\n${globs.join("\n")}\n};\n`;
+  dev += `};
+
+// Lazy mock glob — one () => import() per JSON file, keyed by
+// ../../../client/<name>/mock/<...> path. ensureClientMocks in
+// engine/library/mock-data.ts loads only the requested client's prefix.
+export const mockGlobs: Record<string, () => Promise<unknown>> =
+  import.meta.glob("../../../client/*/mock/**/*.json");
+`;
   writeFileSync(join(appDir, "src/tenants/dev-all.ts"), dev);
 
   console.log(`active client → ${name} (${m.title || name})`);
@@ -203,6 +217,10 @@ entities = {
         meta: { client: name, site_name: name, title: name },
         home_page: "pages/home",
         admin: { require_auth: false, logout_redirect: "/" },
+        // RBAC — roles the login endpoint may mint. Menu/admin_menu
+        // entries may carry "roles": ["admin"] to hide per role; entities
+        // get "rbac": {"read": "*", "write": ["admin"]} in entities.py.
+        roles: [{ name: "viewer", default: true }, { name: "admin" }],
         menu: [
           { name: "Home", url: "/", entity: "pages/home", public: true, order: 0 },
         ],
@@ -243,9 +261,21 @@ entities = {
     ) + "\n",
   );
 
+  // Named data sources — entity DSL "source" keys pick one of these.
+  // kinds: json | sqlite | http. Add more entries per business need.
+  put(join(be, "datasources.json"),
+    JSON.stringify(
+      {
+        json: { kind: "json", path: "data.json" },
+      },
+      null,
+      2,
+    ) + "\n",
+  );
+
   console.log(`scaffolded ${name}:
   fe/client/${name}/   client.json + site/ + admin/
-  be/client/${name}/   entities.py + configuration.json
+  be/client/${name}/   entities.py + configuration.json + datasources.json
 next: npm run client -- ${name}   then CLIENT_NAME=${name} on the backend`);
 }
 

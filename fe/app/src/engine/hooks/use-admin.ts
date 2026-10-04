@@ -13,7 +13,9 @@ export const useAdmin = () => {
     localStorage.removeItem("token");
     setUser(null);
     setLoading(false);
-    
+    // Role is back to the default — re-filter menus.
+    window.dispatchEvent(new Event("auth-change"));
+
     // Dynamic redirect from config
     const redirectPath = config?.admin?.logout_redirect || "/login";
     navigate(redirectPath, { replace: true });

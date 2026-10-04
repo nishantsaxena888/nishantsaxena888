@@ -4,6 +4,7 @@ import { useConfigStore } from "@/store/use-config-store";
 import { useGenericState } from "@/store/use-generic-state";
 import { apiClient } from "@/engine";
 import { buildConfigFromSessions } from "@/engine/library/reducers";
+import { currentRole, visibleByRole } from "@/engine/library/rbac";
 
 type AppProviderProps = {
   children: (data: any, loading: boolean) => React.ReactNode;
@@ -42,6 +43,15 @@ const AppProvider = ({ children }: AppProviderProps) => {
     });
     setData(response);
     if (response?.data) {
+      // RBAC: hide menu/admin_menu entries the current role cannot see.
+      // The backend independently enforces read/write on entities — this
+      // is UI filtering only (hidden menus don't grant access anyway).
+      const role = currentRole(response.data);
+      response.data = {
+        ...response.data,
+        menu: visibleByRole(response.data.menu, role),
+        admin_menu: visibleByRole(response.data.admin_menu, role),
+      };
       setConfig(response.data);
       const sessions = response.data.sessions || [];
       if (sessions.length > 0) {
@@ -55,6 +65,10 @@ const AppProvider = ({ children }: AppProviderProps) => {
 
   useEffect(() => {
     loadData();
+    // Re-fetch on login/logout so menus re-filter for the new role.
+    const onAuthChange = () => loadData();
+    window.addEventListener("auth-change", onAuthChange);
+    return () => window.removeEventListener("auth-change", onAuthChange);
   }, []);
 
   return <div>{loading ? <StaticLoader /> : children(data, loading)}</div>;
