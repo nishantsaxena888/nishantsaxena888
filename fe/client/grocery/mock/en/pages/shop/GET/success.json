@@ -81,9 +81,11 @@
            },
            "content": {
             "hero": {
-             "title": "Fresh this week",
-             "subtitle": "Seasonal picks, locally sourced.",
-             "image": "https://images.unsplash.com/photo-1542838132-92c53300491e?w=600"
+             "badge": "Seasonal",
+             "headline": "Fresh this week",
+             "subheadline": "Seasonal picks, locally sourced.",
+             "cta": "Shop deals",
+             "ctaUrl": "/deals"
             }
            }
           }
