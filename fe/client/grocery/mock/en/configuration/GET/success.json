@@ -281,7 +281,7 @@
         },
         {
           "id": "grocery-grid-1",
-          "type": "product-grid",
+          "type": "listing",
           "properties": {
             "level": "base",
             "type": "dynamic",
@@ -309,7 +309,7 @@
       "config": [
         {
           "id": "grocery-grid-shop",
-          "type": "product-grid",
+          "type": "listing",
           "properties": {
             "level": "base",
             "type": "dynamic",
@@ -337,7 +337,7 @@
       "config": [
         {
           "id": "grocery-grid-deals",
-          "type": "product-grid",
+          "type": "listing",
           "properties": {
             "level": "base",
             "type": "dynamic",

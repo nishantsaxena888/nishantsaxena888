@@ -6,7 +6,7 @@
   "data": [
     {
       "id": "checkout-pipeline",
-      "type": "checkout",
+      "type": "form-summary",
       "properties": {
         "level": "base",
         "title": "सुरक्षित चेकआउट",

@@ -6,7 +6,7 @@
   "config": [
     {
       "id": "cart-view-component",
-      "type": "cart-view",
+      "type": "session-list",
       "properties": {
         "title": "शॉपिंग कार्ट",
         "subtitle": "चेकआउट करने से पहले अपने आइटम की समीक्षा और प्रबंधन करें",

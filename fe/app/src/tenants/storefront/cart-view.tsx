@@ -6,17 +6,22 @@ import { useConfigStore } from "@/store/use-config-store";
 import { useLanguage } from "@/components/shared/language-provider";
 import { money, makeTr } from "./utils";
 
-// Generic cart page backed by the client's "cart" session
-// (useGenericState persists it). Reads items live — matches the header
-// badge — and mutates through useEntity session ops.
-export const StorefrontCartView = ({ content }: any) => {
+// Generic session-backed item list (a "cart" by config). The session
+// name, continue/checkout targets and labels all come from def config —
+// properties.session (default "cart"), content.continue_url,
+// content.checkout_url — so the same comp serves any persisted
+// item collection (wishlist, compare, order draft).
+export const StorefrontCartView = ({ content, properties }: any) => {
   const tr = makeTr(useLanguage().t);
-  const cartData = useGenericState((s: any) => s.data?.cart);
+  const session = content?.session || properties?.session || "cart";
+  const continueUrl = content?.continue_url || "/shop";
+  const checkoutUrl = content?.checkout_url || "/checkout";
+  const cartData = useGenericState((s: any) => s.data?.[session]);
   const items = Array.isArray(cartData) ? cartData : [];
   const currency = useConfigStore(
     (s: any) => s.config?.meta?.currency_symbol || "$",
   );
-  const cart = useEntity("cart");
+  const cart = useEntity(session);
 
   const setQty = (item: any, qty: number) => {
     if (qty <= 0) return cart.onDelete(item.id);
@@ -32,7 +37,7 @@ export const StorefrontCartView = ({ content }: any) => {
       <section className="sf-cart-empty">
         <h1>{content?.title || tr("cart.title", "Your cart")}</h1>
         <p>{tr("cart.empty", "Your cart is empty.")}</p>
-        <Link to="/shop" className="sf-cta">
+        <Link to={continueUrl} className="sf-cta">
           {tr("cart.continue_shopping", "Continue shopping")}
         </Link>
       </section>
@@ -85,8 +90,8 @@ export const StorefrontCartView = ({ content }: any) => {
               {money(total + (total > 30 ? 0 : 4.99), currency)}
             </strong>
           </div>
-          <Link to="/checkout" className="sf-cta sf-checkout-btn">
-            Checkout
+          <Link to={checkoutUrl} className="sf-cta sf-checkout-btn">
+            {tr("checkout.title", "Checkout")}
           </Link>
         </aside>
       </div>

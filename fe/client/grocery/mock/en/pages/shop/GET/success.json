@@ -74,7 +74,7 @@
          "children": [
           {
            "id": "shop-promo",
-           "type": "hero-section",
+           "type": "banner",
            "properties": {
             "level": "base",
             "type": "static"
@@ -102,7 +102,7 @@
          "children": [
           {
            "id": "products-shop",
-           "type": "products",
+           "type": "listing",
            "properties": {
             "level": "base",
             "type": "dynamic",

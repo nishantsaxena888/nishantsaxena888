@@ -18,7 +18,7 @@
     },
     {
       "id": "grocery-grid-1",
-      "type": "product-grid",
+      "type": "listing",
       "properties": {
         "level": "base",
         "type": "dynamic",

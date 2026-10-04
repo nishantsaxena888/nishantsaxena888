@@ -29,7 +29,7 @@
     },
     {
       "id": "cart",
-      "type": "cart-view",
+      "type": "session-list",
       "properties": {
         "level": "base",
         "type": "static"

@@ -173,6 +173,28 @@ reads knobs from `content` or `properties`. Example: grocery `/shop` uses
 products)` — responsive stacking on mobile via `span_md`. Verified
 side-by-side at 1400px and stacked at 500px.
 
+## Naming rule: def types are UI-generic, not domain-specific
+
+Generic component type names describe the UI role only — domain words
+belong in the def's labels/config, never in the type:
+
+| Canonical type | Renders | Domain comes from |
+|---|---|---|
+| `banner` | media + headline + CTA | content.hero |
+| `listing` | card grid, item action → named session | actionData + properties.session |
+| `session-list` | named session items + qty + totals | properties.session (default "cart"), content.continue_url/checkout_url |
+| `form-summary` | form + session summary → POST | content.submit_entity, field labels |
+| `account` | record form + related list | content fields |
+| `auth-layout` | auth card variants | content.config.type |
+| `header`/`footer` | page chrome | endpoint data |
+
+`grid`/`col`/`container`/`section`/`stack`/`spacer` (layout primitives) follow
+the same rule. Legacy aliases (`products`, `cart-view`, `checkout`,
+`profile`, `login-layout-1`, `hero-section`) still resolve — new defs must
+use canonical names. Client-repo comps MAY use domain names
+(`course-list`, `hello-banner`) — that's client vocabulary inside its own
+folder.
+
 ## Admin
 
 `/admin/:slug` → `Protected` (JWT `localStorage.token`, `jwt-decode` expiry;

@@ -7,21 +7,23 @@ import { toast } from "@/lib/toast";
 import { useLanguage } from "@/components/shared/language-provider";
 import { money, makeTr } from "./utils";
 
-// Generic checkout — contact/address form + order summary from the cart
-// session. On submit it POSTs to the configured order entity (default
-// "order") and clears the cart. Field labels come from content so a
-// client can restyle without touching the comp.
-export const StorefrontCheckout = ({ content }: any) => {
+// Generic form + summary flow. Renders a form beside a summary of a
+// named session (default "cart"); on submit it POSTs to the configured
+// target entity (content.submit_entity, default "order") and clears the
+// session. Field labels come from content/translations — the comp has
+// no commerce-specific behavior beyond that contract.
+export const StorefrontCheckout = ({ content, properties }: any) => {
   const tr = makeTr(useLanguage().t);
   const navigate = useNavigate();
-  const cartData = useGenericState((s: any) => s.data?.cart);
+  const session = content?.session || properties?.session || "cart";
+  const cartData = useGenericState((s: any) => s.data?.[session]);
   const items = Array.isArray(cartData) ? cartData : [];
   const currency = useConfigStore(
     (s: any) => s.config?.meta?.currency_symbol || "$",
   );
-  const orderEntity = content?.order_entity || "order";
+  const orderEntity = content?.submit_entity || content?.order_entity || "order";
   const orders = useEntity(orderEntity);
-  const cart = useEntity("cart");
+  const cart = useEntity(session);
   const [form, setForm] = React.useState<Record<string, string>>({});
   const [placing, setPlacing] = React.useState(false);
 

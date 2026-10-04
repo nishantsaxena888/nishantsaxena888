@@ -29,7 +29,7 @@
     },
     {
       "id": "products-deals",
-      "type": "products",
+      "type": "listing",
       "properties": {
         "level": "base",
         "type": "dynamic",

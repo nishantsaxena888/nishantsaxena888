@@ -29,7 +29,7 @@
     },
     {
       "id": "profile",
-      "type": "profile",
+      "type": "account",
       "properties": {
         "level": "base",
         "type": "dynamic",

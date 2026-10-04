@@ -29,7 +29,7 @@
     },
     {
       "id": "checkout",
-      "type": "checkout",
+      "type": "form-summary",
       "properties": {
         "level": "base",
         "type": "static"

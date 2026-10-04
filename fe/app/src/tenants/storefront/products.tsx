@@ -5,28 +5,30 @@ import { useLanguage } from "@/components/shared/language-provider";
 import { toast } from "@/lib/toast";
 import { listOf, money, makeTr } from "./utils";
 
-// Generic storefront product grid. Items come from the def's dynamic
-// action (actionData.data.data). "Add to cart" posts to the client's
-// configured cart session when one exists — otherwise it's a no-op with
-// a toast, so the comp stays usable for non-commerce clients.
-export const StorefrontProducts = ({ content, actionData }: any) => {
+// Generic card-grid listing. Items come from the def's dynamic action
+// (actionData.data.data). The card action posts the item to a named
+// session — properties.session / content.session (default "cart") —
+// when that session is configured; otherwise it's a no-op with a toast,
+// so the comp stays usable for any entity list on any client.
+export const StorefrontProducts = ({ content, properties, actionData }: any) => {
   const tr = makeTr(useLanguage().t);
   const products = listOf(actionData?.data?.data);
+  const session = content?.session || properties?.session || "cart";
   const currency = useConfigStore(
     (s: any) => s.config?.meta?.currency_symbol || "$",
   );
   const hasCart = useConfigStore((s: any) =>
-    (s.config?.sessions || []).some((x: any) => x.name === "cart"),
+    (s.config?.sessions || []).some((x: any) => x.name === session),
   );
-  const cart = useEntity("cart");
+  const cart = useEntity(session);
 
   const addToCart = async (p: any) => {
     if (!hasCart) {
-      toast.info("Cart is not configured for this client");
+      toast.info(`Session "${session}" is not configured for this client`);
       return;
     }
     await cart.onPost(p);
-    toast.success(`${p.name} added to cart`);
+    toast.success(tr("listing.added", `${p.name} added`));
   };
 
   if (actionData?.loading) return <div className="sf-grid-loading">Loading…</div>;
@@ -70,7 +72,7 @@ export const StorefrontProducts = ({ content, actionData }: any) => {
         ))}
       </div>
       {!actionData?.loading && products.length === 0 && (
-        <p className="sf-empty">No products found.</p>
+        <p className="sf-empty">{tr("listing.empty", "No items found.")}</p>
       )}
     </section>
   );

@@ -35,7 +35,7 @@
     },
     {
       "id": "hero-section",
-      "type": "hero-section",
+      "type": "banner",
       "properties": {
         "level": "base",
         "type": "static"
@@ -84,7 +84,7 @@
     },
     {
       "id": "products",
-      "type": "products",
+      "type": "listing",
       "properties": {
         "level": "base",
         "type": "dynamic",

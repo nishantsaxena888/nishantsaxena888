@@ -6,7 +6,7 @@
   "config": [
     {
       "id": "register-layout",
-      "type": "login-layout-1",
+      "type": "auth-layout",
       "properties": {
         "level": "base",
         "type": "static"

@@ -6,7 +6,7 @@
   "data": [
     {
       "id": "profile-dashboard",
-      "type": "profile",
+      "type": "account",
       "properties": {
         "level": "base",
         "userDetails": {
