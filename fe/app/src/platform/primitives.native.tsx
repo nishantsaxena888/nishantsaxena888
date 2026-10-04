@@ -35,12 +35,26 @@ type Base = {
   "data-testid"?: string;
 };
 
+// Shared props use web names (aria-*, data-testid); native maps them to
+// RN conventions so one prop works on both platforms.
+const nativeProps = ({
+  "aria-label": ariaLabel,
+  "data-testid": testId,
+  role,
+  ...rest
+}: any) => ({
+  accessibilityLabel: ariaLabel,
+  accessibilityRole: role,
+  testID: testId,
+  ...rest,
+});
+
 export const View = ({ as: _as, ...rest }: Base & { as?: string; [k: string]: any }) => (
-  <RNView {...rest} />
+  <RNView {...nativeProps(rest)} />
 );
 
 export const Text = ({ as: _as, ...rest }: Base & { as?: string; [k: string]: any }) => (
-  <RNText {...rest} />
+  <RNText {...nativeProps(rest)} />
 );
 
 export const Pressable = ({
@@ -65,7 +79,7 @@ export const Pressable = ({
     if (to) navTo(to);
     else if (href) Linking.openURL(href).catch(() => {});
   };
-  return <RNPressable onPress={press} disabled={disabled} {...rest} />;
+  return <RNPressable onPress={press} disabled={disabled} {...nativeProps(rest)} />;
 };
 
 export const Anchor = ({
@@ -80,7 +94,7 @@ export const Anchor = ({
       if (external) Linking.openURL(to).catch(() => {});
       else navTo(to);
     }}
-    {...rest}
+    {...nativeProps(rest)}
   />
 );
 
@@ -89,7 +103,7 @@ export const Image = ({
   alt: _alt,
   ...rest
 }: Base & { src?: string; alt?: string; loading?: "lazy" | "eager" }) => (
-  <RNImage source={src ? { uri: src } : undefined} {...rest} />
+  <RNImage source={src ? { uri: src } : undefined} {...nativeProps(rest)} />
 );
 
 export const TextInput = ({
@@ -114,10 +128,10 @@ export const TextInput = ({
   <RNTextInput
     editable={!rest.disabled}
     onChangeText={onChangeText}
-    {...rest}
+    {...nativeProps(rest)}
   />
 );
 
 export const ScrollView = (props: Base & { [k: string]: any }) => (
-  <RNScrollView {...props} />
+  <RNScrollView {...nativeProps(props)} />
 );

@@ -29,7 +29,9 @@ function createWindow() {
     return { action: "deny" };
   });
 
-  win.loadFile(path.join(__dirname, "..", DIST, "index.html"));
+  const index = path.resolve(__dirname, "..", DIST, "index.html");
+  console.log("[electron] loading", index);
+  win.loadFile(index);
 }
 
 app.whenReady().then(() => {

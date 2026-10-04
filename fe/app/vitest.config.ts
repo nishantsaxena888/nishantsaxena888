@@ -18,6 +18,18 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
       nishify: path.resolve(__dirname, "./src/nishify.ts"),
       "@clients": path.resolve(__dirname, "../client"),
+      // *.native.* files get their real modules under Metro; in tests they
+      // resolve to react-native-web + in-memory stubs so the adapters are
+      // actually rendered and exercised, not just type-checked.
+      "react-native": path.resolve(__dirname, "src/test/react-native-stub.ts"),
+      "@react-navigation/native": path.resolve(
+        __dirname,
+        "src/test/react-navigation-stub.ts",
+      ),
+      "@react-native-async-storage/async-storage": path.resolve(
+        __dirname,
+        "src/test/async-storage-stub.ts",
+      ),
     },
     dedupe: ["react", "react-dom", "zustand"],
   },

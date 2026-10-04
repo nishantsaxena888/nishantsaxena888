@@ -28,6 +28,11 @@ declare module "@react-navigation/native" {
   export const NavigationContainer: any;
 }
 
+// Test-time only: vitest aliases "react-native" to a stub that re-exports
+// react-native-web — decl keeps tsc happy; runtime types come from the
+// real react-native decl above when the native app builds.
+declare module "react-native-web";
+
 declare module "@react-native-async-storage/async-storage" {
   const AsyncStorage: {
     getItem(key: string): Promise<string | null>;
