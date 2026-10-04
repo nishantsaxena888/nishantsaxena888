@@ -12,6 +12,8 @@ export interface Definition {
   content: any;
   children?: Definition[];
   config?: any;
+  // Implicit RBAC — role names allowed to render this def; absent/"*" = all.
+  roles?: string[];
 }
 
 interface Action {

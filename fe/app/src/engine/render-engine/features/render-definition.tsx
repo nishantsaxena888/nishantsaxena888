@@ -3,19 +3,33 @@ import { type  Definition, type RenderComponentProps } from './types';
 import { useRenderEngine } from './render-engine-context';
 import { useDynamicData } from './use-dynamic-data';
 import { useFormStyleStore } from '@/store/use-form-style';
+import { useConfigStore } from '@/store/use-config-store';
+import { currentRole, roleAllowed } from '@/engine/library/rbac';
 
 interface RenderDefinitionProps {
   def: Definition;
   config?: any;
 }
 
+// Implicit RBAC — def.roles (or properties.roles) gates the whole
+// component. The backend should ALSO filter defs per role when serving
+// the page; this is the render-side mirror so nothing role-locked mounts
+// (no fetch, no DOM) even if it reaches the client. The gate lives in this
+// outer wrapper — before useDynamicData's fetch effect — so a blocked def
+// never fires its action calls.
 export function RenderDefinition({ def, config }: RenderDefinitionProps) {
+  const role = currentRole(useConfigStore((s: any) => s.config));
+  if (!roleAllowed(def.roles ?? def.properties?.roles, role)) return null;
+  return <RenderDefinitionInner def={def} config={config} />;
+}
+
+function RenderDefinitionInner({ def, config }: RenderDefinitionProps) {
   const { componentMap } = useRenderEngine();
   const { themeName } = useFormStyleStore();
   const Component = componentMap[def.type] as React.ComponentType<RenderComponentProps>;
-  
+
   const { apiData, loading, skeletonLoading, error, firstLoadError, action, searchParameters } = useDynamicData(def);
-  
+
   const children = def.children?.map(child => (
     <RenderDefinition key={child.id} def={child} config={config} />
   )) || [];

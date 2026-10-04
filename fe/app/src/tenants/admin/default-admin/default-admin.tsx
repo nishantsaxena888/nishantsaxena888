@@ -14,6 +14,8 @@ import {
   exportCsv,
   runDeclarativeAction,
 } from "./utils/declarative-actions";
+import { useConfigStore } from "@/store/use-config-store";
+import { currentRole, roleAllowed } from "@/engine/library/rbac";
 
 export const DefaultAdmin = (prop: any) => {
   const {
@@ -41,9 +43,15 @@ export const DefaultAdmin = (prop: any) => {
   const [selectedRows, setSelectedRows] = useState<any[]>([]);
 
   // Declarative table actions — OPTIONS content.table.row_actions /
-  // bulk_actions / export drive this generic executor.
-  const rowActions = table?.row_actions || [];
-  const bulkActions = table?.bulk_actions || [];
+  // bulk_actions / export drive this generic executor. Each action may
+  // carry `roles` — filtered here the same way the backend filters them.
+  const role = currentRole(useConfigStore((s: any) => s.config));
+  const rowActions = (table?.row_actions || []).filter((a: any) =>
+    roleAllowed(a.roles, role),
+  );
+  const bulkActions = (table?.bulk_actions || []).filter((a: any) =>
+    roleAllowed(a.roles, role),
+  );
   const exportable = table?.export === true;
   const entity = prop.config?.activePage?.entity;
 

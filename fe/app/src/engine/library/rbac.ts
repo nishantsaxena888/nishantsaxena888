@@ -25,8 +25,11 @@ export function currentRole(config?: any): string {
 // "*", or includes the current role.
 export function visibleByRole(items: any[] | undefined, role: string): any[] {
   if (!Array.isArray(items)) return [];
-  return items.filter((it) => {
-    const allowed = it?.roles;
-    return !Array.isArray(allowed) || allowed.includes("*") || allowed.includes(role);
-  });
+  return items.filter((it) => roleAllowed(it?.roles, role));
+}
+
+// Single item/def check — `roles` absent or "*" or includes role → visible.
+// Used by RenderDefinition to gate whole defs (components) per role.
+export function roleAllowed(allowed: any, role: string): boolean {
+  return !Array.isArray(allowed) || allowed.includes("*") || allowed.includes(role);
 }

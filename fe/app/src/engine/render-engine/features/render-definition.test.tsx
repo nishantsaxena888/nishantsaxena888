@@ -20,8 +20,9 @@ const dyn = vi.hoisted(() => ({
   },
 }));
 vi.mock("./use-dynamic-data", () => ({
-  useDynamicData: () => dyn.state,
+  useDynamicData: vi.fn(() => dyn.state),
 }));
+import { useDynamicData } from "./use-dynamic-data";
 
 const Stub = ({ content, children, actionData }: any) => (
   <div data-testid="stub">
@@ -63,6 +64,42 @@ describe("def.type → componentMap", () => {
     renderDef({ ...base, type: "nope" });
     expect(screen.getByText(/Component Matching Error/)).toBeInTheDocument();
     expect(screen.getByText("nope")).toBeInTheDocument();
+  });
+});
+
+describe("def.roles gating (implicit component RBAC)", () => {
+  // No token + no config roles → currentRole = "anonymous".
+  it("roles excluding current role → component not mounted at all", () => {
+    renderDef({ ...base, roles: ["admin"] });
+    expect(screen.queryByTestId("stub")).not.toBeInTheDocument();
+  });
+
+  it("properties.roles also gates", () => {
+    renderDef({ ...base, properties: { type: "static", roles: ["admin"] } });
+    expect(screen.queryByTestId("stub")).not.toBeInTheDocument();
+  });
+
+  it("roles:['*'] → renders for everyone", () => {
+    renderDef({ ...base, roles: ["*"] });
+    expect(screen.getByTestId("stub")).toBeInTheDocument();
+  });
+
+  it("roles:[] (empty whitelist) → hidden for everyone", () => {
+    renderDef({ ...base, roles: [] });
+    expect(screen.queryByTestId("stub")).not.toBeInTheDocument();
+  });
+
+  it("blocked def never runs its dynamic fetch", () => {
+    (useDynamicData as any).mockClear();
+    renderDef({
+      ...base,
+      roles: ["admin"],
+      properties: {
+        type: "dynamic",
+        action: [{ key: "rows", endpoint: "item", method: "GET" }],
+      },
+    });
+    expect(useDynamicData).not.toHaveBeenCalled();
   });
 });
 

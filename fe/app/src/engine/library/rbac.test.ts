@@ -2,7 +2,7 @@
 // Pure + node-env: the storage backend is stubbed via the platform seam
 // (setStorageBackend) — the same seam an RN port injects AsyncStorage at.
 import { afterEach, describe, expect, it } from "vitest";
-import { currentRole, visibleByRole } from "./rbac";
+import { currentRole, roleAllowed, visibleByRole } from "./rbac";
 import { setStorageBackend, useMemoryStorage } from "@/platform/storage";
 
 const tokenWith = (claims: object) => {
@@ -75,5 +75,18 @@ describe("visibleByRole", () => {
 
   it("non-array input → empty", () => {
     expect(visibleByRole(undefined, "admin")).toEqual([]);
+  });
+});
+
+describe("roleAllowed (def-level gating)", () => {
+  it.each([
+    [undefined, "viewer", true],
+    [["*"], "viewer", true],
+    [["admin"], "admin", true],
+    [["admin"], "viewer", false],
+    [["admin", "editor"], "editor", true],
+    [[], "admin", false], // empty whitelist = nobody allowed
+  ])("roles=%j for '%s' → %s", (allowed, role, want) => {
+    expect(roleAllowed(allowed, role)).toBe(want);
   });
 });
