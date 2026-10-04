@@ -30,6 +30,19 @@ function createWindow() {
   });
 
   const index = path.resolve(__dirname, "..", DIST, "index.html");
+
+  // SPA fallback — a reload on a history route (file:///login) 404s
+  // because no such file exists; serve index.html instead. (The app
+  // uses hash routing under file://, so this is a safety net.)
+  win.webContents.on(
+    "did-fail-load",
+    (_e, _code, _desc, url, isMainFrame) => {
+      if (isMainFrame && !url.endsWith("index.html")) {
+        win.loadFile(index);
+      }
+    },
+  );
+
   console.log("[electron] loading", index);
   win.loadFile(index);
 }

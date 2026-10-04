@@ -1,6 +1,10 @@
 import { Error, Home, NotFound, Public } from "@/pages";
 import Protected from "@/pages/protected/protected";
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createHashRouter,
+  Navigate,
+} from "react-router-dom";
 
 import Playground from "../../pages/playground/playground";
 
@@ -15,8 +19,17 @@ const firstAdminSlug = (data: any): string => {
   return String(url).replace(/^\/+|\/+$/g, "").replace(/^admin\//, "");
 };
 
+// Under file:// (packaged Electron) history routes have no file backing —
+// a reload at /login requests a path that doesn't exist. Hash routing
+// (index.html#/login) always reloads the same file, so language/client
+// switches (full reloads) keep the page. Web keeps history routing.
+const makeRouter =
+  typeof window !== "undefined" && window.location.protocol === "file:"
+    ? createHashRouter
+    : createBrowserRouter;
+
 export const createRouter = (data: any) =>
-  createBrowserRouter([
+  makeRouter([
     {
       path: "/playground",
       element: <Playground />,
