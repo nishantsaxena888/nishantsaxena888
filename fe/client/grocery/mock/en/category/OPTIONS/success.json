@@ -1,0 +1,102 @@
+{
+  "entity": "category",
+  "name": "category",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "name": {
+        "type": "str",
+        "required": true
+      },
+      "code": {
+        "type": "str",
+        "unique": true
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "name",
+            "label": "Name",
+            "searchable": true
+          },
+          {
+            "key": "code",
+            "label": "Code"
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "name",
+            "componentType": "TextInput",
+            "required": true,
+            "colSpan": 2,
+            "label": "Name"
+          },
+          {
+            "name": "code",
+            "componentType": "TextInput",
+            "required": true,
+            "label": "Code"
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "key": "name",
+          "label": "Name",
+          "searchable": true
+        },
+        {
+          "key": "code",
+          "label": "Code"
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "name",
+          "componentType": "TextInput",
+          "required": true,
+          "colSpan": 2,
+          "label": "Name"
+        },
+        {
+          "name": "code",
+          "componentType": "TextInput",
+          "required": true,
+          "label": "Code"
+        }
+      ]
+    }
+  }
+}

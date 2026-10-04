@@ -1,0 +1,206 @@
+{
+  "entity": "product",
+  "name": "product",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "name": {
+        "type": "str",
+        "required": true
+      },
+      "category": {
+        "type": "str",
+        "default": "Produce"
+      },
+      "price": {
+        "type": "float",
+        "default": 0.0
+      },
+      "stock": {
+        "type": "int",
+        "default": 0
+      },
+      "on_sale": {
+        "type": "bool",
+        "default": false
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "name",
+            "label": "Name",
+            "searchable": true
+          },
+          {
+            "key": "category",
+            "label": "Category",
+            "type": "badge",
+            "variants": {
+              "Produce": "default",
+              "Dairy": "secondary",
+              "Bakery": "secondary",
+              "Drinks": "secondary"
+            }
+          },
+          {
+            "key": "price",
+            "label": "Price",
+            "sortable": true
+          },
+          {
+            "key": "stock",
+            "label": "Stock",
+            "sortable": true
+          },
+          {
+            "key": "on_sale",
+            "label": "On Sale",
+            "type": "status"
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "name",
+            "componentType": "TextInput",
+            "required": true,
+            "colSpan": 2,
+            "label": "Name"
+          },
+          {
+            "name": "category",
+            "componentType": "Select",
+            "options": [
+              "Produce",
+              "Dairy",
+              "Bakery",
+              "Drinks"
+            ],
+            "default": "Produce",
+            "label": "Category"
+          },
+          {
+            "name": "price",
+            "componentType": "TextInput",
+            "default": "0",
+            "label": "Price"
+          },
+          {
+            "name": "stock",
+            "componentType": "TextInput",
+            "default": "0",
+            "label": "Stock"
+          },
+          {
+            "name": "on_sale",
+            "componentType": "Checkbox",
+            "default": false,
+            "label": "On Sale"
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "key": "name",
+          "label": "Name",
+          "searchable": true
+        },
+        {
+          "key": "category",
+          "label": "Category",
+          "type": "badge",
+          "variants": {
+            "Produce": "default",
+            "Dairy": "secondary",
+            "Bakery": "secondary",
+            "Drinks": "secondary"
+          }
+        },
+        {
+          "key": "price",
+          "label": "Price",
+          "sortable": true
+        },
+        {
+          "key": "stock",
+          "label": "Stock",
+          "sortable": true
+        },
+        {
+          "key": "on_sale",
+          "label": "On Sale",
+          "type": "status"
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "name",
+          "componentType": "TextInput",
+          "required": true,
+          "colSpan": 2,
+          "label": "Name"
+        },
+        {
+          "name": "category",
+          "componentType": "Select",
+          "options": [
+            "Produce",
+            "Dairy",
+            "Bakery",
+            "Drinks"
+          ],
+          "default": "Produce",
+          "label": "Category"
+        },
+        {
+          "name": "price",
+          "componentType": "TextInput",
+          "default": "0",
+          "label": "Price"
+        },
+        {
+          "name": "stock",
+          "componentType": "TextInput",
+          "default": "0",
+          "label": "Stock"
+        },
+        {
+          "name": "on_sale",
+          "componentType": "Checkbox",
+          "default": false,
+          "label": "On Sale"
+        }
+      ]
+    }
+  }
+}

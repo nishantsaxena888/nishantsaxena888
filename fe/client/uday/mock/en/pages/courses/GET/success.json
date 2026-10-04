@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "title": "Courses"
+  },
+  "config": [
+    {
+      "id": "uday-courses-all",
+      "type": "course-list",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "courses",
+            "endpoint": "course",
+            "method": "GET",
+            "queryParams": {
+              "size": 50
+            }
+          }
+        ]
+      },
+      "content": {
+        "title": "All courses"
+      }
+    }
+  ]
+}

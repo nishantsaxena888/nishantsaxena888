@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "title": "Hello world \u2014 first todo",
+      "done": true,
+      "priority": "low"
+    },
+    {
+      "id": 2,
+      "title": "Wire the OPTIONS-driven grid",
+      "done": false,
+      "priority": "high"
+    },
+    {
+      "id": 3,
+      "title": "Ship offline mode",
+      "done": false,
+      "priority": "medium"
+    }
+  ],
+  "page": 1,
+  "size": 3,
+  "total": 3
+}

@@ -1,0 +1,171 @@
+{
+  "entity": "order",
+  "name": "order",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "customer": {
+        "type": "str",
+        "required": true
+      },
+      "total": {
+        "type": "float",
+        "default": 0.0
+      },
+      "status": {
+        "type": "str",
+        "default": "pending",
+        "options": [
+          "pending",
+          "packed",
+          "delivered",
+          "cancelled"
+        ]
+      },
+      "created_at": {
+        "type": "datetime"
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "customer",
+            "label": "Customer",
+            "searchable": true
+          },
+          {
+            "key": "total",
+            "label": "Total",
+            "sortable": true
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "type": "badge",
+            "variants": {
+              "pending": "default",
+              "packed": "secondary",
+              "delivered": "secondary",
+              "cancelled": "destructive"
+            }
+          },
+          {
+            "key": "created_at",
+            "label": "Created"
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "customer",
+            "componentType": "TextInput",
+            "required": true,
+            "colSpan": 2,
+            "label": "Customer"
+          },
+          {
+            "name": "total",
+            "componentType": "TextInput",
+            "default": "0",
+            "label": "Total"
+          },
+          {
+            "name": "status",
+            "componentType": "Select",
+            "options": [
+              "pending",
+              "packed",
+              "delivered",
+              "cancelled"
+            ],
+            "default": "pending",
+            "label": "Status"
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "key": "customer",
+          "label": "Customer",
+          "searchable": true
+        },
+        {
+          "key": "total",
+          "label": "Total",
+          "sortable": true
+        },
+        {
+          "key": "status",
+          "label": "Status",
+          "type": "badge",
+          "variants": {
+            "pending": "default",
+            "packed": "secondary",
+            "delivered": "secondary",
+            "cancelled": "destructive"
+          }
+        },
+        {
+          "key": "created_at",
+          "label": "Created"
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "customer",
+          "componentType": "TextInput",
+          "required": true,
+          "colSpan": 2,
+          "label": "Customer"
+        },
+        {
+          "name": "total",
+          "componentType": "TextInput",
+          "default": "0",
+          "label": "Total"
+        },
+        {
+          "name": "status",
+          "componentType": "Select",
+          "options": [
+            "pending",
+            "packed",
+            "delivered",
+            "cancelled"
+          ],
+          "default": "pending",
+          "label": "Status"
+        }
+      ]
+    }
+  }
+}

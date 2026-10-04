@@ -1,0 +1,170 @@
+{
+  "entity": "course",
+  "name": "course",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "title": {
+        "type": "str",
+        "required": true
+      },
+      "description": {
+        "type": "str"
+      },
+      "level": {
+        "type": "str",
+        "default": "beginner",
+        "options": [
+          "beginner",
+          "intermediate",
+          "advanced"
+        ]
+      },
+      "lessons": {
+        "type": "int",
+        "default": 0
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "searchable": true
+          },
+          {
+            "key": "level",
+            "label": "Level",
+            "type": "badge",
+            "variants": {
+              "beginner": "secondary",
+              "intermediate": "default",
+              "advanced": "destructive"
+            }
+          },
+          {
+            "key": "lessons",
+            "label": "Lessons",
+            "sortable": true
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "title",
+            "componentType": "TextInput",
+            "required": true,
+            "colSpan": 2,
+            "label": "Title"
+          },
+          {
+            "name": "description",
+            "componentType": "TextInput",
+            "colSpan": 2,
+            "label": "Description"
+          },
+          {
+            "name": "level",
+            "componentType": "Select",
+            "options": [
+              "beginner",
+              "intermediate",
+              "advanced"
+            ],
+            "default": "beginner",
+            "label": "Level"
+          },
+          {
+            "name": "lessons",
+            "componentType": "TextInput",
+            "default": "0",
+            "label": "Lessons"
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "key": "title",
+          "label": "Title",
+          "searchable": true
+        },
+        {
+          "key": "level",
+          "label": "Level",
+          "type": "badge",
+          "variants": {
+            "beginner": "secondary",
+            "intermediate": "default",
+            "advanced": "destructive"
+          }
+        },
+        {
+          "key": "lessons",
+          "label": "Lessons",
+          "sortable": true
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "title",
+          "componentType": "TextInput",
+          "required": true,
+          "colSpan": 2,
+          "label": "Title"
+        },
+        {
+          "name": "description",
+          "componentType": "TextInput",
+          "colSpan": 2,
+          "label": "Description"
+        },
+        {
+          "name": "level",
+          "componentType": "Select",
+          "options": [
+            "beginner",
+            "intermediate",
+            "advanced"
+          ],
+          "default": "beginner",
+          "label": "Level"
+        },
+        {
+          "name": "lessons",
+          "componentType": "TextInput",
+          "default": "0",
+          "label": "Lessons"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "title": "Uday Learning"
+  },
+  "config": [
+    {
+      "id": "uday-hero-1",
+      "type": "uday-hero",
+      "properties": {
+        "level": "base",
+        "type": "static"
+      },
+      "content": {
+        "title": "Learn by building",
+        "subtitle": "Markdown-driven courses \u2014 the learning client on the same generic platform."
+      }
+    },
+    {
+      "id": "uday-courses-1",
+      "type": "course-list",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "courses",
+            "endpoint": "course",
+            "method": "GET",
+            "queryParams": {
+              "size": 9
+            }
+          }
+        ]
+      },
+      "content": {
+        "title": "Featured courses"
+      }
+    }
+  ]
+}

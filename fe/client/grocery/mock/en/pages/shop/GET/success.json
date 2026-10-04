@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "title": "Shop"
+  },
+  "config": [
+    {
+      "id": "grocery-grid-shop",
+      "type": "product-grid",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "products",
+            "endpoint": "product",
+            "method": "GET",
+            "queryParams": {
+              "size": 24
+            }
+          }
+        ]
+      },
+      "content": {
+        "title": "All products"
+      }
+    }
+  ]
+}

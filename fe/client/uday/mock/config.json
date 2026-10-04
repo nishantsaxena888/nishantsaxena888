@@ -1,0 +1,155 @@
+{
+  "configuration": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "pages/home": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "pages/courses": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "pages/lessons": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "style-config/uday-dark": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "style-config/default": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "course": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "lesson": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "quiz": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  }
+}

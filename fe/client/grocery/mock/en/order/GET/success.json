@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "customer": "Mina Park",
+      "total": 15.38,
+      "status": "packed"
+    },
+    {
+      "id": 2,
+      "customer": "Theo Alvarez",
+      "total": 42.1,
+      "status": "pending"
+    },
+    {
+      "id": 3,
+      "customer": "Mina Park",
+      "total": 8.99,
+      "status": "delivered"
+    }
+  ],
+  "page": 1,
+  "size": 3,
+  "total": 3
+}

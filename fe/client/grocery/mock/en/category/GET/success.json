@@ -1,0 +1,27 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Produce",
+      "code": "PROD"
+    },
+    {
+      "id": 2,
+      "name": "Dairy",
+      "code": "DAIR"
+    },
+    {
+      "id": 3,
+      "name": "Bakery",
+      "code": "BAKE"
+    },
+    {
+      "id": 4,
+      "name": "Drinks",
+      "code": "DRNK"
+    }
+  ],
+  "page": 1,
+  "size": 4,
+  "total": 4
+}

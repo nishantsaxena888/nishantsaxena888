@@ -1,0 +1,29 @@
+{
+  "meta": {
+    "title": "Deals"
+  },
+  "config": [
+    {
+      "id": "grocery-grid-deals",
+      "type": "product-grid",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "products",
+            "endpoint": "product",
+            "method": "GET",
+            "queryParams": {
+              "size": 24,
+              "on_sale": true
+            }
+          }
+        ]
+      },
+      "content": {
+        "title": "On sale"
+      }
+    }
+  ]
+}

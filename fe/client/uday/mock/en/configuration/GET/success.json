@@ -1,0 +1,267 @@
+{
+  "meta": {
+    "client": "uday",
+    "display_name": "Uday Learning",
+    "theme": "uday-dark",
+    "language": "en",
+    "currency": "USD",
+    "currency_symbol": "$"
+  },
+  "admin": {
+    "require_auth": false,
+    "login_redirect": "/admin/course",
+    "logout_redirect": "/"
+  },
+  "menu": [
+    {
+      "name": "Home",
+      "description": "Learning home",
+      "url": "/",
+      "entity": "pages/home",
+      "public": true,
+      "order": 0
+    },
+    {
+      "name": "Courses",
+      "description": "All courses",
+      "url": "/courses",
+      "entity": "pages/courses",
+      "public": true,
+      "order": 1
+    },
+    {
+      "name": "Lessons",
+      "description": "Lesson library",
+      "url": "/lessons",
+      "entity": "pages/lessons",
+      "public": true,
+      "order": 2
+    }
+  ],
+  "admin_menu": [
+    {
+      "name": "Courses",
+      "description": "Course catalogue",
+      "url": "/admin/course",
+      "entity": "course",
+      "icon": "book"
+    },
+    {
+      "name": "Lessons",
+      "description": "Lesson content",
+      "url": "/admin/lesson",
+      "entity": "lesson",
+      "icon": "file-text"
+    },
+    {
+      "name": "Quizzes",
+      "description": "Quiz questions",
+      "url": "/admin/quiz",
+      "entity": "quiz",
+      "icon": "help-circle"
+    }
+  ],
+  "language": [
+    {
+      "name": "English",
+      "code": "en"
+    },
+    {
+      "name": "Hindi",
+      "code": "hi"
+    }
+  ],
+  "sessions": [
+    {
+      "name": "progress",
+      "persist": true,
+      "method": "merge",
+      "method_config": {}
+    }
+  ],
+  "themes": [
+    {
+      "value": "uday-dark",
+      "label": "Uday Dark",
+      "endpoint": "style-config/uday-dark"
+    },
+    {
+      "value": "default",
+      "label": "Default",
+      "endpoint": "style-config/default"
+    }
+  ],
+  "style-configs": {
+    "uday-dark": {
+      "theme": "uday-dark",
+      "name": "Uday Dark",
+      "styles": {
+        "background": "222 25% 8%",
+        "foreground": "210 20% 94%",
+        "card": "222 22% 12%",
+        "card-foreground": "210 20% 94%",
+        "popover": "222 22% 12%",
+        "popover-foreground": "210 20% 94%",
+        "primary": "199 80% 55%",
+        "primary-foreground": "222 25% 8%",
+        "secondary": "222 18% 18%",
+        "secondary-foreground": "210 20% 90%",
+        "muted": "222 18% 18%",
+        "muted-foreground": "215 15% 60%",
+        "accent": "222 20% 20%",
+        "accent-foreground": "210 20% 94%",
+        "destructive": "0 72% 55%",
+        "destructive-foreground": "0 0% 100%",
+        "border": "222 15% 22%",
+        "input": "222 15% 22%",
+        "ring": "199 80% 55%",
+        "radius": "0.6rem",
+        "sidebar-background": "222 28% 6%",
+        "sidebar-foreground": "210 20% 92%",
+        "sidebar-primary": "210 20% 94%",
+        "sidebar-primary-foreground": "222 28% 6%",
+        "sidebar-accent": "222 20% 14%",
+        "sidebar-accent-foreground": "210 20% 92%",
+        "sidebar-border": "222 15% 18%",
+        "sidebar-ring": "199 80% 55%",
+        "menu-active-bg": "199 80% 55%",
+        "menu-active-foreground": "222 25% 8%"
+      }
+    },
+    "default": {
+      "theme": "default",
+      "name": "Default Theme",
+      "styles": {
+        "background": "0 0% 100%",
+        "foreground": "240 10% 10%",
+        "card": "0 0% 100%",
+        "card-foreground": "240 10% 10%",
+        "popover": "0 0% 100%",
+        "popover-foreground": "240 10% 10%",
+        "primary": "240 10% 10%",
+        "primary-foreground": "0 0% 100%",
+        "secondary": "240 5% 96%",
+        "secondary-foreground": "240 10% 10%",
+        "muted": "240 5% 96%",
+        "muted-foreground": "240 5% 45%",
+        "accent": "240 5% 96%",
+        "accent-foreground": "240 10% 10%",
+        "destructive": "0 84.2% 60.2%",
+        "destructive-foreground": "0 0% 100%",
+        "border": "240 6% 90%",
+        "input": "240 6% 90%",
+        "ring": "240 10% 10%",
+        "radius": "0.5rem",
+        "sidebar-background": "240 10% 4%",
+        "sidebar-foreground": "240 5% 96%",
+        "sidebar-primary": "0 0% 100%",
+        "sidebar-primary-foreground": "240 10% 4%",
+        "sidebar-accent": "240 10% 15%",
+        "sidebar-accent-foreground": "240 5% 96%",
+        "sidebar-border": "240 10% 10%",
+        "sidebar-ring": "0 0% 100%",
+        "menu-active-bg": "0 0% 100%",
+        "menu-active-foreground": "240 10% 4%"
+      }
+    }
+  },
+  "pages": {
+    "home": {
+      "meta": {
+        "title": "Uday Learning"
+      },
+      "config": [
+        {
+          "id": "uday-hero-1",
+          "type": "uday-hero",
+          "properties": {
+            "level": "base",
+            "type": "static"
+          },
+          "content": {
+            "title": "Learn by building",
+            "subtitle": "Markdown-driven courses \u2014 the learning client on the same generic platform."
+          }
+        },
+        {
+          "id": "uday-courses-1",
+          "type": "course-list",
+          "properties": {
+            "level": "base",
+            "type": "dynamic",
+            "action": [
+              {
+                "key": "courses",
+                "endpoint": "course",
+                "method": "GET",
+                "queryParams": {
+                  "size": 9
+                }
+              }
+            ]
+          },
+          "content": {
+            "title": "Featured courses"
+          }
+        }
+      ]
+    },
+    "courses": {
+      "meta": {
+        "title": "Courses"
+      },
+      "config": [
+        {
+          "id": "uday-courses-all",
+          "type": "course-list",
+          "properties": {
+            "level": "base",
+            "type": "dynamic",
+            "action": [
+              {
+                "key": "courses",
+                "endpoint": "course",
+                "method": "GET",
+                "queryParams": {
+                  "size": 50
+                }
+              }
+            ]
+          },
+          "content": {
+            "title": "All courses"
+          }
+        }
+      ]
+    },
+    "lessons": {
+      "meta": {
+        "title": "Lessons"
+      },
+      "config": [
+        {
+          "id": "uday-lessons-all",
+          "type": "lesson-feed",
+          "properties": {
+            "level": "base",
+            "type": "dynamic",
+            "action": [
+              {
+                "key": "lessons",
+                "endpoint": "lesson",
+                "method": "GET",
+                "queryParams": {
+                  "size": 20,
+                  "sort": "order"
+                }
+              }
+            ]
+          },
+          "content": {
+            "title": "Lesson library"
+          }
+        }
+      ]
+    }
+  }
+}

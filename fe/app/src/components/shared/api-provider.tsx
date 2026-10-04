@@ -53,6 +53,7 @@ const ApiProvider = ({
     base_url: API_URL,
     lang: language.code,
     default_language: "en",
+    client: activeClient,
   });
 
   const componentList: any =

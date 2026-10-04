@@ -1,0 +1,29 @@
+{
+  "meta": {
+    "title": "Lessons"
+  },
+  "config": [
+    {
+      "id": "uday-lessons-all",
+      "type": "lesson-feed",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "lessons",
+            "endpoint": "lesson",
+            "method": "GET",
+            "queryParams": {
+              "size": 20,
+              "sort": "order"
+            }
+          }
+        ]
+      },
+      "content": {
+        "title": "Lesson library"
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "lesson": "What is serverless?",
+      "question": "What does 'scales to zero' mean?",
+      "options": "No servers ever|No cost when idle|Zero latency|Free tier only",
+      "answer": 1
+    }
+  ],
+  "page": 1,
+  "size": 1,
+  "total": 1
+}

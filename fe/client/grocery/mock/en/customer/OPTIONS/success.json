@@ -1,0 +1,125 @@
+{
+  "entity": "customer",
+  "name": "customer",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "name": {
+        "type": "str",
+        "required": true
+      },
+      "email": {
+        "type": "str"
+      },
+      "loyalty_points": {
+        "type": "int",
+        "default": 0
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "name",
+            "label": "Name",
+            "searchable": true
+          },
+          {
+            "key": "email",
+            "label": "Email"
+          },
+          {
+            "key": "loyalty_points",
+            "label": "Points",
+            "sortable": true
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "name",
+            "componentType": "TextInput",
+            "required": true,
+            "colSpan": 2,
+            "label": "Name"
+          },
+          {
+            "name": "email",
+            "componentType": "TextInput",
+            "label": "Email"
+          },
+          {
+            "name": "loyalty_points",
+            "componentType": "TextInput",
+            "default": "0",
+            "label": "Loyalty Points"
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "key": "name",
+          "label": "Name",
+          "searchable": true
+        },
+        {
+          "key": "email",
+          "label": "Email"
+        },
+        {
+          "key": "loyalty_points",
+          "label": "Points",
+          "sortable": true
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "name",
+          "componentType": "TextInput",
+          "required": true,
+          "colSpan": 2,
+          "label": "Name"
+        },
+        {
+          "name": "email",
+          "componentType": "TextInput",
+          "label": "Email"
+        },
+        {
+          "name": "loyalty_points",
+          "componentType": "TextInput",
+          "default": "0",
+          "label": "Loyalty Points"
+        }
+      ]
+    }
+  }
+}

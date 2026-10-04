@@ -1,0 +1,31 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "course": "AWS Lambda Masterclass",
+      "title": "What is serverless?",
+      "order": 1,
+      "duration": "12 min",
+      "content": "# What is serverless?\n\nServerless means you deploy **functions**, not servers.\n\n- No provisioning\n- Pay per invocation\n- Scales to zero\n\n```\naws lambda create-function --runtime python3.11\n```"
+    },
+    {
+      "id": 2,
+      "course": "AWS Lambda Masterclass",
+      "title": "Your first function",
+      "order": 2,
+      "duration": "18 min",
+      "content": "# Your first function\n\nA Lambda handler takes an **event** and a **context**.\n\n```python\ndef handler(event, context):\n    return {'statusCode': 200}\n```\n\nDeploy it with the console or the CLI."
+    },
+    {
+      "id": 3,
+      "course": "Python Fundamentals",
+      "title": "Variables & types",
+      "order": 1,
+      "duration": "10 min",
+      "content": "# Variables & types\n\nPython is dynamically typed.\n\n- `int`, `float`, `str`, `bool`\n- `list`, `dict`, `set`, `tuple`\n\n```python\nx = 42\nname = \"ada\"\n```"
+    }
+  ],
+  "page": 1,
+  "size": 3,
+  "total": 3
+}

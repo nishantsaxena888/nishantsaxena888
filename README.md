@@ -65,6 +65,25 @@ Sample data in `be/client/*/entities.py` is temporary scaffolding ("mocks")
 served through the real API contract — replace rows or swap `source` once
 real data exists; nothing else changes.
 
+## Frontend mocks (run with no backend)
+
+`fe/client/<name>/mock/` holds file-based responses — when an endpoint is
+flagged `mock: true` in `mock/config.json`, `apiClient` serves
+`mock/<lang>/<endpoint>/<METHOD>/<response>.json` instead of calling the
+API. Flag absent or false → real API. Flagged but file missing → 404
+(deliberate: the flag selects the source, it isn't a "try first").
+
+```bash
+# regenerate a client's whole mock tree from its backend definition
+python be/tools/gen_mocks.py hello grocery uday
+```
+
+The generator flags **every** endpoint+method — the client runs fully
+backend-free (configuration, pages, entities, OPTIONS, style-configs).
+Trim `mock/config.json` per endpoint or per method for mixed mode
+(e.g. OPTIONS mocked, CRUD real). Supported per-method extras:
+`response_type`, `status`, `delay`, `id`, `search_param`.
+
 ## Add a client (`foo`)
 
 1. `be/client/foo/entities.py` — entities DSL (copy `hello`'s shape:

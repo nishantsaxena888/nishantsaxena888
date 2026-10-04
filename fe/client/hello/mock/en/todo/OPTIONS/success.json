@@ -1,0 +1,166 @@
+{
+  "entity": "todo",
+  "name": "todo",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "title": {
+        "type": "str",
+        "required": true
+      },
+      "done": {
+        "type": "bool",
+        "default": false
+      },
+      "priority": {
+        "type": "str",
+        "default": "medium",
+        "options": [
+          "low",
+          "medium",
+          "high"
+        ]
+      },
+      "created_at": {
+        "type": "datetime"
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "searchable": true
+          },
+          {
+            "key": "done",
+            "label": "Done",
+            "type": "status"
+          },
+          {
+            "key": "priority",
+            "label": "Priority",
+            "type": "badge",
+            "variants": {
+              "low": "secondary",
+              "medium": "default",
+              "high": "destructive"
+            }
+          },
+          {
+            "key": "created_at",
+            "label": "Created"
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "title",
+            "componentType": "TextInput",
+            "required": true,
+            "colSpan": 2,
+            "label": "Title"
+          },
+          {
+            "name": "priority",
+            "componentType": "Select",
+            "options": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "default": "medium",
+            "label": "Priority"
+          },
+          {
+            "name": "done",
+            "componentType": "Checkbox",
+            "default": false,
+            "label": "Done"
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "key": "title",
+          "label": "Title",
+          "searchable": true
+        },
+        {
+          "key": "done",
+          "label": "Done",
+          "type": "status"
+        },
+        {
+          "key": "priority",
+          "label": "Priority",
+          "type": "badge",
+          "variants": {
+            "low": "secondary",
+            "medium": "default",
+            "high": "destructive"
+          }
+        },
+        {
+          "key": "created_at",
+          "label": "Created"
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "title",
+          "componentType": "TextInput",
+          "required": true,
+          "colSpan": 2,
+          "label": "Title"
+        },
+        {
+          "name": "priority",
+          "componentType": "Select",
+          "options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": "medium",
+          "label": "Priority"
+        },
+        {
+          "name": "done",
+          "componentType": "Checkbox",
+          "default": false,
+          "label": "Done"
+        }
+      ]
+    }
+  }
+}

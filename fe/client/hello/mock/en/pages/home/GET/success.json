@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "title": "Hello"
+  },
+  "config": [
+    {
+      "id": "hello-banner-1",
+      "type": "hello-banner",
+      "properties": {
+        "level": "base",
+        "type": "static"
+      },
+      "content": {
+        "title": "Hello World",
+        "subtitle": "Rendered by RenderEngine from a page definition served by the backend \u2014 component lives in fe/client/hello."
+      }
+    }
+  ]
+}

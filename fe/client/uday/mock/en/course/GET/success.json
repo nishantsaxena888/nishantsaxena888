@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "title": "AWS Lambda Masterclass",
+      "description": "47-module serverless deep dive.",
+      "level": "advanced",
+      "lessons": 47
+    },
+    {
+      "id": 2,
+      "title": "Python Fundamentals",
+      "description": "Variables to classes in one course.",
+      "level": "beginner",
+      "lessons": 12
+    },
+    {
+      "id": 3,
+      "title": "Networking Basics",
+      "description": "TCP/IP, DNS and load balancers.",
+      "level": "intermediate",
+      "lessons": 9
+    }
+  ],
+  "page": 1,
+  "size": 3,
+  "total": 3
+}

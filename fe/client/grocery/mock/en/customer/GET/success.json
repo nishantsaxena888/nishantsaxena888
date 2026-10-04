@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Mina Park",
+      "email": "mina@example.com",
+      "loyalty_points": 240
+    },
+    {
+      "id": 2,
+      "name": "Theo Alvarez",
+      "email": "theo@example.com",
+      "loyalty_points": 85
+    }
+  ],
+  "page": 1,
+  "size": 2,
+  "total": 2
+}

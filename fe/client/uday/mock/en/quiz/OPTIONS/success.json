@@ -1,0 +1,143 @@
+{
+  "entity": "quiz",
+  "name": "quiz",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "lesson": {
+        "type": "str",
+        "required": true
+      },
+      "question": {
+        "type": "str",
+        "required": true
+      },
+      "options": {
+        "type": "str"
+      },
+      "answer": {
+        "type": "int",
+        "default": 0
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "lesson",
+            "label": "Lesson",
+            "searchable": true
+          },
+          {
+            "key": "question",
+            "label": "Question",
+            "searchable": true
+          },
+          {
+            "key": "answer",
+            "label": "Answer"
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "lesson",
+            "componentType": "TextInput",
+            "required": true,
+            "label": "Lesson"
+          },
+          {
+            "name": "question",
+            "componentType": "TextInput",
+            "required": true,
+            "colSpan": 2,
+            "label": "Question"
+          },
+          {
+            "name": "options",
+            "componentType": "TextInput",
+            "colSpan": 2,
+            "label": "Options (| separated)"
+          },
+          {
+            "name": "answer",
+            "componentType": "TextInput",
+            "default": "0",
+            "label": "Answer index"
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "key": "lesson",
+          "label": "Lesson",
+          "searchable": true
+        },
+        {
+          "key": "question",
+          "label": "Question",
+          "searchable": true
+        },
+        {
+          "key": "answer",
+          "label": "Answer"
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "lesson",
+          "componentType": "TextInput",
+          "required": true,
+          "label": "Lesson"
+        },
+        {
+          "name": "question",
+          "componentType": "TextInput",
+          "required": true,
+          "colSpan": 2,
+          "label": "Question"
+        },
+        {
+          "name": "options",
+          "componentType": "TextInput",
+          "colSpan": 2,
+          "label": "Options (| separated)"
+        },
+        {
+          "name": "answer",
+          "componentType": "TextInput",
+          "default": "0",
+          "label": "Answer index"
+        }
+      ]
+    }
+  }
+}
