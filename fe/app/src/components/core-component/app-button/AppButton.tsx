@@ -17,7 +17,6 @@ export const AppButton = ({
   className,
   ...props
 }: AppButtonProps) => {
-  console.log(props);
   const { process } = useFormConfig();
   const appliedTheme = buttonStyles[themeName] || buttonStyles.default;
 

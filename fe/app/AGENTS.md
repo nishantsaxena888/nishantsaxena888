@@ -381,6 +381,11 @@ Languages are **config-driven**: `configuration.language[]` =
   zero console errors. Use a runtime promise (`tenantsReady`, `mockReady`)
   and let the provider/api call await it — the `import.meta.env.DEV`
   ternary still dead-code-eliminates the chunk in prod.
+- `components/shared/old-form-render/` is the legacy form system — only
+  the `/playground` dev route still uses it; new screens use
+  `generic-form`/`form-render`. Dead admin code (`entity-management`,
+  `AdminDashboard`, top-level `components/data-table.tsx`) was removed —
+  the live table is `core-component/data-table`.
 - Headless UI smoke: `node scripts/smoke-ui.mjs` (needs the dev servers;
   playwright is a devDependency).
 

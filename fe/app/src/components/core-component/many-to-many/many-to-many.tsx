@@ -15,7 +15,6 @@ import { createPortal } from "react-dom";
 export const ManyToMany = (props: any) => {
 
 
-  console.log({ props });
   const entity = props?.config?.entity || props?.config?.endpoint;
 
   const getIcon = () => {

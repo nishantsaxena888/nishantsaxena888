@@ -42,11 +42,24 @@ const TITLES: Record<string, string> = {
   "verify-email-card": "auth.verify_email",
 };
 
+// Portable base64url — btoa doesn't exist on React Native. Payload is
+// JSON (ASCII-safe for our claims), so a byte-walk encoder suffices.
+const b64urlEncode = (str: string): string => {
+  const CH = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+  let out = "";
+  for (let i = 0; i < str.length; i += 3) {
+    const a = str.charCodeAt(i), b = str.charCodeAt(i + 1), c = str.charCodeAt(i + 2);
+    out += CH[a >> 2] + CH[((a & 3) << 4) | (b >> 4) || 0] +
+      (i + 1 < str.length ? CH[((b & 15) << 2) | (c >> 6) || 0] : "") +
+      (i + 2 < str.length ? CH[c & 63] : "");
+  }
+  return out.replace(/\+/g, "-").replace(/\//g, "_");
+};
+
 // Unsigned dev JWT — 3 segments so jwt-decode never crashes Protected.
 // Only used when the configured endpoint doesn't return a token.
 const devJwt = (email: string): string => {
-  const b64 = (o: object) =>
-    btoa(JSON.stringify(o)).replace(/=+$/, "").replace(/\+/g, "-").replace(/\//g, "_");
+  const b64 = (o: object) => b64urlEncode(JSON.stringify(o));
   return `${b64({ alg: "none", typ: "JWT" })}.${b64({
     sub: email,
     email,

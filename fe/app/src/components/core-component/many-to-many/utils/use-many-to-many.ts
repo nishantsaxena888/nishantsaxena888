@@ -20,7 +20,7 @@ export const useManytoMany = ({ entity, defaultFilter }: any) => {
   } = useEntity(entity, {
     searchParameter: { ...defaultFilter },
   });
-  console.log({ defaultFilter });
+
 
   const [openForm, setOpenForm] = useState(false);
   const [populateMMData, setPopulateMMData] = useState<any>(null);

@@ -163,7 +163,6 @@ export const FormRender = ({
       ? "vertical"
       : "horizontal";
 
-  console.log("activeTab", groupList);
   const active = Array.isArray(groupList)
     ? groupList.find((item: any) => item?.name === activeTab)
     : undefined;

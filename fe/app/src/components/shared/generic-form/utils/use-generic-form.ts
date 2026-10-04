@@ -84,8 +84,6 @@ export const useGenericForm = (props: any) => {
   const [serverError, setServerError] = useState<any>(null);
 
   const handleAction = (formConfig: any, values: any) => {
-    console.log({ type: action?.type, formConfig, action });
-
     if (action?.store_local_storage) {
       const toStore: any = {};
       action.store_local_storage.forEach((key: string) => {
