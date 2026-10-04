@@ -26,7 +26,12 @@ describe("generic component maps", () => {
     "hero-section": "banner",
     "product-grid": "listing",
     products: "listing",
+    cards: "listing",
+    "card-list": "listing",
+    "card-grid": "listing",
+    items: "listing",
     "cart-view": "session-list",
+    "item-list": "session-list",
     checkout: "form-summary",
     profile: "account",
     "login-layout-1": "auth-layout",
@@ -39,7 +44,7 @@ describe("generic component maps", () => {
   });
 
   it.each(Object.entries(ALIASES))(
-    "legacy alias '%s' renders the same component as '%s'",
+    "alias '%s' renders the same component as '%s'",
     (alias, canonical) => {
       expect(sf[alias]).toBe(sf[canonical]);
     },

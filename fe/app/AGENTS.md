@@ -279,8 +279,9 @@ belong in the def's labels/config, never in the type:
 | `header`/`footer` | page chrome | endpoint data |
 
 `grid`/`col`/`container`/`section`/`stack`/`spacer` (layout primitives) follow
-the same rule. Legacy aliases (`products`, `cart-view`, `checkout`,
-`profile`, `login-layout-1`, `hero-section`) still resolve — new defs must
+the same rule. Aliases still resolve (`products`, `product-grid`,
+`cards`, `card-list`, `card-grid`, `items`, `cart-view`, `item-list`,
+`checkout`, `profile`, `login-layout-1`, `hero-section`) — new defs must
 use canonical names. Client-repo comps MAY use domain names
 (`course-list`, `hello-banner`) — that's client vocabulary inside its own
 folder.

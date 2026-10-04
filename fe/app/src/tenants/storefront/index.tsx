@@ -32,10 +32,15 @@ export const storefront_components = {
   "form-summary": StorefrontFormSummary,
   account: StorefrontAccount,
   "auth-layout": StorefrontAuthLayout,
-  // legacy aliases (same comps, old type names)
+  // aliases (same comps — legacy domain names + generic synonyms)
   "hero-section": StorefrontBanner,
   products: StorefrontListing,
   "product-grid": StorefrontListing,
+  cards: StorefrontListing,
+  "card-list": StorefrontListing,
+  "card-grid": StorefrontListing,
+  items: StorefrontListing,
+  "item-list": StorefrontSessionList,
   "cart-view": StorefrontSessionList,
   checkout: StorefrontFormSummary,
   profile: StorefrontAccount,
