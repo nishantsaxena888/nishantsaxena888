@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "title": "डील्स प्रबंधन",
+    "description": "सक्रिय स्टोरफ़्रंट डील्स और उनके असाइनमेंट को प्रबंधित करें।"
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "id", "label": "आईडी", "type": "text" },
+        { "key": "title", "label": "शीर्षक", "type": "text" },
+        { "key": "type", "label": "प्रकार", "type": "text" },
+        { "key": "value", "label": "मूल्य", "type": "text" }
+      ]
+    },
+    "form": {
+      "id": "deal-form",
+      "title": "डील्स विवरण",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        { "name": "title", "label": "शीर्षक", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required" }] },
+        { "name": "type", "label": "प्रकार", "type": "select", "defaultValue": "user_discount", "column": { "md": 6 }, "options": [
+          { "label": "उपयोगकर्ता छूट", "value": "user_discount" },
+          { "label": "श्रेणी छूट", "value": "category_discount" },
+          { "label": "उत्पाद छूट", "value": "product_discount" }
+        ] },
+        { "name": "value", "label": "छूट मूल्य", "type": "number", "column": { "md": 6 }, "validation": [{ "rule": "required" }] },
+        {
+          "name": "assignment.user_id",
+          "label": "उपयोगकर्ता",
+          "type": "dynamic-multi-select",
+          "column": { "md": 6 },
+          "config": {
+            "endpoint": "user",
+            "bindLabel": "name",
+            "bindValue": "id"
+          },
+          "visible": [
+            {
+              "field": "type",
+              "operator": "===",
+              "value": "user_discount"
+            }
+          ],
+          "validation": [{ "rule": "required" }]
+        },
+        {
+          "name": "assignment.category_id",
+          "label": "श्रेणी",
+          "type": "dynamic-multi-select",
+          "column": { "md": 6 },
+          "config": {
+            "endpoint": "category",
+            "bindLabel": "name",
+            "bindValue": "id"
+          },
+          "visible": [
+            {
+              "field": "type",
+              "operator": "===",
+              "value": "category_discount"
+            }
+          ],
+          "validation": [{ "rule": "required" }]
+        },
+        {
+          "name": "assignment.product_id",
+          "label": "उत्पाद",
+          "type": "dynamic-multi-select",
+          "column": { "md": 6 },
+          "config": {
+            "endpoint": "product",
+            "bindLabel": "name",
+            "bindValue": "id"
+          },
+          "visible": [
+            {
+              "field": "type",
+              "operator": "===",
+              "value": "product_discount"
+            }
+          ],
+          "validation": [{ "rule": "required" }]
+        }
+      ]
+    }
+  }
+}

@@ -1,7 +1,9 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { apiClient, useEntity } from "@/engine";
+import { useLanguage } from "@/components/shared/language-provider";
 import { toast } from "@/lib/toast";
+import { makeTr } from "./utils";
 
 // Generic auth screen (def type "login-layout-1"). content.config drives
 // the variant: login-card | register-card | forgot-password-card |
@@ -12,29 +14,29 @@ import { toast } from "@/lib/toast";
 
 const FIELDS: Record<string, { key: string; label: string; type?: string }[]> = {
   "login-card": [
-    { key: "email", label: "Email", type: "email" },
-    { key: "password", label: "Password", type: "password" },
+    { key: "email", label: "auth.email", type: "email" },
+    { key: "password", label: "auth.password", type: "password" },
   ],
   "register-card": [
-    { key: "name", label: "Full name" },
-    { key: "email", label: "Email", type: "email" },
-    { key: "password", label: "Password", type: "password" },
+    { key: "name", label: "address.full_name" },
+    { key: "email", label: "auth.email", type: "email" },
+    { key: "password", label: "auth.password", type: "password" },
   ],
-  "forgot-password-card": [{ key: "email", label: "Email", type: "email" }],
+  "forgot-password-card": [{ key: "email", label: "auth.email", type: "email" }],
   "reset-password-card": [
-    { key: "email", label: "Email", type: "email" },
-    { key: "password", label: "New password", type: "password" },
-    { key: "confirm", label: "Confirm password", type: "password" },
+    { key: "email", label: "auth.email", type: "email" },
+    { key: "password", label: "auth.new_password", type: "password" },
+    { key: "confirm", label: "auth.confirm_password", type: "password" },
   ],
-  "verify-email-card": [{ key: "code", label: "Verification code" }],
+  "verify-email-card": [{ key: "code", label: "auth.verification_code" }],
 };
 
 const TITLES: Record<string, string> = {
-  "login-card": "Sign in",
-  "register-card": "Create account",
-  "forgot-password-card": "Forgot password",
-  "reset-password-card": "Reset password",
-  "verify-email-card": "Verify your email",
+  "login-card": "auth.sign_in",
+  "register-card": "auth.sign_up",
+  "forgot-password-card": "auth.forgot_password",
+  "reset-password-card": "auth.reset_password",
+  "verify-email-card": "auth.verify_email",
 };
 
 // "{{Label||l||/path}}" → link
@@ -52,6 +54,7 @@ const renderFooterText = (text: string) => {
 };
 
 export const StorefrontLoginLayout = ({ content }: any) => {
+  const tr = makeTr(useLanguage().t);
   const navigate = useNavigate();
   const cfg = content?.config || {};
   const cardType = cfg.type || "login-card";
@@ -71,7 +74,7 @@ export const StorefrontLoginLayout = ({ content }: any) => {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (cardType === "reset-password-card" && form.password !== form.confirm) {
-      toast.error("Passwords do not match");
+      toast.error(tr("auth.password_mismatch", "Passwords do not match"));
       return;
     }
     setBusy(true);
@@ -82,7 +85,7 @@ export const StorefrontLoginLayout = ({ content }: any) => {
       : null;
     setBusy(false);
     if (res?.error && cardType === "login-card") {
-      toast.error(res.message || "Sign in failed");
+      toast.error(res.message || tr("auth.sign_in", "Sign in failed"));
       return;
     }
 
@@ -113,11 +116,11 @@ export const StorefrontLoginLayout = ({ content }: any) => {
             )}
           </div>
         )}
-        <h2>{content?.title || TITLES[cardType] || "Sign in"}</h2>
+        <h2>{content?.title || tr(TITLES[cardType] || "auth.sign_in", "Sign in")}</h2>
         <form onSubmit={submit}>
           {fields.map((f) => (
             <label className="sf-field" key={f.key}>
-              <span>{f.label}</span>
+              <span>{tr(f.label, f.label)}</span>
               <input
                 required
                 type={f.type || "text"}
@@ -127,12 +130,12 @@ export const StorefrontLoginLayout = ({ content }: any) => {
             </label>
           ))}
           <button className="sf-cta" disabled={busy}>
-            {busy ? "…" : TITLES[cardType] || "Continue"}
+            {busy ? "…" : tr(TITLES[cardType] || "auth.sign_in", "Continue")}
           </button>
         </form>
         {cardType === "login-card" && (
           <Link to="/forgot-password" className="sf-footer-link">
-            Forgot password?
+            {tr("auth.forgot_password", "Forgot password?")}
           </Link>
         )}
         {content?.footerText && (

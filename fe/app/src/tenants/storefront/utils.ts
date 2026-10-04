@@ -23,3 +23,12 @@ export const firstOf = (v: any): any => {
 
 export const money = (n: any, symbol = "$"): string =>
   `${symbol}${Number(n ?? 0).toFixed(2)}`;
+
+// t() echoes the key when a translation is missing — wrap it so a
+// comp's literal default survives clients without translation data.
+export const makeTr =
+  (t: (key: string) => string) =>
+  (key: string, fallback: string): string => {
+    const v = t(key);
+    return v === key ? fallback : v;
+  };

@@ -16,7 +16,7 @@ export const SiteNav = ({ config }: { config?: any }) => {
   const sessions: any[] = Array.isArray(data.sessions) ? data.sessions : [];
 
   const items = (Array.isArray(data.menu) ? data.menu : [])
-    .filter((i: any) => i.public !== false && !i.auth_page)
+    .filter((i: any) => i.public !== false && !i.auth_page && !i.hide)
     .sort((a: any, b: any) => (a.order ?? 0) - (b.order ?? 0));
 
   if (items.length === 0) return null;

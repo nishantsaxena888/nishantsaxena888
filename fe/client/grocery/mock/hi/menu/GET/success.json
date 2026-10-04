@@ -1,0 +1,44 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "type": "menu",
+      "name": "होम",
+      "description": "मुख्य पृष्ठ",
+      "url": "/",
+      "entity": "home",
+      "public": true,
+      "order": 0
+    },
+    {
+      "id": 2,
+      "type": "menu",
+      "name": "कार्ट",
+      "description": "शॉपिंग कार्ट",
+      "url": "/cart",
+      "entity": "cart",
+      "public": true,
+      "order": 1
+    },
+    {
+      "id": 3,
+      "type": "menu",
+      "name": "चेकआउट",
+      "description": "सुरक्षित भुगतान",
+      "url": "/checkout",
+      "entity": "checkout",
+      "public": true,
+      "order": 2
+    },
+    {
+      "id": 4,
+      "type": "menu",
+      "name": "प्रोफ़ाइल",
+      "description": "ग्राहक प्रोफ़ाइल",
+      "url": "/my-account",
+      "entity": "profile",
+      "public": true,
+      "order": 3
+    }
+  ]
+}

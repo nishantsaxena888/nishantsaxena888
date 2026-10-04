@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "title": "श्रेणी प्रबंधन",
+    "description": "उत्पाद श्रेणियों को व्यवस्थित और प्रबंधित करें।"
+  },
+  "name": "category",
+  "config": [
+    {
+      "id": "category-admin-module",
+      "type": "default-admin",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "actions": [
+          {
+            "key": "data",
+            "endpoint": "/category",
+            "method": "get",
+            "queryParams": {},
+            "responseMapping": {}
+          }
+        ]
+      },
+      "content": {
+        "table": {
+          "columns": [
+            {
+              "key": "id",
+              "label": "आईडी",
+              "type": "text",
+              "sortable": true
+            },
+            {
+              "key": "name",
+              "label": "नाम",
+              "type": "text",
+              "sortable": true,
+              "searchable": true
+            },
+            {
+              "key": "status",
+              "label": "स्थिति",
+              "type": "status",
+              "options": {
+                "active": { "label": "सक्रिय", "variant": "success" },
+                "inactive": { "label": "निष्क्रिय", "variant": "destructive" }
+              }
+            }
+          ],
+          "actions": [
+            {
+              "id": "edit-category",
+              "label": "संपादन",
+              "type": "button",
+              "action": "open_form",
+              "variant": "ghost",
+              "icon": "EditIcon"
+            },
+            {
+              "id": "delete-category",
+              "label": "हटाएं",
+              "type": "button",
+              "action": "confirm_delete",
+              "variant": "destructive",
+              "icon": "TrashIcon"
+            }
+          ]
+        },
+        "form": {
+          "id": "category-form",
+          "title": "श्रेणी विवरण",
+          "layout": "default",
+          "columns": 2,
+          "fields": [
+            {
+              "name": "name",
+              "label": "श्रेणी का नाम",
+              "componentType": "TextInput",
+              "required": true,
+              "placeholder": "जैसे: पेय पदार्थ, नाश्ता...",
+              "colSpan": 1
+            },
+            {
+              "name": "status",
+              "label": "स्थिति",
+              "componentType": "Select",
+              "defaultValue": "active",
+              "colSpan": 1,
+              "options": [
+                { "label": "सक्रिय", "value": "active" },
+                { "label": "निष्क्रिय", "value": "inactive" }
+              ]
+            }
+          ]
+        }
+      },
+      "children": []
+    }
+  ]
+}

@@ -3,12 +3,14 @@ import { Trash2 } from "lucide-react";
 import { useEntity } from "@/engine";
 import { useGenericState } from "@/store/use-generic-state";
 import { useConfigStore } from "@/store/use-config-store";
-import { money } from "./utils";
+import { useLanguage } from "@/components/shared/language-provider";
+import { money, makeTr } from "./utils";
 
 // Generic cart page backed by the client's "cart" session
 // (useGenericState persists it). Reads items live — matches the header
 // badge — and mutates through useEntity session ops.
 export const StorefrontCartView = ({ content }: any) => {
+  const tr = makeTr(useLanguage().t);
   const cartData = useGenericState((s: any) => s.data?.cart);
   const items = Array.isArray(cartData) ? cartData : [];
   const currency = useConfigStore(
@@ -28,10 +30,10 @@ export const StorefrontCartView = ({ content }: any) => {
   if (!items.length) {
     return (
       <section className="sf-cart-empty">
-        <h1>{content?.title || "Your cart"}</h1>
-        <p>Your cart is empty.</p>
+        <h1>{content?.title || tr("cart.title", "Your cart")}</h1>
+        <p>{tr("cart.empty", "Your cart is empty.")}</p>
         <Link to="/shop" className="sf-cta">
-          Continue shopping
+          {tr("cart.continue_shopping", "Continue shopping")}
         </Link>
       </section>
     );
@@ -39,7 +41,7 @@ export const StorefrontCartView = ({ content }: any) => {
 
   return (
     <section className="sf-cart">
-      <h1>{content?.title || "Your cart"}</h1>
+      <h1>{content?.title || tr("cart.title", "Your cart")}</h1>
       <div className="sf-cart-layout">
         <ul className="sf-cart-items">
           {items.map((i: any) => (
@@ -59,7 +61,7 @@ export const StorefrontCartView = ({ content }: any) => {
               </strong>
               <button
                 className="sf-remove"
-                aria-label="Remove"
+                aria-label={tr("cart.remove", "Remove")}
                 onClick={() => cart.onDelete(i.id)}
               >
                 <Trash2 className="h-4 w-4" />
@@ -68,17 +70,17 @@ export const StorefrontCartView = ({ content }: any) => {
           ))}
         </ul>
         <aside className="sf-cart-summary">
-          <h3>Order summary</h3>
+          <h3>{tr("checkout.order_summary", "Order summary")}</h3>
           <div className="sf-summary-row">
-            <span>Subtotal</span>
+            <span>{tr("cart.subtotal", "Subtotal")}</span>
             <strong>{money(total, currency)}</strong>
           </div>
           <div className="sf-summary-row">
-            <span>Delivery</span>
+            <span>{tr("cart.shipping", "Shipping")}</span>
             <strong>{total > 30 ? "Free" : money(4.99, currency)}</strong>
           </div>
           <div className="sf-summary-total">
-            <span>Total</span>
+            <span>{tr("cart.total", "Total")}</span>
             <strong>
               {money(total + (total > 30 ? 0 : 4.99), currency)}
             </strong>

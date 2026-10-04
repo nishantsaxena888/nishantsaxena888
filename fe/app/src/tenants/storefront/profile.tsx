@@ -2,12 +2,14 @@ import React from "react";
 import { useEntity } from "@/engine";
 import { useConfigStore } from "@/store/use-config-store";
 import { toast } from "@/lib/toast";
-import { listOf, money } from "./utils";
+import { useLanguage } from "@/components/shared/language-provider";
+import { listOf, money, makeTr } from "./utils";
 
 // Generic account page — profile form (saved to the configured user
 // entity, default "user") + recent orders from the order entity when the
 // def's action supplies it.
 export const StorefrontProfile = ({ content, actionData }: any) => {
+  const tr = makeTr(useLanguage().t);
   const currency = useConfigStore(
     (s: any) => s.config?.meta?.currency_symbol || "$",
   );
@@ -29,8 +31,8 @@ export const StorefrontProfile = ({ content, actionData }: any) => {
     e.preventDefault();
     localStorage.setItem("profile", JSON.stringify(form));
     const res = await user.onPost(form).catch(() => null);
-    if (res?.error) toast.error("Could not save profile");
-    else toast.success("Profile saved");
+    if (res?.error) toast.error(tr("profile.save_error", "Could not save profile"));
+    else toast.success(tr("profile.saved", "Profile saved"));
   };
 
   const field = (key: string, label: string, extra: any = {}) => (
@@ -42,19 +44,19 @@ export const StorefrontProfile = ({ content, actionData }: any) => {
 
   return (
     <section className="sf-profile">
-      <h1>{content?.title || "My account"}</h1>
+      <h1>{content?.title || tr("profile.title", "My account")}</h1>
       <div className="sf-cart-layout">
         <form className="sf-checkout-form" onSubmit={save}>
-          <h3>Profile</h3>
-          {field("name", "Full name")}
-          {field("email", "Email", { type: "email" })}
-          {field("phone", "Phone", { type: "tel" })}
-          {field("address", "Default address")}
+          <h3>{tr("profile.title", "Profile")}</h3>
+          {field("name", tr("address.full_name", "Full name"))}
+          {field("email", tr("auth.email", "Email"), { type: "email" })}
+          {field("phone", tr("address.phone", "Phone"), { type: "tel" })}
+          {field("address", tr("address.street", "Default address"))}
           <button className="sf-cta">Save</button>
         </form>
         <aside className="sf-cart-summary">
-          <h3>Recent orders</h3>
-          {orders.length === 0 && <p>No orders yet.</p>}
+          <h3>{tr("profile.recent_orders", "Recent orders")}</h3>
+          {orders.length === 0 && <p>{tr("profile.no_orders", "No orders yet.")}</p>}
           {orders.map((o: any) => (
             <div key={o.id} className="sf-summary-row">
               <span>

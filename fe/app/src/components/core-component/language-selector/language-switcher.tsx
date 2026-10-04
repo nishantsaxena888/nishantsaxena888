@@ -1,14 +1,13 @@
 import { ChevronDown, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
-  LANGUAGES,
   useLanguage,
   type Language,
 } from "@/components/shared/language-provider";
 import { useState, useRef, useEffect } from "react";
 
 export function LanguageSwitcher() {
-  const { language, setLanguage } = useLanguage();
+  const { language, languages, setLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -39,7 +38,7 @@ export function LanguageSwitcher() {
 
       {isOpen && (
         <div className="absolute right-0 mt-1 w-36 bg-popover text-popover-foreground border border-border rounded-xl shadow-xl z-50 py-1 overflow-hidden animate-in fade-in zoom-in-95 duration-100">
-          {LANGUAGES.map((lang: Language) => {
+          {languages.map((lang: Language) => {
             const isSelected = lang.code === language.code;
             return (
               <button

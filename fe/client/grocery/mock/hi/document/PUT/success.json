@@ -1,0 +1,13 @@
+{
+  "status_code": 200,
+  "message": "दस्तावेज़ सफलतापूर्वक अपडेट किया गया!",
+  "data": {
+    "id": 1,
+    "name": "अपडेट किया गया दस्तावेज़ नाम",
+    "type": "PDF",
+    "status": "active",
+    "url": "/admin/document",
+    "file_name": "मानक_संचालन_प्रक्रिया_v2.pdf",
+    "description": "अपडेट किया गया विवरण।"
+  }
+}

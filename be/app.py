@@ -105,6 +105,54 @@ def list_entities():
     return {"entities": ENTITIES_ORDER}
 
 
+def _dev_jwt(payload: Dict[str, Any]) -> str:
+    """Unsigned JWT — the frontend only decodes claims (jwt-decode);
+    signing is unnecessary for the dev/source-driven model. Swap for a
+    real signer when a client adds real auth."""
+    import base64, json as _json
+    def b64(o): return base64.urlsafe_b64encode(_json.dumps(o).encode()).rstrip(b"=").decode()
+    return f"{b64({'alg': 'none', 'typ': 'JWT'})}.{b64(payload)}.dev"
+
+
+@app.post("/api/login")
+@app.post("/api/login/")
+async def login(request: Request):
+    """Generic login — any credentials mint a dev token carrying the
+    claims the frontend reads (sub/email/exp). Real auth plugs in at the
+    same contract: POST → {token, user}."""
+    body = await request.json()
+    email = (body or {}).get("email") or (body or {}).get("username") or "user@local"
+    import time
+    payload = {"sub": email, "email": email, "exp": int(time.time()) + 86400}
+    return {"token": _dev_jwt(payload), "user": {"email": email, "name": email.split("@")[0]}}
+
+
+@app.get("/api/_search")
+@app.get("/api/_search/")
+def federated_search(q: str = "", size: int = 5):
+    """Federated substring search across all declared entities —
+    {entity: [items]} for entities with a hit. Client-agnostic."""
+    q = (q or "").strip().lower()
+    if not q:
+        return {"items": {}, "total": 0}
+    hits: Dict[str, Any] = {}
+    total = 0
+    from starlette.datastructures import QueryParams
+    for entity in ENTITIES_ORDER:
+        try:
+            rows = _src(entity).list(entity, QueryParams("size=1000")).get("items", [])
+        except Exception:
+            continue
+        matched = [
+            r for r in rows
+            if any(q in str(v).lower() for v in r.values() if isinstance(v, (str, int, float)))
+        ][:size]
+        if matched:
+            hits[entity] = matched
+            total += len(matched)
+    return {"items": hits, "total": total}
+
+
 @app.get("/api/{entity}/options/")
 def options(entity: str, schema: str = "basic"):
     if entity not in entities:

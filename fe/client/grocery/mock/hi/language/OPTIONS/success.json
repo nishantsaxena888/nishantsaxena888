@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "title": "भाषा प्रबंधन",
+    "description": "सिस्टम-व्यापी भाषाओं और स्थानीयकरण सेटिंग्स को कॉन्फ़िगर करें।"
+  },
+  "name": "language",
+  "config": [
+    {
+      "id": "language-admin-module",
+      "type": "default-admin",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "actions": [
+          {
+            "key": "data",
+            "endpoint": "/language",
+            "method": "get",
+            "queryParams": {},
+            "responseMapping": {}
+          }
+        ]
+      },
+      "content": {
+        "table": {
+          "columns": [
+            {
+              "key": "name",
+              "label": "भाषा का नाम",
+              "type": "text",
+              "sortable": true,
+              "searchable": true
+            },
+            {
+              "key": "code",
+              "label": "आईएसओ कोड",
+              "type": "badge",
+              "styles": {
+                "variant": "outline",
+                "className": "font-black uppercase tracking-wider text-[10px]"
+              }
+            },
+            {
+              "key": "is_default",
+              "label": "प्राथमिक",
+              "type": "status",
+              "options": {
+                "true": { "label": "डिफ़ॉल्ट", "variant": "emerald" },
+                "false": { "label": "वैकल्पिक", "variant": "secondary" }
+              }
+            },
+            {
+              "key": "status",
+              "label": "स्थिति",
+              "type": "status",
+              "options": {
+                "active": { "label": "सक्रिय", "variant": "success" },
+                "inactive": { "label": "निष्क्रिय", "variant": "destructive" }
+              }
+            }
+          ],
+          "actions": [
+            {
+              "id": "edit-lang",
+              "label": "संपादन",
+              "type": "button",
+              "action": "open_form",
+              "variant": "ghost",
+              "icon": "EditIcon"
+            },
+            {
+              "id": "delete-lang",
+              "label": "हटाएं",
+              "type": "button",
+              "action": "confirm_delete",
+              "variant": "destructive",
+              "icon": "TrashIcon"
+            }
+          ],
+          "filters": [
+            {
+              "name": "status",
+              "label": "स्थिति",
+              "type": "select",
+              "options": [
+                { "label": "सभी", "value": "all" },
+                { "label": "सक्रिय", "value": "active" },
+                { "label": "निष्क्रिय", "value": "inactive" }
+              ]
+            }
+          ]
+        },
+        "form": {
+          "id": "language-form",
+          "title": "भाषा विवरण",
+          "layout": "default",
+          "columns": 2,
+          "fields": [
+            {
+              "name": "name",
+              "label": "भाषा का नाम",
+              "componentType": "TextInput",
+              "required": true,
+              "placeholder": "जैसे: English, हिंदी...",
+              "colSpan": 1
+            },
+            {
+              "name": "code",
+              "label": "भाषा कोड (ISO)",
+              "componentType": "TextInput",
+              "required": true,
+              "placeholder": "जैसे: en, hi...",
+              "colSpan": 1
+            },
+            {
+              "name": "is_default",
+              "label": "डिफ़ॉल्ट भाषा के रूप में सेट करें",
+              "componentType": "Switch",
+              "colSpan": 2
+            },
+            {
+              "name": "status",
+              "label": "सक्रिय स्थिति",
+              "componentType": "Select",
+              "defaultValue": "active",
+              "colSpan": 2,
+              "options": [
+                { "label": "सक्रिय", "value": "active" },
+                { "label": "निष्क्रिय", "value": "inactive" }
+              ]
+            }
+          ]
+        }
+      },
+      "children": []
+    }
+  ]
+}

@@ -1,0 +1,305 @@
+{
+  "meta": {
+    "client": "fashion-black",
+    "display_name": "Fashion Black",
+    "theme": "fashion-black",
+    "logo": "/logo.png",
+    "favicon": "/favicon.png",
+    "currency": "USD",
+    "currency_symbol": "$",
+    "language": "en",
+    "timezone": "Asia/Kolkata",
+    "date_format": "dd/MM/yyyy",
+    "time_format": "HH:mm:ss",
+    "date_time_format": "dd/MM/yyyy HH:mm:ss"
+  },
+  "admin": {
+    "login_redirect": "/admin/overview",
+    "logout_redirect": "/login"
+  },
+  "menu": [
+    {
+      "name": "होम",
+      "description": "होम विवरण",
+      "url": "/",
+      "entity": "home",
+      "public": true,
+      "order": 0
+    },
+    {
+      "name": "कार्ट",
+      "description": "कार्ट विवरण",
+      "url": "/cart",
+      "entity": "cart",
+      "public": true,
+      "order": 1
+    },
+    {
+      "name": "चेकआउट",
+      "description": "चेकआउट विवरण",
+      "url": "/checkout",
+      "entity": "checkout",
+      "public": true,
+      "order": 2
+    },
+    {
+      "name": "प्रोफ़ाइल",
+      "description": "प्रोफ़ाइल विवरण",
+      "url": "/my-account",
+      "entity": "profile",
+      "public": true,
+      "order": 3
+    },
+    {
+      "name": "लॉगिन",
+      "description": "लॉगिन विवरण",
+      "url": "/login",
+      "public": true,
+      "entity": "login",
+      "order": 4,
+      "auth_page": true
+    },
+    {
+      "name": "साइन अप",
+      "description": "साइन अप विवरण",
+      "url": "/register",
+      "entity": "register",
+      "public": true,
+      "order": 5,
+      "auth_page": true
+    },
+    {
+      "name": "Forgot Password",
+      "description": "Forgot Password description",
+      "url": "/forgot-password",
+      "entity": "forgot-password",
+      "public": true,
+      "order": 6,
+      "auth_page": true
+    },
+    {
+      "name": "Reset Password",
+      "description": "Reset Password description",
+      "url": "/reset-password",
+      "entity": "reset-password",
+      "public": true,
+      "order": 7,
+      "auth_page": true
+    },
+    {
+      "name": "Verify Email",
+      "description": "Verify Email description",
+      "url": "/verify-email",
+      "entity": "verify-email",
+      "public": true,
+      "order": 8,
+      "auth_page": true
+    }
+  ],
+  "admin_menu": [
+    {
+      "name": "Nishify App",
+      "description": "Dashboard description",
+      "url": "/admin/overview",
+      "entity": "dashboard"
+    },
+    {
+      "name": "Settings",
+      "description": "Dashboard description",
+      "url": "/admin/settings",
+      "entity": "settings",
+      "sub_menu": [
+        {
+          "name": "Configuration",
+          "description": "Dashboard description",
+          "url": "/admin/configuration",
+          "entity": "configuration"
+        },
+        {
+          "name": "Language",
+          "description": "Dashboard description",
+          "url": "/admin/language",
+          "entity": "language"
+        },
+        {
+          "name": "Theme",
+          "description": "Dashboard description",
+          "url": "/admin/theme",
+          "entity": "theme"
+        },
+        {
+          "name": "Menu",
+          "description": "Dashboard description",
+          "url": "/admin/menu",
+          "entity": "menu"
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "description": "Dashboard description",
+      "url": "/admin/user",
+      "entity": "user",
+      "menu": [
+        {
+          "name": "Role",
+          "description": "Dashboard description",
+          "url": "/admin/role",
+          "entity": "role"
+        },
+        {
+          "name": "User",
+          "description": "Dashboard description",
+          "url": "/admin/user",
+          "entity": "user"
+        },
+        {
+          "name": "Permission",
+          "description": "Dashboard description",
+          "url": "/admin/permission",
+          "entity": "permission"
+        }
+      ]
+    },
+    {
+      "name": "Product",
+      "description": "Dashboard description",
+      "url": "/admin/product",
+      "entity": "product",
+      "menu": [
+        {
+          "name": "Category",
+          "description": "Dashboard description",
+          "url": "/admin/category",
+          "entity": "category"
+        },
+        {
+          "name": "Sub Category",
+          "description": "Dashboard description",
+          "url": "/admin/sub-category",
+          "entity": "sub-category"
+        },
+        {
+          "name": "Attribute",
+          "description": "Dashboard description",
+          "url": "/admin/attribute",
+          "entity": "attribute"
+        },
+        {
+          "name": "Brand",
+          "description": "Dashboard description",
+          "url": "/admin/brand",
+          "entity": "brand"
+        },
+        {
+          "name": "Unit",
+          "description": "Dashboard description",
+          "url": "/admin/unit",
+          "entity": "unit"
+        },
+        {
+          "name": "Tax",
+          "description": "Dashboard description",
+          "url": "/admin/tax",
+          "entity": "tax"
+        },
+        {
+          "name": "Discount",
+          "description": "Dashboard description",
+          "url": "/admin/discount",
+          "entity": "discount"
+        },
+        {
+          "name": "Promo Codes",
+          "description": "Promo Codes description",
+          "url": "/admin/promo-code",
+          "entity": "promo-code"
+        },
+        {
+          "name": "Deals",
+          "description": "Deals description",
+          "url": "/admin/deal",
+          "entity": "deal"
+        }
+      ]
+    },
+    {
+      "name": "Order",
+      "description": "Dashboard description",
+      "url": "/admin/order",
+      "entity": "order",
+      "menu": [
+        {
+          "name": "Order",
+          "description": "Dashboard description",
+          "url": "/admin/order",
+          "entity": "order"
+        },
+        {
+          "name": "Transaction",
+          "description": "Dashboard description",
+          "url": "/admin/transaction",
+          "entity": "transaction"
+        }
+      ]
+    },
+    {
+      "name": "दस्तावेज़",
+      "description": "दस्तावेज़ों का प्रबंधन",
+      "url": "/admin/document",
+      "entity": "document",
+      "icon": "file-text"
+    }
+  ],
+  "language": [
+    {
+      "name": "English",
+      "code": "en"
+    },
+    {
+      "name": "Hindi",
+      "code": "hi"
+    }
+  ],
+  "sessions": [
+    {
+      "name": "cart",
+      "source": "session",
+      "persist": true,
+      "method": "array_upsert",
+      "method_config": {
+        "match_key": "id",
+        "on_match": "increment",
+        "increment_field": "qty",
+        "default_fields": { "qty": 1 }
+      },
+      "field_mapping": {
+        "id": "id",
+        "unit_price": "price",
+        "name": "name",
+        "image": "image"
+      }
+    },
+    {
+      "name": "wishlist",
+      "source": "session",
+      "persist": true,
+      "method": "array_toggle",
+      "method_config": {
+        "match_key": "id"
+      }
+    },
+    {
+      "name": "selected_user",
+      "source": "session",
+      "persist": true,
+      "method": "replace"
+    },
+    {
+      "name": "applied_coupons",
+      "source": "session",
+      "persist": true,
+      "method": "replace"
+    }
+  ]
+}

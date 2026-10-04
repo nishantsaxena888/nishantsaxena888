@@ -7,6 +7,7 @@ import {
 } from "@/engine";
 import { client as bakedClient } from "@/tenants/active";
 import { componentsMap, tenantsReady } from "@/tenants";
+import { useConfigStore } from "@/store/use-config-store";
 
 export const getActiveClient = (): string => {
   if (import.meta.env.DEV) {
@@ -69,10 +70,15 @@ const ApiProvider = ({
     };
   }, []);
 
+  // Fallback language comes from the client's configuration
+  // (meta.language) once fetched — "en" until then.
+  const configuredDefault = useConfigStore(
+    (s: any) => s.config?.meta?.language,
+  );
   setApiConfiguration({
     base_url: API_URL,
     lang: language.code,
-    default_language: "en",
+    default_language: configuredDefault || "en",
     client: activeClient,
   });
 

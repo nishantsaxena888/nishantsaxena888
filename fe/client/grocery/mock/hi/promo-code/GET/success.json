@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "title": "प्रोमो कोड",
+    "description": "उपलब्ध प्रोमो कोड प्राप्त करें"
+  },
+  "data": [
+    {
+      "code": "WELCOME10",
+      "description": "आपकी पहली खरीद पर 10% की छूट!",
+      "type": "percent",
+      "value": 0.1
+    },
+    {
+      "code": "SAVE50",
+      "description": "$500 से अधिक के ऑर्डर पर $50 की छूट",
+      "type": "fixed",
+      "value": 50.0,
+      "conditions": {
+        "min_purchase": 500.0
+      }
+    },
+    {
+      "code": "FREE5",
+      "description": "$5.00 की फ्लैट छूट!",
+      "type": "fixed",
+      "value": 5.0
+    },
+    {
+      "code": "FREESHIP",
+      "description": "$25 से अधिक के ऑर्डर पर मुफ्त शिपिंग!",
+      "type": "free_shipping",
+      "conditions": {
+        "min_purchase": 25.0
+      }
+    },
+    {
+      "code": "BOGO1",
+      "description": "ऑर्गेनिक एवोकैडो पर एक खरीदें, एक मुफ्त पाएं!",
+      "type": "bogo_same",
+      "rules": {
+        "product_id": 1,
+        "buy_qty": 1,
+        "get_qty": 1
+      }
+    },
+    {
+      "code": "BOGO2",
+      "description": "2 पालक खरीदें, 1 टमाटर मुफ्त पाएं!",
+      "type": "bogo_diff",
+      "rules": {
+        "buy_product_id": 2,
+        "buy_qty": 2,
+        "get_product_id": 3,
+        "get_qty": 1
+      }
+    },
+    {
+      "code": "BOGOCAT",
+      "description": "3 ताजी उपज खरीदें, 1 मुफ्त पाएं!",
+      "type": "bogo_category",
+      "rules": {
+        "category_id": 4,
+        "buy_qty": 2,
+        "get_qty": 1
+      }
+    },
+    {
+      "code": "HEALTHY20",
+      "description": "ताजा उपज के साथ $50 से अधिक पर 20% की छूट!",
+      "type": "percent",
+      "value": 0.2,
+      "conditions": {
+        "min_purchase": 50.0,
+        "require_categories": [4],
+        "relation": "AND"
+      }
+    }
+  ]
+}

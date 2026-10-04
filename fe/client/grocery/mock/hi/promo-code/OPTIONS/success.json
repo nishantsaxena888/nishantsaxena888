@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "title": "प्रोमो कोड प्रबंधन",
+    "description": "स्टोरफ़्रंट प्रोमो कोड और शर्तों को कॉन्फ़िगर और प्रबंधित करें।"
+  },
+  "content": {
+    "table": {
+      "columns": [
+        { "key": "code", "label": "प्रोमो कोड", "type": "text" },
+        { "key": "description", "label": "विवरण", "type": "text" },
+        { "key": "type", "label": "प्रकार", "type": "text" },
+        { "key": "value", "label": "मूल्य", "type": "text" }
+      ]
+    },
+    "form": {
+      "id": "promo-code-form",
+      "title": "प्रोमो कोड विवरण",
+      "layout": "default",
+      "columns": 2,
+      "inputs": [
+        { "name": "code", "label": "प्रोमो कोड", "type": "text", "column": { "md": 6 }, "validation": [{ "rule": "required" }] },
+        { "name": "description", "label": "विवरण", "type": "text", "column": { "md": 6 } },
+        { "name": "type", "label": "प्रकार", "type": "select", "defaultValue": "percent", "column": { "md": 6 }, "options": [
+          { "label": "प्रतिशत छूट", "value": "percent" },
+          { "label": "निश्चित छूट", "value": "fixed" },
+          { "label": "मुफ्त शिपिंग", "value": "free_shipping" }
+        ] },
+        { "name": "value", "label": "छूट मूल्य", "type": "number", "column": { "md": 6 }, "validation": [{ "rule": "required" }] }
+      ]
+    }
+  }
+}

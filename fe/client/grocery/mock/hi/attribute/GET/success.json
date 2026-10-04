@@ -1,0 +1,14 @@
+{
+    "data":  [
+                 {
+                     "status":  "active",
+                     "name":  "विशेषता आइटम 1",
+                     "id":  1
+                 },
+                 {
+                     "status":  "inactive",
+                     "name":  "विशेषता आइटम 2",
+                     "id":  2
+                 }
+             ]
+}

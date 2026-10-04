@@ -81,9 +81,19 @@ fe/client/<name>/
   `fe/client/<name>/` + `be/client/<name>/` (working todo entity).
 - **Surface-scoped maps**: `componentsMap[client] = {site, admin}` in
   `src/tenants/index.ts`. Site routes resolve `def.type` against
-  `site_tenant.components`; admin routes against
+  `storefront_components + site_tenant.components`; admin routes against
   `default_admin_component + admin_tenant.components` via
   `AdminSurfaceProvider` mounted at `DashboardRenderer`.
+- **Storefront tenant** (`src/tenants/storefront/`): generic commerce
+  blocks available to every site surface — `header`, `hero-section`,
+  `products`, `footer`, `cart-view`, `checkout`, `profile`,
+  `login-layout-1` (all five auth card variants via
+  `content.config.type`). Def types match the source naming so page
+  definitions port verbatim. A client can override any of them by
+  registering the same `def.type` in its own site tenant.
+- **`site_nav` config flag**: `configuration.site_nav === false` stands
+  the generic `SiteNav` down — clients whose pages bring their own
+  `header`/`footer` defs set this (grocery does).
 - `ClientTenant` contract: `src/tenants/types.ts`.
 - Per-client builds: `npm run build:hello|grocery|uday` → `dist/<name>`.
 
@@ -180,10 +190,23 @@ Client components get engine deps through the `@/` alias (e.g. `useEntity`,
 folders sit outside `src/` so package resolution goes through the app's
 imports.
 
+## Multilingual (three layers)
+
+1. **API/mock content** — `mock/<lang>/<endpoint>/...`; `apiClient`
+   sends `lang`/`Accept-Language` headers and falls back to the
+   configured default (`configuration.meta.language`, else `en`).
+2. **UI strings** — `useLanguage().t(key)` from the `translations`
+   endpoint; missing keys echo the key (storefront comps use `makeTr`
+   for a literal fallback).
+3. **Per-field localization** — `useLanguage().l(obj, "a.b")` reads
+   `obj.translations[<lang>].a.b`, falling back to the base field.
+
+Languages are **config-driven**: `configuration.language[]` =
+`{name, code, flag?}` (flags guessed for common codes otherwise).
+`localStorage["language"]` persists the choice; `setLanguage` reloads.
+
 ## Gotchas
 
-- `render-engine-context.tsx` has a commented-out time-bomb
-  (`isTimeValid(...)` → "Credit Expire") — dev license check, disabled.
 - `apiClient` sets debug globals on `window` (`_LATEST_API_*`).
 - Registry `id` constraint matching is strict; `search_param` checking is
   currently disabled.

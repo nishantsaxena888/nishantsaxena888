@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
-import { firstOf } from "./utils";
+import { useLanguage } from "@/components/shared/language-provider";
+import { firstOf, makeTr } from "./utils";
 
 // Generic storefront footer — columns from the footer endpoint record:
 // categories, navigationLinks, socialLinks, contact info.
 export const StorefrontFooter = ({ content, actionData }: any) => {
+  const tr = makeTr(useLanguage().t);
   const f = firstOf(actionData?.data?.data) || content?.data || {};
   const navLinks = f.navigationLinks || [];
   const categories = f.categories || [];
@@ -29,7 +31,7 @@ export const StorefrontFooter = ({ content, actionData }: any) => {
         </div>
         {categories.length > 0 && (
           <div>
-            <h4>Categories</h4>
+            <h4>{tr("footer.categories", "Categories")}</h4>
             {categories.map((c: any) => {
               const label = typeof c === "string" ? c : c.name;
               return <Link key={label} to="/shop">{label}</Link>;
@@ -38,7 +40,7 @@ export const StorefrontFooter = ({ content, actionData }: any) => {
         )}
         {navLinks.length > 0 && (
           <div>
-            <h4>Links</h4>
+            <h4>{tr("footer.quick_links", "Links")}</h4>
             {navLinks.map((l: any) => (
               <Link key={l.label} to={l.url || `/${l.target || ""}`}>
                 {l.label}
@@ -48,7 +50,7 @@ export const StorefrontFooter = ({ content, actionData }: any) => {
         )}
         {(f.phone || f.email || f.address) && (
           <div>
-            <h4>Contact</h4>
+            <h4>{tr("footer.contact", "Contact")}</h4>
             {f.phone && <p>{f.phone}</p>}
             {f.email && <p>{f.email}</p>}
             {f.address && <p>{f.address}</p>}

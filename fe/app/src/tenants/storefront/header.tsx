@@ -2,7 +2,8 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Search, ShoppingCart, User } from "lucide-react";
 import { useGenericState } from "@/store/use-generic-state";
-import { listOf, firstOf } from "./utils";
+import { useLanguage } from "@/components/shared/language-provider";
+import { listOf, firstOf, makeTr } from "./utils";
 
 // Generic storefront header. Data comes from the def's dynamic action:
 //   actionData.data.data     → header record (name/tagline/logo/phone/…)
@@ -11,6 +12,7 @@ import { listOf, firstOf } from "./utils";
 // none, the badge simply does not render.
 export const StorefrontHeader = ({ content, actionData }: any) => {
   const navigate = useNavigate();
+  const tr = makeTr(useLanguage().t);
   const header = firstOf(actionData?.data?.data) || content?.data || {};
   const categories =
     listOf(actionData?.data?.category) || header.categories || [];
@@ -55,18 +57,18 @@ export const StorefrontHeader = ({ content, actionData }: any) => {
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Search products…"
+            placeholder={tr("search.placeholder", "Search products…")}
           />
           <button type="submit" aria-label="Search">
             <Search className="h-4 w-4" />
           </button>
         </form>
         <nav className="sf-header-actions">
-          <Link to="/cart" className="sf-icon-btn" aria-label="Cart">
+          <Link to="/cart" className="sf-icon-btn" aria-label={tr("header.cart", "Cart")}>
             <ShoppingCart className="h-5 w-5" />
             {cartCount > 0 && <span className="sf-badge">{cartCount}</span>}
           </Link>
-          <Link to="/login" className="sf-icon-btn" aria-label="Account">
+          <Link to="/login" className="sf-icon-btn" aria-label={tr("header.sign_in", "Sign in")} title={tr("header.sign_in", "Sign in")}>
             <User className="h-5 w-5" />
           </Link>
         </nav>

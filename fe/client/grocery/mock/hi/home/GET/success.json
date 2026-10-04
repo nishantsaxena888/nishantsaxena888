@@ -1,0 +1,153 @@
+{
+  "meta": {
+    "title": "होम पेज",
+    "description": "होम विवरण"
+  },
+  "config": [
+    {
+      "id": "header",
+      "type": "header",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "data",
+            "endpoint": "/header",
+            "method": "get",
+            "queryParams": {
+              "id": 1
+            },
+            "responseMapping": {}
+          },
+          {
+            "key": "category",
+            "endpoint": "/category",
+            "method": "get",
+            "responseMapping": {
+              "bindLabel": "name",
+              "bindValue": "id"
+            }
+          }
+        ]
+      },
+      "content": {},
+      "children": []
+    },
+    {
+      "id": "hero-section",
+      "type": "hero-section",
+      "properties": {
+        "level": "base",
+        "type": "static"
+      },
+      "content": {
+        "name": "FreshMart",
+        "tagline": "थोक",
+        "type": "grocery",
+        "logoIcon": "🥦",
+        "hero": {
+          "headline": "ताजा किराने का सामान, तेजी से वितरित",
+          "subheadline": "थोक मूल्यों पर खेत से मेज तक की गुणवत्ता। उसी दिन डिलीवरी के लिए दोपहर 2 बजे से पहले ऑर्डर करें।",
+          "cta": "ताजा उपज खरीदें",
+          "badge": "🚚 ₹1000 से अधिक पर मुफ्त डिलीवरी"
+        },
+        "categories": [
+          "सभी उत्पाद",
+          "ताजा उपज",
+          "डेयरी और अंडे",
+          "मांस और समुद्री भोजन",
+          "बेकरी",
+          "पेय",
+          "पेंट्री",
+          "जमे हुए खाद्य पदार्थ",
+          "नाश्ता"
+        ],
+        "phone": "1-800-FRESHMART",
+        "hours": "सोम-शनि: सुबह 6 - रात 8 बजे",
+        "topBarMessage": "खुदरा विक्रेताओं और वितरकों के लिए थोक मूल्य निर्धारण",
+        "freeDeliveryThreshold": 1000,
+        "translations": {}
+      },
+      "children": []
+    },
+    {
+      "id": "products",
+      "type": "products",
+      "properties": {
+        "level": "base",
+        "type": "static"
+      },
+      "content": {
+        "entityConfig": {
+          "fields": {
+            "image": { "path": "image" },
+            "badge": { "path": "badge" },
+            "title": { "path": "name" },
+            "description": { "path": "description" },
+            "rating": { "path": "rating", "reviewsPath": "reviews" },
+            "price": { "path": "price", "originalPricePath": "originalPrice", "format": "currency", "symbol": "₹" },
+            "inStock": { "path": "inStock" }
+          },
+          "actions": {
+            "primary": { "type": "addToCart", "label": "कार्ट में जोड़ें", "session": "cart" },
+            "secondary": { "type": "details", "label": "विवरण" },
+            "wishlist": { "type": "wishlist", "labelAdd": "इच्छा सूची में जोड़ें", "labelRemove": "इच्छा सूची से निकालें", "session": "wishlist" }
+          },
+          "sessions": [
+            {
+              "name": "cart",
+              "source": "session",
+              "persist": true,
+              "method": "array_upsert",
+              "method_config": {
+                "match_key": "id",
+                "on_match": "increment",
+                "increment_field": "qty",
+                "default_fields": { "qty": 1 }
+              },
+              "field_mapping": {
+                "id": "id",
+                "unit_price": "price",
+                "name": "name",
+                "image": "image"
+              }
+            },
+            {
+              "name": "wishlist",
+              "source": "session",
+              "persist": true,
+              "method": "array_toggle",
+              "method_config": { "match_key": "id" }
+            }
+          ],
+          "labels": {
+            "noImage": "कोई छवि नहीं"
+          }
+        }
+      },
+      "children": []
+    },
+    {
+      "id": "footer",
+      "type": "footer",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "data",
+            "endpoint": "/footer",
+            "method": "get",
+            "queryParams": {
+              "id": 1
+            },
+            "responseMapping": {}
+          }
+        ]
+      },
+      "content": {},
+      "children": []
+    }
+  ]
+}

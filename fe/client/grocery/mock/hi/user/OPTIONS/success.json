@@ -1,0 +1,91 @@
+{
+  "meta": {
+    "title": "उपयोगकर्ता प्रबंधन",
+    "description": "सिस्टम उपयोगकर्ताओं और उनकी पहुंच को प्रबंधित करें।"
+  },
+  "name": "user",
+  "config": [
+    {
+      "id": "user-admin-module",
+      "type": "default-admin",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "actions": [
+          {
+            "key": "data",
+            "endpoint": "/user",
+            "method": "get",
+            "queryParams": {},
+            "responseMapping": {}
+          }
+        ]
+      },
+      "content": {
+        "table": {
+          "columns": [
+            {
+              "key": "id",
+              "label": "आईडी",
+              "type": "text",
+              "sortable": true
+            },
+            {
+              "key": "name",
+              "label": "नाम",
+              "type": "text",
+              "sortable": true,
+              "searchable": true
+            },
+            {
+              "key": "status",
+              "label": "स्थिति",
+              "type": "status",
+              "options": {
+                "active": { "label": "सक्रिय", "variant": "success" },
+                "inactive": { "label": "निष्क्रिय", "variant": "destructive" }
+              }
+            }
+          ],
+          "actions": [
+            {
+              "id": "edit-user",
+              "label": "संपादन",
+              "type": "button",
+              "action": "open_form",
+              "variant": "ghost",
+              "icon": "EditIcon"
+            }
+          ]
+        },
+        "form": {
+          "id": "user-form",
+          "title": "उपयोगकर्ता विवरण",
+          "layout": "default",
+          "columns": 2,
+          "fields": [
+            {
+              "name": "name",
+              "label": "नाम",
+              "componentType": "TextInput",
+              "required": true,
+              "colSpan": 1
+            },
+            {
+              "name": "status",
+              "label": "स्थिति",
+              "componentType": "Select",
+              "defaultValue": "active",
+              "colSpan": 1,
+              "options": [
+                { "label": "सक्रिय", "value": "active" },
+                { "label": "निष्क्रिय", "value": "inactive" }
+              ]
+            }
+          ]
+        }
+      },
+      "children": []
+    }
+  ]
+}

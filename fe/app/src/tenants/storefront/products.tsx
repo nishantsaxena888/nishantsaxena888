@@ -1,14 +1,16 @@
 import { Star } from "lucide-react";
 import { useEntity } from "@/engine";
 import { useConfigStore } from "@/store/use-config-store";
+import { useLanguage } from "@/components/shared/language-provider";
 import { toast } from "@/lib/toast";
-import { listOf, money } from "./utils";
+import { listOf, money, makeTr } from "./utils";
 
 // Generic storefront product grid. Items come from the def's dynamic
 // action (actionData.data.data). "Add to cart" posts to the client's
 // configured cart session when one exists — otherwise it's a no-op with
 // a toast, so the comp stays usable for non-commerce clients.
 export const StorefrontProducts = ({ content, actionData }: any) => {
+  const tr = makeTr(useLanguage().t);
   const products = listOf(actionData?.data?.data);
   const currency = useConfigStore(
     (s: any) => s.config?.meta?.currency_symbol || "$",
@@ -59,7 +61,9 @@ export const StorefrontProducts = ({ content, actionData }: any) => {
                 disabled={p.stock === 0}
                 onClick={() => addToCart(p)}
               >
-                {p.stock === 0 ? "Out of stock" : "Add to cart"}
+                {p.stock === 0
+                  ? tr("listing.out_of_stock", "Out of stock")
+                  : tr("listing.add_to_cart", "Add to cart")}
               </button>
             </div>
           </article>

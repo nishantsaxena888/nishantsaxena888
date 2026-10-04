@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "title": "शॉपिंग कार्ट",
+    "description": "आपकी शॉपिंग कार्ट"
+  },
+  "config": [
+    {
+      "id": "cart-view-component",
+      "type": "cart-view",
+      "properties": {
+        "title": "शॉपिंग कार्ट",
+        "subtitle": "चेकआउट करने से पहले अपने आइटम की समीक्षा और प्रबंधन करें",
+        "labels": {
+          "shoppingCartTitle": "शॉपिंग कार्ट",
+          "manageItemsSubtitle": "चेकआउट करने से पहले अपने आइटम की समीक्षा और प्रबंधन करें",
+          "stockLimitWarning": "और नहीं जोड़ सकते। स्टॉक सीमा तक पहुँच गया!",
+          "stockAvailableWarning": "स्टॉक में केवल {{name}} के {{stock}} आइटम उपलब्ध हैं।",
+          "defaultItemName": "आइटम",
+          "continueShopping": "खरीदारी जारी रखें",
+          "yourItems": "आपके आइटम",
+          "itemsCountSuffix": "आइटम",
+          "eachPriceSuffix": "प्रत्येक",
+          "lowStockWarning": "स्टॉक में केवल {{stock}} बचे हैं!",
+          "emptyCartTitle": "आपकी कार्ट खाली है",
+          "emptyCartSubtitle": "शुरू करने के लिए हमारे कैटलॉग से आइटम जोड़ें।",
+          "cartSummary": "कार्ट सारांश",
+          "promoCodePlaceholder": "प्रोमो कोड",
+          "applyPromoCode": "लागू करें",
+          "inactiveCouponPrefix": "निष्क्रिय:",
+          "subtotalLabel": "उप-योग",
+          "discountLabel": "छूट",
+          "taxLabel": "कर",
+          "shippingLabel": "शिपिंग",
+          "freeShippingLabel": "मुफ़्त",
+          "freeShippingNote": "* ${{threshold}} से ऊपर के ऑर्डर पर मुफ्त शिपिंग",
+          "totalDueLabel": "कुल देय",
+          "proceedToCheckout": "चेकआउट के लिए आगे बढ़ें"
+        },
+        "price_rules": {
+          "tax_rate": 0.08,
+          "shipping_fee": 5.0,
+          "free_shipping_threshold": 30.0
+        },
+        "promo_codes": [
+          {
+            "code": "WELCOME10",
+            "description": "आपकी पहली खरीद पर 10% की छूट!",
+            "type": "percent",
+            "value": 0.1
+          },
+          {
+            "code": "SAVE50",
+            "description": "$500 से अधिक के ऑर्डर पर $50 की छूट",
+            "type": "fixed",
+            "value": 50.0
+          },
+          {
+            "code": "FREE5",
+            "description": "$5.00 की फ्लैट छूट!",
+            "type": "fixed",
+            "value": 5.0
+          }
+        ]
+      }
+    }
+  ]
+}

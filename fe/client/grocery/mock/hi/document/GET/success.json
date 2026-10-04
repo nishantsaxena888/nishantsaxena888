@@ -1,0 +1,49 @@
+{
+  "data": [
+    { 
+      "id": 1, 
+      "name": "मानक संचालन प्रक्रिया (SOP)", 
+      "type": "PDF", 
+      "status": "active",
+      "url": "/admin/document",
+      "file_name": "मानक_संचालन_प्रक्रिया_v2.pdf",
+      "description": "कर्मचारियों के ऑनबोर्डिंग के लिए मानक संचालन प्रक्रियाएं और दिशानिर्देश।"
+    },
+    { 
+      "id": 2, 
+      "name": "सेवा की शर्तें", 
+      "type": "DOCX", 
+      "status": "active",
+      "url": "/admin/document",
+      "file_name": "सेवा_की_शर्तें_2026.docx",
+      "description": "कंपनी की सेवा की शर्तें और ग्राहक अनुपालन दिशानिर्देश।"
+    },
+    { 
+      "id": 3, 
+      "name": "गोपनीयता नीति", 
+      "type": "DOCX", 
+      "status": "active",
+      "url": "/admin/document",
+      "file_name": "गोपनीयता_नीति_v4.docx",
+      "description": "ग्राहक गोपनीयता नीतियां और डेटा संग्रह पैरामीटर।"
+    },
+    { 
+      "id": 4, 
+      "name": "कर्मचारी पुस्तिका", 
+      "type": "PDF", 
+      "status": "active",
+      "url": "/admin/document",
+      "file_name": "कर्मचारी_पुस्तिका_नवीनतम.pdf",
+      "description": "आचार संहिता, अनुपालन, लाभ और कार्यस्थल के मानक।"
+    },
+    { 
+      "id": 5, 
+      "name": "कंपनी प्रस्तुति 2026", 
+      "type": "XLSX", 
+      "status": "active",
+      "url": "/admin/document",
+      "file_name": "कंपनी_प्रस्तुति_शीट.xlsx",
+      "description": "त्रैमासिक परिचालन परिणाम और लक्ष्य अनुमान।"
+    }
+  ]
+}

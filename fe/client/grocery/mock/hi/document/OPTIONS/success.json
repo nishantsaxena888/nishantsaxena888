@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "title": "दस्तावेज़ प्रबंधन",
+    "description": "कंपनी और उत्पाद दस्तावेजों को अपलोड, देखें और प्रबंधित करें।"
+  },
+  "name": "document",
+  "config": [
+    {
+      "id": "document-admin-module",
+      "type": "media-upload",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "actions": [
+          {
+            "key": "data",
+            "endpoint": "/document",
+            "method": "get",
+            "queryParams": {},
+            "responseMapping": {}
+          }
+        ]
+      },
+      "content": {
+        "table": {
+          "columns": [
+            {
+              "key": "id",
+              "label": "आईडी",
+              "type": "text",
+              "sortable": true
+            },
+            {
+              "key": "name",
+              "label": "दस्तावेज़ नाम",
+              "type": "text",
+              "sortable": true,
+              "searchable": true
+            },
+            {
+              "key": "type",
+              "label": "दस्तावेज़ प्रकार",
+              "type": "text",
+              "sortable": true
+            },
+            {
+              "key": "status",
+              "label": "स्थिति",
+              "type": "status",
+              "options": {
+                "active": { "label": "सक्रिय", "variant": "success" },
+                "inactive": { "label": "निष्क्रिय", "variant": "destructive" }
+              }
+            }
+          ],
+          "actions": [
+            {
+              "id": "edit-document",
+              "label": "संपादन",
+              "type": "button",
+              "action": "open_form",
+              "variant": "ghost",
+              "icon": "EditIcon"
+            },
+            {
+              "id": "delete-document",
+              "label": "हटाएं",
+              "type": "button",
+              "action": "confirm_delete",
+              "variant": "destructive",
+              "icon": "TrashIcon"
+            }
+          ]
+        },
+        "form": {
+          "id": "document-form",
+          "title": "दस्तावेज़ विवरण",
+          "layout": "default",
+          "columns": 2,
+          "fields": [
+            {
+              "name": "name",
+              "label": "दस्तावेज़ नाम",
+              "componentType": "TextInput",
+              "required": true,
+              "placeholder": "जैसे: गोपनीयता नीति, एसओपी...",
+              "colSpan": 1
+            },
+            {
+              "name": "type",
+              "label": "दस्तावेज़ प्रकार",
+              "componentType": "Select",
+              "defaultValue": "PDF",
+              "colSpan": 1,
+              "options": [
+                { "label": "PDF", "value": "PDF" },
+                { "label": "DOCX", "value": "DOCX" },
+                { "label": "XLSX", "value": "XLSX" },
+                { "label": "TXT", "value": "TXT" }
+              ]
+            },
+            {
+              "name": "status",
+              "label": "स्थिति",
+              "componentType": "Select",
+              "defaultValue": "active",
+              "colSpan": 1,
+              "options": [
+                { "label": "सक्रिय", "value": "active" },
+                { "label": "निष्क्रिय", "value": "inactive" }
+              ]
+            }
+          ]
+        }
+      },
+      "children": []
+    }
+  ]
+}

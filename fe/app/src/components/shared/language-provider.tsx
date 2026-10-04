@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
+import { useConfigStore } from "@/store/use-config-store";
 
 export type LanguageCode = string;
 
@@ -8,16 +9,24 @@ export interface Language {
     flag: string;
 }
 
+// Fallback before configuration loads — the client's own
+// configuration.language[] replaces this once fetched.
 const LANGUAGES: Language[] = [
     { code: "en", name: "English", flag: "🇺🇸" },
     { code: "hi", name: "Hindi", flag: "🇮🇳" },
 ];
+
+const FLAGS: Record<string, string> = {
+    en: "🇺🇸", hi: "🇮🇳", es: "🇪🇸", fr: "🇫🇷", de: "🇩🇪",
+    ar: "🇸🇦", pt: "🇧🇷", ja: "🇯🇵", zh: "🇨🇳",
+};
 
 // Export so components can import from here
 export { LANGUAGES };
 
 interface LanguageContextType {
     language: Language;
+    languages: Language[];
     setLanguage: (lang: Language) => void;
     t: (key: string) => string;
     l: (obj: any, field: string) => any;
@@ -26,16 +35,34 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    // Config-driven languages — configuration.language[] supplies
+    // {name, code, flag?}; falls back to en/hi until config arrives.
+    const configLangs = useConfigStore((s: any) => s.config?.language);
+    const languages: Language[] = useMemo(() => {
+        const list = Array.isArray(configLangs) && configLangs.length
+            ? configLangs
+            : LANGUAGES;
+        return list.map((l: any) => ({
+            code: l.code,
+            name: l.name,
+            flag: l.flag || FLAGS[l.code] || "🌐",
+        }));
+    }, [configLangs]);
+
     const [currentLanguage, setCurrentLanguage] = useState<Language>(LANGUAGES[0]);
     const [translations, setTranslations] = useState<Record<string, string>>({});
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const savedCode = localStorage.getItem('language') as LanguageCode;
-            const found = LANGUAGES.find(l => l.code === savedCode);
-            if (found) setCurrentLanguage(found);
-        }
-    }, []);
+        const savedCode = typeof window !== 'undefined'
+            ? (localStorage.getItem('language') as LanguageCode)
+            : null;
+        const found = languages.find(l => l.code === savedCode);
+        // Adopt the saved code when valid, otherwise the client's first
+        // configured language once the list resolves.
+        setCurrentLanguage(prev =>
+            found ? found : languages.find(l => l.code === prev.code) || languages[0]
+        );
+    }, [languages]);
 
     // Load translations from the real API when language changes
     useEffect(() => {
@@ -88,10 +115,11 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     const value = useMemo(() => ({
         language: currentLanguage,
+        languages,
         setLanguage: handleSetLanguage,
         t,
         l,
-    }), [currentLanguage, handleSetLanguage, t, l]);
+    }), [currentLanguage, languages, handleSetLanguage, t, l]);
 
     return (
         <LanguageContext.Provider value={value}>
@@ -102,6 +130,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
 const defaultLanguageContext: LanguageContextType = {
     language: LANGUAGES[0],
+    languages: LANGUAGES,
     setLanguage: () => {},
     t: (key: string) => key,
     l: (obj: any, field: string) => obj?.[field] ?? '',

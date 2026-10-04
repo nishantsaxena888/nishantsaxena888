@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "title": "सक्रिय डील्स",
+    "description": "सक्रिय स्टोरफ़्रंट डील्स और असाइनमेंट प्राप्त करें"
+  },
+  "data": [
+    {
+      "id": "deal-user-arjun",
+      "title": "वीआईपी सदस्य अर्जुन का विशेष (उप-योग पर 15% छूट)",
+      "type": "user_discount",
+      "value": 0.15,
+      "assignment": {
+        "user_id": [1]
+      }
+    },
+    {
+      "id": "deal-category-produce",
+      "title": "ताजा उपज पर $1.00 की छूट प्रति आइटम",
+      "type": "category_discount",
+      "value": 1.00,
+      "assignment": {
+        "category_id": [4]
+      }
+    },
+    {
+      "id": "deal-product-avocado",
+      "title": "एवोकैडो प्रेमी सेल (ऑर्गेनिक एवोकैडो पैक पर $0.50 की छूट)",
+      "type": "product_discount",
+      "value": 0.50,
+      "assignment": {
+        "product_id": [1]
+      }
+    }
+  ]
+}

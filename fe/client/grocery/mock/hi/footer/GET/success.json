@@ -1,0 +1,73 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "logoIcon": "🥦",
+      "name": "फ्रेशमार्ट",
+      "tagline": "ताजा किराने का सामान आपके दरवाजे पर वितरित। गुणवत्ता जिस पर आप भरोसा कर सकते हैं, कीमतें जो आपको पसंद आएंगी।",
+      "categories": [
+        "ताजा उपज",
+        "डेयरी और अंडे",
+        "मांस और समुद्री भोजन",
+        "बेकरी",
+        "पेय"
+      ],
+      "socialLinks": [
+        {
+          "icon": "instagram",
+          "url": "https://instagram.com/freshmart"
+        },
+        {
+          "icon": "twitter",
+          "url": "https://twitter.com/freshmart"
+        },
+        {
+          "icon": "facebook",
+          "url": "https://facebook.com/freshmart"
+        },
+        {
+          "icon": "youtube",
+          "url": "https://youtube.com/freshmart"
+        }
+      ],
+      "navigationLinks": [
+        {
+          "label": "सभी उत्पाद",
+          "target": "home"
+        },
+        {
+          "label": "मेरी प्रोफ़ाइल",
+          "target": "profile"
+        },
+        {
+          "label": "सहायता केंद्र",
+          "target": "help"
+        },
+        {
+          "label": "ऑर्डर ट्रैक करें",
+          "target": "track-order"
+        }
+      ],
+      "legalLinks": [
+        {
+          "label": "गोपनीयता नीति",
+          "target": "privacy"
+        },
+        {
+          "label": "सेवा की शर्तें",
+          "target": "terms"
+        },
+        {
+          "label": "धनवापसी नीति",
+          "target": "refund"
+        }
+      ],
+      "newsletter": {
+        "enabled": true,
+        "heading": "जुड़े रहें",
+        "description": "साप्ताहिक सौदे और मौसमी व्यंजन सीधे अपने इनबॉक्स में प्राप्त करें।"
+      },
+      "companyName": "फ्रेशमार्ट इंक"
+    }
+  ]
+}
