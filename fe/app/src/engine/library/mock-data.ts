@@ -16,6 +16,7 @@ import type { ApiConfigMap } from "./api";
 import { mockFiles } from "../../tenants/mock-active";
 import { client as bakedClient } from "../../tenants/active";
 import { storage } from "@/platform/storage";
+import { isDev, clientName } from "@/platform/env";
 
 type ResponseFiles = Record<string, any>;
 type EndpointMap = Record<string, ResponseFiles>; // METHOD -> file -> json
@@ -63,7 +64,7 @@ const mocksLoaded = new Set<string>([bakedClient]);
 // Dev: import every mock file under ../../../client/<name>/mock/ on first
 // use. Idempotent; apiClient awaits this before resolveMock reads maps.
 export async function ensureClientMocks(name: string): Promise<void> {
-  if (!import.meta.env.DEV || !name || mocksLoaded.has(name)) return;
+  if (!isDev() || !name || mocksLoaded.has(name)) return;
   mocksLoaded.add(name);
   const { mockGlobs } = await import("../../tenants/dev-all");
   const prefix = `../../../client/${name}/mock/`;
@@ -76,7 +77,7 @@ export async function ensureClientMocks(name: string): Promise<void> {
 }
 
 const requested =
-  import.meta.env.VITE_CLIENT ||
+  clientName() ||
   (typeof window !== "undefined" && storage.getItem("vite-client")) ||
   bakedClient;
 

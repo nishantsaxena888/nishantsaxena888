@@ -188,12 +188,26 @@ The seam that makes generic code portable across **web**, **React Native**,
 and **Electron**. Reusable storefront components never import
 `react-router-dom` or touch `localStorage` directly — they use these:
 
-| Module | Contract | Web impl | RN port | Electron |
+| Module | Contract | Web impl | RN port (`.native.*`, Metro resolves) | Electron |
 |---|---|---|---|---|
-| `storage.ts` | `storage.{get,set,remove}Item` sync facade; `setStorageBackend()` injects impl at boot | `localStorage` | `AsyncStorage` impl hydrated into memory at boot, injected via `setStorageBackend` | reuse web (or IPC-backed impl) |
-| `navigation.ts` | `useNav()` → `{navigate(path, {replace}), goBack()}`; `useRouteParams()` → route params; `usePath()` → pathname; `registerNavigator`/`navTo` for non-hook callers | `useNavigate`/`useParams`/`useLocation` (react-router) | `useNavigation`/`useRoute` (react-navigation), path = route name + params | reuse web |
-| `host.ts` | `emitAppEvent(name, detail)` / `onAppEvent(name, cb)` → unsubscribe; `reloadApp()` — cross-cutting events (`auth-change`, `client-change`) never use `window` directly | DOM events + `location.reload` | EventEmitter / DeviceEventEmitter + state re-render | reuse web |
-| `primitives.tsx` | `View`, `Text`, `Pressable`, `Anchor`, `Image`, `TextInput`, `ScrollView` — RN-shaped API (`onPress`, `onChangeText`, `to`) | renders `div`/`span`/`button`/`a`/`img`/`input` (semantic via `as` prop) | `primitives.native.tsx` mapping to `View`/`Text`/`Pressable`/`Image`/`TextInput` | reuse web |
+| `storage.ts` | `storage.{get,set,remove}Item` sync facade; core lives in `storage-core.ts` | `localStorage` (installed at module load) | `storage.native.ts` — `hydrateStorage()` warms an AsyncStorage-backed mirror before the tree mounts | reuse web (or IPC-backed impl) |
+| `navigation.ts` | `useNav()` → `{navigate(path, {replace}), goBack()}`; `useRouteParams()` → route params; `usePath()` → pathname; `registerNavigator`/`navTo` for non-hook callers | `useNavigate`/`useParams`/`useLocation` (react-router) | `navigation.native.ts` — `useNavigation`/`useRoute`; screen name == path minus `/`; `setPathMapper()` customizes | reuse web |
+| `host.ts` | `emitAppEvent(name, detail)` / `onAppEvent(name, cb)` → unsubscribe; `reloadApp()` — cross-cutting events (`auth-change`, `client-change`) never use `window` directly | DOM events + `location.reload` | `host.native.ts` — DeviceEventEmitter + DevSettings.reload (dev) | reuse web |
+| `primitives.tsx` | `View`, `Text`, `Pressable`, `Anchor`, `Image`, `TextInput`, `ScrollView` — RN-shaped API (`onPress`, `onChangeText`, `to`) | renders `div`/`span`/`button`/`a`/`img`/`input` (semantic via `as` prop) | `primitives.native.tsx` — real RN components; `className` passes through for NativeWind | reuse web |
+| `env.ts` | `env(key)`, `isDev()`, `apiUrl()`, `clientName()` — shared code never touches `import.meta.env` | `import.meta.env.*` | `env.native.ts` — app calls `setEnvConfig({apiUrl, client, dev})` at boot | reuse web |
+
+RN host-app checklist (one-time, nothing in shared src changes):
+
+1. Metro resolves `*.native.ts(x)` automatically — no config needed.
+2. Peer deps the app provides: `react-native`, `@react-navigation/native`,
+   `@react-native-async-storage/async-storage` (`native.d.ts` stubs types
+   so web `tsc` stays green without them installed).
+3. Boot: `setEnvConfig({apiUrl, client, dev: __DEV__})` +
+   `await hydrateStorage()` + `registerNavigator(navRef.navigate)`
+   before first render.
+4. Styling: NativeWind makes `className` work natively, or map
+   className→style in your theme layer.
+5. Icons: alias `lucide-react` → `lucide-react-native` in Metro config.
 
 Rules for new generic components:
 
@@ -207,8 +221,13 @@ Rules for new generic components:
 - Persist via `storage` — never `localStorage` directly.
 - `className` is the web-styling hook; the native variant maps it to a
   `style` lookup — keep client visuals in `styles.css` classes.
+- Env/build config via `platform/env` (`isDev`/`apiUrl`/`clientName`) —
+  never `import.meta.env` in reusable code.
 - Electron runs the same web bundle (`ELECTRON=1 npm run build` →
-  relative asset base for `file://` loading).
+  relative asset base for `file://` loading); `electron/main.cjs` +
+  `preload.cjs` are the shell — `ELECTRON_DIST=dist/<client>
+  npx electron electron/main.cjs`. Native-only features belong in a
+  `platform/<x>.electron.ts` adapter behind the same contract.
 
 ## Sessions (client-side state)
 

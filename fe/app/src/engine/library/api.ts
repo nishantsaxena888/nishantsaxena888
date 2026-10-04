@@ -19,14 +19,13 @@ export type HttpMethod =
   | "patch"
   | "delete"
   | "options";
+import { apiUrl } from "@/platform/env";
+
 /**
  * Global variable to store the API base URL.
- * Initialized with environment variables if available.
+ * Resolved via the platform env seam (Vite env on web, setEnvConfig on RN).
  */
-let globalApiBaseUrl =
-  (typeof import.meta !== "undefined" &&
-    (import.meta as any).env?.VITE_API_BASE_URL) ||
-  "";
+let globalApiBaseUrl = apiUrl() || "";
 
 export interface MockDataEntry {
   success?: any;

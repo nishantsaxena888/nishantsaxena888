@@ -15,9 +15,10 @@ import {
 import { useConfigStore } from "@/store/use-config-store";
 import { storage } from "@/platform/storage";
 import { emitAppEvent, onAppEvent } from "@/platform/host";
+import { isDev, clientName, apiUrl } from "@/platform/env";
 
 export const getActiveClient = (): string => {
-  if (import.meta.env.DEV) {
+  if (isDev()) {
     // Dev: every client's surfaces + mocks are bundled (tenants/dev-all.ts),
     // so a process-level VITE_CLIENT or a runtime localStorage["vite-client"]
     // switch both work — e.g. `VITE_CLIENT=grocery npm run dev`. A stale
@@ -29,11 +30,10 @@ export const getActiveClient = (): string => {
         : null;
     if (cached && componentsMap[cached]) return cached;
     if (cached) storage.removeItem("vite-client");
-    if (import.meta.env.VITE_CLIENT && componentsMap[import.meta.env.VITE_CLIENT])
-      return import.meta.env.VITE_CLIENT;
+    if (clientName() && componentsMap[clientName()!]) return clientName()!;
   }
   // Prod: only the generated client's code is in the bundle.
-  return import.meta.env.VITE_CLIENT || bakedClient;
+  return clientName() || bakedClient;
 };
 
 export const setActiveClient = (clientName: string) => {
@@ -43,7 +43,7 @@ export const setActiveClient = (clientName: string) => {
   }
 };
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = apiUrl();
 
 const ApiProvider = ({
   children,

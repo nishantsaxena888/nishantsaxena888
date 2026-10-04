@@ -4,6 +4,7 @@ import { layout_components } from "./layout";
 import { client, site_tenant, admin_tenant } from "./active";
 import type { ClientTenant } from "./types";
 import { storage } from "@/platform/storage";
+import { isDev, clientName } from "@/platform/env";
 
 // Per-client surface maps. The active client's surfaces live in
 // fe/client/<name>/{site,admin}/; site routes resolve def.type against
@@ -27,7 +28,7 @@ export const componentsMap: Record<string, Surfaces> = {
 // does NOT check componentsMap: callers use this to know WHAT to load via
 // ensureClient before looking anything up.
 export const requestedClient = (): string =>
-  import.meta.env.VITE_CLIENT ||
+  clientName() ||
   (typeof window !== "undefined" &&
     storage.getItem("vite-client")) ||
   client;
@@ -39,7 +40,7 @@ export const requestedClient = (): string =>
 // the baked client stays eagerly bundled via active.ts.
 export async function ensureClient(name: string): Promise<void> {
   if (
-    !import.meta.env.DEV ||
+    !isDev() ||
     !name ||
     name === "default" ||
     componentsMap[name]
@@ -68,6 +69,6 @@ export async function ensureClient(name: string): Promise<void> {
 // Resolved by ApiProvider before first render so a requested client
 // (VITE_CLIENT/localStorage) has its map ready. No top-level await — the
 // promise never blocks module evaluation.
-export const tenantsReady: Promise<void> = import.meta.env.DEV
+export const tenantsReady: Promise<void> = isDev()
   ? ensureClient(requestedClient())
   : Promise.resolve();
