@@ -6,6 +6,14 @@ import { AdminSkeleton } from "./utils/admin-skeleton";
 import { toast } from "sonner";
 import { useFormStyleStore } from "@/store/use-form-style";
 import { useCurdEntity } from "./utils/use-curd-entity";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Icon, type IconName } from "@/components/ui/icon-picker";
+import {
+  exportCsv,
+  runDeclarativeAction,
+} from "./utils/declarative-actions";
 
 export const DefaultAdmin = (prop: any) => {
   const {
@@ -29,6 +37,56 @@ export const DefaultAdmin = (prop: any) => {
   } = useCurdEntity(prop);
 
   const { styles, themeName } = useFormStyleStore();
+  const navigate = useNavigate();
+  const [selectedRows, setSelectedRows] = useState<any[]>([]);
+
+  // Declarative table actions — OPTIONS content.table.row_actions /
+  // bulk_actions / export drive this generic executor.
+  const rowActions = table?.row_actions || [];
+  const bulkActions = table?.bulk_actions || [];
+  const exportable = table?.export === true;
+  const entity = prop.config?.activePage?.entity;
+
+  const reload = () =>
+    onChangeHandle({ type: "page", value: config?.currentPage || 1 });
+
+  const runAction = async (def: any, rows: any[]) => {
+    if (def.confirm) {
+      const ok = await confirm(
+        typeof def.confirm === "string"
+          ? { title: def.label || def.name, description: def.confirm }
+          : def.confirm,
+      );
+      if (!ok) return;
+    }
+    setProcess(true);
+    if (def.name === "export_csv") {
+      exportCsv(
+        def.filename || `${entity || "export"}.csv`,
+        rows,
+        table?.columns || [],
+      );
+    } else if (def.name === "bulk_delete") {
+      for (const row of rows) {
+        const res = await onDelete(row.id || row);
+        if (!res) break;
+      }
+    } else {
+      let failed = 0;
+      for (const row of rows) {
+        const { ok } = await runDeclarativeAction(def, row, {
+          entity,
+          navigate,
+        });
+        if (!ok) failed++;
+      }
+      failed
+        ? toast.error(`${def.label || def.name} failed on ${failed} item(s)`)
+        : toast.success(`${def.label || def.name} done`);
+    }
+    setProcess(false);
+    await reload();
+  };
   return (
     <div className="p-6">
       {isSkeleton ? (
@@ -47,6 +105,45 @@ export const DefaultAdmin = (prop: any) => {
             />
           ) : (
             <div className="space-y-4">
+              {(bulkActions.length > 0 || exportable) && (
+                <div className="flex items-center gap-2 px-1">
+                  {selectedRows.length > 0 && (
+                    <span className="text-sm text-muted-foreground">
+                      {selectedRows.length} selected
+                    </span>
+                  )}
+                  {bulkActions.map((def: any) => (
+                    <Button
+                      key={def.name}
+                      variant="outline"
+                      size="sm"
+                      disabled={selectedRows.length === 0}
+                      onClick={() => runAction(def, selectedRows)}
+                    >
+                      {def.icon && (
+                        <Icon name={def.icon as IconName} className="h-3.5 w-3.5 mr-1.5" />
+                      )}
+                      {def.label || def.name}
+                    </Button>
+                  ))}
+                  {exportable && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      disabled={!list?.length}
+                      onClick={() =>
+                        exportCsv(
+                          `${entity || "export"}.csv`,
+                          selectedRows.length ? selectedRows : list || [],
+                          table?.columns || [],
+                        )
+                      }
+                    >
+                      Export CSV{selectedRows.length ? ` (${selectedRows.length})` : ""}
+                    </Button>
+                  )}
+                </div>
+              )}
               <IteratorModule
                 data={list || []}
                 config={table || {}}
@@ -70,6 +167,9 @@ export const DefaultAdmin = (prop: any) => {
                   // onRowClick: (row: any) => {
                   //   formOpenManage(true, row);
                   // },
+                  customActions: rowActions,
+                  onCustomAction: (row: any, def: any) => runAction(def, [row]),
+                  onSelectedRowChange: (rows: any[]) => setSelectedRows(rows || []),
                   onEdit: (row: any) => {
                     formOpenManage(true, row);
                   },

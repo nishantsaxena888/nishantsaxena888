@@ -261,6 +261,33 @@ Admin screens are entity-driven — **the OPTIONS response IS the screen**:
    `use-curd-entity.ts` (wraps `useEntity`; `onChangeHandle` → reload for
    page/sort/filter, 500ms-debounced search, confirm dialog).
 
+Declarative table actions (OPTIONS `content.table`, executed by the
+generic grid — no per-screen code):
+
+```json
+"table": {
+  "export": true,
+  "row_actions":  [{"name":"view","label":"View","icon":"eye",
+                    "type":"navigate","navigation":"/items/{id}"}],
+  "bulk_actions": [{"name":"export_csv","label":"Export"},
+                   {"name":"bulk_delete","label":"Delete",
+                    "confirm":"Delete selected?"},
+                   {"name":"restock","endpoint":"product/{id}/restock",
+                    "method":"post"}]
+}
+```
+
+- `type "api"` (default) → `apiClient` with `{field}` interpolation from
+  the row; `type "navigate"` → router push. Builtins: `export_csv`,
+  `bulk_delete`. `confirm` gates via the confirm dialog. Row actions
+  render as icon buttons beside Edit/Delete; bulk actions live in a
+  toolbar that appears when `bulk_actions`/`export` are declared.
+
+Read-through caching (`engine/library/api-cache.ts`): OPTIONS cached for
+the session, GETs 30s TTL, mutations invalidate their endpoint prefix,
+identical concurrent calls dedupe. `prefetchEntity(entity)` fires on
+admin-nav hover so screens open warm.
+
 New admin CRUD module = entity `ui` metadata + one `admin_menu` entry —
 no TS. Custom admin screens: put the component in `admin/components/`,
 register `def.type` in `admin/tenant.ts`, return that def from OPTIONS.

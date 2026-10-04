@@ -31,6 +31,33 @@
           "label": "Status",
           "type": "status"
         }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ],
+      "export": true,
+      "row_actions": [
+        {
+          "name": "view",
+          "label": "View",
+          "icon": "eye",
+          "type": "navigate",
+          "navigation": "/shop"
+        }
+      ],
+      "bulk_actions": [
+        {
+          "name": "export_csv",
+          "label": "Export selected",
+          "icon": "download"
+        },
+        {
+          "name": "bulk_delete",
+          "label": "Delete selected",
+          "icon": "trash-2",
+          "confirm": "Delete the selected products?"
+        }
       ]
     },
     "form": {

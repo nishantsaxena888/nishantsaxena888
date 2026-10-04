@@ -16,6 +16,7 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
+import { prefetchEntity } from "@/engine/library/api-cache";
 
 import { type IconName, Icon } from "@/components/ui/icon-picker";
 import { dynamicIconImports } from "lucide-react/dynamic";
@@ -24,6 +25,7 @@ interface NavItem {
   title: string;
   url: string;
   icon?: React.ReactNode;
+  entity?: string;
   isActive?: boolean;
   items?: NavItem[];
 }
@@ -101,7 +103,7 @@ function NavMenuItem({ item, depth = 0 }: { item: NavItem; depth?: number }) {
               "data-[active=true]:text-menu-active-foreground",
             )}
           >
-            <Link to={item.url}>
+            <Link to={item.url} onMouseEnter={() => prefetchEntity(item.entity)}>
               {iconAndTitle}
             </Link>
           </SidebarMenuButton>
@@ -158,7 +160,7 @@ function NavMenuItem({ item, depth = 0 }: { item: NavItem; depth?: number }) {
           isActive={active}
           className={active ? "font-bold text-primary" : "font-normal"}
         >
-          <Link to={item.url}>
+          <Link to={item.url} onMouseEnter={() => prefetchEntity(item.entity)}>
             <span>{item.title}</span>
           </Link>
         </SidebarMenuSubButton>

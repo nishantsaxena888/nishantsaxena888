@@ -28,6 +28,11 @@ export type IteratorConfig = {
     onEdit?: (rowData: any) => void;
     onDelete?: (rowData: any) => void;
     onFilter?: (filters: any) => void;
+    // Declarative row actions from OPTIONS table.row_actions — rendered as
+    // icon buttons next to Edit/Delete; the parent runs them via
+    // onCustomAction(row, def).
+    customActions?: Array<{ name: string; label?: string; icon?: string }>;
+    onCustomAction?: (rowData: any, def: any) => void;
   };
   search?: string;
   onSearchChange?: (val: string) => void;

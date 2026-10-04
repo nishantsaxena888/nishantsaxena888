@@ -49,6 +49,7 @@ export function AppSidebar({
       title: item.name,
       url: item.url,
       icon: item.icon || iconMap[item.entity],
+      entity: item.entity,
       isActive:
         location.pathname === item.url ||
         location.pathname.startsWith(item.url + "/"),

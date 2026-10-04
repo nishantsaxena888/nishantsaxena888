@@ -2,6 +2,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { type AxiosRequestConfig, AxiosError } from "axios";
 import { ensureClientMocks, mockConfigByClient, mockDataByClient } from "./mock-data";
+import {
+  apiCacheKey,
+  cacheRead,
+  cacheSchema,
+  cacheWrite,
+  deduped,
+  invalidateEndpoint,
+} from "./api-cache";
 
 export type HttpMethod =
   | "get"
@@ -126,112 +134,132 @@ export const apiClient = async <T = any>(
 
   const API_BASE_URL = globalApiBaseUrl;
 
-  // --- mock routing -------------------------------------------------------
-  // Per-client registry (fe/client/<name>/mock/config.json). If the
-  // endpoint+method has "mock": true, serve the file from the client's mock
-  // tree; a missing file is a 404 (deliberate — flag means "this source",
-  // not "try mock first"). Everything else falls through to axios.
-  const mockResponse = await resolveMock(endpoint, method, id, searchParameter);
-  if (mockResponse) return mockResponse as ApiResponse<T>;
-  // ------------------------------------------------------------------------
-
-  const formattedBaseUrl = API_BASE_URL
-    ? API_BASE_URL.endsWith("/")
-      ? API_BASE_URL.slice(0, -1)
-      : API_BASE_URL
+  // Read-through cache — OPTIONS are session-stable, GETs short-TTL.
+  // Mutations invalidate their endpoint prefix so writes never leave
+  // stale reads behind. Dedupe merges prefetch + render calls into one.
+  const isRead = method === "get" || method === "options";
+  const key = isRead
+    ? apiCacheKey(globalApiClient, endpoint, method, { id, ...searchParameter })
     : "";
-
-  let formattedPrefix = "";
-  if (preFix) {
-    formattedPrefix = preFix.startsWith("/") ? preFix : `/${preFix}`;
-    formattedPrefix = formattedPrefix.endsWith("/")
-      ? formattedPrefix.slice(0, -1)
-      : formattedPrefix;
+  if (isRead) {
+    const hit = cacheRead(key);
+    if (hit) return hit;
   }
-
-  const formattedEndpoint = (endpoint || "").startsWith("/")
-    ? endpoint
-    : `/${endpoint}`;
-
-  let url = `${formattedBaseUrl}${formattedPrefix}${formattedEndpoint}`;
-
-  if (id !== undefined && id !== null) {
-    url = url.endsWith("/") ? `${url}${id}` : `${url}/${id}`;
+  const response = await (isRead ? deduped(key, run) : run());
+  if (isRead && !response.error) {
+    (method === "options" ? cacheSchema : cacheWrite)(key, response);
   }
+  if (!isRead && !response.error) invalidateEndpoint(globalApiClient, endpoint);
+  return response;
 
-  const axiosMethod = method === "options" ? "options" : method;
+  async function run() {
+    // --- mock routing -------------------------------------------------------
+      // Per-client registry (fe/client/<name>/mock/config.json). If the
+      // endpoint+method has "mock": true, serve the file from the client's mock
+      // tree; a missing file is a 404 (deliberate — flag means "this source",
+      // not "try mock first"). Everything else falls through to axios.
+      const mockResponse = await resolveMock(endpoint, method, id, searchParameter);
+      if (mockResponse) return mockResponse as ApiResponse<T>;
+    // ------------------------------------------------------------------------
 
-  const mergedHeaders: Record<string, string> = { ...header };
+    const formattedBaseUrl = API_BASE_URL
+      ? API_BASE_URL.endsWith("/")
+        ? API_BASE_URL.slice(0, -1)
+        : API_BASE_URL
+      : "";
 
-  if (!mergedHeaders["Accept-Language"]) {
-    mergedHeaders["Accept-Language"] = globalApiLang;
-  }
-  if (!mergedHeaders["lang"]) {
-    mergedHeaders["lang"] = globalApiLang;
-  }
-
-  if (typeof window !== "undefined") {
-    const token = localStorage.getItem("token");
-    if (
-      token &&
-      !mergedHeaders["Authorization"] &&
-      !mergedHeaders["authorization"]
-    ) {
-      mergedHeaders["Authorization"] = `Bearer ${token}`;
+    let formattedPrefix = "";
+    if (preFix) {
+      formattedPrefix = preFix.startsWith("/") ? preFix : `/${preFix}`;
+      formattedPrefix = formattedPrefix.endsWith("/")
+        ? formattedPrefix.slice(0, -1)
+        : formattedPrefix;
     }
-  }
 
-  const config: AxiosRequestConfig = {
-    method: axiosMethod,
-    url,
-    headers: mergedHeaders,
-    params: searchParameter,
-    data: payload,
-    responseType: responseType,
-  };
+    const formattedEndpoint = (endpoint || "").startsWith("/")
+      ? endpoint
+      : `/${endpoint}`;
 
-  try {
-    const response = await axios(config);
-    return {
-      data: response.data,
-      error: false,
-      status_code: response.status,
-      message: response.statusText || "Success",
-    };
-  } catch (error: any) {
-    let statusCode = 500;
-    let message = "An unexpected error occurred";
-    let errorData = null;
+    let url = `${formattedBaseUrl}${formattedPrefix}${formattedEndpoint}`;
 
-    if (axios.isAxiosError(error)) {
-      const axiosError = error as AxiosError<any>;
-      errorData = axiosError.response?.data || null;
-      statusCode = axiosError.response?.status || 500;
+    if (id !== undefined && id !== null) {
+      url = url.endsWith("/") ? `${url}${id}` : `${url}/${id}`;
+    }
 
-      if (!axiosError.response) {
-        message =
-          "Network Error: Please check your internet connection. the server might be unreachable.";
-        statusCode = 0;
-      } else if (statusCode >= 500) {
-        message =
-          "Internal Server Error: Something went wrong on the server. Please try again later.";
-      } else {
-        message =
-          axiosError.response?.data?.message ||
-          axiosError.message ||
-          "An error occurred with the request";
+    const axiosMethod = method === "options" ? "options" : method;
+
+    const mergedHeaders: Record<string, string> = { ...header };
+
+    if (!mergedHeaders["Accept-Language"]) {
+      mergedHeaders["Accept-Language"] = globalApiLang;
+    }
+    if (!mergedHeaders["lang"]) {
+      mergedHeaders["lang"] = globalApiLang;
+    }
+
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      if (
+        token &&
+        !mergedHeaders["Authorization"] &&
+        !mergedHeaders["authorization"]
+      ) {
+        mergedHeaders["Authorization"] = `Bearer ${token}`;
       }
-    } else if (error instanceof Error) {
-      message = error.message;
     }
 
-    return {
-      data: null,
-      details: errorData,
-      error: true,
-      status_code: statusCode,
-      message,
+    const config: AxiosRequestConfig = {
+      method: axiosMethod,
+      url,
+      headers: mergedHeaders,
+      params: searchParameter,
+      data: payload,
+      responseType: responseType,
     };
+
+    try {
+      const response = await axios(config);
+      return {
+        data: response.data,
+        error: false,
+        status_code: response.status,
+        message: response.statusText || "Success",
+      };
+    } catch (error: any) {
+      let statusCode = 500;
+      let message = "An unexpected error occurred";
+      let errorData = null;
+
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError<any>;
+        errorData = axiosError.response?.data || null;
+        statusCode = axiosError.response?.status || 500;
+
+        if (!axiosError.response) {
+          message =
+            "Network Error: Please check your internet connection. the server might be unreachable.";
+          statusCode = 0;
+        } else if (statusCode >= 500) {
+          message =
+            "Internal Server Error: Something went wrong on the server. Please try again later.";
+        } else {
+          message =
+            axiosError.response?.data?.message ||
+            axiosError.message ||
+            "An error occurred with the request";
+        }
+      } else if (error instanceof Error) {
+        message = error.message;
+      }
+
+      return {
+        data: null,
+        details: errorData,
+        error: true,
+        status_code: statusCode,
+        message,
+      };
+    }
   }
 };
 

@@ -12,6 +12,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { Pencil, Trash2 } from "lucide-react";
+import { Icon, type IconName } from "@/components/ui/icon-picker";
 import { Button } from "@/components/ui/button";
 
 export const TableIterator = ({
@@ -76,7 +77,7 @@ export const TableIterator = ({
                 />
               );
             })}
-            {(action?.onEdit || action?.onDelete) && (
+            {(action?.onEdit || action?.onDelete || action?.customActions?.length) && (
               <TableHead className="text-right">Actions</TableHead>
             )}
           </TableRow>
@@ -151,7 +152,7 @@ export const TableIterator = ({
                       </TableCell>
                     );
                   })}
-                  {(action?.onEdit || action?.onDelete) && (
+                  {(action?.onEdit || action?.onDelete || action?.customActions?.length) && (
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-1">
                         {action?.onEdit && (
@@ -167,6 +168,25 @@ export const TableIterator = ({
                             <Pencil className="h-3.5 w-3.5" />
                           </Button>
                         )}
+                        {action?.customActions?.map((def: any) => (
+                          <Button
+                            key={def.name}
+                            variant="ghost"
+                            size={def.icon ? "icon" : "sm"}
+                            title={def.label || def.name}
+                            className="h-8 text-muted-foreground hover:text-primary transition-colors"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              action.onCustomAction?.(row, def);
+                            }}
+                          >
+                            {def.icon ? (
+                              <Icon name={def.icon as IconName} className="h-3.5 w-3.5" />
+                            ) : (
+                              <span className="text-xs px-1">{def.label || def.name}</span>
+                            )}
+                          </Button>
+                        ))}
                         {action?.onDelete && (
                           <Button
                             variant="ghost"
@@ -191,7 +211,9 @@ export const TableIterator = ({
               <TableCell
                 colSpan={
                   visibleColumns.length +
-                  (action?.onEdit || action?.onDelete ? 2 : 1)
+                  (action?.onEdit || action?.onDelete || action?.customActions?.length
+                    ? 2
+                    : 1)
                 }
                 className="h-24 text-center text-muted-foreground"
               >
