@@ -1,119 +1,61 @@
 {
   "meta": {
-    "title": "सुरक्षित चेकआउट",
-    "description": "अपना ऑर्डर पूरा करें"
+    "title": "Checkout"
   },
-  "data": [
+  "config": [
     {
-      "id": "checkout-pipeline",
+      "id": "hdr",
+      "type": "header",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "data",
+            "endpoint": "/header",
+            "method": "get",
+            "queryParams": {
+              "id": 1
+            }
+          },
+          {
+            "key": "category",
+            "endpoint": "/category",
+            "method": "get"
+          }
+        ]
+      },
+      "content": null
+    },
+    {
+      "id": "checkout",
       "type": "form-summary",
       "properties": {
         "level": "base",
-        "title": "सुरक्षित चेकआउट",
-        "subtitle": "3 आसान चरणों में अपना ऑर्डर पूरा करें",
-        "steps": [
-          {
-            "id": "shipping",
-            "title": "शिपिंग पता",
-            "fields": [
-              {
-                "name": "name",
-                "label": "पूरा नाम",
-                "type": "text",
-                "required": true,
-                "placeholder": "जैसे: जॉन डो",
-                "icon": "User"
-              },
-              {
-                "name": "email",
-                "label": "ईमेल पता",
-                "type": "email",
-                "required": true,
-                "placeholder": "जैसे: john@example.com",
-                "icon": "Mail"
-              },
-              {
-                "name": "houseNo",
-                "label": "मकान / फ्लैट / सुइट संख्या",
-                "type": "text",
-                "required": true,
-                "placeholder": "जैसे: 123",
-                "icon": "Building2"
-              },
-              {
-                "name": "city",
-                "label": "शहर",
-                "type": "text",
-                "required": true,
-                "placeholder": "जैसे: नई दिल्ली",
-                "icon": "Map"
-              },
-              {
-                "name": "state",
-                "label": "राज्य",
-                "type": "text",
-                "required": true,
-                "placeholder": "जैसे: दिल्ली",
-                "icon": "MapPin"
-              }
-            ]
-          },
-          {
-            "id": "payment",
-            "title": "भुगतान विधि",
-            "methods": [
-              {
-                "id": "card",
-                "label": "क्रेडिट कार्ड",
-                "icon": "CreditCard",
-                "fields": [
-                  {
-                    "name": "cardNumber",
-                    "label": "कार्ड नंबर",
-                    "type": "text",
-                    "placeholder": "XXXX XXXX XXXX XXXX",
-                    "required": true
-                  },
-                  {
-                    "name": "expiry",
-                    "label": "समाप्ति तिथि",
-                    "type": "text",
-                    "placeholder": "माह/वर्ष",
-                    "required": true
-                  },
-                  {
-                    "name": "cvv",
-                    "label": "सीवीवी कोड",
-                    "type": "password",
-                    "placeholder": "•••",
-                    "required": true
-                  }
-                ]
-              },
-              {
-                "id": "cash",
-                "label": "कैश ऑन डिलीवरी",
-                "icon": "Banknote"
-              },
-              {
-                "id": "upi",
-                "label": "यूपीआई / डिजिटल वॉलेट",
-                "icon": "Wallet"
-              }
-            ]
-          },
-          {
-            "id": "review",
-            "title": "ऑर्डर समीक्षा"
-          }
-        ],
-        "successPage": {
-          "title": "ऑर्डर सफलतापूर्वक दर्ज हो गया है!",
-          "subtitle": "हमारे साथ खरीदारी करने के लिए धन्यवाद। आपके ऑर्डर का विवरण नीचे दिया गया है।",
-          "buttonText": "मुख्य पृष्ठ पर वापस जाएं",
-          "redirectUrl": "/"
-        }
+        "type": "static"
+      },
+      "content": {
+        "title": "Checkout"
       }
+    },
+    {
+      "id": "ftr",
+      "type": "footer",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "data",
+            "endpoint": "/footer",
+            "method": "get",
+            "queryParams": {
+              "id": 1
+            }
+          }
+        ]
+      },
+      "content": {}
     }
   ]
 }

@@ -65,13 +65,19 @@ export function ThemeProvider({
         }
     })
 
-    // Config can arrive after mount (configuration fetch): if the user has
-    // not picked a theme, adopt the client's first configured one.
+    // Config can arrive after mount (configuration fetch): adopt the
+    // client's first configured theme when the user hasn't picked one —
+    // OR when a stored value is no longer offered by this client (e.g.
+    // stale "fashion-black" after a config switch).
     useEffect(() => {
         if (typeof window === "undefined") return;
         const stored = localStorage.getItem(storageKey);
         const first = THEMES[0]?.value;
-        if (!stored && first && theme !== first) setTheme(first);
+        const valid = stored && THEMES.some((t) => t.value === stored);
+        if (!valid && first && theme !== first) {
+            setTheme(first);
+            localStorage.setItem(storageKey, first);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [THEMES])
 

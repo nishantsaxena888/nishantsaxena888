@@ -1,157 +1,71 @@
 {
   "meta": {
-    "title": "ग्राहक प्रोफ़ाइल",
-    "description": "विवरण और ऑर्डर देखें"
+    "title": "My account"
   },
-  "data": [
+  "config": [
     {
-      "id": "profile-dashboard",
+      "id": "hdr",
+      "type": "header",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "data",
+            "endpoint": "/header",
+            "method": "get",
+            "queryParams": {
+              "id": 1
+            }
+          },
+          {
+            "key": "category",
+            "endpoint": "/category",
+            "method": "get"
+          }
+        ]
+      },
+      "content": null
+    },
+    {
+      "id": "profile",
       "type": "account",
       "properties": {
         "level": "base",
-        "userDetails": {
-          "name": "Nishant Saxena",
-          "email": "nishant.saxena@example.com",
-          "phone": "+91 98765 43210",
-          "address": "456 Greenfield Enclave, Sector 62, Noida, UP, India",
-          "zipCode": "201301",
-          "membership": "प्लेटिनम सदस्य"
-        },
-        "labels": {
-          "heading": "मेरा खाता",
-          "memberBadge": "सदस्य",
-          "editProfile": "प्रोफ़ाइल संपादित करें",
-          "signOut": "साइन आउट",
-          "vipBadge": "वीआईपी सदस्य",
-          "statOrders": "कुल ऑर्डर",
-          "statWishlist": "इच्छा-सूची",
-          "statPoints": "इनाम अंक",
-          "statAddresses": "पते",
-          "navOverview": "अवलोकन",
-          "navOrders": "मेरे ऑर्डर",
-          "navAddresses": "पते",
-          "navWishlist": "इच्छा-सूची",
-          "navSettings": "सेटिंग्स",
-          "navHelp": "सहायता और समर्थन",
-          "navPrivacy": "गोपनीयता और शर्तें",
-          "supportTitle": "क्या मदद चाहिए?",
-          "supportDesc": "प्राथमिकता सदस्यों के लिए हमारी सहायता टीम 24/7 उपलब्ध है।",
-          "supportCta": "समर्थन से संपर्क करें",
-          "recentOrdersTitle": "हाल के ऑर्डर",
-          "recentOrdersSub": "आपकी हालिया खरीदारी",
-          "viewAll": "सभी देखें",
-          "quickActionsTitle": "त्वरित कार्रवाई",
-          "shopNow": "अभी खरीदें",
-          "myWishlist": "मेरी इच्छा-सूची",
-          "addressesLabel": "पते",
-          "payment": "भुगतान",
-          "notifications": "सूचनाएं",
-          "help": "सहायता",
-          "ordersTitle": "मेरे ऑर्डर",
-          "ordersSub": "पूर्ण खरीदारी इतिहास",
-          "viewDetails": "विवरण देखें",
-          "addressesTitle": "सहेजे गए पते",
-          "addressesSub": "अपने वितरण स्थानों को प्रबंधित करें",
-          "wishlistTitle": "मेरी इच्छा-सूची",
-          "wishlistSub": "आपके द्वारा सहेजी गई वस्तुएं",
-          "wishlistEmpty": "आपकी इच्छा-सूची खाली है",
-          "wishlistEmptyDesc": "अपनी पसंद की वस्तुओं को सहेजें और वे यहां दिखाई देंगी ताकि आप उन्हें आसानी से पा सकें।",
-          "startShopping": "खरीदारी शुरू करें",
-          "statusDelivered": "पहुंचा दिया गया",
-          "statusProcessing": "प्रसंस्करण में",
-          "statusCancelled": "रद्द किया गया",
-          "showingOrders": "सभी दिखा रहा है",
-          "addressDeliveryTitle": "वितरण का पता",
-          "addressSavedTitle": "सहेजे गए पते",
-          "addressManageMsg": "अपने शिपिंग गंतव्यों को प्रबंधित करें",
-          "addressAddNew": "नया जोड़ें",
-          "addressUpdateDetails": "विवरण अपडेट करें",
-          "addressNewDestination": "नया गंतव्य",
-          "addressFullName": "पूरा नाम",
-          "addressPhone": "फ़ोन",
-          "addressStreet": "पता",
-          "addressCity": "शहर",
-          "addressState": "राज्य",
-          "addressZip": "पिन कोड",
-          "addressType": "प्रकार",
-          "addressTypeHome": "घर",
-          "addressTypeWork": "काम",
-          "addressTypeOther": "अन्य",
-          "addressUseDefault": "डिफ़ॉल्ट रूप से उपयोग करें",
-          "addressCancel": "रद्द करें",
-          "addressSave": "पता सहेजें",
-          "addressUpdate": "अपडेट करें",
-          "addressDefaultBadge": "डिफ़ॉल्ट",
-          "addressEmptyMsg": "आपकी पता पुस्तिका खाली है",
-          "returnToShop": "दुकान पर वापस जाएं",
-          "photoSettings": "फ़ोटो सेटिंग्स"
-        },
-        "stats": {
-          "orders": "12",
-          "wishlist": "5",
-          "points": "840",
-          "addresses": "3"
-        },
-        "quickActions": [
-          { "icon": "ShoppingBag", "labelKey": "shopNow", "color": "bg-primary/10 text-primary", "action": "shopNow" },
-          { "icon": "Heart", "labelKey": "myWishlist", "color": "bg-rose-500/10 text-rose-500", "action": "wishlist" },
-          { "icon": "MapPin", "labelKey": "addressesLabel", "color": "bg-green-500/10 text-green-500", "action": "addresses" },
-          { "icon": "CreditCard", "labelKey": "payment", "color": "bg-purple-500/10 text-purple-500", "action": "payment" },
-          { "icon": "Bell", "labelKey": "notifications", "color": "bg-amber-500/10 text-amber-500", "action": "notifications" },
-          { "icon": "HelpCircle", "labelKey": "help", "color": "bg-cyan-500/10 text-cyan-500", "action": "help" }
-        ],
-        "orders": [
+        "type": "dynamic",
+        "action": [
           {
-            "id": "ORD-2026-987",
-            "date": "2026-06-27",
-            "total": "$182.40",
-            "status": "Processing",
-            "paymentMethod": "Credit Card",
-            "trackingNumber": "TRK-NS-20260627",
-            "carrier": "BlueDart Express",
-            "items": 4
-          },
-          {
-            "id": "ORD-2026-812",
-            "date": "2026-06-15",
-            "total": "$92.50",
-            "status": "Delivered",
-            "paymentMethod": "Digital UPI",
-            "trackingNumber": "TRK-NS-20260615",
-            "carrier": "FreshMart Delivery",
-            "items": 3
-          }
-        ],
-        "faqs": [
-          { "q": "मैं अपने ऑर्डर को कैसे ट्रैक करूं?", "a": "आप अपने प्रोफ़ाइल के 'ऑर्डर इतिहास' अनुभाग में अपने ऑर्डर को ट्रैक कर सकते हैं।" },
-          { "q": "आपकी वापसी नीति क्या है?", "a": "हम अधिकांश वस्तुओं के लिए उनके मूल स्थिति में होने पर 30-दिन की वापसी नीति प्रदान करते।" },
-          { "q": "क्या आप अंतरराष्ट्रीय शिपिंग की पेशकश करते हैं?", "a": "वर्तमान में, हम केवल महाद्वीपीय संयुक्त राज्य अमेरिका के भीतर ही जहाज भेजते हैं।" },
-          { "q": "मैं सहायता से कैसे संपर्क कर सकता हूं?", "a": "आप नीचे दिए गए संपर्क फ़ॉर्म के माध्यम से या हमारी सहायता लाइन पर कॉल करके हम तक पहुँच सकते हैं।" }
-        ],
-        "privacyPolicy": {
-          "sections": [
-            {
-              "title": "सूचना संग्रह",
-              "content": [
-                "हम वह जानकारी एकत्र करते हैं जो आप सीधे हमें प्रदान करते हैं जब आप एक खाता बनाते हैं, खरीदारी करते हैं, या हमसे संवाद करते हैं। इसमें आपका नाम, ईमेल पता, शिपिंग पता और भुगतान जानकारी शामिल हो सकती है।",
-                "जब आप हमारे प्लेटफ़ॉर्म पर आते हैं, तो हम स्वचालित रूप से कुछ जानकारी भी एकत्र करते हैं, जैसे कि आपका आईपी पता, ब्राउज़र का प्रकार, और आप हमारे प्लेटफ़ॉर्म के साथ कैसे बातचीत करते हैं।"
-              ]
-            },
-            {
-              "title": "डेटा सुरक्षा",
-              "content": [
-                "हम आपकी जानकारी को अनधिकृत पहुंच, परिवर्तन या प्रकटीकरण से बचाने के लिए उद्योग-मानक सुरक्षा उपाय लागू करते हैं। इसमें सभी डेटा ट्रांसफर के लिए एसएसएल एन्क्रिप्शन और संवेदनशील जानकारी के लिए सुरक्षित स्टोरेज शामिल है।"
-              ]
+            "key": "orders",
+            "endpoint": "order",
+            "method": "get",
+            "queryParams": {
+              "size": 5
             }
-          ],
-          "summary": [
-            "हम आपका व्यक्तिगत डेटा कभी नहीं बेचते हैं।",
-            "हम केवल आपके अनुभव को बढ़ाने के लिए कुकीज़ का उपयोग करते हैं।",
-            "आपके पास अपने डेटा पर पूर्ण नियंत्रण है।",
-            "सुरक्षित एसएसएल-एन्क्रिप्टेड लेनदेन।"
-          ]
-        }
+          }
+        ]
+      },
+      "content": {
+        "title": "My account"
       }
+    },
+    {
+      "id": "ftr",
+      "type": "footer",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "data",
+            "endpoint": "/footer",
+            "method": "get",
+            "queryParams": {
+              "id": 1
+            }
+          }
+        ]
+      },
+      "content": {}
     }
   ]
 }
