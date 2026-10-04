@@ -10,7 +10,7 @@ import { FormStyleSettings } from "@/tenants/admin/default-admin/utils/form-styl
 import { cn } from "@/lib/utils";
 
 export function SiteHeader({ activePage }: { activePage: any }) {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, themes } = useTheme();
   const { setIsSettingsOpen, styles } = useFormStyleStore();
   const isRightSidebar = styles.sidebarPosition === "right";
 
@@ -47,7 +47,18 @@ export function SiteHeader({ activePage }: { activePage: any }) {
             variant="ghost"
             size="icon"
             className="h-9 w-9 rounded-full bg-muted/50 hover:bg-muted transition-colors"
-            onClick={() => setTheme(theme === "dark" ? "default" : "dark")}
+            onClick={() => {
+              // Cycle through the client's configured themes
+              // (config.themes) — falls back to dark/default when the
+              // client defines none.
+              const values = themes.map((t) => t.value);
+              const next = values.length
+                ? values[(values.indexOf(theme) + 1) % values.length]
+                : theme === "dark"
+                  ? "default"
+                  : "dark";
+              setTheme(next);
+            }}
           >
             {theme === "dark" ? (
               <Sun className="h-4 w-4 text-primary" />

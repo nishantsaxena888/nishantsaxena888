@@ -21,12 +21,14 @@ type ThemeProviderProps = {
 type ThemeProviderState = {
     theme: Theme
     setTheme: (theme: Theme, clientOverride?: string) => void
+    themes: ThemeOption[]
     isFetchingStyleConfig: boolean
 }
 
 const initialState: ThemeProviderState = {
     theme: "default",
     setTheme: () => null,
+    themes: [],
     isFetchingStyleConfig: false,
 }
 
@@ -154,8 +156,9 @@ export function ThemeProvider({
     const value = useMemo(() => ({
         theme,
         setTheme: handleSetTheme,
+        themes: THEMES,
         isFetchingStyleConfig,
-    }), [theme, handleSetTheme, isFetchingStyleConfig]);
+    }), [theme, handleSetTheme, THEMES, isFetchingStyleConfig]);
 
     return (
         <ThemeProviderContext.Provider {...props} value={value}>
