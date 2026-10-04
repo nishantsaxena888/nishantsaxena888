@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { type AxiosRequestConfig, AxiosError } from "axios";
-import { mockConfigByClient, mockDataByClient } from "./mock-data";
+import { mockConfigByClient, mockDataByClient, mockReady } from "./mock-data";
 
 export type HttpMethod =
   | "get"
@@ -243,8 +243,9 @@ async function resolveMock(
   searchParameter?: Record<string, any>,
 ): Promise<ApiResponse | null> {
   // Registry from the active client's mock/config.json (bundled via the
-  // generated tenant globs). If endpoint+method isn't flagged
-  // "mock": true, the call falls through to the real API.
+  // generated tenant globs). In dev the per-client trees load lazily —
+  // wait for them so a mock:true flag isn't read before its files are in.
+  await mockReady;
   const registry = mockConfigByClient[globalApiClient];
   if (!registry) return null;
 

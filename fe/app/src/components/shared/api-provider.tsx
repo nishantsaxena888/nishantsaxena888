@@ -6,18 +6,23 @@ import {
   setApiConfiguration,
 } from "@/engine";
 import { client as bakedClient } from "@/tenants/active";
+import { componentsMap, tenantsReady } from "@/tenants";
 
 export const getActiveClient = (): string => {
   if (import.meta.env.DEV) {
     // Dev: every client's surfaces + mocks are bundled (tenants/dev-all.ts),
     // so a process-level VITE_CLIENT or a runtime localStorage["vite-client"]
-    // switch both work — e.g. `VITE_CLIENT=grocery npm run dev`.
+    // switch both work — e.g. `VITE_CLIENT=grocery npm run dev`. A stale
+    // localStorage value (removed/renamed client) is ignored rather than
+    // leaving the app with an empty component map.
     const cached =
       typeof window !== "undefined"
         ? localStorage.getItem("vite-client")
         : null;
-    if (cached) return cached;
-    if (import.meta.env.VITE_CLIENT) return import.meta.env.VITE_CLIENT;
+    if (cached && componentsMap[cached]) return cached;
+    if (cached) localStorage.removeItem("vite-client");
+    if (import.meta.env.VITE_CLIENT && componentsMap[import.meta.env.VITE_CLIENT])
+      return import.meta.env.VITE_CLIENT;
   }
   // Prod: only the generated client's code is in the bundle.
   return import.meta.env.VITE_CLIENT || bakedClient;
@@ -42,6 +47,13 @@ const ApiProvider = ({
   formInput: any;
 }) => {
   const { language } = useLanguage();
+  // In dev, dev-all merges the other clients' maps lazily — wait for
+  // tenantsReady so a VITE_CLIENT/localStorage client different from the
+  // baked one resolves to a real map before first render.
+  const [tenantsLoaded, setTenantsLoaded] = React.useState(false);
+  React.useEffect(() => {
+    tenantsReady.then(() => setTenantsLoaded(true));
+  }, []);
   const [activeClient, setClientState] = React.useState<string>(() => getActiveClient());
 
   React.useEffect(() => {
@@ -63,6 +75,8 @@ const ApiProvider = ({
     default_language: "en",
     client: activeClient,
   });
+
+  if (!tenantsLoaded) return null;
 
   const maps = componentMap[activeClient] || componentMap["default"];
   // Surface-scoped maps: {site, admin}. A flat legacy map resolves for both.

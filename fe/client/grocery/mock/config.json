@@ -29,6 +29,11 @@
       "mock": true
     }
   },
+  "translations": {
+    "GET": {
+      "mock": true
+    }
+  },
   "overview": {
     "GET": {
       "mock": true

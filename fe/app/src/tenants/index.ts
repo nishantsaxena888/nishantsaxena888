@@ -19,16 +19,20 @@ export const componentsMap: Record<string, Surfaces> = {
   default: { site: {}, admin: { ...default_admin_component } },
 };
 
-// Dev only: every client's surfaces are available so multiple dev servers
-// (or localStorage["vite-client"]) can run different clients off the same
-// tree without regenerating. The DEV guard is statically replaced at build
-// — prod bundles never include dev-all.ts or other clients' code.
-if (import.meta.env.DEV) {
-  const { allClients } = await import("./dev-all");
-  for (const [name, t] of Object.entries(allClients)) {
-    componentsMap[name] = {
-      site: { ...t.site.components },
-      admin: { ...default_admin_component, ...t.admin.components },
-    };
-  }
-}
+// Dev only: every client's surfaces are merged lazily so multiple dev
+// servers (or localStorage["vite-client"]) can run different clients off
+// the same tree without regenerating. Runtime import, not top-level
+// await — a TLA here deadlocks the graph (index → dev-all → client comps
+// → @/engine → api → mock-data → dev-all). ApiProvider awaits
+// tenantsReady before reading the map. The DEV guard is statically
+// replaced at build — prod never includes dev-all.ts.
+export const tenantsReady: Promise<void> = import.meta.env.DEV
+  ? import("./dev-all").then(({ allClients }) => {
+      for (const [name, t] of Object.entries(allClients)) {
+        componentsMap[name] = {
+          site: { ...t.site.components },
+          admin: { ...default_admin_component, ...t.admin.components },
+        };
+      }
+    })
+  : Promise.resolve();

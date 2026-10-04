@@ -20,43 +20,46 @@ type ResponseFiles = Record<string, any>;
 type EndpointMap = Record<string, ResponseFiles>; // METHOD -> file -> json
 type LangMap = Record<string, EndpointMap>;       // endpoint -> EndpointMap
 
-const globsByClient: Record<string, Record<string, any>> = {
-  [bakedClient]: mockFiles as Record<string, any>,
-};
-
-if (import.meta.env.DEV) {
-  const { mockGlobs } = await import("../../tenants/dev-all");
-  Object.assign(globsByClient, mockGlobs);
-}
-
 // mockDataByClient[client][lang][endpoint][METHOD][responseType] = json
 export const mockDataByClient: Record<string, LangMap> = {};
 
 // mockConfigByClient[client] = that client's endpoint registry
 export const mockConfigByClient: Record<string, ApiConfigMap> = {};
 
-for (const [client, fileMap] of Object.entries(globsByClient)) {
-  for (const path in fileMap) {
-    // path: ../../../client/<name>/mock/<...>
-    const rel = path.split("/mock/")[1];
-    if (!rel) continue;
-    const parts = rel.split("/").filter(Boolean);
-    const json = (fileMap[path] as any)?.default ?? fileMap[path];
+function loadGlobs(globsByClient: Record<string, Record<string, any>>) {
+  for (const [client, fileMap] of Object.entries(globsByClient)) {
+    for (const path in fileMap) {
+      // path: ../../../client/<name>/mock/<...>
+      const rel = path.split("/mock/")[1];
+      if (!rel) continue;
+      const parts = rel.split("/").filter(Boolean);
+      const json = (fileMap[path] as any)?.default ?? fileMap[path];
 
-    if (parts.length === 1 && parts[0] === "config.json") {
-      mockConfigByClient[client] = json;
-      continue;
+      if (parts.length === 1 && parts[0] === "config.json") {
+        mockConfigByClient[client] = json;
+        continue;
+      }
+
+      // [lang, ...endpoint, METHOD, file.json]
+      if (parts.length < 4) continue;
+      const lang = parts[0];
+      const file = parts[parts.length - 1].replace(/\.json$/, "");
+      const method = parts[parts.length - 2];
+      const endpoint = parts.slice(1, -2).join("/");
+
+      ((mockDataByClient[client] ??= {})[lang] ??= {})[endpoint] ??= {};
+      mockDataByClient[client][lang][endpoint][method] ??= {};
+      mockDataByClient[client][lang][endpoint][method][file] = json;
     }
-
-    // [lang, ...endpoint, METHOD, file.json]
-    if (parts.length < 4) continue;
-    const lang = parts[0];
-    const file = parts[parts.length - 1].replace(/\.json$/, "");
-    const method = parts[parts.length - 2];
-    const endpoint = parts.slice(1, -2).join("/");
-
-    ((mockDataByClient[client] ??= {})[lang] ??= {})[endpoint] ??= {};
-    mockDataByClient[client][lang][endpoint][method] ??= {};
-    mockDataByClient[client][lang][endpoint][method][file] = json;
   }
 }
+
+// Baked client loads synchronously. Dev adds every client's globs lazily —
+// mockReady must resolve before resolveMock reads the maps (api.ts awaits
+// it). No top-level await: a TLA here deadlocks the module graph
+// (mock-data → dev-all → client comps → @/engine → api → mock-data).
+loadGlobs({ [bakedClient]: mockFiles as Record<string, any> });
+
+export const mockReady: Promise<void> = import.meta.env.DEV
+  ? import("../../tenants/dev-all").then(({ mockGlobs }) => loadGlobs(mockGlobs))
+  : Promise.resolve();

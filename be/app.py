@@ -92,6 +92,14 @@ def page(slug: str):
     return p
 
 
+@app.get("/api/translations")
+@app.get("/api/translations/")
+def translations():
+    """UI string map for the active language — flat {key: text} from
+    configuration.translations (empty dict until a client defines it)."""
+    return _client_config().get("translations", {})
+
+
 @app.get("/api/entities")
 def list_entities():
     return {"entities": ENTITIES_ORDER}

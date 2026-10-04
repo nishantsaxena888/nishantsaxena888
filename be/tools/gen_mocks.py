@@ -59,6 +59,10 @@ def gen_client(name: str):
         flag(ep, ("GET",))
         write(out, f"en/{ep}/GET/success.json", style)
 
+    # UI strings — configuration.translations (empty until defined)
+    flag("translations", ("GET",))
+    write(out, "en/translations/GET/success.json", cfg.get("translations", {}))
+
     # entities — list + options + write stubs
     for entity in order:
         spec = entities[entity]

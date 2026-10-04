@@ -191,6 +191,14 @@ imports.
   `config` are `any`.
 - `.env`: keep `VITE_API_URL` empty in dev (relative calls → Vite proxy →
   :8100) and do NOT set `VITE_CLIENT` — it would override `tenants/active.ts`.
+- **No top-level await for dev-only imports.** A TLA `await import()` here
+  deadlocks the whole module graph silently (dev-all → client comps →
+  `@/engine` → `api.ts` → `mock-data` → dev-all): pages render blank with
+  zero console errors. Use a runtime promise (`tenantsReady`, `mockReady`)
+  and let the provider/api call await it — the `import.meta.env.DEV`
+  ternary still dead-code-eliminates the chunk in prod.
+- Headless UI smoke: `node scripts/smoke-ui.mjs` (needs the dev servers;
+  playwright is a devDependency).
 
 ## Commands
 
