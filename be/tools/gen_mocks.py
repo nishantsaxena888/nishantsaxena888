@@ -45,18 +45,18 @@ def gen_client(name: str):
     def flag(endpoint, methods=METHODS):
         registry.setdefault(endpoint, {}).update({m: {"mock": True} for m in methods})
 
-    # configuration + pages + style-configs
-    flag("configuration")
+    # configuration + pages + style-configs — read-only endpoints, GET only
+    flag("configuration", ("GET",))
     write(out, "en/configuration/GET/success.json", cfg)
 
     for slug, page_def in cfg.get("pages", {}).items():
         ep = f"pages/{slug}"
-        flag(ep)
+        flag(ep, ("GET",))
         write(out, f"en/{ep}/GET/success.json", page_def)
 
     for theme, style in cfg.get("style-configs", {}).items():
         ep = f"style-config/{theme}"
-        flag(ep)
+        flag(ep, ("GET",))
         write(out, f"en/{ep}/GET/success.json", style)
 
     # entities — list + options + write stubs
