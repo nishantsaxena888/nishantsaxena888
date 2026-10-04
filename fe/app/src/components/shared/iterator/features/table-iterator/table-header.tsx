@@ -21,19 +21,7 @@ export const TableHeader = ({ data, tableId, sortConfig, onSort }: { data: any, 
   const isResizing = useRef(false);
   const startX = useRef<number>(0);
   const startWidth = useRef<number>(0);
-
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    if (!isResizing.current) return;
-    const newWidth = startWidth.current + (e.clientX - startX.current);
-    setWidth(Math.max(50, newWidth));
-  }, []);
-
-  const handleMouseUp = useCallback(() => {
-    isResizing.current = false;
-    document.removeEventListener("mousemove", handleMouseMove);
-    document.removeEventListener("mouseup", handleMouseUp);
-    document.body.style.cursor = "default";
-  }, [handleMouseMove]);
+  const dragCleanup = useRef<AbortController | null>(null);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -41,8 +29,27 @@ export const TableHeader = ({ data, tableId, sortConfig, onSort }: { data: any, 
     startX.current = e.clientX;
     startWidth.current = width;
 
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseup", handleMouseUp);
+    // Both listeners auto-remove when the drag ends (mouseup → abort).
+    const ac = new AbortController();
+    dragCleanup.current = ac;
+    document.addEventListener(
+      "mousemove",
+      (ev: MouseEvent) => {
+        if (!isResizing.current) return;
+        const newWidth = startWidth.current + (ev.clientX - startX.current);
+        setWidth(Math.max(50, newWidth));
+      },
+      { signal: ac.signal },
+    );
+    document.addEventListener(
+      "mouseup",
+      () => {
+        isResizing.current = false;
+        document.body.style.cursor = "default";
+        ac.abort();
+      },
+      { signal: ac.signal },
+    );
     document.body.style.cursor = "col-resize";
   };
 

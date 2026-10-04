@@ -1,8 +1,11 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useCallback } from "react";
 import { storage } from "@/platform/storage";
 
 export const useIterator = ({ data, columns, id }: any) => {
-  const getStorageKey = () => (id ? `table-${id}-config` : null);
+  const getStorageKey = useCallback(
+    () => (id ? `table-${id}-config` : null),
+    [id],
+  );
 
   const [columnConfig, setColumnConfig] = useState(() => {
     const key = getStorageKey();
@@ -26,7 +29,7 @@ export const useIterator = ({ data, columns, id }: any) => {
     if (key) {
       storage.setItem(key, JSON.stringify(columnConfig));
     }
-  }, [columnConfig, id]);
+  }, [columnConfig, getStorageKey]);
 
   const toggleColumn = (key: string) => {
     setColumnConfig((prev: any) => {

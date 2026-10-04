@@ -2,7 +2,7 @@ import React from "react";
 import { useEntity } from "@/engine";
 import { useConfigStore } from "@/store/use-config-store";
 import { toast } from "@/lib/toast";
-import { useLanguage } from "@/components/shared/language-provider";
+import { useLanguage } from "@/components/shared/use-language";
 import { listOf, money, makeTr } from "./utils";
 import { storage } from "@/platform/storage";
 import { Pressable, Text, TextInput, View } from "@/platform/primitives";

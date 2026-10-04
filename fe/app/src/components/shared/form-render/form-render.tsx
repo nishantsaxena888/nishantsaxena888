@@ -11,7 +11,8 @@ import { useFormLogic } from "./utils/use-form-logic";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { LabelsType } from "./utils/form-tabs-utils/form-tab-footer";
-import { FormConfigProvider, useFormConfig } from "./utils/use-form-config";
+import { FormConfigProvider } from "./utils/use-form-config";
+import { useFormConfig } from "./utils/form-config-context";
 
 export const FormRender = ({
   formSchema,

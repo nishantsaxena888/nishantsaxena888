@@ -14,7 +14,7 @@ vi.mock("@/engine", () => ({
 vi.mock("@/lib/toast", () => ({
   toast: { success: vi.fn(), info: (...a: any[]) => toastInfo(...a) },
 }));
-vi.mock("@/components/shared/language-provider", () => ({
+vi.mock("@/components/shared/use-language", () => ({
   useLanguage: () => ({ t: (_k: string, d?: string) => d || _k }),
 }));
 

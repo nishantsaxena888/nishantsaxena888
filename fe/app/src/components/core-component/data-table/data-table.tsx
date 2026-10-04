@@ -85,7 +85,7 @@ import {
 } from "@/components/ui/tabs"
 import { GripVerticalIcon, CircleCheckIcon, LoaderIcon, Columns3Icon, ChevronDownIcon, PlusIcon, TrendingUpIcon } from "lucide-react"
 
-export const schema = z.object({
+const schema = z.object({
   id: z.number(),
   header: z.string(),
   type: z.string(),
@@ -373,6 +373,7 @@ export function DataTable({
     [data]
   )
 
+  // eslint-disable-next-line react-hooks/incompatible-library -- TanStack Table returns non-memoizable functions; the compiler safely skips this component.
   const table = useReactTable({
     data,
     columns: dynamicColumns,

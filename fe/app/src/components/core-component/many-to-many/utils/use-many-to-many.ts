@@ -27,9 +27,11 @@ export const useManytoMany = ({ entity, defaultFilter }: any) => {
   const [searchValue, setSearchValue] = useState(config?.search || "");
   const [searchLoading, setSearchLoading] = useState(false);
 
-  useEffect(() => {
+  const [prevConfigSearch, setPrevConfigSearch] = useState(config?.search);
+  if (config?.search !== prevConfigSearch) {
+    setPrevConfigSearch(config?.search);
     setSearchValue(config?.search || "");
-  }, [config?.search]);
+  }
 
   useEffect(() => {
     const handler = setTimeout(async () => {

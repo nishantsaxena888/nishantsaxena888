@@ -60,7 +60,9 @@ export const useFormRender = <T extends Record<string, any> = any>({
     setStateValues((populateData || {}) as T);
   }
 
-  useEffect(() => {
+  const [prevServerError, setPrevServerError] = useState(serverError);
+  if (serverError !== prevServerError) {
+    setPrevServerError(serverError);
     if (serverError && Object.keys(serverError).length > 0) {
       const newErrors: Record<string, string> = {};
       Object.entries(serverError).forEach(([key, messages]) => {
@@ -72,7 +74,7 @@ export const useFormRender = <T extends Record<string, any> = any>({
       });
       setErrors((prev) => ({ ...prev, ...newErrors }));
     }
-  }, [serverError]);
+  }
 
   /**
    * validateField
@@ -454,7 +456,7 @@ export const useFormRender = <T extends Record<string, any> = any>({
         setPending(false);
       }
     },
-    [onSubmit, validateForm, values, errors],
+    [onSubmit, validateForm, values],
   );
 
   /**

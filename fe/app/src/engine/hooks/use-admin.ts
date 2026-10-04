@@ -6,8 +6,19 @@ import { useConfigStore } from "@/store/use-config-store";
 import { storage } from "@/platform/storage";
 
 export const useAdmin = () => {
-  const [user, setUser] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  // Decode the token synchronously at init — no mount-effect setState.
+  const [user, setUser] = useState<any>(() => {
+    const token = storage.getItem("token");
+    if (!token) return null;
+    try {
+      const decoded = jwtDecode(token);
+      if (decoded.exp && decoded.exp < Date.now() / 1000) return null;
+      return decoded;
+    } catch {
+      return null;
+    }
+  });
+  const [loading, setLoading] = useState(false);
   const { navigate } = useNav();
   const config = useConfigStore((state) => state.config);
 
@@ -23,29 +34,19 @@ export const useAdmin = () => {
     navigate(redirectPath, { replace: true });
   }, [navigate, config]);
 
+  // Expired/undecodable token → logout side effects only; user state was
+  // already resolved in the initializer above.
   useEffect(() => {
     const token = storage.getItem("token");
-    
-    if (token) {
-      try {
-        const decoded = jwtDecode(token);
-        
-        // Basic expiration check
-        const currentTime = Date.now() / 1000;
-        if (decoded.exp && decoded.exp < currentTime) {
-          console.warn("Session expired");
-          logout();
-          return;
-        }
-
-        setUser(decoded);
-      } catch (error) {
-        console.error("Token decoding failed:", error);
-        logout();
-      }
+    if (!token) return;
+    let expired = false;
+    try {
+      const decoded = jwtDecode(token);
+      expired = !!(decoded.exp && decoded.exp < Date.now() / 1000);
+    } catch {
+      expired = true;
     }
-    
-    setLoading(false);
+    if (expired) queueMicrotask(logout);
   }, [logout]);
 
   return {

@@ -76,17 +76,13 @@ export const useMediaUpload = (prop: any) => {
     return null;
   }, [selectedIds, list]);
 
-  useEffect(() => {
-    if (selectedItem) {
-      setEditName(selectedItem.name || "");
-      setEditDesc(selectedItem.description || "");
-      setEditStatus(selectedItem.status || "active");
-    } else {
-      setEditName("");
-      setEditDesc("");
-      setEditStatus("active");
-    }
-  }, [selectedItem]);
+  const [prevSelectedItem, setPrevSelectedItem] = useState(selectedItem);
+  if (selectedItem !== prevSelectedItem) {
+    setPrevSelectedItem(selectedItem);
+    setEditName(selectedItem?.name || "");
+    setEditDesc(selectedItem?.description || "");
+    setEditStatus(selectedItem?.status || "active");
+  }
 
   const filteredList = useMemo(() => {
     if (!Array.isArray(list)) return [];

@@ -224,6 +224,7 @@ export function useEntity(entity: string, options?: UseEntityOptions) {
       entity,
       id,
       header,
+      can,
       currentPage,
       currentItemPerPage,
       currentSortBy,
@@ -253,13 +254,17 @@ export function useEntity(entity: string, options?: UseEntityOptions) {
     } finally {
       setLoading(false);
     }
-  }, [entity, header]);
+  }, [entity, header, can]);
 
   // Initial Data Lifecycle (Optional hook effect trigger controlled organically by 'prefetch')
   useEffect(() => {
     if (prefetch && !isSession) {
-      onOptions();
-      reload();
+      // onOptions/reload flip loading synchronously — defer the trigger a
+      // microtask so no setState runs inside the effect body.
+      queueMicrotask(() => {
+        void onOptions();
+        void reload();
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prefetch, entity, id, isSession]);

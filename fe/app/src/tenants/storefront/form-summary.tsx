@@ -3,7 +3,7 @@ import { useEntity } from "@/engine";
 import { useGenericState } from "@/store/use-generic-state";
 import { useConfigStore } from "@/store/use-config-store";
 import { toast } from "@/lib/toast";
-import { useLanguage } from "@/components/shared/language-provider";
+import { useLanguage } from "@/components/shared/use-language";
 import { useNav } from "@/platform/navigation";
 import { Pressable, Text, TextInput, View } from "@/platform/primitives";
 import { money, makeTr } from "./utils";

@@ -35,8 +35,11 @@ export const AudioPicker = ({
 
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
 
-  // Handle initial value
-  React.useEffect(() => {
+  // Handle initial value — prop-driven sync lives in the render-phase
+  // adjust pattern (same as other controlled inputs in this package).
+  const [prevValue, setPrevValue] = React.useState(value);
+  if (value !== prevValue) {
+    setPrevValue(value);
     if (typeof value === "string" && value) {
       setAudioUrl(value);
       setMode("url");
@@ -46,7 +49,7 @@ export const AudioPicker = ({
       setAudioUrl(URL.createObjectURL(value));
       setMode("upload");
     }
-  }, [value]);
+  }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

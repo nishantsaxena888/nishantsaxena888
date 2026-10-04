@@ -1,4 +1,4 @@
-import { createContext, useContext, type ReactNode } from 'react';
+import { createContext, type ReactNode } from 'react';
 
 export interface EngineContextType {
   t: (key: string, lang?: string, namespace?: string) => string;
@@ -12,7 +12,7 @@ const defaultEngineContext: EngineContextType = {
   currentLanguage: { code: 'en' }
 };
 
-export const EngineContext = createContext<EngineContextType>(defaultEngineContext);
+const EngineContext = createContext<EngineContextType>(defaultEngineContext);
 
 export const EngineProvider = ({ 
   children, 
@@ -27,5 +27,3 @@ export const EngineProvider = ({
     </EngineContext.Provider>
   );
 };
-
-export const useEngine = () => useContext(EngineContext);

@@ -15,7 +15,12 @@ export type UseGoogleAutocompleteReturn = {
 };
 
 export const useGoogleAutocomplete = (apiKey: string): UseGoogleAutocompleteReturn => {
-  const [isLoaded, setIsLoaded] = useState(false);
+  // Mock mode / already-injected script resolve at init — only the real
+  // script download path needs the effect below.
+  const [isLoaded, setIsLoaded] = useState(() =>
+    typeof window !== "undefined" &&
+    (!apiKey || apiKey === "mock" || Boolean((window as any).google?.maps?.places)),
+  );
   const [loadError, setLoadError] = useState<string | null>(null);
   
   const autocompleteService = useRef<any>(null);
@@ -23,17 +28,7 @@ export const useGoogleAutocomplete = (apiKey: string): UseGoogleAutocompleteRetu
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    
-    // 🔥 MOCK MODE FOR PLAYGROUND
-    if (!apiKey || apiKey === "mock") {
-      setIsLoaded(true);
-      return;
-    }
-
-    if ((window as any).google?.maps?.places) {
-      setIsLoaded(true);
-      return;
-    }
+    if (isLoaded) return;
 
     const scriptId = "google-maps-script";
     let script = document.getElementById(scriptId) as HTMLScriptElement;
@@ -57,7 +52,7 @@ export const useGoogleAutocomplete = (apiKey: string): UseGoogleAutocompleteRetu
       script.removeEventListener("load", handleLoad);
       script.removeEventListener("error", handleError);
     };
-  }, [apiKey]);
+  }, [apiKey, isLoaded]);
 
   useEffect(() => {
     // Only initialize real Google instances if we're not in mock mode

@@ -4,7 +4,7 @@ import {
   FormTabFooter,
   type FormTabFooterClassNamesType,
 } from "./form-tab-footer";
-import { useFormConfig } from "../use-form-config";
+import { useFormConfig } from "../form-config-context";
 
 export type TabLayoutFormClassNamesType = {
   base?: string;

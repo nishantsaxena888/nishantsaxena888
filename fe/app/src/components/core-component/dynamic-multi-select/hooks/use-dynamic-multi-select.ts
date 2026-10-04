@@ -58,13 +58,9 @@ export const useDynamicMultiSelect = ({
     dependsOn,
   } = config || {};
 
-  // Read value of the parent field if dependsOn is defined
-  const parentValue = React.useMemo(() => {
-    if (control && dependsOn) {
-      return control.getValue(dependsOn);
-    }
-    return undefined;
-  }, [control, dependsOn, control?.state?.values]);
+  // Read value of the parent field if dependsOn is defined — read fresh
+  // each render so changes propagate without a memo dependency hack.
+  const parentValue = dependsOn ? control?.getValue?.(dependsOn) : undefined;
 
   const fetchData = React.useCallback(
     async (
@@ -75,14 +71,14 @@ export const useDynamicMultiSelect = ({
     ) => {
       if (!endpoint) return;
 
-      // If dependsOn is specified but no parent value is set, do not fetch
+      // If dependsOn is specified but no parent value is set, do not fetch.
+      // (The render-phase adjust below already cleared apiOptions/hasMore.)
       if (dependsOn && (currentParentVal === undefined || currentParentVal === null || currentParentVal === "")) {
-        setApiOptions([]);
-        setHasMore(false);
         return;
       }
 
-      setLoading(true);
+      // loading=true is set by callers — either render-phase adjusts
+      // (effect-triggered loads) or async callbacks (search/scroll).
       try {
         const searchParameter: Record<string, any> = {
           [pageParam]: pageNum,
@@ -137,30 +133,50 @@ export const useDynamicMultiSelect = ({
     [endpoint, method, pageSize, searchParam, pageParam, limitParam, dependsOn, bindLabel, bindValue]
   );
 
+  // Reset page/list and arm loading when parentValue changes —
+  // render-phase adjust so the effect below stays async-only.
+  const [prevParentValue, setPrevParentValue] = React.useState(parentValue);
+  if (parentValue !== prevParentValue) {
+    setPrevParentValue(parentValue);
+    setPage(1);
+    setApiOptions([]);
+    const emptyParent =
+      dependsOn &&
+      (parentValue === undefined || parentValue === null || parentValue === "");
+    setHasMore(!emptyParent);
+    if (endpoint && !emptyParent) setLoading(true);
+  }
+
   // Initial load or parent value changed load
   React.useEffect(() => {
     if (!endpoint) return;
 
-    // Reset page and list when parentValue changes or initially
-    setPage(1);
-    setHasMore(true);
-    setApiOptions([]);
+    // Defer so no setState runs synchronously in the effect body.
+    queueMicrotask(() => {
+      // Clear child value if parent changes to avoid invalid submissions (only after initial mount)
+      if (dependsOn && isMounted.current) {
+        onChange?.([]);
+      }
+      void fetchData("", 1, false, parentValue);
+      isMounted.current = true;
+    });
+  }, [parentValue, endpoint, dependsOn, fetchData, onChange]);
 
-    // Clear child value if parent changes to avoid invalid submissions (only after initial mount)
-    if (dependsOn && isMounted.current) {
-      onChange?.([]);
+  // Opening the dropdown arms loading in a render-phase adjust...
+  const [prevIsOpen, setPrevIsOpen] = React.useState(isOpen);
+  if (isOpen !== prevIsOpen) {
+    setPrevIsOpen(isOpen);
+    if (isOpen && !dependsOn && endpoint && apiOptions.length === 0) {
+      setLoading(true);
     }
+  }
 
-    fetchData("", 1, false, parentValue);
-    isMounted.current = true;
-  }, [parentValue, endpoint, dependsOn]);
-
-  // Handle opening dropdown
+  // ...and the effect performs the fetch.
   React.useEffect(() => {
     if (!endpoint || dependsOn) return; // For dependent fields, handled by parentValue effect
 
     if (isOpen && apiOptions.length === 0) {
-      fetchData("", 1);
+      queueMicrotask(() => void fetchData("", 1));
     }
   }, [isOpen, endpoint, apiOptions.length, dependsOn, fetchData]);
 
@@ -171,7 +187,8 @@ export const useDynamicMultiSelect = ({
     const timer = setTimeout(() => {
       setPage(1);
       setIsSearching(true);
-      fetchData(inputValue, 1, false, parentValue);
+      setLoading(true);
+      void fetchData(inputValue, 1, false, parentValue);
     }, 500);
 
     return () => clearTimeout(timer);
@@ -186,7 +203,8 @@ export const useDynamicMultiSelect = ({
         if (entries[0].isIntersecting) {
           const nextPage = page + 1;
           setPage(nextPage);
-          fetchData(inputValue, nextPage, true, parentValue);
+          setLoading(true);
+          void fetchData(inputValue, nextPage, true, parentValue);
         }
       },
       { threshold: 1.0 }

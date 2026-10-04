@@ -2,7 +2,7 @@ import { Trash2 } from "lucide-react";
 import { useEntity } from "@/engine";
 import { useGenericState } from "@/store/use-generic-state";
 import { useConfigStore } from "@/store/use-config-store";
-import { useLanguage } from "@/components/shared/language-provider";
+import { useLanguage } from "@/components/shared/use-language";
 import { Anchor, Image, Pressable, Text, View } from "@/platform/primitives";
 import { money, makeTr } from "./utils";
 

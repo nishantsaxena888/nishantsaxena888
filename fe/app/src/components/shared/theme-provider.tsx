@@ -1,39 +1,21 @@
-import { createContext, useContext, useEffect, useState, useMemo, useCallback } from "react"
+import { useEffect, useState, useMemo, useCallback } from "react"
 import { apiClient } from "@/engine/library/api"
-import { setActiveClient } from "./api-provider"
+import { setActiveClient } from "@/platform/active-client"
 import { useConfigStore } from "@/store/use-config-store"
 import { storage } from "@/platform/storage";
+import {
+    ThemeProviderContext,
+    type Theme,
+    type ThemeOption,
+} from "./use-theme";
 
-export type Theme = string
-
-export interface ThemeOption {
-    value: string
-    label?: string
-    endpoint?: string
-    client?: string
-}
+export type { Theme, ThemeOption }
 
 type ThemeProviderProps = {
     children: React.ReactNode
     defaultTheme?: Theme
     storageKey?: string
 }
-
-type ThemeProviderState = {
-    theme: Theme
-    setTheme: (theme: Theme, clientOverride?: string) => void
-    themes: ThemeOption[]
-    isFetchingStyleConfig: boolean
-}
-
-const initialState: ThemeProviderState = {
-    theme: "default",
-    setTheme: () => null,
-    themes: [],
-    isFetchingStyleConfig: false,
-}
-
-const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
 
 export function ThemeProvider({
     children,
@@ -69,18 +51,27 @@ export function ThemeProvider({
     // Config can arrive after mount (configuration fetch): adopt the
     // client's first configured theme when the user hasn't picked one —
     // OR when a stored value is no longer offered by this client (e.g.
-    // stale "fashion-black" after a config switch).
+    // stale "fashion-black" after a config switch). Theme state moves via
+    // render-phase adjust; the effect only persists the adopted value.
+    const storedTheme =
+        typeof window !== "undefined" ? storage.getItem(storageKey) : null
+    const firstTheme = THEMES[0]?.value
+    const shouldAdopt =
+        Boolean(firstTheme) &&
+        theme !== firstTheme &&
+        !(storedTheme && THEMES.some((t) => t.value === storedTheme))
+
+    const [prevShouldAdopt, setPrevShouldAdopt] = useState(shouldAdopt)
+    if (shouldAdopt !== prevShouldAdopt) {
+        setPrevShouldAdopt(shouldAdopt)
+        if (shouldAdopt && firstTheme) setTheme(firstTheme)
+    }
+
     useEffect(() => {
-        if (typeof window === "undefined") return;
-        const stored = storage.getItem(storageKey);
-        const first = THEMES[0]?.value;
-        const valid = stored && THEMES.some((t) => t.value === stored);
-        if (!valid && first && theme !== first) {
-            setTheme(first);
-            storage.setItem(storageKey, first);
+        if (shouldAdopt && firstTheme && typeof window !== "undefined") {
+            storage.setItem(storageKey, firstTheme)
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [THEMES])
+    }, [shouldAdopt, firstTheme, storageKey])
 
     const [isFetchingStyleConfig, setIsFetchingStyleConfig] = useState(false)
 
@@ -172,9 +163,4 @@ export function ThemeProvider({
             {children}
         </ThemeProviderContext.Provider>
     )
-}
-
-export const useTheme = () => {
-    const context = useContext(ThemeProviderContext)
-    return context || initialState
 }

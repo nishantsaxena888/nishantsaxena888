@@ -54,10 +54,9 @@ export function useCartCalculation(options?: {
 
   const gsUpdate = useGenericState((state) => state.update);
 
-  // Fetch API lists on mount
+  // Fetch API lists on mount — loading already starts true.
   useEffect(() => {
     let active = true;
-    setLoading(true);
 
     Promise.all([
       apiClient("product"),

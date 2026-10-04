@@ -60,52 +60,54 @@ export function SearchAutocomplete<T extends string | object>({
   className,
 }: SearchAutocompleteProps<T>) {
   const [query, setQuery] = React.useState("");
-  const [suggestions, setSuggestions] = React.useState<T[]>(data);
+  const [fetched, setFetched] = React.useState<T[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-
-  const timerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const appliedInputTheme = inputStyles[themeName] || inputStyles.default;
   const appliedListTheme = listStyles[themeName] || listStyles.default;
 
-  const getLabel = (item: T): string => {
+  const getLabel = React.useCallback((item: T): string => {
     if (typeof item === "string") return item;
     if (labelKey && typeof item === "object" && item !== null) {
       return (item as any)[labelKey] || "";
     }
     return JSON.stringify(item);
-  };
+  }, [labelKey]);
 
-  const getValue = (item: T): string => {
+  const getValue = React.useCallback((item: T): string => {
     if (typeof item === "string") return item;
     if (valueKey && typeof item === "object" && item !== null) {
       return (item as any)[valueKey] || "";
     }
     return getLabel(item);
-  };
+  }, [valueKey, getLabel]);
+
+  // Static mode: suggestions derive from data+query — no state to sync.
+  // Fetch mode: raw results live in `fetched`; an empty query reads as [].
+  const suggestions = React.useMemo(() => {
+    if (onFetch) return query.trim() === "" ? [] : fetched;
+    return data.filter((item) =>
+      getLabel(item).toLowerCase().includes(query.toLowerCase())
+    );
+  }, [onFetch, fetched, data, query, getLabel]);
+
+  // Arm the spinner the moment a fetch-worthy query appears —
+  // render-phase adjust; the async callback clears it.
+  const wantFetch = Boolean(onFetch && query.trim() !== "");
+  const [prevWantFetch, setPrevWantFetch] = React.useState(wantFetch);
+  if (wantFetch !== prevWantFetch) {
+    setPrevWantFetch(wantFetch);
+    if (wantFetch) setIsLoading(true);
+  }
 
   React.useEffect(() => {
-    if (!onFetch) {
-      const filtered = data.filter((item) =>
-        getLabel(item).toLowerCase().includes(query.toLowerCase())
-      );
-      setSuggestions(filtered);
-      return;
-    }
+    if (!onFetch || query.trim() === "") return;
 
-    if (query.trim() === "") {
-      setSuggestions([]);
-      return;
-    }
-
-    setIsLoading(true);
-    if (timerRef.current) clearTimeout(timerRef.current);
-
-    timerRef.current = setTimeout(async () => {
+    const timer = setTimeout(async () => {
       try {
         const results = await onFetch(query);
-        setSuggestions(results);
+        setFetched(results);
       } catch (error) {
         console.error("Failed to fetch autocomplete results:", error);
       } finally {
@@ -113,10 +115,8 @@ export function SearchAutocomplete<T extends string | object>({
       }
     }, debounceMs);
 
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
-  }, [query, data, onFetch, debounceMs]);
+    return () => clearTimeout(timer);
+  }, [query, onFetch, debounceMs]);
 
   return (
     <div className={cn("relative w-full", className)}>

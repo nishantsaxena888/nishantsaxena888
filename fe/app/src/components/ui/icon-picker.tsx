@@ -198,6 +198,7 @@ const IconPicker = React.forwardRef<
 
   const parentRef = React.useRef<HTMLDivElement>(null);
 
+  // eslint-disable-next-line react-hooks/incompatible-library -- TanStack Virtual returns non-memoizable functions; the compiler safely skips this component.
   const virtualizer = useVirtualizer({
     count: virtualItems.length,
     getScrollElement: () => parentRef.current,
@@ -229,13 +230,13 @@ const IconPicker = React.forwardRef<
         setIsLoading(false);
       }, 1);
     }
-  }, [open, onOpenChange, virtualizer]);
+  }, [open, onOpenChange, virtualizer, setSearch]);
 
   const handleIconClick = useCallback((iconName: IconName) => {
     handleValueChange(iconName);
     setIsOpen(false);
     setSearch("");
-  }, [handleValueChange]);
+  }, [handleValueChange, setSearch]);
 
   const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -245,7 +246,7 @@ const IconPicker = React.forwardRef<
     }
 
     virtualizer.scrollToOffset(0);
-  }, [virtualizer]);
+  }, [virtualizer, setSearch]);
 
   const scrollToCategory = useCallback((categoryName: string) => {
     const categoryIndex = categoryIndices[categoryName];

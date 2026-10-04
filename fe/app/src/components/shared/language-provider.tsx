@@ -1,40 +1,14 @@
-import React, { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useConfigStore } from "@/store/use-config-store";
 import { storage } from "@/platform/storage";
 import { reloadApp } from "@/platform/host";
-
-export type LanguageCode = string;
-
-export interface Language {
-    code: LanguageCode;
-    name: string;
-    flag: string;
-}
-
-// Fallback before configuration loads — the client's own
-// configuration.language[] replaces this once fetched.
-const LANGUAGES: Language[] = [
-    { code: "en", name: "English", flag: "🇺🇸" },
-    { code: "hi", name: "Hindi", flag: "🇮🇳" },
-];
-
-const FLAGS: Record<string, string> = {
-    en: "🇺🇸", hi: "🇮🇳", es: "🇪🇸", fr: "🇫🇷", de: "🇩🇪",
-    ar: "🇸🇦", pt: "🇧🇷", ja: "🇯🇵", zh: "🇨🇳",
-};
-
-// Export so components can import from here
-export { LANGUAGES };
-
-interface LanguageContextType {
-    language: Language;
-    languages: Language[];
-    setLanguage: (lang: Language) => void;
-    t: (key: string) => string;
-    l: (obj: any, field: string) => any;
-}
-
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+import {
+    FLAGS,
+    LANGUAGES,
+    LanguageContext,
+    type Language,
+    type LanguageCode,
+} from "./use-language";
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     // Config-driven languages — configuration.language[] supplies
@@ -54,17 +28,19 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const [currentLanguage, setCurrentLanguage] = useState<Language>(LANGUAGES[0]);
     const [translations, setTranslations] = useState<Record<string, string>>({});
 
-    useEffect(() => {
+    // Adopt the saved code when valid, otherwise the client's first
+    // configured language once the list resolves — render-phase adjust.
+    const [prevLanguages, setPrevLanguages] = useState(languages);
+    if (languages !== prevLanguages) {
+        setPrevLanguages(languages);
         const savedCode = typeof window !== 'undefined'
             ? (storage.getItem('language') as LanguageCode)
             : null;
         const found = languages.find(l => l.code === savedCode);
-        // Adopt the saved code when valid, otherwise the client's first
-        // configured language once the list resolves.
         setCurrentLanguage(prev =>
             found ? found : languages.find(l => l.code === prev.code) || languages[0]
         );
-    }, [languages]);
+    }
 
     // Load translations from the real API when language changes
     useEffect(() => {
@@ -128,17 +104,4 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
             {children}
         </LanguageContext.Provider>
     );
-};
-
-const defaultLanguageContext: LanguageContextType = {
-    language: LANGUAGES[0],
-    languages: LANGUAGES,
-    setLanguage: () => {},
-    t: (key: string) => key,
-    l: (obj: any, field: string) => obj?.[field] ?? '',
-};
-
-export const useLanguage = () => {
-    const context = useContext(LanguageContext);
-    return context || defaultLanguageContext;
 };

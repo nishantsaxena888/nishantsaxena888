@@ -1,5 +1,5 @@
  
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { type Definition } from "./types";
 import { apiClient } from "../../library/api";
 
@@ -17,7 +17,10 @@ export function useDynamicData(def: Definition) {
   const [firstLoadError, setFirstLoadError] = useState<string | null>(null);
 
   const isDynamic = def.properties.type === "dynamic";
-  const actions = (def.properties.action as any[]) || [];
+  const actions = useMemo(
+    () => (def.properties.action as any[]) || [],
+    [def.properties.action],
+  );
 
   const anyLoading =
     isDynamic && actions.length > 0
@@ -85,29 +88,39 @@ export function useDynamicData(def: Definition) {
   );
 
   const actionsKey = JSON.stringify(def.properties.action || []);
+  const dynamicKey = `${def.properties.type}|${actionsKey}`;
 
-  useEffect(() => {
+  // Derived-from-def state moves via render-phase adjust; the effect
+  // below only fires the async fetches.
+  const [prevDynamicKey, setPrevDynamicKey] = useState(dynamicKey);
+  if (dynamicKey !== prevDynamicKey) {
+    setPrevDynamicKey(dynamicKey);
     if (isDynamic && actions.length > 0) {
-      const newSearchParams: Record<string, any> = {};
-      actions.forEach((a: any) => {
-        if (a.key) {
-          newSearchParams[a.key] = a.queryParams || {};
-        }
-      });
-
       setSearchParameters((prev) => {
         let hasChanges = false;
         const merged = { ...prev };
-        Object.keys(newSearchParams).forEach((key) => {
-          if (JSON.stringify(merged[key]) !== JSON.stringify(newSearchParams[key])) {
-            merged[key] = { ...merged[key], ...newSearchParams[key] };
+        actions.forEach((a: any) => {
+          if (!a.key) return;
+          const incoming = a.queryParams || {};
+          if (JSON.stringify(merged[a.key]) !== JSON.stringify(incoming)) {
+            merged[a.key] = { ...merged[a.key], ...incoming };
             hasChanges = true;
           }
         });
         return hasChanges ? merged : prev;
       });
+    } else {
+      setIsFirstLoad(false);
+    }
+  }
 
-      // Trigger fetch for each action
+  useEffect(() => {
+    if (!(isDynamic && actions.length > 0)) return;
+
+    // Trigger fetch for each action — deferred to a microtask so the
+    // synchronous setLoadingMap inside fetchDynamicData doesn't run in
+    // the effect body.
+    queueMicrotask(() => {
       const promises = actions.map((a: any) => {
         if (a.key) {
           const params = {
@@ -122,11 +135,9 @@ export function useDynamicData(def: Definition) {
       Promise.all(promises).then(() => {
         setIsFirstLoad(false);
       });
-    } else {
-      setIsFirstLoad(false);
-    }
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [def.properties.type, actionsKey]);
+  }, [dynamicKey]);
 
   const actionHandler = async ({
     key,

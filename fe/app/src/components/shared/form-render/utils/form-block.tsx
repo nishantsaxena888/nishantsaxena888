@@ -3,7 +3,7 @@ import { FormItrator } from "./form-itrator";
 import { cn } from "@/lib/utils";
 import { ChevronDownIcon } from "lucide-react";
 import { useState } from "react";
-import { useFormConfig } from "./use-form-config";
+import { useFormConfig } from "./form-config-context";
 
 export type BlockClassNamesType = {
   base?: string;

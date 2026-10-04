@@ -91,11 +91,15 @@ export const useForm = <T extends Record<string, any>>(initialValues: T, schema?
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   
-  // Sync values when initialValues or schema changes
-  useEffect(() => {
+  // Sync values when initialValues or schema changes — render-phase
+  // adjust keyed on the schema id + serialized initial values.
+  const initKey = `${schema?.id ?? ""}|${JSON.stringify(initialValues)}`;
+  const [prevInitKey, setPrevInitKey] = useState(initKey);
+  if (initKey !== prevInitKey) {
+    setPrevInitKey(initKey);
     setValues(getInitialValues());
     setErrors({});
-  }, [schema?.id, JSON.stringify(initialValues)]);
+  }
   // Persistence Effect
   useEffect(() => {
     if (!schema?.persistence) return;
@@ -118,8 +122,9 @@ export const useForm = <T extends Record<string, any>>(initialValues: T, schema?
 
   const validationRules = useRef<Record<string, ValidationRule[]>>({});
 
-  // Initialize validation rules from schema
-  useMemo(() => {
+  // Initialize validation rules from schema — computed in useMemo, then
+  // committed to the ref in an effect (refs must not be written in render).
+  const flattenedRules = useMemo(() => {
     if (schema) {
       const flattenedRules: Record<string, ValidationRule[]> = {};
       
@@ -151,9 +156,14 @@ export const useForm = <T extends Record<string, any>>(initialValues: T, schema?
       };
       
       traverse(schema.fields);
-      validationRules.current = flattenedRules;
+      return flattenedRules;
     }
+    return {};
   }, [schema, values]);
+
+  useEffect(() => {
+    validationRules.current = flattenedRules;
+  }, [flattenedRules]);
 
   const validateField = useCallback(async (fieldName: string, value: any, currentValues: any) => {
     const rules = validationRules.current[fieldName];
@@ -334,13 +344,14 @@ export const useForm = <T extends Record<string, any>>(initialValues: T, schema?
     return !hasError;
   }, [values, errors, validateField]);
 
+  const persistKey = schema?.persistence?.key;
   const resetForm = useCallback(() => {
     setValues(initialValues);
     setErrors({});
-    if (schema?.persistence?.key) {
-      storage.removeItem(`form_persistence_${schema.persistence.key}`);
+    if (persistKey) {
+      storage.removeItem(`form_persistence_${persistKey}`);
     }
-  }, [initialValues, schema?.persistence?.key]);
+  }, [initialValues, persistKey]);
 
   return {
     values,

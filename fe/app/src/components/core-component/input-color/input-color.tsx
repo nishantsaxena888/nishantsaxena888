@@ -189,12 +189,17 @@ export const InputColor = ({
   const [isUpdating, setIsUpdating] = React.useState(false);
   const [colorMode, setColorMode] = React.useState<ColorMode>("HEX");
 
-  React.useEffect(() => {
-    if (isUpdating) return;
-    if (validateHex(value)) {
+  // Mirrors the old [value, isUpdating] effect deps: re-sync on either
+  // change, but only when not mid-update and the hex is valid.
+  const [prevColorValue, setPrevColorValue] = React.useState(value);
+  const [prevUpdating, setPrevUpdating] = React.useState(isUpdating);
+  if (value !== prevColorValue || isUpdating !== prevUpdating) {
+    setPrevColorValue(value);
+    setPrevUpdating(isUpdating);
+    if (!isUpdating && validateHex(value)) {
       setInternalHsv(rgbToHsv(hexToRgb(value)));
     }
-  }, [value, isUpdating]);
+  }
 
   const updateColor = (newHsv: HSV) => {
     setInternalHsv(newHsv);

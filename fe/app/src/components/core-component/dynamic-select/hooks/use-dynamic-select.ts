@@ -35,7 +35,9 @@ export const useDynamicSelect = ({
   const [hasMore, setHasMore] = React.useState(true);
   const [isOpen, setIsOpen] = React.useState(false);
   
-  const isTyping = React.useRef(false);
+  // isTyping is read during render (label-sync adjust below), so it must
+  // be state, not a ref — ref reads in render are not allowed.
+  const [isTyping, setIsTyping] = React.useState(false);
   const observerTarget = React.useRef<HTMLDivElement | null>(null);
 
   const {
@@ -52,7 +54,8 @@ export const useDynamicSelect = ({
   const fetchData = React.useCallback(async (searchQuery: string, pageNum: number, append: boolean = false) => {
     if (!endpoint) return;
 
-    setLoading(true);
+    // loading=true is set by callers — render-phase adjusts for
+    // effect-triggered loads, async callbacks for search/scroll.
     try {
       const searchParameter: Record<string, any> = {
         [pageParam]: pageNum,
@@ -89,35 +92,44 @@ export const useDynamicSelect = ({
     }
   }, [endpoint, method, pageSize, searchParam, pageParam, limitParam]);
 
-  // Initial load: either if open, OR if a value exists but we don't have its option loaded yet
+  // Initial load: either if open, OR if a value exists but we don't have
+  // its option loaded yet. Loading flag moves via render-phase adjust;
+  // the effect only fires the async call.
+  const hasValue = value !== undefined && value !== null && value !== "";
+  const hasLoadedOption =
+    hasValue &&
+    internalOptions.some((opt) => String(opt[valueKey]) === String(value));
+  const needInitialLoad =
+    Boolean(endpoint) &&
+    internalOptions.length === 0 &&
+    (isOpen || (hasValue && !hasLoadedOption));
+
+  const [prevNeedInitialLoad, setPrevNeedInitialLoad] = React.useState(needInitialLoad);
+  if (needInitialLoad !== prevNeedInitialLoad) {
+    setPrevNeedInitialLoad(needInitialLoad);
+    if (needInitialLoad) setLoading(true);
+  }
+
   React.useEffect(() => {
-    if (!endpoint) return;
-
-    const hasValue = value !== undefined && value !== null && value !== "";
-    const hasLoadedOption = hasValue && internalOptions.some(
-      (opt) => String(opt[valueKey]) === String(value)
-    );
-
-    // Fetch if:
-    // 1. Dropdown is open and options are not loaded yet
-    // 2. Or, a value is set but we haven't loaded its option to resolve the label
-    if ((isOpen || (hasValue && !hasLoadedOption)) && internalOptions.length === 0) {
-      fetchData("", 1);
+    if (needInitialLoad) {
+      // Defer so no setState runs synchronously in the effect body.
+      queueMicrotask(() => void fetchData("", 1));
     }
-  }, [isOpen, endpoint, fetchData, internalOptions.length, value, valueKey]);
+  }, [needInitialLoad, fetchData]);
 
   // Debounced search
   React.useEffect(() => {
-    if (!endpoint || !isTyping.current) return;
+    if (!endpoint || !isTyping) return;
 
     const timer = setTimeout(() => {
       setPage(1);
       setIsSearching(true);
-      fetchData(inputValue, 1);
+      setLoading(true);
+      void fetchData(inputValue, 1);
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [inputValue, endpoint, fetchData]);
+  }, [inputValue, endpoint, isTyping, fetchData]);
 
   // Infinite scroll observer
   React.useEffect(() => {
@@ -128,7 +140,8 @@ export const useDynamicSelect = ({
         if (entries[0].isIntersecting) {
           const nextPage = page + 1;
           setPage(nextPage);
-          fetchData(inputValue, nextPage, true);
+          setLoading(true);
+          void fetchData(inputValue, nextPage, true);
         }
       },
       { threshold: 1.0 }
@@ -141,21 +154,22 @@ export const useDynamicSelect = ({
     return () => observer.disconnect();
   }, [hasMore, loading, page, endpoint, fetchData, inputValue]);
 
-  // Sync input value with selected option label
-  React.useEffect(() => {
-    if (value && !isTyping.current) {
-      const allOptions = [...(staticOptions || []), ...(internalOptions || [])];
-      const selectedOption = allOptions.find(
+  // Sync input value with selected option label — render-phase adjust.
+  const selectedLabel = value
+    ? [...(staticOptions || []), ...(internalOptions || [])].find(
         (opt) => String(opt[valueKey]) === String(value)
-      );
-      if (selectedOption) {
-        setInputValue(selectedOption[labelKey]);
-      }
+      )?.[labelKey]
+    : undefined;
+  const [prevSelectedLabel, setPrevSelectedLabel] = React.useState(selectedLabel);
+  if (selectedLabel !== prevSelectedLabel) {
+    setPrevSelectedLabel(selectedLabel);
+    if (selectedLabel !== undefined && !isTyping) {
+      setInputValue(selectedLabel);
     }
-  }, [value, staticOptions, internalOptions, labelKey, valueKey]);
+  }
 
   const handleInputValueChange = (val: string) => {
-    if (!isTyping.current) {
+    if (!isTyping) {
       const allOptions = [...(staticOptions || []), ...(internalOptions || [])];
       const isValueNotLabel = allOptions.some(
         (opt) =>
@@ -166,11 +180,11 @@ export const useDynamicSelect = ({
     }
 
     setInputValue(val);
-    isTyping.current = true;
+    setIsTyping(true);
   };
 
   const handleValueChange = (val: string | null) => {
-    isTyping.current = false;
+    setIsTyping(false);
     onChange?.(val as string);
     const allOptions = [...(staticOptions || []), ...(internalOptions || [])];
     const selectedOption = allOptions.find(
@@ -181,9 +195,8 @@ export const useDynamicSelect = ({
     }
   };
 
-  const finalOptions = (endpoint ? internalOptions : staticOptions) || [];
-  
   const filteredOptions = React.useMemo(() => {
+    const finalOptions = (endpoint ? internalOptions : staticOptions) || [];
     if (endpoint) return finalOptions; // API handles filtering
     if (!inputValue) return finalOptions;
 
@@ -192,7 +205,7 @@ export const useDynamicSelect = ({
         .toLowerCase()
         .includes(inputValue.toLowerCase())
     );
-  }, [finalOptions, inputValue, labelKey, endpoint]);
+  }, [internalOptions, staticOptions, inputValue, labelKey, endpoint]);
 
   return {
     inputValue,

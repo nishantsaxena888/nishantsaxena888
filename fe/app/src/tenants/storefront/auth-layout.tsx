@@ -1,6 +1,6 @@
 import React from "react";
 import { apiClient } from "@/engine";
-import { useLanguage } from "@/components/shared/language-provider";
+import { useLanguage } from "@/components/shared/use-language";
 import { toast } from "@/lib/toast";
 import { makeTr } from "./utils";
 import { storage } from "@/platform/storage";

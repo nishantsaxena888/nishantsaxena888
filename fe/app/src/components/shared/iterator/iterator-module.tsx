@@ -150,7 +150,7 @@ export const IteratorModule = ({
     }, 400);
 
     return () => clearTimeout(timer);
-  }, [filterValues]); // Only depend on filterValues
+  }, [filterValues, action]); // Re-arm when the action prop changes too
 
   const handleSort = (key: string) => {
     let direction: "asc" | "desc" = "asc";

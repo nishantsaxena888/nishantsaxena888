@@ -9,7 +9,7 @@ import { useFormItrator } from "./use-form-itrator";
 import { BlockLayoutForm /* type BlockClassNamesType */ } from "./form-block";
 import { cn } from "@/lib/utils";
 // import type { LabelsType } from "./form-tabs-utils/form-tab-footer";
-import { useFormConfig } from "./use-form-config";
+import { useFormConfig } from "./form-config-context";
 
 type FormItratorType = {
   inputs: any[];

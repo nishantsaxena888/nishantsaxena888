@@ -7,30 +7,39 @@ export const usePublicRender = ({ menu, currentPage }: any) => {
   const currentMenu = Array.isArray(menu) ? menu.find((item: any) => item.url === currentPage) : undefined;
 
   const [data, setData] = useState<any>(undefined);
-  const [loading, setLoading] = useState(true);
+  // No entity → nothing to fetch → not loading (matches the old
+  // effect's `else setLoading(false)`).
+  const [loading, setLoading] = useState(() =>
+    Boolean(currentMenu?.entity),
+  );
 
-  const loadData = async () => {
-    setLoading(true);
-    try {
-      if (currentMenu?.entity) {
-        const response = await apiClient(currentMenu?.entity, {
-          method: "get",
-        });
-        setData(response);
-      }
-    } catch (err) {
-      console.error("Failed to fetch entity content:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Menu/page switched → reset immediately (render-phase adjust); the
+  // effect below only does async work.
+  const [prevMenu, setPrevMenu] = useState(currentMenu);
+  if (currentMenu !== prevMenu) {
+    setPrevMenu(currentMenu);
+    setData(undefined);
+    setLoading(Boolean(currentMenu?.entity));
+  }
 
   useEffect(() => {
-    if (currentMenu?.entity) {
-      loadData();
-    } else {
-      setLoading(false);
-    }
+    const entity = currentMenu?.entity;
+    if (!entity) return;
+    let cancelled = false;
+    apiClient(entity, { method: "get" })
+      .then((response) => {
+        if (cancelled) return;
+        setData(response);
+        setLoading(false);
+      })
+      .catch((err) => {
+        if (cancelled) return;
+        console.error("Failed to fetch entity content:", err);
+        setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, [currentMenu]);
 
   return { data, loading };

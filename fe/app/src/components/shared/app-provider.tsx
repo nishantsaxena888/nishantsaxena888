@@ -11,34 +11,11 @@ type AppProviderProps = {
   children: (data: any, loading: boolean) => React.ReactNode;
 };
 
-/**
- * Extracts all session definitions from the page layout config.
- * Sessions are defined inside entityConfig.sessions[] of each component block.
- * This collects them all and deduplicates by name.
- */
-function extractSessionsFromConfig(configBlocks: any[]): any[] {
-  const sessionsMap = new Map<string, any>();
-
-  for (const block of configBlocks) {
-    const sessions = block?.content?.entityConfig?.sessions;
-    if (Array.isArray(sessions)) {
-      for (const session of sessions) {
-        if (session.name && !sessionsMap.has(session.name)) {
-          sessionsMap.set(session.name, session);
-        }
-      }
-    }
-  }
-
-  return Array.from(sessionsMap.values());
-}
-
 const AppProvider = ({ children }: AppProviderProps) => {
   const setConfig = useConfigStore((state) => state.setConfig);
   const [data, setData] = useState<any>(undefined);
   const [loading, setLoading] = useState(true);
-  const loadData = async () => {
-    setLoading(true);
+  const loadData = React.useCallback(async () => {
     const response = await apiClient("configuration", {
       method: "get",
     });
@@ -62,17 +39,18 @@ const AppProvider = ({ children }: AppProviderProps) => {
       }
     }
     setLoading(false);
-  };
+  }, [setConfig]);
 
   useEffect(() => {
-    loadData();
+    // Defer so the setLoading(true)-style sync work inside loadData stays
+    // out of the effect body.
+    queueMicrotask(() => void loadData());
     // Re-fetch on login/logout so menus re-filter for the new role.
-    return onAppEvent("auth-change", () => loadData());
-  }, []);
+    return onAppEvent("auth-change", () => void loadData());
+  }, [loadData]);
 
   return <div>{loading ? <StaticLoader /> : children(data, loading)}</div>;
 };
 
-export { extractSessionsFromConfig, buildConfigFromSessions };
 export default AppProvider;
 

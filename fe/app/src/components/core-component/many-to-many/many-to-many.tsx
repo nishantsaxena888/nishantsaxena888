@@ -1,7 +1,7 @@
 "use client";
 
 import { Tag, Truck, MapPin, Layers } from "lucide-react";
-import { useFormConfig } from "@/components/shared/form-render/utils/use-form-config";
+import { useFormConfig } from "@/components/shared/form-render/utils/form-config-context";
 import { useManytoMany } from "./utils/use-many-to-many";
 import { useFormStyleStore } from "@/store/use-form-style";
 import { DefaultPagination } from "@/tenants/admin/default-admin/utils/default-pagination";

@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { useFormConfig } from "../use-form-config";
+import { useFormConfig } from "../form-config-context";
 
 export type TabHeaderClassNamesType = {
   base?: string;

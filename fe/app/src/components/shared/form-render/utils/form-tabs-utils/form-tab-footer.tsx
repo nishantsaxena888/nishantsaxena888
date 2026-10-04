@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useFormTabFooter } from "./use-form-tab-footer";
 import { cn } from "@/lib/utils";
-import { useFormConfig } from "../use-form-config";
+import { useFormConfig } from "../form-config-context";
 
 export type FormTabFooterClassNamesType = {
   base?: string;

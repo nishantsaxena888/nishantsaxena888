@@ -1,7 +1,7 @@
 import { Star } from "lucide-react";
 import { useEntity } from "@/engine";
 import { useConfigStore } from "@/store/use-config-store";
-import { useLanguage } from "@/components/shared/language-provider";
+import { useLanguage } from "@/components/shared/use-language";
 import { toast } from "@/lib/toast";
 import { Image, Pressable, Text, View } from "@/platform/primitives";
 import { listOf, money, makeTr } from "./utils";

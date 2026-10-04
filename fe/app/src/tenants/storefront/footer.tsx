@@ -1,4 +1,4 @@
-import { useLanguage } from "@/components/shared/language-provider";
+import { useLanguage } from "@/components/shared/use-language";
 import { Anchor, Text, View } from "@/platform/primitives";
 import { firstOf, makeTr } from "./utils";
 

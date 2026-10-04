@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import {
   useLanguage,
   type Language,
-} from "@/components/shared/language-provider";
+} from "@/components/shared/use-language";
 import { useState, useRef, useEffect } from "react";
 
 export function LanguageSwitcher() {
