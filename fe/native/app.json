@@ -1,0 +1,13 @@
+{
+  "expo": {
+    "name": "nishify",
+    "slug": "nishify",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "nishify",
+    "userInterfaceStyle": "automatic",
+    "ios": { "supportsTablet": true },
+    "android": {},
+    "web": {}
+  }
+}

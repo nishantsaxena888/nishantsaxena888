@@ -1,3 +1,4 @@
-// Re-export so client folders (outside fe/app's node_modules resolution)
-// can toast via the "@" alias:  import { toast } from "@/lib/toast";
-export { toast } from "sonner";
+// Re-export the platform toast so every layer (incl. client folders,
+// which resolve "@" to fe/app/src) shares one seam. Metro resolves
+// platform/toast.native.ts on RN — sonner never reaches native code.
+export { toast } from "@/platform/toast";

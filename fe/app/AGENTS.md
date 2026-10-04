@@ -194,20 +194,26 @@ and **Electron**. Reusable storefront components never import
 | `navigation.ts` | `useNav()` → `{navigate(path, {replace}), goBack()}`; `useRouteParams()` → route params; `usePath()` → pathname; `registerNavigator`/`navTo` for non-hook callers | `useNavigate`/`useParams`/`useLocation` (react-router) | `navigation.native.ts` — `useNavigation`/`useRoute`; screen name == path minus `/`; `setPathMapper()` customizes | reuse web |
 | `host.ts` | `emitAppEvent(name, detail)` / `onAppEvent(name, cb)` → unsubscribe; `reloadApp()` — cross-cutting events (`auth-change`, `client-change`) never use `window` directly | DOM events + `location.reload` | `host.native.ts` — DeviceEventEmitter + DevSettings.reload (dev) | reuse web |
 | `primitives.tsx` | `View`, `Text`, `Pressable`, `Anchor`, `Image`, `TextInput`, `ScrollView` — RN-shaped API (`onPress`, `onChangeText`, `to`) | renders `div`/`span`/`button`/`a`/`img`/`input` (semantic via `as` prop) | `primitives.native.tsx` — real RN components; `className` passes through for NativeWind | reuse web |
-| `env.ts` | `env(key)`, `isDev()`, `apiUrl()`, `clientName()` — shared code never touches `import.meta.env` | `import.meta.env.*` | `env.native.ts` — app calls `setEnvConfig({apiUrl, client, dev})` at boot | reuse web |
+| `env.ts` | `env(key)`, `isDev()`, `apiUrl()`, `clientName()`, `setEnvConfig()` — shared code never touches `import.meta.env` | `import.meta.env.*` | `env.native.ts` — app calls `setEnvConfig({apiUrl, client, dev})` at boot | reuse web |
+| `toast.ts` | `toast.{success,error,info,...}` — components never import sonner directly (via `@/lib/toast`) | sonner | `toast.native.ts` — Alert + `"toast"` app event (host renders its own banners) | reuse web |
 
 RN host-app checklist (one-time, nothing in shared src changes):
 
 1. Metro resolves `*.native.ts(x)` automatically — no config needed.
 2. Peer deps the app provides: `react-native`, `@react-navigation/native`,
-   `@react-native-async-storage/async-storage` (`native.d.ts` stubs types
-   so web `tsc` stays green without them installed).
-3. Boot: `setEnvConfig({apiUrl, client, dev: __DEV__})` +
+   `@react-navigation/native-stack`, `@react-native-async-storage/async-storage`
+   (`native.d.ts` stubs types so web `tsc` stays green without them installed).
+3. `fe/native/` is the ready Expo scaffold — `npm install && npm run start`
+   there; it boots `src/native/native-app.tsx` (providers + NavigationContainer
+   + Stack screens generated from `config.menu`, `initialParams.slug` feeding
+   `useRouteParams` so `PublicRenderer` runs unchanged).
+4. Boot: `setEnvConfig({apiUrl, client, dev: __DEV__})` +
    `await hydrateStorage()` + `registerNavigator(navRef.navigate)`
-   before first render.
-4. Styling: NativeWind makes `className` work natively, or map
+   before first render — App.tsx in fe/native already does this.
+5. Styling: NativeWind makes `className` work natively, or map
    className→style in your theme layer.
-5. Icons: alias `lucide-react` → `lucide-react-native` in Metro config.
+6. Icons: alias `lucide-react` → `lucide-react-native` in Metro config.
+7. Admin screens are DOM-oriented — native shell is site screens only.
 
 Rules for new generic components:
 

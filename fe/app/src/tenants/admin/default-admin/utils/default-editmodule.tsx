@@ -1,6 +1,6 @@
 import { FormRender } from "@/components/shared/form-render";
 import { ArrowLeft } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import { useFormStyleStore } from "@/store/use-form-style";
 import { Button } from "@/components/ui/button";
 

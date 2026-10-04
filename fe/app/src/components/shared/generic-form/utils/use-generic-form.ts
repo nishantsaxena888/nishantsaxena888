@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import { useEntity } from "@/engine";
 import { useFormStyleStore } from "@/store/use-form-style";
 import { useNav } from "@/platform/navigation";

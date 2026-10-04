@@ -1,7 +1,7 @@
 import React, { useState, useRef, useMemo, useEffect } from "react";
 import { useCurdEntity } from "../../default-admin/utils/use-curd-entity";
 import { useFormStyleStore } from "@/store/use-form-style";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 
 export const useMediaUpload = (prop: any) => {
   const resolvedProp = useMemo(() => {

@@ -6,12 +6,7 @@
 //
 // Nothing else in shared code changes — env()/apiUrl()/clientName() read
 // the registered values.
-export interface EnvConfig {
-  apiUrl?: string;
-  client?: string;
-  dev?: boolean;
-  [key: string]: any;
-}
+import type { EnvConfig } from "./env";
 
 let cfg: EnvConfig = {};
 

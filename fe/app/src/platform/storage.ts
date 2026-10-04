@@ -12,4 +12,9 @@ if (typeof window !== "undefined" && window.localStorage) {
   setStorageBackend(memoryStorage());
 }
 
+// Parity with storage.native.ts — web needs no hydration (localStorage
+// is sync and installed above), so this is an immediate no-op. Keeping
+// the same export means boot code compiles identically on both.
+export const hydrateStorage = async (): Promise<void> => {};
+
 export * from "./storage-core";

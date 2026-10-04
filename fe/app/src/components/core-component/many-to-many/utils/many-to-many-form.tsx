@@ -5,7 +5,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { FormRender } from "@/components/shared/form-render";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 
 export const ManyToManyForm = ({
   openForm,

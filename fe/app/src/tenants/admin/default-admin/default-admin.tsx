@@ -3,7 +3,7 @@ import { DefaultEditModule } from "./utils/default-editmodule";
 import { DefaultPagination } from "./utils/default-pagination";
 import { ItemsPerPageInfo } from "./utils/item-per-page-info";
 import { AdminSkeleton } from "./utils/admin-skeleton";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import { useFormStyleStore } from "@/store/use-form-style";
 import { useCurdEntity } from "./utils/use-curd-entity";
 import { useState, useEffect } from "react";

@@ -3,7 +3,7 @@ import { Plus, LayoutGrid, List, FolderOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useMediaManagerStore } from "@/store/use-media-manager";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 
 interface MediaHeaderProps {
   activePageName?: string;

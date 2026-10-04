@@ -1,0 +1,13 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": false,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["../app/src/*"],
+      "@clients/*": ["../client/*"],
+      "nishify": ["../app/src/nishify.ts"]
+    }
+  },
+  "include": ["App.tsx", "index.js", "../app/src/**/*.ts", "../app/src/**/*.tsx", "../client"]
+}

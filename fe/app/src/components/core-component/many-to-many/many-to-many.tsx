@@ -8,7 +8,7 @@ import { DefaultPagination } from "@/tenants/admin/default-admin/utils/default-p
 import { ItemsPerPageInfo } from "@/tenants/admin/default-admin/utils/item-per-page-info";
 import { IteratorModule } from "@/components/shared/iterator";
 import { AdminSkeleton } from "@/tenants/admin/default-admin/utils/admin-skeleton";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import { ManyToManyForm } from "./utils/many-to-many-form";
 import { createPortal } from "react-dom";
 

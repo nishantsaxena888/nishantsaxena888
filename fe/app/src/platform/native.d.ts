@@ -12,6 +12,7 @@ declare module "react-native" {
   export const ScrollView: React.ComponentType<any>;
   export const SafeAreaView: React.ComponentType<any>;
   export const Linking: { openURL(url: string): Promise<any> };
+  export const Alert: { alert(title: string, message?: string): void };
   export const DeviceEventEmitter: {
     emit(name: string, data?: any): void;
     addListener(name: string, cb: (data?: any) => void): { remove(): void };
@@ -25,7 +26,15 @@ declare module "@react-navigation/native" {
   export function useNavigation<T = any>(): T;
   export function useRoute<T = { name: string; params?: any }>(): T;
   export function useFocusEffect(cb: () => void): void;
+  export function useNavigationContainerRef(): any;
   export const NavigationContainer: any;
+}
+
+declare module "@react-navigation/native-stack" {
+  export function createNativeStackNavigator(): {
+    Navigator: any;
+    Screen: any;
+  };
 }
 
 // Test-time only: vitest aliases "react-native" to a stub that re-exports

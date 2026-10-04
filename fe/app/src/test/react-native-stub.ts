@@ -24,3 +24,7 @@ export const __devReloads = () => reloads;
 export const Linking = {
   openURL: async (_url: string) => {},
 };
+
+export const Alert = {
+  alert: (_title: string, _message?: string) => {},
+};
