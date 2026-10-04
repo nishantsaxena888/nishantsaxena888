@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { NotFound } from "@/pages/not-found/not-found";
 import { usePublicRender } from "../home-page/utils/use-public-render";
 import { PageRenderer } from "../dynamic-page/page-renderer";
+import { SiteNav } from "../site-nav/site-nav";
 
 export interface PublicRendererProps {
   config: any;
@@ -45,7 +46,10 @@ export const PublicRenderer = ({ config }: PublicRendererProps) => {
     return <NotFound />; // Or redirect to /login
   }
 
-  console.log({ content, loading });
-
-  return <PageRenderer loading={loading} content={content} />;
+  return (
+    <>
+      <SiteNav config={config} />
+      <PageRenderer loading={loading} content={content} />
+    </>
+  );
 };
