@@ -3,6 +3,7 @@
 import { Input } from "@/components/ui/input";
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { assetUrl } from "@/platform/asset";
 
 type Option = {
   label: string;
@@ -92,7 +93,7 @@ export const ImageRadioGroupField = ({
 
             {/* Image */}
             <img
-              src={option.image}
+              src={assetUrl(option.image)}
               alt={option.label}
               className="w-full h-24 object-cover rounded-md"
               width={100}

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { toast } from "@/lib/toast";
 import { getDocIcon } from "./media-utils";
+import { assetUrl } from "@/platform/asset";
 import { useConfirmDialog } from "@/hooks/use-confirm-dialog";
 
 interface MediaSidebarProps {
@@ -76,7 +77,7 @@ export const MediaSidebar: React.FC<MediaSidebarProps> = ({
             {["png", "jpg", "jpeg", "webp", "gif", "image"].includes((selectedItem.type || "").toLowerCase()) ? (
               <div className="w-32 h-32 rounded-lg border overflow-hidden bg-muted flex items-center justify-center mb-3">
                 <img
-                  src={selectedItem.url}
+                  src={assetUrl(selectedItem.url)}
                   alt={selectedItem.name}
                   className="w-full h-full object-cover"
                   onError={(e) => {

@@ -15,6 +15,7 @@
 // no DOM events, no form semantics — those live in web-only comps.
 import React from "react";
 import { Link } from "react-router-dom";
+import { assetUrl } from "./asset";
 
 type Base = {
   className?: string;
@@ -105,7 +106,7 @@ export const Image = ({
   alt = "",
   ...rest
 }: Base & { src?: string; alt?: string; loading?: "lazy" | "eager" }) => (
-  <img src={src} alt={alt} {...rest} />
+  <img src={assetUrl(src)} alt={alt} {...rest} />
 );
 
 export const TextInput = ({

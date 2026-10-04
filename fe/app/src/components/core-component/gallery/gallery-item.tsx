@@ -4,6 +4,7 @@ import { Trash2, GripVertical, File as FileIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { type GalleryStyle, type GalleryFile } from "./utils/gallery-style";
+import { assetUrl } from "@/platform/asset";
 
 interface GalleryItemProps {
   file: GalleryFile;
@@ -51,7 +52,7 @@ export function GalleryItem({
       <div className={styles.preview}>
         {isImage ? (
           <img
-            src={file.url}
+            src={assetUrl(file.url)}
             alt={file.name}
             className={styles.thumbnail}
             sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"

@@ -3,6 +3,7 @@ import { Download, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "@/lib/toast";
 import { getDocIcon } from "./media-utils";
+import { assetUrl } from "@/platform/asset";
 
 interface MediaListProps {
   filteredList: any[];
@@ -86,7 +87,7 @@ export const MediaList: React.FC<MediaListProps> = ({
                   {["png", "jpg", "jpeg", "webp", "gif", "image"].includes((item.type || "").toLowerCase()) ? (
                     <div className="w-10 h-10 rounded-lg border overflow-hidden bg-muted flex items-center justify-center">
                       <img
-                        src={item.url}
+                        src={assetUrl(item.url)}
                         alt={item.name}
                         className="w-full h-full object-cover"
                         onError={(e) => {

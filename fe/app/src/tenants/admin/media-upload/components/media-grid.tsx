@@ -3,6 +3,7 @@ import { Download, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "@/lib/toast";
 import { getDocIcon } from "./media-utils";
+import { assetUrl } from "@/platform/asset";
 
 interface MediaGridProps {
   filteredList: any[];
@@ -71,7 +72,7 @@ export const MediaGrid: React.FC<MediaGridProps> = ({
               {["png", "jpg", "jpeg", "webp", "gif", "image"].includes((item.type || "").toLowerCase()) ? (
                 <div className="w-full h-full relative flex items-center justify-center bg-muted overflow-hidden">
                   <img
-                    src={item.url}
+                    src={assetUrl(item.url)}
                     alt={item.name}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     onError={(e) => {

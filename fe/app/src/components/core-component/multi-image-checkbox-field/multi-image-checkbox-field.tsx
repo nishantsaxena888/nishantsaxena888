@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { assetUrl } from "@/platform/asset";
 
 type Option = {
   label: string;
@@ -102,7 +103,7 @@ export const MultiImageCheckboxField = ({
             {/* Image Container */}
             <div className="relative w-full overflow-hidden rounded-md group">
               <img
-                src={option.image}
+                src={assetUrl(option.image)}
                 alt={option.label}
                 className={cn(
                   "w-full h-28 object-cover transition-transform duration-300",

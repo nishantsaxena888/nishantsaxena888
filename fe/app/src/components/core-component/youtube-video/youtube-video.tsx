@@ -4,6 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Play } from "lucide-react";
 import { getYouTubeId, getYouTubeThumbnail, buildYouTubeEmbedUrl } from "./utils/video-utils";
+import { assetUrl } from "@/platform/asset";
 interface YouTubeVideoProps {
   /** Video ID or full YouTube URL */
   src: string;
@@ -66,7 +67,7 @@ export const YouTubeVideo = ({
           {/* Thumbnail */}
           {resolvedThumbnail ? (
             <img 
-              src={resolvedThumbnail} 
+              src={assetUrl(resolvedThumbnail)} 
               alt={title}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               onError={(e) => {
