@@ -17,6 +17,7 @@ export const StorefrontAccount = ({ content, actionData }: any) => {
   );
   const userEntity = content?.user_entity || "user";
   const user = useEntity(userEntity);
+  const canSave = user.can("post");
   const [form, setForm] = React.useState<Record<string, string>>(() => {
     try {
       return JSON.parse(storage.getItem("profile") || "{}");
@@ -54,7 +55,9 @@ export const StorefrontAccount = ({ content, actionData }: any) => {
           {field("email", tr("auth.email", "Email"), { type: "email" })}
           {field("phone", tr("address.phone", "Phone"), { type: "tel" })}
           {field("address", tr("address.street", "Default address"))}
-          <Pressable type="submit" className="sf-cta">Save</Pressable>
+          <Pressable type="submit" className="sf-cta" disabled={!canSave}>
+            {canSave ? "Save" : tr("profile.read_only", "Read only")}
+          </Pressable>
         </View>
         <View as="aside" className="sf-summary-panel">
           <Text as="h3">{tr("profile.recent_orders", "Recent orders")}</Text>

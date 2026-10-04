@@ -24,6 +24,9 @@ export const StorefrontFormSummary = ({ content, properties }: any) => {
   );
   const orderEntity = content?.submit_entity || content?.order_entity || "order";
   const orders = useEntity(orderEntity);
+  // Implicit RBAC — configuration rbac[orderEntity] (or OPTIONS spec)
+  // decides whether this role may POST; disabled submit beats a 403.
+  const canSubmit = orders.can("post");
   const cart = useEntity(session);
   const [form, setForm] = React.useState<Record<string, string>>({});
   const [placing, setPlacing] = React.useState(false);
@@ -80,8 +83,12 @@ export const StorefrontFormSummary = ({ content, properties }: any) => {
           {field("address", tr("address.street", "Address"))}
           {field("city", tr("address.city", "City"))}
           {field("zip", tr("address.zip", "ZIP / PIN"))}
-          <Pressable type="submit" className="sf-cta" disabled={placing}>
-            {placing ? "…" : `${tr("checkout.place_order", "Place order")} · ${money(total, currency)}`}
+          <Pressable type="submit" className="sf-cta" disabled={placing || !canSubmit}>
+            {!canSubmit
+              ? tr("checkout.not_permitted", "Not permitted")
+              : placing
+                ? "…"
+                : `${tr("checkout.place_order", "Place order")} · ${money(total, currency)}`}
           </Pressable>
         </View>
         <View as="aside" className="sf-summary-panel">

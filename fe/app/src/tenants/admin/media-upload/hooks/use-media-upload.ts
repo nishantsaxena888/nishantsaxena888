@@ -32,7 +32,17 @@ export const useMediaUpload = (prop: any) => {
     searchValue,
     searchLoading,
     setProcess,
+    can,
   } = useCurdEntity(resolvedProp);
+
+  // Method RBAC from OPTIONS/configuration — upload = POST, remove =
+  // DELETE, save details = PUT. Denied → handlers toast instead of
+  // silently doing nothing (the hook-level 403 is the backstop anyway).
+  const canUpload = can?.("post") !== false;
+  const canDelete = can?.("delete") !== false;
+  const canEdit = can?.("put") !== false;
+  const denied = (what: string) => () =>
+    toast.error(`Not permitted: ${what}`);
 
   const { styles, themeName } = useFormStyleStore();
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -284,15 +294,18 @@ export const useMediaUpload = (prop: any) => {
     setEditStatus,
     fileInputRef,
     filteredList,
-    handleUploadClick,
-    handleFileChange,
-    handleDragOver,
-    handleDragLeave,
-    handleDrop,
-    handleDeleteItem,
+    handleUploadClick: canUpload ? handleUploadClick : denied("upload"),
+    handleFileChange: canUpload ? handleFileChange : denied("upload"),
+    handleDragOver: canUpload ? handleDragOver : undefined,
+    handleDragLeave: canUpload ? handleDragLeave : undefined,
+    handleDrop: canUpload ? handleDrop : denied("upload"),
+    handleDeleteItem: canDelete ? handleDeleteItem : denied("delete"),
     handleItemClick,
     handleSelectAll,
-    handleSaveDetails,
+    handleSaveDetails: canEdit ? handleSaveDetails : denied("edit"),
     getDocColor,
+    canUpload,
+    canDelete,
+    canEdit,
   };
 };
