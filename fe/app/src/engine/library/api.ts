@@ -279,6 +279,13 @@ async function resolveMock(
   const registry = mockConfigByClient[globalApiClient];
   if (!registry) return null;
 
+  // Mock mode from the registry itself (mock/config.json "_mode"):
+  //   "loose"  (default) — flagged → mock; unflagged → real API.
+  //   "strict" — flagged → mock; unflagged → 404, NEVER hits the network.
+  //   "auto"   — flagged → mock; unflagged → serve a matching file if one
+  //              exists in the tree, else real API.
+  const mode = (registry as any)?._mode || "loose";
+
   // Normalize: strip slashes, fold query string into searchParameter.
   let ep = (endpoint || "").replace(/^\/+|\/+$/g, "");
   let matchId = id;
@@ -305,10 +312,46 @@ async function resolveMock(
       if (matchId === undefined) matchId = tail;
     }
   }
-  if (!epCfg) return null;
+  const langTree = mockDataByClient[globalApiClient];
+
+  // Auto mode — unflagged endpoint but a file exists → serve it.
+  if (!epCfg && mode === "auto") {
+    const autoFile =
+      langTree?.[globalApiLang]?.[ep]?.[method.toUpperCase()]?.["success"] ??
+      langTree?.[globalApiDefaultLang]?.[ep]?.[method.toUpperCase()]?.["success"];
+    if (autoFile !== undefined) {
+      return {
+        data: autoFile,
+        error: false,
+        status_code: 200,
+        message: "Mock data returned successfully",
+      };
+    }
+  }
+
+  if (!epCfg) {
+    // Strict mode — unflagged endpoints never reach the network.
+    return mode === "strict"
+      ? {
+          data: null,
+          error: true,
+          status_code: 404,
+          message: `Mock strict: no registry entry for ${method.toUpperCase()} ${ep}`,
+        }
+      : null;
+  }
 
   const detail = epCfg[method.toUpperCase()];
-  if (!detail || detail.mock !== true) return null;
+  if (!detail || detail.mock !== true) {
+    return mode === "strict"
+      ? {
+          data: null,
+          error: true,
+          status_code: 404,
+          message: `Mock strict: ${method.toUpperCase()} ${ep} not flagged mock`,
+        }
+      : null;
+  }
 
   // Optional id constraint in the registry entry.
   if (detail.id !== undefined && String(detail.id) !== String(matchId)) {
@@ -319,7 +362,6 @@ async function resolveMock(
   const status = detail.status || 200;
   const delay = detail.delay !== undefined ? detail.delay : 120;
 
-  const langTree = mockDataByClient[globalApiClient];
   const file =
     langTree?.[globalApiLang]?.[ep]?.[method.toUpperCase()]?.[responseType] ??
     langTree?.[globalApiDefaultLang]?.[ep]?.[method.toUpperCase()]?.[responseType];

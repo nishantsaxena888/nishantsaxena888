@@ -576,5 +576,6 @@
     "GET": {
       "mock": true
     }
-  }
+  },
+  "_mode": "strict"
 }

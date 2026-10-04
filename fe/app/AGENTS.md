@@ -126,6 +126,10 @@ fe/client/<name>/mock/
   flagged-but-missing); absent/`false` → real axios. Registry flags =
   source selection per endpoint+method, so mixed mock/real mode = edit
   `mock/config.json` only.
+- Registry top-level `"_mode"` picks the client-wide mode:
+  `"loose"` (default, above), `"strict"` — unflagged calls 404 and never
+  touch the network (full-mock guarantee), `"auto"` — unflagged calls
+  serve a matching file when one exists, else real API.
 - `mockFiles` glob is generated per client (`tenants/mock-active.ts`) —
   other clients' mock JSON is never bundled.
 - Regenerate a client's whole tree from its backend definitions:

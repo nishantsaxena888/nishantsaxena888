@@ -101,5 +101,6 @@
     "DELETE": {
       "mock": true
     }
-  }
+  },
+  "_mode": "strict"
 }
