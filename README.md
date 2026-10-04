@@ -81,10 +81,35 @@ real data exists; nothing else changes.
 That's it — no engine code changes. Pages come from `pages` defs
 (`def.type` → component), admin screens come from entity OPTIONS.
 
-## Switch client mid-session
+## Switch client
 
-`npm run client -- <name>` rewrites `fe/app/src/tenants/active.ts`; Vite
-hot-reloads. Backend is a separate process per client (`CLIENT_NAME`).
+A client runs on **two processes** — switch both:
+
+```bash
+# 1. backend — restart with the new CLIENT_NAME
+cd be
+CLIENT_NAME=uday .venv/bin/python -m uvicorn app:app --port 8100
+# (Ctrl+C the old one first — only one backend per port)
+
+# 2. frontend — regenerate the tenant link
+cd fe/app
+npm run client -- uday        # rewrites src/tenants/active.ts
+# Vite hot-reloads automatically if `npm run dev` is running —
+# no restart needed.
+```
+
+| Client | `npm run client --` | `CLIENT_NAME=` |
+|---|---|---|
+| Hello | `hello` | `hello` |
+| Grocery | `grocery` | `grocery` |
+| Uday | `uday` | `uday` |
+
+The names always match: `fe/client/<name>` and `be/client/<name>` are the
+same `<name>`.
+
+> `localStorage["vite-client"]` no longer switches the bundle — tenants
+> are compiled in per client (`active.ts`), so only the generated client
+> exists in the build.
 
 More detail: `fe/client/README.md`, `be/client/README.md`,
 `docs/knowledge_base_*.md`.
