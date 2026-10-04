@@ -3,7 +3,7 @@
 
 export const HelloBanner = ({ content }: any) => {
   return (
-    <div className="m-4 rounded-xl border border-border bg-muted/50 p-4">
+    <div className="hello-banner m-4 rounded-xl border border-border bg-muted/50 p-4">
       <h2 className="text-lg font-semibold text-foreground">
         {content?.title || "Hello Client"}
       </h2>

@@ -24,7 +24,7 @@ export const ProductGrid = ({ content, actionData }: any) => {
   };
 
   return (
-    <div className="m-4">
+    <div className="product-grid m-4">
       {content?.title && (
         <h2 className="mb-3 text-xl font-semibold text-foreground">{content.title}</h2>
       )}
@@ -35,9 +35,9 @@ export const ProductGrid = ({ content, actionData }: any) => {
         {items.map((p: any) => (
           <div
             key={p.id}
-            className="rounded-xl border border-border bg-card p-4 shadow-sm transition-all hover:border-primary/50"
+            className="product-card rounded-xl border border-border bg-card p-4 shadow-sm transition-all hover:border-primary/50"
           >
-            <div className="mb-3 flex h-20 items-center justify-center rounded-lg bg-muted text-2xl font-bold text-muted-foreground">
+            <div className="product-thumb mb-3 flex h-20 items-center justify-center rounded-lg bg-muted text-2xl font-bold text-muted-foreground">
               {String(p.name || "?").charAt(0)}
             </div>
             <div className="flex items-start justify-between gap-2">
@@ -52,17 +52,17 @@ export const ProductGrid = ({ content, actionData }: any) => {
                 </span>
               </div>
               <div className="text-right">
-                <p className="text-sm font-semibold text-foreground">
+                <p className="product-price text-sm font-semibold text-foreground">
                   ${Number(p.price || 0).toFixed(2)}
                 </p>
                 {p.on_sale && (
-                  <p className="text-[11px] font-medium text-destructive">SALE</p>
+                  <p className="sale-tag text-[11px] font-medium text-destructive">SALE</p>
                 )}
               </div>
             </div>
             <button
               onClick={() => addToCart(p)}
-              className="mt-3 w-full rounded-lg bg-primary py-1.5 text-xs font-medium text-primary-foreground transition-all hover:opacity-90 active:scale-[0.98]"
+              className="add-to-cart mt-3 w-full rounded-lg bg-primary py-1.5 text-xs font-medium text-primary-foreground transition-all hover:opacity-90 active:scale-[0.98]"
             >
               Add to cart
             </button>

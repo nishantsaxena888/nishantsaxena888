@@ -1,5 +1,11 @@
-/* hello site surface styles — bundled by `npm run client -- hello` */
-.hello-banner-accent {
+/* hello site surface — auto-bundled by `npm run client -- hello`
+   Minimal, quiet skin: thin accent edge, no chrome. */
+
+.hello-banner {
   border-left: 4px solid hsl(var(--primary));
-  padding-left: 0.75rem;
+  border-radius: 4px;
+}
+
+.hello-banner h2 {
+  letter-spacing: -0.02em;
 }

@@ -1,0 +1,44 @@
+/* uday site surface — auto-bundled by `npm run client -- uday`
+   Learning-platform skin: left-accent cards, reading-friendly markdown,
+   terminal-ish code blocks. Palette still comes from style-config vars. */
+
+.uday-hero {
+  border-left: 6px solid hsl(var(--primary));
+  border-radius: 0.5rem;
+}
+
+.course-card {
+  border-left: 4px solid hsl(var(--primary) / 0.55);
+  border-radius: 0.5rem;
+}
+
+.course-card:hover {
+  border-left-color: hsl(var(--primary));
+  transform: translateX(3px);
+}
+
+.lesson-card {
+  border-left: 4px solid hsl(var(--primary) / 0.35);
+  border-radius: 0.5rem;
+}
+
+.lesson-card:hover {
+  border-left-color: hsl(var(--primary));
+}
+
+/* markdown body inside a lesson card */
+.lesson-card h3 {
+  border-bottom: 1px solid hsl(var(--border));
+  padding-bottom: 0.35rem;
+}
+
+.lesson-card li::marker {
+  color: hsl(var(--primary));
+}
+
+.md-code {
+  background: hsl(240 10% 10%);
+  color: hsl(150 60% 75%);
+  border: 1px solid hsl(240 10% 18%);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}

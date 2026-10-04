@@ -10,7 +10,7 @@ function renderMarkdown(md: string) {
     if (line.trim().startsWith("```")) {
       if (inCode) {
         blocks.push(
-          <pre key={i} className="my-2 overflow-x-auto rounded-lg bg-muted p-3 text-xs text-foreground">
+          <pre key={i} className="md-code my-2 overflow-x-auto rounded-lg bg-muted p-3 text-xs text-foreground">
             <code>{code.join("\n")}</code>
           </pre>,
         );
@@ -51,7 +51,7 @@ export const LessonFeed = ({ content, actionData }: any) => {
   const loading = actionData?.loading;
 
   return (
-    <div className="m-4 max-w-3xl">
+    <div className="lesson-feed m-4 max-w-3xl">
       {content?.title && (
         <h2 className="mb-3 text-xl font-semibold text-foreground">{content.title}</h2>
       )}
@@ -61,7 +61,7 @@ export const LessonFeed = ({ content, actionData }: any) => {
       {items.map((l: any) => (
         <article
           key={l.id}
-          className="mb-4 rounded-xl border border-border bg-card p-5 shadow-sm"
+          className="lesson-card mb-4 rounded-xl border border-border bg-card p-5 shadow-sm"
         >
           <div className="mb-2 flex items-baseline justify-between gap-2">
             <h3 className="text-base font-semibold text-foreground">

@@ -12,7 +12,7 @@ export const CourseList = ({ content, actionData }: any) => {
   const loading = actionData?.loading;
 
   return (
-    <div className="m-4">
+    <div className="course-list m-4">
       {content?.title && (
         <h2 className="mb-3 text-xl font-semibold text-foreground">{content.title}</h2>
       )}
@@ -23,7 +23,7 @@ export const CourseList = ({ content, actionData }: any) => {
         {items.map((c: any) => (
           <div
             key={c.id}
-            className="rounded-xl border border-border bg-card p-5 shadow-sm transition-all hover:border-primary/50"
+            className="course-card rounded-xl border border-border bg-card p-5 shadow-sm transition-all hover:border-primary/50"
           >
             <div className="flex items-start justify-between gap-2">
               <h3 className="text-base font-semibold text-foreground">{c.title}</h3>
