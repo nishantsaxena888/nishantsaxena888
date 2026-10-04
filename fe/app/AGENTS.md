@@ -164,6 +164,12 @@ fe/client/<name>/mock/
   `role` claim decides; no token → the `default: true` role.
   `POST /api/login` accepts `"role"` (validated against declared roles)
   and embeds the claim.
+- **Row-level rule filters**: per-entity `"filter"` in `entities.py` maps
+  role → forced query params (`{"viewer": {"done__eq": "false"},
+  "*": {"region__eq": "west"}}` — `"*"` applies to every role and merges
+  with the role's own rules). Scope params override caller params
+  (callers can't escape), apply to list AND get/put/delete (out-of-scope
+  rows → 404). Ops supported in `_in_scope`: `eq`, `in`.
 - **Frontend mirroring**: `menu`/`admin_menu` entries may carry
   `"roles": [...]` — `app-provider` filters them via
   `engine/library/rbac.ts` (token `role` claim or declared default).

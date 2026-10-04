@@ -172,6 +172,51 @@ def _check_rbac(entity: str, action: str, request: Request) -> None:
         raise HTTPException(403, f"Role '{role}' cannot {action} '{entity}'")
 
 
+# ---------------------------------------------------------------------------
+# Row-level rule filters — per-client, per-role mandatory scopes.
+#
+#   entities.py per-entity "filter":
+#     {"viewer": {"status__eq": "active"},   # role → forced query params
+#      "*":      {"region__eq": "west"}}     # "*" applies to every role
+#   Rules MERGE over caller params (caller cannot escape the scope) and
+#   compose per role: "*" + <role> both apply.
+# ---------------------------------------------------------------------------
+
+
+def _scope(entity: str, request: Request) -> Dict[str, str]:
+    rules = entities.get(entity, {}).get("filter") or {}
+    role = _role(request)
+    out: Dict[str, str] = {}
+    if isinstance(rules.get("*"), dict):
+        out.update(rules["*"])
+    if isinstance(rules.get(role), dict):
+        out.update(rules[role])
+    return out
+
+
+def _scoped_params(entity: str, request: Request):
+    scope = _scope(entity, request)
+    if not scope:
+        return request.query_params
+    import urllib.parse
+    from starlette.datastructures import QueryParams
+    merged = {**dict(request.query_params.multi_items()), **scope}
+    return QueryParams(urllib.parse.urlencode(merged))
+
+
+def _in_scope(entity: str, request: Request, row: Dict[str, Any]) -> bool:
+    for key, want in _scope(entity, request).items():
+        field, _, op = key.partition("__")
+        op = op or "eq"
+        val = str(row.get(field)).lower()
+        want_s = str(want).lower()
+        if op == "eq" and val != want_s:
+            return False
+        if op == "in" and val not in [x.strip() for x in want_s.split(",")]:
+            return False
+    return True
+
+
 @app.get("/")
 def root():
     return {"ok": True, "service": f"{CLIENT_NAME}-entity-api", "entities": ENTITIES_ORDER}
@@ -291,13 +336,20 @@ def list_items(entity: str, request: Request, response: Response):
     _check_rbac(entity, "read", request)
     src = _src(entity)
     response.headers["X-Data-Source"] = f"{entities[entity].get('source', 'json')}:{src.name}"
-    return src.list(entity, request.query_params)
+    return src.list(entity, _scoped_params(entity, request))
+
+
+def _get_scoped(entity: str, item_id: int, request: Request) -> Dict[str, Any]:
+    row = _src(entity).get(entity, item_id)
+    if not _in_scope(entity, request, row):
+        raise HTTPException(404, f"{entity}/{item_id} not found")
+    return row
 
 
 @app.get("/api/{entity}/{item_id}/")
 def get_item(entity: str, item_id: int, request: Request):
     _check_rbac(entity, "read", request)
-    return _src(entity).get(entity, item_id)
+    return _get_scoped(entity, item_id, request)
 
 
 @app.post("/api/{entity}/")
@@ -312,6 +364,7 @@ async def create_item(entity: str, request: Request):
 @app.put("/api/{entity}/{item_id}/")
 async def update_item(entity: str, item_id: int, request: Request):
     _check_rbac(entity, "write", request)
+    _get_scoped(entity, item_id, request)
     return _src(entity).update(entity, item_id, await request.json())
 
 
@@ -319,6 +372,7 @@ async def update_item(entity: str, item_id: int, request: Request):
 @app.delete("/api/{entity}/{item_id}/")
 def delete_item(entity: str, item_id: int, request: Request):
     _check_rbac(entity, "write", request)
+    _get_scoped(entity, item_id, request)
     return _src(entity).delete(entity, item_id)
 
 

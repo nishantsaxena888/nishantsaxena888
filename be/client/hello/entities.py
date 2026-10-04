@@ -35,6 +35,9 @@ entities = {
         # RBAC demo: anyone (incl. anonymous) reads, only the "admin" role
         # writes. Roles are declared in configuration.json "roles".
         "rbac": {"read": "*", "write": ["admin"]},
+        # Row-level rule filter: viewers only see pending todos; admin sees
+        # everything. Caller params merge UNDER the scope (can't escape it).
+        "filter": {"viewer": {"done__eq": "false"}},
         "fields": {
             "id":        {"type": "int", "primary_key": True},
             "title":     {"type": "str", "required": True},
