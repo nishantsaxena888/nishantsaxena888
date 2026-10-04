@@ -1,26 +1,90 @@
-# Hi, I'm Nishant 👋
+# nishantsaxena888 — generic client platform
 
-Senior Software Engineer building production systems on AWS — and lately,
-Forward Deployed-style applied AI.
+One generic engine, many clients. A product is assembled from **config +
+client folder**, never by touching the engine. Modelled on `ns` (frontend),
+`nishify` (backend entities), `Uday_AWS` (content-driven components).
 
-## What I work on
+```
+fe/
+  app/                  ← GENERIC frontend (ns engine, stripped). Frozen.
+    src/tenants/active.ts      ← GENERATED: which client is live
+    scripts/client.mjs         ← client switcher
+  client/<name>/
+    site/               ← S surface: route "/" — client's components + css
+    admin/              ← A surface: route "/admin" — client admin comps
+                          (usually empty — generic OPTIONS admin covers it)
+be/
+  app.py                ← GENERIC entity service. Frozen.
+  sources.py            ← Source contract + JsonSource
+  client/<name>/
+    entities.py         ← data model (fields + ui.table/form + sample_data)
+    configuration.json  ← menus, pages, themes, sessions, auth flags
+```
 
-- ☁️ **AWS / Cloud architecture** — Lambda, serverless, multi-service platforms
-- 🤖 **Applied AI** — agentic workflows, MCP integrations, eval pipelines
-- 🐍 **Python + FastAPI** — entity-driven backends, multi-tenant systems
-- ⚛️ **Full-stack** — Next.js, React, and (apparently) plenty of vanilla JS
+Every surface (site `S`, admin `A`) = **css + js + layout + entity
+association + implicit RBAC + options + CRUD**, delivered as:
+one route (`/` or `/admin/:slug`) + one config + one tenant map.
 
-## Currently
+## Run a client
 
-- 📚 Building an interactive AWS Masterclass platform (49 modules, dark mode, i18n)
-- 🔧 nishify — entity-driven multi-tenant platform
+Two processes — backend serves the client's entities + configuration,
+frontend bundles that client's components.
 
-## Elsewhere
+```bash
+# backend — pick the client with CLIENT_NAME
+cd be
+CLIENT_NAME=grocery .venv/bin/python -m uvicorn app:app --port 8100
 
-- 💼 LinkedIn: *(add your link)*
-- 📧 Email: *(add your email)*
+# frontend — pick the client with the switcher (Vite proxies /api → :8100)
+cd fe/app
+npm run client -- grocery   # rewrites src/tenants/active.ts
+npm run dev                 # → http://localhost:5173 (site), /admin (admin)
+```
 
----
+## Production build (lean — only the active client's code)
 
-*This profile README lives in `nishantsaxena888/nishantsaxena888` — GitHub's
-special repo that renders on your profile page (needs the repo public to show).*
+```bash
+npm run build:hello      # → fe/app/dist/hello
+npm run build:grocery    # → fe/app/dist/grocery
+npm run build:uday       # → fe/app/dist/uday
+```
+
+Each `build:<name>` script regenerates `tenants/active.ts` first — the
+bundle contains only that client's code. To add another, hardcode one more
+line in `fe/app/package.json` scripts (that's intentional).
+
+## Clients shipped
+
+| Client | Kind | Site pages | Admin entities |
+|---|---|---|---|
+| `hello` | smoke test | `/` | todo |
+| `grocery` | e-commerce | `/`, `/shop`, `/deals` | product, category, order, customer |
+| `uday` | learning | `/`, `/courses`, `/lessons` | course, lesson, quiz |
+
+Sample data in `be/client/*/entities.py` is temporary scaffolding ("mocks")
+served through the real API contract — replace rows or swap `source` once
+real data exists; nothing else changes.
+
+## Add a client (`foo`)
+
+1. `be/client/foo/entities.py` — entities DSL (copy `hello`'s shape:
+   `fields` + `ui.table`/`ui.form` + `sample_data`)
+2. `be/client/foo/configuration.json` — `menu`, `admin_menu`, `pages`,
+   `themes`/`style-configs`, `sessions`, `admin`, `meta`
+3. `fe/client/foo/site/tenant.ts` — `export default { components: {...} }`
+   (see `fe/client/README.md` for the contract)
+4. `fe/client/foo/admin/tenant.ts` — `export default { components: {} }`
+   unless the client needs custom admin screens
+5. `npm run client -- foo` and run. Optionally add a `build:foo` script
+   line in `fe/app/package.json`.
+
+That's it — no engine code changes. Pages come from `pages` defs
+(`def.type` → component), admin screens come from entity OPTIONS.
+
+## Switch client mid-session
+
+`npm run client -- <name>` rewrites `fe/app/src/tenants/active.ts`; Vite
+hot-reloads. Backend is a separate process per client (`CLIENT_NAME`).
+
+More detail: `fe/client/README.md`, `be/client/README.md`,
+`docs/knowledge_base_*.md`.

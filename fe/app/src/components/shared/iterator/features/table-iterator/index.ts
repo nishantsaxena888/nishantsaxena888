@@ -1,0 +1,1 @@
+export {TableIterator} from "./table-iterator"

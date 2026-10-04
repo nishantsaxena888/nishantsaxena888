@@ -1,0 +1,12 @@
+# python
+__pycache__/
+*.pyc
+.venv/
+
+# backend runtime data (per client)
+be/client/*/data.json
+
+# node
+node_modules/
+dist/
+*.local

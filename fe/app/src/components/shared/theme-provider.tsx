@@ -1,0 +1,155 @@
+import { createContext, useContext, useEffect, useState, useMemo, useCallback } from "react"
+import { apiClient } from "@/engine/library/api"
+import { setActiveClient } from "./api-provider"
+import { useConfigStore } from "@/store/use-config-store"
+
+export type Theme = string
+
+export interface ThemeOption {
+    value: string
+    label?: string
+    endpoint?: string
+    client?: string
+}
+
+type ThemeProviderProps = {
+    children: React.ReactNode
+    defaultTheme?: Theme
+    storageKey?: string
+}
+
+type ThemeProviderState = {
+    theme: Theme
+    setTheme: (theme: Theme, clientOverride?: string) => void
+    isFetchingStyleConfig: boolean
+}
+
+const initialState: ThemeProviderState = {
+    theme: "default",
+    setTheme: () => null,
+    isFetchingStyleConfig: false,
+}
+
+const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
+
+export function ThemeProvider({
+    children,
+    defaultTheme,
+    storageKey = "vite-ui-theme",
+    ...props
+}: ThemeProviderProps) {
+    // Theme options come from the backend "configuration" (config-driven,
+    // no mocks). Shape: config.data.themes = [{value, label, endpoint, client}]
+    const configThemes = useConfigStore((s: any) => s.config?.themes)
+    const THEMES: ThemeOption[] = useMemo(
+        () => (Array.isArray(configThemes) ? configThemes : []),
+        [configThemes],
+    )
+    const fallbackTheme = defaultTheme || THEMES[0]?.value || "default"
+
+    const [theme, setTheme] = useState<Theme>(() => {
+        try {
+            if (typeof window !== 'undefined') {
+                return (localStorage.getItem(storageKey) as Theme) || fallbackTheme
+            }
+            return fallbackTheme
+        } catch (e) {
+            return fallbackTheme
+        }
+    })
+
+    const [isFetchingStyleConfig, setIsFetchingStyleConfig] = useState(false)
+
+    // Fetch style-config/${theme} dynamically whenever theme changes
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        const fetchThemeStyleConfig = async () => {
+            setIsFetchingStyleConfig(true);
+            try {
+                const foundOption = THEMES.find((t) => t.value === theme);
+                const endpoint = foundOption?.endpoint || `style-config/${theme}`;
+                const res = await apiClient(endpoint, { method: "get" });
+                const stylesObj = res?.data?.styles;
+
+                if (!res?.error && stylesObj && Object.keys(stylesObj).length > 0) {
+                    // Apply inline CSS variables to <html> element for instant 100% priority update
+                    Object.entries(stylesObj).forEach(([key, val]) => {
+                        document.documentElement.style.setProperty(`--${key}`, String(val));
+                    });
+
+                    // Keep dynamic style tag updated as well
+                    let styleTag = document.getElementById("dynamic-style-config");
+                    if (!styleTag) {
+                        styleTag = document.createElement("style");
+                        styleTag.id = "dynamic-style-config";
+                        document.head.appendChild(styleTag);
+                    }
+                    const cssRules = Object.entries(stylesObj)
+                        .map(([key, val]) => `--${key}: ${val};`)
+                        .join("\n");
+                    styleTag.textContent = `:root {\n${cssRules}\n}`;
+                } else {
+                    const styleTag = document.getElementById("dynamic-style-config");
+                    if (styleTag) styleTag.remove();
+                }
+            } catch (err) {
+                console.warn("Could not fetch style-config for:", theme, err);
+                const styleTag = document.getElementById("dynamic-style-config");
+                if (styleTag) styleTag.remove();
+            } finally {
+                setIsFetchingStyleConfig(false);
+            }
+        };
+
+        fetchThemeStyleConfig();
+    }, [theme, THEMES]);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const root = window.document.documentElement
+
+        // Remove all dynamic theme classes
+        const allDynamicThemes = THEMES.map((t) => `theme-${t.value}`)
+        root.classList.remove(...allDynamicThemes, "dark", "light")
+
+        if (theme === "dark") {
+            root.classList.add("dark")
+        } else if (theme !== "light" && theme !== "default") {
+            root.classList.add(`theme-${theme}`)
+        }
+    }, [theme, THEMES])
+
+    const handleSetTheme = useCallback((newTheme: Theme, clientOverride?: string) => {
+        try {
+            if (typeof window !== 'undefined') {
+                localStorage.setItem(storageKey, newTheme)
+            }
+        } catch (e) { }
+
+        const foundOption = THEMES.find((t) => t.value === newTheme);
+        const targetClient = clientOverride || foundOption?.client;
+        if (targetClient) {
+            setActiveClient(targetClient);
+        }
+
+        setTheme(newTheme)
+    }, [storageKey, THEMES]);
+
+    const value = useMemo(() => ({
+        theme,
+        setTheme: handleSetTheme,
+        isFetchingStyleConfig,
+    }), [theme, handleSetTheme, isFetchingStyleConfig]);
+
+    return (
+        <ThemeProviderContext.Provider {...props} value={value}>
+            {children}
+        </ThemeProviderContext.Provider>
+    )
+}
+
+export const useTheme = () => {
+    const context = useContext(ThemeProviderContext)
+    return context || initialState
+}
