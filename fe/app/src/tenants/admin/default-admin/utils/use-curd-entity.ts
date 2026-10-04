@@ -19,8 +19,12 @@ export const useCurdEntity = ({ config: extra, content }: any) => {
     onDelete,
     onPost,
     onUpdate,
+    can,
   } = useEntity(entity, {
     searchParameter: extra?.searchParameter || {},
+    // OPTIONS `content.rbac` drives method permissions for this screen —
+    // {"viewer": ["GET"], "admin": ["*"]} or a flat list for all roles.
+    rbac: content?.rbac,
   });
 
   const [openForm, setOpenForm] = useState(false);
@@ -109,6 +113,7 @@ export const useCurdEntity = ({ config: extra, content }: any) => {
     onDelete,
     onPost,
     onUpdate,
+    can,
 
     formOpenManage,
     onChangeHandle,

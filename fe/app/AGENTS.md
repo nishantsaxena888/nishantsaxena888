@@ -306,6 +306,31 @@ Admin screens are entity-driven — **the OPTIONS response IS the screen**:
    `use-curd-entity.ts` (wraps `useEntity`; `onChangeHandle` → reload for
    page/sort/filter, 500ms-debounced search, confirm dialog).
 
+## Implicit RBAC (client-side mirror — backend is the real boundary)
+
+One whitelist shape everywhere: a `roles` array on any config item
+(`"*"` = all, `[]` = none, absent/non-array = unrestricted). The helpers
+live in `src/engine/library/rbac.ts` (`currentRole`, `roleAllowed`,
+`visibleByRole`, `methodAllowed`/`rbacMethods`):
+
+| Level | Where | Gate |
+|---|---|---|
+| Definition | `def.roles` / `def.properties.roles` | `RenderDefinition` skips it — the check runs before `useDynamicData` mounts, so a blocked def fires **no fetch** |
+| Menu items | `menu[]`/`admin_menu[]` `.roles` | `visibleByRole` |
+| Actions | `table.row_actions[]`/`bulk_actions[]` `.roles` | `default-admin` filters |
+| Columns/fields | `columns[].roles`, `form.fields[].roles` | `default-admin` mirrors the server ACL (lets one static mock OPTIONS serve every role) |
+| Methods | `content.rbac` (OPTIONS) or `configuration.rbac[entity]` | **`useEntity`** — `can(method)` drives UI; denied calls return 403 without hitting the network |
+
+Method spec (role → HTTP methods; `"*"` role = fallback for unlisted
+roles incl. anonymous, `"*"` method = all; case-insensitive):
+
+```json
+"rbac": {"*": ["GET","OPTIONS"], "editor": ["GET","POST","PUT"], "admin": ["*"]}
+```
+
+or a flat `["GET","POST"]` = applies to every role. Sessions bypass
+method RBAC (local state; gate them via def `roles`).
+
 Declarative table actions (OPTIONS `content.table`, executed by the
 generic grid — no per-screen code):
 

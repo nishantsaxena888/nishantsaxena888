@@ -2,7 +2,13 @@
 // Pure + node-env: the storage backend is stubbed via the platform seam
 // (setStorageBackend) — the same seam an RN port injects AsyncStorage at.
 import { afterEach, describe, expect, it } from "vitest";
-import { currentRole, roleAllowed, visibleByRole } from "./rbac";
+import {
+  currentRole,
+  methodAllowed,
+  rbacMethods,
+  roleAllowed,
+  visibleByRole,
+} from "./rbac";
 import { setStorageBackend, useMemoryStorage } from "@/platform/storage";
 
 const tokenWith = (claims: object) => {
@@ -88,5 +94,42 @@ describe("roleAllowed (def-level gating)", () => {
     [[], "admin", false], // empty whitelist = nobody allowed
   ])("roles=%j for '%s' → %s", (allowed, role, want) => {
     expect(roleAllowed(allowed, role)).toBe(want);
+  });
+});
+
+// Entity method RBAC — the spec OPTIONS/configuration carries; useEntity
+// gates every CRUD call on methodAllowed().
+describe("methodAllowed (entity CRUD RBAC)", () => {
+  const spec = {
+    viewer: ["GET"],
+    editor: ["GET", "POST", "PUT"],
+    admin: ["*"],
+  };
+
+  it.each([
+    // [spec, role, method, allowed]
+    [undefined, "viewer", "delete", true], // no spec → unrestricted
+    [spec, "viewer", "get", true],
+    [spec, "viewer", "GET", true], // case-insensitive
+    [spec, "viewer", "post", false],
+    [spec, "viewer", "delete", false],
+    [spec, "editor", "put", true],
+    [spec, "editor", "delete", false],
+    [spec, "admin", "delete", true], // "*" grants all
+    [spec, "admin", "options", true],
+    [["GET"], "anyone", "get", true], // flat list → all roles
+    [["GET"], "anyone", "post", false],
+    [{ "*": ["GET"] }, "nobody", "get", true], // "*" role = fallback
+    [{ "*": ["GET"] }, "nobody", "post", false],
+  ])("spec=%j role='%s' method='%s' → %s", (s, role, method, want) => {
+    expect(methodAllowed(s as any, role, method)).toBe(want);
+  });
+
+  it("rbacMethods returns null for unrestricted/wildcard", () => {
+    expect(rbacMethods(undefined, "viewer")).toBeNull();
+    expect(rbacMethods({ admin: ["*"] }, "admin")).toBeNull();
+    expect(rbacMethods({ viewer: ["GET"] }, "viewer")).toEqual(
+      new Set(["get"]),
+    );
   });
 });

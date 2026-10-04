@@ -360,5 +360,25 @@
       ]
     }
   },
-  "site_nav": false
+  "site_nav": false,
+  "roles": [
+    {
+      "name": "viewer",
+      "default": true
+    },
+    {
+      "name": "admin"
+    }
+  ],
+  "rbac": {
+    "product": {
+      "*": [
+        "GET",
+        "OPTIONS"
+      ],
+      "admin": [
+        "*"
+      ]
+    }
+  }
 }

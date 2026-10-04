@@ -2,7 +2,9 @@
 import { useState, useCallback, useEffect } from "react";
 import { apiClient } from "../library/api";
 import { useGenericState } from "@/store/use-generic-state";
+import { useConfigStore } from "@/store/use-config-store";
 import { isRegisteredSession, getSessionMatchKey } from "../library/reducers";
+import { currentRole, methodAllowed, type RbacSpec } from "../library/rbac";
 
 const EMPTY_ARRAY: any[] = [];
 
@@ -18,6 +20,9 @@ export interface UseEntityOptions {
   prefetch?: boolean;
   header?: Record<string, string>;
   disabledMethods?: ("get" | "post" | "put" | "patch" | "delete" | "options")[];
+  // Per-call-site permission override (e.g. OPTIONS `content.rbac` passed
+  // down by useCurdEntity). Falls back to configuration `rbac[entity]`.
+  rbac?: RbacSpec;
 }
 
 export interface EntityReloadParams {
@@ -43,9 +48,29 @@ export function useEntity(entity: string, options?: UseEntityOptions) {
     prefetch = true,
     header,
     disabledMethods = [],
+    rbac,
   } = options || {};
 
   const isSession = isRegisteredSession(entity);
+
+  // Implicit entity RBAC — the permission spec is data, not code:
+  // `rbac` prop (typically OPTIONS content.rbac) wins, else the client's
+  // configuration `rbac[entity]` map. Sessions stay ungated — they are
+  // local state, and def-level `roles` already gates their rendering.
+  const configRbac = useConfigStore(
+    useCallback((s: any) => s.config?.rbac?.[entity], [entity]),
+  );
+  const role = currentRole(useConfigStore((s: any) => s.config));
+  const rbacSpec = rbac !== undefined ? rbac : configRbac;
+  // can("post") → is the current role allowed AND the method not disabled.
+  // UI hides on this; the method bodies below also no-op on it so a missed
+  // check still can't call (the backend remains the real boundary).
+  const can = useCallback(
+    (method: string) =>
+      !disabledMethods.includes(method as any) &&
+      methodAllowed(rbacSpec, role, method),
+    [disabledMethods, rbacSpec, role],
+  );
 
   // Subscribe reactively to the session state when it's a registered session
   const sessionData = useGenericState(
@@ -113,9 +138,9 @@ export function useEntity(entity: string, options?: UseEntityOptions) {
         return { data: sessionData, error: false, status_code: 200, message: "Session data loaded" };
       }
 
-      if (disabledMethods.includes("get")) {
+      if (!can("get")) {
         setIsSkeleton(false);
-        return { data: null, error: true, status_code: 403, message: "GET method is disabled" };
+        return { data: null, error: true, status_code: 403, message: "GET not permitted" };
       }
       setLoading(true);
 
@@ -211,8 +236,8 @@ export function useEntity(entity: string, options?: UseEntityOptions) {
   );
 
   const onOptions = useCallback(async () => {
-    if (disabledMethods.includes("options")) {
-      return { data: null, error: true, status_code: 403, message: "OPTIONS method is disabled" };
+    if (!can("options")) {
+      return { data: null, error: true, status_code: 403, message: "OPTIONS not permitted" };
     }
     setLoading(true);
     try {
@@ -286,8 +311,8 @@ export function useEntity(entity: string, options?: UseEntityOptions) {
       useGenericState.getState().update(entity, payload);
       return { data: payload, error: false, status_code: 200, message: "Session updated" };
     }
-    if (disabledMethods.includes("post")) {
-      return { data: null, error: true, status_code: 403, message: "POST method is disabled" };
+    if (!can("post")) {
+      return { data: null, error: true, status_code: 403, message: "POST not permitted" };
     }
     setLoading(true);
     try {
@@ -311,8 +336,8 @@ export function useEntity(entity: string, options?: UseEntityOptions) {
       useGenericState.getState().update(entity, { ...payload, [matchKey]: updateId });
       return { data: payload, error: false, status_code: 200, message: "Session updated" };
     }
-    if (disabledMethods.includes("put")) {
-      return { data: null, error: true, status_code: 403, message: "PUT method is disabled" };
+    if (!can("put")) {
+      return { data: null, error: true, status_code: 403, message: "PUT not permitted" };
     }
     setLoading(true);
     try {
@@ -336,8 +361,8 @@ export function useEntity(entity: string, options?: UseEntityOptions) {
       useGenericState.getState().update(entity, { id: deleteId, _operation: "remove" });
       return { data: null, error: false, status_code: 200, message: "Session item removed" };
     }
-    if (disabledMethods.includes("delete")) {
-      return { data: null, error: true, status_code: 403, message: "DELETE method is disabled" };
+    if (!can("delete")) {
+      return { data: null, error: true, status_code: 403, message: "DELETE not permitted" };
     }
     setLoading(true);
     try {
@@ -364,6 +389,8 @@ export function useEntity(entity: string, options?: UseEntityOptions) {
     onPost,
     reload,
     onAction,
+    can,
+    role,
     loading,
     isSkeleton,
     config: {

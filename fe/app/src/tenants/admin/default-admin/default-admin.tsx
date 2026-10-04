@@ -15,7 +15,7 @@ import {
   runDeclarativeAction,
 } from "./utils/declarative-actions";
 import { useConfigStore } from "@/store/use-config-store";
-import { currentRole, roleAllowed } from "@/engine/library/rbac";
+import { currentRole, roleAllowed, visibleByRole } from "@/engine/library/rbac";
 
 export const DefaultAdmin = (prop: any) => {
   const {
@@ -33,6 +33,7 @@ export const DefaultAdmin = (prop: any) => {
     onDelete,
     onPost,
     onUpdate,
+    can,
     confirm,
     dialog,
     setProcess,
@@ -52,6 +53,14 @@ export const DefaultAdmin = (prop: any) => {
   const bulkActions = (table?.bulk_actions || []).filter((a: any) =>
     roleAllowed(a.roles, role),
   );
+  // Client-side mirror of the server's field ACL — columns[].roles and
+  // fields[].roles let ONE static mock OPTIONS serve every role.
+  const tableView = table
+    ? { ...table, columns: visibleByRole(table.columns, role) }
+    : table;
+  const formView = form
+    ? { ...form, fields: visibleByRole(form.fields, role) }
+    : form;
   const exportable = table?.export === true;
   const entity = prop.config?.activePage?.entity;
 
@@ -116,7 +125,7 @@ export const DefaultAdmin = (prop: any) => {
           {openForm ? (
             <DefaultEditModule
               formOpenManage={formOpenManage}
-              form={form}
+              form={formView}
               config={config}
               populateData={populateData}
               onPost={onPost}
@@ -166,9 +175,11 @@ export const DefaultAdmin = (prop: any) => {
               )}
               <IteratorModule
                 data={list || []}
-                config={table || {}}
+                config={tableView || {}}
                 id={prop.config?.activePage?.entity}
-                onAddRecord={() => formOpenManage(true)}
+                onAddRecord={
+                  can?.("post") ? () => formOpenManage(true) : undefined
+                }
                 createButtonlabel={
                   prop.config?.activePage?.name
                     ? `Add ${prop.config.activePage.name}`
@@ -190,25 +201,29 @@ export const DefaultAdmin = (prop: any) => {
                   customActions: rowActions,
                   onCustomAction: (row: any, def: any) => runAction(def, [row]),
                   onSelectedRowChange: (rows: any[]) => setSelectedRows(rows || []),
-                  onEdit: (row: any) => {
-                    formOpenManage(true, row);
-                  },
-                  onDelete: async (row: any) => {
-                    const confirmRes = await confirm({
-                      title: "Delete",
-                      description:
-                        "Are you sure you want to delete this record?",
-                    });
-
-                    if (confirmRes) {
-                      setProcess(true);
-                      const response = await onDelete(row.id || row);
-                      if (response) {
-                        toast.success("Record deleted successfully");
+                  onEdit: can?.("put")
+                    ? (row: any) => {
+                        formOpenManage(true, row);
                       }
-                      setProcess(false);
-                    }
-                  },
+                    : undefined,
+                  onDelete: can?.("delete")
+                    ? async (row: any) => {
+                        const confirmRes = await confirm({
+                          title: "Delete",
+                          description:
+                            "Are you sure you want to delete this record?",
+                        });
+
+                        if (confirmRes) {
+                          setProcess(true);
+                          const response = await onDelete(row.id || row);
+                          if (response) {
+                            toast.success("Record deleted successfully");
+                          }
+                          setProcess(false);
+                        }
+                      }
+                    : undefined,
                   onSort: (key, direction) => {
                     onChangeHandle({ type: "sort", value: { key, direction } });
                   },

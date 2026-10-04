@@ -367,14 +367,16 @@ export const IteratorModule = ({
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Button
-              onClick={() => onAddRecord?.()}
-              size="sm"
-              className="h-9 gap-2 shadow-sm shadow-primary/20"
-            >
-              <PlusIcon className="size-3.5" />
-              <span className="hidden md:inline">{createButtonlabel}</span>
-            </Button>
+            {onAddRecord && (
+              <Button
+                onClick={() => onAddRecord()}
+                size="sm"
+                className="h-9 gap-2 shadow-sm shadow-primary/20"
+              >
+                <PlusIcon className="size-3.5" />
+                <span className="hidden md:inline">{createButtonlabel}</span>
+              </Button>
+            )}
           </div>
         </div>
 

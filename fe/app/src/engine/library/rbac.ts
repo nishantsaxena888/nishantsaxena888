@@ -33,3 +33,27 @@ export function visibleByRole(items: any[] | undefined, role: string): any[] {
 export function roleAllowed(allowed: any, role: string): boolean {
   return !Array.isArray(allowed) || allowed.includes("*") || allowed.includes(role);
 }
+
+// ---- Entity method RBAC -------------------------------------------------
+// Declarative permission spec, identical shape in mock OPTIONS and the real
+// backend response:
+//   "rbac": { "viewer": ["GET"], "editor": ["GET","POST","PUT"], "admin": ["*"] }
+//   "rbac": ["GET","POST"]            // flat list — applies to every role
+// Absent spec → everything allowed. A role key of "*" is the fallback for
+// unlisted roles; a method of "*" grants all. Methods are case-insensitive
+// ("GET" ↔ "get") so spec authors can use either convention.
+export type RbacSpec = Record<string, string[]> | string[] | undefined;
+
+export function rbacMethods(spec: RbacSpec, role: string): Set<string> | null {
+  if (spec === undefined || spec === null) return null; // unrestricted
+  const list = Array.isArray(spec)
+    ? spec
+    : spec[role] || spec["*"] || [];
+  if (list.includes("*")) return null; // wildcard grant = unrestricted
+  return new Set(list.map((m) => String(m).toLowerCase()));
+}
+
+export function methodAllowed(spec: RbacSpec, role: string, method: string): boolean {
+  const allowed = rbacMethods(spec, role);
+  return allowed === null || allowed.has(String(method).toLowerCase());
+}

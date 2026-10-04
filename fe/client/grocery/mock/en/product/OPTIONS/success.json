@@ -57,7 +57,8 @@
           "label": "View",
           "icon": "eye",
           "type": "navigate",
-          "navigation": "/shop"
+          "navigation": "/shop",
+          "roles": []
         }
       ],
       "bulk_actions": [
@@ -590,6 +591,20 @@
             }
           ]
         }
+      ]
+    },
+    "rbac": {
+      "viewer": [
+        "GET",
+        "OPTIONS"
+      ],
+      "editor": [
+        "GET",
+        "POST",
+        "PUT"
+      ],
+      "admin": [
+        "*"
       ]
     }
   }
