@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { apiClient, useEntity } from "@/engine";
+import { apiClient } from "@/engine";
 import { useLanguage } from "@/components/shared/language-provider";
 import { toast } from "@/lib/toast";
 import { makeTr } from "./utils";
@@ -37,6 +37,18 @@ const TITLES: Record<string, string> = {
   "forgot-password-card": "auth.forgot_password",
   "reset-password-card": "auth.reset_password",
   "verify-email-card": "auth.verify_email",
+};
+
+// Unsigned dev JWT — 3 segments so jwt-decode never crashes Protected.
+// Only used when the configured endpoint doesn't return a token.
+const devJwt = (email: string): string => {
+  const b64 = (o: object) =>
+    btoa(JSON.stringify(o)).replace(/=+$/, "").replace(/\+/g, "-").replace(/\//g, "_");
+  return `${b64({ alg: "none", typ: "JWT" })}.${b64({
+    sub: email,
+    email,
+    exp: Math.floor(Date.now() / 1000) + 86400,
+  })}.dev`;
 };
 
 // "{{Label||l||/path}}" → link
@@ -79,7 +91,8 @@ export const StorefrontLoginLayout = ({ content }: any) => {
     }
     setBusy(true);
     // POST to the configured endpoint when it exists — mocked or real.
-    // An error response doesn't block local flows (no real auth backend).
+    // The generic backend's /api/login returns a decodable JWT; when a
+    // response carries a token use it verbatim.
     const res = cfg.endpoint
       ? await apiClient(cfg.endpoint, { method: "post", payload: form })
       : null;
@@ -94,8 +107,10 @@ export const StorefrontLoginLayout = ({ content }: any) => {
     for (const k of action.remove_local_storage || [])
       localStorage.removeItem(k);
     if (action.login || cardType === "login-card") {
-      // Dev token — real auth swaps this flow via the same action config.
-      localStorage.setItem("token", `dev-${Date.now()}`);
+      // Prefer the endpoint's token (the generic backend's /api/login
+      // returns a real JWT); otherwise mint an unsigned dev one.
+      const token = res?.data?.token || devJwt(form.email || "user@local");
+      localStorage.setItem("token", token);
     }
     if (action.navigation) navigate(action.navigation);
     else navigate("/");
