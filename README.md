@@ -124,6 +124,20 @@ configuration.json with a working todo entity). Then:
 That's it — no engine code changes. Pages come from `pages` defs
 (`def.type` → component), admin screens come from entity OPTIONS.
 
+## Verify
+
+With the three dev servers running (parallel section above):
+
+```bash
+cd fe/app
+node scripts/smoke-ui.mjs    # headless Chromium — all 21 routes
+node scripts/check-mocks.mjs # offline: every flagged mock has a file
+```
+
+The smoke test renders every site page and every `admin_menu` entity page
+for all three clients, failing on console errors, page errors, or 404s —
+including the expected not-found route.
+
 ## Switch client
 
 A client runs on **two processes** — switch both:
