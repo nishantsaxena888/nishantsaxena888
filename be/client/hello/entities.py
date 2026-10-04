@@ -1,9 +1,35 @@
 # be/client/hello/entities.py
 # Entity DSL — the single source of truth (same shape as nishify clients/*/entities.py)
 
-ENTITIES_ORDER = ["todo"]
+ENTITIES_ORDER = ["overview", "todo"]
 
 entities = {
+    # Admin landing screen — OPTIONS returns `config` (Definition[]) instead
+    # of a table/form schema, so DashboardControl renders the client's own
+    # hello-overview component rather than the generic grid. The entity is
+    # never CRUD'd; fields/sample_data are nominal.
+    "overview": {
+        "source": "json",
+        "fields": {"id": {"type": "int", "primary_key": True}},
+        "ui": {},
+        "config": [
+            {
+                "id": "hello-overview-1",
+                "type": "hello-overview",
+                "properties": {
+                    "level": "base",
+                    "type": "dynamic",
+                    "action": [
+                        {"key": "todos", "endpoint": "todo", "method": "GET",
+                         "queryParams": {"size": 100}},
+                    ],
+                },
+                "content": {},
+            },
+        ],
+        "sample_data": [],
+    },
+
     "todo": {
         "source": "json",   # implementation is secondary — swap sources freely
         "fields": {

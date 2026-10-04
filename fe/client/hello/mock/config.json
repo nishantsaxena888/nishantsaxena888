@@ -14,6 +14,23 @@
       "mock": true
     }
   },
+  "overview": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
   "todo": {
     "GET": {
       "mock": true

@@ -1,0 +1,43 @@
+{
+  "entity": "overview",
+  "name": "overview",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      }
+    },
+    "ui": {}
+  },
+  "content": {},
+  "config": [
+    {
+      "id": "grocery-overview-1",
+      "type": "grocery-overview",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "products",
+            "endpoint": "product",
+            "method": "GET",
+            "queryParams": {
+              "size": 100
+            }
+          },
+          {
+            "key": "orders",
+            "endpoint": "order",
+            "method": "GET",
+            "queryParams": {
+              "size": 100
+            }
+          }
+        ]
+      },
+      "content": {}
+    }
+  ]
+}

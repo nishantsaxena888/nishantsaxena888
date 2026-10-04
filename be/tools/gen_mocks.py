@@ -66,11 +66,14 @@ def gen_client(name: str):
         rows = list(spec.get("sample_data") or [])
         write(out, f"en/{entity}/GET/success.json",
               {"items": rows, "page": 1, "size": len(rows) or 20, "total": len(rows)})
-        write(out, f"en/{entity}/OPTIONS/success.json", {
+        options_body = {
             "entity": entity, "name": entity,
             "schema": {"fields": spec["fields"], "ui": spec.get("ui", {})},
             "content": spec.get("ui", {}),
-        })
+        }
+        if spec.get("config"):
+            options_body["config"] = spec["config"]
+        write(out, f"en/{entity}/OPTIONS/success.json", options_body)
         for m in ("POST", "PUT", "DELETE"):
             write(out, f"en/{entity}/{m}/success.json", {"ok": True, "mock": True})
 

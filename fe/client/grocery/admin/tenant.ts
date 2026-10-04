@@ -1,5 +1,9 @@
-// grocery admin tenant — no client-specific admin components.
-// The generic OPTIONS-driven admin covers this client's admin surface.
+// grocery admin tenant — store-specific admin screens on top of the
+// generic OPTIONS admin (which still serves product/category/order/customer).
+import GroceryOverview from "./components/grocery-overview";
+
 export default {
-  components: {},
+  components: {
+    "grocery-overview": GroceryOverview,
+  },
 };

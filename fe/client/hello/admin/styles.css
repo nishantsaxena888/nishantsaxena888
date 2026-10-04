@@ -1,0 +1,4 @@
+/* hello admin surface — auto-bundled by `npm run client -- hello` */
+.hello-overview .rounded-lg {
+  border-color: hsl(var(--primary) / 0.4);
+}

@@ -242,8 +242,11 @@ async function resolveMock(
   id: string | number | undefined,
   searchParameter?: Record<string, any>,
 ): Promise<ApiResponse | null> {
-  const registry = mockConfig[globalApiClient];
-  if (!registry) return null; // client has no mock registry → always real API
+  // Registry from the active client's mock/config.json (bundled via the
+  // generated tenants/mock-active.ts glob). If endpoint+method isn't flagged
+  // "mock": true, the call falls through to the real API.
+  const registry = mockConfig;
+  if (!registry) return null;
 
   // Normalize: strip slashes, fold query string into searchParameter.
   let ep = (endpoint || "").replace(/^\/+|\/+$/g, "");
@@ -285,10 +288,9 @@ async function resolveMock(
   const status = detail.status || 200;
   const delay = detail.delay !== undefined ? detail.delay : 120;
 
-  const langTree = mockData[globalApiClient];
   const file =
-    langTree?.[globalApiLang]?.[ep]?.[method.toUpperCase()]?.[responseType] ??
-    langTree?.[globalApiDefaultLang]?.[ep]?.[method.toUpperCase()]?.[responseType];
+    mockData[globalApiLang]?.[ep]?.[method.toUpperCase()]?.[responseType] ??
+    mockData[globalApiDefaultLang]?.[ep]?.[method.toUpperCase()]?.[responseType];
 
   if (delay > 0) await new Promise((r) => setTimeout(r, delay));
 

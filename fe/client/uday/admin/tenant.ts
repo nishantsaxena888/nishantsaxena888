@@ -1,5 +1,9 @@
-// uday admin tenant — no client-specific admin components.
-// The generic OPTIONS-driven admin covers this client's admin surface.
+// uday admin tenant — learning-specific admin screens on top of the
+// generic OPTIONS admin (which still serves course/lesson/quiz).
+import UdayOverview from "./components/uday-overview";
+
 export default {
-  components: {},
+  components: {
+    "uday-overview": UdayOverview,
+  },
 };

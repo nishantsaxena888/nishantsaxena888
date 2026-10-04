@@ -40,6 +40,13 @@
   ],
   "admin_menu": [
     {
+      "name": "Overview",
+      "description": "Learning snapshot",
+      "url": "/admin/overview",
+      "entity": "overview",
+      "icon": "layout-dashboard"
+    },
+    {
       "name": "Courses",
       "description": "Course catalogue",
       "url": "/admin/course",

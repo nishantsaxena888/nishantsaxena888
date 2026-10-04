@@ -1,0 +1,5 @@
+/* hello site surface styles — bundled by `npm run client -- hello` */
+.hello-banner-accent {
+  border-left: 4px solid hsl(var(--primary));
+  padding-left: 0.75rem;
+}

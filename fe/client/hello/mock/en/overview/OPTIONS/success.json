@@ -1,0 +1,35 @@
+{
+  "entity": "overview",
+  "name": "overview",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      }
+    },
+    "ui": {}
+  },
+  "content": {},
+  "config": [
+    {
+      "id": "hello-overview-1",
+      "type": "hello-overview",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "todos",
+            "endpoint": "todo",
+            "method": "GET",
+            "queryParams": {
+              "size": 100
+            }
+          }
+        ]
+      },
+      "content": {}
+    }
+  ]
+}

@@ -13,18 +13,48 @@
     "logout_redirect": "/"
   },
   "menu": [
-    { "name": "Home", "description": "Hello home", "url": "/", "entity": "pages/home", "public": true, "order": 0 }
+    {
+      "name": "Home",
+      "description": "Hello home",
+      "url": "/",
+      "entity": "pages/home",
+      "public": true,
+      "order": 0
+    }
   ],
   "admin_menu": [
-    { "name": "Todos", "description": "Todo admin", "url": "/admin/todo", "entity": "todo", "icon": "list" }
+    {
+      "name": "Overview",
+      "description": "Admin home",
+      "url": "/admin/overview",
+      "entity": "overview",
+      "icon": "layout-dashboard"
+    },
+    {
+      "name": "Todos",
+      "description": "Todo admin",
+      "url": "/admin/todo",
+      "entity": "todo",
+      "icon": "list"
+    }
   ],
   "language": [
-    { "name": "English", "code": "en" },
-    { "name": "Hindi", "code": "hi" }
+    {
+      "name": "English",
+      "code": "en"
+    },
+    {
+      "name": "Hindi",
+      "code": "hi"
+    }
   ],
   "sessions": [],
   "themes": [
-    { "value": "default", "label": "Default", "endpoint": "style-config/default" }
+    {
+      "value": "default",
+      "label": "Default",
+      "endpoint": "style-config/default"
+    }
   ],
   "style-configs": {
     "default": {
@@ -66,15 +96,20 @@
   },
   "pages": {
     "home": {
-      "meta": { "title": "Hello" },
+      "meta": {
+        "title": "Hello"
+      },
       "config": [
         {
           "id": "hello-banner-1",
           "type": "hello-banner",
-          "properties": { "level": "base", "type": "static" },
+          "properties": {
+            "level": "base",
+            "type": "static"
+          },
           "content": {
             "title": "Hello World",
-            "subtitle": "Rendered by RenderEngine from a page definition served by the backend — component lives in fe/client/hello."
+            "subtitle": "Rendered by RenderEngine from a page definition served by the backend \u2014 component lives in fe/client/hello."
           }
         }
       ]

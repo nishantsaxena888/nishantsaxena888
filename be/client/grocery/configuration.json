@@ -13,19 +13,77 @@
     "logout_redirect": "/"
   },
   "menu": [
-    { "name": "Home", "description": "Storefront", "url": "/", "entity": "pages/home", "public": true, "order": 0 },
-    { "name": "Shop", "description": "All products", "url": "/shop", "entity": "pages/shop", "public": true, "order": 1 },
-    { "name": "Deals", "description": "On sale now", "url": "/deals", "entity": "pages/deals", "public": true, "order": 2 }
+    {
+      "name": "Home",
+      "description": "Storefront",
+      "url": "/",
+      "entity": "pages/home",
+      "public": true,
+      "order": 0
+    },
+    {
+      "name": "Shop",
+      "description": "All products",
+      "url": "/shop",
+      "entity": "pages/shop",
+      "public": true,
+      "order": 1
+    },
+    {
+      "name": "Deals",
+      "description": "On sale now",
+      "url": "/deals",
+      "entity": "pages/deals",
+      "public": true,
+      "order": 2
+    }
   ],
   "admin_menu": [
-    { "name": "Products", "description": "Product catalogue", "url": "/admin/product", "entity": "product", "icon": "shopping-basket" },
-    { "name": "Categories", "description": "Category management", "url": "/admin/category", "entity": "category", "icon": "tags" },
-    { "name": "Orders", "description": "Order tracking", "url": "/admin/order", "entity": "order", "icon": "receipt" },
-    { "name": "Customers", "description": "Customer records", "url": "/admin/customer", "entity": "customer", "icon": "users" }
+    {
+      "name": "Overview",
+      "description": "Store snapshot",
+      "url": "/admin/overview",
+      "entity": "overview",
+      "icon": "layout-dashboard"
+    },
+    {
+      "name": "Products",
+      "description": "Product catalogue",
+      "url": "/admin/product",
+      "entity": "product",
+      "icon": "shopping-basket"
+    },
+    {
+      "name": "Categories",
+      "description": "Category management",
+      "url": "/admin/category",
+      "entity": "category",
+      "icon": "tags"
+    },
+    {
+      "name": "Orders",
+      "description": "Order tracking",
+      "url": "/admin/order",
+      "entity": "order",
+      "icon": "receipt"
+    },
+    {
+      "name": "Customers",
+      "description": "Customer records",
+      "url": "/admin/customer",
+      "entity": "customer",
+      "icon": "users"
+    }
   ],
   "language": [
-    { "name": "English", "code": "en" },
-    { "name": "Hindi", "code": "hi" }
+    {
+      "name": "English",
+      "code": "en"
+    },
+    {
+      "name": "Hindi",
+      "code": "hi"
+    }
   ],
   "sessions": [
     {
@@ -36,13 +94,23 @@
         "match_key": "id",
         "on_match": "increment",
         "increment_field": "qty",
-        "default_fields": { "qty": 1 }
+        "default_fields": {
+          "qty": 1
+        }
       }
     }
   ],
   "themes": [
-    { "value": "grocery-light", "label": "Grocery Light", "endpoint": "style-config/grocery-light" },
-    { "value": "default", "label": "Default", "endpoint": "style-config/default" }
+    {
+      "value": "grocery-light",
+      "label": "Grocery Light",
+      "endpoint": "style-config/grocery-light"
+    },
+    {
+      "value": "default",
+      "label": "Default",
+      "endpoint": "style-config/default"
+    }
   ],
   "style-configs": {
     "grocery-light": {
@@ -120,15 +188,20 @@
   },
   "pages": {
     "home": {
-      "meta": { "title": "Grocery" },
+      "meta": {
+        "title": "Grocery"
+      },
       "config": [
         {
           "id": "grocery-hero-1",
           "type": "grocery-hero",
-          "properties": { "level": "base", "type": "static" },
+          "properties": {
+            "level": "base",
+            "type": "static"
+          },
           "content": {
             "title": "Fresh today",
-            "subtitle": "Same engine, different client — this page is a JSON definition served by the backend.",
+            "subtitle": "Same engine, different client \u2014 this page is a JSON definition served by the backend.",
             "cta": "Shop deals"
           }
         },
@@ -139,15 +212,26 @@
             "level": "base",
             "type": "dynamic",
             "action": [
-              { "key": "products", "endpoint": "product", "method": "GET", "queryParams": { "size": 8 } }
+              {
+                "key": "products",
+                "endpoint": "product",
+                "method": "GET",
+                "queryParams": {
+                  "size": 8
+                }
+              }
             ]
           },
-          "content": { "title": "Featured" }
+          "content": {
+            "title": "Featured"
+          }
         }
       ]
     },
     "shop": {
-      "meta": { "title": "Shop" },
+      "meta": {
+        "title": "Shop"
+      },
       "config": [
         {
           "id": "grocery-grid-shop",
@@ -156,15 +240,26 @@
             "level": "base",
             "type": "dynamic",
             "action": [
-              { "key": "products", "endpoint": "product", "method": "GET", "queryParams": { "size": 24 } }
+              {
+                "key": "products",
+                "endpoint": "product",
+                "method": "GET",
+                "queryParams": {
+                  "size": 24
+                }
+              }
             ]
           },
-          "content": { "title": "All products" }
+          "content": {
+            "title": "All products"
+          }
         }
       ]
     },
     "deals": {
-      "meta": { "title": "Deals" },
+      "meta": {
+        "title": "Deals"
+      },
       "config": [
         {
           "id": "grocery-grid-deals",
@@ -173,11 +268,20 @@
             "level": "base",
             "type": "dynamic",
             "action": [
-              { "key": "products", "endpoint": "product", "method": "GET",
-                "queryParams": { "size": 24, "on_sale": true } }
+              {
+                "key": "products",
+                "endpoint": "product",
+                "method": "GET",
+                "queryParams": {
+                  "size": 24,
+                  "on_sale": true
+                }
+              }
             ]
           },
-          "content": { "title": "On sale" }
+          "content": {
+            "title": "On sale"
+          }
         }
       ]
     }

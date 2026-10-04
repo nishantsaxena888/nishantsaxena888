@@ -1,0 +1,51 @@
+{
+  "entity": "overview",
+  "name": "overview",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      }
+    },
+    "ui": {}
+  },
+  "content": {},
+  "config": [
+    {
+      "id": "uday-overview-1",
+      "type": "uday-overview",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "courses",
+            "endpoint": "course",
+            "method": "GET",
+            "queryParams": {
+              "size": 100
+            }
+          },
+          {
+            "key": "lessons",
+            "endpoint": "lesson",
+            "method": "GET",
+            "queryParams": {
+              "size": 100
+            }
+          },
+          {
+            "key": "quizzes",
+            "endpoint": "quiz",
+            "method": "GET",
+            "queryParams": {
+              "size": 100
+            }
+          }
+        ]
+      },
+      "content": {}
+    }
+  ]
+}

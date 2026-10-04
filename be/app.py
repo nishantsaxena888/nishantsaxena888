@@ -107,6 +107,10 @@ def options(entity: str, schema: str = "basic"):
         "name": entity,
         "schema": {"fields": cfg["fields"], **({"ui": cfg.get("ui", {})} if schema == "full" else {})},
         "content": cfg.get("ui", {}),
+        # Optional full Definition[] — a custom admin screen. When present the
+        # frontend renders these defs (resolved via the admin component map)
+        # instead of the synthesized default-admin grid.
+        **({"config": cfg["config"]} if cfg.get("config") else {}),
     }
 
 

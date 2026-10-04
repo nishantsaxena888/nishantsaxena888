@@ -24,6 +24,13 @@
   ],
   "admin_menu": [
     {
+      "name": "Overview",
+      "description": "Admin home",
+      "url": "/admin/overview",
+      "entity": "overview",
+      "icon": "layout-dashboard"
+    },
+    {
       "name": "Todos",
       "description": "Todo admin",
       "url": "/admin/todo",

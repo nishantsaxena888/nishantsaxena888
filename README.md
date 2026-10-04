@@ -55,11 +55,19 @@ line in `fe/app/package.json` scripts (that's intentional).
 
 ## Clients shipped
 
-| Client | Kind | Site pages | Admin entities |
-|---|---|---|---|
-| `hello` | smoke test | `/` | todo |
-| `grocery` | e-commerce | `/`, `/shop`, `/deals` | product, category, order, customer |
-| `uday` | learning | `/`, `/courses`, `/lessons` | course, lesson, quiz |
+| Client | Kind | Site pages | Admin entities | Admin landing |
+|---|---|---|---|---|
+| `hello` | smoke test | `/` | overview, todo | `hello-overview` — todo counts |
+| `grocery` | e-commerce | `/`, `/shop`, `/deals` | overview, product, category, order, customer | `grocery-overview` — revenue/stock stats |
+| `uday` | learning | `/`, `/courses`, `/lessons` | overview, course, lesson, quiz | `uday-overview` — course/lesson/quiz rollup |
+
+Each client has **its own site and admin**: site comps live in
+`fe/client/<name>/site/`, admin comps in `fe/client/<name>/admin/`
+(resolved surface-scoped — a site `def.type` can't leak into admin). A
+custom admin screen = an entity whose OPTIONS returns `config:
+Definition[]` (see the `overview` entity in any `entities.py`) + a
+component registered in `admin/tenant.ts`; generic CRUD screens still
+come from `ui.table`/`ui.form` OPTIONS — zero TS.
 
 Sample data in `be/client/*/entities.py` is temporary scaffolding ("mocks")
 served through the real API contract — replace rows or swap `source` once
@@ -84,6 +92,14 @@ Trim `mock/config.json` per endpoint or per method for mixed mode
 (e.g. OPTIONS mocked, CRUD real). Supported per-method extras:
 `response_type`, `status`, `delay`, `id`, `search_param`.
 
+Only the **active** client's `mock/` is bundled (generated glob in
+`fe/app/src/tenants/mock-active.ts`). Before browser testing, validate
+every flagged file exists:
+
+```bash
+cd fe/app && node scripts/check-mocks.mjs
+```
+
 ## Add a client (`foo`)
 
 1. `be/client/foo/entities.py` — entities DSL (copy `hello`'s shape:
@@ -94,7 +110,9 @@ Trim `mock/config.json` per endpoint or per method for mixed mode
    (see `fe/client/README.md` for the contract)
 4. `fe/client/foo/admin/tenant.ts` — `export default { components: {} }`
    unless the client needs custom admin screens
-5. `npm run client -- foo` and run. Optionally add a `build:foo` script
+5. Optional: `site/styles.css` / `admin/styles.css` (auto-bundled when
+   present), `mock/` via `python be/tools/gen_mocks.py foo`
+6. `npm run client -- foo` and run. Optionally add a `build:foo` script
    line in `fe/app/package.json`.
 
 That's it — no engine code changes. Pages come from `pages` defs
@@ -112,7 +130,8 @@ CLIENT_NAME=uday .venv/bin/python -m uvicorn app:app --port 8100
 
 # 2. frontend — regenerate the tenant link
 cd fe/app
-npm run client -- uday        # rewrites src/tenants/active.ts
+npm run client -- uday        # rewrites src/tenants/{active,mock-active}.ts
+# — swaps both surfaces: site comps, admin screens, styles, mocks
 # Vite hot-reloads automatically if `npm run dev` is running —
 # no restart needed.
 ```

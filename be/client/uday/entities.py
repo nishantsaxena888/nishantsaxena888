@@ -3,9 +3,37 @@
 # Learning-platform client (Uday_AWS model). Sample data is temporary
 # scaffolding for testing — swap the source once real content exists.
 
-ENTITIES_ORDER = ["course", "lesson", "quiz"]
+ENTITIES_ORDER = ["overview", "course", "lesson", "quiz"]
 
 entities = {
+    # Admin landing screen — OPTIONS returns `config` (Definition[]) so the
+    # client's uday-overview component renders instead of default-admin.
+    "overview": {
+        "source": "json",
+        "fields": {"id": {"type": "int", "primary_key": True}},
+        "ui": {},
+        "config": [
+            {
+                "id": "uday-overview-1",
+                "type": "uday-overview",
+                "properties": {
+                    "level": "base",
+                    "type": "dynamic",
+                    "action": [
+                        {"key": "courses", "endpoint": "course", "method": "GET",
+                         "queryParams": {"size": 100}},
+                        {"key": "lessons", "endpoint": "lesson", "method": "GET",
+                         "queryParams": {"size": 100}},
+                        {"key": "quizzes", "endpoint": "quiz", "method": "GET",
+                         "queryParams": {"size": 100}},
+                    ],
+                },
+                "content": {},
+            },
+        ],
+        "sample_data": [],
+    },
+
     "course": {
         "source": "json",
         "fields": {

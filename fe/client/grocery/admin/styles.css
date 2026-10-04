@@ -1,0 +1,16 @@
+/* grocery admin surface — auto-bundled by `npm run client -- grocery` */
+.grocery-overview .stat-card {
+  border-left: 3px solid hsl(var(--primary));
+}
+
+.order-status {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  text-transform: capitalize;
+}
+.order-status-pending   { background: hsl(45 90% 90%);  color: hsl(30 80% 30%); }
+.order-status-packed    { background: hsl(210 90% 90%); color: hsl(215 70% 35%); }
+.order-status-delivered { background: hsl(150 60% 90%); color: hsl(150 70% 25%); }
+.order-status-cancelled { background: hsl(0 80% 92%);   color: hsl(0 70% 40%); }

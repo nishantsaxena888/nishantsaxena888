@@ -3,9 +3,35 @@
 # Sample data is temporary scaffolding for testing ("mocks") — swap the source
 # or replace the rows once real data exists.
 
-ENTITIES_ORDER = ["category", "product", "customer", "order"]
+ENTITIES_ORDER = ["overview", "category", "product", "customer", "order"]
 
 entities = {
+    # Admin landing screen — OPTIONS returns `config` (Definition[]) so the
+    # client's grocery-overview component renders instead of default-admin.
+    "overview": {
+        "source": "json",
+        "fields": {"id": {"type": "int", "primary_key": True}},
+        "ui": {},
+        "config": [
+            {
+                "id": "grocery-overview-1",
+                "type": "grocery-overview",
+                "properties": {
+                    "level": "base",
+                    "type": "dynamic",
+                    "action": [
+                        {"key": "products", "endpoint": "product", "method": "GET",
+                         "queryParams": {"size": 100}},
+                        {"key": "orders", "endpoint": "order", "method": "GET",
+                         "queryParams": {"size": 100}},
+                    ],
+                },
+                "content": {},
+            },
+        ],
+        "sample_data": [],
+    },
+
     "category": {
         "source": "json",
         "fields": {

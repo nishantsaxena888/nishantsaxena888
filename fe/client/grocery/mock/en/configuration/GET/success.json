@@ -40,6 +40,13 @@
   ],
   "admin_menu": [
     {
+      "name": "Overview",
+      "description": "Store snapshot",
+      "url": "/admin/overview",
+      "entity": "overview",
+      "icon": "layout-dashboard"
+    },
+    {
       "name": "Products",
       "description": "Product catalogue",
       "url": "/admin/product",
