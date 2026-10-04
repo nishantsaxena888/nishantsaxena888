@@ -26,7 +26,9 @@ export default defineConfig({
     strictPort: false,
     fs: { allow: [".."] },
     proxy: {
-      "/api": "http://localhost:8100",
+      // Per-client dev servers point at their own backend:
+      //   VITE_BACKEND_URL=http://localhost:8101 npm run dev -- --port 5174
+      "/api": process.env.VITE_BACKEND_URL || "http://localhost:8100",
     },
   },
 });

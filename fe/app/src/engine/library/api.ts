@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { type AxiosRequestConfig, AxiosError } from "axios";
-import { mockConfig, mockData } from "./mock-data";
+import { mockConfigByClient, mockDataByClient } from "./mock-data";
 
 export type HttpMethod =
   | "get"
@@ -243,9 +243,9 @@ async function resolveMock(
   searchParameter?: Record<string, any>,
 ): Promise<ApiResponse | null> {
   // Registry from the active client's mock/config.json (bundled via the
-  // generated tenants/mock-active.ts glob). If endpoint+method isn't flagged
+  // generated tenant globs). If endpoint+method isn't flagged
   // "mock": true, the call falls through to the real API.
-  const registry = mockConfig;
+  const registry = mockConfigByClient[globalApiClient];
   if (!registry) return null;
 
   // Normalize: strip slashes, fold query string into searchParameter.
@@ -288,9 +288,10 @@ async function resolveMock(
   const status = detail.status || 200;
   const delay = detail.delay !== undefined ? detail.delay : 120;
 
+  const langTree = mockDataByClient[globalApiClient];
   const file =
-    mockData[globalApiLang]?.[ep]?.[method.toUpperCase()]?.[responseType] ??
-    mockData[globalApiDefaultLang]?.[ep]?.[method.toUpperCase()]?.[responseType];
+    langTree?.[globalApiLang]?.[ep]?.[method.toUpperCase()]?.[responseType] ??
+    langTree?.[globalApiDefaultLang]?.[ep]?.[method.toUpperCase()]?.[responseType];
 
   if (delay > 0) await new Promise((r) => setTimeout(r, delay));
 

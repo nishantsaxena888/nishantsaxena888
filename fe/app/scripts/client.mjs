@@ -7,7 +7,7 @@
 // Generates:
 //   src/tenants/active.ts      — tenant imports + declared styles imports
 //   src/tenants/mock-active.ts — mock glob (empty when manifest mock:false)
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -84,6 +84,37 @@ export const mockFiles = import.meta.glob("../../../client/${name}/mock/**/*.jso
 export const mockFiles: Record<string, unknown> = {};`}
 `,
   );
+
+  // Dev-all bindings: every client's tenants/styles/mocks in one generated
+  // file. Only imported under import.meta.env.DEV, so production builds
+  // tree-shake it away entirely — prod stays single-client lean.
+  const names = readdirSync(clientDir)
+    .filter((d) => existsSync(join(clientDir, d, "client.json")))
+    .sort();
+
+  let dev = `// GENERATED — do not edit by hand.
+// \`npm run client <name>\` rewrites this file. Dev only: imported under
+// import.meta.env.DEV so prod builds drop it completely.
+`;
+  const entries = [];
+  const globs = [];
+  for (const n of names) {
+    const manifest = readManifest(clientDir, n);
+    dev += `import ${n}_site from "@clients/${n}/site/tenant";\n`;
+    dev += `import ${n}_admin from "@clients/${n}/admin/tenant";\n`;
+    for (const s of SURFACES) {
+      if (manifest?.surfaces?.[s]?.styles)
+        dev += `import "@clients/${n}/${s}/styles.css";\n`;
+    }
+    entries.push(`  ${n}: { site: ${n}_site, admin: ${n}_admin },`);
+    if (manifest?.mock)
+      globs.push(
+        `  ${n}: import.meta.glob("../../../client/${n}/mock/**/*.json", { eager: true }),`,
+      );
+  }
+  dev += `\nexport const allClients = {\n${entries.join("\n")}\n};\n`;
+  dev += `\nexport const mockGlobs = {\n${globs.join("\n")}\n};\n`;
+  writeFileSync(join(appDir, "src/tenants/dev-all.ts"), dev);
 
   console.log(`active client → ${name} (${m.title || name})`);
 }

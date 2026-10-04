@@ -8,10 +8,18 @@ import {
 import { client as bakedClient } from "@/tenants/active";
 
 export const getActiveClient = (): string => {
-  // Clients compile in per build (tenants/active.ts) — a localStorage
-  // override can't work (the other client's components are not in the
-  // bundle) and would mix one client's mocks with another's components.
-  // Switch with `npm run client -- <name>` instead.
+  if (import.meta.env.DEV) {
+    // Dev: every client's surfaces + mocks are bundled (tenants/dev-all.ts),
+    // so a process-level VITE_CLIENT or a runtime localStorage["vite-client"]
+    // switch both work — e.g. `VITE_CLIENT=grocery npm run dev`.
+    const cached =
+      typeof window !== "undefined"
+        ? localStorage.getItem("vite-client")
+        : null;
+    if (cached) return cached;
+    if (import.meta.env.VITE_CLIENT) return import.meta.env.VITE_CLIENT;
+  }
+  // Prod: only the generated client's code is in the bundle.
   return import.meta.env.VITE_CLIENT || bakedClient;
 };
 
