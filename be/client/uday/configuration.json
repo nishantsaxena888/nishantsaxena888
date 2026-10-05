@@ -39,9 +39,9 @@
       "order": 2
     },
     {
-      "name": "Learn",
+      "name": "Chapter",
       "description": "Chapter reader",
-      "url": "/learn/:id",
+      "url": "/chapter/:id",
       "entity": "pages/learn",
       "public": true,
       "hide": true,
@@ -210,14 +210,14 @@
   ],
   "themes": [
     {
-      "value": "uday-dark",
-      "label": "Uday Dark",
-      "endpoint": "style-config/uday-dark"
-    },
-    {
       "value": "default",
       "label": "Default",
       "endpoint": "style-config/default"
+    },
+    {
+      "value": "uday-dark",
+      "label": "Uday Dark",
+      "endpoint": "style-config/uday-dark"
     }
   ],
   "style-configs": {
@@ -349,7 +349,7 @@
               "description": "Build, deploy, secure, scale, and operate a real AWS production environment. 47 chapters. One continuous project. From zero to production-ready architect.",
               "primary": {
                 "label": "🚀 Start Learning",
-                "to": "/learn/1400"
+                "to": "/chapter/module-04"
               },
               "secondary": {
                 "label": "📚 Browse Chapters",
@@ -625,7 +625,7 @@
           },
           "content": {
             "title": "Course",
-            "reader_path": "/learn"
+            "reader_path": "/chapter"
           }
         }
       ]
@@ -691,7 +691,15 @@
           "content": {
             "title": "Chapter",
             "back_path": "/courses",
-            "toc": true
+            "toc": true,
+            "topbar": {
+              "logo": "🚀 Masterclass",
+              "title_tpl": "Chapter {no}: {title}",
+              "home": "/",
+              "dark_theme": "uday-dark",
+              "light_theme": "default"
+            },
+            "reader_path": "/chapter"
           }
         }
       ]

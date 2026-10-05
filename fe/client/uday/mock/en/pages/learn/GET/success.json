@@ -59,7 +59,15 @@
       "content": {
         "title": "Chapter",
         "back_path": "/courses",
-        "toc": true
+        "toc": true,
+        "topbar": {
+          "logo": "\ud83d\ude80 Masterclass",
+          "title_tpl": "Chapter {no}: {title}",
+          "home": "/",
+          "dark_theme": "uday-dark",
+          "light_theme": "default"
+        },
+        "reader_path": "/chapter"
       }
     }
   ]

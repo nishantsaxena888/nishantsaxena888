@@ -52,7 +52,7 @@
           "description": "Build, deploy, secure, scale, and operate a real AWS production environment. 47 chapters. One continuous project. From zero to production-ready architect.",
           "primary": {
             "label": "\ud83d\ude80 Start Learning",
-            "to": "/learn/1400"
+            "to": "/chapter/module-04"
           },
           "secondary": {
             "label": "\ud83d\udcda Browse Chapters",

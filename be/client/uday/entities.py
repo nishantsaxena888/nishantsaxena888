@@ -238,6 +238,7 @@ entities = {
             "course_id": {"type": "int", "required": True},
             "title":     {"type": "str", "required": True},
             "order":     {"type": "int", "default": 0},
+            "slug":      {"type": "str"},
             # media base for relative asset refs inside md_content
             # (imported md references e.g. "image-1.png" — resolves to
             # content_base + src when serving)

@@ -39,7 +39,7 @@ export default function CourseDetail({ content, actionData, session }: any) {
       kind: "chapter",
       at: new Date().toISOString(),
     });
-    navigate(`${content?.reader_path || "/learn"}/${ch.id}`);
+    navigate(`${content?.reader_path || "/learn"}/${ch.slug || ch.id}`);
   };
 
   if (actionData?.loading) {

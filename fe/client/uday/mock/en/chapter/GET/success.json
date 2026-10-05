@@ -6,7 +6,8 @@
       "title": "00 \u2014 Welcome And Series Map",
       "order": 1,
       "content_base": "/agentcore-playlist/",
-      "published_revision_id": 1000
+      "published_revision_id": 1000,
+      "slug": "Chapter_00_Welcome_and_Series_Map"
     },
     {
       "id": 1001,
@@ -14,7 +15,8 @@
       "title": "01 \u2014 Prototype To Production Gap",
       "order": 1,
       "content_base": "/agentcore-production-agent/",
-      "published_revision_id": 1001
+      "published_revision_id": 1001,
+      "slug": "Chapter_01_Prototype_to_Production_Gap"
     },
     {
       "id": 1002,
@@ -22,7 +24,8 @@
       "title": "02 \u2014 Runtime Local To Cloud",
       "order": 2,
       "content_base": "/agentcore-production-agent/",
-      "published_revision_id": 1002
+      "published_revision_id": 1002,
+      "slug": "Chapter_02_Runtime_Local_to_Cloud"
     },
     {
       "id": 1003,
@@ -30,7 +33,8 @@
       "title": "03 \u2014 Gateway Tools As MCP",
       "order": 3,
       "content_base": "/agentcore-production-agent/",
-      "published_revision_id": 1003
+      "published_revision_id": 1003,
+      "slug": "Chapter_03_Gateway_Tools_as_MCP"
     },
     {
       "id": 1004,
@@ -38,7 +42,8 @@
       "title": "04 \u2014 Memory Identity Observability",
       "order": 4,
       "content_base": "/agentcore-production-agent/",
-      "published_revision_id": 1004
+      "published_revision_id": 1004,
+      "slug": "Chapter_04_Memory_Identity_Observability"
     },
     {
       "id": 1005,
@@ -46,7 +51,8 @@
       "title": "01 \u2014 Why Strands Agents",
       "order": 1,
       "content_base": "/strands-agents/",
-      "published_revision_id": 1005
+      "published_revision_id": 1005,
+      "slug": "Chapter_01_Why_Strands_Agents"
     },
     {
       "id": 1006,
@@ -54,7 +60,8 @@
       "title": "02 \u2014 Strands SDK And The App Blueprint",
       "order": 2,
       "content_base": "/strands-agents/",
-      "published_revision_id": 1006
+      "published_revision_id": 1006,
+      "slug": "Chapter_02_Strands_SDK_and_the_App_Blueprint"
     },
     {
       "id": 1007,
@@ -62,7 +69,8 @@
       "title": "03 \u2014 Agents Tools And MCP Hands On",
       "order": 3,
       "content_base": "/strands-agents/",
-      "published_revision_id": 1007
+      "published_revision_id": 1007,
+      "slug": "Chapter_03_Agents_Tools_and_MCP_Hands_On"
     },
     {
       "id": 1008,
@@ -70,7 +78,8 @@
       "title": "04 \u2014 Multi Agent Orchestration",
       "order": 4,
       "content_base": "/strands-agents/",
-      "published_revision_id": 1008
+      "published_revision_id": 1008,
+      "slug": "Chapter_04_Multi_Agent_Orchestration"
     },
     {
       "id": 1009,
@@ -78,7 +87,8 @@
       "title": "04 \u2014 AgentCore Runtime Prototype To Production",
       "order": 1,
       "content_base": "/bedrock-deepti/",
-      "published_revision_id": 1009
+      "published_revision_id": 1009,
+      "slug": "Chapter_04_AgentCore_Runtime_Prototype_to_Production"
     },
     {
       "id": 1010,
@@ -86,7 +96,8 @@
       "title": "05 \u2014 AgentCore Gateway Connecting Agents To Tools",
       "order": 1,
       "content_base": "/bedrock-deepti/",
-      "published_revision_id": 1010
+      "published_revision_id": 1010,
+      "slug": "Chapter_05_AgentCore_Gateway_Connecting_Agents_to_Tools"
     },
     {
       "id": 1011,
@@ -94,7 +105,8 @@
       "title": "01 \u2014 Agent Identity Model",
       "order": 1,
       "content_base": "/agentcore-security/",
-      "published_revision_id": 1011
+      "published_revision_id": 1011,
+      "slug": "Chapter_01_Agent_Identity_Model"
     },
     {
       "id": 1012,
@@ -102,7 +114,8 @@
       "title": "02 \u2014 Credential Providers And OAuth",
       "order": 2,
       "content_base": "/agentcore-security/",
-      "published_revision_id": 1012
+      "published_revision_id": 1012,
+      "slug": "Chapter_02_Credential_Providers_and_OAuth"
     },
     {
       "id": 1013,
@@ -110,7 +123,8 @@
       "title": "03 \u2014 Gateway And Identity",
       "order": 3,
       "content_base": "/agentcore-security/",
-      "published_revision_id": 1013
+      "published_revision_id": 1013,
+      "slug": "Chapter_03_Gateway_and_Identity"
     },
     {
       "id": 1014,
@@ -118,7 +132,8 @@
       "title": "01 \u2014 Browser Tool",
       "order": 1,
       "content_base": "/agentcore-tools/",
-      "published_revision_id": 1014
+      "published_revision_id": 1014,
+      "slug": "Chapter_01_Browser_Tool"
     },
     {
       "id": 1015,
@@ -126,7 +141,8 @@
       "title": "02 \u2014 Code Interpreter",
       "order": 2,
       "content_base": "/agentcore-tools/",
-      "published_revision_id": 1015
+      "published_revision_id": 1015,
+      "slug": "Chapter_02_Code_Interpreter"
     },
     {
       "id": 1016,
@@ -134,7 +150,8 @@
       "title": "03 \u2014 Composition And Production",
       "order": 3,
       "content_base": "/agentcore-tools/",
-      "published_revision_id": 1016
+      "published_revision_id": 1016,
+      "slug": "Chapter_03_Composition_and_Production"
     },
     {
       "id": 1017,
@@ -142,7 +159,8 @@
       "title": "01 \u2014 STM Vs LTM",
       "order": 1,
       "content_base": "/agentcore-memory/",
-      "published_revision_id": 1017
+      "published_revision_id": 1017,
+      "slug": "Chapter_01_STM_vs_LTM"
     },
     {
       "id": 1018,
@@ -150,7 +168,8 @@
       "title": "02 \u2014 Strategies And Namespaces",
       "order": 2,
       "content_base": "/agentcore-memory/",
-      "published_revision_id": 1018
+      "published_revision_id": 1018,
+      "slug": "Chapter_02_Strategies_and_Namespaces"
     },
     {
       "id": 1019,
@@ -158,7 +177,8 @@
       "title": "03 \u2014 Hooks And Demo",
       "order": 3,
       "content_base": "/agentcore-memory/",
-      "published_revision_id": 1019
+      "published_revision_id": 1019,
+      "slug": "Chapter_03_Hooks_and_Demo"
     },
     {
       "id": 1020,
@@ -166,7 +186,8 @@
       "title": "01 \u2014 Production Lifecycle",
       "order": 1,
       "content_base": "/agentcore-prod-deploy/",
-      "published_revision_id": 1020
+      "published_revision_id": 1020,
+      "slug": "Chapter_01_Production_Lifecycle"
     },
     {
       "id": 1021,
@@ -174,7 +195,8 @@
       "title": "02 \u2014 MCP On Runtime",
       "order": 2,
       "content_base": "/agentcore-prod-deploy/",
-      "published_revision_id": 1021
+      "published_revision_id": 1021,
+      "slug": "Chapter_02_MCP_on_Runtime"
     },
     {
       "id": 1022,
@@ -182,7 +204,8 @@
       "title": "03 \u2014 End To End Walkthrough",
       "order": 3,
       "content_base": "/agentcore-prod-deploy/",
-      "published_revision_id": 1022
+      "published_revision_id": 1022,
+      "slug": "Chapter_03_End_to_End_Walkthrough"
     },
     {
       "id": 1023,
@@ -190,7 +213,8 @@
       "title": "01 \u2014 OTel Spans Traces",
       "order": 1,
       "content_base": "/agentcore-observability/",
-      "published_revision_id": 1023
+      "published_revision_id": 1023,
+      "slug": "Chapter_01_OTel_Spans_Traces"
     },
     {
       "id": 1024,
@@ -198,7 +222,8 @@
       "title": "02 \u2014 CloudWatch GenAI Dashboard",
       "order": 2,
       "content_base": "/agentcore-observability/",
-      "published_revision_id": 1024
+      "published_revision_id": 1024,
+      "slug": "Chapter_02_CloudWatch_GenAI_Dashboard"
     },
     {
       "id": 1025,
@@ -206,7 +231,8 @@
       "title": "03 \u2014 Third Party APM",
       "order": 3,
       "content_base": "/agentcore-observability/",
-      "published_revision_id": 1025
+      "published_revision_id": 1025,
+      "slug": "Chapter_03_Third_Party_APM"
     },
     {
       "id": 1026,
@@ -214,7 +240,8 @@
       "title": "01 \u2014 Evaluation Concepts",
       "order": 1,
       "content_base": "/agentcore-evaluations/",
-      "published_revision_id": 1026
+      "published_revision_id": 1026,
+      "slug": "Chapter_01_Evaluation_Concepts"
     },
     {
       "id": 1027,
@@ -222,7 +249,8 @@
       "title": "02 \u2014 OnDemand Evals Config",
       "order": 2,
       "content_base": "/agentcore-evaluations/",
-      "published_revision_id": 1027
+      "published_revision_id": 1027,
+      "slug": "Chapter_02_OnDemand_Evals_Config"
     },
     {
       "id": 1028,
@@ -230,7 +258,8 @@
       "title": "03 \u2014 Dashboards And Judges",
       "order": 3,
       "content_base": "/agentcore-evaluations/",
-      "published_revision_id": 1028
+      "published_revision_id": 1028,
+      "slug": "Chapter_03_Dashboards_and_Judges"
     },
     {
       "id": 1029,
@@ -238,7 +267,8 @@
       "title": "01 \u2014 Agent Tool Risks",
       "order": 1,
       "content_base": "/agentcore-tool-controls/",
-      "published_revision_id": 1029
+      "published_revision_id": 1029,
+      "slug": "Chapter_01_Agent_Tool_Risks"
     },
     {
       "id": 1030,
@@ -246,7 +276,8 @@
       "title": "02 \u2014 Cedar Policies On Gateway",
       "order": 2,
       "content_base": "/agentcore-tool-controls/",
-      "published_revision_id": 1030
+      "published_revision_id": 1030,
+      "slug": "Chapter_02_Cedar_Policies_on_Gateway"
     },
     {
       "id": 1031,
@@ -254,7 +285,8 @@
       "title": "03 \u2014 Policy Author And Enforcement",
       "order": 3,
       "content_base": "/agentcore-tool-controls/",
-      "published_revision_id": 1031
+      "published_revision_id": 1031,
+      "slug": "Chapter_03_Policy_Author_and_Enforcement"
     },
     {
       "id": 1032,
@@ -262,7 +294,8 @@
       "title": "01 \u2014 Episodic Memory Concept",
       "order": 1,
       "content_base": "/agentcore-episodic-memory/",
-      "published_revision_id": 1032
+      "published_revision_id": 1032,
+      "slug": "Chapter_01_Episodic_Memory_Concept"
     },
     {
       "id": 1033,
@@ -270,7 +303,8 @@
       "title": "02 \u2014 Episodes And Reflections",
       "order": 2,
       "content_base": "/agentcore-episodic-memory/",
-      "published_revision_id": 1033
+      "published_revision_id": 1033,
+      "slug": "Chapter_02_Episodes_and_Reflections"
     },
     {
       "id": 1034,
@@ -278,7 +312,8 @@
       "title": "03 \u2014 Feedback And Loops",
       "order": 3,
       "content_base": "/agentcore-episodic-memory/",
-      "published_revision_id": 1034
+      "published_revision_id": 1034,
+      "slug": "Chapter_03_Feedback_and_Loops"
     },
     {
       "id": 1035,
@@ -286,7 +321,8 @@
       "title": "99 \u2014 Summary Notes",
       "order": 1,
       "content_base": "/agentcore-playlist/",
-      "published_revision_id": 1035
+      "published_revision_id": 1035,
+      "slug": "Chapter_99_Summary_Notes"
     },
     {
       "id": 1036,
@@ -294,7 +330,8 @@
       "title": "Welcome",
       "order": 1,
       "content_base": "/nishant-notes/",
-      "published_revision_id": 1036
+      "published_revision_id": 1036,
+      "slug": "welcome"
     },
     {
       "id": 1037,
@@ -302,7 +339,8 @@
       "title": "01 \u2014 Introduction To Bedrock Agentcore",
       "order": 1,
       "content_base": "/bedrock/",
-      "published_revision_id": 1037
+      "published_revision_id": 1037,
+      "slug": "Chapter_01_introduction_to_bedrock_agentcore"
     },
     {
       "id": 1038,
@@ -310,7 +348,8 @@
       "title": "02 \u2014 Prerequisites",
       "order": 2,
       "content_base": "/bedrock/",
-      "published_revision_id": 1038
+      "published_revision_id": 1038,
+      "slug": "Chapter_02_prerequisites"
     },
     {
       "id": 1039,
@@ -318,7 +357,8 @@
       "title": "03 \u2014 Aws Configuration",
       "order": 3,
       "content_base": "/bedrock/",
-      "published_revision_id": 1039
+      "published_revision_id": 1039,
+      "slug": "Chapter_03_aws_configuration"
     },
     {
       "id": 1040,
@@ -326,7 +366,8 @@
       "title": "04 \u2014 Clone Repository",
       "order": 4,
       "content_base": "/bedrock/",
-      "published_revision_id": 1040
+      "published_revision_id": 1040,
+      "slug": "Chapter_04_clone_repository"
     },
     {
       "id": 1041,
@@ -334,7 +375,8 @@
       "title": "05 \u2014 Repository Walkthrough",
       "order": 5,
       "content_base": "/bedrock/",
-      "published_revision_id": 1041
+      "published_revision_id": 1041,
+      "slug": "Chapter_05_repository_walkthrough"
     },
     {
       "id": 1042,
@@ -342,7 +384,8 @@
       "title": "06 \u2014 Project Setup",
       "order": 6,
       "content_base": "/bedrock/",
-      "published_revision_id": 1042
+      "published_revision_id": 1042,
+      "slug": "Chapter_06_project_setup"
     },
     {
       "id": 1043,
@@ -350,7 +393,8 @@
       "title": "07 \u2014 Configuration Files",
       "order": 7,
       "content_base": "/bedrock/",
-      "published_revision_id": 1043
+      "published_revision_id": 1043,
+      "slug": "Chapter_07_configuration_files"
     },
     {
       "id": 1044,
@@ -358,7 +402,8 @@
       "title": "08 \u2014 Running The Application",
       "order": 8,
       "content_base": "/bedrock/",
-      "published_revision_id": 1044
+      "published_revision_id": 1044,
+      "slug": "Chapter_08_running_the_application"
     },
     {
       "id": 1045,
@@ -366,7 +411,8 @@
       "title": "09 \u2014 Understanding The Code",
       "order": 9,
       "content_base": "/bedrock/",
-      "published_revision_id": 1045
+      "published_revision_id": 1045,
+      "slug": "Chapter_09_understanding_the_code"
     },
     {
       "id": 1046,
@@ -374,7 +420,8 @@
       "title": "10 \u2014 Agentcore Runtime",
       "order": 10,
       "content_base": "/bedrock/",
-      "published_revision_id": 1046
+      "published_revision_id": 1046,
+      "slug": "Chapter_10_agentcore_runtime"
     },
     {
       "id": 1047,
@@ -382,7 +429,8 @@
       "title": "11 \u2014 Gateway",
       "order": 11,
       "content_base": "/bedrock/",
-      "published_revision_id": 1047
+      "published_revision_id": 1047,
+      "slug": "Chapter_11_gateway"
     },
     {
       "id": 1048,
@@ -390,7 +438,8 @@
       "title": "12 \u2014 Identity",
       "order": 12,
       "content_base": "/bedrock/",
-      "published_revision_id": 1048
+      "published_revision_id": 1048,
+      "slug": "Chapter_12_identity"
     },
     {
       "id": 1049,
@@ -398,7 +447,8 @@
       "title": "13 \u2014 Memory",
       "order": 13,
       "content_base": "/bedrock/",
-      "published_revision_id": 1049
+      "published_revision_id": 1049,
+      "slug": "Chapter_13_memory"
     },
     {
       "id": 1050,
@@ -406,7 +456,8 @@
       "title": "14 \u2014 Tools",
       "order": 14,
       "content_base": "/bedrock/",
-      "published_revision_id": 1050
+      "published_revision_id": 1050,
+      "slug": "Chapter_14_tools"
     },
     {
       "id": 1051,
@@ -414,7 +465,8 @@
       "title": "15 \u2014 Deployment",
       "order": 15,
       "content_base": "/bedrock/",
-      "published_revision_id": 1051
+      "published_revision_id": 1051,
+      "slug": "Chapter_15_deployment"
     },
     {
       "id": 1052,
@@ -422,7 +474,8 @@
       "title": "16 \u2014 Observability",
       "order": 16,
       "content_base": "/bedrock/",
-      "published_revision_id": 1052
+      "published_revision_id": 1052,
+      "slug": "Chapter_16_observability"
     },
     {
       "id": 1053,
@@ -430,7 +483,8 @@
       "title": "17 \u2014 Complete End To End Flow",
       "order": 17,
       "content_base": "/bedrock/",
-      "published_revision_id": 1053
+      "published_revision_id": 1053,
+      "slug": "Chapter_17_complete_end_to_end_flow"
     },
     {
       "id": 1054,
@@ -438,7 +492,8 @@
       "title": "Appendix",
       "order": 18,
       "content_base": "/bedrock/",
-      "published_revision_id": 1054
+      "published_revision_id": 1054,
+      "slug": "appendix"
     },
     {
       "id": 1055,
@@ -446,7 +501,8 @@
       "title": "References",
       "order": 19,
       "content_base": "/bedrock/",
-      "published_revision_id": 1055
+      "published_revision_id": 1055,
+      "slug": "references"
     },
     {
       "id": 1056,
@@ -454,7 +510,8 @@
       "title": "01 \u2014 Notes",
       "order": 1,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1056
+      "published_revision_id": 1056,
+      "slug": "01_notes"
     },
     {
       "id": 1057,
@@ -462,7 +519,8 @@
       "title": "01 \u2014 Questions",
       "order": 2,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1057
+      "published_revision_id": 1057,
+      "slug": "01_questions"
     },
     {
       "id": 1058,
@@ -470,7 +528,8 @@
       "title": "01 \u2014 Summary",
       "order": 3,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1058
+      "published_revision_id": 1058,
+      "slug": "01_summary"
     },
     {
       "id": 1059,
@@ -478,7 +537,8 @@
       "title": "02 \u2014 Data Engineering Relevance",
       "order": 4,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1059
+      "published_revision_id": 1059,
+      "slug": "02_data_engineering_relevance"
     },
     {
       "id": 1060,
@@ -486,7 +546,8 @@
       "title": "02 \u2014 Notes",
       "order": 5,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1060
+      "published_revision_id": 1060,
+      "slug": "02_notes"
     },
     {
       "id": 1061,
@@ -494,7 +555,8 @@
       "title": "02 \u2014 Questions",
       "order": 6,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1061
+      "published_revision_id": 1061,
+      "slug": "02_questions"
     },
     {
       "id": 1062,
@@ -502,7 +564,8 @@
       "title": "02 \u2014 Summary",
       "order": 7,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1062
+      "published_revision_id": 1062,
+      "slug": "02_summary"
     },
     {
       "id": 1063,
@@ -510,7 +573,8 @@
       "title": "03 \u2014 Notes",
       "order": 8,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1063
+      "published_revision_id": 1063,
+      "slug": "03_notes"
     },
     {
       "id": 1064,
@@ -518,7 +582,8 @@
       "title": "03 \u2014 Questions",
       "order": 9,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1064
+      "published_revision_id": 1064,
+      "slug": "03_questions"
     },
     {
       "id": 1065,
@@ -526,7 +591,8 @@
       "title": "03 \u2014 Summary",
       "order": 10,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1065
+      "published_revision_id": 1065,
+      "slug": "03_summary"
     },
     {
       "id": 1066,
@@ -534,7 +600,8 @@
       "title": "04 \u2014 Notes",
       "order": 11,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1066
+      "published_revision_id": 1066,
+      "slug": "04_notes"
     },
     {
       "id": 1067,
@@ -542,7 +609,8 @@
       "title": "04 \u2014 Questions",
       "order": 12,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1067
+      "published_revision_id": 1067,
+      "slug": "04_questions"
     },
     {
       "id": 1068,
@@ -550,7 +618,8 @@
       "title": "04 \u2014 Summary",
       "order": 13,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1068
+      "published_revision_id": 1068,
+      "slug": "04_summary"
     },
     {
       "id": 1069,
@@ -558,7 +627,8 @@
       "title": "05 \u2014 Notes",
       "order": 14,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1069
+      "published_revision_id": 1069,
+      "slug": "05_notes"
     },
     {
       "id": 1070,
@@ -566,7 +636,8 @@
       "title": "05 \u2014 Questions",
       "order": 15,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1070
+      "published_revision_id": 1070,
+      "slug": "05_questions"
     },
     {
       "id": 1071,
@@ -574,7 +645,8 @@
       "title": "05 \u2014 Summary",
       "order": 16,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1071
+      "published_revision_id": 1071,
+      "slug": "05_summary"
     },
     {
       "id": 1072,
@@ -582,7 +654,8 @@
       "title": "06 \u2014 Notes",
       "order": 17,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1072
+      "published_revision_id": 1072,
+      "slug": "06_notes"
     },
     {
       "id": 1073,
@@ -590,7 +663,8 @@
       "title": "06 \u2014 Questions",
       "order": 18,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1073
+      "published_revision_id": 1073,
+      "slug": "06_questions"
     },
     {
       "id": 1074,
@@ -598,7 +672,8 @@
       "title": "06 \u2014 Summary",
       "order": 19,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1074
+      "published_revision_id": 1074,
+      "slug": "06_summary"
     },
     {
       "id": 1075,
@@ -606,7 +681,8 @@
       "title": "07 \u2014 Notes",
       "order": 20,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1075
+      "published_revision_id": 1075,
+      "slug": "07_notes"
     },
     {
       "id": 1076,
@@ -614,7 +690,8 @@
       "title": "07 \u2014 Questions",
       "order": 21,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1076
+      "published_revision_id": 1076,
+      "slug": "07_questions"
     },
     {
       "id": 1077,
@@ -622,7 +699,8 @@
       "title": "07 \u2014 Summary",
       "order": 22,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1077
+      "published_revision_id": 1077,
+      "slug": "07_summary"
     },
     {
       "id": 1078,
@@ -630,7 +708,8 @@
       "title": "08 \u2014 Notes",
       "order": 23,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1078
+      "published_revision_id": 1078,
+      "slug": "08_notes"
     },
     {
       "id": 1079,
@@ -638,7 +717,8 @@
       "title": "08 \u2014 Questions",
       "order": 24,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1079
+      "published_revision_id": 1079,
+      "slug": "08_questions"
     },
     {
       "id": 1080,
@@ -646,7 +726,8 @@
       "title": "08 \u2014 Summary",
       "order": 25,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1080
+      "published_revision_id": 1080,
+      "slug": "08_summary"
     },
     {
       "id": 1081,
@@ -654,7 +735,8 @@
       "title": "09 \u2014 Notes",
       "order": 26,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1081
+      "published_revision_id": 1081,
+      "slug": "09_notes"
     },
     {
       "id": 1082,
@@ -662,7 +744,8 @@
       "title": "09 \u2014 Questions",
       "order": 27,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1082
+      "published_revision_id": 1082,
+      "slug": "09_questions"
     },
     {
       "id": 1083,
@@ -670,7 +753,8 @@
       "title": "09 \u2014 Summary",
       "order": 28,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1083
+      "published_revision_id": 1083,
+      "slug": "09_summary"
     },
     {
       "id": 1084,
@@ -678,7 +762,8 @@
       "title": "10 \u2014 Notes",
       "order": 29,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1084
+      "published_revision_id": 1084,
+      "slug": "10_notes"
     },
     {
       "id": 1085,
@@ -686,7 +771,8 @@
       "title": "10 \u2014 Questions",
       "order": 30,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1085
+      "published_revision_id": 1085,
+      "slug": "10_questions"
     },
     {
       "id": 1086,
@@ -694,7 +780,8 @@
       "title": "10 \u2014 Summary",
       "order": 31,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1086
+      "published_revision_id": 1086,
+      "slug": "10_summary"
     },
     {
       "id": 1087,
@@ -702,7 +789,8 @@
       "title": "11 \u2014 Notes",
       "order": 32,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1087
+      "published_revision_id": 1087,
+      "slug": "11_notes"
     },
     {
       "id": 1088,
@@ -710,7 +798,8 @@
       "title": "11 \u2014 Questions",
       "order": 33,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1088
+      "published_revision_id": 1088,
+      "slug": "11_questions"
     },
     {
       "id": 1089,
@@ -718,7 +807,8 @@
       "title": "11 \u2014 Summary",
       "order": 34,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1089
+      "published_revision_id": 1089,
+      "slug": "11_summary"
     },
     {
       "id": 1090,
@@ -726,7 +816,8 @@
       "title": "12 \u2014 Notes",
       "order": 35,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1090
+      "published_revision_id": 1090,
+      "slug": "12_notes"
     },
     {
       "id": 1091,
@@ -734,7 +825,8 @@
       "title": "12 \u2014 Questions",
       "order": 36,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1091
+      "published_revision_id": 1091,
+      "slug": "12_questions"
     },
     {
       "id": 1092,
@@ -742,7 +834,8 @@
       "title": "12 \u2014 Summary",
       "order": 37,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1092
+      "published_revision_id": 1092,
+      "slug": "12_summary"
     },
     {
       "id": 1093,
@@ -750,7 +843,8 @@
       "title": "Recreate Workspace Skill",
       "order": 38,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1093
+      "published_revision_id": 1093,
+      "slug": "recreate_workspace_skill"
     },
     {
       "id": 1094,
@@ -758,7 +852,8 @@
       "title": "Youtube Course Content Generator Skill",
       "order": 39,
       "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
-      "published_revision_id": 1094
+      "published_revision_id": 1094,
+      "slug": "youtube_course_content_generator_skill"
     },
     {
       "id": 1095,
@@ -766,7 +861,8 @@
       "title": "01 \u2014 Introduction To Bedrock Agentcore",
       "order": 1,
       "content_base": "/bedrock/",
-      "published_revision_id": 1095
+      "published_revision_id": 1095,
+      "slug": "Chapter_01_introduction_to_bedrock_agentcore"
     },
     {
       "id": 1096,
@@ -774,7 +870,8 @@
       "title": "02 \u2014 Prerequisites",
       "order": 2,
       "content_base": "/bedrock/",
-      "published_revision_id": 1096
+      "published_revision_id": 1096,
+      "slug": "Chapter_02_prerequisites"
     },
     {
       "id": 1097,
@@ -782,7 +879,8 @@
       "title": "03 \u2014 Aws Configuration",
       "order": 3,
       "content_base": "/bedrock/",
-      "published_revision_id": 1097
+      "published_revision_id": 1097,
+      "slug": "Chapter_03_aws_configuration"
     },
     {
       "id": 1098,
@@ -790,7 +888,8 @@
       "title": "04 \u2014 Clone Repository",
       "order": 4,
       "content_base": "/bedrock/",
-      "published_revision_id": 1098
+      "published_revision_id": 1098,
+      "slug": "Chapter_04_clone_repository"
     },
     {
       "id": 1099,
@@ -798,7 +897,8 @@
       "title": "05 \u2014 Repository Walkthrough",
       "order": 5,
       "content_base": "/bedrock/",
-      "published_revision_id": 1099
+      "published_revision_id": 1099,
+      "slug": "Chapter_05_repository_walkthrough"
     },
     {
       "id": 1100,
@@ -806,7 +906,8 @@
       "title": "06 \u2014 Project Setup",
       "order": 6,
       "content_base": "/bedrock/",
-      "published_revision_id": 1100
+      "published_revision_id": 1100,
+      "slug": "Chapter_06_project_setup"
     },
     {
       "id": 1101,
@@ -814,7 +915,8 @@
       "title": "07 \u2014 Configuration Files",
       "order": 7,
       "content_base": "/bedrock/",
-      "published_revision_id": 1101
+      "published_revision_id": 1101,
+      "slug": "Chapter_07_configuration_files"
     },
     {
       "id": 1102,
@@ -822,7 +924,8 @@
       "title": "08 \u2014 Running The Application",
       "order": 8,
       "content_base": "/bedrock/",
-      "published_revision_id": 1102
+      "published_revision_id": 1102,
+      "slug": "Chapter_08_running_the_application"
     },
     {
       "id": 1103,
@@ -830,7 +933,8 @@
       "title": "09 \u2014 Understanding The Code",
       "order": 9,
       "content_base": "/bedrock/",
-      "published_revision_id": 1103
+      "published_revision_id": 1103,
+      "slug": "Chapter_09_understanding_the_code"
     },
     {
       "id": 1104,
@@ -838,7 +942,8 @@
       "title": "10 \u2014 Agentcore Runtime",
       "order": 10,
       "content_base": "/bedrock/",
-      "published_revision_id": 1104
+      "published_revision_id": 1104,
+      "slug": "Chapter_10_agentcore_runtime"
     },
     {
       "id": 1105,
@@ -846,7 +951,8 @@
       "title": "11 \u2014 Gateway",
       "order": 11,
       "content_base": "/bedrock/",
-      "published_revision_id": 1105
+      "published_revision_id": 1105,
+      "slug": "Chapter_11_gateway"
     },
     {
       "id": 1106,
@@ -854,7 +960,8 @@
       "title": "12 \u2014 Identity",
       "order": 12,
       "content_base": "/bedrock/",
-      "published_revision_id": 1106
+      "published_revision_id": 1106,
+      "slug": "Chapter_12_identity"
     },
     {
       "id": 1107,
@@ -862,7 +969,8 @@
       "title": "13 \u2014 Memory",
       "order": 13,
       "content_base": "/bedrock/",
-      "published_revision_id": 1107
+      "published_revision_id": 1107,
+      "slug": "Chapter_13_memory"
     },
     {
       "id": 1108,
@@ -870,7 +978,8 @@
       "title": "14 \u2014 Tools",
       "order": 14,
       "content_base": "/bedrock/",
-      "published_revision_id": 1108
+      "published_revision_id": 1108,
+      "slug": "Chapter_14_tools"
     },
     {
       "id": 1109,
@@ -878,7 +987,8 @@
       "title": "15 \u2014 Deployment",
       "order": 15,
       "content_base": "/bedrock/",
-      "published_revision_id": 1109
+      "published_revision_id": 1109,
+      "slug": "Chapter_15_deployment"
     },
     {
       "id": 1110,
@@ -886,7 +996,8 @@
       "title": "16 \u2014 Observability",
       "order": 16,
       "content_base": "/bedrock/",
-      "published_revision_id": 1110
+      "published_revision_id": 1110,
+      "slug": "Chapter_16_observability"
     },
     {
       "id": 1111,
@@ -894,7 +1005,8 @@
       "title": "17 \u2014 Complete End To End Flow",
       "order": 17,
       "content_base": "/bedrock/",
-      "published_revision_id": 1111
+      "published_revision_id": 1111,
+      "slug": "Chapter_17_complete_end_to_end_flow"
     },
     {
       "id": 1112,
@@ -902,7 +1014,8 @@
       "title": "01 \u2014 History Of Unix And Linux",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1112
+      "published_revision_id": 1112,
+      "slug": "Chapter_01_History_of_Unix_and_Linux"
     },
     {
       "id": 1113,
@@ -910,7 +1023,8 @@
       "title": "02 \u2014 Linux Distributions And Ecosystem",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1113
+      "published_revision_id": 1113,
+      "slug": "Chapter_02_Linux_Distributions_and_Ecosystem"
     },
     {
       "id": 1114,
@@ -918,7 +1032,8 @@
       "title": "03 \u2014 Linux Architecture And Kernel Fundamentals",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1114
+      "published_revision_id": 1114,
+      "slug": "Chapter_03_Linux_Architecture_and_Kernel_Fundamentals"
     },
     {
       "id": 1115,
@@ -926,7 +1041,8 @@
       "title": "04 \u2014 Linux Boot Process",
       "order": 4,
       "content_base": "/linux/",
-      "published_revision_id": 1115
+      "published_revision_id": 1115,
+      "slug": "Chapter_04_Linux_Boot_Process"
     },
     {
       "id": 1116,
@@ -934,7 +1050,8 @@
       "title": "05 \u2014 Filesystem Hierarchy Standard",
       "order": 5,
       "content_base": "/linux/",
-      "published_revision_id": 1116
+      "published_revision_id": 1116,
+      "slug": "Chapter_05_Filesystem_Hierarchy_Standard"
     },
     {
       "id": 1117,
@@ -942,7 +1059,8 @@
       "title": "06 \u2014 Installing Linux On VMware And VirtualBox",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1117
+      "published_revision_id": 1117,
+      "slug": "Chapter_06_Installing_Linux_on_VMware_and_VirtualBox"
     },
     {
       "id": 1118,
@@ -950,7 +1068,8 @@
       "title": "07 \u2014 First Login And Terminal Basics",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1118
+      "published_revision_id": 1118,
+      "slug": "Chapter_07_First_Login_and_Terminal_Basics"
     },
     {
       "id": 1119,
@@ -958,7 +1077,8 @@
       "title": "08 \u2014 Navigating The Linux Filesystem",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1119
+      "published_revision_id": 1119,
+      "slug": "Chapter_08_Navigating_the_Linux_Filesystem"
     },
     {
       "id": 1120,
@@ -966,7 +1086,8 @@
       "title": "09 \u2014 File And Directory Operations",
       "order": 4,
       "content_base": "/linux/",
-      "published_revision_id": 1120
+      "published_revision_id": 1120,
+      "slug": "Chapter_09_File_and_Directory_Operations"
     },
     {
       "id": 1121,
@@ -974,7 +1095,8 @@
       "title": "10 \u2014 Text Editors Vim And Nano",
       "order": 5,
       "content_base": "/linux/",
-      "published_revision_id": 1121
+      "published_revision_id": 1121,
+      "slug": "Chapter_10_Text_Editors_vim_and_nano"
     },
     {
       "id": 1122,
@@ -982,7 +1104,8 @@
       "title": "11 \u2014 Viewing Files Logs Text Processing",
       "order": 6,
       "content_base": "/linux/",
-      "published_revision_id": 1122
+      "published_revision_id": 1122,
+      "slug": "Chapter_11_Viewing_Files_Logs_Text_Processing"
     },
     {
       "id": 1123,
@@ -990,7 +1113,8 @@
       "title": "12 \u2014 Help System And Documentation",
       "order": 7,
       "content_base": "/linux/",
-      "published_revision_id": 1123
+      "published_revision_id": 1123,
+      "slug": "Chapter_12_Help_System_and_Documentation"
     },
     {
       "id": 1124,
@@ -998,7 +1122,8 @@
       "title": "13 \u2014 IO Redirection Pipes Wildcards",
       "order": 8,
       "content_base": "/linux/",
-      "published_revision_id": 1124
+      "published_revision_id": 1124,
+      "slug": "Chapter_13_IO_Redirection_Pipes_Wildcards"
     },
     {
       "id": 1125,
@@ -1006,7 +1131,8 @@
       "title": "14 \u2014 Searching Files And Pattern Matching",
       "order": 9,
       "content_base": "/linux/",
-      "published_revision_id": 1125
+      "published_revision_id": 1125,
+      "slug": "Chapter_14_Searching_Files_and_Pattern_Matching"
     },
     {
       "id": 1126,
@@ -1014,7 +1140,8 @@
       "title": "15 \u2014 Inodes Hard Links And Soft Links",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1126
+      "published_revision_id": 1126,
+      "slug": "Chapter_15_Inodes_Hard_Links_and_Soft_Links"
     },
     {
       "id": 1127,
@@ -1022,7 +1149,8 @@
       "title": "16 \u2014 Linux Permissions Deep Dive",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1127
+      "published_revision_id": 1127,
+      "slug": "Chapter_16_Linux_Permissions_Deep_Dive"
     },
     {
       "id": 1128,
@@ -1030,7 +1158,8 @@
       "title": "17 \u2014 Access Control Lists ACL",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1128
+      "published_revision_id": 1128,
+      "slug": "Chapter_17_Access_Control_Lists_ACL"
     },
     {
       "id": 1129,
@@ -1038,7 +1167,8 @@
       "title": "18 \u2014 Special Permissions SUID SGID Sticky",
       "order": 4,
       "content_base": "/linux/",
-      "published_revision_id": 1129
+      "published_revision_id": 1129,
+      "slug": "Chapter_18_Special_Permissions_SUID_SGID_Sticky"
     },
     {
       "id": 1130,
@@ -1046,7 +1176,8 @@
       "title": "19 \u2014 Default Permissions And Umask",
       "order": 5,
       "content_base": "/linux/",
-      "published_revision_id": 1130
+      "published_revision_id": 1130,
+      "slug": "Chapter_19_Default_Permissions_and_Umask"
     },
     {
       "id": 1131,
@@ -1054,7 +1185,8 @@
       "title": "20 \u2014 File Ownership Chown And Chgrp",
       "order": 6,
       "content_base": "/linux/",
-      "published_revision_id": 1131
+      "published_revision_id": 1131,
+      "slug": "Chapter_20_File_Ownership_chown_and_chgrp"
     },
     {
       "id": 1132,
@@ -1062,7 +1194,8 @@
       "title": "21 \u2014 User Management Basics",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1132
+      "published_revision_id": 1132,
+      "slug": "Chapter_21_User_Management_Basics"
     },
     {
       "id": 1133,
@@ -1070,7 +1203,8 @@
       "title": "22 \u2014 Group Administration",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1133
+      "published_revision_id": 1133,
+      "slug": "Chapter_22_Group_Administration"
     },
     {
       "id": 1134,
@@ -1078,7 +1212,8 @@
       "title": "23 \u2014 Sudo And Privilege Escalation",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1134
+      "published_revision_id": 1134,
+      "slug": "Chapter_23_Sudo_and_Privilege_Escalation"
     },
     {
       "id": 1135,
@@ -1086,7 +1221,8 @@
       "title": "24 \u2014 Password Management And Aging",
       "order": 4,
       "content_base": "/linux/",
-      "published_revision_id": 1135
+      "published_revision_id": 1135,
+      "slug": "Chapter_24_Password_Management_and_Aging"
     },
     {
       "id": 1136,
@@ -1094,7 +1230,8 @@
       "title": "25 \u2014 User Profiles And Initialization",
       "order": 5,
       "content_base": "/linux/",
-      "published_revision_id": 1136
+      "published_revision_id": 1136,
+      "slug": "Chapter_25_User_Profiles_and_Initialization"
     },
     {
       "id": 1137,
@@ -1102,7 +1239,8 @@
       "title": "26 \u2014 PAM Fundamentals",
       "order": 6,
       "content_base": "/linux/",
-      "published_revision_id": 1137
+      "published_revision_id": 1137,
+      "slug": "Chapter_26_PAM_Fundamentals"
     },
     {
       "id": 1138,
@@ -1110,7 +1248,8 @@
       "title": "27 \u2014 Process Management Basics",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1138
+      "published_revision_id": 1138,
+      "slug": "Chapter_27_Process_Management_Basics"
     },
     {
       "id": 1139,
@@ -1118,7 +1257,8 @@
       "title": "28 \u2014 Background Jobs And Tmux",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1139
+      "published_revision_id": 1139,
+      "slug": "Chapter_28_Background_Jobs_and_Tmux"
     },
     {
       "id": 1140,
@@ -1126,7 +1266,8 @@
       "title": "29 \u2014 Systemd And Systemctl",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1140
+      "published_revision_id": 1140,
+      "slug": "Chapter_29_Systemd_and_systemctl"
     },
     {
       "id": 1141,
@@ -1134,7 +1275,8 @@
       "title": "30 \u2014 Systemd Targets And Journalctl",
       "order": 4,
       "content_base": "/linux/",
-      "published_revision_id": 1141
+      "published_revision_id": 1141,
+      "slug": "Chapter_30_Systemd_Targets_and_Journalctl"
     },
     {
       "id": 1142,
@@ -1142,7 +1284,8 @@
       "title": "31 \u2014 Task Scheduling",
       "order": 5,
       "content_base": "/linux/",
-      "published_revision_id": 1142
+      "published_revision_id": 1142,
+      "slug": "Chapter_31_Task_Scheduling"
     },
     {
       "id": 1143,
@@ -1150,7 +1293,8 @@
       "title": "27 \u2014 Process Management Basics",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1143
+      "published_revision_id": 1143,
+      "slug": "Chapter_27_Process_Management_Basics"
     },
     {
       "id": 1144,
@@ -1158,7 +1302,8 @@
       "title": "28 \u2014 Background Jobs And Tmux",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1144
+      "published_revision_id": 1144,
+      "slug": "Chapter_28_Background_Jobs_and_Tmux"
     },
     {
       "id": 1145,
@@ -1166,7 +1311,8 @@
       "title": "29 \u2014 Systemd And Systemctl",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1145
+      "published_revision_id": 1145,
+      "slug": "Chapter_29_Systemd_and_systemctl"
     },
     {
       "id": 1146,
@@ -1174,7 +1320,8 @@
       "title": "30 \u2014 Systemd Targets And Journalctl",
       "order": 4,
       "content_base": "/linux/",
-      "published_revision_id": 1146
+      "published_revision_id": 1146,
+      "slug": "Chapter_30_Systemd_Targets_and_Journalctl"
     },
     {
       "id": 1147,
@@ -1182,7 +1329,8 @@
       "title": "31 \u2014 Task Scheduling",
       "order": 5,
       "content_base": "/linux/",
-      "published_revision_id": 1147
+      "published_revision_id": 1147,
+      "slug": "Chapter_31_Task_Scheduling"
     },
     {
       "id": 1148,
@@ -1190,7 +1338,8 @@
       "title": "32 \u2014 Package Management RPM DNF",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1148
+      "published_revision_id": 1148,
+      "slug": "Chapter_32_Package_Management_RPM_DNF"
     },
     {
       "id": 1149,
@@ -1198,7 +1347,8 @@
       "title": "33 \u2014 Package Management DPKG APT",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1149
+      "published_revision_id": 1149,
+      "slug": "Chapter_33_Package_Management_DPKG_APT"
     },
     {
       "id": 1150,
@@ -1206,7 +1356,8 @@
       "title": "34 \u2014 Compiling From Source",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1150
+      "published_revision_id": 1150,
+      "slug": "Chapter_34_Compiling_from_Source"
     },
     {
       "id": 1151,
@@ -1214,7 +1365,8 @@
       "title": "32 \u2014 Package Management RPM DNF",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1151
+      "published_revision_id": 1151,
+      "slug": "Chapter_32_Package_Management_RPM_DNF"
     },
     {
       "id": 1152,
@@ -1222,7 +1374,8 @@
       "title": "33 \u2014 Package Management DPKG APT",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1152
+      "published_revision_id": 1152,
+      "slug": "Chapter_33_Package_Management_DPKG_APT"
     },
     {
       "id": 1153,
@@ -1230,7 +1383,8 @@
       "title": "34 \u2014 Compiling From Source",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1153
+      "published_revision_id": 1153,
+      "slug": "Chapter_34_Compiling_from_Source"
     },
     {
       "id": 1154,
@@ -1238,7 +1392,8 @@
       "title": "35 \u2014 Storage Fundamentals Partitioning",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1154
+      "published_revision_id": 1154,
+      "slug": "Chapter_35_Storage_Fundamentals_Partitioning"
     },
     {
       "id": 1155,
@@ -1246,7 +1401,8 @@
       "title": "36 \u2014 Filesystem Creation Mounting",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1155
+      "published_revision_id": 1155,
+      "slug": "Chapter_36_Filesystem_Creation_Mounting"
     },
     {
       "id": 1156,
@@ -1254,7 +1410,8 @@
       "title": "37 \u2014 Swap Space Management",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1156
+      "published_revision_id": 1156,
+      "slug": "Chapter_37_Swap_Space_Management"
     },
     {
       "id": 1157,
@@ -1262,7 +1419,8 @@
       "title": "38 \u2014 Logical Volume Management",
       "order": 4,
       "content_base": "/linux/",
-      "published_revision_id": 1157
+      "published_revision_id": 1157,
+      "slug": "Chapter_38_Logical_Volume_Management"
     },
     {
       "id": 1158,
@@ -1270,7 +1428,8 @@
       "title": "39 \u2014 LVM Resizing Snapshots",
       "order": 5,
       "content_base": "/linux/",
-      "published_revision_id": 1158
+      "published_revision_id": 1158,
+      "slug": "Chapter_39_LVM_Resizing_Snapshots"
     },
     {
       "id": 1159,
@@ -1278,7 +1437,8 @@
       "title": "40 \u2014 RAID Fundamentals",
       "order": 6,
       "content_base": "/linux/",
-      "published_revision_id": 1159
+      "published_revision_id": 1159,
+      "slug": "Chapter_40_RAID_Fundamentals"
     },
     {
       "id": 1160,
@@ -1286,7 +1446,8 @@
       "title": "41 \u2014 Network Configuration Basics",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1160
+      "published_revision_id": 1160,
+      "slug": "Chapter_41_Network_Configuration_Basics"
     },
     {
       "id": 1161,
@@ -1294,7 +1455,8 @@
       "title": "42 \u2014 Network Configuration Tools",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1161
+      "published_revision_id": 1161,
+      "slug": "Chapter_42_Network_Configuration_Tools"
     },
     {
       "id": 1162,
@@ -1302,7 +1464,8 @@
       "title": "43 \u2014 Routing And Gateways",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1162
+      "published_revision_id": 1162,
+      "slug": "Chapter_43_Routing_and_Gateways"
     },
     {
       "id": 1163,
@@ -1310,7 +1473,8 @@
       "title": "44 \u2014 DNS And Host Resolution",
       "order": 4,
       "content_base": "/linux/",
-      "published_revision_id": 1163
+      "published_revision_id": 1163,
+      "slug": "Chapter_44_DNS_and_Host_Resolution"
     },
     {
       "id": 1164,
@@ -1318,7 +1482,8 @@
       "title": "45 \u2014 Firewalld And Iptables",
       "order": 5,
       "content_base": "/linux/",
-      "published_revision_id": 1164
+      "published_revision_id": 1164,
+      "slug": "Chapter_45_Firewalld_and_iptables"
     },
     {
       "id": 1165,
@@ -1326,7 +1491,8 @@
       "title": "46 \u2014 Network Troubleshooting",
       "order": 6,
       "content_base": "/linux/",
-      "published_revision_id": 1165
+      "published_revision_id": 1165,
+      "slug": "Chapter_46_Network_Troubleshooting"
     },
     {
       "id": 1166,
@@ -1334,7 +1500,8 @@
       "title": "41 \u2014 Network Configuration Basics",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1166
+      "published_revision_id": 1166,
+      "slug": "Chapter_41_Network_Configuration_Basics"
     },
     {
       "id": 1167,
@@ -1342,7 +1509,8 @@
       "title": "42 \u2014 Network Configuration Tools",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1167
+      "published_revision_id": 1167,
+      "slug": "Chapter_42_Network_Configuration_Tools"
     },
     {
       "id": 1168,
@@ -1350,7 +1518,8 @@
       "title": "43 \u2014 Routing And Gateways",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1168
+      "published_revision_id": 1168,
+      "slug": "Chapter_43_Routing_and_Gateways"
     },
     {
       "id": 1169,
@@ -1358,7 +1527,8 @@
       "title": "44 \u2014 DNS And Host Resolution",
       "order": 4,
       "content_base": "/linux/",
-      "published_revision_id": 1169
+      "published_revision_id": 1169,
+      "slug": "Chapter_44_DNS_and_Host_Resolution"
     },
     {
       "id": 1170,
@@ -1366,7 +1536,8 @@
       "title": "45 \u2014 Firewalld And Iptables",
       "order": 5,
       "content_base": "/linux/",
-      "published_revision_id": 1170
+      "published_revision_id": 1170,
+      "slug": "Chapter_45_Firewalld_and_iptables"
     },
     {
       "id": 1171,
@@ -1374,7 +1545,8 @@
       "title": "46 \u2014 Network Troubleshooting",
       "order": 6,
       "content_base": "/linux/",
-      "published_revision_id": 1171
+      "published_revision_id": 1171,
+      "slug": "Chapter_46_Network_Troubleshooting"
     },
     {
       "id": 1172,
@@ -1382,7 +1554,8 @@
       "title": "47 \u2014 OpenSSH Configuration",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1172
+      "published_revision_id": 1172,
+      "slug": "Chapter_47_OpenSSH_Configuration"
     },
     {
       "id": 1173,
@@ -1390,7 +1563,8 @@
       "title": "48 \u2014 Securing SSH",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1173
+      "published_revision_id": 1173,
+      "slug": "Chapter_48_Securing_SSH"
     },
     {
       "id": 1174,
@@ -1398,7 +1572,8 @@
       "title": "49 \u2014 SELinux Fundamentals",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1174
+      "published_revision_id": 1174,
+      "slug": "Chapter_49_SELinux_Fundamentals"
     },
     {
       "id": 1175,
@@ -1406,7 +1581,8 @@
       "title": "50 \u2014 SELinux Contexts",
       "order": 4,
       "content_base": "/linux/",
-      "published_revision_id": 1175
+      "published_revision_id": 1175,
+      "slug": "Chapter_50_SELinux_Contexts"
     },
     {
       "id": 1176,
@@ -1414,7 +1590,8 @@
       "title": "51 \u2014 Auditing And Logging",
       "order": 5,
       "content_base": "/linux/",
-      "published_revision_id": 1176
+      "published_revision_id": 1176,
+      "slug": "Chapter_51_Auditing_and_Logging"
     },
     {
       "id": 1177,
@@ -1422,7 +1599,8 @@
       "title": "52 \u2014 Vulnerability Scanning",
       "order": 6,
       "content_base": "/linux/",
-      "published_revision_id": 1177
+      "published_revision_id": 1177,
+      "slug": "Chapter_52_Vulnerability_Scanning"
     },
     {
       "id": 1178,
@@ -1430,7 +1608,8 @@
       "title": "53 \u2014 Performance Monitoring",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1178
+      "published_revision_id": 1178,
+      "slug": "Chapter_53_Performance_Monitoring"
     },
     {
       "id": 1179,
@@ -1438,7 +1617,8 @@
       "title": "54 \u2014 System Activity Reporter",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1179
+      "published_revision_id": 1179,
+      "slug": "Chapter_54_System_Activity_Reporter"
     },
     {
       "id": 1180,
@@ -1446,7 +1626,8 @@
       "title": "55 \u2014 Network Monitoring",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1180
+      "published_revision_id": 1180,
+      "slug": "Chapter_55_Network_Monitoring"
     },
     {
       "id": 1181,
@@ -1454,7 +1635,8 @@
       "title": "56 \u2014 Apache Administration",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1181
+      "published_revision_id": 1181,
+      "slug": "Chapter_56_Apache_Administration"
     },
     {
       "id": 1182,
@@ -1462,7 +1644,8 @@
       "title": "57 \u2014 Nginx Web Server",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1182
+      "published_revision_id": 1182,
+      "slug": "Chapter_57_Nginx_Web_Server"
     },
     {
       "id": 1183,
@@ -1470,7 +1653,8 @@
       "title": "58 \u2014 Tomcat Administration",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1183
+      "published_revision_id": 1183,
+      "slug": "Chapter_58_Tomcat_Administration"
     },
     {
       "id": 1184,
@@ -1478,7 +1662,8 @@
       "title": "59 \u2014 Load Balancing",
       "order": 4,
       "content_base": "/linux/",
-      "published_revision_id": 1184
+      "published_revision_id": 1184,
+      "slug": "Chapter_59_Load_Balancing"
     },
     {
       "id": 1185,
@@ -1486,7 +1671,8 @@
       "title": "60 \u2014 SSL Certificates",
       "order": 5,
       "content_base": "/linux/",
-      "published_revision_id": 1185
+      "published_revision_id": 1185,
+      "slug": "Chapter_60_SSL_Certificates"
     },
     {
       "id": 1186,
@@ -1494,7 +1680,8 @@
       "title": "61 \u2014 Bash Scripting Basics",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1186
+      "published_revision_id": 1186,
+      "slug": "Chapter_61_Bash_Scripting_Basics"
     },
     {
       "id": 1187,
@@ -1502,7 +1689,8 @@
       "title": "62 \u2014 Control Structures",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1187
+      "published_revision_id": 1187,
+      "slug": "Chapter_62_Control_Structures"
     },
     {
       "id": 1188,
@@ -1510,7 +1698,8 @@
       "title": "63 \u2014 Functions And Errors",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1188
+      "published_revision_id": 1188,
+      "slug": "Chapter_63_Functions_and_Errors"
     },
     {
       "id": 1189,
@@ -1518,7 +1707,8 @@
       "title": "64 \u2014 Text Processing",
       "order": 4,
       "content_base": "/linux/",
-      "published_revision_id": 1189
+      "published_revision_id": 1189,
+      "slug": "Chapter_64_Text_Processing"
     },
     {
       "id": 1190,
@@ -1526,7 +1716,8 @@
       "title": "65 \u2014 Automating Tasks",
       "order": 5,
       "content_base": "/linux/",
-      "published_revision_id": 1190
+      "published_revision_id": 1190,
+      "slug": "Chapter_65_Automating_Tasks"
     },
     {
       "id": 1191,
@@ -1534,7 +1725,8 @@
       "title": "66 \u2014 Rsync And Remote Copy",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1191
+      "published_revision_id": 1191,
+      "slug": "Chapter_66_Rsync_and_Remote_Copy"
     },
     {
       "id": 1192,
@@ -1542,7 +1734,8 @@
       "title": "67 \u2014 Tar And Compression",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1192
+      "published_revision_id": 1192,
+      "slug": "Chapter_67_Tar_and_Compression"
     },
     {
       "id": 1193,
@@ -1550,7 +1743,8 @@
       "title": "68 \u2014 Disaster Recovery",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1193
+      "published_revision_id": 1193,
+      "slug": "Chapter_68_Disaster_Recovery"
     },
     {
       "id": 1194,
@@ -1558,7 +1752,8 @@
       "title": "69 \u2014 MySQL Administration",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1194
+      "published_revision_id": 1194,
+      "slug": "Chapter_69_MySQL_Administration"
     },
     {
       "id": 1195,
@@ -1566,7 +1761,8 @@
       "title": "70 \u2014 PostgreSQL Administration",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1195
+      "published_revision_id": 1195,
+      "slug": "Chapter_70_PostgreSQL_Administration"
     },
     {
       "id": 1196,
@@ -1574,7 +1770,8 @@
       "title": "71 \u2014 Chrony And NTP",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1196
+      "published_revision_id": 1196,
+      "slug": "Chapter_71_Chrony_and_NTP"
     },
     {
       "id": 1197,
@@ -1582,7 +1779,8 @@
       "title": "72 \u2014 Postfix MTA",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1197
+      "published_revision_id": 1197,
+      "slug": "Chapter_72_Postfix_MTA"
     },
     {
       "id": 1198,
@@ -1590,7 +1788,8 @@
       "title": "73 \u2014 File Sharing NFS Samba",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1198
+      "published_revision_id": 1198,
+      "slug": "Chapter_73_File_Sharing_NFS_Samba"
     },
     {
       "id": 1199,
@@ -1598,7 +1797,8 @@
       "title": "74 \u2014 Git Version Control",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1199
+      "published_revision_id": 1199,
+      "slug": "Chapter_74_Git_Version_Control"
     },
     {
       "id": 1200,
@@ -1606,7 +1806,8 @@
       "title": "75 \u2014 Docker And Containers",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1200
+      "published_revision_id": 1200,
+      "slug": "Chapter_75_Docker_and_Containers"
     },
     {
       "id": 1201,
@@ -1614,7 +1815,8 @@
       "title": "76 \u2014 AWS And SSH Keys",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1201
+      "published_revision_id": 1201,
+      "slug": "Chapter_76_AWS_and_SSH_Keys"
     },
     {
       "id": 1202,
@@ -1622,7 +1824,8 @@
       "title": "77 \u2014 Dmesg Kernel Panics",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1202
+      "published_revision_id": 1202,
+      "slug": "Chapter_77_dmesg_Kernel_Panics"
     },
     {
       "id": 1203,
@@ -1630,7 +1833,8 @@
       "title": "78 \u2014 Strace And Debugging",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1203
+      "published_revision_id": 1203,
+      "slug": "Chapter_78_Strace_and_Debugging"
     },
     {
       "id": 1204,
@@ -1638,7 +1842,8 @@
       "title": "79 \u2014 Rescue Target Password",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1204
+      "published_revision_id": 1204,
+      "slug": "Chapter_79_Rescue_Target_Password"
     },
     {
       "id": 1205,
@@ -1646,7 +1851,8 @@
       "title": "80 \u2014 High Availability Keepalived",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1205
+      "published_revision_id": 1205,
+      "slug": "Chapter_80_High_Availability_Keepalived"
     },
     {
       "id": 1206,
@@ -1654,7 +1860,8 @@
       "title": "81 \u2014 Ansible Basics",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1206
+      "published_revision_id": 1206,
+      "slug": "Chapter_81_Ansible_Basics"
     },
     {
       "id": 1207,
@@ -1662,7 +1869,8 @@
       "title": "82 \u2014 Resume Building",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1207
+      "published_revision_id": 1207,
+      "slug": "Chapter_82_Resume_Building"
     },
     {
       "id": 1208,
@@ -1670,7 +1878,8 @@
       "title": "83 \u2014 Interview Questions",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1208
+      "published_revision_id": 1208,
+      "slug": "Chapter_83_Interview_Questions"
     },
     {
       "id": 1209,
@@ -1678,7 +1887,8 @@
       "title": "84 \u2014 Scenario Drills",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1209
+      "published_revision_id": 1209,
+      "slug": "Chapter_84_Scenario_Drills"
     },
     {
       "id": 1210,
@@ -1686,7 +1896,8 @@
       "title": "85 \u2014 Capstone Project",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1210
+      "published_revision_id": 1210,
+      "slug": "Chapter_85_Capstone_Project"
     },
     {
       "id": 1211,
@@ -1694,7 +1905,8 @@
       "title": "01 \u2014 History Of Unix And Linux",
       "order": 1,
       "content_base": "/linux/",
-      "published_revision_id": 1211
+      "published_revision_id": 1211,
+      "slug": "Chapter_01_History_of_Unix_and_Linux"
     },
     {
       "id": 1212,
@@ -1702,7 +1914,8 @@
       "title": "02 \u2014 Linux Distributions And Ecosystem",
       "order": 2,
       "content_base": "/linux/",
-      "published_revision_id": 1212
+      "published_revision_id": 1212,
+      "slug": "Chapter_02_Linux_Distributions_and_Ecosystem"
     },
     {
       "id": 1213,
@@ -1710,7 +1923,8 @@
       "title": "03 \u2014 Linux Architecture And Kernel Fundamentals",
       "order": 3,
       "content_base": "/linux/",
-      "published_revision_id": 1213
+      "published_revision_id": 1213,
+      "slug": "Chapter_03_Linux_Architecture_and_Kernel_Fundamentals"
     },
     {
       "id": 1214,
@@ -1718,7 +1932,8 @@
       "title": "04 \u2014 Linux Boot Process",
       "order": 4,
       "content_base": "/linux/",
-      "published_revision_id": 1214
+      "published_revision_id": 1214,
+      "slug": "Chapter_04_Linux_Boot_Process"
     },
     {
       "id": 1215,
@@ -1726,7 +1941,8 @@
       "title": "05 \u2014 Filesystem Hierarchy Standard",
       "order": 5,
       "content_base": "/linux/",
-      "published_revision_id": 1215
+      "published_revision_id": 1215,
+      "slug": "Chapter_05_Filesystem_Hierarchy_Standard"
     },
     {
       "id": 1216,
@@ -1734,7 +1950,8 @@
       "title": "06 \u2014 Installing Linux On VMware And VirtualBox",
       "order": 6,
       "content_base": "/linux/",
-      "published_revision_id": 1216
+      "published_revision_id": 1216,
+      "slug": "Chapter_06_Installing_Linux_on_VMware_and_VirtualBox"
     },
     {
       "id": 1217,
@@ -1742,7 +1959,8 @@
       "title": "07 \u2014 First Login And Terminal Basics",
       "order": 7,
       "content_base": "/linux/",
-      "published_revision_id": 1217
+      "published_revision_id": 1217,
+      "slug": "Chapter_07_First_Login_and_Terminal_Basics"
     },
     {
       "id": 1218,
@@ -1750,7 +1968,8 @@
       "title": "08 \u2014 Navigating The Linux Filesystem",
       "order": 8,
       "content_base": "/linux/",
-      "published_revision_id": 1218
+      "published_revision_id": 1218,
+      "slug": "Chapter_08_Navigating_the_Linux_Filesystem"
     },
     {
       "id": 1219,
@@ -1758,7 +1977,8 @@
       "title": "09 \u2014 File And Directory Operations",
       "order": 9,
       "content_base": "/linux/",
-      "published_revision_id": 1219
+      "published_revision_id": 1219,
+      "slug": "Chapter_09_File_and_Directory_Operations"
     },
     {
       "id": 1220,
@@ -1766,7 +1986,8 @@
       "title": "10 \u2014 Text Editors Vim And Nano",
       "order": 10,
       "content_base": "/linux/",
-      "published_revision_id": 1220
+      "published_revision_id": 1220,
+      "slug": "Chapter_10_Text_Editors_vim_and_nano"
     },
     {
       "id": 1221,
@@ -1774,7 +1995,8 @@
       "title": "11 \u2014 Viewing Files Logs Text Processing",
       "order": 11,
       "content_base": "/linux/",
-      "published_revision_id": 1221
+      "published_revision_id": 1221,
+      "slug": "Chapter_11_Viewing_Files_Logs_Text_Processing"
     },
     {
       "id": 1222,
@@ -1782,7 +2004,8 @@
       "title": "12 \u2014 Help System And Documentation",
       "order": 12,
       "content_base": "/linux/",
-      "published_revision_id": 1222
+      "published_revision_id": 1222,
+      "slug": "Chapter_12_Help_System_and_Documentation"
     },
     {
       "id": 1223,
@@ -1790,7 +2013,8 @@
       "title": "13 \u2014 IO Redirection Pipes Wildcards",
       "order": 13,
       "content_base": "/linux/",
-      "published_revision_id": 1223
+      "published_revision_id": 1223,
+      "slug": "Chapter_13_IO_Redirection_Pipes_Wildcards"
     },
     {
       "id": 1224,
@@ -1798,7 +2022,8 @@
       "title": "14 \u2014 Searching Files And Pattern Matching",
       "order": 14,
       "content_base": "/linux/",
-      "published_revision_id": 1224
+      "published_revision_id": 1224,
+      "slug": "Chapter_14_Searching_Files_and_Pattern_Matching"
     },
     {
       "id": 1225,
@@ -1806,7 +2031,8 @@
       "title": "15 \u2014 Inodes Hard Links And Soft Links",
       "order": 15,
       "content_base": "/linux/",
-      "published_revision_id": 1225
+      "published_revision_id": 1225,
+      "slug": "Chapter_15_Inodes_Hard_Links_and_Soft_Links"
     },
     {
       "id": 1226,
@@ -1814,7 +2040,8 @@
       "title": "16 \u2014 Linux Permissions Deep Dive",
       "order": 16,
       "content_base": "/linux/",
-      "published_revision_id": 1226
+      "published_revision_id": 1226,
+      "slug": "Chapter_16_Linux_Permissions_Deep_Dive"
     },
     {
       "id": 1227,
@@ -1822,7 +2049,8 @@
       "title": "17 \u2014 Access Control Lists ACL",
       "order": 17,
       "content_base": "/linux/",
-      "published_revision_id": 1227
+      "published_revision_id": 1227,
+      "slug": "Chapter_17_Access_Control_Lists_ACL"
     },
     {
       "id": 1228,
@@ -1830,7 +2058,8 @@
       "title": "18 \u2014 Special Permissions SUID SGID Sticky",
       "order": 18,
       "content_base": "/linux/",
-      "published_revision_id": 1228
+      "published_revision_id": 1228,
+      "slug": "Chapter_18_Special_Permissions_SUID_SGID_Sticky"
     },
     {
       "id": 1229,
@@ -1838,7 +2067,8 @@
       "title": "19 \u2014 Default Permissions And Umask",
       "order": 19,
       "content_base": "/linux/",
-      "published_revision_id": 1229
+      "published_revision_id": 1229,
+      "slug": "Chapter_19_Default_Permissions_and_Umask"
     },
     {
       "id": 1230,
@@ -1846,7 +2076,8 @@
       "title": "20 \u2014 File Ownership Chown And Chgrp",
       "order": 20,
       "content_base": "/linux/",
-      "published_revision_id": 1230
+      "published_revision_id": 1230,
+      "slug": "Chapter_20_File_Ownership_chown_and_chgrp"
     },
     {
       "id": 1231,
@@ -1854,7 +2085,8 @@
       "title": "21 \u2014 User Management Basics",
       "order": 21,
       "content_base": "/linux/",
-      "published_revision_id": 1231
+      "published_revision_id": 1231,
+      "slug": "Chapter_21_User_Management_Basics"
     },
     {
       "id": 1232,
@@ -1862,7 +2094,8 @@
       "title": "22 \u2014 Group Administration",
       "order": 22,
       "content_base": "/linux/",
-      "published_revision_id": 1232
+      "published_revision_id": 1232,
+      "slug": "Chapter_22_Group_Administration"
     },
     {
       "id": 1233,
@@ -1870,7 +2103,8 @@
       "title": "23 \u2014 Sudo And Privilege Escalation",
       "order": 23,
       "content_base": "/linux/",
-      "published_revision_id": 1233
+      "published_revision_id": 1233,
+      "slug": "Chapter_23_Sudo_and_Privilege_Escalation"
     },
     {
       "id": 1234,
@@ -1878,7 +2112,8 @@
       "title": "24 \u2014 Password Management And Aging",
       "order": 24,
       "content_base": "/linux/",
-      "published_revision_id": 1234
+      "published_revision_id": 1234,
+      "slug": "Chapter_24_Password_Management_and_Aging"
     },
     {
       "id": 1235,
@@ -1886,7 +2121,8 @@
       "title": "25 \u2014 User Profiles And Initialization",
       "order": 25,
       "content_base": "/linux/",
-      "published_revision_id": 1235
+      "published_revision_id": 1235,
+      "slug": "Chapter_25_User_Profiles_and_Initialization"
     },
     {
       "id": 1236,
@@ -1894,7 +2130,8 @@
       "title": "26 \u2014 PAM Fundamentals",
       "order": 26,
       "content_base": "/linux/",
-      "published_revision_id": 1236
+      "published_revision_id": 1236,
+      "slug": "Chapter_26_PAM_Fundamentals"
     },
     {
       "id": 1237,
@@ -1902,7 +2139,8 @@
       "title": "27 \u2014 Process Management Basics",
       "order": 27,
       "content_base": "/linux/",
-      "published_revision_id": 1237
+      "published_revision_id": 1237,
+      "slug": "Chapter_27_Process_Management_Basics"
     },
     {
       "id": 1238,
@@ -1910,7 +2148,8 @@
       "title": "28 \u2014 Background Jobs And Tmux",
       "order": 28,
       "content_base": "/linux/",
-      "published_revision_id": 1238
+      "published_revision_id": 1238,
+      "slug": "Chapter_28_Background_Jobs_and_Tmux"
     },
     {
       "id": 1239,
@@ -1918,7 +2157,8 @@
       "title": "29 \u2014 Systemd And Systemctl",
       "order": 29,
       "content_base": "/linux/",
-      "published_revision_id": 1239
+      "published_revision_id": 1239,
+      "slug": "Chapter_29_Systemd_and_systemctl"
     },
     {
       "id": 1240,
@@ -1926,7 +2166,8 @@
       "title": "30 \u2014 Systemd Targets And Journalctl",
       "order": 30,
       "content_base": "/linux/",
-      "published_revision_id": 1240
+      "published_revision_id": 1240,
+      "slug": "Chapter_30_Systemd_Targets_and_Journalctl"
     },
     {
       "id": 1241,
@@ -1934,7 +2175,8 @@
       "title": "31 \u2014 Task Scheduling",
       "order": 31,
       "content_base": "/linux/",
-      "published_revision_id": 1241
+      "published_revision_id": 1241,
+      "slug": "Chapter_31_Task_Scheduling"
     },
     {
       "id": 1242,
@@ -1942,7 +2184,8 @@
       "title": "32 \u2014 Package Management RPM DNF",
       "order": 32,
       "content_base": "/linux/",
-      "published_revision_id": 1242
+      "published_revision_id": 1242,
+      "slug": "Chapter_32_Package_Management_RPM_DNF"
     },
     {
       "id": 1243,
@@ -1950,7 +2193,8 @@
       "title": "33 \u2014 Package Management DPKG APT",
       "order": 33,
       "content_base": "/linux/",
-      "published_revision_id": 1243
+      "published_revision_id": 1243,
+      "slug": "Chapter_33_Package_Management_DPKG_APT"
     },
     {
       "id": 1244,
@@ -1958,7 +2202,8 @@
       "title": "34 \u2014 Compiling From Source",
       "order": 34,
       "content_base": "/linux/",
-      "published_revision_id": 1244
+      "published_revision_id": 1244,
+      "slug": "Chapter_34_Compiling_from_Source"
     },
     {
       "id": 1245,
@@ -1966,7 +2211,8 @@
       "title": "35 \u2014 Storage Fundamentals Partitioning",
       "order": 35,
       "content_base": "/linux/",
-      "published_revision_id": 1245
+      "published_revision_id": 1245,
+      "slug": "Chapter_35_Storage_Fundamentals_Partitioning"
     },
     {
       "id": 1246,
@@ -1974,7 +2220,8 @@
       "title": "36 \u2014 Filesystem Creation Mounting",
       "order": 36,
       "content_base": "/linux/",
-      "published_revision_id": 1246
+      "published_revision_id": 1246,
+      "slug": "Chapter_36_Filesystem_Creation_Mounting"
     },
     {
       "id": 1247,
@@ -1982,7 +2229,8 @@
       "title": "37 \u2014 Swap Space Management",
       "order": 37,
       "content_base": "/linux/",
-      "published_revision_id": 1247
+      "published_revision_id": 1247,
+      "slug": "Chapter_37_Swap_Space_Management"
     },
     {
       "id": 1248,
@@ -1990,7 +2238,8 @@
       "title": "38 \u2014 Logical Volume Management",
       "order": 38,
       "content_base": "/linux/",
-      "published_revision_id": 1248
+      "published_revision_id": 1248,
+      "slug": "Chapter_38_Logical_Volume_Management"
     },
     {
       "id": 1249,
@@ -1998,7 +2247,8 @@
       "title": "39 \u2014 LVM Resizing Snapshots",
       "order": 39,
       "content_base": "/linux/",
-      "published_revision_id": 1249
+      "published_revision_id": 1249,
+      "slug": "Chapter_39_LVM_Resizing_Snapshots"
     },
     {
       "id": 1250,
@@ -2006,7 +2256,8 @@
       "title": "40 \u2014 RAID Fundamentals",
       "order": 40,
       "content_base": "/linux/",
-      "published_revision_id": 1250
+      "published_revision_id": 1250,
+      "slug": "Chapter_40_RAID_Fundamentals"
     },
     {
       "id": 1251,
@@ -2014,7 +2265,8 @@
       "title": "41 \u2014 Network Configuration Basics",
       "order": 41,
       "content_base": "/linux/",
-      "published_revision_id": 1251
+      "published_revision_id": 1251,
+      "slug": "Chapter_41_Network_Configuration_Basics"
     },
     {
       "id": 1252,
@@ -2022,7 +2274,8 @@
       "title": "42 \u2014 Network Configuration Tools",
       "order": 42,
       "content_base": "/linux/",
-      "published_revision_id": 1252
+      "published_revision_id": 1252,
+      "slug": "Chapter_42_Network_Configuration_Tools"
     },
     {
       "id": 1253,
@@ -2030,7 +2283,8 @@
       "title": "43 \u2014 Routing And Gateways",
       "order": 43,
       "content_base": "/linux/",
-      "published_revision_id": 1253
+      "published_revision_id": 1253,
+      "slug": "Chapter_43_Routing_and_Gateways"
     },
     {
       "id": 1254,
@@ -2038,7 +2292,8 @@
       "title": "44 \u2014 DNS And Host Resolution",
       "order": 44,
       "content_base": "/linux/",
-      "published_revision_id": 1254
+      "published_revision_id": 1254,
+      "slug": "Chapter_44_DNS_and_Host_Resolution"
     },
     {
       "id": 1255,
@@ -2046,7 +2301,8 @@
       "title": "45 \u2014 Firewalld And Iptables",
       "order": 45,
       "content_base": "/linux/",
-      "published_revision_id": 1255
+      "published_revision_id": 1255,
+      "slug": "Chapter_45_Firewalld_and_iptables"
     },
     {
       "id": 1256,
@@ -2054,7 +2310,8 @@
       "title": "46 \u2014 Network Troubleshooting",
       "order": 46,
       "content_base": "/linux/",
-      "published_revision_id": 1256
+      "published_revision_id": 1256,
+      "slug": "Chapter_46_Network_Troubleshooting"
     },
     {
       "id": 1257,
@@ -2062,7 +2319,8 @@
       "title": "47 \u2014 OpenSSH Configuration",
       "order": 47,
       "content_base": "/linux/",
-      "published_revision_id": 1257
+      "published_revision_id": 1257,
+      "slug": "Chapter_47_OpenSSH_Configuration"
     },
     {
       "id": 1258,
@@ -2070,7 +2328,8 @@
       "title": "48 \u2014 Securing SSH",
       "order": 48,
       "content_base": "/linux/",
-      "published_revision_id": 1258
+      "published_revision_id": 1258,
+      "slug": "Chapter_48_Securing_SSH"
     },
     {
       "id": 1259,
@@ -2078,7 +2337,8 @@
       "title": "49 \u2014 SELinux Fundamentals",
       "order": 49,
       "content_base": "/linux/",
-      "published_revision_id": 1259
+      "published_revision_id": 1259,
+      "slug": "Chapter_49_SELinux_Fundamentals"
     },
     {
       "id": 1260,
@@ -2086,7 +2346,8 @@
       "title": "50 \u2014 SELinux Contexts",
       "order": 50,
       "content_base": "/linux/",
-      "published_revision_id": 1260
+      "published_revision_id": 1260,
+      "slug": "Chapter_50_SELinux_Contexts"
     },
     {
       "id": 1261,
@@ -2094,7 +2355,8 @@
       "title": "51 \u2014 Auditing And Logging",
       "order": 51,
       "content_base": "/linux/",
-      "published_revision_id": 1261
+      "published_revision_id": 1261,
+      "slug": "Chapter_51_Auditing_and_Logging"
     },
     {
       "id": 1262,
@@ -2102,7 +2364,8 @@
       "title": "52 \u2014 Vulnerability Scanning",
       "order": 52,
       "content_base": "/linux/",
-      "published_revision_id": 1262
+      "published_revision_id": 1262,
+      "slug": "Chapter_52_Vulnerability_Scanning"
     },
     {
       "id": 1263,
@@ -2110,7 +2373,8 @@
       "title": "53 \u2014 Performance Monitoring",
       "order": 53,
       "content_base": "/linux/",
-      "published_revision_id": 1263
+      "published_revision_id": 1263,
+      "slug": "Chapter_53_Performance_Monitoring"
     },
     {
       "id": 1264,
@@ -2118,7 +2382,8 @@
       "title": "54 \u2014 System Activity Reporter",
       "order": 54,
       "content_base": "/linux/",
-      "published_revision_id": 1264
+      "published_revision_id": 1264,
+      "slug": "Chapter_54_System_Activity_Reporter"
     },
     {
       "id": 1265,
@@ -2126,7 +2391,8 @@
       "title": "55 \u2014 Network Monitoring",
       "order": 55,
       "content_base": "/linux/",
-      "published_revision_id": 1265
+      "published_revision_id": 1265,
+      "slug": "Chapter_55_Network_Monitoring"
     },
     {
       "id": 1266,
@@ -2134,7 +2400,8 @@
       "title": "56 \u2014 Apache Administration",
       "order": 56,
       "content_base": "/linux/",
-      "published_revision_id": 1266
+      "published_revision_id": 1266,
+      "slug": "Chapter_56_Apache_Administration"
     },
     {
       "id": 1267,
@@ -2142,7 +2409,8 @@
       "title": "57 \u2014 Nginx Web Server",
       "order": 57,
       "content_base": "/linux/",
-      "published_revision_id": 1267
+      "published_revision_id": 1267,
+      "slug": "Chapter_57_Nginx_Web_Server"
     },
     {
       "id": 1268,
@@ -2150,7 +2418,8 @@
       "title": "58 \u2014 Tomcat Administration",
       "order": 58,
       "content_base": "/linux/",
-      "published_revision_id": 1268
+      "published_revision_id": 1268,
+      "slug": "Chapter_58_Tomcat_Administration"
     },
     {
       "id": 1269,
@@ -2158,7 +2427,8 @@
       "title": "59 \u2014 Load Balancing",
       "order": 59,
       "content_base": "/linux/",
-      "published_revision_id": 1269
+      "published_revision_id": 1269,
+      "slug": "Chapter_59_Load_Balancing"
     },
     {
       "id": 1270,
@@ -2166,7 +2436,8 @@
       "title": "60 \u2014 SSL Certificates",
       "order": 60,
       "content_base": "/linux/",
-      "published_revision_id": 1270
+      "published_revision_id": 1270,
+      "slug": "Chapter_60_SSL_Certificates"
     },
     {
       "id": 1271,
@@ -2174,7 +2445,8 @@
       "title": "61 \u2014 Bash Scripting Basics",
       "order": 61,
       "content_base": "/linux/",
-      "published_revision_id": 1271
+      "published_revision_id": 1271,
+      "slug": "Chapter_61_Bash_Scripting_Basics"
     },
     {
       "id": 1272,
@@ -2182,7 +2454,8 @@
       "title": "62 \u2014 Control Structures",
       "order": 62,
       "content_base": "/linux/",
-      "published_revision_id": 1272
+      "published_revision_id": 1272,
+      "slug": "Chapter_62_Control_Structures"
     },
     {
       "id": 1273,
@@ -2190,7 +2463,8 @@
       "title": "63 \u2014 Functions And Errors",
       "order": 63,
       "content_base": "/linux/",
-      "published_revision_id": 1273
+      "published_revision_id": 1273,
+      "slug": "Chapter_63_Functions_and_Errors"
     },
     {
       "id": 1274,
@@ -2198,7 +2472,8 @@
       "title": "64 \u2014 Text Processing",
       "order": 64,
       "content_base": "/linux/",
-      "published_revision_id": 1274
+      "published_revision_id": 1274,
+      "slug": "Chapter_64_Text_Processing"
     },
     {
       "id": 1275,
@@ -2206,7 +2481,8 @@
       "title": "65 \u2014 Automating Tasks",
       "order": 65,
       "content_base": "/linux/",
-      "published_revision_id": 1275
+      "published_revision_id": 1275,
+      "slug": "Chapter_65_Automating_Tasks"
     },
     {
       "id": 1276,
@@ -2214,7 +2490,8 @@
       "title": "66 \u2014 Rsync And Remote Copy",
       "order": 66,
       "content_base": "/linux/",
-      "published_revision_id": 1276
+      "published_revision_id": 1276,
+      "slug": "Chapter_66_Rsync_and_Remote_Copy"
     },
     {
       "id": 1277,
@@ -2222,7 +2499,8 @@
       "title": "67 \u2014 Tar And Compression",
       "order": 67,
       "content_base": "/linux/",
-      "published_revision_id": 1277
+      "published_revision_id": 1277,
+      "slug": "Chapter_67_Tar_and_Compression"
     },
     {
       "id": 1278,
@@ -2230,7 +2508,8 @@
       "title": "68 \u2014 Disaster Recovery",
       "order": 68,
       "content_base": "/linux/",
-      "published_revision_id": 1278
+      "published_revision_id": 1278,
+      "slug": "Chapter_68_Disaster_Recovery"
     },
     {
       "id": 1279,
@@ -2238,7 +2517,8 @@
       "title": "69 \u2014 MySQL Administration",
       "order": 69,
       "content_base": "/linux/",
-      "published_revision_id": 1279
+      "published_revision_id": 1279,
+      "slug": "Chapter_69_MySQL_Administration"
     },
     {
       "id": 1280,
@@ -2246,7 +2526,8 @@
       "title": "70 \u2014 PostgreSQL Administration",
       "order": 70,
       "content_base": "/linux/",
-      "published_revision_id": 1280
+      "published_revision_id": 1280,
+      "slug": "Chapter_70_PostgreSQL_Administration"
     },
     {
       "id": 1281,
@@ -2254,7 +2535,8 @@
       "title": "71 \u2014 Chrony And NTP",
       "order": 71,
       "content_base": "/linux/",
-      "published_revision_id": 1281
+      "published_revision_id": 1281,
+      "slug": "Chapter_71_Chrony_and_NTP"
     },
     {
       "id": 1282,
@@ -2262,7 +2544,8 @@
       "title": "72 \u2014 Postfix MTA",
       "order": 72,
       "content_base": "/linux/",
-      "published_revision_id": 1282
+      "published_revision_id": 1282,
+      "slug": "Chapter_72_Postfix_MTA"
     },
     {
       "id": 1283,
@@ -2270,7 +2553,8 @@
       "title": "73 \u2014 File Sharing NFS Samba",
       "order": 73,
       "content_base": "/linux/",
-      "published_revision_id": 1283
+      "published_revision_id": 1283,
+      "slug": "Chapter_73_File_Sharing_NFS_Samba"
     },
     {
       "id": 1284,
@@ -2278,7 +2562,8 @@
       "title": "74 \u2014 Git Version Control",
       "order": 74,
       "content_base": "/linux/",
-      "published_revision_id": 1284
+      "published_revision_id": 1284,
+      "slug": "Chapter_74_Git_Version_Control"
     },
     {
       "id": 1285,
@@ -2286,7 +2571,8 @@
       "title": "75 \u2014 Docker And Containers",
       "order": 75,
       "content_base": "/linux/",
-      "published_revision_id": 1285
+      "published_revision_id": 1285,
+      "slug": "Chapter_75_Docker_and_Containers"
     },
     {
       "id": 1286,
@@ -2294,7 +2580,8 @@
       "title": "76 \u2014 AWS And SSH Keys",
       "order": 76,
       "content_base": "/linux/",
-      "published_revision_id": 1286
+      "published_revision_id": 1286,
+      "slug": "Chapter_76_AWS_and_SSH_Keys"
     },
     {
       "id": 1287,
@@ -2302,7 +2589,8 @@
       "title": "77 \u2014 Dmesg Kernel Panics",
       "order": 77,
       "content_base": "/linux/",
-      "published_revision_id": 1287
+      "published_revision_id": 1287,
+      "slug": "Chapter_77_dmesg_Kernel_Panics"
     },
     {
       "id": 1288,
@@ -2310,7 +2598,8 @@
       "title": "78 \u2014 Strace And Debugging",
       "order": 78,
       "content_base": "/linux/",
-      "published_revision_id": 1288
+      "published_revision_id": 1288,
+      "slug": "Chapter_78_Strace_and_Debugging"
     },
     {
       "id": 1289,
@@ -2318,7 +2607,8 @@
       "title": "79 \u2014 Rescue Target Password",
       "order": 79,
       "content_base": "/linux/",
-      "published_revision_id": 1289
+      "published_revision_id": 1289,
+      "slug": "Chapter_79_Rescue_Target_Password"
     },
     {
       "id": 1290,
@@ -2326,7 +2616,8 @@
       "title": "80 \u2014 High Availability Keepalived",
       "order": 80,
       "content_base": "/linux/",
-      "published_revision_id": 1290
+      "published_revision_id": 1290,
+      "slug": "Chapter_80_High_Availability_Keepalived"
     },
     {
       "id": 1291,
@@ -2334,7 +2625,8 @@
       "title": "81 \u2014 Ansible Basics",
       "order": 81,
       "content_base": "/linux/",
-      "published_revision_id": 1291
+      "published_revision_id": 1291,
+      "slug": "Chapter_81_Ansible_Basics"
     },
     {
       "id": 1292,
@@ -2342,7 +2634,8 @@
       "title": "82 \u2014 Resume Building",
       "order": 82,
       "content_base": "/linux/",
-      "published_revision_id": 1292
+      "published_revision_id": 1292,
+      "slug": "Chapter_82_Resume_Building"
     },
     {
       "id": 1293,
@@ -2350,7 +2643,8 @@
       "title": "83 \u2014 Interview Questions",
       "order": 83,
       "content_base": "/linux/",
-      "published_revision_id": 1293
+      "published_revision_id": 1293,
+      "slug": "Chapter_83_Interview_Questions"
     },
     {
       "id": 1294,
@@ -2358,7 +2652,8 @@
       "title": "84 \u2014 Scenario Drills",
       "order": 84,
       "content_base": "/linux/",
-      "published_revision_id": 1294
+      "published_revision_id": 1294,
+      "slug": "Chapter_84_Scenario_Drills"
     },
     {
       "id": 1295,
@@ -2366,7 +2661,8 @@
       "title": "85 \u2014 Capstone Project",
       "order": 85,
       "content_base": "/linux/",
-      "published_revision_id": 1295
+      "published_revision_id": 1295,
+      "slug": "Chapter_85_Capstone_Project"
     },
     {
       "id": 1296,
@@ -2374,7 +2670,8 @@
       "title": "01 \u2014 Introduction To Containers And Docker",
       "order": 1,
       "content_base": "/docker/",
-      "published_revision_id": 1296
+      "published_revision_id": 1296,
+      "slug": "module-01-introduction-to-containers-and-docker"
     },
     {
       "id": 1297,
@@ -2382,7 +2679,8 @@
       "title": "02 \u2014 Container Fundamentals",
       "order": 2,
       "content_base": "/docker/",
-      "published_revision_id": 1297
+      "published_revision_id": 1297,
+      "slug": "module-02-container-fundamentals"
     },
     {
       "id": 1298,
@@ -2390,7 +2688,8 @@
       "title": "03 \u2014 Docker Architecture And Internals",
       "order": 3,
       "content_base": "/docker/",
-      "published_revision_id": 1298
+      "published_revision_id": 1298,
+      "slug": "module-03-docker-architecture-and-internals"
     },
     {
       "id": 1299,
@@ -2398,7 +2697,8 @@
       "title": "04 \u2014 Installation And Environment Setup",
       "order": 4,
       "content_base": "/docker/",
-      "published_revision_id": 1299
+      "published_revision_id": 1299,
+      "slug": "module-04-installation-and-environment-setup"
     },
     {
       "id": 1300,
@@ -2406,7 +2706,8 @@
       "title": "05 \u2014 Docker CLI And Essential Commands",
       "order": 5,
       "content_base": "/docker/",
-      "published_revision_id": 1300
+      "published_revision_id": 1300,
+      "slug": "module-05-docker-cli-and-essential-commands"
     },
     {
       "id": 1301,
@@ -2414,7 +2715,8 @@
       "title": "06 \u2014 Images Layers And Registries",
       "order": 6,
       "content_base": "/docker/",
-      "published_revision_id": 1301
+      "published_revision_id": 1301,
+      "slug": "module-06-images-layers-and-registries"
     },
     {
       "id": 1302,
@@ -2422,7 +2724,8 @@
       "title": "07 \u2014 Containers And Lifecycle Management",
       "order": 7,
       "content_base": "/docker/",
-      "published_revision_id": 1302
+      "published_revision_id": 1302,
+      "slug": "module-07-containers-and-lifecycle-management"
     },
     {
       "id": 1303,
@@ -2430,7 +2733,8 @@
       "title": "08 \u2014 Docker Networking Deep Dive",
       "order": 8,
       "content_base": "/docker/",
-      "published_revision_id": 1303
+      "published_revision_id": 1303,
+      "slug": "module-08-docker-networking-deep-dive"
     },
     {
       "id": 1304,
@@ -2438,7 +2742,8 @@
       "title": "09 \u2014 Docker Storage Volumes And Bind Mounts",
       "order": 9,
       "content_base": "/docker/",
-      "published_revision_id": 1304
+      "published_revision_id": 1304,
+      "slug": "module-09-docker-storage-volumes-and-bind-mounts"
     },
     {
       "id": 1305,
@@ -2446,7 +2751,8 @@
       "title": "10 \u2014 Dockerfile Mastery",
       "order": 10,
       "content_base": "/docker/",
-      "published_revision_id": 1305
+      "published_revision_id": 1305,
+      "slug": "module-10-dockerfile-mastery"
     },
     {
       "id": 1306,
@@ -2454,7 +2760,8 @@
       "title": "11 \u2014 Docker Compose",
       "order": 11,
       "content_base": "/docker/",
-      "published_revision_id": 1306
+      "published_revision_id": 1306,
+      "slug": "module-11-docker-compose"
     },
     {
       "id": 1307,
@@ -2462,7 +2769,8 @@
       "title": "12 \u2014 Multi Container Application Development",
       "order": 12,
       "content_base": "/docker/",
-      "published_revision_id": 1307
+      "published_revision_id": 1307,
+      "slug": "module-12-multi-container-application-development"
     },
     {
       "id": 1308,
@@ -2470,7 +2778,8 @@
       "title": "13 \u2014 Docker Security",
       "order": 13,
       "content_base": "/docker/",
-      "published_revision_id": 1308
+      "published_revision_id": 1308,
+      "slug": "module-13-docker-security"
     },
     {
       "id": 1309,
@@ -2478,7 +2787,8 @@
       "title": "14 \u2014 Docker Performance And Optimization",
       "order": 14,
       "content_base": "/docker/",
-      "published_revision_id": 1309
+      "published_revision_id": 1309,
+      "slug": "module-14-docker-performance-and-optimization"
     },
     {
       "id": 1310,
@@ -2486,7 +2796,8 @@
       "title": "15 \u2014 Logging Monitoring And Observability",
       "order": 15,
       "content_base": "/docker/",
-      "published_revision_id": 1310
+      "published_revision_id": 1310,
+      "slug": "module-15-logging-monitoring-and-observability"
     },
     {
       "id": 1311,
@@ -2494,7 +2805,8 @@
       "title": "16 \u2014 Debugging And Troubleshooting",
       "order": 16,
       "content_base": "/docker/",
-      "published_revision_id": 1311
+      "published_revision_id": 1311,
+      "slug": "module-16-debugging-and-troubleshooting"
     },
     {
       "id": 1312,
@@ -2502,7 +2814,8 @@
       "title": "17 \u2014 Testing Containerized Applications",
       "order": 17,
       "content_base": "/docker/",
-      "published_revision_id": 1312
+      "published_revision_id": 1312,
+      "slug": "module-17-testing-containerized-applications"
     },
     {
       "id": 1313,
@@ -2510,7 +2823,8 @@
       "title": "18 \u2014 CI CD With Docker",
       "order": 18,
       "content_base": "/docker/",
-      "published_revision_id": 1313
+      "published_revision_id": 1313,
+      "slug": "module-18-ci-cd-with-docker"
     },
     {
       "id": 1314,
@@ -2518,7 +2832,8 @@
       "title": "19 \u2014 Docker In AWS Azure And GCP",
       "order": 19,
       "content_base": "/docker/",
-      "published_revision_id": 1314
+      "published_revision_id": 1314,
+      "slug": "module-19-docker-in-aws-azure-and-gcp"
     },
     {
       "id": 1315,
@@ -2526,7 +2841,8 @@
       "title": "20 \u2014 Enterprise Architecture And Production Patterns",
       "order": 20,
       "content_base": "/docker/",
-      "published_revision_id": 1315
+      "published_revision_id": 1315,
+      "slug": "module-20-enterprise-architecture-and-production-patterns"
     },
     {
       "id": 1316,
@@ -2534,7 +2850,8 @@
       "title": "21 \u2014 Design Patterns And Anti Patterns",
       "order": 21,
       "content_base": "/docker/",
-      "published_revision_id": 1316
+      "published_revision_id": 1316,
+      "slug": "module-21-design-patterns-and-anti-patterns"
     },
     {
       "id": 1317,
@@ -2542,7 +2859,8 @@
       "title": "22 \u2014 Best Practices And Interview Preparation",
       "order": 22,
       "content_base": "/docker/",
-      "published_revision_id": 1317
+      "published_revision_id": 1317,
+      "slug": "module-22-best-practices-and-interview-preparation"
     },
     {
       "id": 1318,
@@ -2550,7 +2868,8 @@
       "title": "23 \u2014 Real World Case Studies",
       "order": 23,
       "content_base": "/docker/",
-      "published_revision_id": 1318
+      "published_revision_id": 1318,
+      "slug": "module-23-real-world-case-studies"
     },
     {
       "id": 1319,
@@ -2558,7 +2877,8 @@
       "title": "24 \u2014 Enterprise Capstone Project",
       "order": 24,
       "content_base": "/docker/",
-      "published_revision_id": 1319
+      "published_revision_id": 1319,
+      "slug": "module-24-enterprise-capstone-project"
     },
     {
       "id": 1320,
@@ -2566,7 +2886,8 @@
       "title": "25 \u2014 Final Review Certification Guide And Career Preparation",
       "order": 25,
       "content_base": "/docker/",
-      "published_revision_id": 1320
+      "published_revision_id": 1320,
+      "slug": "module-25-final-review-certification-guide-and-career-preparation"
     },
     {
       "id": 1321,
@@ -2574,7 +2895,8 @@
       "title": "01 \u2014 Ch01 Getting Started With Python Devops",
       "order": 1,
       "content_base": "/python-devops/",
-      "published_revision_id": 1321
+      "published_revision_id": 1321,
+      "slug": "ch01-getting-started-with-python-devops"
     },
     {
       "id": 1322,
@@ -2582,7 +2904,8 @@
       "title": "02 \u2014 Ch02 Python Data Types",
       "order": 2,
       "content_base": "/python-devops/",
-      "published_revision_id": 1322
+      "published_revision_id": 1322,
+      "slug": "ch02-python-data-types"
     },
     {
       "id": 1323,
@@ -2590,7 +2913,8 @@
       "title": "03 \u2014 Ch03 Python Data Structures",
       "order": 3,
       "content_base": "/python-devops/",
-      "published_revision_id": 1323
+      "published_revision_id": 1323,
+      "slug": "ch03-python-data-structures"
     },
     {
       "id": 1324,
@@ -2598,7 +2922,8 @@
       "title": "04 \u2014 Ch04 Python Control Flow",
       "order": 4,
       "content_base": "/python-devops/",
-      "published_revision_id": 1324
+      "published_revision_id": 1324,
+      "slug": "ch04-python-control-flow"
     },
     {
       "id": 1325,
@@ -2606,7 +2931,8 @@
       "title": "05 \u2014 Ch05 Python Functions Modularity",
       "order": 5,
       "content_base": "/python-devops/",
-      "published_revision_id": 1325
+      "published_revision_id": 1325,
+      "slug": "ch05-python-functions-modularity"
     },
     {
       "id": 1326,
@@ -2614,7 +2940,8 @@
       "title": "06 \u2014 Ch06 Python Error Handling",
       "order": 6,
       "content_base": "/python-devops/",
-      "published_revision_id": 1326
+      "published_revision_id": 1326,
+      "slug": "ch06-python-error-handling"
     },
     {
       "id": 1327,
@@ -2622,7 +2949,8 @@
       "title": "07 \u2014 Ch07 Linux File Directory Automation",
       "order": 7,
       "content_base": "/python-devops/",
-      "published_revision_id": 1327
+      "published_revision_id": 1327,
+      "slug": "ch07-linux-file-directory-automation"
     },
     {
       "id": 1328,
@@ -2630,7 +2958,8 @@
       "title": "08 \u2014 Ch08 Command Execution Env Vars",
       "order": 8,
       "content_base": "/python-devops/",
-      "published_revision_id": 1328
+      "published_revision_id": 1328,
+      "slug": "ch08-command-execution-env-vars"
     },
     {
       "id": 1329,
@@ -2638,7 +2967,8 @@
       "title": "09 \u2014 Ch09 Working With Data Formats",
       "order": 9,
       "content_base": "/python-devops/",
-      "published_revision_id": 1329
+      "published_revision_id": 1329,
+      "slug": "ch09-working-with-data-formats"
     },
     {
       "id": 1330,
@@ -2646,7 +2976,8 @@
       "title": "10 \u2014 Ch10 Http Rest Api Fundamentals",
       "order": 10,
       "content_base": "/python-devops/",
-      "published_revision_id": 1330
+      "published_revision_id": 1330,
+      "slug": "ch10-http-rest-api-fundamentals"
     },
     {
       "id": 1331,
@@ -2654,7 +2985,8 @@
       "title": "11 \u2014 Ch11 Api Security Authentication",
       "order": 11,
       "content_base": "/python-devops/",
-      "published_revision_id": 1331
+      "published_revision_id": 1331,
+      "slug": "ch11-api-security-authentication"
     },
     {
       "id": 1332,
@@ -2662,7 +2994,8 @@
       "title": "12 \u2014 Ch12 Cloud Fundamentals Neutral Automation",
       "order": 12,
       "content_base": "/python-devops/",
-      "published_revision_id": 1332
+      "published_revision_id": 1332,
+      "slug": "ch12-cloud-fundamentals-neutral-automation"
     },
     {
       "id": 1333,
@@ -2670,7 +3003,8 @@
       "title": "13 \u2014 Ch13 Aws Automation Boto3",
       "order": 13,
       "content_base": "/python-devops/",
-      "published_revision_id": 1333
+      "published_revision_id": 1333,
+      "slug": "ch13-aws-automation-boto3"
     },
     {
       "id": 1334,
@@ -2678,7 +3012,8 @@
       "title": "14 \u2014 Ch14 Azure Gcp Automation",
       "order": 14,
       "content_base": "/python-devops/",
-      "published_revision_id": 1334
+      "published_revision_id": 1334,
+      "slug": "ch14-azure-gcp-automation"
     },
     {
       "id": 1335,
@@ -2686,7 +3021,8 @@
       "title": "15 \u2014 Ch15 Git And Python",
       "order": 15,
       "content_base": "/python-devops/",
-      "published_revision_id": 1335
+      "published_revision_id": 1335,
+      "slug": "ch15-git-and-python"
     },
     {
       "id": 1336,
@@ -2694,7 +3030,8 @@
       "title": "16 \u2014 Ch16 Cicd Fundamentals",
       "order": 16,
       "content_base": "/python-devops/",
-      "published_revision_id": 1336
+      "published_revision_id": 1336,
+      "slug": "ch16-cicd-fundamentals"
     },
     {
       "id": 1337,
@@ -2702,7 +3039,8 @@
       "title": "17 \u2014 Ch17 Cicd Automation Jenkins Github Actions",
       "order": 17,
       "content_base": "/python-devops/",
-      "published_revision_id": 1337
+      "published_revision_id": 1337,
+      "slug": "ch17-cicd-automation-jenkins-github-actions"
     },
     {
       "id": 1338,
@@ -2710,7 +3048,8 @@
       "title": "18 \u2014 Ch18 Infrastructure As Code",
       "order": 18,
       "content_base": "/python-devops/",
-      "published_revision_id": 1338
+      "published_revision_id": 1338,
+      "slug": "ch18-infrastructure-as-code"
     },
     {
       "id": 1339,
@@ -2718,7 +3057,8 @@
       "title": "19 \u2014 Ch19 Containers With Docker",
       "order": 19,
       "content_base": "/python-devops/",
-      "published_revision_id": 1339
+      "published_revision_id": 1339,
+      "slug": "ch19-containers-with-docker"
     },
     {
       "id": 1340,
@@ -2726,7 +3066,8 @@
       "title": "20 \u2014 Ch20 Kubernetes Python Automation",
       "order": 20,
       "content_base": "/python-devops/",
-      "published_revision_id": 1340
+      "published_revision_id": 1340,
+      "slug": "ch20-kubernetes-python-automation"
     },
     {
       "id": 1341,
@@ -2734,7 +3075,8 @@
       "title": "21 \u2014 Ch21 System Monitoring Observability",
       "order": 21,
       "content_base": "/python-devops/",
-      "published_revision_id": 1341
+      "published_revision_id": 1341,
+      "slug": "ch21-system-monitoring-observability"
     },
     {
       "id": 1342,
@@ -2742,7 +3084,8 @@
       "title": "22 \u2014 Ch22 Logging Log Management",
       "order": 22,
       "content_base": "/python-devops/",
-      "published_revision_id": 1342
+      "published_revision_id": 1342,
+      "slug": "ch22-logging-log-management"
     },
     {
       "id": 1343,
@@ -2750,7 +3093,8 @@
       "title": "23 \u2014 Ch23 Prometheus Cloudwatch",
       "order": 23,
       "content_base": "/python-devops/",
-      "published_revision_id": 1343
+      "published_revision_id": 1343,
+      "slug": "ch23-prometheus-cloudwatch"
     },
     {
       "id": 1344,
@@ -2758,7 +3102,8 @@
       "title": "24 \u2014 Ch24 Oop For Devops",
       "order": 24,
       "content_base": "/python-devops/",
-      "published_revision_id": 1344
+      "published_revision_id": 1344,
+      "slug": "ch24-oop-for-devops"
     },
     {
       "id": 1345,
@@ -2766,7 +3111,8 @@
       "title": "25 \u2014 Ch25 Cli Tools Regex",
       "order": 25,
       "content_base": "/python-devops/",
-      "published_revision_id": 1345
+      "published_revision_id": 1345,
+      "slug": "ch25-cli-tools-regex"
     },
     {
       "id": 1346,
@@ -2774,7 +3120,8 @@
       "title": "26 \u2014 Ch26 Quality Testing",
       "order": 26,
       "content_base": "/python-devops/",
-      "published_revision_id": 1346
+      "published_revision_id": 1346,
+      "slug": "ch26-quality-testing"
     },
     {
       "id": 1347,
@@ -2782,7 +3129,8 @@
       "title": "27 \u2014 Ch27 Security Automation",
       "order": 27,
       "content_base": "/python-devops/",
-      "published_revision_id": 1347
+      "published_revision_id": 1347,
+      "slug": "ch27-security-automation"
     },
     {
       "id": 1348,
@@ -2790,7 +3138,8 @@
       "title": "28 \u2014 Ch28 Resilient Automation",
       "order": 28,
       "content_base": "/python-devops/",
-      "published_revision_id": 1348
+      "published_revision_id": 1348,
+      "slug": "ch28-resilient-automation"
     },
     {
       "id": 1349,
@@ -2798,7 +3147,8 @@
       "title": "29 \u2014 Ch29 Production Grade Automation",
       "order": 29,
       "content_base": "/python-devops/",
-      "published_revision_id": 1349
+      "published_revision_id": 1349,
+      "slug": "ch29-production-grade-automation"
     },
     {
       "id": 1350,
@@ -2806,7 +3156,8 @@
       "title": "30 \u2014 Ch30 Modern Automation Patterns",
       "order": 30,
       "content_base": "/python-devops/",
-      "published_revision_id": 1350
+      "published_revision_id": 1350,
+      "slug": "ch30-modern-automation-patterns"
     },
     {
       "id": 1351,
@@ -2814,7 +3165,8 @@
       "title": "00 \u2014 Linux Networking Prerequisites",
       "order": 1,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1351
+      "published_revision_id": 1351,
+      "slug": "Level-00-Linux-Networking-Prerequisites"
     },
     {
       "id": 1352,
@@ -2822,7 +3174,8 @@
       "title": "01 \u2014 Containers And Docker",
       "order": 2,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1352
+      "published_revision_id": 1352,
+      "slug": "Level-01-Containers-and-Docker"
     },
     {
       "id": 1353,
@@ -2830,7 +3183,8 @@
       "title": "02 \u2014 Docker Vs Kubernetes",
       "order": 3,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1353
+      "published_revision_id": 1353,
+      "slug": "Level-02-Docker-vs-Kubernetes"
     },
     {
       "id": 1354,
@@ -2838,7 +3192,8 @@
       "title": "03 \u2014 Kubernetes Introduction",
       "order": 4,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1354
+      "published_revision_id": 1354,
+      "slug": "Level-03-Kubernetes-Introduction"
     },
     {
       "id": 1355,
@@ -2846,7 +3201,8 @@
       "title": "04 \u2014 Kubernetes Architecture",
       "order": 5,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1355
+      "published_revision_id": 1355,
+      "slug": "Level-04-Kubernetes-Architecture"
     },
     {
       "id": 1356,
@@ -2854,7 +3210,8 @@
       "title": "05 \u2014 Kubernetes Installation",
       "order": 6,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1356
+      "published_revision_id": 1356,
+      "slug": "Level-05-Kubernetes-Installation"
     },
     {
       "id": 1357,
@@ -2862,7 +3219,8 @@
       "title": "06 \u2014 Kubectl Deep Dive",
       "order": 7,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1357
+      "published_revision_id": 1357,
+      "slug": "Level-06-kubectl-Deep-Dive"
     },
     {
       "id": 1358,
@@ -2870,7 +3228,8 @@
       "title": "07 \u2014 Kubernetes Core Objects",
       "order": 8,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1358
+      "published_revision_id": 1358,
+      "slug": "Level-07-Kubernetes-Core-Objects"
     },
     {
       "id": 1359,
@@ -2878,7 +3237,8 @@
       "title": "08 \u2014 Pods Deep Dive",
       "order": 9,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1359
+      "published_revision_id": 1359,
+      "slug": "Level-08-Pods-Deep-Dive"
     },
     {
       "id": 1360,
@@ -2886,7 +3246,8 @@
       "title": "09 \u2014 Kubernetes Networking",
       "order": 10,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1360
+      "published_revision_id": 1360,
+      "slug": "Level-09-Kubernetes-Networking"
     },
     {
       "id": 1361,
@@ -2894,7 +3255,8 @@
       "title": "10 \u2014 Kubernetes Storage",
       "order": 11,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1361
+      "published_revision_id": 1361,
+      "slug": "Level-10-Kubernetes-Storage"
     },
     {
       "id": 1362,
@@ -2902,7 +3264,8 @@
       "title": "11 \u2014 Configuration And Secrets",
       "order": 12,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1362
+      "published_revision_id": 1362,
+      "slug": "Level-11-Configuration-and-Secrets"
     },
     {
       "id": 1363,
@@ -2910,7 +3273,8 @@
       "title": "12 \u2014 Scheduling",
       "order": 13,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1363
+      "published_revision_id": 1363,
+      "slug": "Level-12-Scheduling"
     },
     {
       "id": 1364,
@@ -2918,7 +3282,8 @@
       "title": "13 \u2014 Deployments And Rollouts",
       "order": 14,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1364
+      "published_revision_id": 1364,
+      "slug": "Level-13-Deployments-and-Rollouts"
     },
     {
       "id": 1365,
@@ -2926,7 +3291,8 @@
       "title": "14 \u2014 Autoscaling",
       "order": 15,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1365
+      "published_revision_id": 1365,
+      "slug": "Level-14-Autoscaling"
     },
     {
       "id": 1366,
@@ -2934,7 +3300,8 @@
       "title": "15 \u2014 Security And RBAC",
       "order": 16,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1366
+      "published_revision_id": 1366,
+      "slug": "Level-15-Security-and-RBAC"
     },
     {
       "id": 1367,
@@ -2942,7 +3309,8 @@
       "title": "16 \u2014 AWS Fundamentals",
       "order": 17,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1367
+      "published_revision_id": 1367,
+      "slug": "Level-16-AWS-Fundamentals"
     },
     {
       "id": 1368,
@@ -2950,7 +3318,8 @@
       "title": "17 \u2014 Amazon EKS",
       "order": 18,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1368
+      "published_revision_id": 1368,
+      "slug": "Level-17-Amazon-EKS"
     },
     {
       "id": 1369,
@@ -2958,7 +3327,8 @@
       "title": "18 \u2014 EKS Networking",
       "order": 19,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1369
+      "published_revision_id": 1369,
+      "slug": "Level-18-EKS-Networking"
     },
     {
       "id": 1370,
@@ -2966,7 +3336,8 @@
       "title": "19 \u2014 Git For DevOps",
       "order": 20,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1370
+      "published_revision_id": 1370,
+      "slug": "Level-19-Git-for-DevOps"
     },
     {
       "id": 1371,
@@ -2974,7 +3345,8 @@
       "title": "20 \u2014 CICD Pipelines",
       "order": 21,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1371
+      "published_revision_id": 1371,
+      "slug": "Level-20-CICD-Pipelines"
     },
     {
       "id": 1372,
@@ -2982,7 +3354,8 @@
       "title": "21 \u2014 Terraform EKS",
       "order": 22,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1372
+      "published_revision_id": 1372,
+      "slug": "Level-21-Terraform-EKS"
     },
     {
       "id": 1373,
@@ -2990,7 +3363,8 @@
       "title": "22 \u2014 Helm",
       "order": 23,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1373
+      "published_revision_id": 1373,
+      "slug": "Level-22-Helm"
     },
     {
       "id": 1374,
@@ -2998,7 +3372,8 @@
       "title": "23 \u2014 GitOps ArgoCD",
       "order": 24,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1374
+      "published_revision_id": 1374,
+      "slug": "Level-23-GitOps-ArgoCD"
     },
     {
       "id": 1375,
@@ -3006,7 +3381,8 @@
       "title": "24 \u2014 Monitoring Observability",
       "order": 25,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1375
+      "published_revision_id": 1375,
+      "slug": "Level-24-Monitoring-Observability"
     },
     {
       "id": 1376,
@@ -3014,7 +3390,8 @@
       "title": "25 \u2014 Production Operations",
       "order": 26,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1376
+      "published_revision_id": 1376,
+      "slug": "Level-25-Production-Operations"
     },
     {
       "id": 1377,
@@ -3022,7 +3399,8 @@
       "title": "26 \u2014 Troubleshooting",
       "order": 27,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1377
+      "published_revision_id": 1377,
+      "slug": "Level-26-Troubleshooting"
     },
     {
       "id": 1378,
@@ -3030,7 +3408,8 @@
       "title": "27 \u2014 Production Incidents",
       "order": 28,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1378
+      "published_revision_id": 1378,
+      "slug": "Level-27-Production-Incidents"
     },
     {
       "id": 1379,
@@ -3038,7 +3417,8 @@
       "title": "28 \u2014 Enterprise Architecture",
       "order": 29,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1379
+      "published_revision_id": 1379,
+      "slug": "Level-28-Enterprise-Architecture"
     },
     {
       "id": 1380,
@@ -3046,7 +3426,8 @@
       "title": "29 \u2014 Interview Question Bank",
       "order": 30,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1380
+      "published_revision_id": 1380,
+      "slug": "Level-29-Interview-Question-Bank"
     },
     {
       "id": 1381,
@@ -3054,7 +3435,8 @@
       "title": "30 \u2014 Capstone Projects",
       "order": 31,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1381
+      "published_revision_id": 1381,
+      "slug": "Level-30-Capstone-Projects"
     },
     {
       "id": 1382,
@@ -3062,7 +3444,8 @@
       "title": "Kubernetes AWS EKS Master Curriculum",
       "order": 32,
       "content_base": "/kubernetes/",
-      "published_revision_id": 1382
+      "published_revision_id": 1382,
+      "slug": "Kubernetes_AWS_EKS_Master_Curriculum"
     },
     {
       "id": 1383,
@@ -3070,7 +3453,8 @@
       "title": "01 \u2014 Introduction To Amazon Bedrock",
       "order": 1,
       "content_base": "/bedrock-deepti/",
-      "published_revision_id": 1383
+      "published_revision_id": 1383,
+      "slug": "Chapter_01_Core_Architecture"
     },
     {
       "id": 1384,
@@ -3078,7 +3462,8 @@
       "title": "02 \u2014 Bedrock AgentCore Production Ready Agents",
       "order": 2,
       "content_base": "/bedrock-deepti/",
-      "published_revision_id": 1384
+      "published_revision_id": 1384,
+      "slug": "Chapter_02_Search_Orders_Recommendations_Analytics"
     },
     {
       "id": 1385,
@@ -3086,7 +3471,8 @@
       "title": "03 \u2014 Building Agentic AI Applications With Strands Agents And MCP",
       "order": 3,
       "content_base": "/bedrock-deepti/",
-      "published_revision_id": 1385
+      "published_revision_id": 1385,
+      "slug": "Chapter_03_Mapping_to_AWS_Services"
     },
     {
       "id": 1386,
@@ -3094,7 +3480,8 @@
       "title": "04 \u2014 AgentCore Runtime Prototype To Production",
       "order": 4,
       "content_base": "/bedrock-deepti/",
-      "published_revision_id": 1386
+      "published_revision_id": 1386,
+      "slug": "chapter-1386"
     },
     {
       "id": 1387,
@@ -3102,7 +3489,8 @@
       "title": "05 \u2014 AgentCore Gateway Connecting Agents To Tools",
       "order": 5,
       "content_base": "/bedrock-deepti/",
-      "published_revision_id": 1387
+      "published_revision_id": 1387,
+      "slug": "chapter-1387"
     },
     {
       "id": 1388,
@@ -3110,7 +3498,8 @@
       "title": "06 \u2014 AgentCore Identity Secure Agent Workflows",
       "order": 6,
       "content_base": "/bedrock-deepti/",
-      "published_revision_id": 1388
+      "published_revision_id": 1388,
+      "slug": "chapter-1388"
     },
     {
       "id": 1389,
@@ -3118,7 +3507,8 @@
       "title": "01 \u2014 Core Architecture",
       "order": 1,
       "content_base": "/ecommerce-architecture/",
-      "published_revision_id": 1389
+      "published_revision_id": 1389,
+      "slug": "Chapter_01_Core_Architecture"
     },
     {
       "id": 1390,
@@ -3126,7 +3516,8 @@
       "title": "02 \u2014 Search Orders Recommendations Analytics",
       "order": 2,
       "content_base": "/ecommerce-architecture/",
-      "published_revision_id": 1390
+      "published_revision_id": 1390,
+      "slug": "Chapter_02_Search_Orders_Recommendations_Analytics"
     },
     {
       "id": 1391,
@@ -3134,7 +3525,8 @@
       "title": "03 \u2014 Mapping To AWS Services",
       "order": 3,
       "content_base": "/ecommerce-architecture/",
-      "published_revision_id": 1391
+      "published_revision_id": 1391,
+      "slug": "Chapter_03_Mapping_to_AWS_Services"
     },
     {
       "id": 1392,
@@ -3142,7 +3534,8 @@
       "title": "01 \u2014 Three Platforms",
       "order": 1,
       "content_base": "/microservices-choose/",
-      "published_revision_id": 1392
+      "published_revision_id": 1392,
+      "slug": "Chapter_01_Three_Platforms"
     },
     {
       "id": 1393,
@@ -3150,7 +3543,8 @@
       "title": "02 \u2014 Decision Framework",
       "order": 2,
       "content_base": "/microservices-choose/",
-      "published_revision_id": 1393
+      "published_revision_id": 1393,
+      "slug": "Chapter_02_Decision_Framework"
     },
     {
       "id": 1394,
@@ -3158,7 +3552,8 @@
       "title": "01 \u2014 Modern Microservice",
       "order": 1,
       "content_base": "/microservices-reinvent/",
-      "published_revision_id": 1394
+      "published_revision_id": 1394,
+      "slug": "Chapter_01_Modern_Microservice"
     },
     {
       "id": 1395,
@@ -3166,7 +3561,8 @@
       "title": "02 \u2014 Space Migration App",
       "order": 2,
       "content_base": "/microservices-reinvent/",
-      "published_revision_id": 1395
+      "published_revision_id": 1395,
+      "slug": "Chapter_02_Space_Migration_App"
     },
     {
       "id": 1396,
@@ -3174,7 +3570,8 @@
       "title": "03 \u2014 Observability Operations",
       "order": 3,
       "content_base": "/microservices-reinvent/",
-      "published_revision_id": 1396
+      "published_revision_id": 1396,
+      "slug": "Chapter_03_Observability_Operations"
     },
     {
       "id": 1397,
@@ -3189,7 +3586,8 @@
       "duration": "1.5 hours",
       "color": "#ef4444",
       "color_bg": "#fef2f2",
-      "lessons": 3
+      "lessons": 3,
+      "slug": "module-01"
     },
     {
       "id": 1398,
@@ -3204,7 +3602,8 @@
       "duration": "1.5 hours",
       "color": "#22c55e",
       "color_bg": "#f0fdf4",
-      "lessons": 3
+      "lessons": 3,
+      "slug": "module-02"
     },
     {
       "id": 1399,
@@ -3219,7 +3618,8 @@
       "duration": "1.5 hours",
       "color": "#f97316",
       "color_bg": "#fff7ed",
-      "lessons": 3
+      "lessons": 3,
+      "slug": "module-03"
     },
     {
       "id": 1400,
@@ -3234,7 +3634,8 @@
       "duration": "1.5 hours",
       "color": "#6366f1",
       "color_bg": "#eef2ff",
-      "lessons": 3
+      "lessons": 3,
+      "slug": "module-04"
     },
     {
       "id": 1401,
@@ -3249,7 +3650,8 @@
       "duration": "1.5 hours",
       "color": "#06b6d4",
       "color_bg": "#ecfeff",
-      "lessons": 3
+      "lessons": 3,
+      "slug": "module-05"
     },
     {
       "id": 1402,
@@ -3264,7 +3666,8 @@
       "duration": "1.5 hours",
       "color": "#a855f7",
       "color_bg": "#faf5ff",
-      "lessons": 3
+      "lessons": 3,
+      "slug": "module-06"
     },
     {
       "id": 1403,
@@ -3279,7 +3682,8 @@
       "duration": "1.5 hours",
       "color": "#0ea5e9",
       "color_bg": "#f0f9ff",
-      "lessons": 3
+      "lessons": 3,
+      "slug": "module-07"
     },
     {
       "id": 1404,
@@ -3294,7 +3698,8 @@
       "duration": "3 hours",
       "color": "var(--color-primary-500)",
       "color_bg": "var(--color-primary-50)",
-      "lessons": 5
+      "lessons": 5,
+      "slug": "module-08"
     },
     {
       "id": 1405,
@@ -3309,7 +3714,8 @@
       "duration": "2.5 hours",
       "color": "var(--color-accent-500)",
       "color_bg": "var(--color-accent-50)",
-      "lessons": 3
+      "lessons": 3,
+      "slug": "module-09"
     },
     {
       "id": 1406,
@@ -3324,7 +3730,8 @@
       "duration": "3 hours",
       "color": "#3b82f6",
       "color_bg": "#eff6ff",
-      "lessons": 3
+      "lessons": 3,
+      "slug": "module-10"
     },
     {
       "id": 1407,
@@ -3339,7 +3746,8 @@
       "duration": "2 hours",
       "color": "#8b5cf6",
       "color_bg": "#f5f3ff",
-      "lessons": 3
+      "lessons": 3,
+      "slug": "module-11"
     },
     {
       "id": 1408,
@@ -3354,7 +3762,8 @@
       "duration": "2.5 hours",
       "color": "#ec4899",
       "color_bg": "#fdf2f8",
-      "lessons": 3
+      "lessons": 3,
+      "slug": "module-12"
     },
     {
       "id": 1409,
@@ -3369,7 +3778,8 @@
       "duration": "2 hours",
       "color": "#14b8a6",
       "color_bg": "#f0fdfa",
-      "lessons": 3
+      "lessons": 3,
+      "slug": "module-13"
     },
     {
       "id": 1410,
@@ -3384,7 +3794,8 @@
       "duration": "2.5 hours",
       "color": "#f59e0b",
       "color_bg": "#fffbeb",
-      "lessons": 3
+      "lessons": 3,
+      "slug": "module-14"
     },
     {
       "id": 1411,
@@ -3399,7 +3810,8 @@
       "duration": "1.5 hours",
       "color": "#f43f5e",
       "color_bg": "#fff1f2",
-      "lessons": 3
+      "lessons": 3,
+      "slug": "module-15"
     },
     {
       "id": 1412,
@@ -3414,7 +3826,8 @@
       "duration": "1.5 hours",
       "color": "#3b82f6",
       "color_bg": "#eff6ff",
-      "lessons": 3
+      "lessons": 3,
+      "slug": "module-16"
     },
     {
       "id": 1413,
@@ -3429,7 +3842,8 @@
       "duration": "1 hour",
       "color": "#8b5cf6",
       "color_bg": "#f5f3ff",
-      "lessons": 3
+      "lessons": 3,
+      "slug": "module-17"
     },
     {
       "id": 1414,
@@ -3444,7 +3858,8 @@
       "duration": "1.5 hours",
       "color": "#10b981",
       "color_bg": "#ecfdf5",
-      "lessons": 3
+      "lessons": 3,
+      "slug": "module-18"
     },
     {
       "id": 1415,
@@ -3459,7 +3874,8 @@
       "duration": "1 hour",
       "color": "#f59e0b",
       "color_bg": "#fffbeb",
-      "lessons": 3
+      "lessons": 3,
+      "slug": "module-19"
     },
     {
       "id": 1416,
@@ -3474,7 +3890,8 @@
       "duration": "1.5 hours",
       "color": "#0ea5e9",
       "color_bg": "#f0f9ff",
-      "lessons": 3
+      "lessons": 3,
+      "slug": "module-20"
     },
     {
       "id": 1417,
@@ -3489,7 +3906,8 @@
       "duration": "2 hours",
       "color": "#6366f1",
       "color_bg": "#eef2ff",
-      "lessons": 3
+      "lessons": 3,
+      "slug": "module-21"
     },
     {
       "id": 1418,
@@ -3504,7 +3922,8 @@
       "duration": "75 min",
       "color": "#f59e0b",
       "color_bg": "#fef3c7",
-      "lessons": 9
+      "lessons": 9,
+      "slug": "module-22"
     },
     {
       "id": 1419,
@@ -3519,7 +3938,8 @@
       "duration": "65 min",
       "color": "#f59e0b",
       "color_bg": "#fef3c7",
-      "lessons": 8
+      "lessons": 8,
+      "slug": "module-23"
     },
     {
       "id": 1420,
@@ -3534,7 +3954,8 @@
       "duration": "60 min",
       "color": "#f59e0b",
       "color_bg": "#fef3c7",
-      "lessons": 7
+      "lessons": 7,
+      "slug": "module-24"
     },
     {
       "id": 1421,
@@ -3549,7 +3970,8 @@
       "duration": "70 min",
       "color": "#0ea5e9",
       "color_bg": "#e0f2fe",
-      "lessons": 6
+      "lessons": 6,
+      "slug": "module-25"
     },
     {
       "id": 1422,
@@ -3564,7 +3986,8 @@
       "duration": "70 min",
       "color": "#0ea5e9",
       "color_bg": "#e0f2fe",
-      "lessons": 6
+      "lessons": 6,
+      "slug": "module-26"
     },
     {
       "id": 1423,
@@ -3579,7 +4002,8 @@
       "duration": "65 min",
       "color": "#0ea5e9",
       "color_bg": "#e0f2fe",
-      "lessons": 6
+      "lessons": 6,
+      "slug": "module-27"
     },
     {
       "id": 1424,
@@ -3594,7 +4018,8 @@
       "duration": "60 min",
       "color": "#0ea5e9",
       "color_bg": "#e0f2fe",
-      "lessons": 6
+      "lessons": 6,
+      "slug": "module-28"
     },
     {
       "id": 1425,
@@ -3609,7 +4034,8 @@
       "duration": "75 min",
       "color": "#10b981",
       "color_bg": "#d1fae5",
-      "lessons": 6
+      "lessons": 6,
+      "slug": "module-29"
     },
     {
       "id": 1426,
@@ -3624,7 +4050,8 @@
       "duration": "60 min",
       "color": "#10b981",
       "color_bg": "#d1fae5",
-      "lessons": 6
+      "lessons": 6,
+      "slug": "module-30"
     },
     {
       "id": 1427,
@@ -3639,7 +4066,8 @@
       "duration": "60 min",
       "color": "#10b981",
       "color_bg": "#d1fae5",
-      "lessons": 5
+      "lessons": 5,
+      "slug": "module-31"
     },
     {
       "id": 1428,
@@ -3654,7 +4082,8 @@
       "duration": "60 min",
       "color": "#10b981",
       "color_bg": "#d1fae5",
-      "lessons": 5
+      "lessons": 5,
+      "slug": "module-32"
     },
     {
       "id": 1429,
@@ -3669,7 +4098,8 @@
       "duration": "60 min",
       "color": "#10b981",
       "color_bg": "#d1fae5",
-      "lessons": 4
+      "lessons": 4,
+      "slug": "module-33"
     },
     {
       "id": 1430,
@@ -3684,7 +4114,8 @@
       "duration": "60 min",
       "color": "#10b981",
       "color_bg": "#d1fae5",
-      "lessons": 4
+      "lessons": 4,
+      "slug": "module-34"
     },
     {
       "id": 1431,
@@ -3699,7 +4130,8 @@
       "duration": "60 min",
       "color": "#ec4899",
       "color_bg": "#fce7f3",
-      "lessons": 4
+      "lessons": 4,
+      "slug": "module-35"
     },
     {
       "id": 1432,
@@ -3714,7 +4146,8 @@
       "duration": "50 min",
       "color": "#ec4899",
       "color_bg": "#fce7f3",
-      "lessons": 4
+      "lessons": 4,
+      "slug": "module-36"
     },
     {
       "id": 1433,
@@ -3729,7 +4162,8 @@
       "duration": "75 min",
       "color": "#ec4899",
       "color_bg": "#fce7f3",
-      "lessons": 4
+      "lessons": 4,
+      "slug": "module-37"
     },
     {
       "id": 1434,
@@ -3744,7 +4178,8 @@
       "duration": "60 min",
       "color": "#059669",
       "color_bg": "#ecfdf5",
-      "lessons": 4
+      "lessons": 4,
+      "slug": "module-38"
     },
     {
       "id": 1435,
@@ -3759,7 +4194,8 @@
       "duration": "75 min",
       "color": "#0284c7",
       "color_bg": "#f0f9ff",
-      "lessons": 4
+      "lessons": 4,
+      "slug": "module-39"
     },
     {
       "id": 1436,
@@ -3774,7 +4210,8 @@
       "duration": "80 min",
       "color": "#d97706",
       "color_bg": "#fffbeb",
-      "lessons": 4
+      "lessons": 4,
+      "slug": "module-40"
     },
     {
       "id": 1437,
@@ -3789,7 +4226,8 @@
       "duration": "70 min",
       "color": "#7c3aed",
       "color_bg": "#f5f3ff",
-      "lessons": 4
+      "lessons": 4,
+      "slug": "module-41"
     },
     {
       "id": 1438,
@@ -3804,7 +4242,8 @@
       "duration": "85 min",
       "color": "#db2777",
       "color_bg": "#fdf2f8",
-      "lessons": 4
+      "lessons": 4,
+      "slug": "module-42"
     },
     {
       "id": 1439,
@@ -3819,7 +4258,8 @@
       "duration": "65 min",
       "color": "#dc2626",
       "color_bg": "#fef2f2",
-      "lessons": 4
+      "lessons": 4,
+      "slug": "module-43"
     },
     {
       "id": 1440,
@@ -3834,7 +4274,8 @@
       "duration": "60 min",
       "color": "#4f46e5",
       "color_bg": "#eef2ff",
-      "lessons": 4
+      "lessons": 4,
+      "slug": "module-44"
     },
     {
       "id": 1441,
@@ -3849,7 +4290,8 @@
       "duration": "75 min",
       "color": "#0891b2",
       "color_bg": "#ecfeff",
-      "lessons": 4
+      "lessons": 4,
+      "slug": "module-45"
     },
     {
       "id": 1442,
@@ -3864,7 +4306,8 @@
       "duration": "60 min",
       "color": "#65a30d",
       "color_bg": "#f7fee7",
-      "lessons": 4
+      "lessons": 4,
+      "slug": "module-46"
     },
     {
       "id": 1443,
@@ -3879,7 +4322,8 @@
       "duration": "70 min",
       "color": "#16a34a",
       "color_bg": "#f0fdf4",
-      "lessons": 4
+      "lessons": 4,
+      "slug": "module-47"
     }
   ],
   "page": 1,

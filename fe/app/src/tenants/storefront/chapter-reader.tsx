@@ -12,6 +12,7 @@
 import { useMemo, useState } from "react";
 import { useNav } from "@/platform/navigation";
 import { useLanguage } from "@/components/shared/use-language";
+import { useTheme } from "@/components/shared/use-theme";
 import { Pressable, Text, View } from "@/platform/primitives";
 import { useRenderEngine } from "@/engine/render-engine/features/render-engine-context";
 import { parseMd, type MdSection } from "./md-sections";
@@ -23,6 +24,7 @@ const toItems = (res: any): any[] =>
 export default function ChapterReader({ content, actionData, session }: any) {
   const navigate = useNav().navigate;
   const { t } = useLanguage();
+  const { theme, setTheme } = useTheme();
   const { componentMap } = useRenderEngine();
   const [popup, setPopup] = useState<"detail" | "notes" | null>(null);
   const [noteDraft, setNoteDraft] = useState("");
@@ -93,8 +95,10 @@ export default function ChapterReader({ content, actionData, session }: any) {
       kind: "chapter",
       at: new Date().toISOString(),
     });
-    navigate(`${readerPath}/${ch.id}`);
+    navigate(`${readerPath}/${ch.slug || ch.id}`);
   };
+
+  const tb = content?.topbar;
 
   if (actionData?.loading) {
     return (
@@ -105,7 +109,56 @@ export default function ChapterReader({ content, actionData, session }: any) {
   }
 
   return (
-    <View className="reader-layout">
+    <View className="reader-page">
+      {tb && (
+        <View className="reader-topbar">
+          <View className="reader-topbar-brand">
+            <Pressable
+              className="reader-topbar-logo"
+              onPress={() => navigate(tb.home || "/")}
+            >
+              {tb.logo || ""}
+            </Pressable>
+            <View className="reader-topbar-divider" />
+            <Text className="reader-topbar-title">
+              {(tb.title_tpl || "{title}")
+                .replace("{no}", String(chapter?.order ?? "").padStart(2, "0"))
+                .replace("{title}", chapter?.title || "")}
+            </Text>
+          </View>
+          <View className="reader-topbar-actions">
+            <Pressable className="topbar-btn" onPress={() => setPopup("detail")}>
+              {tb.details_label || `📄 ${t("popup.detailedChapter")}`}
+            </Pressable>
+            <Pressable className="topbar-btn" onPress={() => setPopup("notes")}>
+              {tb.notes_label || `🧪 ${t("popup.labNotes")}`}
+            </Pressable>
+            {tb.theme_toggle !== false && (
+              <Pressable
+                className="topbar-btn topbar-btn-theme"
+                onPress={() =>
+                  setTheme(
+                    theme === (tb.dark_theme || "uday-dark")
+                      ? tb.light_theme || "default"
+                      : tb.dark_theme || "uday-dark",
+                  )
+                }
+              >
+                {theme === (tb.dark_theme || "uday-dark") ? "☀️" : "🌙"}
+              </Pressable>
+            )}
+            {siblings.length > 0 && (
+              <View className="topbar-progress">
+                <Text>{pct}%</Text>
+                <View className="topbar-progress-bar">
+                  <View className="topbar-progress-fill" style={{ width: `${pct}%` }} />
+                </View>
+              </View>
+            )}
+          </View>
+        </View>
+      )}
+      <View className="reader-layout">
       {siblings.length > 0 && (
         <View as="aside" className="reader-sidebar">
           <Text className="reader-sidebar-label">{t("sidebar.modules")}</Text>
@@ -130,29 +183,31 @@ export default function ChapterReader({ content, actionData, session }: any) {
         </View>
       )}
       <View as="article" className="chapter-reader">
-        <View className="chapter-topbar">
-          <Pressable
-            className="back-link"
-            onPress={() =>
-              navigate(
-                `${content?.back_path || "/courses"}/${chapter?.course_id ?? ""}`,
-              )
-            }
-          >
-            {content?.back_label || t("common.backToCourse")}
-          </Pressable>
-          <View className="chapter-topbar-actions">
-            <Pressable className="btn btn-secondary" onPress={() => setPopup("detail")}>
-              📄 {t("popup.detailedChapter")}
+        {!tb && (
+          <View className="chapter-topbar">
+            <Pressable
+              className="back-link"
+              onPress={() =>
+                navigate(
+                  `${content?.back_path || "/courses"}/${chapter?.course_id ?? ""}`,
+                )
+              }
+            >
+              {content?.back_label || t("common.backToCourse")}
             </Pressable>
-            <Pressable className="btn btn-secondary" onPress={() => setPopup("notes")}>
-              📝 {t("popup.labNotes")}
-            </Pressable>
-            {siblings.length > 0 && (
-              <Text className="reader-side-pct">{pct}%</Text>
-            )}
+            <View className="chapter-topbar-actions">
+              <Pressable className="btn btn-secondary" onPress={() => setPopup("detail")}>
+                📄 {t("popup.detailedChapter")}
+              </Pressable>
+              <Pressable className="btn btn-secondary" onPress={() => setPopup("notes")}>
+                📝 {t("popup.labNotes")}
+              </Pressable>
+              {siblings.length > 0 && (
+                <Text className="reader-side-pct">{pct}%</Text>
+              )}
+            </View>
           </View>
-        </View>
+        )}
         <View className="chapter-meta-row">
           {chapter?.difficulty && (
             <Text className={`badge difficulty-${chapter.difficulty}`}>
@@ -287,6 +342,7 @@ export default function ChapterReader({ content, actionData, session }: any) {
           </View>
         </View>
       )}
+      </View>
     </View>
   );
 }

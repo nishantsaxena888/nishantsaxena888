@@ -32,7 +32,7 @@ const ROUTES = {
     "/admin", "/admin/overview", "/admin/product", "/admin/order",
   ],
   uday: [
-    "/", "/courses", "/courses/149", "/learn/1000", "/my-learning", "/guide",
+    "/", "/courses", "/courses/149", "/chapter/1000", "/my-learning", "/guide",
     "/admin", "/admin/overview", "/admin/course", "/admin/revision",
     "/admin/review-queue",
   ],
@@ -240,7 +240,7 @@ for (const [client, routes] of Object.entries(ROUTES)) {
     const rows = await page.locator(".chapter-row").count();
     check(rows > 0, "uday course detail → chapters", `${rows} chapters`);
 
-    await goto(page, "/learn/1000");
+    await goto(page, "/chapter/1000");
     const reader = await page.locator(".chapter-reader").count();
     const quiz = await page.locator(".quiz-card").count();
     check(

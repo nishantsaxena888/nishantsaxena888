@@ -572,7 +572,10 @@ async function resolveMock(
       : matchId !== undefined && Array.isArray((file as any)?.items)
         ? (file as any).items.find(
             (item: any) =>
-              item && String(item.id ?? item.pk ?? item._id) === String(matchId),
+              item &&
+              [item.id, item.pk, item._id, item.slug, item.code].some(
+                (k: any) => k != null && String(k) === String(matchId),
+              ),
           )
         : file;
   if (

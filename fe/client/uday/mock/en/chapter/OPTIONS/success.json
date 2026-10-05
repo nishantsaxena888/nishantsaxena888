@@ -19,6 +19,9 @@
         "type": "int",
         "default": 0
       },
+      "slug": {
+        "type": "str"
+      },
       "content_base": {
         "type": "str"
       },
