@@ -245,3 +245,110 @@ and hit `/docs` for API checks.
 - `AGENTS.md` (repo root — condensed version of this file)
 - `AWS_Services_Summary.md`, `COLLEGE_HARDWARE_LAB_PROPOSAL_AND_SOPS.md`
 - Sibling docs: `ns.md` (frontend engine), `nishify.md` (entity platform)
+
+---
+
+## Replica Flow Map (framework implementation — `uday` client)
+
+Every route is a JSON page def; components resolve through the generic
+storefront map (uday tenant registers zero page-level overrides — everything
+below runs on shared components).
+
+### Site routes
+
+```
+/                       landing            actions: categories, courses,
+                                           chapters, quiz_submission
+                        ├─ hero            copy/stats from content
+                        ├─ journey         18 stage pills (content)
+                        ├─ features        6 cards (content)
+                        ├─ dashboard       stats ← session counts +
+                        │                  action counts + progress %
+                        │                  (session items / total_key)
+                        ├─ categories      category entities + course
+                        │                  counts → /courses?category=N
+                        ├─ achievements    badge cards; earned_session
+                        │                  ids light up
+                        └─ footer          content
+
+/courses                nav-back + course-list
+                        actions: data(course), categories, chapters
+                        ├─ ?category=N     query filter (filter_param/
+                        │                  filter_field from content)
+                        ├─ card meta       category icon/colors, status
+                        │                  badge, chapter count
+                        └─ click           → /courses/:id + recent session
+
+/courses/:id            course-detail      actions: course(:id), chapters,
+                                           enroll(lazy POST enrollment)
+                        ├─ ← Back link     content.back_label/back_path
+                        ├─ module cards    number bubble, icon, progress
+                        │                  bar, difficulty/duration/lessons
+                        └─ Enroll          POST → overlay-persisted
+
+/learn/:id              chapter-reader     actions: chapter(:id), revisions,
+                                           chapters(siblings), submit_quiz
+                                           (lazy POST), save_notes(lazy)
+                        ├─ MODULES sidebar same-course chapters, ✓ done,
+                        │                  orange active, % chip
+                        ├─ MdDoc           headings/lists/tables/code/
+                        │                  mermaid/callouts/quiz/video/
+                        │                  hotspot/gallery/images/
+                        │                  md-<tag> custom widgets
+                        ├─ TOC rail        heading anchors (mdAnchor)
+                        ├─ modals          Detailed Chapter + Lab Notes
+                        └─ prev/next       sibling order
+
+/my-learning            nav-back + session-list ×3 (recent, progress,
+                        bookmark) — empty_text/continue_label configured
+/guide                  nav-back + md-viewer (inline md, toc, quiz,
+                        md-githubexplorer widget demo)
+/login, /register       auth-layout (mock POST → dev JWT)
+```
+
+### Admin routes (all generated CRUD + workflow)
+
+```
+/admin/overview         overview
+/admin/<entity>         auto-CRUD for category, course, chapter, revision,
+                        comment, course_release, enrollment, progress,
+                        lab_note, quiz_submission (OPTIONS-driven)
+/admin/review-queue     revision-pipeline — draft/in_review/published/
+                        rejected columns; approve/reject = PUT revision/:rid
+                        (lazy action, overlay-persisted); rollback = new
+                        draft revision
+```
+
+### Component reuse ledger
+
+| Component | Location | Used by | Hardcoded domain? |
+|---|---|---|---|
+| landing | `src/tenants/storefront/` | uday (any client) | no — all copy via content |
+| course-list | storefront | uday + skillom | no — fields/actions via content |
+| course-detail | storefront | uday + skillom | no |
+| chapter-reader | storefront | uday + skillom | no |
+| md-render/md-sections/md-viewer | storefront | uday + skillom + guide | no |
+| mermaid-diagram | storefront | any md content | no |
+| nav-back | storefront | uday pages | no |
+| revision-pipeline | `src/tenants/admin/` | uday + skillom admin | no — status set via entity |
+| uday-hero / uday-overview | `fe/client/uday/` | uday only | client-scoped branding |
+| md-githubexplorer | `fe/client/uday/site/components/` | uday md directives | client widget (graceful fallback elsewhere) |
+
+Uday-specific surface = `configuration.json` (copy/layout/routes/sessions/
+theme), `site/styles.css` (scoped tokens), `entities.py` + `seed/`, one
+branding comp per surface, one md widget.
+
+### Mock fidelity (`fe/client/uday/mock/`)
+
+| Original behavior | Mocked as-is? |
+|---|---|
+| Content catalog (56 courses/454 chapters/456 revisions) | ✅ exact seed from `docsRegistry` + `courseRegistry` |
+| List/detail/param reads | ✅ `entity/:id`, `?course_id=` filters |
+| Writes (enroll, quiz submit, revision approve, notes) | ✅ overlay-persisted (localStorage `mockw:`), reads reflect writes, refresh-safe |
+| Progress/bookmark/recent | ✅ sessions → `uday_gs_*` localStorage |
+| en/hi translations | ✅ `mock/{en,hi}/translations` |
+| Auth (login → JWT, role claim) | ✅ mock login → dev token; admin gated |
+| Mermaid/images | ✅ real render (mermaid.js + symlinked assets via link-assets.sh) |
+| TerminalEngine / ConsoleSimulator / ChallengeEngine | ⚠️ render as code/callout — engines not ported |
+| Lab-note editor in popup | ⚠️ modal exists; rich contenteditable editor pending |
+| Achievements granting logic | ⚠️ display only — `_checkAchievements` equivalent pending |
