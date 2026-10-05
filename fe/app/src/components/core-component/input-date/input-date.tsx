@@ -14,9 +14,16 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-function formatDate(date: Date | undefined) {
-  if (!date) return "";
-  return date.toLocaleDateString("en-US", {
+function toDate(value: Date | string | undefined): Date | undefined {
+  if (!value) return undefined;
+  const d = value instanceof Date ? value : new Date(value);
+  return isNaN(d.getTime()) ? undefined : d;
+}
+
+function formatDate(date: Date | string | undefined) {
+  const d = toDate(date);
+  if (!d) return "";
+  return d.toLocaleDateString("en-US", {
     day: "2-digit",
     month: "long",
     year: "numeric",
@@ -28,7 +35,7 @@ function isValidDate(date: Date | undefined) {
 }
 
 type DateFieldProps = {
-  value?: Date;
+  value?: Date | string;
   onChange?: (date: Date | undefined) => void;
   minDate?: Date;
   maxDate?: Date;
@@ -59,8 +66,8 @@ export const InputDate = ({
   onBlur,
 }: DateFieldProps) => {
   const [open, setOpen] = React.useState(false);
-  const [date, setDate] = React.useState<Date | undefined>(value);
-  const [month, setMonth] = React.useState<Date | undefined>(value);
+  const [date, setDate] = React.useState<Date | undefined>(() => toDate(value));
+  const [month, setMonth] = React.useState<Date | undefined>(() => toDate(value));
   const [inputValue, setInputValue] = React.useState(formatDate(value));
   const [internalError, setInternalError] = React.useState<string | undefined>(error);
 
@@ -75,8 +82,9 @@ export const InputDate = ({
   const [prevSyncedValue, setPrevSyncedValue] = React.useState(value);
   if (value !== prevSyncedValue) {
     setPrevSyncedValue(value);
-    setDate(value);
-    setMonth(value);
+    const d = toDate(value);
+    setDate(d);
+    setMonth(d);
     setInputValue(formatDate(value));
   }
 
