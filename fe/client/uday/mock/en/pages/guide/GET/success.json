@@ -4,6 +4,18 @@
   },
   "config": [
     {
+      "id": "nav-back",
+      "type": "nav-back",
+      "properties": {
+        "level": "base",
+        "type": "static"
+      },
+      "content": {
+        "label": "\u2190 Back to Home",
+        "to": "/"
+      }
+    },
+    {
       "id": "guide-doc",
       "type": "md-viewer",
       "properties": {

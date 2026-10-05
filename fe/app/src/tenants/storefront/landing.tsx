@@ -8,8 +8,14 @@
 //               `to` is a route; "#id" scrolls to an in-page anchor.
 //   journey     {title, subtitle, stages:[string]}
 //   features    {title, subtitle, cards:[{icon,bg,title,desc}]}
-//   dashboard   {title, subtitle, stats:[{icon,bg,fg,label,suffix,
-//                session | value}]} — `session` shows the session item count
+//   dashboard   {title, subtitle, stats:[{icon,bg,fg,label,suffix}]} —
+//               stat value sources (first match wins):
+//                 session:   session item count
+//                 count_key: actionData[key] item count
+//                 total_key: with session → percent of actionData[total_key]
+//                 value:     literal
+//   achievements {title, subtitle, items:[{icon,title,desc}], earned_session}
+//               — badge cards; earned_session ids get "earned" styling.
 //   categories  {title, subtitle, key:"categories", count_key:"courses",
 //                count_field:"category_id", path:"/courses", param:"category",
 //                fields:{title,desc,icon,color,bg}} — cards feed from
@@ -134,20 +140,32 @@ export default function Landing({ content, actionData, session }: any) {
       {c.dashboard?.stats?.length > 0 && (
         <Section id="dashboard" title={c.dashboard.title} subtitle={c.dashboard.subtitle}>
           <View className="dashboard-grid">
-            {c.dashboard.stats.map((s: any, i: number) => (
-              <View key={i} className="stat-card">
-                <View className="stat-card-icon" style={{ background: s.bg, color: s.fg }}>
-                  {s.icon}
-                </View>
-                <View>
-                  <View className="stat-card-value">
-                    {s.session ? (session?.items(s.session)?.length ?? 0) : (s.value ?? 0)}
-                    {s.suffix || ""}
+            {c.dashboard.stats.map((s: any, i: number) => {
+              const n = s.session
+                ? (session?.items(s.session)?.length ?? 0)
+                : s.count_key
+                  ? toItems(actionData?.data?.[s.count_key]).length
+                  : (s.value ?? 0);
+              const total = s.total_key
+                ? toItems(actionData?.data?.[s.total_key]).length
+                : 0;
+              const val =
+                s.total_key && total > 0 ? Math.round((n / total) * 100) : n;
+              return (
+                <View key={i} className="stat-card">
+                  <View className="stat-card-icon" style={{ background: s.bg, color: s.fg }}>
+                    {s.icon}
                   </View>
-                  <View className="stat-card-label">{s.label}</View>
+                  <View>
+                    <View className="stat-card-value">
+                      {val}
+                      {s.suffix || ""}
+                    </View>
+                    <View className="stat-card-label">{s.label}</View>
+                  </View>
                 </View>
-              </View>
-            ))}
+              );
+            })}
           </View>
         </Section>
       )}
@@ -174,6 +192,32 @@ export default function Landing({ content, actionData, session }: any) {
                 </View>
               </Pressable>
             ))}
+          </View>
+        </Section>
+      )}
+
+      {c.achievements?.items?.length > 0 && (
+        <Section title={c.achievements.title} subtitle={c.achievements.subtitle}>
+          <View className="achievements-grid">
+            {c.achievements.items.map((a: any, i: number) => {
+              const earned = a.id
+                ? (session?.items(c.achievements.earned_session || "achievement") || []).some(
+                    (r: any) => r.id === a.id,
+                  )
+                : false;
+              return (
+                <View
+                  key={a.id || i}
+                  className={`achievement-card${earned ? " earned" : ""}`}
+                >
+                  <View className="achievement-icon">{a.icon}</View>
+                  <View>
+                    <View className="achievement-title">{a.title}</View>
+                    {a.desc && <Text as="p" className="achievement-desc">{a.desc}</Text>}
+                  </View>
+                </View>
+              );
+            })}
           </View>
         </Section>
       )}

@@ -25,6 +25,22 @@
             "queryParams": {
               "size": 500
             }
+          },
+          {
+            "key": "chapters",
+            "endpoint": "chapter",
+            "method": "GET",
+            "queryParams": {
+              "size": 500
+            }
+          },
+          {
+            "key": "quiz_submission",
+            "endpoint": "quiz_submission",
+            "method": "GET",
+            "queryParams": {
+              "size": 500
+            }
           }
         ]
       },
@@ -129,49 +145,51 @@
         },
         "dashboard": {
           "title": "Your Progress",
-          "subtitle": "Track your learning journey across all courses.",
+          "subtitle": "Track your learning journey across all 47 chapters.",
           "stats": [
             {
               "icon": "\ud83d\udcca",
               "bg": "#fff7ed",
               "fg": "#f97316",
-              "label": "Chapters Completed",
-              "session": "progress"
+              "label": "Overall Progress",
+              "session": "progress",
+              "total_key": "chapters",
+              "suffix": "%"
             },
             {
-              "icon": "\ud83d\udd16",
-              "bg": "#eff6ff",
-              "fg": "#3b82f6",
-              "label": "Bookmarked",
-              "session": "bookmark"
-            },
-            {
-              "icon": "\ud83d\udd58",
+              "icon": "\u2328\ufe0f",
               "bg": "#ecfdf5",
               "fg": "#10b981",
-              "label": "Recently Viewed",
-              "session": "recent"
+              "label": "Commands Executed",
+              "value": 0
             },
             {
-              "icon": "\ud83d\udcda",
+              "icon": "\ud83e\udde0",
+              "bg": "#eff6ff",
+              "fg": "#3b82f6",
+              "label": "Quizzes Taken",
+              "count_key": "quiz_submission"
+            },
+            {
+              "icon": "\ud83d\udd2c",
               "bg": "#fffbeb",
               "fg": "#f59e0b",
-              "label": "Courses",
-              "value": "56"
+              "label": "Labs Completed",
+              "value": 0
             },
             {
               "icon": "\ud83c\udfc6",
               "bg": "#fdf2f8",
               "fg": "#ec4899",
-              "label": "Quizzes Taken",
-              "session": "quiz"
+              "label": "Challenges Solved",
+              "value": 0
             },
             {
               "icon": "\ud83c\udf96\ufe0f",
               "bg": "#f5f3ff",
               "fg": "#8b5cf6",
               "label": "Achievements",
-              "value": "0"
+              "count_key": "achievement"
             }
           ]
         },
@@ -185,6 +203,67 @@
         "footer": {
           "line1": "AWS Production Masterclass \u2014 Interactive Learning Platform",
           "line2": "Built for learning. Content sourced from AWS documentation and rewritten for interactive instruction.\nAWS, Lambda, and other AWS service names are trademarks of Amazon Web Services, Inc."
+        },
+        "achievements": {
+          "title": "Achievements",
+          "subtitle": "Professional badges earned through mastery.",
+          "earned_session": "achievement",
+          "items": [
+            {
+              "id": "first-steps",
+              "icon": "\ud83d\udc63",
+              "title": "First Steps",
+              "desc": "Complete your first lesson section."
+            },
+            {
+              "id": "module-finisher",
+              "icon": "\ud83c\udfc1",
+              "title": "Module Finisher",
+              "desc": "Complete an entire module end-to-end."
+            },
+            {
+              "id": "five-modules",
+              "icon": "\ud83d\udcda",
+              "title": "Bookworm",
+              "desc": "Complete 5 different modules."
+            },
+            {
+              "id": "half-journey",
+              "icon": "\ud83d\uddfa\ufe0f",
+              "title": "Halfway There",
+              "desc": "Complete at least half of all modules."
+            },
+            {
+              "id": "hands-on",
+              "icon": "\ud83d\udd2c",
+              "title": "Hands-On Learner",
+              "desc": "Finish your first interactive lab."
+            },
+            {
+              "id": "cli-warrior",
+              "icon": "\u2328\ufe0f",
+              "title": "CLI Warrior",
+              "desc": "Execute 10 commands in the simulated terminal."
+            },
+            {
+              "id": "fde-architect",
+              "icon": "\ud83e\udd16",
+              "title": "Forward Deployed Hero",
+              "desc": "Complete the Forward Deployed Engineer (FDE) enterprise AI module."
+            },
+            {
+              "id": "quiz-ace",
+              "icon": "\ud83e\udde0",
+              "title": "Quiz Ace",
+              "desc": "Score 100% on any knowledge check."
+            },
+            {
+              "id": "production-architect",
+              "icon": "\ud83c\udfc6",
+              "title": "Production Architect",
+              "desc": "Reach 90% overall course progress."
+            }
+          ]
         }
       }
     }

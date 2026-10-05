@@ -39,7 +39,11 @@
       "content": {
         "title": "All Courses",
         "cta_label": "Start learning",
-        "detail_path": "/courses"
+        "detail_path": "/courses",
+        "back": {
+          "label": "\u2190 Back to Home",
+          "to": "/"
+        }
       }
     }
   ]

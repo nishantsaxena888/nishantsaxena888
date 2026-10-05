@@ -37,9 +37,12 @@ export const StorefrontSessionList = ({ content, properties }: any) => {
     return (
       <View as="section" className="sf-session-empty">
         <Text as="h1">{content?.title || tr("cart.title", "Your cart")}</Text>
-        <Text as="p">{tr("cart.empty", "Your cart is empty.")}</Text>
+        <Text as="p">
+          {content?.empty_text || tr("cart.empty", "Your cart is empty.")}
+        </Text>
         <Anchor to={continueUrl} className="sf-cta">
-          {tr("cart.continue_shopping", "Continue shopping")}
+          {content?.continue_label ||
+            tr("cart.continue_shopping", "Continue shopping")}
         </Anchor>
       </View>
     );

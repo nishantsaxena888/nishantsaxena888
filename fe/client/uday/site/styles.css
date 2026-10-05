@@ -408,3 +408,31 @@
 }
 .md-table td { padding: 0.6rem 1rem; border-bottom: 1px solid #e2e8f0; color: #334155; }
 .md-table tr:hover td { background: #f8fafc; }
+
+/* achievements grid (landing) */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+.achievement-card {
+  display: flex; gap: 0.9rem; align-items: flex-start;
+  background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
+  padding: 1rem 1.1rem; opacity: 0.55; filter: grayscale(0.6);
+  transition: all 0.18s ease;
+}
+.achievement-card.earned { opacity: 1; filter: none; border-color: #f97316; box-shadow: 0 2px 8px rgba(249,115,22,0.12); }
+.achievement-card:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.achievement-icon { font-size: 1.6rem; line-height: 1; }
+.achievement-title { font-weight: 600; color: #0f172a; font-size: 0.95rem; }
+.achievement-desc { font-size: 0.8rem; color: #64748b; margin-top: 0.15rem; line-height: 1.45; }
+
+/* back link — doc-header style, used when site_nav is off */
+.back-link, .nav-back {
+  display: inline-block; padding: 0.45rem 0.9rem; margin-bottom: 1rem;
+  font-size: 0.875rem; font-weight: 500; color: #475569;
+  border: 1px solid #e2e8f0; border-radius: 8px; background: #fff;
+  cursor: pointer; transition: all 0.15s ease;
+}
+.back-link:hover { color: #0f172a; border-color: #cbd5e1; }
+.nav-back { margin: 1rem 0 0 1rem; }

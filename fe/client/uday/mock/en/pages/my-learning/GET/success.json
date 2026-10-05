@@ -4,6 +4,18 @@
   },
   "config": [
     {
+      "id": "nav-back",
+      "type": "nav-back",
+      "properties": {
+        "level": "base",
+        "type": "static"
+      },
+      "content": {
+        "label": "\u2190 Back to Home",
+        "to": "/"
+      }
+    },
+    {
       "id": "recent-strip",
       "type": "session-list",
       "properties": {
@@ -12,7 +24,10 @@
       },
       "content": {
         "title": "Recently viewed",
-        "session": "recent"
+        "session": "recent",
+        "empty_text": "Nothing here yet.",
+        "continue_label": "Browse courses",
+        "continue_url": "/courses"
       }
     },
     {
@@ -24,7 +39,10 @@
       },
       "content": {
         "title": "My progress",
-        "session": "progress"
+        "session": "progress",
+        "empty_text": "Nothing here yet.",
+        "continue_label": "Browse courses",
+        "continue_url": "/courses"
       }
     },
     {
@@ -36,7 +54,10 @@
       },
       "content": {
         "title": "Bookmarks",
-        "session": "bookmark"
+        "session": "bookmark",
+        "empty_text": "Nothing here yet.",
+        "continue_label": "Browse courses",
+        "continue_url": "/courses"
       }
     }
   ]

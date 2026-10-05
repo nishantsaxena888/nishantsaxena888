@@ -12,6 +12,7 @@ import CourseDetail from "./course-detail";
 import ChapterReader from "./chapter-reader";
 import MdViewer from "./md-viewer";
 import Landing from "./landing";
+import NavBack from "./nav-back";
 
 // Generic storefront building blocks — available to every client's site
 // surface. Type names are domain-neutral UI roles; the domain words
@@ -69,4 +70,5 @@ export const storefront_components = {
   "chapter-reader": ChapterReader,
   // md++ content anywhere — docs/notes/guides/announcements
   "md-viewer": MdViewer,
+  "nav-back": NavBack,
 };

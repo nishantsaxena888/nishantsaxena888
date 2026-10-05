@@ -7,6 +7,7 @@
 //     the card icon/colors (course.category_id → category.emoji/color)
 //     and the filtered-page title
 //   count_key/count_field — second list grouped by fk for "N chapters"
+//   back — {label,to} optional back link rendered above the title
 //   fields — {icon,color,bg,desc,status,title} record field mapping
 import { useNav, useQuery } from "@/platform/navigation";
 import { Pressable, Text, View } from "@/platform/primitives";
@@ -62,6 +63,14 @@ export default function CourseList({ content, actionData, session }: any) {
     <View as="section" className="course-list catalog-page">
       <View className="container">
         <View className="catalog-head">
+          {content?.back && (
+            <Pressable
+              className="back-link"
+              onPress={() => navigate(content.back.to || "/")}
+            >
+              {content.back.label || "← Back"}
+            </Pressable>
+          )}
           {title && <Text as="h2">{title}</Text>}
           {fv && (
             <Text as="p" className="catalog-filter-note">
