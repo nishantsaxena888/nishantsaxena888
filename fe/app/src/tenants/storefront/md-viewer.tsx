@@ -34,15 +34,16 @@ const pickMd = (raw: any): { md?: string; base?: string } => {
 export default function MdViewer({ content, actionData }: any) {
   const { componentMap } = useRenderEngine();
 
-  const source = useMemo((): { md?: string; base?: string } => {
-    if (content?.markdown) return { md: content.markdown };
-    if (content?.md_key) return pickMd(actionData?.data?.[content.md_key]);
-    return {};
-  }, [content?.markdown, content?.md_key, actionData?.data]);
+  const source: { md?: string; base?: string } = content?.markdown
+    ? { md: content.markdown }
+    : content?.md_key
+      ? pickMd(actionData?.data?.[content.md_key])
+      : {};
+  const md = source.md;
 
   const parsed = useMemo(
-    () => (source.md ? parseMd(source.md) : { sections: [] as MdSection[] }),
-    [source.md],
+    () => (md ? parseMd(md) : { sections: [] as MdSection[] }),
+    [md],
   );
 
   // `md-<tag>` convention — client tenant components render extended

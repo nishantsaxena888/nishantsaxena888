@@ -193,19 +193,32 @@ for (const [client, routes] of Object.entries(ROUTES)) {
     );
 
     // review board: status columns + lazy write actions (PUT transition
-    // fires only on click — the mock answers {ok:true}, list reloads)
+    // fires only on click). Mock writes persist now — approving moves
+    // the card from in_review (col 2) to published (col 3) for real.
     await goto(page, "/admin/review-queue");
     const cols = await page.locator(".revision-pipeline .grid > div").count();
     check(cols === 4, "skillom review-queue → 4 status columns", `${cols} cols`);
+    const colCards = (i) =>
+      page.locator(
+        `.revision-pipeline .grid > div:nth-child(${i}) .rounded-md`,
+      );
+    const inReviewBefore = await colCards(2).count();
+    const publishedBefore = await colCards(3).count();
     const approve = page
       .locator("button")
       .filter({ hasText: /^Approve$/ })
       .first();
     if (await approve.count()) {
       await approve.click();
-      await page.waitForTimeout(400);
-      const board = (await page.textContent("body")) || "";
-      check(!board.includes("crashed"), "approve transition no crash");
+      await page.waitForTimeout(800);
+      const inReviewAfter = await colCards(2).count();
+      const publishedAfter = await colCards(3).count();
+      check(
+        inReviewAfter === inReviewBefore - 1 &&
+          publishedAfter === publishedBefore + 1,
+        "approve → mock write persists (card moves columns)",
+        `in_review ${inReviewBefore}→${inReviewAfter}, published ${publishedBefore}→${publishedAfter}`,
+      );
     }
   } catch (e) {
     check(false, "skillom flow", e.message.slice(0, 120));
@@ -256,6 +269,25 @@ for (const [client, routes] of Object.entries(ROUTES)) {
     await goto(page, "/admin/review-queue");
     const cols = await page.locator(".revision-pipeline .grid > div").count();
     check(cols === 4, "uday review-queue → 4 status columns", `${cols} cols`);
+    // enroll persists as a real row — write overlay lands in storage
+    // and the admin enrollment table serves it back.
+    await goto(page, "/courses/3");
+    const enrollBtn = page
+      .locator("button, [role=button]")
+      .filter({ hasText: /enroll/i })
+      .first();
+    if (await enrollBtn.count()) {
+      await enrollBtn.click();
+      await page.waitForTimeout(600);
+      const ov = await page.evaluate(() =>
+        window.localStorage.getItem("mockw:uday:en:enrollment"),
+      );
+      const created = ov ? JSON.parse(ov).creates?.length || 0 : 0;
+      check(created > 0, "uday enroll → mock write persisted", `${created} created`);
+      await goto(page, "/admin/enrollment");
+      const body = (await page.textContent("body")) || "";
+      check(/active/i.test(body), "enrollment row visible in admin table");
+    }
 
     // md++ reusable layer: standalone md-viewer page renders inline
     // markdown, an interactive quiz, AND a client-registered md-<tag>

@@ -30,11 +30,23 @@ const REGISTRY: any = {
   order: { GET: { mock: true, delay: 0, status: 500, response_type: "err" } },
   pinned: { GET: { mock: true, delay: 0, id: "7" } },
   gone: { GET: { mock: true, delay: 0 } }, // flagged, no file
+  doc: {
+    GET: { mock: true, delay: 0 },
+    POST: { mock: true, delay: 0 },
+    PUT: { mock: true, delay: 0 },
+    DELETE: { mock: true, delay: 0 },
+  },
 };
 
 const TREE: any = {
   en: {
     item: { GET: { success: { items: [item] } }, OPTIONS: { success: { ui: 1 } } },
+    doc: {
+      GET: { success: { items: [{ id: 1, title: "One" }, { id: 2, title: "Two" }] } },
+      POST: { success: { ok: true } },
+      PUT: { success: { ok: true } },
+      DELETE: { success: { ok: true } },
+    },
     order: { GET: { err: { message: "boom" } } },
     pinned: { GET: { success: { id: 7 } } },
     loose_only: { GET: { success: { auto: true } } },
@@ -160,6 +172,36 @@ describe("status / response_type", () => {
     expect(r.status_code).toBe(500);
     expect((r.details as any).message).toBe("boom");
     expect(r.data).toBeNull();
+  });
+});
+
+describe("mock writes — demo state actually persists", () => {
+  it("POST appends a row; the next GET serves it", async () => {
+    const w = await apiClient("doc", {
+      method: "post",
+      payload: { title: "Three" },
+    });
+    expect(w.error).toBe(false);
+    expect((w.data as any).title).toBe("Three");
+    expect((w.data as any).id).toBe(3); // next id = max+1
+    const r = await apiClient("doc", { method: "get" });
+    expect((r.data as any).items.map((i: any) => i.title)).toContain("Three");
+  });
+
+  it("PUT doc/2 patches the record; detail read reflects it", async () => {
+    await apiClient("doc", { method: "put", id: 2, payload: { status: "done" } });
+    const r = await apiClient("doc", { method: "get", id: 2 });
+    expect((r.data as any).status).toBe("done");
+  });
+
+  it("DELETE doc/1 removes it from the list", async () => {
+    await apiClient("doc", { method: "delete", id: 1 });
+    const r = await apiClient("doc", { method: "get" });
+    expect((r.data as any).items.map((i: any) => i.id)).not.toContain(1);
+  });
+
+  it("writes never hit the network", () => {
+    expect(axiosCall).not.toHaveBeenCalled();
   });
 });
 

@@ -225,7 +225,13 @@ export const apiClient = async <T = any>(
       // endpoint+method has "mock": true, serve the file from the client's mock
       // tree; a missing file is a 404 (deliberate — flag means "this source",
       // not "try mock first"). Everything else falls through to axios.
-      const mockResponse = await resolveMock(endpoint, method, id, searchParameter);
+      const mockResponse = await resolveMock(
+        endpoint,
+        method,
+        id,
+        searchParameter,
+        payload,
+      );
       if (mockResponse) return mockResponse as ApiResponse<T>;
     // ------------------------------------------------------------------------
 
@@ -339,12 +345,102 @@ export const apiClient = async <T = any>(
   }
 };
 
+// --- mock writes ------------------------------------------------------------
+// Mutating calls on mock-flagged endpoints actually change the data the
+// demo serves: POST appends, PUT/PATCH patches by id, DELETE removes —
+// applied to the endpoint's GET list. Mutations persist as a compact
+// localStorage overlay (creates/updates/deletes replayed over the file),
+// so the demo state survives reloads; wipe key `mockw:<c>:<l>:<ep>` to
+// reset one endpoint's data.
+type MockOverlay = {
+  creates: any[];
+  updates: Record<string, any>;
+  deletes: string[];
+};
+const overlayKey = (ep: string) =>
+  `mockw:${globalApiClient}:${globalApiLang}:${ep}`;
+const mockHydrated = new Set<string>();
+
+const readOverlay = (k: string): MockOverlay => {
+  try {
+    const o = JSON.parse(storage.getItem(k) || "{}");
+    return { creates: o.creates || [], updates: o.updates || {}, deletes: o.deletes || [] };
+  } catch {
+    return { creates: [], updates: {}, deletes: [] };
+  }
+};
+
+// Locate the endpoint's GET list file and hydrate it from the overlay
+// once — returns the live items[] (module state, so reads afterwards see
+// writes) or undefined for non-list endpoints.
+const mockRows = (langTree: any, ep: string): any[] | undefined => {
+  const f =
+    langTree?.[globalApiLang]?.[ep]?.GET?.success ??
+    langTree?.[globalApiDefaultLang]?.[ep]?.GET?.success;
+  const items = Array.isArray(f) ? f : f?.items;
+  if (!Array.isArray(items)) return undefined;
+  const k = overlayKey(ep);
+  if (!mockHydrated.has(k)) {
+    mockHydrated.add(k);
+    const ov = readOverlay(k);
+    for (const row of ov.creates)
+      if (!items.some((r: any) => String(r?.id) === String(row?.id)))
+        items.push(row);
+    for (const [id, patch] of Object.entries(ov.updates)) {
+      const r = items.find((r: any) => String(r?.id) === id);
+      if (r) Object.assign(r, patch);
+    }
+    if (ov.deletes.length) {
+      for (let i = items.length - 1; i >= 0; i--)
+        if (ov.deletes.includes(String(items[i]?.id))) items.splice(i, 1);
+    }
+  }
+  return items;
+};
+
+const applyMockWrite = (
+  langTree: any,
+  ep: string,
+  method: string,
+  matchId: string | number | undefined,
+  payload: any,
+): any => {
+  const items = mockRows(langTree, ep);
+  if (!items) return undefined;
+  const k = overlayKey(ep);
+  const ov = readOverlay(k);
+  let row: any;
+  if (method === "post") {
+    const next = items.reduce((m: number, r: any) => Math.max(m, Number(r?.id) || 0), 0) + 1;
+    row = { id: next, ...(payload || {}) };
+    if (!items.some((r: any) => String(r?.id) === String(row.id))) items.push(row);
+    ov.creates.push(row);
+  } else if (method === "put" || method === "patch") {
+    row = items.find((r: any) => String(r?.id) === String(matchId));
+    if (!row) return undefined;
+    Object.assign(row, payload || {});
+    ov.updates[String(matchId)] = { ...ov.updates[String(matchId)], ...payload };
+  } else if (method === "delete") {
+    const i = items.findIndex((r: any) => String(r?.id) === String(matchId));
+    if (i < 0) return undefined;
+    row = items.splice(i, 1)[0];
+    ov.deletes.push(String(matchId));
+  }
+  try {
+    storage.setItem(k, JSON.stringify(ov));
+  } catch {
+    // Overlay too large (e.g. full md rows) — session still works in-memory.
+  }
+  return row;
+};
+
 // --- mock resolution ------------------------------------------------------
 async function resolveMock(
   endpoint: string,
   method: string,
   id: string | number | undefined,
   searchParameter?: Record<string, any>,
+  payload?: any,
 ): Promise<ApiResponse | null> {
   // Registry from the active client's mock/config.json (bundled via the
   // generated tenant globs). In dev the per-client trees load lazily —
@@ -460,16 +556,25 @@ async function resolveMock(
     };
   }
 
+  // Reads hydrate prior writes from the overlay; mutations apply and the
+  // mutated row is what the response carries.
+  mockRows(langTree, ep);
+  const writeRow = ["post", "put", "patch", "delete"].includes(method)
+    ? applyMockWrite(langTree, ep, method, matchId, payload)
+    : undefined;
+
   // Detail read — entity/:id on a list-shaped mock ({items: []}) returns
   // the single record, mirroring GET /entity/{id} on the real backend.
   // Unknown ids 404 rather than silently returning the whole list.
   const data =
-    matchId !== undefined && Array.isArray((file as any)?.items)
-      ? (file as any).items.find(
-          (item: any) =>
-            item && String(item.id ?? item.pk ?? item._id) === String(matchId),
-        )
-      : file;
+    writeRow !== undefined
+      ? writeRow
+      : matchId !== undefined && Array.isArray((file as any)?.items)
+        ? (file as any).items.find(
+            (item: any) =>
+              item && String(item.id ?? item.pk ?? item._id) === String(matchId),
+          )
+        : file;
   if (
     matchId !== undefined &&
     Array.isArray((file as any)?.items) &&
