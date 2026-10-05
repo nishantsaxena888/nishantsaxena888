@@ -1,0 +1,21 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "user_id": "deepti",
+      "course_id": 2,
+      "status": "active",
+      "enrolled_at": "2025-01-03T08:00:00Z"
+    },
+    {
+      "id": 2,
+      "user_id": "uday",
+      "course_id": 1,
+      "status": "completed",
+      "enrolled_at": "2024-11-15T08:00:00Z"
+    }
+  ],
+  "page": 1,
+  "size": 2,
+  "total": 2
+}

@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "title": "Learn \u2014 Skillom"
+  },
+  "config": [
+    {
+      "id": "chapter-reader",
+      "type": "chapter-reader",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "chapter",
+            "endpoint": "chapter/:id",
+            "method": "GET"
+          },
+          {
+            "key": "revisions",
+            "endpoint": "revision",
+            "method": "GET",
+            "queryParams": {
+              "chapter_id": ":id",
+              "size": 100
+            }
+          }
+        ]
+      },
+      "content": {
+        "title": "Chapter"
+      }
+    }
+  ]
+}

@@ -34,11 +34,13 @@ export default defineConfig({
     dedupe: ["react", "react-dom", "zustand"],
   },
   test: {
-    include: ["src/**/*.test.{ts,tsx}"],
+    include: ["src/**/*.test.{ts,tsx}", "../client/**/*.test.{ts,tsx}"],
     setupFiles: ["./src/test/setup.ts"],
     environmentMatchGlobs: [
       ["src/**/*.test.tsx", "jsdom"],
+      ["../client/**/*.test.tsx", "jsdom"],
       ["src/**/*.test.ts", "node"],
+      ["../client/**/*.test.ts", "node"],
     ],
   },
 });

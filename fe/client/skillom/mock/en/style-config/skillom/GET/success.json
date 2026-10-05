@@ -1,0 +1,9 @@
+{
+  "name": "Skillom",
+  "styles": {
+    "primary": "262 83% 58%",
+    "primary-foreground": "0 0% 100%",
+    "accent": "262 83% 96%",
+    "radius": "0.5rem"
+  }
+}

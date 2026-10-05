@@ -1,0 +1,29 @@
+{
+  "meta": {
+    "title": "Courses \u2014 Skillom"
+  },
+  "config": [
+    {
+      "id": "course-grid",
+      "type": "course-list",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "data",
+            "endpoint": "course",
+            "method": "GET",
+            "queryParams": {
+              "size": 100
+            }
+          }
+        ]
+      },
+      "content": {
+        "title": "All Courses",
+        "cta_label": "Open course"
+      }
+    }
+  ]
+}

@@ -33,6 +33,10 @@ const ROUTES = {
   ],
   uday: ["/", "/courses", "/admin", "/admin/overview", "/admin/course"],
   airbnb: ["/", "/stays", "/wishlist", "/admin", "/admin/overview", "/admin/listing"],
+  skillom: [
+    "/", "/courses", "/courses/2", "/learn/1", "/my-learning",
+    "/admin", "/admin/overview", "/admin/course", "/admin/revision",
+  ],
 };
 
 let fail = 0;
@@ -137,6 +141,55 @@ for (const [client, routes] of Object.entries(ROUTES)) {
     check(false, "airbnb interactions", e.message.slice(0, 120));
   }
   check(errors.length === 0, "airbnb interactions: no page errors", errors[0] || "");
+  await ctx.close();
+}
+
+// skillom — course catalog → detail → md reader → quiz + progress session
+{
+  const { ctx, page, errors } = await newClientPage("skillom");
+  try {
+    await goto(page, "/courses");
+    const cards = await page.locator(".course-card").count();
+    check(cards > 0, "skillom /courses cards render", `${cards} cards`);
+
+    // parameterized detail route → ordered chapter list
+    await goto(page, "/courses/5");
+    const rows = await page.locator(".chapter-row").count();
+    check(rows > 0, "skillom course detail → chapters", `${rows} chapters`);
+
+    // reader: md_content → parsed sections, Quiz directive → widget
+    await goto(page, "/learn/1");
+    const reader = await page.locator(".chapter-reader").count();
+    const quiz = await page.locator(".quiz-card").count();
+    check(
+      reader > 0 && quiz > 0,
+      "skillom reader: md → sections + quiz widget",
+      `${quiz} quiz`,
+    );
+
+    // answer the quiz → correctness state
+    if (quiz) {
+      await page.locator(".quiz-option").nth(1).click();
+      await page.waitForTimeout(200);
+      const feedback = (await page.locator(".quiz-card").textContent()) || "";
+      check(/correct/i.test(feedback), "quiz answer → feedback");
+    }
+
+    // mark complete → writes the "progress" session (localStorage)
+    const markBtn = page.locator(".chapter-reader .sf-action-btn");
+    if (await markBtn.count()) await markBtn.click();
+    await page.waitForTimeout(300);
+    const prog = await page.evaluate(() =>
+      window.localStorage.getItem("skillom_gs_progress"),
+    );
+    check(
+      !!prog && JSON.parse(prog).length > 0,
+      "mark complete → progress session persist",
+    );
+  } catch (e) {
+    check(false, "skillom flow", e.message.slice(0, 120));
+  }
+  check(errors.length === 0, "skillom flow: no page errors", errors[0] || "");
   await ctx.close();
 }
 

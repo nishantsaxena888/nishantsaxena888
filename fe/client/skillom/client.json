@@ -1,0 +1,13 @@
+{
+  "name": "skillom",
+  "title": "Skillom",
+  "surfaces": {
+    "site": {
+      "styles": true
+    },
+    "admin": {
+      "styles": true
+    }
+  },
+  "mock": true
+}

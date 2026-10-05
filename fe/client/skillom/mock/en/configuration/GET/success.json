@@ -1,0 +1,309 @@
+{
+  "meta": {
+    "client": "skillom",
+    "display_name": "Skillom",
+    "theme": "skillom-light",
+    "language": "en"
+  },
+  "admin": {
+    "require_auth": false,
+    "login_redirect": "/admin/course",
+    "logout_redirect": "/"
+  },
+  "menu": [
+    {
+      "name": "Home",
+      "description": "Course catalog",
+      "url": "/",
+      "entity": "home",
+      "public": true,
+      "order": 0
+    },
+    {
+      "name": "Courses",
+      "description": "All courses",
+      "url": "/courses",
+      "entity": "pages/courses",
+      "public": true,
+      "order": 1
+    },
+    {
+      "name": "Course",
+      "description": "Course detail",
+      "url": "/courses/:id",
+      "entity": "pages/course",
+      "public": true,
+      "hide": true,
+      "order": 5
+    },
+    {
+      "name": "Learn",
+      "description": "Chapter reader",
+      "url": "/learn/:id",
+      "entity": "pages/learn",
+      "public": true,
+      "hide": true,
+      "order": 6
+    },
+    {
+      "name": "My Learning",
+      "description": "Progress & bookmarks",
+      "url": "/my-learning",
+      "entity": "my-learning",
+      "public": true,
+      "order": 2
+    },
+    {
+      "name": "Login",
+      "description": "Sign in",
+      "url": "/login",
+      "entity": "login",
+      "public": true,
+      "order": 3,
+      "auth_page": true,
+      "hide": true
+    },
+    {
+      "name": "Signup",
+      "description": "Create account",
+      "url": "/register",
+      "entity": "register",
+      "public": true,
+      "order": 4,
+      "auth_page": true,
+      "hide": true
+    }
+  ],
+  "admin_menu": [
+    {
+      "name": "Overview",
+      "description": "Platform snapshot",
+      "url": "/admin/overview",
+      "entity": "overview",
+      "icon": "layout-dashboard"
+    },
+    {
+      "name": "Categories",
+      "description": "Course categories",
+      "url": "/admin/category",
+      "entity": "category",
+      "icon": "tags"
+    },
+    {
+      "name": "Courses",
+      "description": "Course management",
+      "url": "/admin/course",
+      "entity": "course",
+      "icon": "graduation-cap"
+    },
+    {
+      "name": "Chapters",
+      "description": "Chapter ordering",
+      "url": "/admin/chapter",
+      "entity": "chapter",
+      "icon": "list"
+    },
+    {
+      "name": "Revisions",
+      "description": "Draft / review / publish",
+      "url": "/admin/revision",
+      "entity": "revision",
+      "icon": "git-branch"
+    },
+    {
+      "name": "Comments",
+      "description": "Review comments",
+      "url": "/admin/comment",
+      "entity": "comment",
+      "icon": "message-square"
+    },
+    {
+      "name": "Releases",
+      "description": "Course snapshots",
+      "url": "/admin/course-release",
+      "entity": "course_release",
+      "icon": "package"
+    },
+    {
+      "name": "Enrollments",
+      "description": "Learner enrollment",
+      "url": "/admin/enrollment",
+      "entity": "enrollment",
+      "icon": "user-plus"
+    },
+    {
+      "name": "Progress",
+      "description": "Section completion",
+      "url": "/admin/progress",
+      "entity": "progress",
+      "icon": "check-circle"
+    },
+    {
+      "name": "Lab Notes",
+      "description": "Learner notes",
+      "url": "/admin/lab-note",
+      "entity": "lab_note",
+      "icon": "notebook-pen"
+    },
+    {
+      "name": "Quiz Scores",
+      "description": "Quiz submissions",
+      "url": "/admin/quiz-submission",
+      "entity": "quiz_submission",
+      "icon": "trophy"
+    }
+  ],
+  "language": [
+    {
+      "name": "English",
+      "code": "en"
+    },
+    {
+      "name": "Hindi",
+      "code": "hi"
+    }
+  ],
+  "sessions": [
+    {
+      "name": "progress",
+      "persist": true,
+      "method": "array_upsert",
+      "method_config": {
+        "match_key": "id"
+      }
+    },
+    {
+      "name": "bookmark",
+      "persist": true,
+      "method": "array_toggle",
+      "method_config": {
+        "match_key": "id"
+      }
+    },
+    {
+      "name": "recent",
+      "persist": true,
+      "method": "array_prepend_unique",
+      "method_config": {
+        "match_key": "id",
+        "limit": 12
+      }
+    }
+  ],
+  "pages": {
+    "courses": {
+      "meta": {
+        "title": "Courses \u2014 Skillom"
+      },
+      "config": [
+        {
+          "id": "course-grid",
+          "type": "course-list",
+          "properties": {
+            "level": "base",
+            "type": "dynamic",
+            "action": [
+              {
+                "key": "data",
+                "endpoint": "course",
+                "method": "GET",
+                "queryParams": {
+                  "size": 100
+                }
+              }
+            ]
+          },
+          "content": {
+            "title": "All Courses",
+            "cta_label": "Open course"
+          }
+        }
+      ]
+    },
+    "course": {
+      "meta": {
+        "title": "Course \u2014 Skillom"
+      },
+      "config": [
+        {
+          "id": "course-detail",
+          "type": "course-detail",
+          "properties": {
+            "level": "base",
+            "type": "dynamic",
+            "action": [
+              {
+                "key": "course",
+                "endpoint": "course/:id",
+                "method": "GET"
+              },
+              {
+                "key": "chapters",
+                "endpoint": "chapter",
+                "method": "GET",
+                "queryParams": {
+                  "course_id": ":id",
+                  "size": 200
+                }
+              }
+            ]
+          },
+          "content": {
+            "title": "Course"
+          }
+        }
+      ]
+    },
+    "learn": {
+      "meta": {
+        "title": "Learn \u2014 Skillom"
+      },
+      "config": [
+        {
+          "id": "chapter-reader",
+          "type": "chapter-reader",
+          "properties": {
+            "level": "base",
+            "type": "dynamic",
+            "action": [
+              {
+                "key": "chapter",
+                "endpoint": "chapter/:id",
+                "method": "GET"
+              },
+              {
+                "key": "revisions",
+                "endpoint": "revision",
+                "method": "GET",
+                "queryParams": {
+                  "chapter_id": ":id",
+                  "size": 100
+                }
+              }
+            ]
+          },
+          "content": {
+            "title": "Chapter"
+          }
+        }
+      ]
+    }
+  },
+  "themes": [
+    {
+      "value": "skillom",
+      "label": "Skillom"
+    }
+  ],
+  "style-configs": {
+    "skillom": {
+      "name": "Skillom",
+      "styles": {
+        "primary": "262 83% 58%",
+        "primary-foreground": "0 0% 100%",
+        "accent": "262 83% 96%",
+        "radius": "0.5rem"
+      }
+    }
+  }
+}

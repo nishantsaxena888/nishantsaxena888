@@ -1,0 +1,63 @@
+{
+  "config": [
+    {
+      "type": "register-card",
+      "content": {
+        "form": {
+          "labels": {
+            "submit": "Create Account"
+          },
+          "submit_included": true,
+          "inputs": [
+            {
+              "name": "full_name",
+              "label": "Full Name",
+              "type": "text",
+              "placeholder": "Enter your full name",
+              "column": { "md": 12 },
+              "validation": [{ "rule": "required", "message": "Name is required" }]
+            },
+            {
+              "name": "email",
+              "label": "Email Address",
+              "type": "email",
+              "placeholder": "Enter your email",
+              "column": { "md": 12 },
+              "validation": [
+                { "rule": "required", "message": "Email is required" },
+                { "rule": "email", "message": "Invalid email" }
+              ]
+            },
+            {
+              "name": "password",
+              "label": "Password",
+              "type": "password",
+              "placeholder": "Create a password",
+              "column": { "md": 12 },
+              "validation": [
+                { "rule": "required", "message": "Password is required" },
+                { "rule": "minLength", "value": 8, "message": "Min 8 characters" }
+              ]
+            },
+            {
+              "name": "submit_btn",
+              "label": "",
+              "type": "submit",
+              "isNoneInput": true,
+              "button_label": "Create Account",
+              "column": { "md": 12 }
+            },
+            {
+              "name": "link",
+              "label": "",
+              "type": "typography",
+              "isNoneInput": true,
+              "content": "Already have an account? {{Login||l||/login}}",
+              "column": { "md": 12 }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

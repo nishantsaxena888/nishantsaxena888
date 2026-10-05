@@ -1,0 +1,168 @@
+{
+  "entity": "course_release",
+  "name": "course_release",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "course_id": {
+        "type": "int",
+        "required": true
+      },
+      "version_no": {
+        "type": "int",
+        "required": true
+      },
+      "snapshot": {
+        "type": "str"
+      },
+      "label": {
+        "type": "str"
+      },
+      "created_by": {
+        "type": "str"
+      },
+      "created_at": {
+        "type": "datetime"
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "course_id",
+            "label": "Course"
+          },
+          {
+            "key": "version_no",
+            "label": "Version",
+            "sortable": true
+          },
+          {
+            "key": "label",
+            "label": "Label",
+            "searchable": true
+          },
+          {
+            "key": "created_by",
+            "label": "By"
+          },
+          {
+            "key": "created_at",
+            "label": "Created"
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "course_id",
+            "componentType": "Select",
+            "required": true,
+            "label": "Course",
+            "options": [
+              "1",
+              "2"
+            ]
+          },
+          {
+            "name": "version_no",
+            "componentType": "NumberInput",
+            "required": true,
+            "label": "Version No"
+          },
+          {
+            "name": "label",
+            "componentType": "TextInput",
+            "label": "Label"
+          },
+          {
+            "name": "snapshot",
+            "componentType": "TextInput",
+            "colSpan": 2,
+            "label": "Snapshot (chapter\u2192revision JSON)"
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "key": "course_id",
+          "label": "Course"
+        },
+        {
+          "key": "version_no",
+          "label": "Version",
+          "sortable": true
+        },
+        {
+          "key": "label",
+          "label": "Label",
+          "searchable": true
+        },
+        {
+          "key": "created_by",
+          "label": "By"
+        },
+        {
+          "key": "created_at",
+          "label": "Created"
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "course_id",
+          "componentType": "Select",
+          "required": true,
+          "label": "Course",
+          "options": [
+            "1",
+            "2"
+          ]
+        },
+        {
+          "name": "version_no",
+          "componentType": "NumberInput",
+          "required": true,
+          "label": "Version No"
+        },
+        {
+          "name": "label",
+          "componentType": "TextInput",
+          "label": "Label"
+        },
+        {
+          "name": "snapshot",
+          "componentType": "TextInput",
+          "colSpan": 2,
+          "label": "Snapshot (chapter\u2192revision JSON)"
+        }
+      ]
+    }
+  }
+}

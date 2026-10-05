@@ -1,0 +1,36 @@
+{
+  "meta": { "title": "Skillom — Learn by Building" },
+  "config": [
+    {
+      "id": "hero",
+      "type": "hero-section",
+      "properties": { "level": "base", "type": "static" },
+      "content": {
+        "name": "Skillom",
+        "tagline": "Learn by Building",
+        "logoIcon": "🎓",
+        "hero": {
+          "headline": "Production-grade skills, one chapter at a time",
+          "subheadline": "Video-driven courses, interactive labs, real code — from zero to deployment."
+        }
+      }
+    },
+    {
+      "id": "course-grid",
+      "type": "course-list",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "data",
+            "endpoint": "course",
+            "method": "get",
+            "queryParams": { "size": 100 }
+          }
+        ]
+      },
+      "content": { "title": "All Courses", "cta_label": "Start learning" }
+    }
+  ]
+}

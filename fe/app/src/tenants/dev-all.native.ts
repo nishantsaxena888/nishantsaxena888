@@ -29,6 +29,11 @@ export const clientLoaders: Record<string, ClientLoader> = {
     admin: () => import("@clients/hello/admin/tenant"),
     styles: [() => import("@clients/hello/site/styles.css"), () => import("@clients/hello/admin/styles.css")],
   },
+  skillom: {
+    site: () => import("@clients/skillom/site/tenant"),
+    admin: () => import("@clients/skillom/admin/tenant"),
+    styles: [() => import("@clients/skillom/site/styles.css"), () => import("@clients/skillom/admin/styles.css")],
+  },
   uday: {
     site: () => import("@clients/uday/site/tenant"),
     admin: () => import("@clients/uday/admin/tenant"),

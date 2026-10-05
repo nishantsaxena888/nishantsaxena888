@@ -1,0 +1,24 @@
+{
+  "meta": { "title": "Login", "description": "Sign in to Skillom" },
+  "config": [
+    {
+      "id": "login-layout",
+      "type": "auth-layout",
+      "properties": { "level": "base", "type": "static" },
+      "content": {
+        "name": "Skillom",
+        "config": {
+          "endpoint": "login",
+          "type": "login-card",
+          "action": {
+            "type": "redirect",
+            "navigation": "/admin/overview",
+            "navigation_type": "navigate",
+            "login": true
+          }
+        }
+      },
+      "children": []
+    }
+  ]
+}

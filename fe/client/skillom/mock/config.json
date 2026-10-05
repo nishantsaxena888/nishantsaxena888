@@ -1,0 +1,251 @@
+{
+  "configuration": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "pages/courses": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "pages/course": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "pages/learn": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "style-config/skillom": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "translations": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "overview": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "category": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "course": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "chapter": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "revision": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "comment": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "course_release": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "enrollment": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "progress": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "lab_note": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "quiz_submission": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "home": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "my-learning": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "login": {
+    "GET": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    }
+  },
+  "register": {
+    "GET": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    }
+  }
+}

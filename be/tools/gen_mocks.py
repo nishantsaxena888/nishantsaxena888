@@ -86,6 +86,27 @@ def gen_client(name: str):
         for m in ("POST", "PUT", "DELETE"):
             write(out, f"en/{entity}/{m}/success.json", {"ok": True, "mock": True})
 
+    # Menu entities that aren't entities/pages/sessions (home, login,
+    # my-learning…) still resolve through apiClient, so they need registry
+    # entries. Flag them; write a stub only when no mock file exists —
+    # hand-authored page defs are never clobbered by regeneration.
+    sessions = {s.get("name") for s in cfg.get("sessions", [])}
+    for item in (cfg.get("menu") or []) + (cfg.get("admin_menu") or []):
+        ep = item.get("entity")
+        if not ep or ep in registry or ep in sessions:
+            continue
+        methods = ["GET"] + (["POST", "OPTIONS"] if item.get("auth_page") else [])
+        flag(ep, methods)
+        for m in methods:
+            stub = out / f"en/{ep}/{m}/success.json"
+            if not stub.exists():
+                body = (
+                    {"meta": {"title": item.get("name", ep)}, "config": []}
+                    if m == "GET"
+                    else {"ok": True, "mock": True}
+                )
+                write(stub, body)
+
     write(out, "config.json", registry)
     print(f"{name}: {len(registry)} endpoints flagged mock:true → fe/client/{name}/mock/")
 

@@ -1,0 +1,6 @@
+/* skillom site surface — auto-bundled by `npm run client -- skillom`
+   Learning-platform skin hooks go here. */
+
+.skillom-overview {
+  letter-spacing: -0.01em;
+}

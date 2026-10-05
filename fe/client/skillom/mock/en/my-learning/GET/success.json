@@ -1,0 +1,32 @@
+{
+  "meta": { "title": "My Learning — Skillom" },
+  "config": [
+    {
+      "id": "recent-strip",
+      "type": "session-list",
+      "properties": { "level": "base", "type": "static" },
+      "content": {
+        "title": "Recently viewed",
+        "session": "recent"
+      }
+    },
+    {
+      "id": "progress-list",
+      "type": "session-list",
+      "properties": { "level": "base", "type": "static" },
+      "content": {
+        "title": "My progress",
+        "session": "progress"
+      }
+    },
+    {
+      "id": "bookmark-list",
+      "type": "session-list",
+      "properties": { "level": "base", "type": "static" },
+      "content": {
+        "title": "Bookmarks",
+        "session": "bookmark"
+      }
+    }
+  ]
+}

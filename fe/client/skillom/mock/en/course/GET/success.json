@@ -1,0 +1,61 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "category_id": 1,
+      "title": "AWS AgentCore \u2014 Complete Series",
+      "code": "agentcore-series",
+      "status": "published",
+      "description": "12-episode Show & Tell series \u2014 intro to episodic memory.",
+      "created_at": "2024-11-01T09:00:00Z"
+    },
+    {
+      "id": 2,
+      "category_id": 4,
+      "title": "Bedrock to Production",
+      "code": "bedrock-to-production",
+      "status": "published",
+      "description": "20-chapter course \u2014 GenAI foundations to production capstone.",
+      "created_at": "2024-12-10T09:00:00Z"
+    },
+    {
+      "id": 3,
+      "category_id": 2,
+      "title": "Linux Foundations",
+      "code": "linux-foundations",
+      "status": "published",
+      "description": "Shell, filesystem, permissions \u2014 the AWS admin base layer.",
+      "created_at": "2025-01-05T09:00:00Z"
+    },
+    {
+      "id": 4,
+      "category_id": 3,
+      "title": "Docker \u2014 Containers & Compose",
+      "code": "docker-compose",
+      "status": "published",
+      "description": "Images, containers, networks, compose stacks.",
+      "created_at": "2025-01-12T09:00:00Z"
+    },
+    {
+      "id": 5,
+      "category_id": 5,
+      "title": "AWS Production Masterclass",
+      "code": "aws-masterclass",
+      "status": "published",
+      "description": "47-module production curriculum \u2014 IAM to GenAI.",
+      "created_at": "2024-10-01T09:00:00Z"
+    },
+    {
+      "id": 6,
+      "category_id": 6,
+      "title": "Kubernetes \u2014 Containers to Production",
+      "code": "k8s-production",
+      "status": "draft",
+      "description": "Pods, services, deployments, operators.",
+      "created_at": "2025-02-01T09:00:00Z"
+    }
+  ],
+  "page": 1,
+  "size": 6,
+  "total": 6
+}

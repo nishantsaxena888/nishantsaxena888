@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "title": "Course \u2014 Skillom"
+  },
+  "config": [
+    {
+      "id": "course-detail",
+      "type": "course-detail",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "course",
+            "endpoint": "course/:id",
+            "method": "GET"
+          },
+          {
+            "key": "chapters",
+            "endpoint": "chapter",
+            "method": "GET",
+            "queryParams": {
+              "course_id": ":id",
+              "size": 200
+            }
+          }
+        ]
+      },
+      "content": {
+        "title": "Course"
+      }
+    }
+  ]
+}

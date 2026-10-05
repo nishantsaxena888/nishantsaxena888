@@ -1,0 +1,93 @@
+{
+  "entity": "overview",
+  "name": "overview",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "Id",
+            "sortable": true
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": []
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "Id",
+          "sortable": true
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": []
+    }
+  },
+  "config": [
+    {
+      "id": "skillom-overview-1",
+      "type": "skillom-overview",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "courses",
+            "endpoint": "course",
+            "method": "GET",
+            "queryParams": {
+              "size": 100
+            }
+          },
+          {
+            "key": "chapters",
+            "endpoint": "chapter",
+            "method": "GET",
+            "queryParams": {
+              "size": 100
+            }
+          },
+          {
+            "key": "revisions",
+            "endpoint": "revision",
+            "method": "GET",
+            "queryParams": {
+              "size": 100
+            }
+          },
+          {
+            "key": "enrollments",
+            "endpoint": "enrollment",
+            "method": "GET",
+            "queryParams": {
+              "size": 100
+            }
+          }
+        ]
+      },
+      "content": {}
+    }
+  ]
+}

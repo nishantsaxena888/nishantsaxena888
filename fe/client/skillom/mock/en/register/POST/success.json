@@ -1,0 +1,11 @@
+{
+  "status_code": 201,
+  "message": "Account created successfully!",
+  "data": {
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "user": {
+      "name": "New User",
+      "email": "newuser@example.com"
+    }
+  }
+}

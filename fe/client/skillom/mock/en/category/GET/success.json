@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "AWS AgentCore",
+      "code": "agentcore",
+      "icon": "cpu",
+      "order": 1
+    },
+    {
+      "id": 2,
+      "name": "Linux",
+      "code": "linux",
+      "icon": "terminal",
+      "order": 2
+    },
+    {
+      "id": 3,
+      "name": "Docker",
+      "code": "docker",
+      "icon": "box",
+      "order": 3
+    },
+    {
+      "id": 4,
+      "name": "Bedrock to Production",
+      "code": "bedrock-prod",
+      "icon": "sparkles",
+      "order": 4
+    },
+    {
+      "id": 5,
+      "name": "AWS Masterclass",
+      "code": "aws-masterclass",
+      "icon": "cloud",
+      "order": 5
+    },
+    {
+      "id": 6,
+      "name": "Kubernetes",
+      "code": "k8s",
+      "icon": "ship",
+      "order": 6
+    }
+  ],
+  "page": 1,
+  "size": 6,
+  "total": 6
+}

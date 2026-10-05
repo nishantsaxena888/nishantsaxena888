@@ -1,0 +1,147 @@
+{
+  "entity": "category",
+  "name": "category",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "name": {
+        "type": "str",
+        "required": true
+      },
+      "code": {
+        "type": "str",
+        "unique": true
+      },
+      "icon": {
+        "type": "str"
+      },
+      "order": {
+        "type": "int",
+        "default": 0
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "order",
+            "label": "Order",
+            "sortable": true
+          },
+          {
+            "key": "name",
+            "label": "Name",
+            "searchable": true
+          },
+          {
+            "key": "code",
+            "label": "Code"
+          },
+          {
+            "key": "icon",
+            "label": "Icon"
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "name",
+            "componentType": "TextInput",
+            "required": true,
+            "colSpan": 2,
+            "label": "Name"
+          },
+          {
+            "name": "code",
+            "componentType": "TextInput",
+            "required": true,
+            "label": "Code"
+          },
+          {
+            "name": "icon",
+            "componentType": "TextInput",
+            "label": "Icon"
+          },
+          {
+            "name": "order",
+            "componentType": "NumberInput",
+            "label": "Order"
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "key": "order",
+          "label": "Order",
+          "sortable": true
+        },
+        {
+          "key": "name",
+          "label": "Name",
+          "searchable": true
+        },
+        {
+          "key": "code",
+          "label": "Code"
+        },
+        {
+          "key": "icon",
+          "label": "Icon"
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "name",
+          "componentType": "TextInput",
+          "required": true,
+          "colSpan": 2,
+          "label": "Name"
+        },
+        {
+          "name": "code",
+          "componentType": "TextInput",
+          "required": true,
+          "label": "Code"
+        },
+        {
+          "name": "icon",
+          "componentType": "TextInput",
+          "label": "Icon"
+        },
+        {
+          "name": "order",
+          "componentType": "NumberInput",
+          "label": "Order"
+        }
+      ]
+    }
+  }
+}

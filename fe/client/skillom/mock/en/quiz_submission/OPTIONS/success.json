@@ -1,0 +1,170 @@
+{
+  "entity": "quiz_submission",
+  "name": "quiz_submission",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "user_id": {
+        "type": "str",
+        "required": true
+      },
+      "chapter_id": {
+        "type": "int",
+        "required": true
+      },
+      "quiz_id": {
+        "type": "str"
+      },
+      "score": {
+        "type": "int",
+        "default": 0
+      },
+      "total": {
+        "type": "int",
+        "default": 0
+      },
+      "submitted_at": {
+        "type": "datetime"
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "user_id",
+            "label": "User",
+            "searchable": true
+          },
+          {
+            "key": "chapter_id",
+            "label": "Chapter"
+          },
+          {
+            "key": "score",
+            "label": "Score"
+          },
+          {
+            "key": "total",
+            "label": "Total"
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "user_id",
+            "componentType": "TextInput",
+            "required": true,
+            "label": "User"
+          },
+          {
+            "name": "chapter_id",
+            "componentType": "Select",
+            "required": true,
+            "label": "Chapter",
+            "options": [
+              "1",
+              "2",
+              "3"
+            ]
+          },
+          {
+            "name": "quiz_id",
+            "componentType": "TextInput",
+            "label": "Quiz"
+          },
+          {
+            "name": "score",
+            "componentType": "NumberInput",
+            "label": "Score"
+          },
+          {
+            "name": "total",
+            "componentType": "NumberInput",
+            "label": "Total"
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "key": "user_id",
+          "label": "User",
+          "searchable": true
+        },
+        {
+          "key": "chapter_id",
+          "label": "Chapter"
+        },
+        {
+          "key": "score",
+          "label": "Score"
+        },
+        {
+          "key": "total",
+          "label": "Total"
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "user_id",
+          "componentType": "TextInput",
+          "required": true,
+          "label": "User"
+        },
+        {
+          "name": "chapter_id",
+          "componentType": "Select",
+          "required": true,
+          "label": "Chapter",
+          "options": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "name": "quiz_id",
+          "componentType": "TextInput",
+          "label": "Quiz"
+        },
+        {
+          "name": "score",
+          "componentType": "NumberInput",
+          "label": "Score"
+        },
+        {
+          "name": "total",
+          "componentType": "NumberInput",
+          "label": "Total"
+        }
+      ]
+    }
+  }
+}

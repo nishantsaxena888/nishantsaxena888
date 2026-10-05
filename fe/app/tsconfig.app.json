@@ -31,7 +31,10 @@
       "react": ["./node_modules/@types/react"],
       "react/jsx-runtime": ["./node_modules/@types/react/jsx-runtime"],
       "react-dom": ["./node_modules/@types/react-dom"],
-      "react-dom/client": ["./node_modules/@types/react-dom/client"]
+      "react-dom/client": ["./node_modules/@types/react-dom/client"],
+      // fe/client/** sits outside this package — bare specifiers like
+      // "vitest" can't reach ./node_modules from there, so map them here.
+      "vitest": ["./node_modules/vitest/dist/index.d.ts"]
     }
   },
   "include": ["src", "../client"]

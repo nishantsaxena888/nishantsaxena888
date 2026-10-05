@@ -1,0 +1,195 @@
+{
+  "entity": "course",
+  "name": "course",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "category_id": {
+        "type": "int",
+        "required": true
+      },
+      "title": {
+        "type": "str",
+        "required": true
+      },
+      "code": {
+        "type": "str",
+        "unique": true
+      },
+      "description": {
+        "type": "str"
+      },
+      "status": {
+        "type": "str",
+        "default": "draft",
+        "options": [
+          "draft",
+          "published",
+          "archived"
+        ]
+      },
+      "created_at": {
+        "type": "datetime"
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "searchable": true
+          },
+          {
+            "key": "code",
+            "label": "Code"
+          },
+          {
+            "key": "category_id",
+            "label": "Category"
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "type": "badge"
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "title",
+            "componentType": "TextInput",
+            "required": true,
+            "colSpan": 2,
+            "label": "Title"
+          },
+          {
+            "name": "code",
+            "componentType": "TextInput",
+            "required": true,
+            "label": "Code"
+          },
+          {
+            "name": "category_id",
+            "componentType": "Select",
+            "required": true,
+            "label": "Category",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          {
+            "name": "description",
+            "componentType": "TextInput",
+            "colSpan": 2,
+            "label": "Description"
+          },
+          {
+            "name": "status",
+            "componentType": "Select",
+            "label": "Status",
+            "options": [
+              "draft",
+              "published",
+              "archived"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "key": "title",
+          "label": "Title",
+          "searchable": true
+        },
+        {
+          "key": "code",
+          "label": "Code"
+        },
+        {
+          "key": "category_id",
+          "label": "Category"
+        },
+        {
+          "key": "status",
+          "label": "Status",
+          "type": "badge"
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "title",
+          "componentType": "TextInput",
+          "required": true,
+          "colSpan": 2,
+          "label": "Title"
+        },
+        {
+          "name": "code",
+          "componentType": "TextInput",
+          "required": true,
+          "label": "Code"
+        },
+        {
+          "name": "category_id",
+          "componentType": "Select",
+          "required": true,
+          "label": "Category",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+        },
+        {
+          "name": "description",
+          "componentType": "TextInput",
+          "colSpan": 2,
+          "label": "Description"
+        },
+        {
+          "name": "status",
+          "componentType": "Select",
+          "label": "Status",
+          "options": [
+            "draft",
+            "published",
+            "archived"
+          ]
+        }
+      ]
+    }
+  }
+}
