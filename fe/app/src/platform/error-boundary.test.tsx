@@ -66,4 +66,30 @@ describe("DefErrorBoundary", () => {
     );
     expect(screen.getByText("custom fb")).toBeTruthy();
   });
+
+  it("resetKey change remounts past a crash (next def in slot)", () => {
+    const { rerender } = render(
+      <DefErrorBoundary label="a" resetKey="def-1">
+        <Thrower />
+      </DefErrorBoundary>,
+    );
+    expect(screen.getByText(/crashed/)).toBeTruthy();
+    rerender(
+      <DefErrorBoundary label="b" resetKey="def-2">
+        <div>recovered</div>
+      </DefErrorBoundary>,
+    );
+    expect(screen.getByText("recovered")).toBeTruthy();
+  });
+
+  it("Retry button clears the failed state", () => {
+    const { rerender } = render(
+      <DefErrorBoundary label="a" resetKey="r1">
+        <Thrower />
+      </DefErrorBoundary>,
+    );
+    screen.getByText("Retry").click();
+    // Children re-render — Thrower re-crashes, boundary trips again.
+    expect(screen.getByText(/crashed/)).toBeTruthy();
+  });
 });

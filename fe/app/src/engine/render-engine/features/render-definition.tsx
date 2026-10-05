@@ -79,7 +79,7 @@ function RenderDefinitionInner({ def, config }: RenderDefinitionProps) {
     // error and reports via platform/report; the rest of the page stays
     // mounted instead of bubbling to the route errorElement.
     return (
-      <DefErrorBoundary label={def.type}>
+      <DefErrorBoundary label={def.type} resetKey={def.id}>
         <Component key={def.id} id={def.id} type={def.type} content={def.content} properties={def.properties} actionData={actionData} session={session} config={config} themeName={themeName}>
           {children}
         </Component>

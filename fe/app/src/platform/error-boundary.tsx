@@ -4,6 +4,9 @@ import { reportError } from "./report";
 interface BoundaryProps {
   // Stable label for reports — e.g. "def:stay-grid".
   label: string;
+  // When this value changes the boundary resets — a crash under one def
+  // must not leak into the next def rendered in this slot.
+  resetKey?: unknown;
   // Rendered instead of children on crash. When omitted a neutral
   // inline box is shown (dev-friendly but not a white screen in prod).
   fallback?: React.ReactNode;
@@ -34,6 +37,12 @@ export class DefErrorBoundary extends React.Component<
     });
   }
 
+  componentDidUpdate(prevProps: BoundaryProps) {
+    if (this.state.failed && prevProps.resetKey !== this.props.resetKey) {
+      this.setState({ failed: false });
+    }
+  }
+
   render() {
     if (!this.state.failed) return this.props.children;
     if (this.props.fallback !== undefined) return this.props.fallback;
@@ -48,8 +57,13 @@ export class DefErrorBoundary extends React.Component<
           color: "#991b1b",
         }}
       >
-        <strong>Render Error:</strong> "{this.props.label}" crashed. The rest
-        of the page is unaffected.
+        <strong>Render Error:</strong> "{this.props.label}" crashed.{" "}
+        <button
+          onClick={() => this.setState({ failed: false })}
+          style={{ textDecoration: "underline", fontWeight: 600 }}
+        >
+          Retry
+        </button>
       </div>
     );
   }
