@@ -436,3 +436,18 @@
 }
 .back-link:hover { color: #0f172a; border-color: #cbd5e1; }
 .nav-back { margin: 1rem 0 0 1rem; }
+
+/* card action chips (rbac-gated CRUD) */
+.course-card { position: relative; }
+.course-card .card-hit { display: block; cursor: pointer; text-align: left; width: 100%; }
+.card-actions {
+  position: absolute; top: 0.75rem; right: 0.75rem;
+  display: flex; gap: 0.35rem; opacity: 0; transition: opacity 0.15s ease;
+}
+.course-card:hover .card-actions { opacity: 1; }
+.card-action-btn {
+  width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+  background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;
+  font-size: 0.85rem; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.card-action-btn:hover { border-color: #f97316; background: #fff7ed; }

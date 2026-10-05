@@ -111,6 +111,12 @@
             ]
           }
         ]
+      },
+      "rbac": {
+        "read": "*",
+        "write": [
+          "admin"
+        ]
       }
     }
   },
@@ -189,6 +195,12 @@
             "archived"
           ]
         }
+      ]
+    },
+    "rbac": {
+      "read": "*",
+      "write": [
+        "admin"
       ]
     }
   }

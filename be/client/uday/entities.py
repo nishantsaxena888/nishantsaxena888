@@ -133,6 +133,7 @@ entities = {
 
     "course": {
         "source": "json",
+        "rbac": {"read": "*", "write": ["admin"]},
         "fields": {
             "id":          {"type": "int", "primary_key": True},
             "category_id": {"type": "int", "required": True},

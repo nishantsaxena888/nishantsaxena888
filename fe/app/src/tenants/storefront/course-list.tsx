@@ -8,14 +8,18 @@
 //     and the filtered-page title
 //   count_key/count_field — second list grouped by fk for "N chapters"
 //   back — {label,to} optional back link rendered above the title
+//   entity + card_actions — entity CRUD chips on each card, gated by the
+//     entity's rbac spec (useEntity.can). Action: {icon,label} +
+//     {method:"delete",confirm} or {opens:"detail"}.
 //   fields — {icon,color,bg,desc,status,title} record field mapping
+import { useEntity } from "@/engine";
 import { useNav, useQuery } from "@/platform/navigation";
 import { Pressable, Text, View } from "@/platform/primitives";
 
 const toItems = (res: any): any[] =>
   Array.isArray(res) ? res : res?.items ?? res?.data ?? [];
 
-export default function CourseList({ content, actionData, session }: any) {
+export default function CourseList({ content, actionData, session, action }: any) {
   const all = toItems(actionData?.data?.data);
   const navigate = useNav().navigate;
   // Optional query filter — ?category=3 filters rows on content.filter_field
@@ -38,6 +42,25 @@ export default function CourseList({ content, actionData, session }: any) {
   const title = activeCat
     ? `${activeCat.emoji ? `${activeCat.emoji} ` : ""}${activeCat.name}`
     : content?.title;
+
+  // prefetch off — list data already flows via the def's actions; the hook
+  // is only needed here for can()/onDelete on card actions.
+  const ent = useEntity(content?.entity || "course", { prefetch: false });
+  const cardActions: any[] = content?.card_actions || [];
+
+  const runAction = async (a: any, c: any) => {
+    if (a.opens === "detail" || !a.method) {
+      navigate(`${content?.detail_path || "/courses"}/${c.id}`);
+      return;
+    }
+    const label = (a.confirm || "").replace("{title}", c.title || `#${c.id}`);
+    if (a.confirm && typeof window !== "undefined" && !window.confirm(label))
+      return;
+    if (a.method === "delete") {
+      await ent.onDelete(c.id);
+      action?.({ key: "data", type: "reload" });
+    }
+  };
 
   const open = (c: any) => {
     session?.update("recent", {
@@ -88,36 +111,51 @@ export default function CourseList({ content, actionData, session }: any) {
           {courses.map((c: any) => {
             const cat = catById[c.category_id];
             const n = counts[c.id];
+            const allowed = cardActions.filter((a: any) =>
+              a.method ? ent.can(a.method) : true,
+            );
             return (
-              <Pressable
-                key={c.id}
-                className="card module-card course-card"
-                onPress={() => open(c)}
-              >
-                <View className="card-body">
-                  <View
-                    className="module-icon"
-                    style={{ background: cat?.color_bg, color: cat?.color }}
-                  >
-                    {cat?.emoji || "📚"}
-                  </View>
-                  <View className="module-title">{c.title}</View>
-                  {c.description && (
-                    <View className="module-desc">{c.description}</View>
-                  )}
-                  <View className="module-meta">
-                    {c.status && (
-                      <Text className={`badge status-${c.status}`}>{c.status}</Text>
+              <View key={c.id} className="card module-card course-card">
+                <Pressable className="card-hit" onPress={() => open(c)}>
+                  <View className="card-body">
+                    <View
+                      className="module-icon"
+                      style={{ background: cat?.color_bg, color: cat?.color }}
+                    >
+                      {cat?.emoji || "📚"}
+                    </View>
+                    <View className="module-title">{c.title}</View>
+                    {c.description && (
+                      <View className="module-desc">{c.description}</View>
                     )}
-                    {n != null && <Text>📦 {n} chapters</Text>}
+                    <View className="module-meta">
+                      {c.status && (
+                        <Text className={`badge status-${c.status}`}>{c.status}</Text>
+                      )}
+                      {n != null && <Text>📦 {n} chapters</Text>}
+                    </View>
+                    {/* visual CTA only — the card itself carries the press,
+                        so this stays a span (no nested interactive elements) */}
+                    <Text className="sf-action-btn">
+                      {content?.cta_label || "Start learning"}
+                    </Text>
                   </View>
-                  {/* visual CTA only — the card itself carries the press,
-                      so this stays a span (no nested interactive elements) */}
-                  <Text className="sf-action-btn">
-                    {content?.cta_label || "Start learning"}
-                  </Text>
-                </View>
-              </Pressable>
+                </Pressable>
+                {allowed.length > 0 && (
+                  <View className="card-actions">
+                    {allowed.map((a: any, i: number) => (
+                      <Pressable
+                        key={i}
+                        className="card-action-btn"
+                        title={a.label}
+                        onPress={() => runAction(a, c)}
+                      >
+                        {a.icon}
+                      </Pressable>
+                    ))}
+                  </View>
+                )}
+              </View>
             );
           })}
         </View>

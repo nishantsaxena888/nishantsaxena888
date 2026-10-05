@@ -611,7 +611,22 @@
             "back": {
               "label": "← Back to Home",
               "to": "/"
-            }
+            },
+            "entity": "course",
+            "card_actions": [
+              {
+                "icon": "✏️",
+                "label": "Edit",
+                "opens": "detail",
+                "method": "put"
+              },
+              {
+                "icon": "🗑",
+                "label": "Delete",
+                "method": "delete",
+                "confirm": "Delete {title}?"
+              }
+            ]
           }
         }
       ]
@@ -852,5 +867,22 @@
     "nav.courses": "Courses",
     "nav.myLearning": "My Learning"
   },
-  "site_nav": false
+  "site_nav": false,
+  "roles": [
+    {
+      "name": "viewer",
+      "default": true
+    },
+    {
+      "name": "admin"
+    }
+  ],
+  "rbac": {
+    "course": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    }
+  }
 }
