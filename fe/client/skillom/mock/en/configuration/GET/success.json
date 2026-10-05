@@ -286,6 +286,18 @@
                   "chapter_id": ":id",
                   "size": 100
                 }
+              },
+              {
+                "key": "submit_quiz",
+                "endpoint": "quiz_submission",
+                "method": "POST",
+                "lazy": true,
+                "payload": {
+                  "chapter_id": ":chapter_id",
+                  "quiz_id": ":quiz_id",
+                  "score": ":score",
+                  "total": ":total"
+                }
               }
             ]
           },

@@ -73,9 +73,20 @@ const Inline = ({ text }: { text: string }) => {
   return <>{parts}</>;
 };
 
-const Quiz = ({ sec }: { sec: Extract<MdSection, { type: "quiz" }> }) => {
+const Quiz = ({
+  sec,
+  onAnswer,
+}: {
+  sec: Extract<MdSection, { type: "quiz" }>;
+  onAnswer?: (correct: boolean) => void;
+}) => {
   const [picked, setPicked] = useState<number | null>(null);
   const done = picked !== null;
+  const pick = (i: number) => {
+    if (done) return;
+    setPicked(i);
+    onAnswer?.(i === sec.answerIndex);
+  };
   return (
     <View className="quiz-card rounded-lg border p-4 space-y-3">
       <Text as="p" className="font-medium">
@@ -91,7 +102,7 @@ const Quiz = ({ sec }: { sec: Extract<MdSection, { type: "quiz" }> }) => {
                 ? "border-red-500 bg-red-500/10"
                 : "hover:bg-accent"
           }`}
-          onPress={() => !done && setPicked(i)}
+          onPress={() => pick(i)}
         >
           <Text>{opt}</Text>
         </Pressable>
@@ -113,7 +124,15 @@ const resolveSrc = (src: string, base?: string) =>
     ? `${base.replace(/\/?$/, "/")}${src}`
     : src;
 
-const Section = ({ sec, base }: { sec: MdSection; base?: string }) => {
+const Section = ({
+  sec,
+  base,
+  onQuizAnswer,
+}: {
+  sec: MdSection;
+  base?: string;
+  onQuizAnswer?: (correct: boolean) => void;
+}) => {
   switch (sec.type) {
     case "heading":
       return sec.level <= 2 ? (
@@ -170,7 +189,7 @@ const Section = ({ sec, base }: { sec: MdSection; base?: string }) => {
         </View>
       );
     case "quiz":
-      return <Quiz sec={sec} />;
+      return <Quiz sec={sec} onAnswer={onQuizAnswer} />;
     case "video":
       return (
         <View className="video-card rounded-lg border p-4 space-y-2">
@@ -310,7 +329,26 @@ export default function ChapterReader({ content, actionData, session }: any) {
         </Text>
       )}
       {parsed.sections.map((sec, i) => (
-        <Section key={i} sec={sec} base={chapter?.content_base} />
+        <Section
+          key={i}
+          sec={sec}
+          base={chapter?.content_base}
+          onQuizAnswer={
+            sec.type === "quiz"
+              ? (correct) =>
+                  actionData?.action?.({
+                    key: "submit_quiz",
+                    type: "filter",
+                    data: {
+                      chapter_id: chapter?.id,
+                      quiz_id: `ch${chapter?.id}-q${i}`,
+                      score: correct ? 1 : 0,
+                      total: 1,
+                    },
+                  })
+              : undefined
+          }
+        />
       ))}
       {!actionData?.loading && parsed.sections.length === 0 && (
         <Text as="p" className="text-muted-foreground">
