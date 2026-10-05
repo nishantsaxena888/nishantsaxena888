@@ -216,6 +216,23 @@
       "mock": true
     }
   },
+  "review-queue": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
   "home": {
     "GET": {
       "mock": true

@@ -111,6 +111,13 @@
       "icon": "git-branch"
     },
     {
+      "name": "Review Queue",
+      "description": "Draft / review / publish board",
+      "url": "/admin/review-queue",
+      "entity": "review-queue",
+      "icon": "kanban"
+    },
+    {
       "name": "Comments",
       "description": "Review comments",
       "url": "/admin/comment",

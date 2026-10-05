@@ -13,7 +13,7 @@
 ENTITIES_ORDER = [
     "overview", "category", "course", "chapter", "revision", "comment",
     "course_release", "enrollment", "progress", "lab_note",
-    "quiz_submission",
+    "quiz_submission", "review-queue",
 ]
 
 entities = {
@@ -746,5 +746,38 @@ entities = {
             {"id": 1, "user_id": "deepti", "chapter_id": 1, "quiz_id": "ch1-quick-quiz",
              "score": 3, "total": 3, "submitted_at": "2025-01-04T10:45:00Z"},
         ],
+    },
+
+    # Review board — OPTIONS serves a `config` def so /admin/review-queue
+    # renders the skillom "revision-pipeline" component: status columns
+    # plus lazy write actions (transition = PUT revision/:rid,
+    # rollback = POST revision copying old md into a new draft).
+    "review-queue": {
+        "source": "json",
+        "fields": {"id": {"type": "int", "primary_key": True}},
+        "config": [{
+            "id": "revision-pipeline",
+            "type": "revision-pipeline",
+            "properties": {
+                "level": "base",
+                "type": "dynamic",
+                "action": [
+                    {"key": "revisions", "endpoint": "revision",
+                     "method": "GET", "queryParams": {"size": 500}},
+                    {"key": "transition", "endpoint": "revision/:rid",
+                     "method": "PUT", "lazy": True,
+                     "payload": {"status": ":status"}},
+                    {"key": "rollback", "endpoint": "revision",
+                     "method": "POST", "lazy": True,
+                     "payload": {"chapter_id": ":chapter_id",
+                                 "version_no": ":version_no",
+                                 "md_content": ":md_content",
+                                 "author": ":author",
+                                 "status": "draft"}},
+                ],
+            },
+            "content": {"title": "Review Pipeline"},
+        }],
+        "sample_data": [],
     },
 }

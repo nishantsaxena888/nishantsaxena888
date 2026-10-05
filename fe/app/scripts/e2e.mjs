@@ -36,6 +36,7 @@ const ROUTES = {
   skillom: [
     "/", "/courses", "/courses/2", "/learn/1", "/my-learning",
     "/admin", "/admin/overview", "/admin/course", "/admin/revision",
+    "/admin/review-queue",
   ],
 };
 
@@ -186,6 +187,22 @@ for (const [client, routes] of Object.entries(ROUTES)) {
       !!prog && JSON.parse(prog).length > 0,
       "mark complete → progress session persist",
     );
+
+    // review board: status columns + lazy write actions (PUT transition
+    // fires only on click — the mock answers {ok:true}, list reloads)
+    await goto(page, "/admin/review-queue");
+    const cols = await page.locator(".revision-pipeline .grid > div").count();
+    check(cols === 4, "skillom review-queue → 4 status columns", `${cols} cols`);
+    const approve = page
+      .locator("button")
+      .filter({ hasText: /^Approve$/ })
+      .first();
+    if (await approve.count()) {
+      await approve.click();
+      await page.waitForTimeout(400);
+      const board = (await page.textContent("body")) || "";
+      check(!board.includes("crashed"), "approve transition no crash");
+    }
   } catch (e) {
     check(false, "skillom flow", e.message.slice(0, 120));
   }

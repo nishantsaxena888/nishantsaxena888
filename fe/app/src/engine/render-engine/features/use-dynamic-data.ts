@@ -41,14 +41,22 @@ export function useDynamicData(def: Definition) {
   // Skeleton only makes sense when there is an initial fetch to wait on —
   // a dynamic def with zero actions never triggers the effect that clears
   // this, so it must start false (was an infinite "Loading Component…").
+  // `lazy: true` actions exist only for explicit action() calls (writes
+  // like PUT/POST must never fire on mount) — they don't count for the
+  // first-load skeleton or initial fetch batch.
+  const autoActions = useMemo(
+    () => actions.filter((a: any) => !a.lazy),
+    [actions],
+  );
+
   const [isFirstLoad, setIsFirstLoad] = useState<boolean>(
-    isDynamic && actions.length > 0,
+    isDynamic && autoActions.length > 0,
   );
   const [firstLoadError, setFirstLoadError] = useState<string | null>(null);
 
   const anyLoading =
-    isDynamic && actions.length > 0
-      ? actions.some((a) => loadingMap[a.key] !== false)
+    isDynamic && autoActions.length > 0
+      ? autoActions.some((a) => loadingMap[a.key] !== false)
       : false;
 
   const skeletonLoading = isFirstLoad;
@@ -69,14 +77,18 @@ export function useDynamicData(def: Definition) {
       }
 
       const { method, headers } = actionConfig;
-      const endpoint = interpolate(actionConfig.endpoint, routeParams);
-      const payload = interpolate(actionConfig.payload, routeParams);
       const paramsToUse = interpolate(
         paramsOverride !== undefined
           ? paramsOverride
           : searchParameters[actionKey],
         routeParams,
       );
+      // Action data doubles as interpolation context — a lazy write
+      // action like "revision/:rid" resolves :rid from the row the
+      // component passed to action(), not just the URL params.
+      const ctx = { ...routeParams, ...(paramsToUse || {}) };
+      const endpoint = interpolate(actionConfig.endpoint, ctx);
+      const payload = interpolate(actionConfig.payload, ctx);
 
       setLoadingMap((prev) => ({ ...prev, [actionKey]: true }));
       setErrorMap((prev) => {
@@ -148,13 +160,13 @@ export function useDynamicData(def: Definition) {
   }
 
   useEffect(() => {
-    if (!(isDynamic && actions.length > 0)) return;
+    if (!(isDynamic && autoActions.length > 0)) return;
 
-    // Trigger fetch for each action — deferred to a microtask so the
-    // synchronous setLoadingMap inside fetchDynamicData doesn't run in
-    // the effect body.
+    // Trigger fetch for each non-lazy action — deferred to a microtask
+    // so the synchronous setLoadingMap inside fetchDynamicData doesn't
+    // run in the effect body.
     queueMicrotask(() => {
-      const promises = actions.map((a: any) => {
+      const promises = autoActions.map((a: any) => {
         if (a.key) {
           const params = {
             ...(searchParameters[a.key] || {}),
