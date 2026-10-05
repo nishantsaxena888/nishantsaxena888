@@ -29,6 +29,11 @@
       "mock": true
     }
   },
+  "pages/guide": {
+    "GET": {
+      "mock": true
+    }
+  },
   "style-config/uday-dark": {
     "GET": {
       "mock": true

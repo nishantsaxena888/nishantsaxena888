@@ -17,9 +17,31 @@ export type MdSection =
   | { type: "hotspot"; src: string; hotspots: any[] }
   | { type: "gallery"; images: any[] }
   | { type: "steps"; title: string; steps: any[] }
-  | { type: "widget"; tag: string; title: string; body: string };
+  | {
+      type: "widget";
+      tag: string;
+      title: string;
+      body: string;
+      // Raw directive attrs — a registered `md-<tag>` component in the
+      // tenant map receives these as props; without one the widget
+      // degrades to the attr callout (title/body).
+      attrs?: Record<string, any>;
+    };
 
 export type ParsedMd = { sections: MdSection[] };
+
+// Stable heading anchors — deep links + reviewer comment anchors. A
+// leading section number wins ("3.9 Deployments" → "3-9"); otherwise the
+// title slugifies. Same convention as the source platform's concept ids.
+export const mdAnchor = (text: string): string => {
+  const num = /^(\d+(?:\.\d+)*)\b/.exec(text.trim());
+  if (num) return num[1].replace(/\./g, "-");
+  const slug = text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return slug || "section";
+};
 
 // ---- literal evaluator -------------------------------------------------
 // JS-ish literals from directive attrs: "str" | 'str' | 12 | true | null |
@@ -117,6 +139,26 @@ export const evalLiteral = (s: string): any => {
   return value(p);
 };
 
+// Directive attrs arrive as raw strings (quotes already stripped by
+// parseAttrs; {}-wrapped literals arrive brace-less). evalLiteral maps
+// each back to its real value — […]→array, "12"→12 — but ONLY when the
+// whole string parses ("3-9 foo" must stay a string, not truncate to 3).
+// This is what `md-<tag>` components receive as props.
+const evalAttr = (v: string): any => {
+  const p: P = { s: v, i: 0 };
+  const out = value(p);
+  ws(p);
+  return p.i === v.length && out !== undefined ? out : v;
+};
+
+const evalAttrs = (a: Record<string, any>): Record<string, any> =>
+  Object.fromEntries(
+    Object.entries(a).map(([k, v]) => [
+      k,
+      typeof v === "string" ? evalAttr(v) : v,
+    ]),
+  );
+
 // ---- directive attrs ----------------------------------------------------
 
 const unescapeCode = (s: string) =>
@@ -213,6 +255,7 @@ const attrCallout = (tag: string, a: Record<string, any>): MdSection => ({
   body: TEXT_ATTRS.map((k) => unescapeCode(a[k] || ""))
     .filter(Boolean)
     .join("\n"),
+  attrs: evalAttrs(a),
 });
 
 // self-closing (or Quiz) directive → section
@@ -245,12 +288,14 @@ const directive = (tag: string, attrStr: string): MdSection | null => {
       };
     case "CodeExplorer":
     case "GitHubExplorer":
-      // Live-repo explorer — reader degrades to a link card for now.
+      // Live-repo explorer — reader degrades to a link card unless the
+      // tenant registers an `md-codeexplorer`/`md-githubexplorer` comp.
       return {
         type: "widget",
         tag,
         title: unescapeCode(a.title || "Code explorer"),
         body: a.repo ? `Repository: ${a.repo}${a.ref ? ` @ ${a.ref}` : ""}` : "",
+        attrs: evalAttrs(a),
       };
     case "Conversation":
       return {
@@ -258,6 +303,7 @@ const directive = (tag: string, attrStr: string): MdSection | null => {
         tag,
         title: unescapeCode(a.title || "Conversation"),
         body: "",
+        attrs: evalAttrs(a),
       };
     case "FlowDiagram":
     case "AgentFlowStoryteller":

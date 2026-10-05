@@ -1,7 +1,7 @@
 // md-sections parser contract — lives next to the lib (vitest includes
 // ../client/** so client code tests itself without crossing the boundary).
 import { describe, expect, it } from "vitest";
-import { evalLiteral, parseMd } from "./md-sections";
+import { evalLiteral, mdAnchor, parseMd } from "./md-sections";
 
 describe("evalLiteral", () => {
   it("parses arrays, objects, scalars without eval", () => {
@@ -130,5 +130,34 @@ describe("parseMd — directives", () => {
   it("plain HTML lines pass through / skipped", () => {
     const { sections } = parseMd("text\n<div>\nmore text");
     expect(sections.map((s) => s.type)).toEqual(["paragraph", "paragraph"]);
+  });
+
+  it("widget sections carry raw attrs for `md-<tag>` custom renderers", () => {
+    const md = [
+      '<GitHubExplorer repo="acme/repo" ref="nishant" files={["a.ts","b.ts"]} />',
+      '<FlowDiagram title="Flow" description="a→b" />',
+    ].join("\n");
+    const { sections } = parseMd(md);
+    expect(sections[0]).toMatchObject({
+      type: "widget",
+      tag: "GitHubExplorer",
+      attrs: { repo: "acme/repo", ref: "nishant", files: ["a.ts", "b.ts"] },
+    });
+    expect(sections[1]).toMatchObject({
+      type: "widget",
+      tag: "FlowDiagram",
+      attrs: { title: "Flow" },
+    });
+  });
+});
+
+describe("mdAnchor", () => {
+  it("numbered sections → dash anchors (concept-id convention)", () => {
+    expect(mdAnchor("3.9 Deployments")).toBe("3-9");
+    expect(mdAnchor("12.4.1 Nested")).toBe("12-4-1");
+  });
+  it("plain headings slugify; empty → section", () => {
+    expect(mdAnchor("Getting Started!")).toBe("getting-started");
+    expect(mdAnchor("")).toBe("section");
   });
 });

@@ -32,7 +32,7 @@ const ROUTES = {
     "/admin", "/admin/overview", "/admin/product", "/admin/order",
   ],
   uday: [
-    "/", "/courses", "/courses/2", "/learn/1", "/my-learning",
+    "/", "/courses", "/courses/2", "/learn/1", "/my-learning", "/guide",
     "/admin", "/admin/overview", "/admin/course", "/admin/revision",
     "/admin/review-queue",
   ],
@@ -256,6 +256,20 @@ for (const [client, routes] of Object.entries(ROUTES)) {
     await goto(page, "/admin/review-queue");
     const cols = await page.locator(".revision-pipeline .grid > div").count();
     check(cols === 4, "uday review-queue → 4 status columns", `${cols} cols`);
+
+    // md++ reusable layer: standalone md-viewer page renders inline
+    // markdown, an interactive quiz, AND a client-registered md-<tag>
+    // widget (uday's md-githubexplorer — the tenant extension point).
+    await goto(page, "/guide");
+    const viewer = await page.locator(".md-viewer").count();
+    const toc = await page.locator(".md-toc").count();
+    const ghCard = await page.locator(".github-explorer").count();
+    const gQuiz = await page.locator(".md-viewer .quiz-card").count();
+    check(
+      viewer > 0 && toc > 0 && gQuiz > 0 && ghCard > 0,
+      "uday /guide: md-viewer + toc + quiz + md-githubexplorer widget",
+      `viewer=${viewer} toc=${toc} quiz=${gQuiz} gh=${ghCard}`,
+    );
   } catch (e) {
     check(false, "uday flow", e.message.slice(0, 120));
   }

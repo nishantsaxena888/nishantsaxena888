@@ -10,6 +10,7 @@ import { StorefrontAuthLayout } from "./auth-layout";
 import CourseList from "./course-list";
 import CourseDetail from "./course-detail";
 import ChapterReader from "./chapter-reader";
+import MdViewer from "./md-viewer";
 
 // Generic storefront building blocks — available to every client's site
 // surface. Type names are domain-neutral UI roles; the domain words
@@ -28,6 +29,9 @@ import ChapterReader from "./chapter-reader";
 //   course-detail   header + ordered child list → reader_path (/learn/:id)
 //   chapter-reader  md_content → typed widgets (quiz/callouts/video…)
 //                   via md-sections; progress session + lazy entity writes
+//   md-viewer       standalone md++ on any page — content.markdown inline
+//                   or content.md_key → actionData; "md-<tag>" tenant
+//                   comps render extended directives
 //
 // Legacy type names are kept as aliases so ported defs still resolve —
 // new defs should use the canonical names above.
@@ -58,4 +62,6 @@ export const storefront_components = {
   "course-list": CourseList,
   "course-detail": CourseDetail,
   "chapter-reader": ChapterReader,
+  // md++ content anywhere — docs/notes/guides/announcements
+  "md-viewer": MdViewer,
 };

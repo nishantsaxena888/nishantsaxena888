@@ -48,22 +48,36 @@ fe/client/skillom/mock/…             — endpoint tree + config.json registry
 for `auth_page` entries — and only writes stub files that don't already
 exist, so hand-authored page mocks survive regeneration.
 
-## Markdown directives (tenants/storefront/md-sections.ts)
+## md++ layer (tenants/storefront/md-*)
 
-`parseMd(md)` → typed `MdSection[]`. Blocks: headings, paragraphs,
-code fences, lists, images, blockquote callouts. Embedded JSX-style
-directives keep document position via `@@MDSEC:N@@` sentinels:
+`parseMd(md)` (`md-sections.ts`) → typed `MdSection[]`. Blocks:
+headings, paragraphs, code fences, lists, images, blockquote callouts.
+Embedded JSX-style directives keep document position via
+`@@MDSEC:N@@` sentinels:
 
 - `<Quiz …/>` — interactive quiz (options/answerIndex/explanation)
 - `<InfoCard|TipCard|WarningCard|…>body</Tag>` — callout variants
 - `<VideoSection youtubeId=…>` — thumbnail + link
 - `<HotspotImage>`, `<ImageGallery>`, `<CodeExecutionPlayer>` — widgets
 - `<GitHubExplorer|CodeExplorer|Conversation|FlowDiagram>` — degrade to
-  attr-driven cards (live repo fetch is a deliberate gap for now)
+  attr-driven cards by default
 - unknown self-closing widgets — attr callout fallback, never a crash
 
 Attrs support `"quoted"`, `{literal}` (`{[…], {k:v}, scalars}` via a
 recursive-descent `evalLiteral` — **no `new Function`, Hermes-safe**).
+
+**Reusable renderers**: `md-render.tsx` exports `MdDoc` (sections→UI,
+heading anchors via `mdAnchor` — `3.9 X` → `#3-9`) and `MdToc`. Two def
+types consume it: `chapter-reader` (course content) and `md-viewer`
+(md++ on any page — `content.markdown` inline or `content.md_key` →
+actionData, `content.toc` → heading nav).
+
+**Client extension point**: a `widget` section carries raw `attrs`;
+the renderer resolves `md-<tag>` through the tenant component map —
+`fe/client/uday` registers `md-githubexplorer` and `<GitHubExplorer/>`
+in course md renders as a real repo card there while other clients get
+the callout fallback. Any client can add md++ widgets with one file +
+one tenant line, zero engine edits.
 
 ## Engine additions made for this client (all generic)
 

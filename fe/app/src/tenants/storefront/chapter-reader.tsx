@@ -2,280 +2,23 @@
 // (usually a `pages/<slug>` detail route like /learn/:id) declares:
 //   actions: <doc>/:id (title/meta) + <revision-entity>?<doc>_id=:id
 // The component picks the pinned/latest published revision, parses its
-// md_content through ./md-sections, and renders typed sections as
-// widgets (quiz, callouts, video, hotspot, code…). Session writes
-// (progress) go through the SessionBridge prop — the def's lazy
-// actions handle entity writes (e.g. quiz_submission POST).
-import { useMemo, useState } from "react";
+// md_content through ./md-sections, and renders typed sections via
+// ./md-render (shared with md-viewer). Session writes (progress) go
+// through the SessionBridge prop — the def's lazy actions handle entity
+// writes (e.g. quiz_submission POST).
+import { useMemo } from "react";
 import { useNav } from "@/platform/navigation";
-import {
-  Anchor,
-  Image,
-  Pressable,
-  Text,
-  View,
-} from "@/platform/primitives";
+import { Pressable, Text, View } from "@/platform/primitives";
+import { useRenderEngine } from "@/engine/render-engine/features/render-engine-context";
 import { parseMd, type MdSection } from "./md-sections";
+import { MdDoc } from "./md-render";
 
 const toItems = (res: any): any[] =>
   Array.isArray(res) ? res : res?.items ?? res?.data ?? [];
 
-const CALLOUT_ICON: Record<string, string> = {
-  info: "ℹ️",
-  tip: "💡",
-  warning: "⚠️",
-  success: "✅",
-  note: "📝",
-  concept: "🧠",
-  "key-takeaways": "🔑",
-  section: "📌",
-  why: "❓",
-  goal: "🎯",
-  outcome: "🏁",
-  quote: "❝",
-};
-
-// Minimal inline md: **bold**, `code`, [text](url). No italic-* parsing
-// (rare in course md, keeps tokenizer trivial).
-const Inline = ({ text }: { text: string }) => {
-  const parts = useMemo(() => {
-    const out: any[] = [];
-    const re = /(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g;
-    let last = 0;
-    let m: RegExpExecArray | null;
-    let k = 0;
-    while ((m = re.exec(text))) {
-      if (m.index > last) out.push(<Text key={k++}>{text.slice(last, m.index)}</Text>);
-      const t = m[0];
-      if (t.startsWith("**"))
-        out.push(
-          <Text key={k++} as="strong">
-            {t.slice(2, -2)}
-          </Text>,
-        );
-      else if (t.startsWith("`"))
-        out.push(
-          <Text key={k++} as="code" className="rounded bg-muted px-1">
-            {t.slice(1, -1)}
-          </Text>,
-        );
-      else {
-        const mm = /\[([^\]]+)\]\(([^)]+)\)/.exec(t)!;
-        out.push(
-          <Anchor key={k++} to={mm[2]} external>
-            {mm[1]}
-          </Anchor>,
-        );
-      }
-      last = m.index + t.length;
-    }
-    if (last < text.length) out.push(<Text key={k++}>{text.slice(last)}</Text>);
-    return out;
-  }, [text]);
-  return <>{parts}</>;
-};
-
-const Quiz = ({
-  sec,
-  onAnswer,
-}: {
-  sec: Extract<MdSection, { type: "quiz" }>;
-  onAnswer?: (correct: boolean) => void;
-}) => {
-  const [picked, setPicked] = useState<number | null>(null);
-  const done = picked !== null;
-  const pick = (i: number) => {
-    if (done) return;
-    setPicked(i);
-    onAnswer?.(i === sec.answerIndex);
-  };
-  return (
-    <View className="quiz-card rounded-lg border p-4 space-y-3">
-      <Text as="p" className="font-medium">
-        {sec.question}
-      </Text>
-      {sec.options.map((opt: string, i: number) => (
-        <Pressable
-          key={i}
-          className={`quiz-option rounded border p-2 text-left ${
-            done && i === sec.answerIndex
-              ? "border-green-500 bg-green-500/10"
-              : done && i === picked
-                ? "border-red-500 bg-red-500/10"
-                : "hover:bg-accent"
-          }`}
-          onPress={() => pick(i)}
-        >
-          <Text>{opt}</Text>
-        </Pressable>
-      ))}
-      {done && (
-        <Text as="p" className="text-sm text-muted-foreground">
-          {picked === sec.answerIndex ? "Correct. " : "Not quite. "}
-          {sec.explanation}
-        </Text>
-      )}
-    </View>
-  );
-};
-
-// Relative asset refs inside md (image-1.png, screenshots/x.png) resolve
-// against the chapter's content_base — same convention as the source repo.
-const resolveSrc = (src: string, base?: string) =>
-  src && !/^(https?:)?\/\//.test(src) && !src.startsWith("/") && base
-    ? `${base.replace(/\/?$/, "/")}${src}`
-    : src;
-
-const Section = ({
-  sec,
-  base,
-  onQuizAnswer,
-}: {
-  sec: MdSection;
-  base?: string;
-  onQuizAnswer?: (correct: boolean) => void;
-}) => {
-  switch (sec.type) {
-    case "heading":
-      return sec.level <= 2 ? (
-        <Text as="h2" className="text-xl font-semibold mt-6">
-          <Inline text={sec.text} />
-        </Text>
-      ) : (
-        <Text as="h3" className="text-lg font-semibold mt-4">
-          <Inline text={sec.text} />
-        </Text>
-      );
-    case "paragraph":
-      return (
-        <Text as="p" className="leading-7">
-          <Inline text={sec.text} />
-        </Text>
-      );
-    case "code":
-      return (
-        <View className="rounded-lg border bg-muted/50 overflow-hidden">
-          {sec.lang ? (
-            <Text className="px-3 py-1 text-xs text-muted-foreground border-b">
-              {sec.lang}
-            </Text>
-          ) : null}
-          <Text as="pre" className="p-3 overflow-x-auto text-sm">
-            {sec.code}
-          </Text>
-        </View>
-      );
-    case "list":
-      return (
-        <View as={sec.ordered ? "ol" : "ul"} className="list-inside space-y-1 pl-4">
-          {sec.items.map((it, i) => (
-            <Text as="li" key={i}>
-              <Inline text={it} />
-            </Text>
-          ))}
-        </View>
-      );
-    case "image":
-      return <Image src={resolveSrc(sec.src, base)} alt={sec.alt} loading="lazy" />;
-    case "callout":
-      return (
-        <View className="callout rounded-lg border p-4 space-y-1">
-          <Text as="p" className="font-medium">
-            {CALLOUT_ICON[sec.variant] || "ℹ️"} {sec.title}
-          </Text>
-          {sec.body && (
-            <Text as="p" className="text-sm text-muted-foreground">
-              <Inline text={sec.body} />
-            </Text>
-          )}
-        </View>
-      );
-    case "quiz":
-      return <Quiz sec={sec} onAnswer={onQuizAnswer} />;
-    case "video":
-      return (
-        <View className="video-card rounded-lg border p-4 space-y-2">
-          <Image
-            src={`https://img.youtube.com/vi/${sec.youtubeId}/hqdefault.jpg`}
-            alt={sec.title || "video"}
-            loading="lazy"
-          />
-          <Anchor
-            to={`https://www.youtube.com/watch?v=${sec.youtubeId}`}
-            external
-          >
-            ▶ {sec.title || "Watch video"}
-          </Anchor>
-        </View>
-      );
-    case "hotspot":
-      return (
-        <View className="hotspot-card rounded-lg border overflow-hidden">
-          {sec.src ? (
-            <Image src={resolveSrc(sec.src, base)} alt="hotspot" loading="lazy" />
-          ) : null}
-          <View className="p-3 space-y-1">
-            {sec.hotspots.map((h: any, i: number) => (
-              <Text key={i} as="p" className="text-sm">
-                • {h.tip || h.label}
-              </Text>
-            ))}
-          </View>
-        </View>
-      );
-    case "gallery":
-      return (
-        <View className="gallery grid gap-2 md:grid-cols-2">
-          {sec.images.map((im: any, i: number) => (
-            <Image
-              key={i}
-              src={resolveSrc(typeof im === "string" ? im : im.src, base)}
-              alt={im.alt || `image ${i + 1}`}
-              loading="lazy"
-            />
-          ))}
-        </View>
-      );
-    case "steps":
-      return (
-        <View className="steps-card rounded-lg border p-4 space-y-2">
-          <Text as="p" className="font-medium">
-            {sec.title}
-          </Text>
-          {sec.steps.map((st: any, i: number) => (
-            <View key={i} className="pl-3 border-l-2 space-y-1">
-              <Text as="p" className="text-sm font-medium">
-                {i + 1}. {st.title || st.label}
-              </Text>
-              {st.code && (
-                <Text as="pre" className="rounded bg-muted/50 p-2 text-xs overflow-x-auto">
-                  {st.code}
-                </Text>
-              )}
-            </View>
-          ))}
-        </View>
-      );
-    case "widget":
-      return (
-        <View className="callout rounded-lg border border-dashed p-4 space-y-1">
-          <Text as="p" className="font-medium">
-            {sec.title}
-          </Text>
-          {sec.body && (
-            <Text as="p" className="text-sm text-muted-foreground">
-              <Inline text={sec.body} />
-            </Text>
-          )}
-        </View>
-      );
-    default:
-      return null;
-  }
-};
-
 export default function ChapterReader({ content, actionData, session }: any) {
   const navigate = useNav().navigate;
+  const { componentMap } = useRenderEngine();
   const chapter =
     actionData?.data?.chapter?.data ?? actionData?.data?.chapter;
   const revisions = toItems(actionData?.data?.revisions).filter(
@@ -292,9 +35,19 @@ export default function ChapterReader({ content, actionData, session }: any) {
       (a: any, b: any) => (b.version_no ?? 0) - (a.version_no ?? 0),
     )[0];
 
-  const parsed = rev?.md_content
-    ? parseMd(rev.md_content)
-    : { sections: [] };
+  const parsed = useMemo(
+    () =>
+      rev?.md_content ? parseMd(rev.md_content) : { sections: [] as MdSection[] },
+    [rev],
+  );
+
+  // `md-<tag>` tenant components render extended directives (see
+  // md-viewer); unregistered tags degrade to attr callouts.
+  const resolveWidget = (sec: Extract<MdSection, { type: "widget" }>) => {
+    const Comp = componentMap?.[`md-${sec.tag.toLowerCase()}`] as any;
+    if (!Comp) return undefined;
+    return <Comp section={sec} attrs={sec.attrs || {}} content={content} />;
+  };
 
   const markComplete = () => {
     if (chapter?.id == null) return;
@@ -330,28 +83,23 @@ export default function ChapterReader({ content, actionData, session }: any) {
           v{rev.version_no} · {rev.status}
         </Text>
       )}
-      {parsed.sections.map((sec, i) => (
-        <Section
-          key={i}
-          sec={sec}
-          base={chapter?.content_base}
-          onQuizAnswer={
-            sec.type === "quiz"
-              ? (correct) =>
-                  actionData?.action?.({
-                    key: "submit_quiz",
-                    type: "filter",
-                    data: {
-                      chapter_id: chapter?.id,
-                      quiz_id: `ch${chapter?.id}-q${i}`,
-                      score: correct ? 1 : 0,
-                      total: 1,
-                    },
-                  })
-              : undefined
-          }
-        />
-      ))}
+      <MdDoc
+        sections={parsed.sections}
+        base={chapter?.content_base}
+        resolveWidget={resolveWidget}
+        onQuizAnswer={(correct, i) =>
+          actionData?.action?.({
+            key: content?.quiz_action || "submit_quiz",
+            type: "filter",
+            data: {
+              chapter_id: chapter?.id,
+              quiz_id: `ch${chapter?.id}-q${i}`,
+              score: correct ? 1 : 0,
+              total: 1,
+            },
+          })
+        }
+      />
       {!actionData?.loading && parsed.sections.length === 0 && (
         <Text as="p" className="text-muted-foreground">
           {content?.empty || "No content yet."}

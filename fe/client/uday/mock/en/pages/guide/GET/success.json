@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "title": "Guide \u2014 Uday"
+  },
+  "config": [
+    {
+      "id": "guide-doc",
+      "type": "md-viewer",
+      "properties": {
+        "level": "base",
+        "type": "static"
+      },
+      "content": {
+        "title": "Authoring in md++",
+        "toc": true,
+        "markdown": "# Guide\n\n## 1. Overview\n\nPages are **JSON definitions**; content is `markdown + embedded directives` \u2014 *no code per page*.\n\n> **Note** \u2014 blocks like this are plain blockquotes.\n\n<InfoCard title=\"Reusable\">\nDirectives become real widgets.\n</InfoCard>\n\n## 2. Quiz\n\n<Quiz question=\"Where does page content live?\" options={[\"in code\",\"in configuration + content\"]} answerIndex={1} explanation=\"Pages are defs; md++ supplies content.\"/>\n\n## 3. Custom widgets\n\nClients register `md-<tag>` comps; unregistered tags degrade to callouts.\n\n<GitHubExplorer repo=\"nishantsaxena888/platform\" ref=\"nishant\" files={[\"fe/app/src/tenants/storefront/md-render.tsx\"]}/>\n\n- lists\n- code\n```bash\nnpm run e2e\n```"
+      }
+    }
+  ]
+}
