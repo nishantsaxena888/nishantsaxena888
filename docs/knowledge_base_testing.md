@@ -39,6 +39,10 @@ Naya bug fix ho to uska check ek line mein yahan add karo — e2e mein
   pe assert karo, `page.on('request')` pe nahi.
 - Electron hash routing hai (`file://` pe) — test mein `location.hash`
   use karo, `pushState` nahi.
+- Electron **persists Chromium profile + nav history** between launches —
+  boot pe purana hash route restore ho sakta hai. `e2e-desktop.mjs`
+  starts by pinning `#/` + reload; assertions wait for real DOM rows
+  (`tbody tr`), fixed sleeps pe rely mat karo.
 - `ELECTRON_RUN_AS_NODE` env kabhi Electron launch ko mat do — binary
   Node ki tarah exit kar deta hai (scripts already strip it).
 - Admin sab clients pe `require_auth: false` hai (dev default) — gate

@@ -65,7 +65,14 @@ const nav = async (route) => {
 };
 
 // ---- checks ----------------------------------------------------------------
-await settle(4000);
+// Chromium restores the persisted navigation history (last hash route)
+// on relaunch — pin to "#/" so the suite is deterministic regardless of
+// what the previous session was looking at.
+await settle(3000);
+await page.evaluate(() => {
+  window.location.hash = "#/";
+});
+await settle(3000);
 check(
   (await page.evaluate(() => location.protocol)) === "file:",
   "boots over file:// (packed-app path)",
@@ -79,24 +86,45 @@ check(
 );
 
 await nav("/admin/order");
+// Wait for real rows — the edit form also prints "Customer" so text
+// matching alone can false-positive while OPTIONS is still resolving.
+let rows = 0;
+for (let i = 0; i < 10 && rows === 0; i++) {
+  rows = await page.evaluate(
+    () => document.querySelectorAll("tbody tr").length,
+  );
+  if (rows === 0) await page.waitForTimeout(700);
+}
 const orders = await body();
 check(
-  /order id|customer/i.test(orders) && !orders.includes("crashed"),
+  rows > 0 && !orders.includes("crashed"),
   "admin orders table",
+  rows > 0 ? "" : `rows=0 | ${orders.slice(0, 60).replace(/\n/g, " ")}`,
 );
 
 // Edit regression — the string-date crash that killed default-admin.
-const actionsBtn = page.locator("tbody tr td:last-child button").first();
-if (await actionsBtn.count()) {
-  await actionsBtn.click();
-  await settle(1500);
+// The actions cell holds icon buttons (pencil = edit); wait for a real
+// row first so the OPTIONS fetch has finished.
+const editBtn = page.locator("tbody tr td:last-child button").first();
+try {
+  await page.locator("tbody tr").first().waitFor({ timeout: 10000 });
+  await editBtn.waitFor({ timeout: 5000 });
+  await editBtn.click();
+  await settle(1800);
   const form = await body();
   check(
     !form.includes("crashed") && /submit|cancel/i.test(form),
     "order edit form renders on desktop",
   );
-} else {
-  check(false, "order edit form renders on desktop", "no action button");
+} catch (e) {
+  await page
+    .screenshot({ path: "/tmp/e2e-desktop-fail.png" })
+    .catch(() => {});
+  check(
+    false,
+    "order edit form renders on desktop",
+    String(e?.message || e).slice(0, 80),
+  );
 }
 
 await app.close();
