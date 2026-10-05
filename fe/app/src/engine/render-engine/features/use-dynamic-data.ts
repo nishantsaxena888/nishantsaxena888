@@ -32,16 +32,19 @@ export function useDynamicData(def: Definition) {
     {},
   );
 
-  const [isFirstLoad, setIsFirstLoad] = useState<boolean>(
-    def.properties.type === "dynamic",
-  );
-  const [firstLoadError, setFirstLoadError] = useState<string | null>(null);
-
   const isDynamic = def.properties.type === "dynamic";
   const actions = useMemo(
     () => (def.properties.action as any[]) || [],
     [def.properties.action],
   );
+
+  // Skeleton only makes sense when there is an initial fetch to wait on —
+  // a dynamic def with zero actions never triggers the effect that clears
+  // this, so it must start false (was an infinite "Loading Component…").
+  const [isFirstLoad, setIsFirstLoad] = useState<boolean>(
+    isDynamic && actions.length > 0,
+  );
+  const [firstLoadError, setFirstLoadError] = useState<string | null>(null);
 
   const anyLoading =
     isDynamic && actions.length > 0

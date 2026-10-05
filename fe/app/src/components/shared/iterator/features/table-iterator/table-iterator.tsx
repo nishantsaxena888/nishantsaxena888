@@ -78,7 +78,7 @@ export const TableIterator = ({
                 />
               );
             })}
-            {(action?.onEdit || action?.onDelete || action?.customActions?.length) && (
+            {!!(action?.onEdit || action?.onDelete || action?.customActions?.length) && (
               <TableHead className="text-right">Actions</TableHead>
             )}
           </TableRow>
@@ -188,7 +188,7 @@ export const TableIterator = ({
                       </TableCell>
                     );
                   })}
-                  {(action?.onEdit || action?.onDelete || action?.customActions?.length) && (
+                  {!!(action?.onEdit || action?.onDelete || action?.customActions?.length) && (
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-1">
                         {action?.onEdit && (

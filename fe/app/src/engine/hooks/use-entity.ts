@@ -218,11 +218,14 @@ export function useEntity(entity: string, options?: UseEntityOptions) {
 
           setList(matchedList);
           setTotal(matchedTotal);
-          setIsSkeleton(false);
         }
         return res;
       } finally {
+        // Skeleton ends on ANY settled response — success or failure. A
+        // failed first load must not leave the skeleton up forever (the
+        // caller surfaces res.error separately).
         setLoading(false);
+        setIsSkeleton(false);
       }
     },
     [

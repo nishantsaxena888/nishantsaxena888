@@ -93,6 +93,9 @@ for (const [client, routes] of Object.entries(ROUTES)) {
       const ok =
         text.length > 20 &&
         !text.includes("Configuration Error") &&
+        // A still-mounted skeleton after the settle wait = a fetch that
+        // never resolved — text-length checks alone let this through.
+        !text.includes("Loading Component") &&
         errors.length === 0;
       check(ok, `${client}${route}`, text.slice(0, 60));
       if (errors.length) console.log("   errors:", errors.slice(0, 3).join(" | "));

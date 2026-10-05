@@ -120,6 +120,15 @@ function validateClient(name) {
       ok();
       if (!siteKeys.has(def.type))
         fail(`pages/${slug}`, `def type "${def.type}" has no component (id ${def.id})`);
+      // `properties.actions` (plural) is a silent trap — the engine reads
+      // `action`; the plural parses as a dynamic def with zero actions
+      // and leaves the first-load skeleton mounted forever.
+      if (def.properties?.actions) {
+        fail(
+          `pages/${slug}`,
+          `def "${def.id}" uses "properties.actions" — the engine contract is "properties.action" (singular)`,
+        );
+      }
       // action endpoints → declared entity (strip :params and ?query)
       for (const a of def.properties?.action || []) {
         ok();

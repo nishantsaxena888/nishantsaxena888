@@ -29,7 +29,11 @@ const DashboardControl = ({
                     properties: {
                       level: "base",
                       type: "dynamic",
-                      actions: [
+                      // Engine contract is `properties.action` (singular)
+                      // — `actions` silently parses as a dynamic def with
+                      // zero actions, which leaves the first-load skeleton
+                      // up forever.
+                      action: [
                         {
                           key: "data",
                           endpoint: `/${activePage?.entity || ""}`,
