@@ -46,6 +46,15 @@
       "entity": "pages/wishlist",
       "public": true,
       "order": 2
+    },
+    {
+      "name": "Stay",
+      "description": "Stay detail",
+      "url": "/stays/:id",
+      "entity": "pages/stay",
+      "public": true,
+      "hide": true,
+      "order": 3
     }
   ],
   "admin_menu": [
@@ -107,6 +116,14 @@
       "name": "wishlist",
       "persist": true,
       "method": "array_toggle",
+      "method_config": {
+        "match_key": "id"
+      }
+    },
+    {
+      "name": "trips",
+      "persist": true,
+      "method": "array_upsert",
       "method_config": {
         "match_key": "id"
       }
@@ -395,6 +412,48 @@
             "title": "Your wishlist",
             "session": "wishlist",
             "empty_text": "Nothing saved yet \u2014 tap a heart on any stay."
+          }
+        }
+      ]
+    },
+    "stay": {
+      "meta": {
+        "title": "Stay"
+      },
+      "config": [
+        {
+          "id": "airbnb-stay-detail",
+          "type": "stay-detail",
+          "properties": {
+            "level": "base",
+            "type": "dynamic",
+            "action": [
+              {
+                "key": "stay",
+                "endpoint": "listing/:id",
+                "method": "GET"
+              },
+              {
+                "key": "host",
+                "endpoint": "host",
+                "method": "GET",
+                "queryParams": {
+                  "size": 100
+                }
+              },
+              {
+                "key": "reviews",
+                "endpoint": "review",
+                "method": "GET",
+                "queryParams": {
+                  "size": 50
+                }
+              }
+            ]
+          },
+          "content": {
+            "session": "wishlist",
+            "reserve_session": "trips"
           }
         }
       ]

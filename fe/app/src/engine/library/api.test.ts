@@ -82,9 +82,17 @@ describe("flagged endpoints → mock file", () => {
     expect((r.data as any).items[0].name).toBe("विजेट");
   });
 
-  it("detail path item/7 resolves parent endpoint + id", async () => {
-    const r = await apiClient("item/7", { method: "get" });
+  it("detail path item/1 resolves parent endpoint + returns the record", async () => {
+    const r = await apiClient("item/1", { method: "get" });
     expect(r.error).toBe(false);
+    expect((r.data as any).id).toBe(1);
+    expect((r.data as any).name).toBe("Widget");
+  });
+
+  it("detail path item/7 404s — id filtering mirrors the real API", async () => {
+    const r = await apiClient("item/7", { method: "get" });
+    expect(r.error).toBe(true);
+    expect(r.status_code).toBe(404);
   });
 
   it("registry id constraint — match serves, mismatch falls through", async () => {

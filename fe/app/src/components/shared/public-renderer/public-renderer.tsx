@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNav, useRouteParams } from "@/platform/navigation";
 import { NotFound } from "@/pages/not-found/not-found";
-import { usePublicRender } from "../home-page/utils/use-public-render";
+import { matchMenuEntry, usePublicRender } from "../home-page/utils/use-public-render";
 import { PageRenderer } from "../dynamic-page/page-renderer";
 import { SiteNav } from "../site-nav/site-nav";
 import { storage } from "@/platform/storage";
@@ -11,23 +11,28 @@ export interface PublicRendererProps {
 }
 
 export const PublicRenderer = ({ config }: PublicRendererProps) => {
-  const { slug } = useRouteParams<{ slug: string }>();
+  const { slug, id } = useRouteParams<{ slug: string; id?: string }>();
   const { navigate } = useNav();
+
+  const path = `/${slug}${id ? `/${id}` : ""}`;
 
   const { data: content, loading } = usePublicRender({
     menu: config?.data?.menu || [],
-    currentPage: `/${slug}`,
+    currentPage: path,
   });
 
   const token =
     typeof window !== "undefined" ? storage.getItem("token") : null;
 
-  // Find the menu item that matches the slug
+  // Find the menu item that matches the path — exact, entity-name, or
+  // parameterized (/stays/:id matches /stays/5).
   const menuList = Array.isArray(config?.data?.menu) ? config.data.menu : [];
-  const activePage = menuList.find(
-    (item: any) =>
-      item.entity === slug || item.url?.replace(/^\/|\/$/g, "") === slug,
-  );
+  const activePage =
+    matchMenuEntry(menuList, path) ||
+    menuList.find(
+      (item: any) =>
+        item.entity === slug || item.url?.replace(/^\/|\/$/g, "") === slug,
+    );
 
   useEffect(() => {
     if (activePage?.auth_page && token) {

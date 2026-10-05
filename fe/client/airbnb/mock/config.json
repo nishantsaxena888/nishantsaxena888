@@ -19,6 +19,11 @@
       "mock": true
     }
   },
+  "pages/stay": {
+    "GET": {
+      "mock": true
+    }
+  },
   "style-config/airbnb": {
     "GET": {
       "mock": true

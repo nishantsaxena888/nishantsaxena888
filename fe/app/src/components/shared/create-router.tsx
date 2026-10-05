@@ -45,6 +45,13 @@ export const createRouter = (data: any) =>
       errorElement: <Error />,
     },
     {
+      // Parameterized pages — menu entries whose url carries segments
+      // like /stays/:id resolve the same page def for every id.
+      path: "/:slug/:id",
+      element: <Public config={data} />,
+      errorElement: <Error />,
+    },
+    {
       path: "/:slug",
       element: <Public config={data} />,
       errorElement: <Error />,

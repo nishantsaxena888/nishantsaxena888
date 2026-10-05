@@ -2,11 +2,13 @@
 // Loaded by fe/app/src/tenants/active.ts (generated); merged into the
 // active client's component map. See fe/client/README.md.
 import CategoryBar from "./components/category-bar";
+import StayDetail from "./components/stay-detail";
 import StayGrid from "./components/stay-grid";
 
 export default {
   components: {
     "category-bar": CategoryBar,
+    "stay-detail": StayDetail,
     "stay-grid": StayGrid,
   },
 };

@@ -22,6 +22,10 @@ echo "== mocks: registry/files/definitions =="
 (cd fe/app && node scripts/check-mocks.mjs)
 echo "   ok"
 
+echo "== defs: page/component/session contract =="
+(cd fe/app && node scripts/validate-defs.mjs)
+echo "   ok"
+
 echo "== unit/contract tests (vitest) =="
 (cd fe/app && npx vitest run)
 echo "   ok"

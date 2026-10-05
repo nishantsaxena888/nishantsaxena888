@@ -13,7 +13,7 @@
 import type { RenderComponentProps } from "@/tenants/types";
 import { useQuery } from "@/platform/navigation";
 import Icon from "@/platform/icons";
-import { Image, Pressable, Text, View } from "@/platform/primitives";
+import { Anchor, Image, Pressable, Text, View } from "@/platform/primitives";
 
 const listOf = (v: any): any[] =>
   (Array.isArray(v) && v) || (Array.isArray(v?.items) && v.items) || [];
@@ -64,12 +64,19 @@ export const StayGrid = ({
         {items.map((l: any) => (
           <View as="article" key={l.id ?? l.title} className="ab-card">
             <View className="ab-card-media">
-              {l.image && <Image src={l.image} alt={l.title} loading="lazy" />}
+              {l.image && (
+                <Anchor to={`/stays/${l.id}`}>
+                  <Image src={l.image} alt={l.title} loading="lazy" />
+                </Anchor>
+              )}
               {l.badge && <Text className="ab-card-badge">{l.badge}</Text>}
               <Pressable
                 className={`ab-heart${wished(l) ? " ab-heart--on" : ""}`}
                 aria-label="Save to wishlist"
-                onPress={() => session?.update(sessionName, l)}
+                onPress={(e: any) => {
+                  e?.stopPropagation?.();
+                  session?.update(sessionName, l);
+                }}
               >
                 <Icon
                   name="heart"
@@ -81,7 +88,11 @@ export const StayGrid = ({
             </View>
             <View className="ab-card-body">
               <View className="ab-card-row">
-                <Text as="h3">{l.title}</Text>
+                <Text as="h3">
+                  <Anchor to={`/stays/${l.id}`} className="ab-card-link">
+                    {l.title}
+                  </Anchor>
+                </Text>
                 {l.rating != null && (
                   <Text className="ab-rating">
                     <Icon name="star" size={14} filled /> {l.rating}

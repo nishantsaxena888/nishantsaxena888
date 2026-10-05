@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "title": "Stay"
+  },
+  "config": [
+    {
+      "id": "airbnb-stay-detail",
+      "type": "stay-detail",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "stay",
+            "endpoint": "listing/:id",
+            "method": "GET"
+          },
+          {
+            "key": "host",
+            "endpoint": "host",
+            "method": "GET",
+            "queryParams": {
+              "size": 100
+            }
+          },
+          {
+            "key": "reviews",
+            "endpoint": "review",
+            "method": "GET",
+            "queryParams": {
+              "size": 50
+            }
+          }
+        ]
+      },
+      "content": {
+        "session": "wishlist",
+        "reserve_session": "trips"
+      }
+    }
+  ]
+}

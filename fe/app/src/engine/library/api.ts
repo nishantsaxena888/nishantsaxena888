@@ -387,9 +387,32 @@ async function resolveMock(
     };
   }
 
+  // Detail read — entity/:id on a list-shaped mock ({items: []}) returns
+  // the single record, mirroring GET /entity/{id} on the real backend.
+  // Unknown ids 404 rather than silently returning the whole list.
+  const data =
+    matchId !== undefined && Array.isArray((file as any)?.items)
+      ? (file as any).items.find(
+          (item: any) =>
+            item && String(item.id ?? item.pk ?? item._id) === String(matchId),
+        )
+      : file;
+  if (
+    matchId !== undefined &&
+    Array.isArray((file as any)?.items) &&
+    data === undefined
+  ) {
+    return {
+      data: null,
+      error: true,
+      status_code: 404,
+      message: `Mock: no ${ep} record with id ${matchId}`,
+    };
+  }
+
   const isError = ![200, 201, 202].includes(status);
   const responseObj: ApiResponse = {
-    data: isError ? null : file,
+    data: isError ? null : data,
     details: isError ? file : undefined,
     error: isError,
     status_code: status,

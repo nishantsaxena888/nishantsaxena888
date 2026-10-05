@@ -6,15 +6,21 @@ import type { ComponentType, ReactNode } from "react";
 // depends on the shapes.
 
 // Props the RenderEngine hands every component (generic + client-owned).
-// `any` fields are the engine boundary — content/properties come from the
-// page-definition JSON and are shaped by that def's own convention.
-export interface RenderComponentProps {
+// `content`/`properties` come from the page-definition JSON — components
+// may tighten them via generics, e.g.
+//   RenderComponentProps<{ title: string }, { session: string }>
+// The JSON itself stays untyped at the boundary; the generic documents and
+// checks the shape the comp expects (validate-defs checks it at the edge).
+export interface RenderComponentProps<
+  TContent = any,
+  TProperties extends Record<string, any> = Record<string, any>,
+> {
   id?: string;
   type?: string;
   // Static payload from the def's `content` field.
-  content?: any;
+  content?: TContent;
   // Def `properties` — layout/behavior flags (level, static|dynamic, ...).
-  properties?: Record<string, any>;
+  properties?: TProperties;
   // Present when properties.type === "dynamic": fetched action results.
   actionData?: {
     data?: any;

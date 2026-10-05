@@ -2,8 +2,28 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { type Definition } from "./types";
 import { apiClient } from "../../library/api";
+import { useRouteParams } from "@/platform/navigation";
+
+// `:param` placeholders in action endpoints / queryParams resolve from
+// the current route's params — so a detail page (/stays/:id) can declare
+// "endpoint": "listing/:id" or queryParams {id: ":id"} and the engine
+// fills them per route. Unmatched tokens pass through untouched.
+const interpolate = (value: any, params: Record<string, any>): any => {
+  if (typeof value === "string") {
+    return value.replace(/:([a-zA-Z_]\w*)/g, (m, k) =>
+      params[k] !== undefined ? String(params[k]) : m,
+    );
+  }
+  if (value && typeof value === "object" && !Array.isArray(value)) {
+    return Object.fromEntries(
+      Object.entries(value).map(([k, v]) => [k, interpolate(v, params)]),
+    );
+  }
+  return value;
+};
 
 export function useDynamicData(def: Definition) {
+  const routeParams = useRouteParams<Record<string, string>>();
   const [apiDataMap, setApiDataMap] = useState<Record<string, any>>({});
   const [loadingMap, setLoadingMap] = useState<Record<string, boolean>>({});
   const [errorMap, setErrorMap] = useState<Record<string, string>>({});
@@ -44,11 +64,15 @@ export function useDynamicData(def: Definition) {
         return { error: true, message: msg, status_code: 400, data: null };
       }
 
-      const { endpoint, method, payload, headers } = actionConfig;
-      const paramsToUse =
+      const { method, headers } = actionConfig;
+      const endpoint = interpolate(actionConfig.endpoint, routeParams);
+      const payload = interpolate(actionConfig.payload, routeParams);
+      const paramsToUse = interpolate(
         paramsOverride !== undefined
           ? paramsOverride
-          : searchParameters[actionKey];
+          : searchParameters[actionKey],
+        routeParams,
+      );
 
       setLoadingMap((prev) => ({ ...prev, [actionKey]: true }));
       setErrorMap((prev) => {
@@ -84,7 +108,7 @@ export function useDynamicData(def: Definition) {
         setLoadingMap((prev) => ({ ...prev, [actionKey]: false }));
       }
     },
-    [isDynamic, actions, searchParameters],
+    [isDynamic, actions, searchParameters, routeParams],
   );
 
   const actionsKey = JSON.stringify(def.properties.action || []);
