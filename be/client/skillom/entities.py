@@ -227,6 +227,10 @@ entities = {
             "course_id": {"type": "int", "required": True},
             "title":     {"type": "str", "required": True},
             "order":     {"type": "int", "default": 0},
+            # media base for relative asset refs inside md_content
+            # (imported md references e.g. "image-1.png" — resolves to
+            # content_base + src when serving)
+            "content_base": {"type": "str"},
             # current published revision — read path serves this
             "published_revision_id": {"type": "int"},
         },

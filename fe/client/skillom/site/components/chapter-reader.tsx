@@ -106,7 +106,14 @@ const Quiz = ({ sec }: { sec: Extract<MdSection, { type: "quiz" }> }) => {
   );
 };
 
-const Section = ({ sec }: { sec: MdSection }) => {
+// Relative asset refs inside md (image-1.png, screenshots/x.png) resolve
+// against the chapter's content_base — same convention as the source repo.
+const resolveSrc = (src: string, base?: string) =>
+  src && !/^(https?:)?\/\//.test(src) && !src.startsWith("/") && base
+    ? `${base.replace(/\/?$/, "/")}${src}`
+    : src;
+
+const Section = ({ sec, base }: { sec: MdSection; base?: string }) => {
   switch (sec.type) {
     case "heading":
       return sec.level <= 2 ? (
@@ -148,7 +155,7 @@ const Section = ({ sec }: { sec: MdSection }) => {
         </View>
       );
     case "image":
-      return <Image src={sec.src} alt={sec.alt} loading="lazy" />;
+      return <Image src={resolveSrc(sec.src, base)} alt={sec.alt} loading="lazy" />;
     case "callout":
       return (
         <View className="callout rounded-lg border p-4 space-y-1">
@@ -184,7 +191,7 @@ const Section = ({ sec }: { sec: MdSection }) => {
       return (
         <View className="hotspot-card rounded-lg border overflow-hidden">
           {sec.src ? (
-            <Image src={sec.src} alt="hotspot" loading="lazy" />
+            <Image src={resolveSrc(sec.src, base)} alt="hotspot" loading="lazy" />
           ) : null}
           <View className="p-3 space-y-1">
             {sec.hotspots.map((h: any, i: number) => (
@@ -201,7 +208,7 @@ const Section = ({ sec }: { sec: MdSection }) => {
           {sec.images.map((im: any, i: number) => (
             <Image
               key={i}
-              src={typeof im === "string" ? im : im.src}
+              src={resolveSrc(typeof im === "string" ? im : im.src, base)}
               alt={im.alt || `image ${i + 1}`}
               loading="lazy"
             />
@@ -303,7 +310,7 @@ export default function ChapterReader({ content, actionData, session }: any) {
         </Text>
       )}
       {parsed.sections.map((sec, i) => (
-        <Section key={i} sec={sec} />
+        <Section key={i} sec={sec} base={chapter?.content_base} />
       ))}
       {!actionData?.loading && parsed.sections.length === 0 && (
         <Text as="p" className="text-muted-foreground">

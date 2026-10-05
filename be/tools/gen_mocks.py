@@ -65,11 +65,17 @@ def gen_client(name: str):
     flag("translations", ("GET",))
     write(out, "en/translations/GET/success.json", cfg.get("translations", {}))
 
-    # entities — list + options + write stubs
+    # entities — list + options + write stubs.
+    # Data precedence: be/client/<name>/seed/<entity>.json (bulk real data
+    # from importers) overrides inline entities.py sample_data (hand seed).
     for entity in order:
         spec = entities[entity]
         flag(entity)
-        rows = list(spec.get("sample_data") or [])
+        seed_file = client_dir / "seed" / f"{entity}.json"
+        if seed_file.exists():
+            rows = json.loads(seed_file.read_text())
+        else:
+            rows = list(spec.get("sample_data") or [])
         write(out, f"en/{entity}/GET/success.json",
               {"items": rows, "page": 1, "size": len(rows) or 20, "total": len(rows)})
         ui = derive_ui(spec)

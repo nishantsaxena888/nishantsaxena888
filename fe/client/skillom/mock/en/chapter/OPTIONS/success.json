@@ -19,6 +19,9 @@
         "type": "int",
         "default": 0
       },
+      "content_base": {
+        "type": "str"
+      },
       "published_revision_id": {
         "type": "int"
       }
