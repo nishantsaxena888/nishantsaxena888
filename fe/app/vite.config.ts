@@ -33,11 +33,11 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "react": path.resolve(__dirname, "node_modules/react"),
-      "react-dom": path.resolve(__dirname, "node_modules/react-dom"),
-      "@": path.resolve(__dirname, "./src"),
-      "nishify": path.resolve(__dirname, "./src/nishify.ts"),
-      "@clients": path.resolve(__dirname, "../client"),
+      "react": path.resolve(import.meta.dirname, "node_modules/react"),
+      "react-dom": path.resolve(import.meta.dirname, "node_modules/react-dom"),
+      "@": path.resolve(import.meta.dirname, "./src"),
+      "nishify": path.resolve(import.meta.dirname, "./src/nishify.ts"),
+      "@clients": path.resolve(import.meta.dirname, "../client"),
     },
     dedupe: ["react", "react-dom", "zustand"],
   },

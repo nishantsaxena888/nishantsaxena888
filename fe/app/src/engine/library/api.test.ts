@@ -5,9 +5,11 @@
 import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 
 const axiosCall = vi.fn();
+const axiosPost = vi.fn();
 vi.mock("axios", () => ({
   default: Object.assign((...a: any[]) => axiosCall(...a), {
-    isAxiosError: () => false,
+    post: (...a: any[]) => axiosPost(...a),
+    isAxiosError: (e: any) => !!e?.isAxiosError,
   }),
 }));
 
@@ -172,3 +174,4 @@ describe("normalization", () => {
     expect(r.error).toBe(false);
   });
 });
+

@@ -1,6 +1,8 @@
  
  
 import axios, { type AxiosRequestConfig, AxiosError } from "axios";
+import { jwtDecode } from "jwt-decode";
+import { emitAppEvent } from "@/platform/host";
 import { ensureClientMocks, mockConfigByClient, mockDataByClient } from "./mock-data";
 import {
   apiCacheKey,
@@ -93,6 +95,68 @@ export const setApiConfiguration = (configuration: ApiConfiguration) => {
 
 export const getApiConfig = () => globalApiConfig;
 export const getApiMockData = () => null;
+
+// --- token lifecycle ------------------------------------------------------
+// Sliding refresh: before a real-API call attaches the Bearer token, if the
+// token is expired (or inside the skew window) we exchange it once at
+// POST /api/refresh — concurrent callers share one in-flight refresh.
+// A refresh 401 / dead token clears the session and emits auth-change so
+// menus/gates refilter. Mock-served calls never trigger any of this.
+const REFRESH_SKEW_MS = 60_000;
+let refreshInFlight: Promise<void> | null = null;
+let decodedExpCache: { token: string; exp: number | null } | null = null;
+
+const tokenExp = (token: string): number | null => {
+  if (decodedExpCache?.token === token) return decodedExpCache.exp;
+  let exp: number | null = null;
+  try {
+    exp = (jwtDecode(token) as any)?.exp ?? null;
+  } catch {
+    exp = null;
+  }
+  decodedExpCache = { token, exp };
+  return exp;
+};
+
+const clearSession = () => {
+  storage.removeItem("token");
+  emitAppEvent("auth-change");
+};
+
+async function ensureFreshToken(baseUrl: string) {
+  if (typeof window === "undefined") return;
+  const token = storage.getItem("token");
+  if (!token) return;
+  const exp = tokenExp(token);
+  if (!exp || exp * 1000 - Date.now() > REFRESH_SKEW_MS) return;
+  if (!refreshInFlight) {
+    refreshInFlight = (async () => {
+      try {
+        const res = await axios.post(
+          `${baseUrl.replace(/\/+$/, "")}/api/refresh`,
+          {},
+          { headers: { Authorization: `Bearer ${token}` } },
+        );
+        if (res.data?.token) {
+          storage.setItem("token", res.data.token);
+          decodedExpCache = null;
+          emitAppEvent("auth-change");
+        }
+      } catch (err: any) {
+        // 401 → session is dead (bad sig / refresh window passed): drop it.
+        // Network failure (status 0) → keep the token; the request below
+        // proceeds with what we have.
+        if (axios.isAxiosError(err) && err.response?.status === 401) {
+          clearSession();
+        }
+      } finally {
+        refreshInFlight = null;
+      }
+    })();
+  }
+  await refreshInFlight;
+}
+// ---------------------------------------------------------------------------
 
 export interface ApiRequestOptions {
   method?: HttpMethod;
@@ -191,6 +255,10 @@ export const apiClient = async <T = any>(
 
     const axiosMethod = method === "options" ? "options" : method;
 
+    // Real-API path only (mock already resolved above): refresh a dying
+    // token before it rides the request.
+    await ensureFreshToken(formattedBaseUrl);
+
     const mergedHeaders: Record<string, string> = { ...header };
 
     if (!mergedHeaders["Accept-Language"]) {
@@ -254,6 +322,11 @@ export const apiClient = async <T = any>(
       } else if (error instanceof Error) {
         message = error.message;
       }
+
+      // Hard 401 on a real call → session is dead server-side; drop the
+      // token and notify gates (auth-change → config reload, menus
+      // refilter, admin screens bounce on next mount).
+      if (statusCode === 401) clearSession();
 
       return {
         data: null,

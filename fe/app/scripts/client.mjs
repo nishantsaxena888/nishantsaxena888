@@ -178,6 +178,19 @@ export const mockGlobs: Record<string, () => Promise<unknown>> =
 `;
   writeFileSync(join(appDir, "src/tenants/dev-all.native.ts"), devNative);
 
+  // Sync name manifest — getActiveClient consults this to decide whether a
+  // localStorage["vite-client"] value is a known (lazily loadable) client
+  // or stale junk. Checking componentsMap alone races ensureClient: the
+  // map is empty until the dynamic import resolves, so the override was
+  // being deleted before it could ever load.
+  writeFileSync(
+    join(appDir, "src/tenants/known-clients.ts"),
+    `// GENERATED — do not edit by hand. Names of client folders that
+// existed when the tenant bindings were last generated.
+export const KNOWN_CLIENTS: string[] = ${JSON.stringify(names)};
+`,
+  );
+
   console.log(`active client → ${name} (${m.title || name})`);
 }
 

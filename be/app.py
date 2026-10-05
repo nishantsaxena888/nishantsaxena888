@@ -131,6 +131,10 @@ def _src(entity: str) -> Source:
 
 JWT_SECRET = os.environ.get("JWT_SECRET", "dev-secret")
 JWT_TTL = int(os.environ.get("JWT_TTL", "86400"))
+# Sliding rotation window: a token whose signature is valid but exp passed
+# may still be refreshed within this window (default 7d). Beyond it the
+# client must log in again.
+JWT_REFRESH_WINDOW = int(os.environ.get("JWT_REFRESH_WINDOW", str(7 * 86400)))
 
 
 def _b64e(b: bytes) -> str:
@@ -358,6 +362,48 @@ async def login(request: Request):
     payload = {"sub": email, "email": email, "role": role or _default_role(),
                "iat": int(time.time()), "exp": int(time.time()) + JWT_TTL}
     return {"token": _jwt_sign(payload), "user": {"email": email, "name": email.split("@")[0]}}
+
+
+@app.post("/api/refresh")
+@app.post("/api/refresh/")
+async def refresh(request: Request):
+    """Sliding session rotation — exchange a Bearer token for a fresh one.
+
+    Valid signature required. Unexpired tokens refresh freely; expired
+    tokens renew only inside JWT_REFRESH_WINDOW. The response shares the
+    login contract ({token, user}) so the client treats both identically.
+    """
+    auth = request.headers.get("authorization", "")
+    if not auth.lower().startswith("bearer "):
+        raise HTTPException(401, "Bearer token required")
+    try:
+        head, body, sig = auth.split(None, 1)[1].split(".")
+        expect = _b64e(hmac.new(JWT_SECRET.encode(),
+                                f"{head}.{body}".encode(),
+                                hashlib.sha256).digest())
+        if not hmac.compare_digest(expect, sig):
+            raise HTTPException(401, "Invalid token signature")
+        claims = json.loads(_b64d(body))
+    except HTTPException:
+        raise
+    except Exception:
+        raise HTTPException(401, "Malformed token")
+    exp = claims.get("exp") or 0
+    now = int(time.time())
+    if exp < now - JWT_REFRESH_WINDOW:
+        raise HTTPException(401, "Refresh window expired — log in again")
+    # The claim is signed — already trusted. If the client's role set
+    # changed since mint, fall back to the default role rather than
+    # hard-failing the session.
+    role = claims.get("role")
+    if role and role not in _roles():
+        role = _default_role()
+    payload = {"sub": claims.get("sub"), "email": claims.get("email"),
+               "role": role or _default_role(),
+               "iat": now, "exp": now + JWT_TTL}
+    return {"token": _jwt_sign(payload),
+            "user": {"email": claims.get("email"),
+                     "name": (claims.get("email") or "user").split("@")[0]}}
 
 
 @app.get("/api/_search")

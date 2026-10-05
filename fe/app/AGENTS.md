@@ -181,6 +181,15 @@ fe/client/<name>/mock/
   and embeds the claim. Tokens are **HS256-signed** (`JWT_SECRET`,
   `JWT_TTL` env) — unsigned/forged/expired tokens fall back to the
   default role. `CORS_ORIGINS` env restricts origins (dev default `*`).
+- **Session rotation**: `POST /api/refresh` exchanges a Bearer token for a
+  fresh one — same `{token, user}` contract as login. Valid signature
+  required; expired tokens renew only inside `JWT_REFRESH_WINDOW` (default
+  7d); a role claim removed from config downgrades to the default role
+  instead of erroring. The frontend apiClient refreshes automatically: any
+  real-API call carrying a token inside the expiry skew (60s) triggers one
+  deduped refresh first; a refresh-401 or any real-API 401 clears the
+  token and emits `auth-change` (menus refilter, `Protected` bounces to
+  `/login`). Mock-served calls never touch this path.
 - **Field-level ACL**: per-entity `"field_acl": {"viewer": ["created_at"]}`
   hides fields — stripped from list/get/create/update rows AND from the
   OPTIONS schema (columns, form fields). Scope/RBAC still see them.
@@ -337,8 +346,9 @@ folder.
 
 ## Admin
 
-`/admin/:slug` → `Protected` (JWT `localStorage.token`, `jwt-decode` expiry;
-skipped when `configuration.admin.require_auth === false`) →
+`/admin/:slug` → `Protected` (JWT `localStorage.token`, exp claim checked;
+subscribes `auth-change` so a mid-session 401/token-clear bounces
+immediately; skipped when `configuration.admin.require_auth === false`) →
 `DashboardRenderer` (AppSidebar from `admin_menu[]`, respecting `hide`).
 
 Admin screens are entity-driven — **the OPTIONS response IS the screen**:
@@ -520,7 +530,13 @@ lang in the cache namespace.
 - `npm run test` / `test:watch` — vitest contract suite (see Testing)
 - `npm run lint` — eslint, both sides of the tenancy boundary
   (`fe/app` + `fe/client` via `fe/eslint.config.js`)
+- `npm run e2e` — self-contained Playwright E2E: spawns one vite dev
+  server, drives all clients via `localStorage["vite-client"]` (no
+  per-client servers), sweeps routes for render/console errors and runs
+  interaction assertions (wishlist session persist, `?cat=` filter,
+  `/stays/:id` detail, `hi` language render). `E2E_BASE` reuses a running
+  server instead.
 - `node scripts/smoke-ui.mjs` — headless browser smoke across all client
-  routes (dev servers must be running)
+  routes (manual multi-port variant; dev servers must be running)
 - `./verify.sh` (repo root) — one-shot static gate: python syntax, tsc,
   eslint, check-mocks
