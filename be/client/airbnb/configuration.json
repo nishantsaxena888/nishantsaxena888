@@ -1,0 +1,403 @@
+{
+  "meta": {
+    "client": "airbnb",
+    "display_name": "Airbnb",
+    "theme": "airbnb",
+    "language": "en",
+    "currency": "INR",
+    "currency_symbol": "\u20b9"
+  },
+  "home_page": "pages/home",
+  "admin": {
+    "require_auth": false,
+    "login_redirect": "/admin/overview",
+    "logout_redirect": "/"
+  },
+  "roles": [
+    {
+      "name": "viewer",
+      "default": true
+    },
+    {
+      "name": "admin"
+    }
+  ],
+  "menu": [
+    {
+      "name": "Home",
+      "description": "Find your stay",
+      "url": "/",
+      "entity": "pages/home",
+      "public": true,
+      "order": 0
+    },
+    {
+      "name": "Stays",
+      "description": "All stays",
+      "url": "/stays",
+      "entity": "pages/stays",
+      "public": true,
+      "order": 1
+    },
+    {
+      "name": "Wishlists",
+      "description": "Saved stays",
+      "url": "/wishlist",
+      "entity": "pages/wishlist",
+      "public": true,
+      "order": 2
+    }
+  ],
+  "admin_menu": [
+    {
+      "name": "Overview",
+      "description": "Business snapshot",
+      "url": "/admin/overview",
+      "entity": "overview",
+      "icon": "layout-dashboard"
+    },
+    {
+      "name": "Listings",
+      "description": "Stay catalogue",
+      "url": "/admin/listing",
+      "entity": "listing",
+      "icon": "home"
+    },
+    {
+      "name": "Hosts",
+      "description": "Host directory",
+      "url": "/admin/host",
+      "entity": "host",
+      "icon": "user"
+    },
+    {
+      "name": "Bookings",
+      "description": "Reservations",
+      "url": "/admin/booking",
+      "entity": "booking",
+      "icon": "calendar"
+    },
+    {
+      "name": "Reviews",
+      "description": "Guest reviews",
+      "url": "/admin/review",
+      "entity": "review",
+      "icon": "star"
+    },
+    {
+      "name": "Amenities",
+      "description": "Amenity catalogue",
+      "url": "/admin/amenity",
+      "entity": "amenity",
+      "icon": "sparkles"
+    }
+  ],
+  "language": [
+    {
+      "name": "English",
+      "code": "en"
+    },
+    {
+      "name": "Hindi",
+      "code": "hi"
+    }
+  ],
+  "sessions": [
+    {
+      "name": "wishlist",
+      "persist": true,
+      "method": "array_toggle",
+      "method_config": {
+        "match_key": "id"
+      }
+    }
+  ],
+  "themes": [
+    {
+      "value": "airbnb",
+      "label": "Airbnb",
+      "endpoint": "style-config/airbnb"
+    },
+    {
+      "value": "default",
+      "label": "Default",
+      "endpoint": "style-config/default"
+    }
+  ],
+  "style-configs": {
+    "airbnb": {
+      "theme": "airbnb",
+      "name": "Airbnb",
+      "styles": {
+        "background": "0 0% 100%",
+        "foreground": "344 7% 18%",
+        "card": "0 0% 100%",
+        "card-foreground": "344 7% 18%",
+        "popover": "0 0% 100%",
+        "popover-foreground": "344 7% 18%",
+        "primary": "350 89% 60%",
+        "primary-foreground": "0 0% 100%",
+        "secondary": "210 20% 96%",
+        "secondary-foreground": "344 7% 18%",
+        "muted": "210 20% 96%",
+        "muted-foreground": "220 9% 46%",
+        "accent": "350 100% 97%",
+        "accent-foreground": "350 89% 50%",
+        "destructive": "0 72% 51%",
+        "destructive-foreground": "0 0% 100%",
+        "border": "220 13% 91%",
+        "input": "220 13% 91%",
+        "ring": "350 89% 60%",
+        "radius": "0.75rem",
+        "sidebar-background": "0 0% 100%",
+        "sidebar-foreground": "344 7% 18%",
+        "sidebar-primary": "350 89% 60%",
+        "sidebar-primary-foreground": "0 0% 100%",
+        "sidebar-accent": "210 20% 96%",
+        "sidebar-accent-foreground": "344 7% 18%",
+        "sidebar-border": "220 13% 91%",
+        "sidebar-ring": "350 89% 60%",
+        "menu-active-bg": "350 89% 60%",
+        "menu-active-foreground": "0 0% 100%"
+      }
+    },
+    "default": {
+      "theme": "default",
+      "name": "Default Theme",
+      "styles": {
+        "background": "0 0% 100%",
+        "foreground": "240 10% 10%",
+        "card": "0 0% 100%",
+        "card-foreground": "240 10% 10%",
+        "popover": "0 0% 100%",
+        "popover-foreground": "240 10% 10%",
+        "primary": "240 10% 10%",
+        "primary-foreground": "0 0% 100%",
+        "secondary": "240 5% 96%",
+        "secondary-foreground": "240 10% 10%",
+        "muted": "240 5% 96%",
+        "muted-foreground": "240 5% 45%",
+        "accent": "240 5% 96%",
+        "accent-foreground": "240 10% 10%",
+        "destructive": "0 84.2% 60.2%",
+        "destructive-foreground": "0 0% 100%",
+        "border": "240 6% 90%",
+        "input": "240 6% 90%",
+        "ring": "240 10% 10%",
+        "radius": "0.5rem",
+        "sidebar-background": "240 10% 4%",
+        "sidebar-foreground": "240 5% 96%",
+        "sidebar-primary": "0 0% 100%",
+        "sidebar-primary-foreground": "240 10% 4%",
+        "sidebar-accent": "240 10% 15%",
+        "sidebar-accent-foreground": "240 5% 96%",
+        "sidebar-border": "240 10% 10%",
+        "sidebar-ring": "0 0% 100%",
+        "menu-active-bg": "0 0% 100%",
+        "menu-active-foreground": "240 10% 4%"
+      }
+    }
+  },
+  "translations": {
+    "listing.add_to_cart": "Reserve",
+    "listing.added": "Saved to wishlist",
+    "listing.out_of_stock": "Not available",
+    "listing.empty": "No stays found.",
+    "cart.title": "Wishlists",
+    "cart.empty": "Nothing saved yet \u2014 tap a heart on any stay.",
+    "hero.explore": "Explore stays"
+  },
+  "pages": {
+    "home": {
+      "meta": {
+        "title": "Airbnb \u2014 Book unique stays"
+      },
+      "config": [
+        {
+          "id": "airbnb-hero-1",
+          "type": "banner",
+          "properties": {
+            "level": "base",
+            "type": "static"
+          },
+          "content": {
+            "headline": "Find a place you'll love to stay",
+            "subheadline": "Villas, cabins, houseboats and city lofts \u2014 hosted by people who care.",
+            "badge": "Over 8 unique stays live",
+            "cta": "Explore stays",
+            "ctaUrl": "/stays",
+            "explore": "See wishlists",
+            "exploreUrl": "/wishlist",
+            "image": "https://picsum.photos/seed/airbnb-hero/900/600"
+          }
+        },
+        {
+          "id": "airbnb-cats-1",
+          "type": "category-bar",
+          "properties": {
+            "level": "base",
+            "type": "static"
+          },
+          "content": {
+            "target": "/stays",
+            "items": [
+              {
+                "label": "Trending",
+                "icon": "\ud83d\udd25",
+                "category": "trending"
+              },
+              {
+                "label": "Beachfront",
+                "icon": "\ud83c\udfd6\ufe0f",
+                "category": "beachfront"
+              },
+              {
+                "label": "Cabins",
+                "icon": "\ud83c\udfe1",
+                "category": "cabins"
+              },
+              {
+                "label": "Amazing pools",
+                "icon": "\ud83c\udfca",
+                "category": "amazing-pools"
+              },
+              {
+                "label": "Countryside",
+                "icon": "\ud83c\udf3e",
+                "category": "countryside"
+              },
+              {
+                "label": "City",
+                "icon": "\ud83c\udfd9\ufe0f",
+                "category": "city"
+              }
+            ]
+          }
+        },
+        {
+          "id": "airbnb-stays-1",
+          "type": "stay-grid",
+          "properties": {
+            "level": "base",
+            "type": "dynamic",
+            "session": "wishlist",
+            "action": [
+              {
+                "key": "data",
+                "endpoint": "listing",
+                "method": "GET",
+                "queryParams": {
+                  "size": 8
+                }
+              }
+            ]
+          },
+          "content": {
+            "title": "Trending stays",
+            "session": "wishlist"
+          }
+        }
+      ]
+    },
+    "stays": {
+      "meta": {
+        "title": "Stays"
+      },
+      "config": [
+        {
+          "id": "airbnb-cats-2",
+          "type": "category-bar",
+          "properties": {
+            "level": "base",
+            "type": "static"
+          },
+          "content": {
+            "target": "/stays",
+            "items": [
+              {
+                "label": "All",
+                "icon": "\u2728",
+                "category": ""
+              },
+              {
+                "label": "Trending",
+                "icon": "\ud83d\udd25",
+                "category": "trending"
+              },
+              {
+                "label": "Beachfront",
+                "icon": "\ud83c\udfd6\ufe0f",
+                "category": "beachfront"
+              },
+              {
+                "label": "Cabins",
+                "icon": "\ud83c\udfe1",
+                "category": "cabins"
+              },
+              {
+                "label": "Amazing pools",
+                "icon": "\ud83c\udfca",
+                "category": "amazing-pools"
+              },
+              {
+                "label": "Countryside",
+                "icon": "\ud83c\udf3e",
+                "category": "countryside"
+              },
+              {
+                "label": "City",
+                "icon": "\ud83c\udfd9\ufe0f",
+                "category": "city"
+              }
+            ]
+          }
+        },
+        {
+          "id": "airbnb-stays-2",
+          "type": "stay-grid",
+          "properties": {
+            "level": "base",
+            "type": "dynamic",
+            "session": "wishlist",
+            "action": [
+              {
+                "key": "data",
+                "endpoint": "listing",
+                "method": "GET",
+                "queryParams": {
+                  "size": 50
+                }
+              }
+            ]
+          },
+          "content": {
+            "title": "All stays",
+            "session": "wishlist",
+            "empty_text": "No stays in this category yet."
+          }
+        }
+      ]
+    },
+    "wishlist": {
+      "meta": {
+        "title": "Wishlists"
+      },
+      "config": [
+        {
+          "id": "airbnb-wishlist-1",
+          "type": "stay-grid",
+          "properties": {
+            "level": "base",
+            "type": "static",
+            "source": "session:wishlist"
+          },
+          "content": {
+            "title": "Your wishlist",
+            "session": "wishlist",
+            "empty_text": "Nothing saved yet \u2014 tap a heart on any stay."
+          }
+        }
+      ]
+    }
+  }
+}

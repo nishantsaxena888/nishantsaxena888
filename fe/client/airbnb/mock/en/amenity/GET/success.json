@@ -1,0 +1,37 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Wifi",
+      "icon": "wifi"
+    },
+    {
+      "id": 2,
+      "name": "Pool",
+      "icon": "waves"
+    },
+    {
+      "id": 3,
+      "name": "Kitchen",
+      "icon": "chef-hat"
+    },
+    {
+      "id": 4,
+      "name": "Free parking",
+      "icon": "car"
+    },
+    {
+      "id": 5,
+      "name": "Air conditioning",
+      "icon": "snowflake"
+    },
+    {
+      "id": 6,
+      "name": "Pet friendly",
+      "icon": "paw-print"
+    }
+  ],
+  "page": 1,
+  "size": 6,
+  "total": 6
+}

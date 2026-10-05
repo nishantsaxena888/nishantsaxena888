@@ -1,0 +1,47 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "listing": "Beachfront villa with infinity pool",
+      "guest": "Karan M.",
+      "check_in": "2025-07-02",
+      "check_out": "2025-07-06",
+      "guests": 4,
+      "total": 73600,
+      "status": "confirmed"
+    },
+    {
+      "id": 2,
+      "listing": "Houseboat on the backwaters",
+      "guest": "Elena R.",
+      "check_in": "2025-07-11",
+      "check_out": "2025-07-14",
+      "guests": 2,
+      "total": 34500,
+      "status": "pending"
+    },
+    {
+      "id": 3,
+      "listing": "Tea-estate bungalow with valley view",
+      "guest": "Dev S.",
+      "check_in": "2025-06-18",
+      "check_out": "2025-06-21",
+      "guests": 5,
+      "total": 23700,
+      "status": "completed"
+    },
+    {
+      "id": 4,
+      "listing": "Cozy A-frame cabin in the pines",
+      "guest": "Ishita P.",
+      "check_in": "2025-07-20",
+      "check_out": "2025-07-23",
+      "guests": 2,
+      "total": 18600,
+      "status": "confirmed"
+    }
+  ],
+  "page": 1,
+  "size": 4,
+  "total": 4
+}

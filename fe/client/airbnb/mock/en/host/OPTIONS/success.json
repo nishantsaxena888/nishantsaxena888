@@ -1,0 +1,178 @@
+{
+  "entity": "host",
+  "name": "host",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "name": {
+        "type": "str",
+        "required": true
+      },
+      "avatar": {
+        "type": "str"
+      },
+      "since": {
+        "type": "str"
+      },
+      "superhost": {
+        "type": "bool",
+        "default": false
+      },
+      "response_rate": {
+        "type": "int",
+        "default": 90
+      },
+      "listings": {
+        "type": "int",
+        "default": 1
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "name",
+            "label": "Host",
+            "searchable": true
+          },
+          {
+            "key": "since",
+            "label": "Hosting since"
+          },
+          {
+            "key": "superhost",
+            "label": "Superhost",
+            "type": "status"
+          },
+          {
+            "key": "response_rate",
+            "label": "Response %",
+            "sortable": true
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "name",
+            "componentType": "TextInput",
+            "label": "Name",
+            "required": true
+          },
+          {
+            "name": "avatar",
+            "componentType": "TextInput",
+            "label": "Avatar"
+          },
+          {
+            "name": "since",
+            "componentType": "TextInput",
+            "label": "Since"
+          },
+          {
+            "name": "superhost",
+            "componentType": "Checkbox",
+            "label": "Superhost",
+            "default": false
+          },
+          {
+            "name": "response_rate",
+            "componentType": "NumberInput",
+            "label": "Response Rate",
+            "default": 90
+          },
+          {
+            "name": "listings",
+            "componentType": "NumberInput",
+            "label": "Listings",
+            "default": 1
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "key": "name",
+          "label": "Host",
+          "searchable": true
+        },
+        {
+          "key": "since",
+          "label": "Hosting since"
+        },
+        {
+          "key": "superhost",
+          "label": "Superhost",
+          "type": "status"
+        },
+        {
+          "key": "response_rate",
+          "label": "Response %",
+          "sortable": true
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "name",
+          "componentType": "TextInput",
+          "label": "Name",
+          "required": true
+        },
+        {
+          "name": "avatar",
+          "componentType": "TextInput",
+          "label": "Avatar"
+        },
+        {
+          "name": "since",
+          "componentType": "TextInput",
+          "label": "Since"
+        },
+        {
+          "name": "superhost",
+          "componentType": "Checkbox",
+          "label": "Superhost",
+          "default": false
+        },
+        {
+          "name": "response_rate",
+          "componentType": "NumberInput",
+          "label": "Response Rate",
+          "default": 90
+        },
+        {
+          "name": "listings",
+          "componentType": "NumberInput",
+          "label": "Listings",
+          "default": 1
+        }
+      ]
+    }
+  }
+}

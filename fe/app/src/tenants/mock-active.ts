@@ -1,7 +1,7 @@
 // GENERATED — do not edit by hand.
 // `npm run client <name>` rewrites this file. The glob pattern is
-// literal so only fe/client/grocery/mock/ is bundled — other clients' mock
+// literal so only fe/client/airbnb/mock/ is bundled — other clients' mock
 // JSON is never included in this client's build.
-export const mockFiles = import.meta.glob("../../../client/grocery/mock/**/*.json", {
+export const mockFiles = import.meta.glob("../../../client/airbnb/mock/**/*.json", {
   eager: true,
 });

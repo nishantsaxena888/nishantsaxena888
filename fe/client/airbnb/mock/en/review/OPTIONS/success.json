@@ -1,0 +1,159 @@
+{
+  "entity": "review",
+  "name": "review",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "listing": {
+        "type": "str",
+        "required": true
+      },
+      "author": {
+        "type": "str"
+      },
+      "rating": {
+        "type": "int",
+        "default": 5
+      },
+      "comment": {
+        "type": "str"
+      },
+      "date": {
+        "type": "str"
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "listing",
+            "label": "Listing",
+            "searchable": true
+          },
+          {
+            "key": "author",
+            "label": "Author",
+            "searchable": true
+          },
+          {
+            "key": "rating",
+            "label": "Rating",
+            "sortable": true
+          },
+          {
+            "key": "date",
+            "label": "Date"
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "listing",
+            "componentType": "TextInput",
+            "label": "Listing",
+            "required": true
+          },
+          {
+            "name": "author",
+            "componentType": "TextInput",
+            "label": "Author"
+          },
+          {
+            "name": "rating",
+            "componentType": "NumberInput",
+            "label": "Rating",
+            "default": 5
+          },
+          {
+            "name": "comment",
+            "componentType": "TextInput",
+            "label": "Comment"
+          },
+          {
+            "name": "date",
+            "componentType": "TextInput",
+            "label": "Date"
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "key": "listing",
+          "label": "Listing",
+          "searchable": true
+        },
+        {
+          "key": "author",
+          "label": "Author",
+          "searchable": true
+        },
+        {
+          "key": "rating",
+          "label": "Rating",
+          "sortable": true
+        },
+        {
+          "key": "date",
+          "label": "Date"
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "listing",
+          "componentType": "TextInput",
+          "label": "Listing",
+          "required": true
+        },
+        {
+          "name": "author",
+          "componentType": "TextInput",
+          "label": "Author"
+        },
+        {
+          "name": "rating",
+          "componentType": "NumberInput",
+          "label": "Rating",
+          "default": 5
+        },
+        {
+          "name": "comment",
+          "componentType": "TextInput",
+          "label": "Comment"
+        },
+        {
+          "name": "date",
+          "componentType": "TextInput",
+          "label": "Date"
+        }
+      ]
+    }
+  }
+}

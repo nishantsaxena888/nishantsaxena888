@@ -43,6 +43,11 @@ function createWindow() {
     },
   );
 
+  // Pipe renderer console to stdout so packaged-app bugs are visible.
+  win.webContents.on("console-message", (_e, _level, message) => {
+    console.log("[renderer]", message);
+  });
+
   console.log("[electron] loading", index);
   win.loadFile(index);
 }

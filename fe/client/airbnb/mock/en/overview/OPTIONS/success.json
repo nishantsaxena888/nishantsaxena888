@@ -1,0 +1,94 @@
+{
+  "entity": "overview",
+  "name": "overview",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "Id",
+            "sortable": true
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": []
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "Id",
+          "sortable": true
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": []
+    }
+  },
+  "config": [
+    {
+      "id": "airbnb-overview-1",
+      "type": "airbnb-overview",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "listings",
+            "endpoint": "listing",
+            "method": "GET",
+            "queryParams": {
+              "size": 100
+            }
+          },
+          {
+            "key": "bookings",
+            "endpoint": "booking",
+            "method": "GET",
+            "queryParams": {
+              "size": 100,
+              "sort": "check_in"
+            }
+          },
+          {
+            "key": "hosts",
+            "endpoint": "host",
+            "method": "GET",
+            "queryParams": {
+              "size": 100
+            }
+          },
+          {
+            "key": "reviews",
+            "endpoint": "review",
+            "method": "GET",
+            "queryParams": {
+              "size": 100
+            }
+          }
+        ]
+      },
+      "content": {}
+    }
+  ]
+}

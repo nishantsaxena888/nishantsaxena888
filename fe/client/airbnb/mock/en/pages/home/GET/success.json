@@ -1,0 +1,91 @@
+{
+  "meta": {
+    "title": "Airbnb \u2014 Book unique stays"
+  },
+  "config": [
+    {
+      "id": "airbnb-hero-1",
+      "type": "banner",
+      "properties": {
+        "level": "base",
+        "type": "static"
+      },
+      "content": {
+        "headline": "Find a place you'll love to stay",
+        "subheadline": "Villas, cabins, houseboats and city lofts \u2014 hosted by people who care.",
+        "badge": "Over 8 unique stays live",
+        "cta": "Explore stays",
+        "ctaUrl": "/stays",
+        "explore": "See wishlists",
+        "exploreUrl": "/wishlist",
+        "image": "https://picsum.photos/seed/airbnb-hero/900/600"
+      }
+    },
+    {
+      "id": "airbnb-cats-1",
+      "type": "category-bar",
+      "properties": {
+        "level": "base",
+        "type": "static"
+      },
+      "content": {
+        "target": "/stays",
+        "items": [
+          {
+            "label": "Trending",
+            "icon": "\ud83d\udd25",
+            "category": "trending"
+          },
+          {
+            "label": "Beachfront",
+            "icon": "\ud83c\udfd6\ufe0f",
+            "category": "beachfront"
+          },
+          {
+            "label": "Cabins",
+            "icon": "\ud83c\udfe1",
+            "category": "cabins"
+          },
+          {
+            "label": "Amazing pools",
+            "icon": "\ud83c\udfca",
+            "category": "amazing-pools"
+          },
+          {
+            "label": "Countryside",
+            "icon": "\ud83c\udf3e",
+            "category": "countryside"
+          },
+          {
+            "label": "City",
+            "icon": "\ud83c\udfd9\ufe0f",
+            "category": "city"
+          }
+        ]
+      }
+    },
+    {
+      "id": "airbnb-stays-1",
+      "type": "stay-grid",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "session": "wishlist",
+        "action": [
+          {
+            "key": "data",
+            "endpoint": "listing",
+            "method": "GET",
+            "queryParams": {
+              "size": 8
+            }
+          }
+        ]
+      },
+      "content": {
+        "title": "Trending stays",
+        "session": "wishlist"
+      }
+    }
+  ]
+}

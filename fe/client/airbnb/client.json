@@ -1,0 +1,13 @@
+{
+  "name": "airbnb",
+  "title": "Airbnb",
+  "surfaces": {
+    "site": {
+      "styles": true
+    },
+    "admin": {
+      "styles": true
+    }
+  },
+  "mock": true
+}

@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "title": "Stays"
+  },
+  "config": [
+    {
+      "id": "airbnb-cats-2",
+      "type": "category-bar",
+      "properties": {
+        "level": "base",
+        "type": "static"
+      },
+      "content": {
+        "target": "/stays",
+        "items": [
+          {
+            "label": "All",
+            "icon": "\u2728",
+            "category": ""
+          },
+          {
+            "label": "Trending",
+            "icon": "\ud83d\udd25",
+            "category": "trending"
+          },
+          {
+            "label": "Beachfront",
+            "icon": "\ud83c\udfd6\ufe0f",
+            "category": "beachfront"
+          },
+          {
+            "label": "Cabins",
+            "icon": "\ud83c\udfe1",
+            "category": "cabins"
+          },
+          {
+            "label": "Amazing pools",
+            "icon": "\ud83c\udfca",
+            "category": "amazing-pools"
+          },
+          {
+            "label": "Countryside",
+            "icon": "\ud83c\udf3e",
+            "category": "countryside"
+          },
+          {
+            "label": "City",
+            "icon": "\ud83c\udfd9\ufe0f",
+            "category": "city"
+          }
+        ]
+      }
+    },
+    {
+      "id": "airbnb-stays-2",
+      "type": "stay-grid",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "session": "wishlist",
+        "action": [
+          {
+            "key": "data",
+            "endpoint": "listing",
+            "method": "GET",
+            "queryParams": {
+              "size": 50
+            }
+          }
+        ]
+      },
+      "content": {
+        "title": "All stays",
+        "session": "wishlist",
+        "empty_text": "No stays in this category yet."
+      }
+    }
+  ]
+}

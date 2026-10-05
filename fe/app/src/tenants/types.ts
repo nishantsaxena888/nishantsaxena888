@@ -27,6 +27,15 @@ export interface RenderComponentProps {
     }) => void;
     searchParameters?: Record<string, any>;
   };
+  // Session bridge — read/write configured sessions (cart, wishlist,
+  // compare, ...) without importing the store. items(name) → session
+  // array; update(name, value) runs the session's configured reducer
+  // strategy; clear(name) empties it.
+  session?: {
+    items: (name: string) => any[];
+    update: (name: string, value: any) => void;
+    clear: (name: string) => void;
+  };
   // Client configuration blob (menu, sessions, themes, meta, ...).
   config?: any;
   themeName?: string;

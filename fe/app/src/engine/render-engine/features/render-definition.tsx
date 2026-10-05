@@ -1,9 +1,10 @@
 import React from 'react';
-import { type  Definition, type RenderComponentProps } from './types';
+import { type  Definition, type RenderComponentProps, type SessionBridge } from './types';
 import { useRenderEngine } from './render-engine-context';
 import { useDynamicData } from './use-dynamic-data';
 import { useFormStyleStore } from '@/store/use-form-style';
 import { useConfigStore } from '@/store/use-config-store';
+import { useGenericState } from '@/store/use-generic-state';
 import { currentRole, roleAllowed } from '@/engine/library/rbac';
 
 interface RenderDefinitionProps {
@@ -29,6 +30,22 @@ function RenderDefinitionInner({ def, config }: RenderDefinitionProps) {
   const Component = componentMap[def.type] as React.ComponentType<RenderComponentProps>;
 
   const { apiData, loading, skeletonLoading, error, firstLoadError, action, searchParameters } = useDynamicData(def);
+
+  // Session bridge — components read/write configured sessions through
+  // this prop instead of touching the store directly. items() re-renders
+  // via the gsData subscription; update() runs the session's configured
+  // reducer strategy (array_toggle, array_upsert, ...) and persists.
+  const gsData = useGenericState((s: any) => s.data);
+  const session: SessionBridge = React.useMemo(
+    () => ({
+      items: (name: string) =>
+        Array.isArray(gsData?.[name]) ? gsData[name] : [],
+      update: (name: string, value: any) =>
+        useGenericState.getState().update(name, value),
+      clear: (name: string) => useGenericState.getState().clear(name),
+    }),
+    [gsData],
+  );
 
   const children = def.children?.map(child => (
     <RenderDefinition key={child.id} def={child} config={config} />
@@ -58,7 +75,7 @@ function RenderDefinitionInner({ def, config }: RenderDefinitionProps) {
 
   if (Component) {
     return (
-      <Component key={def.id} id={def.id} type={def.type} content={def.content} properties={def.properties} actionData={actionData} config={config} themeName={themeName}>
+      <Component key={def.id} id={def.id} type={def.type} content={def.content} properties={def.properties} actionData={actionData} session={session} config={config} themeName={themeName}>
         {children}
       </Component>
     );

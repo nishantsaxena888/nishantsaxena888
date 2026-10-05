@@ -12,6 +12,11 @@ type ClientLoader = {
 };
 
 export const clientLoaders: Record<string, ClientLoader> = {
+  airbnb: {
+    site: () => import("@clients/airbnb/site/tenant"),
+    admin: () => import("@clients/airbnb/admin/tenant"),
+    styles: [() => import("@clients/airbnb/site/styles.css"), () => import("@clients/airbnb/admin/styles.css")],
+  },
   grocery: {
     site: () => import("@clients/grocery/site/tenant"),
     admin: () => import("@clients/grocery/admin/tenant"),

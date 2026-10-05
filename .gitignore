@@ -14,3 +14,5 @@ dist/
 # platform build artifacts
 fe/app/release/
 fe/native/dist-export/
+fe/native/.expo/
+fe/native/node_modules/

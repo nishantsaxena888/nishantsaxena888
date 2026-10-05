@@ -1,0 +1,39 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Ananya",
+      "since": "2018",
+      "superhost": true,
+      "response_rate": 99,
+      "listings": 3
+    },
+    {
+      "id": 2,
+      "name": "Rohan",
+      "since": "2020",
+      "superhost": false,
+      "response_rate": 94,
+      "listings": 1
+    },
+    {
+      "id": 3,
+      "name": "Meera",
+      "since": "2016",
+      "superhost": true,
+      "response_rate": 100,
+      "listings": 2
+    },
+    {
+      "id": 4,
+      "name": "Joseph",
+      "since": "2015",
+      "superhost": true,
+      "response_rate": 97,
+      "listings": 4
+    }
+  ],
+  "page": 1,
+  "size": 4,
+  "total": 4
+}

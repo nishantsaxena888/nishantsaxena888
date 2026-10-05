@@ -1,0 +1,240 @@
+{
+  "entity": "booking",
+  "name": "booking",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "listing": {
+        "type": "str",
+        "required": true
+      },
+      "guest": {
+        "type": "str",
+        "required": true
+      },
+      "check_in": {
+        "type": "str"
+      },
+      "check_out": {
+        "type": "str"
+      },
+      "guests": {
+        "type": "int",
+        "default": 1
+      },
+      "total": {
+        "type": "int",
+        "default": 0
+      },
+      "status": {
+        "type": "str",
+        "default": "confirmed",
+        "options": [
+          "confirmed",
+          "pending",
+          "cancelled",
+          "completed"
+        ]
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "listing",
+            "label": "Listing",
+            "searchable": true
+          },
+          {
+            "key": "guest",
+            "label": "Guest",
+            "searchable": true
+          },
+          {
+            "key": "check_in",
+            "label": "Check-in"
+          },
+          {
+            "key": "check_out",
+            "label": "Check-out"
+          },
+          {
+            "key": "total",
+            "label": "Total",
+            "sortable": true
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "type": "badge",
+            "variants": {
+              "confirmed": "default",
+              "pending": "secondary",
+              "cancelled": "destructive",
+              "completed": "outline"
+            }
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "listing",
+            "componentType": "TextInput",
+            "required": true,
+            "colSpan": 2,
+            "label": "Listing"
+          },
+          {
+            "name": "guest",
+            "componentType": "TextInput",
+            "required": true,
+            "label": "Guest"
+          },
+          {
+            "name": "check_in",
+            "componentType": "TextInput",
+            "label": "Check-in"
+          },
+          {
+            "name": "check_out",
+            "componentType": "TextInput",
+            "label": "Check-out"
+          },
+          {
+            "name": "guests",
+            "componentType": "NumberInput",
+            "label": "Guests"
+          },
+          {
+            "name": "total",
+            "componentType": "NumberInput",
+            "label": "Total"
+          },
+          {
+            "name": "status",
+            "componentType": "Select",
+            "options": [
+              "confirmed",
+              "pending",
+              "cancelled",
+              "completed"
+            ],
+            "default": "confirmed",
+            "label": "Status"
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "key": "listing",
+          "label": "Listing",
+          "searchable": true
+        },
+        {
+          "key": "guest",
+          "label": "Guest",
+          "searchable": true
+        },
+        {
+          "key": "check_in",
+          "label": "Check-in"
+        },
+        {
+          "key": "check_out",
+          "label": "Check-out"
+        },
+        {
+          "key": "total",
+          "label": "Total",
+          "sortable": true
+        },
+        {
+          "key": "status",
+          "label": "Status",
+          "type": "badge",
+          "variants": {
+            "confirmed": "default",
+            "pending": "secondary",
+            "cancelled": "destructive",
+            "completed": "outline"
+          }
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "listing",
+          "componentType": "TextInput",
+          "required": true,
+          "colSpan": 2,
+          "label": "Listing"
+        },
+        {
+          "name": "guest",
+          "componentType": "TextInput",
+          "required": true,
+          "label": "Guest"
+        },
+        {
+          "name": "check_in",
+          "componentType": "TextInput",
+          "label": "Check-in"
+        },
+        {
+          "name": "check_out",
+          "componentType": "TextInput",
+          "label": "Check-out"
+        },
+        {
+          "name": "guests",
+          "componentType": "NumberInput",
+          "label": "Guests"
+        },
+        {
+          "name": "total",
+          "componentType": "NumberInput",
+          "label": "Total"
+        },
+        {
+          "name": "status",
+          "componentType": "Select",
+          "options": [
+            "confirmed",
+            "pending",
+            "cancelled",
+            "completed"
+          ],
+          "default": "confirmed",
+          "label": "Status"
+        }
+      ]
+    }
+  }
+}

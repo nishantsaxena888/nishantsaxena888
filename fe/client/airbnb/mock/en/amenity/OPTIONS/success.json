@@ -1,0 +1,99 @@
+{
+  "entity": "amenity",
+  "name": "amenity",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "name": {
+        "type": "str",
+        "required": true
+      },
+      "icon": {
+        "type": "str"
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "Id",
+            "sortable": true
+          },
+          {
+            "key": "name",
+            "label": "Name",
+            "searchable": true
+          },
+          {
+            "key": "icon",
+            "label": "Icon",
+            "searchable": true
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "name",
+            "componentType": "TextInput",
+            "label": "Name",
+            "required": true
+          },
+          {
+            "name": "icon",
+            "componentType": "TextInput",
+            "label": "Icon"
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "Id",
+          "sortable": true
+        },
+        {
+          "key": "name",
+          "label": "Name",
+          "searchable": true
+        },
+        {
+          "key": "icon",
+          "label": "Icon",
+          "searchable": true
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "name",
+          "componentType": "TextInput",
+          "label": "Name",
+          "required": true
+        },
+        {
+          "name": "icon",
+          "componentType": "TextInput",
+          "label": "Icon"
+        }
+      ]
+    }
+  }
+}

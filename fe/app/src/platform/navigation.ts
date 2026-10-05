@@ -41,6 +41,16 @@ export function usePath(): string {
   return useLocation().pathname;
 }
 
+// Query-param reader — returns a getter: useQuery()("cat") → ?cat value.
+// RN port reads useRoute().params instead (nav params carry the query).
+export function useQuery(): (key: string) => string | null {
+  const { search } = useLocation();
+  return useCallback(
+    (key: string) => new URLSearchParams(search).get(key),
+    [search],
+  );
+}
+
 // Non-hook seam — registered once by the app shell; RN registers its
 // navigationRef.navigate instead.
 let imperativeNav: Nav["navigate"] | null = null;

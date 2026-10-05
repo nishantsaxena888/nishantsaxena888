@@ -82,19 +82,29 @@ export const clientConfig = defineConfig([
       "@typescript-eslint/no-unused-vars": "off",
       "@typescript-eslint/no-explicit-any": "off",
       // fe/client/** is dumb — React + own-folder relative imports only.
-      // @/* reaches the engine; ../* / ../../* reach other clients or
-      // fe/app. The engine contract (RenderComponentProps) is reachable
-      // only as a type import.
+      // ../* / ../../* reach other clients or fe/app internals — blocked.
+      // @/* reaches the engine; the ONLY value-import surface allowed is
+      // @/platform/* (primitives/navigation/icons/...): the portability
+      // seam, not engine internals. Session state reaches comps through
+      // the RenderComponentProps.session bridge, not the store.
       "@typescript-eslint/no-restricted-imports": [
         "error",
         {
           patterns: [
             {
-              group: ["@/*", "../*", "../../*", "../../../*"],
+              regex: "^@/(?!platform/)",
               allowTypeImports: true,
               message:
                 "Client code must not import the engine or other clients — " +
-                "receive props (RenderComponentProps) and export a tenant map only.",
+                "only @/platform/* seams are allowed as value imports; " +
+                "everything else comes via props (RenderComponentProps).",
+            },
+            {
+              group: ["../*", "../../*", "../../../*"],
+              allowTypeImports: true,
+              message:
+                "Client code must not import other clients or fe/app " +
+                "internals — keep imports inside your own client folder.",
             },
           ],
         },

@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "title": "Wishlists"
+  },
+  "config": [
+    {
+      "id": "airbnb-wishlist-1",
+      "type": "stay-grid",
+      "properties": {
+        "level": "base",
+        "type": "static",
+        "source": "session:wishlist"
+      },
+      "content": {
+        "title": "Your wishlist",
+        "session": "wishlist",
+        "empty_text": "Nothing saved yet \u2014 tap a heart on any stay."
+      }
+    }
+  ]
+}

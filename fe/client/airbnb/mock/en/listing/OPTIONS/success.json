@@ -1,0 +1,339 @@
+{
+  "entity": "listing",
+  "name": "listing",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "title": {
+        "type": "str",
+        "required": true
+      },
+      "location": {
+        "type": "str"
+      },
+      "category": {
+        "type": "str",
+        "default": "trending",
+        "options": [
+          "beachfront",
+          "cabins",
+          "amazing-pools",
+          "countryside",
+          "city",
+          "trending"
+        ]
+      },
+      "price": {
+        "type": "int",
+        "required": true
+      },
+      "rating": {
+        "type": "float"
+      },
+      "reviews": {
+        "type": "int",
+        "default": 0
+      },
+      "guests": {
+        "type": "int",
+        "default": 2
+      },
+      "beds": {
+        "type": "int",
+        "default": 1
+      },
+      "baths": {
+        "type": "int",
+        "default": 1
+      },
+      "image": {
+        "type": "str"
+      },
+      "badge": {
+        "type": "str"
+      },
+      "host": {
+        "type": "str"
+      },
+      "available": {
+        "type": "bool",
+        "default": true
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "title",
+            "label": "Listing",
+            "searchable": true
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "searchable": true
+          },
+          {
+            "key": "category",
+            "label": "Category",
+            "type": "badge",
+            "variants": {
+              "beachfront": "default",
+              "cabins": "secondary",
+              "amazing-pools": "default",
+              "countryside": "secondary",
+              "city": "outline",
+              "trending": "destructive"
+            }
+          },
+          {
+            "key": "price",
+            "label": "Price/night",
+            "sortable": true
+          },
+          {
+            "key": "rating",
+            "label": "Rating",
+            "sortable": true
+          },
+          {
+            "key": "available",
+            "label": "Live",
+            "type": "status"
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "title",
+            "componentType": "TextInput",
+            "required": true,
+            "colSpan": 2,
+            "label": "Title"
+          },
+          {
+            "name": "location",
+            "componentType": "TextInput",
+            "label": "Location"
+          },
+          {
+            "name": "category",
+            "componentType": "Select",
+            "options": [
+              "beachfront",
+              "cabins",
+              "amazing-pools",
+              "countryside",
+              "city",
+              "trending"
+            ],
+            "default": "trending",
+            "label": "Category"
+          },
+          {
+            "name": "price",
+            "componentType": "NumberInput",
+            "required": true,
+            "label": "Price / night"
+          },
+          {
+            "name": "rating",
+            "componentType": "NumberInput",
+            "label": "Rating"
+          },
+          {
+            "name": "reviews",
+            "componentType": "NumberInput",
+            "label": "Reviews"
+          },
+          {
+            "name": "guests",
+            "componentType": "NumberInput",
+            "label": "Guests"
+          },
+          {
+            "name": "beds",
+            "componentType": "NumberInput",
+            "label": "Beds"
+          },
+          {
+            "name": "baths",
+            "componentType": "NumberInput",
+            "label": "Baths"
+          },
+          {
+            "name": "image",
+            "componentType": "TextInput",
+            "colSpan": 2,
+            "label": "Image URL"
+          },
+          {
+            "name": "badge",
+            "componentType": "TextInput",
+            "label": "Badge"
+          },
+          {
+            "name": "host",
+            "componentType": "TextInput",
+            "label": "Host"
+          },
+          {
+            "name": "available",
+            "componentType": "Checkbox",
+            "default": true,
+            "label": "Available"
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "key": "title",
+          "label": "Listing",
+          "searchable": true
+        },
+        {
+          "key": "location",
+          "label": "Location",
+          "searchable": true
+        },
+        {
+          "key": "category",
+          "label": "Category",
+          "type": "badge",
+          "variants": {
+            "beachfront": "default",
+            "cabins": "secondary",
+            "amazing-pools": "default",
+            "countryside": "secondary",
+            "city": "outline",
+            "trending": "destructive"
+          }
+        },
+        {
+          "key": "price",
+          "label": "Price/night",
+          "sortable": true
+        },
+        {
+          "key": "rating",
+          "label": "Rating",
+          "sortable": true
+        },
+        {
+          "key": "available",
+          "label": "Live",
+          "type": "status"
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "title",
+          "componentType": "TextInput",
+          "required": true,
+          "colSpan": 2,
+          "label": "Title"
+        },
+        {
+          "name": "location",
+          "componentType": "TextInput",
+          "label": "Location"
+        },
+        {
+          "name": "category",
+          "componentType": "Select",
+          "options": [
+            "beachfront",
+            "cabins",
+            "amazing-pools",
+            "countryside",
+            "city",
+            "trending"
+          ],
+          "default": "trending",
+          "label": "Category"
+        },
+        {
+          "name": "price",
+          "componentType": "NumberInput",
+          "required": true,
+          "label": "Price / night"
+        },
+        {
+          "name": "rating",
+          "componentType": "NumberInput",
+          "label": "Rating"
+        },
+        {
+          "name": "reviews",
+          "componentType": "NumberInput",
+          "label": "Reviews"
+        },
+        {
+          "name": "guests",
+          "componentType": "NumberInput",
+          "label": "Guests"
+        },
+        {
+          "name": "beds",
+          "componentType": "NumberInput",
+          "label": "Beds"
+        },
+        {
+          "name": "baths",
+          "componentType": "NumberInput",
+          "label": "Baths"
+        },
+        {
+          "name": "image",
+          "componentType": "TextInput",
+          "colSpan": 2,
+          "label": "Image URL"
+        },
+        {
+          "name": "badge",
+          "componentType": "TextInput",
+          "label": "Badge"
+        },
+        {
+          "name": "host",
+          "componentType": "TextInput",
+          "label": "Host"
+        },
+        {
+          "name": "available",
+          "componentType": "Checkbox",
+          "default": true,
+          "label": "Available"
+        }
+      ]
+    }
+  }
+}

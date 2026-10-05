@@ -50,6 +50,22 @@ export function usePath(): string {
   return useRoute().name;
 }
 
+// Query-param reader — same contract as web's useQuery(). On RN there is
+// no query string; nav params are the carrier. "?cat=x" in a navigate
+// path is parsed into params by the path mapper when set, or pass params
+// directly: navigate("stays", { cat: "x" }) via useNavigation if needed.
+export function useQuery(): (key: string) => string | null {
+  const params = useRoute().params as Record<string, unknown> | undefined;
+  return useCallback(
+    (key: string) => {
+      const v = params?.[key];
+      return v != null ? String(v) : null;
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- read route.params lazily; the getter itself is stable
+    [],
+  );
+}
+
 // Non-hook seam — identical contract to the web impl; the app registers
 // navigationRef.navigate (or an adapter mapping path→screen first).
 let imperativeNav: Nav["navigate"] | null = null;
