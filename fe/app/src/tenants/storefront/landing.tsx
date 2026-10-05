@@ -67,6 +67,11 @@ export default function Landing({ content, actionData, session }: any) {
     if (k != null) counts[k] = (counts[k] || 0) + 1;
   }
   const catPath = `${cat.path || "/courses"}?${cat.param || "category"}`;
+  const catCourse: Record<string, any> = {};
+  for (const r of toItems(actionData?.data?.[cat.count_key || "courses"])) {
+    const cid = r[cat.count_field || "category_id"];
+    if (cid != null && !(cid in catCourse)) catCourse[cid] = r.id;
+  }
 
   // kind-aware meta: a "module" category owns one course-collection whose
   // items are chapters — meta shows chapter count + a progress bar fed by
@@ -134,7 +139,7 @@ export default function Landing({ content, actionData, session }: any) {
       )}
 
       {c.journey?.stages?.length > 0 && (
-        <Section tone="journey" title={c.journey.title} subtitle={c.journey.subtitle}>
+        <Section tone={c.journey.tone || "journey"} title={c.journey.title} subtitle={c.journey.subtitle}>
           <View className="journey-flow">
             {c.journey.stages.map((s: string, i: number) => (
               <View key={i} style={{ display: "contents" }}>
@@ -149,7 +154,7 @@ export default function Landing({ content, actionData, session }: any) {
       )}
 
       {c.features?.cards?.length > 0 && (
-        <Section title={c.features.title} subtitle={c.features.subtitle}>
+        <Section tone={c.features.tone} title={c.features.title} subtitle={c.features.subtitle}>
           <View className="feature-grid">
             {c.features.cards.map((fc: any, i: number) => (
               <View key={i} className="feature-card">
@@ -163,7 +168,7 @@ export default function Landing({ content, actionData, session }: any) {
       )}
 
       {c.dashboard?.stats?.length > 0 && (
-        <Section id="dashboard" title={c.dashboard.title} subtitle={c.dashboard.subtitle}>
+        <Section id="dashboard" tone={c.dashboard.tone} title={c.dashboard.title} subtitle={c.dashboard.subtitle}>
           <View className="dashboard-grid">
             {c.dashboard.stats.map((s: any, i: number) => {
               const n = s.session
@@ -196,7 +201,7 @@ export default function Landing({ content, actionData, session }: any) {
       )}
 
       {c.categories && cats.length > 0 && (
-        <Section id="categories" title={cat.title} subtitle={cat.subtitle}>
+        <Section id="categories" tone={cat.tone} title={cat.title} subtitle={cat.subtitle}>
           <View className="module-grid">
             {cats.map((r: any) => {
               const isModule =
@@ -214,7 +219,15 @@ export default function Landing({ content, actionData, session }: any) {
                   ? Math.round(((donePerCat[r.id] ?? 0) / n) * 100)
                   : undefined;
               return (
-                <Pressable key={r.id} className="card module-card" onPress={() => go(`${catPath}=${r.id}`)}>
+                <Pressable
+                  key={r.id}
+                  className="card module-card"
+                  onPress={() =>
+                    isModule && cat.module_path && catCourse[r.id]
+                      ? go(cat.module_path.replace(":id", catCourse[r.id]))
+                      : go(`${catPath}=${r.id}`)
+                  }
+                >
                   <View className="card-body">
                     <View className="module-icon" style={{ background: r[f.bg], color: r[f.color] }}>
                       {r[f.icon] || r[f.title]?.[0] || "📦"}
@@ -247,7 +260,7 @@ export default function Landing({ content, actionData, session }: any) {
       )}
 
       {c.achievements?.items?.length > 0 && (
-        <Section title={c.achievements.title} subtitle={c.achievements.subtitle}>
+        <Section tone={c.achievements.tone} title={c.achievements.title} subtitle={c.achievements.subtitle}>
           <View className="achievements-grid">
             {c.achievements.items.map((a: any, i: number) => {
               const earned = a.id

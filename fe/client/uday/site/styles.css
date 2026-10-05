@@ -175,12 +175,11 @@
 /* categories — folder cards (original module-card) */
 .landing-page .module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
 .landing-page .card {
-  background: var(--lp-n-0); border: 1px solid var(--lp-n-200); border-radius: 1rem;
+  background: var(--lp-n-0); border: none; border-radius: 1rem;
   overflow: hidden; transition: all 300ms; text-align: left; cursor: pointer; width: 100%;
 }
 .landing-page .card:hover {
   box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); transform: translateY(-2px);
-  border-color: var(--lp-n-300);
 }
 .landing-page .card-body { padding: 1.5rem; }
 .landing-page .module-icon {
@@ -238,7 +237,6 @@
 }
 .course-page .card.module-card:hover, .catalog-page .card.module-card:hover {
   box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); transform: translateY(-2px);
-  border-color: #cbd5e1;
 }
 .course-page .card-body, .catalog-page .card-body { padding: 1.5rem; }
 .course-page .module-number, .catalog-page .module-number {
@@ -466,3 +464,8 @@
   transition: width 0.4s ease;
 }
 .card-progress-fill.complete { background: #10b981; }
+
+/* section banding — original alternates white / neutral-50 */
+.landing-page .page-section { background: #fff; }
+.landing-page .page-section-alt,
+.landing-page .page-section-journey { background: #f8fafc; }
