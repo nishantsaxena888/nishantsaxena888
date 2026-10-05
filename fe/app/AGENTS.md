@@ -534,8 +534,16 @@ lang in the cache namespace.
   server, drives all clients via `localStorage["vite-client"]` (no
   per-client servers), sweeps routes for render/console errors and runs
   interaction assertions (wishlist session persist, `?cat=` filter,
-  `/stays/:id` detail, `hi` language render). `E2E_BASE` reuses a running
-  server instead.
+  `/stays/:id` detail, `hi` language render, admin login → token →
+  redirect, and the order edit/add/delete form cycle). `E2E_BASE` reuses
+  a running server instead.
+- `npm run e2e:desktop` — Playwright `_electron` drives the real
+  `electron/main.cjs` over the production `dist/` (file://, hash
+  routing) — same boot path as the packed .app without needing a build
+  artifact. Builds dist first when missing; `CI=1` forces a rebuild.
+- `cd ../native && npm run test:mobile` — Maestro flows
+  (`fe/native/maestro/`); needs a simulator + dev build, see
+  `fe/native/maestro/README.md`.
 - `node scripts/smoke-ui.mjs` — headless browser smoke across all client
   routes (manual multi-port variant; dev servers must be running)
 - `./verify.sh` (repo root) — one-shot static gate: python syntax, tsc,

@@ -48,7 +48,7 @@ export function SharedInlineSelect({
   };
 
   return (
-    <Select value={internalValue} onValueChange={handleValueChange} disabled={disabled}>
+    <Select value={internalValue ?? ""} onValueChange={handleValueChange} disabled={disabled}>
       <SelectTrigger className={cn("app-inline-select-trigger border-transparent hover:bg-muted/50 focus:ring-0 focus:ring-offset-0 h-8 px-2 w-auto", className)}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>

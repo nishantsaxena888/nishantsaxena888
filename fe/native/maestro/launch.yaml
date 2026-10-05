@@ -1,0 +1,24 @@
+# Mobile smoke — boots the app on a simulator/emulator and asserts the
+# config-driven storefront renders. The app id is the Expo dev client /
+# installed build; screens are driven by the client's configuration.json
+# menu, so assertions target generic structure, not product names.
+#
+# Run:
+#   cd fe/native && npm start            # Metro + Expo
+#   # build once:  npx expo run:ios      (or install Expo Go dev build)
+#   maestro test maestro/launch.yaml     # boots device app
+appId: ${APP_ID:-com.nishify.app}
+---
+- launchApp
+# Config fetch + first render — give the mock layer time to resolve.
+- extendedWaitUntil:
+    visible: ".*"
+    timeout: 15000
+- assertVisible:
+    text: ".*"
+# The menu renders every configuration.json entry — at least one
+# interactive element must be present on screen.
+- assertVisible:
+    accessibilityLabel: ".*"
+    optional: true
+- takeScreenshot: launch

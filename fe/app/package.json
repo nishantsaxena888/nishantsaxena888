@@ -20,6 +20,7 @@
     "pack:desktop:dir": "ELECTRON=1 npm run build && electron-builder --dir",
     "validate": "node scripts/validate-defs.mjs",
     "e2e": "node scripts/e2e.mjs",
+    "e2e:desktop": "node scripts/e2e-desktop.mjs",
     "smoke": "node scripts/smoke-ui.mjs"
   },
   "dependencies": {

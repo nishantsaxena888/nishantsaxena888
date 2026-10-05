@@ -89,7 +89,9 @@ export const DynamicSelect = ({
   return (
     <div className={cn("w-full", appliedTheme, className)} style={style}>
       <Combobox
-        value={value}
+        // Always controlled — entity values arrive async; undefined→string
+        // flips trip the uncontrolled→controlled warning.
+        value={value ?? ""}
         onValueChange={handleValueChange}
         inputValue={inputValue}
         onInputValueChange={handleInputValueChange}

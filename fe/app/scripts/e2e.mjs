@@ -156,6 +156,94 @@ for (const [client, routes] of Object.entries(ROUTES)) {
   await ctx.close();
 }
 
+// ---- 3. admin auth + CRUD (grocery) --------------------------------------
+// The login form POSTs the configured endpoint; when the mock doesn't
+// return a token a signed dev JWT is minted and stored under "token".
+{
+  const { ctx, page, errors } = await newClientPage("grocery");
+  try {
+    // Login form → token stored → lands on the admin surface
+    await goto(page, "/login");
+    await page.locator("input").first().fill("admin@nishify.com");
+    await page.locator('input[type="password"]').fill("secret");
+    const submit = page
+      .locator("button")
+      .filter({ hasText: /sign in|log in|submit|continue/i })
+      .first();
+    if (await submit.count()) await submit.click();
+    else await page.locator('input[type="password"]').press("Enter");
+    await page.waitForTimeout(1500);
+    const token = await page.evaluate(() =>
+      window.localStorage.getItem("token"),
+    );
+    check(!!token, "login → token stored");
+    const url = await page.evaluate(() => location.pathname);
+    check(url.startsWith("/admin"), "login → redirected to admin", url);
+
+    // Edit flow — regression for the InputDate string-value crash:
+    // the date field must coerce "2024-04-10" instead of throwing.
+    await goto(page, "/admin/order");
+    await page
+      .locator("tbody tr td:last-child button")
+      .first()
+      .click();
+    await page.waitForTimeout(1200);
+    const editText = (await page.textContent("body")) || "";
+    check(
+      !editText.includes("crashed") && /edit|submit|cancel/i.test(editText),
+      "order edit form renders (date field safe)",
+    );
+    await page
+      .locator("button")
+      .filter({ hasText: /submit/i })
+      .first()
+      .click();
+    await page.waitForTimeout(1200);
+    const afterEdit = (await page.textContent("body")) || "";
+    check(
+      /order id|customer/i.test(afterEdit) && !afterEdit.includes("crashed"),
+      "order edit submit → back to table",
+    );
+
+    // Add form opens and cancels cleanly
+    await goto(page, "/admin/order");
+    await page
+      .locator("button")
+      .filter({ hasText: /add/i })
+      .first()
+      .click();
+    await page.waitForTimeout(1000);
+    const addText = (await page.textContent("body")) || "";
+    check(
+      !addText.includes("crashed") && /submit|cancel/i.test(addText),
+      "order add form renders",
+    );
+
+    // Delete → confirm dialog → row action completes without crash
+    await goto(page, "/admin/order");
+    const delBtn = page.locator("tbody tr td:last-child button").last();
+    if (await delBtn.count()) {
+      await delBtn.click();
+      await page.waitForTimeout(800);
+      const dlg = (await page.textContent("body")) || "";
+      const confirmBtn = page
+        .locator("button")
+        .filter({ hasText: /confirm|delete|yes|ok/i })
+        .last();
+      if (await confirmBtn.count()) {
+        await confirmBtn.click();
+        await page.waitForTimeout(1000);
+      }
+      const afterDel = (await page.textContent("body")) || "";
+      check(!afterDel.includes("crashed"), "order delete flow no crash");
+    }
+  } catch (e) {
+    check(false, "grocery admin flow", e.message.slice(0, 120));
+  }
+  check(errors.length === 0, "admin flow: no page errors", errors[0] || "");
+  await ctx.close();
+}
+
 await browser.close();
 server?.kill();
 console.log(fail ? `\n${fail} check(s) failed` : "\nALL E2E PASS");

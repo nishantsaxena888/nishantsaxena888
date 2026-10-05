@@ -1,0 +1,17 @@
+# Navigation smoke — scrolls the storefront and re-asserts content stays
+# rendered (no crash / blank). Extend with client-specific labels once a
+# client is picked: EXPO_PUBLIC_CLIENT=<name> npm start.
+appId: ${APP_ID:-com.nishify.app}
+---
+- launchApp
+- extendedWaitUntil:
+    visible: ".*"
+    timeout: 15000
+- scroll
+- assertVisible:
+    text: ".*"
+# Engine seam check — the error boundary fallback contains the word
+# "crashed"; if it is on screen a definition threw.
+- assertNotVisible:
+    text: ".*crashed.*"
+- takeScreenshot: navigated

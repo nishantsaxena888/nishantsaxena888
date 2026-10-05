@@ -46,7 +46,9 @@ export const Select = ({
 }: SelectFieldProps) => {
   return (
     <BaseSelect
-      value={value}
+      // Always controlled — entity forms populate value async, and an
+      // undefined→string flip trips Base UI's uncontrolled→controlled warning.
+      value={value ?? ""}
       onValueChange={(val) => onChange?.(val)}
       disabled={disabled}
       required={required}
