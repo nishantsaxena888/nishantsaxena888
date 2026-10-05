@@ -1,0 +1,196 @@
+{
+  "entity": "comment",
+  "name": "comment",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "chapter_id": {
+        "type": "int",
+        "required": true
+      },
+      "revision_id": {
+        "type": "int"
+      },
+      "anchor": {
+        "type": "str"
+      },
+      "author": {
+        "type": "str"
+      },
+      "body": {
+        "type": "str",
+        "required": true
+      },
+      "resolved": {
+        "type": "bool",
+        "default": false
+      },
+      "created_at": {
+        "type": "datetime"
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "chapter_id",
+            "label": "Chapter"
+          },
+          {
+            "key": "anchor",
+            "label": "Section"
+          },
+          {
+            "key": "author",
+            "label": "Author",
+            "searchable": true
+          },
+          {
+            "key": "body",
+            "label": "Comment",
+            "searchable": true
+          },
+          {
+            "key": "resolved",
+            "label": "Resolved",
+            "type": "status"
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "chapter_id",
+            "componentType": "Select",
+            "required": true,
+            "label": "Chapter",
+            "options": [
+              "1",
+              "2",
+              "3"
+            ]
+          },
+          {
+            "name": "revision_id",
+            "componentType": "NumberInput",
+            "label": "Revision"
+          },
+          {
+            "name": "anchor",
+            "componentType": "TextInput",
+            "label": "Section Anchor"
+          },
+          {
+            "name": "author",
+            "componentType": "TextInput",
+            "label": "Author"
+          },
+          {
+            "name": "body",
+            "componentType": "TextInput",
+            "required": true,
+            "colSpan": 2,
+            "label": "Comment"
+          },
+          {
+            "name": "resolved",
+            "componentType": "Checkbox",
+            "label": "Resolved"
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "key": "chapter_id",
+          "label": "Chapter"
+        },
+        {
+          "key": "anchor",
+          "label": "Section"
+        },
+        {
+          "key": "author",
+          "label": "Author",
+          "searchable": true
+        },
+        {
+          "key": "body",
+          "label": "Comment",
+          "searchable": true
+        },
+        {
+          "key": "resolved",
+          "label": "Resolved",
+          "type": "status"
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "chapter_id",
+          "componentType": "Select",
+          "required": true,
+          "label": "Chapter",
+          "options": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "name": "revision_id",
+          "componentType": "NumberInput",
+          "label": "Revision"
+        },
+        {
+          "name": "anchor",
+          "componentType": "TextInput",
+          "label": "Section Anchor"
+        },
+        {
+          "name": "author",
+          "componentType": "TextInput",
+          "label": "Author"
+        },
+        {
+          "name": "body",
+          "componentType": "TextInput",
+          "required": true,
+          "colSpan": 2,
+          "label": "Comment"
+        },
+        {
+          "name": "resolved",
+          "componentType": "Checkbox",
+          "label": "Resolved"
+        }
+      ]
+    }
+  }
+}

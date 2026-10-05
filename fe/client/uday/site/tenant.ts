@@ -1,12 +1,11 @@
-// uday site tenant — client's own site-surface components.
+// uday site tenant — Uday_AWS replica on the generic course platform:
+// catalog/detail/reader components come from the storefront map
+// (course-list, course-detail, chapter-reader); only the branded hero
+// stays client-specific.
 import UdayHero from "./components/uday-hero";
-import CourseList from "./components/course-list";
-import LessonFeed from "./components/lesson-feed";
 
 export default {
   components: {
     "uday-hero": UdayHero,
-    "course-list": CourseList,
-    "lesson-feed": LessonFeed,
   },
 };

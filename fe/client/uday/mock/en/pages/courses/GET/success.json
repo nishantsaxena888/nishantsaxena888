@@ -1,27 +1,29 @@
 {
   "meta": {
-    "title": "Courses"
+    "title": "Courses \u2014 Uday"
   },
   "config": [
     {
-      "id": "uday-courses-all",
+      "id": "course-grid",
       "type": "course-list",
       "properties": {
         "level": "base",
         "type": "dynamic",
         "action": [
           {
-            "key": "courses",
+            "key": "data",
             "endpoint": "course",
             "method": "GET",
             "queryParams": {
-              "size": 50
+              "size": 100
             }
           }
         ]
       },
       "content": {
-        "title": "All courses"
+        "title": "All Courses",
+        "cta_label": "Start learning",
+        "detail_path": "/courses"
       }
     }
   ]

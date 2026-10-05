@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "title": "Course \u2014 Uday"
+  },
+  "config": [
+    {
+      "id": "course-detail",
+      "type": "course-detail",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "course",
+            "endpoint": "course/:id",
+            "method": "GET"
+          },
+          {
+            "key": "chapters",
+            "endpoint": "chapter",
+            "method": "GET",
+            "queryParams": {
+              "course_id": ":id",
+              "size": 200
+            }
+          },
+          {
+            "key": "enroll",
+            "endpoint": "enrollment",
+            "method": "POST",
+            "lazy": true,
+            "payload": {
+              "course_id": ":id",
+              "status": "active",
+              "enrolled_at": ":at"
+            }
+          }
+        ]
+      },
+      "content": {
+        "title": "Course",
+        "reader_path": "/learn"
+      }
+    }
+  ]
+}

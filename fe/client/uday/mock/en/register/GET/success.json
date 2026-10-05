@@ -1,0 +1,26 @@
+{
+  "meta": { "title": "Signup", "description": "Join Uday Learning" },
+  "config": [
+    {
+      "id": "register-layout",
+      "type": "auth-layout",
+      "properties": { "level": "base", "type": "static" },
+      "content": {
+        "title": "Create Account",
+        "name": "Uday Learning",
+        "config": {
+          "endpoint": "register",
+          "type": "register-card",
+          "action": {
+            "type": "redirect",
+            "navigation": "/",
+            "navigation_type": "navigate",
+            "login": true
+          }
+        },
+        "footerText": "Already have an account? {{Login||l||/login}}"
+      },
+      "children": []
+    }
+  ]
+}

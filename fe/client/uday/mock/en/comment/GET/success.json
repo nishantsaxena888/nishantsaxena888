@@ -1,0 +1,27 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "chapter_id": 1,
+      "revision_id": 2,
+      "anchor": "1-4",
+      "author": "nishant",
+      "resolved": false,
+      "body": "Add a model-comparison table before the catalog section.",
+      "created_at": "2024-12-21T09:10:00Z"
+    },
+    {
+      "id": 2,
+      "chapter_id": 1,
+      "revision_id": 2,
+      "anchor": "quiz",
+      "author": "uday",
+      "resolved": true,
+      "body": "Q2 distractor C is too obvious \u2014 rewrite.",
+      "created_at": "2024-12-21T12:40:00Z"
+    }
+  ],
+  "page": 1,
+  "size": 2,
+  "total": 2
+}

@@ -59,21 +59,34 @@ function loadGlobs(globsByClient: Record<string, Record<string, any>>) {
 // Baked client loads synchronously — its glob is eager in mock-active.ts.
 loadGlobs({ [bakedClient]: mockFiles as Record<string, any> });
 
-const mocksLoaded = new Set<string>([bakedClient]);
+// Track in-flight loads by PROMISE, not a done-set: the module-level
+// mockReady kickoff and apiClient's per-request await can race, and a
+// "loading started" marker would let a request fall through to the real
+// API before the client's tree is in — a live backend then serves the
+// wrong tenant's data.
+const mockLoads = new Map<string, Promise<void>>([
+  [bakedClient, Promise.resolve()],
+]);
 
 // Dev: import every mock file under ../../../client/<name>/mock/ on first
 // use. Idempotent; apiClient awaits this before resolveMock reads maps.
-export async function ensureClientMocks(name: string): Promise<void> {
-  if (!isDev() || !name || mocksLoaded.has(name)) return;
-  mocksLoaded.add(name);
-  const { mockGlobs } = await import("../../tenants/dev-all");
-  const prefix = `../../../client/${name}/mock/`;
-  const loaded = await Promise.all(
-    Object.entries(mockGlobs)
-      .filter(([p]) => p.startsWith(prefix))
-      .map(async ([p, load]) => [p, await load()] as const),
-  );
-  loadGlobs({ [name]: Object.fromEntries(loaded) });
+export function ensureClientMocks(name: string): Promise<void> {
+  if (!isDev() || !name) return Promise.resolve();
+  let p = mockLoads.get(name);
+  if (!p) {
+    p = (async () => {
+      const { mockGlobs } = await import("../../tenants/dev-all");
+      const prefix = `../../../client/${name}/mock/`;
+      const loaded = await Promise.all(
+        Object.entries(mockGlobs)
+          .filter(([path]) => path.startsWith(prefix))
+          .map(async ([path, load]) => [path, await load()] as const),
+      );
+      loadGlobs({ [name]: Object.fromEntries(loaded) });
+    })();
+    mockLoads.set(name, p);
+  }
+  return p;
 }
 
 const requested =

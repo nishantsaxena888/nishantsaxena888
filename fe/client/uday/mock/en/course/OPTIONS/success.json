@@ -7,25 +7,32 @@
         "type": "int",
         "primary_key": true
       },
+      "category_id": {
+        "type": "int",
+        "required": true
+      },
       "title": {
         "type": "str",
         "required": true
       },
+      "code": {
+        "type": "str",
+        "unique": true
+      },
       "description": {
         "type": "str"
       },
-      "level": {
+      "status": {
         "type": "str",
-        "default": "beginner",
+        "default": "draft",
         "options": [
-          "beginner",
-          "intermediate",
-          "advanced"
+          "draft",
+          "published",
+          "archived"
         ]
       },
-      "lessons": {
-        "type": "int",
-        "default": 0
+      "created_at": {
+        "type": "datetime"
       }
     },
     "ui": {
@@ -42,19 +49,17 @@
             "searchable": true
           },
           {
-            "key": "level",
-            "label": "Level",
-            "type": "badge",
-            "variants": {
-              "beginner": "secondary",
-              "intermediate": "default",
-              "advanced": "destructive"
-            }
+            "key": "code",
+            "label": "Code"
           },
           {
-            "key": "lessons",
-            "label": "Lessons",
-            "sortable": true
+            "key": "category_id",
+            "label": "Category"
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "type": "badge"
           }
         ],
         "actions": [
@@ -72,27 +77,38 @@
             "label": "Title"
           },
           {
+            "name": "code",
+            "componentType": "TextInput",
+            "required": true,
+            "label": "Code"
+          },
+          {
+            "name": "category_id",
+            "componentType": "Select",
+            "required": true,
+            "label": "Category",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          {
             "name": "description",
             "componentType": "TextInput",
             "colSpan": 2,
             "label": "Description"
           },
           {
-            "name": "level",
+            "name": "status",
             "componentType": "Select",
+            "label": "Status",
             "options": [
-              "beginner",
-              "intermediate",
-              "advanced"
-            ],
-            "default": "beginner",
-            "label": "Level"
-          },
-          {
-            "name": "lessons",
-            "componentType": "TextInput",
-            "default": "0",
-            "label": "Lessons"
+              "draft",
+              "published",
+              "archived"
+            ]
           }
         ]
       }
@@ -112,19 +128,17 @@
           "searchable": true
         },
         {
-          "key": "level",
-          "label": "Level",
-          "type": "badge",
-          "variants": {
-            "beginner": "secondary",
-            "intermediate": "default",
-            "advanced": "destructive"
-          }
+          "key": "code",
+          "label": "Code"
         },
         {
-          "key": "lessons",
-          "label": "Lessons",
-          "sortable": true
+          "key": "category_id",
+          "label": "Category"
+        },
+        {
+          "key": "status",
+          "label": "Status",
+          "type": "badge"
         }
       ],
       "actions": [
@@ -142,27 +156,38 @@
           "label": "Title"
         },
         {
+          "name": "code",
+          "componentType": "TextInput",
+          "required": true,
+          "label": "Code"
+        },
+        {
+          "name": "category_id",
+          "componentType": "Select",
+          "required": true,
+          "label": "Category",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+        },
+        {
           "name": "description",
           "componentType": "TextInput",
           "colSpan": 2,
           "label": "Description"
         },
         {
-          "name": "level",
+          "name": "status",
           "componentType": "Select",
+          "label": "Status",
           "options": [
-            "beginner",
-            "intermediate",
-            "advanced"
-          ],
-          "default": "beginner",
-          "label": "Level"
-        },
-        {
-          "name": "lessons",
-          "componentType": "TextInput",
-          "default": "0",
-          "label": "Lessons"
+            "draft",
+            "published",
+            "archived"
+          ]
         }
       ]
     }

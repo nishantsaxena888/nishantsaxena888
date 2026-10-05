@@ -1,0 +1,3624 @@
+[
+ {
+  "id": 1,
+  "course_id": 2,
+  "order": 1,
+  "title": "Introduction to Amazon Bedrock",
+  "published_revision_id": 1
+ },
+ {
+  "id": 2,
+  "course_id": 2,
+  "order": 2,
+  "title": "AgentCore Production-Ready Agents",
+  "published_revision_id": 3
+ },
+ {
+  "id": 3,
+  "course_id": 1,
+  "order": 1,
+  "title": "Welcome & Series Map",
+  "published_revision_id": 4
+ },
+ {
+  "id": 4,
+  "course_id": 1,
+  "order": 2,
+  "title": "AgentCore Runtime Deep-Dive",
+  "published_revision_id": 5
+ },
+ {
+  "id": 5,
+  "course_id": 3,
+  "order": 1,
+  "title": "Shell & Filesystem",
+  "published_revision_id": 6
+ },
+ {
+  "id": 6,
+  "course_id": 3,
+  "order": 2,
+  "title": "Permissions & Users",
+  "published_revision_id": 7
+ },
+ {
+  "id": 7,
+  "course_id": 4,
+  "order": 1,
+  "title": "Images & Containers",
+  "published_revision_id": 8
+ },
+ {
+  "id": 8,
+  "course_id": 4,
+  "order": 2,
+  "title": "Docker Compose Stacks",
+  "published_revision_id": 9
+ },
+ {
+  "id": 9,
+  "course_id": 5,
+  "order": 1,
+  "title": "IAM \u2014 Accounts, Roles, Policies",
+  "published_revision_id": 10
+ },
+ {
+  "id": 10,
+  "course_id": 5,
+  "order": 2,
+  "title": "Amazon S3 \u2014 Buckets & Storage Classes",
+  "published_revision_id": 11
+ },
+ {
+  "id": 1000,
+  "course_id": 100,
+  "title": "00 \u2014 Welcome And Series Map",
+  "order": 1,
+  "content_base": "/agentcore-playlist/",
+  "published_revision_id": 1000
+ },
+ {
+  "id": 1001,
+  "course_id": 101,
+  "title": "01 \u2014 Prototype To Production Gap",
+  "order": 1,
+  "content_base": "/agentcore-production-agent/",
+  "published_revision_id": 1001
+ },
+ {
+  "id": 1002,
+  "course_id": 101,
+  "title": "02 \u2014 Runtime Local To Cloud",
+  "order": 2,
+  "content_base": "/agentcore-production-agent/",
+  "published_revision_id": 1002
+ },
+ {
+  "id": 1003,
+  "course_id": 101,
+  "title": "03 \u2014 Gateway Tools As MCP",
+  "order": 3,
+  "content_base": "/agentcore-production-agent/",
+  "published_revision_id": 1003
+ },
+ {
+  "id": 1004,
+  "course_id": 101,
+  "title": "04 \u2014 Memory Identity Observability",
+  "order": 4,
+  "content_base": "/agentcore-production-agent/",
+  "published_revision_id": 1004
+ },
+ {
+  "id": 1005,
+  "course_id": 102,
+  "title": "01 \u2014 Why Strands Agents",
+  "order": 1,
+  "content_base": "/strands-agents/",
+  "published_revision_id": 1005
+ },
+ {
+  "id": 1006,
+  "course_id": 102,
+  "title": "02 \u2014 Strands SDK And The App Blueprint",
+  "order": 2,
+  "content_base": "/strands-agents/",
+  "published_revision_id": 1006
+ },
+ {
+  "id": 1007,
+  "course_id": 102,
+  "title": "03 \u2014 Agents Tools And MCP Hands On",
+  "order": 3,
+  "content_base": "/strands-agents/",
+  "published_revision_id": 1007
+ },
+ {
+  "id": 1008,
+  "course_id": 102,
+  "title": "04 \u2014 Multi Agent Orchestration",
+  "order": 4,
+  "content_base": "/strands-agents/",
+  "published_revision_id": 1008
+ },
+ {
+  "id": 1009,
+  "course_id": 103,
+  "title": "04 \u2014 AgentCore Runtime Prototype To Production",
+  "order": 1,
+  "content_base": "/bedrock-deepti/",
+  "published_revision_id": 1009
+ },
+ {
+  "id": 1010,
+  "course_id": 104,
+  "title": "05 \u2014 AgentCore Gateway Connecting Agents To Tools",
+  "order": 1,
+  "content_base": "/bedrock-deepti/",
+  "published_revision_id": 1010
+ },
+ {
+  "id": 1011,
+  "course_id": 105,
+  "title": "01 \u2014 Agent Identity Model",
+  "order": 1,
+  "content_base": "/agentcore-security/",
+  "published_revision_id": 1011
+ },
+ {
+  "id": 1012,
+  "course_id": 105,
+  "title": "02 \u2014 Credential Providers And OAuth",
+  "order": 2,
+  "content_base": "/agentcore-security/",
+  "published_revision_id": 1012
+ },
+ {
+  "id": 1013,
+  "course_id": 105,
+  "title": "03 \u2014 Gateway And Identity",
+  "order": 3,
+  "content_base": "/agentcore-security/",
+  "published_revision_id": 1013
+ },
+ {
+  "id": 1014,
+  "course_id": 106,
+  "title": "01 \u2014 Browser Tool",
+  "order": 1,
+  "content_base": "/agentcore-tools/",
+  "published_revision_id": 1014
+ },
+ {
+  "id": 1015,
+  "course_id": 106,
+  "title": "02 \u2014 Code Interpreter",
+  "order": 2,
+  "content_base": "/agentcore-tools/",
+  "published_revision_id": 1015
+ },
+ {
+  "id": 1016,
+  "course_id": 106,
+  "title": "03 \u2014 Composition And Production",
+  "order": 3,
+  "content_base": "/agentcore-tools/",
+  "published_revision_id": 1016
+ },
+ {
+  "id": 1017,
+  "course_id": 107,
+  "title": "01 \u2014 STM Vs LTM",
+  "order": 1,
+  "content_base": "/agentcore-memory/",
+  "published_revision_id": 1017
+ },
+ {
+  "id": 1018,
+  "course_id": 107,
+  "title": "02 \u2014 Strategies And Namespaces",
+  "order": 2,
+  "content_base": "/agentcore-memory/",
+  "published_revision_id": 1018
+ },
+ {
+  "id": 1019,
+  "course_id": 107,
+  "title": "03 \u2014 Hooks And Demo",
+  "order": 3,
+  "content_base": "/agentcore-memory/",
+  "published_revision_id": 1019
+ },
+ {
+  "id": 1020,
+  "course_id": 108,
+  "title": "01 \u2014 Production Lifecycle",
+  "order": 1,
+  "content_base": "/agentcore-prod-deploy/",
+  "published_revision_id": 1020
+ },
+ {
+  "id": 1021,
+  "course_id": 108,
+  "title": "02 \u2014 MCP On Runtime",
+  "order": 2,
+  "content_base": "/agentcore-prod-deploy/",
+  "published_revision_id": 1021
+ },
+ {
+  "id": 1022,
+  "course_id": 108,
+  "title": "03 \u2014 End To End Walkthrough",
+  "order": 3,
+  "content_base": "/agentcore-prod-deploy/",
+  "published_revision_id": 1022
+ },
+ {
+  "id": 1023,
+  "course_id": 109,
+  "title": "01 \u2014 OTel Spans Traces",
+  "order": 1,
+  "content_base": "/agentcore-observability/",
+  "published_revision_id": 1023
+ },
+ {
+  "id": 1024,
+  "course_id": 109,
+  "title": "02 \u2014 CloudWatch GenAI Dashboard",
+  "order": 2,
+  "content_base": "/agentcore-observability/",
+  "published_revision_id": 1024
+ },
+ {
+  "id": 1025,
+  "course_id": 109,
+  "title": "03 \u2014 Third Party APM",
+  "order": 3,
+  "content_base": "/agentcore-observability/",
+  "published_revision_id": 1025
+ },
+ {
+  "id": 1026,
+  "course_id": 110,
+  "title": "01 \u2014 Evaluation Concepts",
+  "order": 1,
+  "content_base": "/agentcore-evaluations/",
+  "published_revision_id": 1026
+ },
+ {
+  "id": 1027,
+  "course_id": 110,
+  "title": "02 \u2014 OnDemand Evals Config",
+  "order": 2,
+  "content_base": "/agentcore-evaluations/",
+  "published_revision_id": 1027
+ },
+ {
+  "id": 1028,
+  "course_id": 110,
+  "title": "03 \u2014 Dashboards And Judges",
+  "order": 3,
+  "content_base": "/agentcore-evaluations/",
+  "published_revision_id": 1028
+ },
+ {
+  "id": 1029,
+  "course_id": 111,
+  "title": "01 \u2014 Agent Tool Risks",
+  "order": 1,
+  "content_base": "/agentcore-tool-controls/",
+  "published_revision_id": 1029
+ },
+ {
+  "id": 1030,
+  "course_id": 111,
+  "title": "02 \u2014 Cedar Policies On Gateway",
+  "order": 2,
+  "content_base": "/agentcore-tool-controls/",
+  "published_revision_id": 1030
+ },
+ {
+  "id": 1031,
+  "course_id": 111,
+  "title": "03 \u2014 Policy Author And Enforcement",
+  "order": 3,
+  "content_base": "/agentcore-tool-controls/",
+  "published_revision_id": 1031
+ },
+ {
+  "id": 1032,
+  "course_id": 112,
+  "title": "01 \u2014 Episodic Memory Concept",
+  "order": 1,
+  "content_base": "/agentcore-episodic-memory/",
+  "published_revision_id": 1032
+ },
+ {
+  "id": 1033,
+  "course_id": 112,
+  "title": "02 \u2014 Episodes And Reflections",
+  "order": 2,
+  "content_base": "/agentcore-episodic-memory/",
+  "published_revision_id": 1033
+ },
+ {
+  "id": 1034,
+  "course_id": 112,
+  "title": "03 \u2014 Feedback And Loops",
+  "order": 3,
+  "content_base": "/agentcore-episodic-memory/",
+  "published_revision_id": 1034
+ },
+ {
+  "id": 1035,
+  "course_id": 113,
+  "title": "99 \u2014 Summary Notes",
+  "order": 1,
+  "content_base": "/agentcore-playlist/",
+  "published_revision_id": 1035
+ },
+ {
+  "id": 1036,
+  "course_id": 114,
+  "title": "Welcome",
+  "order": 1,
+  "content_base": "/nishant-notes/",
+  "published_revision_id": 1036
+ },
+ {
+  "id": 1037,
+  "course_id": 115,
+  "title": "01 \u2014 Introduction To Bedrock Agentcore",
+  "order": 1,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1037
+ },
+ {
+  "id": 1038,
+  "course_id": 115,
+  "title": "02 \u2014 Prerequisites",
+  "order": 2,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1038
+ },
+ {
+  "id": 1039,
+  "course_id": 115,
+  "title": "03 \u2014 Aws Configuration",
+  "order": 3,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1039
+ },
+ {
+  "id": 1040,
+  "course_id": 115,
+  "title": "04 \u2014 Clone Repository",
+  "order": 4,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1040
+ },
+ {
+  "id": 1041,
+  "course_id": 115,
+  "title": "05 \u2014 Repository Walkthrough",
+  "order": 5,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1041
+ },
+ {
+  "id": 1042,
+  "course_id": 115,
+  "title": "06 \u2014 Project Setup",
+  "order": 6,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1042
+ },
+ {
+  "id": 1043,
+  "course_id": 115,
+  "title": "07 \u2014 Configuration Files",
+  "order": 7,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1043
+ },
+ {
+  "id": 1044,
+  "course_id": 115,
+  "title": "08 \u2014 Running The Application",
+  "order": 8,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1044
+ },
+ {
+  "id": 1045,
+  "course_id": 115,
+  "title": "09 \u2014 Understanding The Code",
+  "order": 9,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1045
+ },
+ {
+  "id": 1046,
+  "course_id": 115,
+  "title": "10 \u2014 Agentcore Runtime",
+  "order": 10,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1046
+ },
+ {
+  "id": 1047,
+  "course_id": 115,
+  "title": "11 \u2014 Gateway",
+  "order": 11,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1047
+ },
+ {
+  "id": 1048,
+  "course_id": 115,
+  "title": "12 \u2014 Identity",
+  "order": 12,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1048
+ },
+ {
+  "id": 1049,
+  "course_id": 115,
+  "title": "13 \u2014 Memory",
+  "order": 13,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1049
+ },
+ {
+  "id": 1050,
+  "course_id": 115,
+  "title": "14 \u2014 Tools",
+  "order": 14,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1050
+ },
+ {
+  "id": 1051,
+  "course_id": 115,
+  "title": "15 \u2014 Deployment",
+  "order": 15,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1051
+ },
+ {
+  "id": 1052,
+  "course_id": 115,
+  "title": "16 \u2014 Observability",
+  "order": 16,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1052
+ },
+ {
+  "id": 1053,
+  "course_id": 115,
+  "title": "17 \u2014 Complete End To End Flow",
+  "order": 17,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1053
+ },
+ {
+  "id": 1054,
+  "course_id": 115,
+  "title": "Appendix",
+  "order": 18,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1054
+ },
+ {
+  "id": 1055,
+  "course_id": 115,
+  "title": "References",
+  "order": 19,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1055
+ },
+ {
+  "id": 1056,
+  "course_id": 116,
+  "title": "01 \u2014 Notes",
+  "order": 1,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1056
+ },
+ {
+  "id": 1057,
+  "course_id": 116,
+  "title": "01 \u2014 Questions",
+  "order": 2,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1057
+ },
+ {
+  "id": 1058,
+  "course_id": 116,
+  "title": "01 \u2014 Summary",
+  "order": 3,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1058
+ },
+ {
+  "id": 1059,
+  "course_id": 116,
+  "title": "02 \u2014 Data Engineering Relevance",
+  "order": 4,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1059
+ },
+ {
+  "id": 1060,
+  "course_id": 116,
+  "title": "02 \u2014 Notes",
+  "order": 5,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1060
+ },
+ {
+  "id": 1061,
+  "course_id": 116,
+  "title": "02 \u2014 Questions",
+  "order": 6,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1061
+ },
+ {
+  "id": 1062,
+  "course_id": 116,
+  "title": "02 \u2014 Summary",
+  "order": 7,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1062
+ },
+ {
+  "id": 1063,
+  "course_id": 116,
+  "title": "03 \u2014 Notes",
+  "order": 8,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1063
+ },
+ {
+  "id": 1064,
+  "course_id": 116,
+  "title": "03 \u2014 Questions",
+  "order": 9,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1064
+ },
+ {
+  "id": 1065,
+  "course_id": 116,
+  "title": "03 \u2014 Summary",
+  "order": 10,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1065
+ },
+ {
+  "id": 1066,
+  "course_id": 116,
+  "title": "04 \u2014 Notes",
+  "order": 11,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1066
+ },
+ {
+  "id": 1067,
+  "course_id": 116,
+  "title": "04 \u2014 Questions",
+  "order": 12,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1067
+ },
+ {
+  "id": 1068,
+  "course_id": 116,
+  "title": "04 \u2014 Summary",
+  "order": 13,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1068
+ },
+ {
+  "id": 1069,
+  "course_id": 116,
+  "title": "05 \u2014 Notes",
+  "order": 14,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1069
+ },
+ {
+  "id": 1070,
+  "course_id": 116,
+  "title": "05 \u2014 Questions",
+  "order": 15,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1070
+ },
+ {
+  "id": 1071,
+  "course_id": 116,
+  "title": "05 \u2014 Summary",
+  "order": 16,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1071
+ },
+ {
+  "id": 1072,
+  "course_id": 116,
+  "title": "06 \u2014 Notes",
+  "order": 17,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1072
+ },
+ {
+  "id": 1073,
+  "course_id": 116,
+  "title": "06 \u2014 Questions",
+  "order": 18,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1073
+ },
+ {
+  "id": 1074,
+  "course_id": 116,
+  "title": "06 \u2014 Summary",
+  "order": 19,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1074
+ },
+ {
+  "id": 1075,
+  "course_id": 116,
+  "title": "07 \u2014 Notes",
+  "order": 20,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1075
+ },
+ {
+  "id": 1076,
+  "course_id": 116,
+  "title": "07 \u2014 Questions",
+  "order": 21,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1076
+ },
+ {
+  "id": 1077,
+  "course_id": 116,
+  "title": "07 \u2014 Summary",
+  "order": 22,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1077
+ },
+ {
+  "id": 1078,
+  "course_id": 116,
+  "title": "08 \u2014 Notes",
+  "order": 23,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1078
+ },
+ {
+  "id": 1079,
+  "course_id": 116,
+  "title": "08 \u2014 Questions",
+  "order": 24,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1079
+ },
+ {
+  "id": 1080,
+  "course_id": 116,
+  "title": "08 \u2014 Summary",
+  "order": 25,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1080
+ },
+ {
+  "id": 1081,
+  "course_id": 116,
+  "title": "09 \u2014 Notes",
+  "order": 26,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1081
+ },
+ {
+  "id": 1082,
+  "course_id": 116,
+  "title": "09 \u2014 Questions",
+  "order": 27,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1082
+ },
+ {
+  "id": 1083,
+  "course_id": 116,
+  "title": "09 \u2014 Summary",
+  "order": 28,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1083
+ },
+ {
+  "id": 1084,
+  "course_id": 116,
+  "title": "10 \u2014 Notes",
+  "order": 29,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1084
+ },
+ {
+  "id": 1085,
+  "course_id": 116,
+  "title": "10 \u2014 Questions",
+  "order": 30,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1085
+ },
+ {
+  "id": 1086,
+  "course_id": 116,
+  "title": "10 \u2014 Summary",
+  "order": 31,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1086
+ },
+ {
+  "id": 1087,
+  "course_id": 116,
+  "title": "11 \u2014 Notes",
+  "order": 32,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1087
+ },
+ {
+  "id": 1088,
+  "course_id": 116,
+  "title": "11 \u2014 Questions",
+  "order": 33,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1088
+ },
+ {
+  "id": 1089,
+  "course_id": 116,
+  "title": "11 \u2014 Summary",
+  "order": 34,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1089
+ },
+ {
+  "id": 1090,
+  "course_id": 116,
+  "title": "12 \u2014 Notes",
+  "order": 35,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1090
+ },
+ {
+  "id": 1091,
+  "course_id": 116,
+  "title": "12 \u2014 Questions",
+  "order": 36,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1091
+ },
+ {
+  "id": 1092,
+  "course_id": 116,
+  "title": "12 \u2014 Summary",
+  "order": 37,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1092
+ },
+ {
+  "id": 1093,
+  "course_id": 116,
+  "title": "Recreate Workspace Skill",
+  "order": 38,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1093
+ },
+ {
+  "id": 1094,
+  "course_id": 116,
+  "title": "Youtube Course Content Generator Skill",
+  "order": 39,
+  "content_base": "/bedrock/aws_employee_video_playlist/summaries/",
+  "published_revision_id": 1094
+ },
+ {
+  "id": 1095,
+  "course_id": 117,
+  "title": "01 \u2014 Introduction To Bedrock Agentcore",
+  "order": 1,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1095
+ },
+ {
+  "id": 1096,
+  "course_id": 117,
+  "title": "02 \u2014 Prerequisites",
+  "order": 2,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1096
+ },
+ {
+  "id": 1097,
+  "course_id": 117,
+  "title": "03 \u2014 Aws Configuration",
+  "order": 3,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1097
+ },
+ {
+  "id": 1098,
+  "course_id": 117,
+  "title": "04 \u2014 Clone Repository",
+  "order": 4,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1098
+ },
+ {
+  "id": 1099,
+  "course_id": 117,
+  "title": "05 \u2014 Repository Walkthrough",
+  "order": 5,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1099
+ },
+ {
+  "id": 1100,
+  "course_id": 117,
+  "title": "06 \u2014 Project Setup",
+  "order": 6,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1100
+ },
+ {
+  "id": 1101,
+  "course_id": 117,
+  "title": "07 \u2014 Configuration Files",
+  "order": 7,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1101
+ },
+ {
+  "id": 1102,
+  "course_id": 117,
+  "title": "08 \u2014 Running The Application",
+  "order": 8,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1102
+ },
+ {
+  "id": 1103,
+  "course_id": 117,
+  "title": "09 \u2014 Understanding The Code",
+  "order": 9,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1103
+ },
+ {
+  "id": 1104,
+  "course_id": 117,
+  "title": "10 \u2014 Agentcore Runtime",
+  "order": 10,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1104
+ },
+ {
+  "id": 1105,
+  "course_id": 117,
+  "title": "11 \u2014 Gateway",
+  "order": 11,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1105
+ },
+ {
+  "id": 1106,
+  "course_id": 117,
+  "title": "12 \u2014 Identity",
+  "order": 12,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1106
+ },
+ {
+  "id": 1107,
+  "course_id": 117,
+  "title": "13 \u2014 Memory",
+  "order": 13,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1107
+ },
+ {
+  "id": 1108,
+  "course_id": 117,
+  "title": "14 \u2014 Tools",
+  "order": 14,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1108
+ },
+ {
+  "id": 1109,
+  "course_id": 117,
+  "title": "15 \u2014 Deployment",
+  "order": 15,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1109
+ },
+ {
+  "id": 1110,
+  "course_id": 117,
+  "title": "16 \u2014 Observability",
+  "order": 16,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1110
+ },
+ {
+  "id": 1111,
+  "course_id": 117,
+  "title": "17 \u2014 Complete End To End Flow",
+  "order": 17,
+  "content_base": "/bedrock/",
+  "published_revision_id": 1111
+ },
+ {
+  "id": 1112,
+  "course_id": 118,
+  "title": "01 \u2014 History Of Unix And Linux",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1112
+ },
+ {
+  "id": 1113,
+  "course_id": 118,
+  "title": "02 \u2014 Linux Distributions And Ecosystem",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1113
+ },
+ {
+  "id": 1114,
+  "course_id": 118,
+  "title": "03 \u2014 Linux Architecture And Kernel Fundamentals",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1114
+ },
+ {
+  "id": 1115,
+  "course_id": 118,
+  "title": "04 \u2014 Linux Boot Process",
+  "order": 4,
+  "content_base": "/linux/",
+  "published_revision_id": 1115
+ },
+ {
+  "id": 1116,
+  "course_id": 118,
+  "title": "05 \u2014 Filesystem Hierarchy Standard",
+  "order": 5,
+  "content_base": "/linux/",
+  "published_revision_id": 1116
+ },
+ {
+  "id": 1117,
+  "course_id": 119,
+  "title": "06 \u2014 Installing Linux On VMware And VirtualBox",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1117
+ },
+ {
+  "id": 1118,
+  "course_id": 119,
+  "title": "07 \u2014 First Login And Terminal Basics",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1118
+ },
+ {
+  "id": 1119,
+  "course_id": 119,
+  "title": "08 \u2014 Navigating The Linux Filesystem",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1119
+ },
+ {
+  "id": 1120,
+  "course_id": 119,
+  "title": "09 \u2014 File And Directory Operations",
+  "order": 4,
+  "content_base": "/linux/",
+  "published_revision_id": 1120
+ },
+ {
+  "id": 1121,
+  "course_id": 119,
+  "title": "10 \u2014 Text Editors Vim And Nano",
+  "order": 5,
+  "content_base": "/linux/",
+  "published_revision_id": 1121
+ },
+ {
+  "id": 1122,
+  "course_id": 119,
+  "title": "11 \u2014 Viewing Files Logs Text Processing",
+  "order": 6,
+  "content_base": "/linux/",
+  "published_revision_id": 1122
+ },
+ {
+  "id": 1123,
+  "course_id": 119,
+  "title": "12 \u2014 Help System And Documentation",
+  "order": 7,
+  "content_base": "/linux/",
+  "published_revision_id": 1123
+ },
+ {
+  "id": 1124,
+  "course_id": 119,
+  "title": "13 \u2014 IO Redirection Pipes Wildcards",
+  "order": 8,
+  "content_base": "/linux/",
+  "published_revision_id": 1124
+ },
+ {
+  "id": 1125,
+  "course_id": 119,
+  "title": "14 \u2014 Searching Files And Pattern Matching",
+  "order": 9,
+  "content_base": "/linux/",
+  "published_revision_id": 1125
+ },
+ {
+  "id": 1126,
+  "course_id": 120,
+  "title": "15 \u2014 Inodes Hard Links And Soft Links",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1126
+ },
+ {
+  "id": 1127,
+  "course_id": 120,
+  "title": "16 \u2014 Linux Permissions Deep Dive",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1127
+ },
+ {
+  "id": 1128,
+  "course_id": 120,
+  "title": "17 \u2014 Access Control Lists ACL",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1128
+ },
+ {
+  "id": 1129,
+  "course_id": 120,
+  "title": "18 \u2014 Special Permissions SUID SGID Sticky",
+  "order": 4,
+  "content_base": "/linux/",
+  "published_revision_id": 1129
+ },
+ {
+  "id": 1130,
+  "course_id": 120,
+  "title": "19 \u2014 Default Permissions And Umask",
+  "order": 5,
+  "content_base": "/linux/",
+  "published_revision_id": 1130
+ },
+ {
+  "id": 1131,
+  "course_id": 120,
+  "title": "20 \u2014 File Ownership Chown And Chgrp",
+  "order": 6,
+  "content_base": "/linux/",
+  "published_revision_id": 1131
+ },
+ {
+  "id": 1132,
+  "course_id": 121,
+  "title": "21 \u2014 User Management Basics",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1132
+ },
+ {
+  "id": 1133,
+  "course_id": 121,
+  "title": "22 \u2014 Group Administration",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1133
+ },
+ {
+  "id": 1134,
+  "course_id": 121,
+  "title": "23 \u2014 Sudo And Privilege Escalation",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1134
+ },
+ {
+  "id": 1135,
+  "course_id": 121,
+  "title": "24 \u2014 Password Management And Aging",
+  "order": 4,
+  "content_base": "/linux/",
+  "published_revision_id": 1135
+ },
+ {
+  "id": 1136,
+  "course_id": 121,
+  "title": "25 \u2014 User Profiles And Initialization",
+  "order": 5,
+  "content_base": "/linux/",
+  "published_revision_id": 1136
+ },
+ {
+  "id": 1137,
+  "course_id": 121,
+  "title": "26 \u2014 PAM Fundamentals",
+  "order": 6,
+  "content_base": "/linux/",
+  "published_revision_id": 1137
+ },
+ {
+  "id": 1138,
+  "course_id": 122,
+  "title": "27 \u2014 Process Management Basics",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1138
+ },
+ {
+  "id": 1139,
+  "course_id": 122,
+  "title": "28 \u2014 Background Jobs And Tmux",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1139
+ },
+ {
+  "id": 1140,
+  "course_id": 122,
+  "title": "29 \u2014 Systemd And Systemctl",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1140
+ },
+ {
+  "id": 1141,
+  "course_id": 122,
+  "title": "30 \u2014 Systemd Targets And Journalctl",
+  "order": 4,
+  "content_base": "/linux/",
+  "published_revision_id": 1141
+ },
+ {
+  "id": 1142,
+  "course_id": 122,
+  "title": "31 \u2014 Task Scheduling",
+  "order": 5,
+  "content_base": "/linux/",
+  "published_revision_id": 1142
+ },
+ {
+  "id": 1143,
+  "course_id": 123,
+  "title": "27 \u2014 Process Management Basics",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1143
+ },
+ {
+  "id": 1144,
+  "course_id": 123,
+  "title": "28 \u2014 Background Jobs And Tmux",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1144
+ },
+ {
+  "id": 1145,
+  "course_id": 123,
+  "title": "29 \u2014 Systemd And Systemctl",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1145
+ },
+ {
+  "id": 1146,
+  "course_id": 123,
+  "title": "30 \u2014 Systemd Targets And Journalctl",
+  "order": 4,
+  "content_base": "/linux/",
+  "published_revision_id": 1146
+ },
+ {
+  "id": 1147,
+  "course_id": 123,
+  "title": "31 \u2014 Task Scheduling",
+  "order": 5,
+  "content_base": "/linux/",
+  "published_revision_id": 1147
+ },
+ {
+  "id": 1148,
+  "course_id": 124,
+  "title": "32 \u2014 Package Management RPM DNF",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1148
+ },
+ {
+  "id": 1149,
+  "course_id": 124,
+  "title": "33 \u2014 Package Management DPKG APT",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1149
+ },
+ {
+  "id": 1150,
+  "course_id": 124,
+  "title": "34 \u2014 Compiling From Source",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1150
+ },
+ {
+  "id": 1151,
+  "course_id": 125,
+  "title": "32 \u2014 Package Management RPM DNF",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1151
+ },
+ {
+  "id": 1152,
+  "course_id": 125,
+  "title": "33 \u2014 Package Management DPKG APT",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1152
+ },
+ {
+  "id": 1153,
+  "course_id": 125,
+  "title": "34 \u2014 Compiling From Source",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1153
+ },
+ {
+  "id": 1154,
+  "course_id": 126,
+  "title": "35 \u2014 Storage Fundamentals Partitioning",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1154
+ },
+ {
+  "id": 1155,
+  "course_id": 126,
+  "title": "36 \u2014 Filesystem Creation Mounting",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1155
+ },
+ {
+  "id": 1156,
+  "course_id": 126,
+  "title": "37 \u2014 Swap Space Management",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1156
+ },
+ {
+  "id": 1157,
+  "course_id": 126,
+  "title": "38 \u2014 Logical Volume Management",
+  "order": 4,
+  "content_base": "/linux/",
+  "published_revision_id": 1157
+ },
+ {
+  "id": 1158,
+  "course_id": 126,
+  "title": "39 \u2014 LVM Resizing Snapshots",
+  "order": 5,
+  "content_base": "/linux/",
+  "published_revision_id": 1158
+ },
+ {
+  "id": 1159,
+  "course_id": 126,
+  "title": "40 \u2014 RAID Fundamentals",
+  "order": 6,
+  "content_base": "/linux/",
+  "published_revision_id": 1159
+ },
+ {
+  "id": 1160,
+  "course_id": 127,
+  "title": "41 \u2014 Network Configuration Basics",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1160
+ },
+ {
+  "id": 1161,
+  "course_id": 127,
+  "title": "42 \u2014 Network Configuration Tools",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1161
+ },
+ {
+  "id": 1162,
+  "course_id": 127,
+  "title": "43 \u2014 Routing And Gateways",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1162
+ },
+ {
+  "id": 1163,
+  "course_id": 127,
+  "title": "44 \u2014 DNS And Host Resolution",
+  "order": 4,
+  "content_base": "/linux/",
+  "published_revision_id": 1163
+ },
+ {
+  "id": 1164,
+  "course_id": 127,
+  "title": "45 \u2014 Firewalld And Iptables",
+  "order": 5,
+  "content_base": "/linux/",
+  "published_revision_id": 1164
+ },
+ {
+  "id": 1165,
+  "course_id": 127,
+  "title": "46 \u2014 Network Troubleshooting",
+  "order": 6,
+  "content_base": "/linux/",
+  "published_revision_id": 1165
+ },
+ {
+  "id": 1166,
+  "course_id": 128,
+  "title": "41 \u2014 Network Configuration Basics",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1166
+ },
+ {
+  "id": 1167,
+  "course_id": 128,
+  "title": "42 \u2014 Network Configuration Tools",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1167
+ },
+ {
+  "id": 1168,
+  "course_id": 128,
+  "title": "43 \u2014 Routing And Gateways",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1168
+ },
+ {
+  "id": 1169,
+  "course_id": 128,
+  "title": "44 \u2014 DNS And Host Resolution",
+  "order": 4,
+  "content_base": "/linux/",
+  "published_revision_id": 1169
+ },
+ {
+  "id": 1170,
+  "course_id": 128,
+  "title": "45 \u2014 Firewalld And Iptables",
+  "order": 5,
+  "content_base": "/linux/",
+  "published_revision_id": 1170
+ },
+ {
+  "id": 1171,
+  "course_id": 128,
+  "title": "46 \u2014 Network Troubleshooting",
+  "order": 6,
+  "content_base": "/linux/",
+  "published_revision_id": 1171
+ },
+ {
+  "id": 1172,
+  "course_id": 129,
+  "title": "47 \u2014 OpenSSH Configuration",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1172
+ },
+ {
+  "id": 1173,
+  "course_id": 129,
+  "title": "48 \u2014 Securing SSH",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1173
+ },
+ {
+  "id": 1174,
+  "course_id": 129,
+  "title": "49 \u2014 SELinux Fundamentals",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1174
+ },
+ {
+  "id": 1175,
+  "course_id": 129,
+  "title": "50 \u2014 SELinux Contexts",
+  "order": 4,
+  "content_base": "/linux/",
+  "published_revision_id": 1175
+ },
+ {
+  "id": 1176,
+  "course_id": 129,
+  "title": "51 \u2014 Auditing And Logging",
+  "order": 5,
+  "content_base": "/linux/",
+  "published_revision_id": 1176
+ },
+ {
+  "id": 1177,
+  "course_id": 129,
+  "title": "52 \u2014 Vulnerability Scanning",
+  "order": 6,
+  "content_base": "/linux/",
+  "published_revision_id": 1177
+ },
+ {
+  "id": 1178,
+  "course_id": 130,
+  "title": "53 \u2014 Performance Monitoring",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1178
+ },
+ {
+  "id": 1179,
+  "course_id": 130,
+  "title": "54 \u2014 System Activity Reporter",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1179
+ },
+ {
+  "id": 1180,
+  "course_id": 130,
+  "title": "55 \u2014 Network Monitoring",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1180
+ },
+ {
+  "id": 1181,
+  "course_id": 131,
+  "title": "56 \u2014 Apache Administration",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1181
+ },
+ {
+  "id": 1182,
+  "course_id": 131,
+  "title": "57 \u2014 Nginx Web Server",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1182
+ },
+ {
+  "id": 1183,
+  "course_id": 131,
+  "title": "58 \u2014 Tomcat Administration",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1183
+ },
+ {
+  "id": 1184,
+  "course_id": 131,
+  "title": "59 \u2014 Load Balancing",
+  "order": 4,
+  "content_base": "/linux/",
+  "published_revision_id": 1184
+ },
+ {
+  "id": 1185,
+  "course_id": 131,
+  "title": "60 \u2014 SSL Certificates",
+  "order": 5,
+  "content_base": "/linux/",
+  "published_revision_id": 1185
+ },
+ {
+  "id": 1186,
+  "course_id": 132,
+  "title": "61 \u2014 Bash Scripting Basics",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1186
+ },
+ {
+  "id": 1187,
+  "course_id": 132,
+  "title": "62 \u2014 Control Structures",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1187
+ },
+ {
+  "id": 1188,
+  "course_id": 132,
+  "title": "63 \u2014 Functions And Errors",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1188
+ },
+ {
+  "id": 1189,
+  "course_id": 132,
+  "title": "64 \u2014 Text Processing",
+  "order": 4,
+  "content_base": "/linux/",
+  "published_revision_id": 1189
+ },
+ {
+  "id": 1190,
+  "course_id": 132,
+  "title": "65 \u2014 Automating Tasks",
+  "order": 5,
+  "content_base": "/linux/",
+  "published_revision_id": 1190
+ },
+ {
+  "id": 1191,
+  "course_id": 133,
+  "title": "66 \u2014 Rsync And Remote Copy",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1191
+ },
+ {
+  "id": 1192,
+  "course_id": 133,
+  "title": "67 \u2014 Tar And Compression",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1192
+ },
+ {
+  "id": 1193,
+  "course_id": 133,
+  "title": "68 \u2014 Disaster Recovery",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1193
+ },
+ {
+  "id": 1194,
+  "course_id": 134,
+  "title": "69 \u2014 MySQL Administration",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1194
+ },
+ {
+  "id": 1195,
+  "course_id": 134,
+  "title": "70 \u2014 PostgreSQL Administration",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1195
+ },
+ {
+  "id": 1196,
+  "course_id": 135,
+  "title": "71 \u2014 Chrony And NTP",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1196
+ },
+ {
+  "id": 1197,
+  "course_id": 135,
+  "title": "72 \u2014 Postfix MTA",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1197
+ },
+ {
+  "id": 1198,
+  "course_id": 135,
+  "title": "73 \u2014 File Sharing NFS Samba",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1198
+ },
+ {
+  "id": 1199,
+  "course_id": 136,
+  "title": "74 \u2014 Git Version Control",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1199
+ },
+ {
+  "id": 1200,
+  "course_id": 136,
+  "title": "75 \u2014 Docker And Containers",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1200
+ },
+ {
+  "id": 1201,
+  "course_id": 136,
+  "title": "76 \u2014 AWS And SSH Keys",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1201
+ },
+ {
+  "id": 1202,
+  "course_id": 137,
+  "title": "77 \u2014 Dmesg Kernel Panics",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1202
+ },
+ {
+  "id": 1203,
+  "course_id": 137,
+  "title": "78 \u2014 Strace And Debugging",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1203
+ },
+ {
+  "id": 1204,
+  "course_id": 137,
+  "title": "79 \u2014 Rescue Target Password",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1204
+ },
+ {
+  "id": 1205,
+  "course_id": 138,
+  "title": "80 \u2014 High Availability Keepalived",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1205
+ },
+ {
+  "id": 1206,
+  "course_id": 138,
+  "title": "81 \u2014 Ansible Basics",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1206
+ },
+ {
+  "id": 1207,
+  "course_id": 139,
+  "title": "82 \u2014 Resume Building",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1207
+ },
+ {
+  "id": 1208,
+  "course_id": 139,
+  "title": "83 \u2014 Interview Questions",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1208
+ },
+ {
+  "id": 1209,
+  "course_id": 139,
+  "title": "84 \u2014 Scenario Drills",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1209
+ },
+ {
+  "id": 1210,
+  "course_id": 140,
+  "title": "85 \u2014 Capstone Project",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1210
+ },
+ {
+  "id": 1211,
+  "course_id": 141,
+  "title": "01 \u2014 History Of Unix And Linux",
+  "order": 1,
+  "content_base": "/linux/",
+  "published_revision_id": 1211
+ },
+ {
+  "id": 1212,
+  "course_id": 141,
+  "title": "02 \u2014 Linux Distributions And Ecosystem",
+  "order": 2,
+  "content_base": "/linux/",
+  "published_revision_id": 1212
+ },
+ {
+  "id": 1213,
+  "course_id": 141,
+  "title": "03 \u2014 Linux Architecture And Kernel Fundamentals",
+  "order": 3,
+  "content_base": "/linux/",
+  "published_revision_id": 1213
+ },
+ {
+  "id": 1214,
+  "course_id": 141,
+  "title": "04 \u2014 Linux Boot Process",
+  "order": 4,
+  "content_base": "/linux/",
+  "published_revision_id": 1214
+ },
+ {
+  "id": 1215,
+  "course_id": 141,
+  "title": "05 \u2014 Filesystem Hierarchy Standard",
+  "order": 5,
+  "content_base": "/linux/",
+  "published_revision_id": 1215
+ },
+ {
+  "id": 1216,
+  "course_id": 141,
+  "title": "06 \u2014 Installing Linux On VMware And VirtualBox",
+  "order": 6,
+  "content_base": "/linux/",
+  "published_revision_id": 1216
+ },
+ {
+  "id": 1217,
+  "course_id": 141,
+  "title": "07 \u2014 First Login And Terminal Basics",
+  "order": 7,
+  "content_base": "/linux/",
+  "published_revision_id": 1217
+ },
+ {
+  "id": 1218,
+  "course_id": 141,
+  "title": "08 \u2014 Navigating The Linux Filesystem",
+  "order": 8,
+  "content_base": "/linux/",
+  "published_revision_id": 1218
+ },
+ {
+  "id": 1219,
+  "course_id": 141,
+  "title": "09 \u2014 File And Directory Operations",
+  "order": 9,
+  "content_base": "/linux/",
+  "published_revision_id": 1219
+ },
+ {
+  "id": 1220,
+  "course_id": 141,
+  "title": "10 \u2014 Text Editors Vim And Nano",
+  "order": 10,
+  "content_base": "/linux/",
+  "published_revision_id": 1220
+ },
+ {
+  "id": 1221,
+  "course_id": 141,
+  "title": "11 \u2014 Viewing Files Logs Text Processing",
+  "order": 11,
+  "content_base": "/linux/",
+  "published_revision_id": 1221
+ },
+ {
+  "id": 1222,
+  "course_id": 141,
+  "title": "12 \u2014 Help System And Documentation",
+  "order": 12,
+  "content_base": "/linux/",
+  "published_revision_id": 1222
+ },
+ {
+  "id": 1223,
+  "course_id": 141,
+  "title": "13 \u2014 IO Redirection Pipes Wildcards",
+  "order": 13,
+  "content_base": "/linux/",
+  "published_revision_id": 1223
+ },
+ {
+  "id": 1224,
+  "course_id": 141,
+  "title": "14 \u2014 Searching Files And Pattern Matching",
+  "order": 14,
+  "content_base": "/linux/",
+  "published_revision_id": 1224
+ },
+ {
+  "id": 1225,
+  "course_id": 141,
+  "title": "15 \u2014 Inodes Hard Links And Soft Links",
+  "order": 15,
+  "content_base": "/linux/",
+  "published_revision_id": 1225
+ },
+ {
+  "id": 1226,
+  "course_id": 141,
+  "title": "16 \u2014 Linux Permissions Deep Dive",
+  "order": 16,
+  "content_base": "/linux/",
+  "published_revision_id": 1226
+ },
+ {
+  "id": 1227,
+  "course_id": 141,
+  "title": "17 \u2014 Access Control Lists ACL",
+  "order": 17,
+  "content_base": "/linux/",
+  "published_revision_id": 1227
+ },
+ {
+  "id": 1228,
+  "course_id": 141,
+  "title": "18 \u2014 Special Permissions SUID SGID Sticky",
+  "order": 18,
+  "content_base": "/linux/",
+  "published_revision_id": 1228
+ },
+ {
+  "id": 1229,
+  "course_id": 141,
+  "title": "19 \u2014 Default Permissions And Umask",
+  "order": 19,
+  "content_base": "/linux/",
+  "published_revision_id": 1229
+ },
+ {
+  "id": 1230,
+  "course_id": 141,
+  "title": "20 \u2014 File Ownership Chown And Chgrp",
+  "order": 20,
+  "content_base": "/linux/",
+  "published_revision_id": 1230
+ },
+ {
+  "id": 1231,
+  "course_id": 141,
+  "title": "21 \u2014 User Management Basics",
+  "order": 21,
+  "content_base": "/linux/",
+  "published_revision_id": 1231
+ },
+ {
+  "id": 1232,
+  "course_id": 141,
+  "title": "22 \u2014 Group Administration",
+  "order": 22,
+  "content_base": "/linux/",
+  "published_revision_id": 1232
+ },
+ {
+  "id": 1233,
+  "course_id": 141,
+  "title": "23 \u2014 Sudo And Privilege Escalation",
+  "order": 23,
+  "content_base": "/linux/",
+  "published_revision_id": 1233
+ },
+ {
+  "id": 1234,
+  "course_id": 141,
+  "title": "24 \u2014 Password Management And Aging",
+  "order": 24,
+  "content_base": "/linux/",
+  "published_revision_id": 1234
+ },
+ {
+  "id": 1235,
+  "course_id": 141,
+  "title": "25 \u2014 User Profiles And Initialization",
+  "order": 25,
+  "content_base": "/linux/",
+  "published_revision_id": 1235
+ },
+ {
+  "id": 1236,
+  "course_id": 141,
+  "title": "26 \u2014 PAM Fundamentals",
+  "order": 26,
+  "content_base": "/linux/",
+  "published_revision_id": 1236
+ },
+ {
+  "id": 1237,
+  "course_id": 141,
+  "title": "27 \u2014 Process Management Basics",
+  "order": 27,
+  "content_base": "/linux/",
+  "published_revision_id": 1237
+ },
+ {
+  "id": 1238,
+  "course_id": 141,
+  "title": "28 \u2014 Background Jobs And Tmux",
+  "order": 28,
+  "content_base": "/linux/",
+  "published_revision_id": 1238
+ },
+ {
+  "id": 1239,
+  "course_id": 141,
+  "title": "29 \u2014 Systemd And Systemctl",
+  "order": 29,
+  "content_base": "/linux/",
+  "published_revision_id": 1239
+ },
+ {
+  "id": 1240,
+  "course_id": 141,
+  "title": "30 \u2014 Systemd Targets And Journalctl",
+  "order": 30,
+  "content_base": "/linux/",
+  "published_revision_id": 1240
+ },
+ {
+  "id": 1241,
+  "course_id": 141,
+  "title": "31 \u2014 Task Scheduling",
+  "order": 31,
+  "content_base": "/linux/",
+  "published_revision_id": 1241
+ },
+ {
+  "id": 1242,
+  "course_id": 141,
+  "title": "32 \u2014 Package Management RPM DNF",
+  "order": 32,
+  "content_base": "/linux/",
+  "published_revision_id": 1242
+ },
+ {
+  "id": 1243,
+  "course_id": 141,
+  "title": "33 \u2014 Package Management DPKG APT",
+  "order": 33,
+  "content_base": "/linux/",
+  "published_revision_id": 1243
+ },
+ {
+  "id": 1244,
+  "course_id": 141,
+  "title": "34 \u2014 Compiling From Source",
+  "order": 34,
+  "content_base": "/linux/",
+  "published_revision_id": 1244
+ },
+ {
+  "id": 1245,
+  "course_id": 141,
+  "title": "35 \u2014 Storage Fundamentals Partitioning",
+  "order": 35,
+  "content_base": "/linux/",
+  "published_revision_id": 1245
+ },
+ {
+  "id": 1246,
+  "course_id": 141,
+  "title": "36 \u2014 Filesystem Creation Mounting",
+  "order": 36,
+  "content_base": "/linux/",
+  "published_revision_id": 1246
+ },
+ {
+  "id": 1247,
+  "course_id": 141,
+  "title": "37 \u2014 Swap Space Management",
+  "order": 37,
+  "content_base": "/linux/",
+  "published_revision_id": 1247
+ },
+ {
+  "id": 1248,
+  "course_id": 141,
+  "title": "38 \u2014 Logical Volume Management",
+  "order": 38,
+  "content_base": "/linux/",
+  "published_revision_id": 1248
+ },
+ {
+  "id": 1249,
+  "course_id": 141,
+  "title": "39 \u2014 LVM Resizing Snapshots",
+  "order": 39,
+  "content_base": "/linux/",
+  "published_revision_id": 1249
+ },
+ {
+  "id": 1250,
+  "course_id": 141,
+  "title": "40 \u2014 RAID Fundamentals",
+  "order": 40,
+  "content_base": "/linux/",
+  "published_revision_id": 1250
+ },
+ {
+  "id": 1251,
+  "course_id": 141,
+  "title": "41 \u2014 Network Configuration Basics",
+  "order": 41,
+  "content_base": "/linux/",
+  "published_revision_id": 1251
+ },
+ {
+  "id": 1252,
+  "course_id": 141,
+  "title": "42 \u2014 Network Configuration Tools",
+  "order": 42,
+  "content_base": "/linux/",
+  "published_revision_id": 1252
+ },
+ {
+  "id": 1253,
+  "course_id": 141,
+  "title": "43 \u2014 Routing And Gateways",
+  "order": 43,
+  "content_base": "/linux/",
+  "published_revision_id": 1253
+ },
+ {
+  "id": 1254,
+  "course_id": 141,
+  "title": "44 \u2014 DNS And Host Resolution",
+  "order": 44,
+  "content_base": "/linux/",
+  "published_revision_id": 1254
+ },
+ {
+  "id": 1255,
+  "course_id": 141,
+  "title": "45 \u2014 Firewalld And Iptables",
+  "order": 45,
+  "content_base": "/linux/",
+  "published_revision_id": 1255
+ },
+ {
+  "id": 1256,
+  "course_id": 141,
+  "title": "46 \u2014 Network Troubleshooting",
+  "order": 46,
+  "content_base": "/linux/",
+  "published_revision_id": 1256
+ },
+ {
+  "id": 1257,
+  "course_id": 141,
+  "title": "47 \u2014 OpenSSH Configuration",
+  "order": 47,
+  "content_base": "/linux/",
+  "published_revision_id": 1257
+ },
+ {
+  "id": 1258,
+  "course_id": 141,
+  "title": "48 \u2014 Securing SSH",
+  "order": 48,
+  "content_base": "/linux/",
+  "published_revision_id": 1258
+ },
+ {
+  "id": 1259,
+  "course_id": 141,
+  "title": "49 \u2014 SELinux Fundamentals",
+  "order": 49,
+  "content_base": "/linux/",
+  "published_revision_id": 1259
+ },
+ {
+  "id": 1260,
+  "course_id": 141,
+  "title": "50 \u2014 SELinux Contexts",
+  "order": 50,
+  "content_base": "/linux/",
+  "published_revision_id": 1260
+ },
+ {
+  "id": 1261,
+  "course_id": 141,
+  "title": "51 \u2014 Auditing And Logging",
+  "order": 51,
+  "content_base": "/linux/",
+  "published_revision_id": 1261
+ },
+ {
+  "id": 1262,
+  "course_id": 141,
+  "title": "52 \u2014 Vulnerability Scanning",
+  "order": 52,
+  "content_base": "/linux/",
+  "published_revision_id": 1262
+ },
+ {
+  "id": 1263,
+  "course_id": 141,
+  "title": "53 \u2014 Performance Monitoring",
+  "order": 53,
+  "content_base": "/linux/",
+  "published_revision_id": 1263
+ },
+ {
+  "id": 1264,
+  "course_id": 141,
+  "title": "54 \u2014 System Activity Reporter",
+  "order": 54,
+  "content_base": "/linux/",
+  "published_revision_id": 1264
+ },
+ {
+  "id": 1265,
+  "course_id": 141,
+  "title": "55 \u2014 Network Monitoring",
+  "order": 55,
+  "content_base": "/linux/",
+  "published_revision_id": 1265
+ },
+ {
+  "id": 1266,
+  "course_id": 141,
+  "title": "56 \u2014 Apache Administration",
+  "order": 56,
+  "content_base": "/linux/",
+  "published_revision_id": 1266
+ },
+ {
+  "id": 1267,
+  "course_id": 141,
+  "title": "57 \u2014 Nginx Web Server",
+  "order": 57,
+  "content_base": "/linux/",
+  "published_revision_id": 1267
+ },
+ {
+  "id": 1268,
+  "course_id": 141,
+  "title": "58 \u2014 Tomcat Administration",
+  "order": 58,
+  "content_base": "/linux/",
+  "published_revision_id": 1268
+ },
+ {
+  "id": 1269,
+  "course_id": 141,
+  "title": "59 \u2014 Load Balancing",
+  "order": 59,
+  "content_base": "/linux/",
+  "published_revision_id": 1269
+ },
+ {
+  "id": 1270,
+  "course_id": 141,
+  "title": "60 \u2014 SSL Certificates",
+  "order": 60,
+  "content_base": "/linux/",
+  "published_revision_id": 1270
+ },
+ {
+  "id": 1271,
+  "course_id": 141,
+  "title": "61 \u2014 Bash Scripting Basics",
+  "order": 61,
+  "content_base": "/linux/",
+  "published_revision_id": 1271
+ },
+ {
+  "id": 1272,
+  "course_id": 141,
+  "title": "62 \u2014 Control Structures",
+  "order": 62,
+  "content_base": "/linux/",
+  "published_revision_id": 1272
+ },
+ {
+  "id": 1273,
+  "course_id": 141,
+  "title": "63 \u2014 Functions And Errors",
+  "order": 63,
+  "content_base": "/linux/",
+  "published_revision_id": 1273
+ },
+ {
+  "id": 1274,
+  "course_id": 141,
+  "title": "64 \u2014 Text Processing",
+  "order": 64,
+  "content_base": "/linux/",
+  "published_revision_id": 1274
+ },
+ {
+  "id": 1275,
+  "course_id": 141,
+  "title": "65 \u2014 Automating Tasks",
+  "order": 65,
+  "content_base": "/linux/",
+  "published_revision_id": 1275
+ },
+ {
+  "id": 1276,
+  "course_id": 141,
+  "title": "66 \u2014 Rsync And Remote Copy",
+  "order": 66,
+  "content_base": "/linux/",
+  "published_revision_id": 1276
+ },
+ {
+  "id": 1277,
+  "course_id": 141,
+  "title": "67 \u2014 Tar And Compression",
+  "order": 67,
+  "content_base": "/linux/",
+  "published_revision_id": 1277
+ },
+ {
+  "id": 1278,
+  "course_id": 141,
+  "title": "68 \u2014 Disaster Recovery",
+  "order": 68,
+  "content_base": "/linux/",
+  "published_revision_id": 1278
+ },
+ {
+  "id": 1279,
+  "course_id": 141,
+  "title": "69 \u2014 MySQL Administration",
+  "order": 69,
+  "content_base": "/linux/",
+  "published_revision_id": 1279
+ },
+ {
+  "id": 1280,
+  "course_id": 141,
+  "title": "70 \u2014 PostgreSQL Administration",
+  "order": 70,
+  "content_base": "/linux/",
+  "published_revision_id": 1280
+ },
+ {
+  "id": 1281,
+  "course_id": 141,
+  "title": "71 \u2014 Chrony And NTP",
+  "order": 71,
+  "content_base": "/linux/",
+  "published_revision_id": 1281
+ },
+ {
+  "id": 1282,
+  "course_id": 141,
+  "title": "72 \u2014 Postfix MTA",
+  "order": 72,
+  "content_base": "/linux/",
+  "published_revision_id": 1282
+ },
+ {
+  "id": 1283,
+  "course_id": 141,
+  "title": "73 \u2014 File Sharing NFS Samba",
+  "order": 73,
+  "content_base": "/linux/",
+  "published_revision_id": 1283
+ },
+ {
+  "id": 1284,
+  "course_id": 141,
+  "title": "74 \u2014 Git Version Control",
+  "order": 74,
+  "content_base": "/linux/",
+  "published_revision_id": 1284
+ },
+ {
+  "id": 1285,
+  "course_id": 141,
+  "title": "75 \u2014 Docker And Containers",
+  "order": 75,
+  "content_base": "/linux/",
+  "published_revision_id": 1285
+ },
+ {
+  "id": 1286,
+  "course_id": 141,
+  "title": "76 \u2014 AWS And SSH Keys",
+  "order": 76,
+  "content_base": "/linux/",
+  "published_revision_id": 1286
+ },
+ {
+  "id": 1287,
+  "course_id": 141,
+  "title": "77 \u2014 Dmesg Kernel Panics",
+  "order": 77,
+  "content_base": "/linux/",
+  "published_revision_id": 1287
+ },
+ {
+  "id": 1288,
+  "course_id": 141,
+  "title": "78 \u2014 Strace And Debugging",
+  "order": 78,
+  "content_base": "/linux/",
+  "published_revision_id": 1288
+ },
+ {
+  "id": 1289,
+  "course_id": 141,
+  "title": "79 \u2014 Rescue Target Password",
+  "order": 79,
+  "content_base": "/linux/",
+  "published_revision_id": 1289
+ },
+ {
+  "id": 1290,
+  "course_id": 141,
+  "title": "80 \u2014 High Availability Keepalived",
+  "order": 80,
+  "content_base": "/linux/",
+  "published_revision_id": 1290
+ },
+ {
+  "id": 1291,
+  "course_id": 141,
+  "title": "81 \u2014 Ansible Basics",
+  "order": 81,
+  "content_base": "/linux/",
+  "published_revision_id": 1291
+ },
+ {
+  "id": 1292,
+  "course_id": 141,
+  "title": "82 \u2014 Resume Building",
+  "order": 82,
+  "content_base": "/linux/",
+  "published_revision_id": 1292
+ },
+ {
+  "id": 1293,
+  "course_id": 141,
+  "title": "83 \u2014 Interview Questions",
+  "order": 83,
+  "content_base": "/linux/",
+  "published_revision_id": 1293
+ },
+ {
+  "id": 1294,
+  "course_id": 141,
+  "title": "84 \u2014 Scenario Drills",
+  "order": 84,
+  "content_base": "/linux/",
+  "published_revision_id": 1294
+ },
+ {
+  "id": 1295,
+  "course_id": 141,
+  "title": "85 \u2014 Capstone Project",
+  "order": 85,
+  "content_base": "/linux/",
+  "published_revision_id": 1295
+ },
+ {
+  "id": 1296,
+  "course_id": 142,
+  "title": "01 \u2014 Introduction To Containers And Docker",
+  "order": 1,
+  "content_base": "/docker/",
+  "published_revision_id": 1296
+ },
+ {
+  "id": 1297,
+  "course_id": 142,
+  "title": "02 \u2014 Container Fundamentals",
+  "order": 2,
+  "content_base": "/docker/",
+  "published_revision_id": 1297
+ },
+ {
+  "id": 1298,
+  "course_id": 142,
+  "title": "03 \u2014 Docker Architecture And Internals",
+  "order": 3,
+  "content_base": "/docker/",
+  "published_revision_id": 1298
+ },
+ {
+  "id": 1299,
+  "course_id": 142,
+  "title": "04 \u2014 Installation And Environment Setup",
+  "order": 4,
+  "content_base": "/docker/",
+  "published_revision_id": 1299
+ },
+ {
+  "id": 1300,
+  "course_id": 142,
+  "title": "05 \u2014 Docker CLI And Essential Commands",
+  "order": 5,
+  "content_base": "/docker/",
+  "published_revision_id": 1300
+ },
+ {
+  "id": 1301,
+  "course_id": 142,
+  "title": "06 \u2014 Images Layers And Registries",
+  "order": 6,
+  "content_base": "/docker/",
+  "published_revision_id": 1301
+ },
+ {
+  "id": 1302,
+  "course_id": 142,
+  "title": "07 \u2014 Containers And Lifecycle Management",
+  "order": 7,
+  "content_base": "/docker/",
+  "published_revision_id": 1302
+ },
+ {
+  "id": 1303,
+  "course_id": 142,
+  "title": "08 \u2014 Docker Networking Deep Dive",
+  "order": 8,
+  "content_base": "/docker/",
+  "published_revision_id": 1303
+ },
+ {
+  "id": 1304,
+  "course_id": 142,
+  "title": "09 \u2014 Docker Storage Volumes And Bind Mounts",
+  "order": 9,
+  "content_base": "/docker/",
+  "published_revision_id": 1304
+ },
+ {
+  "id": 1305,
+  "course_id": 142,
+  "title": "10 \u2014 Dockerfile Mastery",
+  "order": 10,
+  "content_base": "/docker/",
+  "published_revision_id": 1305
+ },
+ {
+  "id": 1306,
+  "course_id": 142,
+  "title": "11 \u2014 Docker Compose",
+  "order": 11,
+  "content_base": "/docker/",
+  "published_revision_id": 1306
+ },
+ {
+  "id": 1307,
+  "course_id": 142,
+  "title": "12 \u2014 Multi Container Application Development",
+  "order": 12,
+  "content_base": "/docker/",
+  "published_revision_id": 1307
+ },
+ {
+  "id": 1308,
+  "course_id": 142,
+  "title": "13 \u2014 Docker Security",
+  "order": 13,
+  "content_base": "/docker/",
+  "published_revision_id": 1308
+ },
+ {
+  "id": 1309,
+  "course_id": 142,
+  "title": "14 \u2014 Docker Performance And Optimization",
+  "order": 14,
+  "content_base": "/docker/",
+  "published_revision_id": 1309
+ },
+ {
+  "id": 1310,
+  "course_id": 142,
+  "title": "15 \u2014 Logging Monitoring And Observability",
+  "order": 15,
+  "content_base": "/docker/",
+  "published_revision_id": 1310
+ },
+ {
+  "id": 1311,
+  "course_id": 142,
+  "title": "16 \u2014 Debugging And Troubleshooting",
+  "order": 16,
+  "content_base": "/docker/",
+  "published_revision_id": 1311
+ },
+ {
+  "id": 1312,
+  "course_id": 142,
+  "title": "17 \u2014 Testing Containerized Applications",
+  "order": 17,
+  "content_base": "/docker/",
+  "published_revision_id": 1312
+ },
+ {
+  "id": 1313,
+  "course_id": 142,
+  "title": "18 \u2014 CI CD With Docker",
+  "order": 18,
+  "content_base": "/docker/",
+  "published_revision_id": 1313
+ },
+ {
+  "id": 1314,
+  "course_id": 142,
+  "title": "19 \u2014 Docker In AWS Azure And GCP",
+  "order": 19,
+  "content_base": "/docker/",
+  "published_revision_id": 1314
+ },
+ {
+  "id": 1315,
+  "course_id": 142,
+  "title": "20 \u2014 Enterprise Architecture And Production Patterns",
+  "order": 20,
+  "content_base": "/docker/",
+  "published_revision_id": 1315
+ },
+ {
+  "id": 1316,
+  "course_id": 142,
+  "title": "21 \u2014 Design Patterns And Anti Patterns",
+  "order": 21,
+  "content_base": "/docker/",
+  "published_revision_id": 1316
+ },
+ {
+  "id": 1317,
+  "course_id": 142,
+  "title": "22 \u2014 Best Practices And Interview Preparation",
+  "order": 22,
+  "content_base": "/docker/",
+  "published_revision_id": 1317
+ },
+ {
+  "id": 1318,
+  "course_id": 142,
+  "title": "23 \u2014 Real World Case Studies",
+  "order": 23,
+  "content_base": "/docker/",
+  "published_revision_id": 1318
+ },
+ {
+  "id": 1319,
+  "course_id": 142,
+  "title": "24 \u2014 Enterprise Capstone Project",
+  "order": 24,
+  "content_base": "/docker/",
+  "published_revision_id": 1319
+ },
+ {
+  "id": 1320,
+  "course_id": 142,
+  "title": "25 \u2014 Final Review Certification Guide And Career Preparation",
+  "order": 25,
+  "content_base": "/docker/",
+  "published_revision_id": 1320
+ },
+ {
+  "id": 1321,
+  "course_id": 143,
+  "title": "01 \u2014 Ch01 Getting Started With Python Devops",
+  "order": 1,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1321
+ },
+ {
+  "id": 1322,
+  "course_id": 143,
+  "title": "02 \u2014 Ch02 Python Data Types",
+  "order": 2,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1322
+ },
+ {
+  "id": 1323,
+  "course_id": 143,
+  "title": "03 \u2014 Ch03 Python Data Structures",
+  "order": 3,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1323
+ },
+ {
+  "id": 1324,
+  "course_id": 143,
+  "title": "04 \u2014 Ch04 Python Control Flow",
+  "order": 4,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1324
+ },
+ {
+  "id": 1325,
+  "course_id": 143,
+  "title": "05 \u2014 Ch05 Python Functions Modularity",
+  "order": 5,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1325
+ },
+ {
+  "id": 1326,
+  "course_id": 143,
+  "title": "06 \u2014 Ch06 Python Error Handling",
+  "order": 6,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1326
+ },
+ {
+  "id": 1327,
+  "course_id": 143,
+  "title": "07 \u2014 Ch07 Linux File Directory Automation",
+  "order": 7,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1327
+ },
+ {
+  "id": 1328,
+  "course_id": 143,
+  "title": "08 \u2014 Ch08 Command Execution Env Vars",
+  "order": 8,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1328
+ },
+ {
+  "id": 1329,
+  "course_id": 143,
+  "title": "09 \u2014 Ch09 Working With Data Formats",
+  "order": 9,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1329
+ },
+ {
+  "id": 1330,
+  "course_id": 143,
+  "title": "10 \u2014 Ch10 Http Rest Api Fundamentals",
+  "order": 10,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1330
+ },
+ {
+  "id": 1331,
+  "course_id": 143,
+  "title": "11 \u2014 Ch11 Api Security Authentication",
+  "order": 11,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1331
+ },
+ {
+  "id": 1332,
+  "course_id": 143,
+  "title": "12 \u2014 Ch12 Cloud Fundamentals Neutral Automation",
+  "order": 12,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1332
+ },
+ {
+  "id": 1333,
+  "course_id": 143,
+  "title": "13 \u2014 Ch13 Aws Automation Boto3",
+  "order": 13,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1333
+ },
+ {
+  "id": 1334,
+  "course_id": 143,
+  "title": "14 \u2014 Ch14 Azure Gcp Automation",
+  "order": 14,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1334
+ },
+ {
+  "id": 1335,
+  "course_id": 143,
+  "title": "15 \u2014 Ch15 Git And Python",
+  "order": 15,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1335
+ },
+ {
+  "id": 1336,
+  "course_id": 143,
+  "title": "16 \u2014 Ch16 Cicd Fundamentals",
+  "order": 16,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1336
+ },
+ {
+  "id": 1337,
+  "course_id": 143,
+  "title": "17 \u2014 Ch17 Cicd Automation Jenkins Github Actions",
+  "order": 17,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1337
+ },
+ {
+  "id": 1338,
+  "course_id": 143,
+  "title": "18 \u2014 Ch18 Infrastructure As Code",
+  "order": 18,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1338
+ },
+ {
+  "id": 1339,
+  "course_id": 143,
+  "title": "19 \u2014 Ch19 Containers With Docker",
+  "order": 19,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1339
+ },
+ {
+  "id": 1340,
+  "course_id": 143,
+  "title": "20 \u2014 Ch20 Kubernetes Python Automation",
+  "order": 20,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1340
+ },
+ {
+  "id": 1341,
+  "course_id": 143,
+  "title": "21 \u2014 Ch21 System Monitoring Observability",
+  "order": 21,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1341
+ },
+ {
+  "id": 1342,
+  "course_id": 143,
+  "title": "22 \u2014 Ch22 Logging Log Management",
+  "order": 22,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1342
+ },
+ {
+  "id": 1343,
+  "course_id": 143,
+  "title": "23 \u2014 Ch23 Prometheus Cloudwatch",
+  "order": 23,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1343
+ },
+ {
+  "id": 1344,
+  "course_id": 143,
+  "title": "24 \u2014 Ch24 Oop For Devops",
+  "order": 24,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1344
+ },
+ {
+  "id": 1345,
+  "course_id": 143,
+  "title": "25 \u2014 Ch25 Cli Tools Regex",
+  "order": 25,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1345
+ },
+ {
+  "id": 1346,
+  "course_id": 143,
+  "title": "26 \u2014 Ch26 Quality Testing",
+  "order": 26,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1346
+ },
+ {
+  "id": 1347,
+  "course_id": 143,
+  "title": "27 \u2014 Ch27 Security Automation",
+  "order": 27,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1347
+ },
+ {
+  "id": 1348,
+  "course_id": 143,
+  "title": "28 \u2014 Ch28 Resilient Automation",
+  "order": 28,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1348
+ },
+ {
+  "id": 1349,
+  "course_id": 143,
+  "title": "29 \u2014 Ch29 Production Grade Automation",
+  "order": 29,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1349
+ },
+ {
+  "id": 1350,
+  "course_id": 143,
+  "title": "30 \u2014 Ch30 Modern Automation Patterns",
+  "order": 30,
+  "content_base": "/python-devops/",
+  "published_revision_id": 1350
+ },
+ {
+  "id": 1351,
+  "course_id": 144,
+  "title": "00 \u2014 Linux Networking Prerequisites",
+  "order": 1,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1351
+ },
+ {
+  "id": 1352,
+  "course_id": 144,
+  "title": "01 \u2014 Containers And Docker",
+  "order": 2,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1352
+ },
+ {
+  "id": 1353,
+  "course_id": 144,
+  "title": "02 \u2014 Docker Vs Kubernetes",
+  "order": 3,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1353
+ },
+ {
+  "id": 1354,
+  "course_id": 144,
+  "title": "03 \u2014 Kubernetes Introduction",
+  "order": 4,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1354
+ },
+ {
+  "id": 1355,
+  "course_id": 144,
+  "title": "04 \u2014 Kubernetes Architecture",
+  "order": 5,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1355
+ },
+ {
+  "id": 1356,
+  "course_id": 144,
+  "title": "05 \u2014 Kubernetes Installation",
+  "order": 6,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1356
+ },
+ {
+  "id": 1357,
+  "course_id": 144,
+  "title": "06 \u2014 Kubectl Deep Dive",
+  "order": 7,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1357
+ },
+ {
+  "id": 1358,
+  "course_id": 144,
+  "title": "07 \u2014 Kubernetes Core Objects",
+  "order": 8,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1358
+ },
+ {
+  "id": 1359,
+  "course_id": 144,
+  "title": "08 \u2014 Pods Deep Dive",
+  "order": 9,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1359
+ },
+ {
+  "id": 1360,
+  "course_id": 144,
+  "title": "09 \u2014 Kubernetes Networking",
+  "order": 10,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1360
+ },
+ {
+  "id": 1361,
+  "course_id": 144,
+  "title": "10 \u2014 Kubernetes Storage",
+  "order": 11,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1361
+ },
+ {
+  "id": 1362,
+  "course_id": 144,
+  "title": "11 \u2014 Configuration And Secrets",
+  "order": 12,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1362
+ },
+ {
+  "id": 1363,
+  "course_id": 144,
+  "title": "12 \u2014 Scheduling",
+  "order": 13,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1363
+ },
+ {
+  "id": 1364,
+  "course_id": 144,
+  "title": "13 \u2014 Deployments And Rollouts",
+  "order": 14,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1364
+ },
+ {
+  "id": 1365,
+  "course_id": 144,
+  "title": "14 \u2014 Autoscaling",
+  "order": 15,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1365
+ },
+ {
+  "id": 1366,
+  "course_id": 144,
+  "title": "15 \u2014 Security And RBAC",
+  "order": 16,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1366
+ },
+ {
+  "id": 1367,
+  "course_id": 144,
+  "title": "16 \u2014 AWS Fundamentals",
+  "order": 17,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1367
+ },
+ {
+  "id": 1368,
+  "course_id": 144,
+  "title": "17 \u2014 Amazon EKS",
+  "order": 18,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1368
+ },
+ {
+  "id": 1369,
+  "course_id": 144,
+  "title": "18 \u2014 EKS Networking",
+  "order": 19,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1369
+ },
+ {
+  "id": 1370,
+  "course_id": 144,
+  "title": "19 \u2014 Git For DevOps",
+  "order": 20,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1370
+ },
+ {
+  "id": 1371,
+  "course_id": 144,
+  "title": "20 \u2014 CICD Pipelines",
+  "order": 21,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1371
+ },
+ {
+  "id": 1372,
+  "course_id": 144,
+  "title": "21 \u2014 Terraform EKS",
+  "order": 22,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1372
+ },
+ {
+  "id": 1373,
+  "course_id": 144,
+  "title": "22 \u2014 Helm",
+  "order": 23,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1373
+ },
+ {
+  "id": 1374,
+  "course_id": 144,
+  "title": "23 \u2014 GitOps ArgoCD",
+  "order": 24,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1374
+ },
+ {
+  "id": 1375,
+  "course_id": 144,
+  "title": "24 \u2014 Monitoring Observability",
+  "order": 25,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1375
+ },
+ {
+  "id": 1376,
+  "course_id": 144,
+  "title": "25 \u2014 Production Operations",
+  "order": 26,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1376
+ },
+ {
+  "id": 1377,
+  "course_id": 144,
+  "title": "26 \u2014 Troubleshooting",
+  "order": 27,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1377
+ },
+ {
+  "id": 1378,
+  "course_id": 144,
+  "title": "27 \u2014 Production Incidents",
+  "order": 28,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1378
+ },
+ {
+  "id": 1379,
+  "course_id": 144,
+  "title": "28 \u2014 Enterprise Architecture",
+  "order": 29,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1379
+ },
+ {
+  "id": 1380,
+  "course_id": 144,
+  "title": "29 \u2014 Interview Question Bank",
+  "order": 30,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1380
+ },
+ {
+  "id": 1381,
+  "course_id": 144,
+  "title": "30 \u2014 Capstone Projects",
+  "order": 31,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1381
+ },
+ {
+  "id": 1382,
+  "course_id": 144,
+  "title": "Kubernetes AWS EKS Master Curriculum",
+  "order": 32,
+  "content_base": "/kubernetes/",
+  "published_revision_id": 1382
+ },
+ {
+  "id": 1383,
+  "course_id": 145,
+  "title": "01 \u2014 Introduction To Amazon Bedrock",
+  "order": 1,
+  "content_base": "/bedrock-deepti/",
+  "published_revision_id": 1383
+ },
+ {
+  "id": 1384,
+  "course_id": 145,
+  "title": "02 \u2014 Bedrock AgentCore Production Ready Agents",
+  "order": 2,
+  "content_base": "/bedrock-deepti/",
+  "published_revision_id": 1384
+ },
+ {
+  "id": 1385,
+  "course_id": 145,
+  "title": "03 \u2014 Building Agentic AI Applications With Strands Agents And MCP",
+  "order": 3,
+  "content_base": "/bedrock-deepti/",
+  "published_revision_id": 1385
+ },
+ {
+  "id": 1386,
+  "course_id": 145,
+  "title": "04 \u2014 AgentCore Runtime Prototype To Production",
+  "order": 4,
+  "content_base": "/bedrock-deepti/",
+  "published_revision_id": 1386
+ },
+ {
+  "id": 1387,
+  "course_id": 145,
+  "title": "05 \u2014 AgentCore Gateway Connecting Agents To Tools",
+  "order": 5,
+  "content_base": "/bedrock-deepti/",
+  "published_revision_id": 1387
+ },
+ {
+  "id": 1388,
+  "course_id": 145,
+  "title": "06 \u2014 AgentCore Identity Secure Agent Workflows",
+  "order": 6,
+  "content_base": "/bedrock-deepti/",
+  "published_revision_id": 1388
+ },
+ {
+  "id": 1389,
+  "course_id": 146,
+  "title": "01 \u2014 Core Architecture",
+  "order": 1,
+  "content_base": "/ecommerce-architecture/",
+  "published_revision_id": 1389
+ },
+ {
+  "id": 1390,
+  "course_id": 146,
+  "title": "02 \u2014 Search Orders Recommendations Analytics",
+  "order": 2,
+  "content_base": "/ecommerce-architecture/",
+  "published_revision_id": 1390
+ },
+ {
+  "id": 1391,
+  "course_id": 146,
+  "title": "03 \u2014 Mapping To AWS Services",
+  "order": 3,
+  "content_base": "/ecommerce-architecture/",
+  "published_revision_id": 1391
+ },
+ {
+  "id": 1392,
+  "course_id": 147,
+  "title": "01 \u2014 Three Platforms",
+  "order": 1,
+  "content_base": "/microservices-choose/",
+  "published_revision_id": 1392
+ },
+ {
+  "id": 1393,
+  "course_id": 147,
+  "title": "02 \u2014 Decision Framework",
+  "order": 2,
+  "content_base": "/microservices-choose/",
+  "published_revision_id": 1393
+ },
+ {
+  "id": 1394,
+  "course_id": 148,
+  "title": "01 \u2014 Modern Microservice",
+  "order": 1,
+  "content_base": "/microservices-reinvent/",
+  "published_revision_id": 1394
+ },
+ {
+  "id": 1395,
+  "course_id": 148,
+  "title": "02 \u2014 Space Migration App",
+  "order": 2,
+  "content_base": "/microservices-reinvent/",
+  "published_revision_id": 1395
+ },
+ {
+  "id": 1396,
+  "course_id": 148,
+  "title": "03 \u2014 Observability Operations",
+  "order": 3,
+  "content_base": "/microservices-reinvent/",
+  "published_revision_id": 1396
+ },
+ {
+  "id": 1397,
+  "course_id": 149,
+  "title": "AWS IAM \u2014 Secure Access & Permissions",
+  "order": 1,
+  "content_base": "/chapters/",
+  "published_revision_id": 1397
+ },
+ {
+  "id": 1398,
+  "course_id": 149,
+  "title": "Amazon S3 \u2014 Store Files & Static Assets",
+  "order": 2,
+  "content_base": "/chapters/",
+  "published_revision_id": 1398
+ },
+ {
+  "id": 1399,
+  "course_id": 149,
+  "title": "Amazon EC2 \u2014 Launch Your First Server",
+  "order": 3,
+  "content_base": "/chapters/",
+  "published_revision_id": 1399
+ },
+ {
+  "id": 1400,
+  "course_id": 149,
+  "title": "Amazon VPC \u2014 Build Your Network Foundation",
+  "order": 4,
+  "content_base": "/chapters/",
+  "published_revision_id": 1400
+ },
+ {
+  "id": 1401,
+  "course_id": 149,
+  "title": "Amazon CloudWatch \u2014 Monitor Everything",
+  "order": 5,
+  "content_base": "/chapters/",
+  "published_revision_id": 1401
+ },
+ {
+  "id": 1402,
+  "course_id": 149,
+  "title": "Amazon RDS \u2014 Relational Databases",
+  "order": 6,
+  "content_base": "/chapters/",
+  "published_revision_id": 1402
+ },
+ {
+  "id": 1403,
+  "course_id": 149,
+  "title": "Amazon Route 53 \u2014 DNS & Domain Names",
+  "order": 7,
+  "content_base": "/chapters/",
+  "published_revision_id": 1403
+ },
+ {
+  "id": 1404,
+  "course_id": 149,
+  "title": "AWS Lambda \u2014 Serverless Compute",
+  "order": 8,
+  "content_base": "/chapters/",
+  "published_revision_id": 1404
+ },
+ {
+  "id": 1405,
+  "course_id": 149,
+  "title": "Amazon API Gateway \u2014 Build REST APIs",
+  "order": 9,
+  "content_base": "/chapters/",
+  "published_revision_id": 1405
+ },
+ {
+  "id": 1406,
+  "course_id": 149,
+  "title": "Amazon DynamoDB \u2014 NoSQL Database",
+  "order": 10,
+  "content_base": "/chapters/",
+  "published_revision_id": 1406
+ },
+ {
+  "id": 1407,
+  "course_id": 149,
+  "title": "Amazon Cognito \u2014 User Authentication",
+  "order": 11,
+  "content_base": "/chapters/",
+  "published_revision_id": 1407
+ },
+ {
+  "id": 1408,
+  "course_id": 149,
+  "title": "Amazon SQS \u2014 Message Queues",
+  "order": 12,
+  "content_base": "/chapters/",
+  "published_revision_id": 1408
+ },
+ {
+  "id": 1409,
+  "course_id": 149,
+  "title": "Amazon SNS \u2014 Notifications & Fan-Out",
+  "order": 13,
+  "content_base": "/chapters/",
+  "published_revision_id": 1409
+ },
+ {
+  "id": 1410,
+  "course_id": 149,
+  "title": "Amazon EventBridge \u2014 Event-Driven Architecture",
+  "order": 14,
+  "content_base": "/chapters/",
+  "published_revision_id": 1410
+ },
+ {
+  "id": 1411,
+  "course_id": 149,
+  "title": "Amazon ECR \u2014 Container Registry",
+  "order": 15,
+  "content_base": "/chapters/",
+  "published_revision_id": 1411
+ },
+ {
+  "id": 1412,
+  "course_id": 149,
+  "title": "Amazon ECS \u2014 Container Orchestration",
+  "order": 16,
+  "content_base": "/chapters/",
+  "published_revision_id": 1412
+ },
+ {
+  "id": 1413,
+  "course_id": 149,
+  "title": "AWS Fargate \u2014 Serverless Containers",
+  "order": 17,
+  "content_base": "/chapters/",
+  "published_revision_id": 1413
+ },
+ {
+  "id": 1414,
+  "course_id": 149,
+  "title": "Elastic Load Balancing \u2014 Distribute Traffic",
+  "order": 18,
+  "content_base": "/chapters/",
+  "published_revision_id": 1414
+ },
+ {
+  "id": 1415,
+  "course_id": 149,
+  "title": "AWS CodeBuild \u2014 CI Build Automation",
+  "order": 19,
+  "content_base": "/chapters/",
+  "published_revision_id": 1415
+ },
+ {
+  "id": 1416,
+  "course_id": 149,
+  "title": "AWS CodePipeline \u2014 CD Pipeline",
+  "order": 20,
+  "content_base": "/chapters/",
+  "published_revision_id": 1416
+ },
+ {
+  "id": 1417,
+  "course_id": 149,
+  "title": "AWS CloudFormation \u2014 Infrastructure as Code",
+  "order": 21,
+  "content_base": "/chapters/",
+  "published_revision_id": 1417
+ },
+ {
+  "id": 1418,
+  "course_id": 149,
+  "title": "AWS KMS \u2014 Encryption & Key Management",
+  "order": 22,
+  "content_base": "/chapters/",
+  "published_revision_id": 1418
+ },
+ {
+  "id": 1419,
+  "course_id": 149,
+  "title": "AWS STS \u2014 Temporary Credentials & Roles",
+  "order": 23,
+  "content_base": "/chapters/",
+  "published_revision_id": 1419
+ },
+ {
+  "id": 1420,
+  "course_id": 149,
+  "title": "AWS Secrets Manager \u2014 Manage Credentials",
+  "order": 24,
+  "content_base": "/chapters/",
+  "published_revision_id": 1420
+ },
+ {
+  "id": 1421,
+  "course_id": 149,
+  "title": "AWS Systems Manager \u2014 Operations Hub",
+  "order": 25,
+  "content_base": "/chapters/",
+  "published_revision_id": 1421
+ },
+ {
+  "id": 1422,
+  "course_id": 149,
+  "title": "AWS CloudTrail \u2014 Audit API Activity",
+  "order": 26,
+  "content_base": "/chapters/",
+  "published_revision_id": 1422
+ },
+ {
+  "id": 1423,
+  "course_id": 149,
+  "title": "AWS Config \u2014 Resource Compliance",
+  "order": 27,
+  "content_base": "/chapters/",
+  "published_revision_id": 1423
+ },
+ {
+  "id": 1424,
+  "course_id": 149,
+  "title": "AWS Backup \u2014 Data Protection & DR",
+  "order": 28,
+  "content_base": "/chapters/",
+  "published_revision_id": 1424
+ },
+ {
+  "id": 1425,
+  "course_id": 149,
+  "title": "Amazon CloudFront \u2014 CDN & Edge Delivery",
+  "order": 29,
+  "content_base": "/chapters/",
+  "published_revision_id": 1425
+ },
+ {
+  "id": 1426,
+  "course_id": 149,
+  "title": "AWS WAF & Shield \u2014 Web App Security",
+  "order": 30,
+  "content_base": "/chapters/",
+  "published_revision_id": 1426
+ },
+ {
+  "id": 1427,
+  "course_id": 149,
+  "title": "AWS Organizations \u2014 Multi-Account Governance",
+  "order": 31,
+  "content_base": "/chapters/",
+  "published_revision_id": 1427
+ },
+ {
+  "id": 1428,
+  "course_id": 149,
+  "title": "AWS PrivateLink \u2014 Private Connectivity",
+  "order": 32,
+  "content_base": "/chapters/",
+  "published_revision_id": 1428
+ },
+ {
+  "id": 1429,
+  "course_id": 149,
+  "title": "Amazon ElastiCache \u2014 In-Memory Caching",
+  "order": 33,
+  "content_base": "/chapters/",
+  "published_revision_id": 1429
+ },
+ {
+  "id": 1430,
+  "course_id": 149,
+  "title": "Amazon OpenSearch \u2014 Search & Log Analytics",
+  "order": 34,
+  "content_base": "/chapters/",
+  "published_revision_id": 1430
+ },
+ {
+  "id": 1431,
+  "course_id": 149,
+  "title": "AWS Step Functions \u2014 Workflow Orchestration",
+  "order": 35,
+  "content_base": "/chapters/",
+  "published_revision_id": 1431
+ },
+ {
+  "id": 1432,
+  "course_id": 149,
+  "title": "AWS IAM Identity Center \u2014 SSO & Workforce",
+  "order": 36,
+  "content_base": "/chapters/",
+  "published_revision_id": 1432
+ },
+ {
+  "id": 1433,
+  "course_id": 149,
+  "title": "Amazon Bedrock & GenAI \u2014 AI-Powered Apps",
+  "order": 37,
+  "content_base": "/chapters/",
+  "published_revision_id": 1433
+ },
+ {
+  "id": 1434,
+  "course_id": 149,
+  "title": "AWS Certificate Manager (ACM) \u2014 SSL/TLS Certificates",
+  "order": 38,
+  "content_base": "/chapters/",
+  "published_revision_id": 1434
+ },
+ {
+  "id": 1435,
+  "course_id": 149,
+  "title": "Amazon EC2 Auto Scaling \u2014 Automatic Capacity",
+  "order": 39,
+  "content_base": "/chapters/",
+  "published_revision_id": 1435
+ },
+ {
+  "id": 1436,
+  "course_id": 149,
+  "title": "Amazon EFS \u2014 Elastic File System",
+  "order": 40,
+  "content_base": "/chapters/",
+  "published_revision_id": 1436
+ },
+ {
+  "id": 1437,
+  "course_id": 149,
+  "title": "AWS X-Ray \u2014 Distributed Tracing & Observability",
+  "order": 41,
+  "content_base": "/chapters/",
+  "published_revision_id": 1437
+ },
+ {
+  "id": 1438,
+  "course_id": 149,
+  "title": "AWS CodeDeploy \u2014 Deployment Automation",
+  "order": 42,
+  "content_base": "/chapters/",
+  "published_revision_id": 1438
+ },
+ {
+  "id": 1439,
+  "course_id": 149,
+  "title": "Amazon GuardDuty \u2014 Intelligent Threat Detection",
+  "order": 43,
+  "content_base": "/chapters/",
+  "published_revision_id": 1439
+ },
+ {
+  "id": 1440,
+  "course_id": 149,
+  "title": "Amazon Inspector \u2014 Automated Vulnerability Assessment",
+  "order": 44,
+  "content_base": "/chapters/",
+  "published_revision_id": 1440
+ },
+ {
+  "id": 1441,
+  "course_id": 149,
+  "title": "AWS Security Hub \u2014 Centralized Security Posture",
+  "order": 45,
+  "content_base": "/chapters/",
+  "published_revision_id": 1441
+ },
+ {
+  "id": 1442,
+  "course_id": 149,
+  "title": "AWS Resource Access Manager (RAM) \u2014 Resource Sharing",
+  "order": 46,
+  "content_base": "/chapters/",
+  "published_revision_id": 1442
+ },
+ {
+  "id": 1443,
+  "course_id": 149,
+  "title": "AWS Cost Explorer & Budgets \u2014 Cost Optimization",
+  "order": 47,
+  "content_base": "/chapters/",
+  "published_revision_id": 1443
+ }
+]

@@ -1,0 +1,148 @@
+{
+  "entity": "chapter",
+  "name": "chapter",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "course_id": {
+        "type": "int",
+        "required": true
+      },
+      "title": {
+        "type": "str",
+        "required": true
+      },
+      "order": {
+        "type": "int",
+        "default": 0
+      },
+      "content_base": {
+        "type": "str"
+      },
+      "published_revision_id": {
+        "type": "int"
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "order",
+            "label": "Order",
+            "sortable": true
+          },
+          {
+            "key": "title",
+            "label": "Title",
+            "searchable": true
+          },
+          {
+            "key": "course_id",
+            "label": "Course"
+          },
+          {
+            "key": "published_revision_id",
+            "label": "Published Rev"
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "title",
+            "componentType": "TextInput",
+            "required": true,
+            "colSpan": 2,
+            "label": "Title"
+          },
+          {
+            "name": "course_id",
+            "componentType": "Select",
+            "required": true,
+            "label": "Course",
+            "options": [
+              "1",
+              "2"
+            ]
+          },
+          {
+            "name": "order",
+            "componentType": "NumberInput",
+            "label": "Order"
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "key": "order",
+          "label": "Order",
+          "sortable": true
+        },
+        {
+          "key": "title",
+          "label": "Title",
+          "searchable": true
+        },
+        {
+          "key": "course_id",
+          "label": "Course"
+        },
+        {
+          "key": "published_revision_id",
+          "label": "Published Rev"
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "title",
+          "componentType": "TextInput",
+          "required": true,
+          "colSpan": 2,
+          "label": "Title"
+        },
+        {
+          "name": "course_id",
+          "componentType": "Select",
+          "required": true,
+          "label": "Course",
+          "options": [
+            "1",
+            "2"
+          ]
+        },
+        {
+          "name": "order",
+          "componentType": "NumberInput",
+          "label": "Order"
+        }
+      ]
+    }
+  }
+}

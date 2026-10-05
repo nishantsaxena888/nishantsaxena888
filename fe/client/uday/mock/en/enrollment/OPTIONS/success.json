@@ -1,0 +1,158 @@
+{
+  "entity": "enrollment",
+  "name": "enrollment",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "user_id": {
+        "type": "str",
+        "required": true
+      },
+      "course_id": {
+        "type": "int",
+        "required": true
+      },
+      "status": {
+        "type": "str",
+        "default": "active",
+        "options": [
+          "active",
+          "completed",
+          "dropped"
+        ]
+      },
+      "enrolled_at": {
+        "type": "datetime"
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "user_id",
+            "label": "User",
+            "searchable": true
+          },
+          {
+            "key": "course_id",
+            "label": "Course"
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "type": "badge"
+          },
+          {
+            "key": "enrolled_at",
+            "label": "Enrolled"
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "user_id",
+            "componentType": "TextInput",
+            "required": true,
+            "label": "User"
+          },
+          {
+            "name": "course_id",
+            "componentType": "Select",
+            "required": true,
+            "label": "Course",
+            "options": [
+              "1",
+              "2"
+            ]
+          },
+          {
+            "name": "status",
+            "componentType": "Select",
+            "label": "Status",
+            "options": [
+              "active",
+              "completed",
+              "dropped"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "key": "user_id",
+          "label": "User",
+          "searchable": true
+        },
+        {
+          "key": "course_id",
+          "label": "Course"
+        },
+        {
+          "key": "status",
+          "label": "Status",
+          "type": "badge"
+        },
+        {
+          "key": "enrolled_at",
+          "label": "Enrolled"
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "user_id",
+          "componentType": "TextInput",
+          "required": true,
+          "label": "User"
+        },
+        {
+          "name": "course_id",
+          "componentType": "Select",
+          "required": true,
+          "label": "Course",
+          "options": [
+            "1",
+            "2"
+          ]
+        },
+        {
+          "name": "status",
+          "componentType": "Select",
+          "label": "Status",
+          "options": [
+            "active",
+            "completed",
+            "dropped"
+          ]
+        }
+      ]
+    }
+  }
+}

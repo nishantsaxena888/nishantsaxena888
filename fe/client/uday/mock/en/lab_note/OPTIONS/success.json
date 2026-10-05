@@ -1,0 +1,136 @@
+{
+  "entity": "lab_note",
+  "name": "lab_note",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "user_id": {
+        "type": "str",
+        "required": true
+      },
+      "chapter_id": {
+        "type": "int",
+        "required": true
+      },
+      "content": {
+        "type": "str"
+      },
+      "updated_at": {
+        "type": "datetime"
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "user_id",
+            "label": "User",
+            "searchable": true
+          },
+          {
+            "key": "chapter_id",
+            "label": "Chapter"
+          },
+          {
+            "key": "updated_at",
+            "label": "Updated"
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "user_id",
+            "componentType": "TextInput",
+            "required": true,
+            "label": "User"
+          },
+          {
+            "name": "chapter_id",
+            "componentType": "Select",
+            "required": true,
+            "label": "Chapter",
+            "options": [
+              "1",
+              "2",
+              "3"
+            ]
+          },
+          {
+            "name": "content",
+            "componentType": "TextInput",
+            "colSpan": 2,
+            "label": "Notes"
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "key": "user_id",
+          "label": "User",
+          "searchable": true
+        },
+        {
+          "key": "chapter_id",
+          "label": "Chapter"
+        },
+        {
+          "key": "updated_at",
+          "label": "Updated"
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "user_id",
+          "componentType": "TextInput",
+          "required": true,
+          "label": "User"
+        },
+        {
+          "name": "chapter_id",
+          "componentType": "Select",
+          "required": true,
+          "label": "Chapter",
+          "options": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "name": "content",
+          "componentType": "TextInput",
+          "colSpan": 2,
+          "label": "Notes"
+        }
+      ]
+    }
+  }
+}

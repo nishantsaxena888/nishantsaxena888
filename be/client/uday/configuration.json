@@ -30,42 +30,136 @@
       "order": 1
     },
     {
-      "name": "Lessons",
-      "description": "Lesson library",
-      "url": "/lessons",
-      "entity": "pages/lessons",
+      "name": "Course",
+      "description": "Course detail",
+      "url": "/courses/:id",
+      "entity": "pages/course",
       "public": true,
+      "hide": true,
       "order": 2
+    },
+    {
+      "name": "Learn",
+      "description": "Chapter reader",
+      "url": "/learn/:id",
+      "entity": "pages/learn",
+      "public": true,
+      "hide": true,
+      "order": 3
+    },
+    {
+      "name": "My Learning",
+      "description": "Progress & bookmarks",
+      "url": "/my-learning",
+      "entity": "pages/my-learning",
+      "public": true,
+      "order": 4
+    },
+    {
+      "name": "Login",
+      "description": "Sign in",
+      "url": "/login",
+      "entity": "login",
+      "public": true,
+      "order": 5,
+      "auth_page": true,
+      "hide": true
+    },
+    {
+      "name": "Signup",
+      "description": "Create account",
+      "url": "/register",
+      "entity": "register",
+      "public": true,
+      "order": 6,
+      "auth_page": true,
+      "hide": true
     }
   ],
   "admin_menu": [
     {
       "name": "Overview",
-      "description": "Learning snapshot",
+      "description": "Platform snapshot",
       "url": "/admin/overview",
       "entity": "overview",
       "icon": "layout-dashboard"
     },
     {
+      "name": "Categories",
+      "description": "Course categories",
+      "url": "/admin/category",
+      "entity": "category",
+      "icon": "tags"
+    },
+    {
       "name": "Courses",
-      "description": "Course catalogue",
+      "description": "Course management",
       "url": "/admin/course",
       "entity": "course",
-      "icon": "book"
+      "icon": "graduation-cap"
     },
     {
-      "name": "Lessons",
-      "description": "Lesson content",
-      "url": "/admin/lesson",
-      "entity": "lesson",
-      "icon": "file-text"
+      "name": "Chapters",
+      "description": "Chapter ordering",
+      "url": "/admin/chapter",
+      "entity": "chapter",
+      "icon": "list"
     },
     {
-      "name": "Quizzes",
-      "description": "Quiz questions",
-      "url": "/admin/quiz",
-      "entity": "quiz",
-      "icon": "help-circle"
+      "name": "Revisions",
+      "description": "Draft / review / publish",
+      "url": "/admin/revision",
+      "entity": "revision",
+      "icon": "git-branch"
+    },
+    {
+      "name": "Review Queue",
+      "description": "Workflow board",
+      "url": "/admin/review-queue",
+      "entity": "review-queue",
+      "icon": "kanban"
+    },
+    {
+      "name": "Comments",
+      "description": "Review comments",
+      "url": "/admin/comment",
+      "entity": "comment",
+      "icon": "message-square"
+    },
+    {
+      "name": "Releases",
+      "description": "Course snapshots",
+      "url": "/admin/course-release",
+      "entity": "course_release",
+      "icon": "package"
+    },
+    {
+      "name": "Enrollments",
+      "description": "Learner enrollment",
+      "url": "/admin/enrollment",
+      "entity": "enrollment",
+      "icon": "user-plus"
+    },
+    {
+      "name": "Progress",
+      "description": "Section completion",
+      "url": "/admin/progress",
+      "entity": "progress",
+      "icon": "check-circle"
+    },
+    {
+      "name": "Lab Notes",
+      "description": "Learner notes",
+      "url": "/admin/lab-note",
+      "entity": "lab_note",
+      "icon": "notebook-pen"
+    },
+    {
+      "name": "Quiz Scores",
+      "description": "Quiz submissions",
+      "url": "/admin/quiz-submission",
+      "entity": "quiz_submission",
+      "icon": "trophy"
     }
   ],
   "language": [
@@ -82,8 +176,27 @@
     {
       "name": "progress",
       "persist": true,
-      "method": "merge",
-      "method_config": {}
+      "method": "array_upsert",
+      "method_config": {
+        "match_key": "id"
+      }
+    },
+    {
+      "name": "bookmark",
+      "persist": true,
+      "method": "array_toggle",
+      "method_config": {
+        "match_key": "id"
+      }
+    },
+    {
+      "name": "recent",
+      "persist": true,
+      "method": "array_prepend_unique",
+      "method_config": {
+        "match_key": "id",
+        "limit": 12
+      }
     }
   ],
   "themes": [
@@ -198,7 +311,7 @@
             "type": "dynamic",
             "action": [
               {
-                "key": "courses",
+                "key": "data",
                 "endpoint": "course",
                 "method": "GET",
                 "queryParams": {
@@ -208,64 +321,174 @@
             ]
           },
           "content": {
-            "title": "Featured courses"
+            "title": "Featured courses",
+            "detail_path": "/courses"
           }
         }
       ]
     },
     "courses": {
       "meta": {
-        "title": "Courses"
+        "title": "Courses \u2014 Uday"
       },
       "config": [
         {
-          "id": "uday-courses-all",
+          "id": "course-grid",
           "type": "course-list",
           "properties": {
             "level": "base",
             "type": "dynamic",
             "action": [
               {
-                "key": "courses",
+                "key": "data",
                 "endpoint": "course",
                 "method": "GET",
                 "queryParams": {
-                  "size": 50
+                  "size": 100
                 }
               }
             ]
           },
           "content": {
-            "title": "All courses"
+            "title": "All Courses",
+            "cta_label": "Start learning",
+            "detail_path": "/courses"
           }
         }
       ]
     },
-    "lessons": {
+    "course": {
       "meta": {
-        "title": "Lessons"
+        "title": "Course \u2014 Uday"
       },
       "config": [
         {
-          "id": "uday-lessons-all",
-          "type": "lesson-feed",
+          "id": "course-detail",
+          "type": "course-detail",
           "properties": {
             "level": "base",
             "type": "dynamic",
             "action": [
               {
-                "key": "lessons",
-                "endpoint": "lesson",
+                "key": "course",
+                "endpoint": "course/:id",
+                "method": "GET"
+              },
+              {
+                "key": "chapters",
+                "endpoint": "chapter",
                 "method": "GET",
                 "queryParams": {
-                  "size": 20,
-                  "sort": "order"
+                  "course_id": ":id",
+                  "size": 200
+                }
+              },
+              {
+                "key": "enroll",
+                "endpoint": "enrollment",
+                "method": "POST",
+                "lazy": true,
+                "payload": {
+                  "course_id": ":id",
+                  "status": "active",
+                  "enrolled_at": ":at"
                 }
               }
             ]
           },
           "content": {
-            "title": "Lesson library"
+            "title": "Course",
+            "reader_path": "/learn"
+          }
+        }
+      ]
+    },
+    "learn": {
+      "meta": {
+        "title": "Learn \u2014 Uday"
+      },
+      "config": [
+        {
+          "id": "chapter-reader",
+          "type": "chapter-reader",
+          "properties": {
+            "level": "base",
+            "type": "dynamic",
+            "action": [
+              {
+                "key": "chapter",
+                "endpoint": "chapter/:id",
+                "method": "GET"
+              },
+              {
+                "key": "revisions",
+                "endpoint": "revision",
+                "method": "GET",
+                "queryParams": {
+                  "chapter_id": ":id",
+                  "size": 100
+                }
+              },
+              {
+                "key": "submit_quiz",
+                "endpoint": "quiz_submission",
+                "method": "POST",
+                "lazy": true,
+                "payload": {
+                  "chapter_id": ":chapter_id",
+                  "quiz_id": ":quiz_id",
+                  "score": ":score",
+                  "total": ":total"
+                }
+              }
+            ]
+          },
+          "content": {
+            "title": "Chapter",
+            "back_path": "/courses"
+          }
+        }
+      ]
+    },
+    "my-learning": {
+      "meta": {
+        "title": "My Learning \u2014 Uday"
+      },
+      "config": [
+        {
+          "id": "recent-strip",
+          "type": "session-list",
+          "properties": {
+            "level": "base",
+            "type": "static"
+          },
+          "content": {
+            "title": "Recently viewed",
+            "session": "recent"
+          }
+        },
+        {
+          "id": "progress-list",
+          "type": "session-list",
+          "properties": {
+            "level": "base",
+            "type": "static"
+          },
+          "content": {
+            "title": "My progress",
+            "session": "progress"
+          }
+        },
+        {
+          "id": "bookmark-list",
+          "type": "session-list",
+          "properties": {
+            "level": "base",
+            "type": "static"
+          },
+          "content": {
+            "title": "Bookmarks",
+            "session": "bookmark"
           }
         }
       ]

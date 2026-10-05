@@ -104,14 +104,14 @@ def gen_client(name: str):
         methods = ["GET"] + (["POST", "OPTIONS"] if item.get("auth_page") else [])
         flag(ep, methods)
         for m in methods:
-            stub = out / f"en/{ep}/{m}/success.json"
-            if not stub.exists():
+            stub = Path("en") / ep / m / "success.json"
+            if not (out / stub).exists():
                 body = (
                     {"meta": {"title": item.get("name", ep)}, "config": []}
                     if m == "GET"
                     else {"ok": True, "mock": True}
                 )
-                write(stub, body)
+                write(out, str(stub), body)
 
     write(out, "config.json", registry)
     print(f"{name}: {len(registry)} endpoints flagged mock:true → fe/client/{name}/mock/")

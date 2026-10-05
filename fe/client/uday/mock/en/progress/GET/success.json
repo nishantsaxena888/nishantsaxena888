@@ -1,0 +1,23 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "user_id": "deepti",
+      "chapter_id": 1,
+      "section": "1-1",
+      "completed": true,
+      "updated_at": "2025-01-04T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "user_id": "deepti",
+      "chapter_id": 1,
+      "section": "1-2",
+      "completed": true,
+      "updated_at": "2025-01-04T10:20:00Z"
+    }
+  ],
+  "page": 1,
+  "size": 2,
+  "total": 2
+}

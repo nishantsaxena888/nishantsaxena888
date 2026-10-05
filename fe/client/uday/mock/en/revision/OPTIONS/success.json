@@ -1,0 +1,219 @@
+{
+  "entity": "revision",
+  "name": "revision",
+  "schema": {
+    "fields": {
+      "id": {
+        "type": "int",
+        "primary_key": true
+      },
+      "chapter_id": {
+        "type": "int",
+        "required": true
+      },
+      "version_no": {
+        "type": "int",
+        "required": true
+      },
+      "md_content": {
+        "type": "str",
+        "required": true
+      },
+      "author": {
+        "type": "str"
+      },
+      "status": {
+        "type": "str",
+        "default": "draft",
+        "options": [
+          "draft",
+          "in_review",
+          "published",
+          "rejected"
+        ]
+      },
+      "review_note": {
+        "type": "str"
+      },
+      "created_at": {
+        "type": "datetime"
+      }
+    },
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "chapter_id",
+            "label": "Chapter"
+          },
+          {
+            "key": "version_no",
+            "label": "Version",
+            "sortable": true
+          },
+          {
+            "key": "author",
+            "label": "Author",
+            "searchable": true
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "type": "badge"
+          },
+          {
+            "key": "created_at",
+            "label": "Created"
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": [
+          {
+            "name": "chapter_id",
+            "componentType": "Select",
+            "required": true,
+            "label": "Chapter",
+            "options": [
+              "1",
+              "2",
+              "3"
+            ]
+          },
+          {
+            "name": "version_no",
+            "componentType": "NumberInput",
+            "required": true,
+            "label": "Version No"
+          },
+          {
+            "name": "md_content",
+            "componentType": "TextInput",
+            "required": true,
+            "colSpan": 2,
+            "label": "Markdown Content"
+          },
+          {
+            "name": "author",
+            "componentType": "TextInput",
+            "label": "Author"
+          },
+          {
+            "name": "status",
+            "componentType": "Select",
+            "label": "Status",
+            "options": [
+              "draft",
+              "in_review",
+              "published",
+              "rejected"
+            ]
+          },
+          {
+            "name": "review_note",
+            "componentType": "TextInput",
+            "colSpan": 2,
+            "label": "Review Note"
+          }
+        ]
+      }
+    }
+  },
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "key": "chapter_id",
+          "label": "Chapter"
+        },
+        {
+          "key": "version_no",
+          "label": "Version",
+          "sortable": true
+        },
+        {
+          "key": "author",
+          "label": "Author",
+          "searchable": true
+        },
+        {
+          "key": "status",
+          "label": "Status",
+          "type": "badge"
+        },
+        {
+          "key": "created_at",
+          "label": "Created"
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": [
+        {
+          "name": "chapter_id",
+          "componentType": "Select",
+          "required": true,
+          "label": "Chapter",
+          "options": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "name": "version_no",
+          "componentType": "NumberInput",
+          "required": true,
+          "label": "Version No"
+        },
+        {
+          "name": "md_content",
+          "componentType": "TextInput",
+          "required": true,
+          "colSpan": 2,
+          "label": "Markdown Content"
+        },
+        {
+          "name": "author",
+          "componentType": "TextInput",
+          "label": "Author"
+        },
+        {
+          "name": "status",
+          "componentType": "Select",
+          "label": "Status",
+          "options": [
+            "draft",
+            "in_review",
+            "published",
+            "rejected"
+          ]
+        },
+        {
+          "name": "review_note",
+          "componentType": "TextInput",
+          "colSpan": 2,
+          "label": "Review Note"
+        }
+      ]
+    }
+  }
+}

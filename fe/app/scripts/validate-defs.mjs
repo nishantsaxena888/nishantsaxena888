@@ -49,6 +49,7 @@ const genericKeys = new Set([
 // Admin component universe (OPTIONS-driven types resolve here)
 const adminKeys = new Set([
   ...mapKeys(join(srcDir, "tenants/admin/default-admin/index.ts")),
+  ...mapKeys(join(srcDir, "tenants/admin/admin.ts")),
   "default-admin",
 ]);
 

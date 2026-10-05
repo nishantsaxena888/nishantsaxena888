@@ -4,13 +4,13 @@
 // Metro equivalent (synchronous like eager:true). Keys are rewritten to
 // the same ../../../client/... shape loadGlobs expects.
 const ctx = (require as any).context(
-  "../../../client/skillom/mock",
+  "../../../client/uday/mock",
   true,
   /\.json$/,
 );
 export const mockFiles: Record<string, unknown> = Object.fromEntries(
   ctx.keys().map((k: string) => [
-    `../../../client/skillom/mock/${k.replace(/^\.\//, "")}`,
+    `../../../client/uday/mock/${k.replace(/^\.\//, "")}`,
     ctx(k),
   ]),
 );

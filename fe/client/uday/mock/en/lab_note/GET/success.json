@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "user_id": "deepti",
+      "chapter_id": 1,
+      "content": "Remember: Bedrock = managed FMs via API, no GPU ops.",
+      "updated_at": "2025-01-04T10:30:00Z"
+    }
+  ],
+  "page": 1,
+  "size": 1,
+  "total": 1
+}

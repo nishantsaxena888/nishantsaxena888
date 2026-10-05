@@ -30,6 +30,10 @@ const GENERIC_TYPES = new Set([
   // storefront (canonical)
   "header", "footer", "banner", "listing", "session-list",
   "form-summary", "account", "auth-layout",
+  // storefront course-engine comps (config-driven: actions + content keys)
+  "course-list", "course-detail", "chapter-reader",
+  // generic admin map
+  "revision-pipeline",
   // storefront legacy aliases
   "hero-section", "products", "product-grid", "cart-view",
   "checkout", "profile", "login-layout-1",

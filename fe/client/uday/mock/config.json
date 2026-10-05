@@ -14,7 +14,17 @@
       "mock": true
     }
   },
-  "pages/lessons": {
+  "pages/course": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "pages/learn": {
+    "GET": {
+      "mock": true
+    }
+  },
+  "pages/my-learning": {
     "GET": {
       "mock": true
     }
@@ -51,6 +61,23 @@
       "mock": true
     }
   },
+  "category": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
   "course": {
     "GET": {
       "mock": true
@@ -68,7 +95,7 @@
       "mock": true
     }
   },
-  "lesson": {
+  "chapter": {
     "GET": {
       "mock": true
     },
@@ -85,7 +112,7 @@
       "mock": true
     }
   },
-  "quiz": {
+  "revision": {
     "GET": {
       "mock": true
     },
@@ -102,5 +129,145 @@
       "mock": true
     }
   },
-  "_mode": "strict"
+  "comment": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "course_release": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "enrollment": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "progress": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "lab_note": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "quiz_submission": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "review-queue": {
+    "GET": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "PUT": {
+      "mock": true
+    },
+    "DELETE": {
+      "mock": true
+    }
+  },
+  "login": {
+    "GET": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    }
+  },
+  "register": {
+    "GET": {
+      "mock": true
+    },
+    "POST": {
+      "mock": true
+    },
+    "OPTIONS": {
+      "mock": true
+    }
+  }
 }

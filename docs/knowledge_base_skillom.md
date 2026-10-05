@@ -6,6 +6,16 @@ model (ported from Uday_AWS), and a draft→review→publish workflow — all
 declared in `be/client/skillom/` + `fe/client/skillom/`, zero engine
 special-casing.
 
+> **Generic promotion (branch `nishant`)** — `course-list`,
+> `course-detail`, `chapter-reader` and `md-sections` now live in
+> `fe/app/src/tenants/storefront/` (and `revision-pipeline` in
+> `tenants/admin/admin.ts`), registered for EVERY client. Skillom and
+> `uday` (the Uday_AWS replica) are both thin tenants: identical flows
+> proven by the same e2e checks. A new course client needs only
+> entities + configuration.json + page defs — route names, session
+> names and labels are configurable per page via `content` keys
+> (`detail_path`, `reader_path`, `back_path`, `progress_session`).
+
 ## Route / page model
 
 | Route | Menu entity | Def | Component |
@@ -38,7 +48,7 @@ fe/client/skillom/mock/…             — endpoint tree + config.json registry
 for `auth_page` entries — and only writes stub files that don't already
 exist, so hand-authored page mocks survive regeneration.
 
-## Markdown directives (site/components/md-sections.ts)
+## Markdown directives (tenants/storefront/md-sections.ts)
 
 `parseMd(md)` → typed `MdSection[]`. Blocks: headings, paragraphs,
 code fences, lists, images, blockquote callouts. Embedded JSX-style
@@ -64,6 +74,9 @@ recursive-descent `evalLiteral` — **no `new Function`, Hermes-safe**).
 - `gen_mocks` — `seed/<entity>.json` data source; menu-entity registry.
 - vitest includes `../client/**/*.test.*`; tsconfig maps `vitest` so
   client-folder tests typecheck.
+- `ensureClientMocks` — in-flight dev mock loads are tracked by promise
+  (a done-set raced: requests fell through to a live backend and were
+  served the WRONG tenant's configuration).
 
 ## CMS workflow
 
@@ -76,8 +89,8 @@ history immutable, audit preserved). `course_release.snapshot`
 ## Importing course content
 
 ```
-python be/tools/import_uday_content.py ../Uday_AWS
-python be/tools/gen_mocks.py skillom
+python be/tools/import_uday_content.py ../Uday_AWS [client]   # default skillom
+python be/tools/gen_mocks.py <client>
 ```
 
 Reads docsRegistry (categories→courses→chapters) + courseRegistry

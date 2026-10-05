@@ -31,7 +31,11 @@ const ROUTES = {
     "/", "/shop", "/cart", "/login",
     "/admin", "/admin/overview", "/admin/product", "/admin/order",
   ],
-  uday: ["/", "/courses", "/admin", "/admin/overview", "/admin/course"],
+  uday: [
+    "/", "/courses", "/courses/2", "/learn/1", "/my-learning",
+    "/admin", "/admin/overview", "/admin/course", "/admin/revision",
+    "/admin/review-queue",
+  ],
   airbnb: ["/", "/stays", "/wishlist", "/admin", "/admin/overview", "/admin/listing"],
   skillom: [
     "/", "/courses", "/courses/2", "/learn/1", "/my-learning",
@@ -207,6 +211,55 @@ for (const [client, routes] of Object.entries(ROUTES)) {
     check(false, "skillom flow", e.message.slice(0, 120));
   }
   check(errors.length === 0, "skillom flow: no page errors", errors[0] || "");
+  await ctx.close();
+}
+
+// uday — Uday_AWS replica on the SAME generic course components skillom
+// uses; identical flows prove the components are client-agnostic.
+{
+  const { ctx, page, errors } = await newClientPage("uday");
+  try {
+    await goto(page, "/courses");
+    const cards = await page.locator(".course-card").count();
+    check(cards > 0, "uday /courses cards render", `${cards} cards`);
+
+    await goto(page, "/courses/5");
+    const rows = await page.locator(".chapter-row").count();
+    check(rows > 0, "uday course detail → chapters", `${rows} chapters`);
+
+    await goto(page, "/learn/1");
+    const reader = await page.locator(".chapter-reader").count();
+    const quiz = await page.locator(".quiz-card").count();
+    check(
+      reader > 0 && quiz > 0,
+      "uday reader: md → sections + quiz widget",
+      `${quiz} quiz`,
+    );
+    if (quiz) {
+      await page.locator(".quiz-option").nth(1).click();
+      await page.waitForTimeout(200);
+      const feedback = (await page.locator(".quiz-card").textContent()) || "";
+      check(/correct/i.test(feedback), "uday quiz answer → feedback");
+    }
+
+    const markBtn = page.locator(".chapter-reader .sf-action-btn");
+    if (await markBtn.count()) await markBtn.click();
+    await page.waitForTimeout(300);
+    const prog = await page.evaluate(() =>
+      window.localStorage.getItem("uday_gs_progress"),
+    );
+    check(
+      !!prog && JSON.parse(prog).length > 0,
+      "uday mark complete → progress session persist",
+    );
+
+    await goto(page, "/admin/review-queue");
+    const cols = await page.locator(".revision-pipeline .grid > div").count();
+    check(cols === 4, "uday review-queue → 4 status columns", `${cols} cols`);
+  } catch (e) {
+    check(false, "uday flow", e.message.slice(0, 120));
+  }
+  check(errors.length === 0, "uday flow: no page errors", errors[0] || "");
   await ctx.close();
 }
 

@@ -23,7 +23,7 @@
         "type": "dynamic",
         "action": [
           {
-            "key": "courses",
+            "key": "data",
             "endpoint": "course",
             "method": "GET",
             "queryParams": {
@@ -33,7 +33,8 @@
         ]
       },
       "content": {
-        "title": "Featured courses"
+        "title": "Featured courses",
+        "detail_path": "/courses"
       }
     }
   ]

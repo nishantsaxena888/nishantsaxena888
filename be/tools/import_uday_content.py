@@ -10,8 +10,8 @@ chapter,revision}.json.
 Seed files override inline entities.py sample_data in gen_mocks, so the
 full catalog is served by the same generic read path (no engine change).
 
-    python be/tools/import_uday_content.py ../Uday_AWS
-    python be/tools/gen_mocks.py skillom
+    python be/tools/import_uday_content.py ../Uday_AWS [skillom|uday]
+    python be/tools/gen_mocks.py <client>
 
 Id offsets keep hand-authored seed stable (categories 1-6, courses 1-9,
 chapters 1-99): imported rows start at 10/100/1000/5000 respectively.
@@ -22,8 +22,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
-CLIENT_DIR = ROOT / "be" / "client" / "skillom"
-SEED = CLIENT_DIR / "seed"
+CLIENT_DIR = None  # set in main
+SEED = None
 
 
 def load_base_sample(entity):
@@ -173,8 +173,11 @@ def import_repo(repo: Path):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("usage: python be/tools/import_uday_content.py <uday_repo_path>")
+        print("usage: python be/tools/import_uday_content.py <uday_repo_path> [client]")
         sys.exit(1)
+    client = sys.argv[2] if len(sys.argv) > 2 else "skillom"
+    CLIENT_DIR = ROOT / "be" / "client" / client
+    SEED = CLIENT_DIR / "seed"
     repo = Path(sys.argv[1]).resolve()
     if not (repo / "src/data/docsRegistry.json").exists():
         sys.exit(f"{repo} does not look like a Uday_AWS checkout")

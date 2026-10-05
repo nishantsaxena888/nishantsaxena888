@@ -8,9 +8,43 @@
         "primary_key": true
       }
     },
-    "ui": {}
+    "ui": {
+      "table": {
+        "columns": [
+          {
+            "key": "id",
+            "label": "Id",
+            "sortable": true
+          }
+        ],
+        "actions": [
+          "open_form",
+          "confirm_delete"
+        ]
+      },
+      "form": {
+        "fields": []
+      }
+    }
   },
-  "content": {},
+  "content": {
+    "table": {
+      "columns": [
+        {
+          "key": "id",
+          "label": "Id",
+          "sortable": true
+        }
+      ],
+      "actions": [
+        "open_form",
+        "confirm_delete"
+      ]
+    },
+    "form": {
+      "fields": []
+    }
+  },
   "config": [
     {
       "id": "uday-overview-1",
@@ -29,7 +63,7 @@
           },
           {
             "key": "lessons",
-            "endpoint": "lesson",
+            "endpoint": "chapter",
             "method": "GET",
             "queryParams": {
               "size": 100
@@ -37,7 +71,7 @@
           },
           {
             "key": "quizzes",
-            "endpoint": "quiz",
+            "endpoint": "quiz_submission",
             "method": "GET",
             "queryParams": {
               "size": 100

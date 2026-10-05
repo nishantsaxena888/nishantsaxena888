@@ -1,0 +1,98 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "AWS AgentCore",
+      "code": "agentcore",
+      "icon": "cpu",
+      "order": 1
+    },
+    {
+      "id": 2,
+      "name": "Linux",
+      "code": "linux",
+      "icon": "terminal",
+      "order": 2
+    },
+    {
+      "id": 3,
+      "name": "Docker",
+      "code": "docker",
+      "icon": "box",
+      "order": 3
+    },
+    {
+      "id": 4,
+      "name": "Bedrock to Production",
+      "code": "bedrock-prod",
+      "icon": "sparkles",
+      "order": 4
+    },
+    {
+      "id": 5,
+      "name": "AWS Masterclass",
+      "code": "aws-masterclass",
+      "icon": "cloud",
+      "order": 5
+    },
+    {
+      "id": 6,
+      "name": "Kubernetes",
+      "code": "k8s",
+      "icon": "ship",
+      "order": 6
+    },
+    {
+      "id": 10,
+      "name": "AWS AgentCore \u2014 Complete Series",
+      "code": "aws-agentcore",
+      "icon": "\u2601\ufe0f",
+      "order": 10
+    },
+    {
+      "id": 11,
+      "name": "Bedrock",
+      "code": "bedrock",
+      "icon": "\ud83e\udd16",
+      "order": 11
+    },
+    {
+      "id": 12,
+      "name": "Python & DevOps",
+      "code": "python-devops",
+      "icon": "\ud83d\udc0d",
+      "order": 12
+    },
+    {
+      "id": 13,
+      "name": "Kubernetes",
+      "code": "kubernetes",
+      "icon": "\u2638\ufe0f",
+      "order": 13
+    },
+    {
+      "id": 14,
+      "name": "Bedrock to Production",
+      "code": "bedrock-to-production",
+      "icon": "\ud83d\ude80",
+      "order": 14
+    },
+    {
+      "id": 15,
+      "name": "eCommerce Architecture on AWS",
+      "code": "ecommerce-architecture",
+      "icon": "\ud83d\uded2",
+      "order": 15
+    },
+    {
+      "id": 16,
+      "name": "Microservices on AWS",
+      "code": "microservices-aws",
+      "icon": "\ud83e\udde9",
+      "order": 16
+    }
+  ],
+  "page": 1,
+  "size": 13,
+  "total": 13
+}
