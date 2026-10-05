@@ -23,6 +23,17 @@
               "course_id": ":id",
               "size": 200
             }
+          },
+          {
+            "key": "enroll",
+            "endpoint": "enrollment",
+            "method": "POST",
+            "lazy": true,
+            "payload": {
+              "course_id": ":id",
+              "status": "active",
+              "enrolled_at": ":at"
+            }
           }
         ]
       },

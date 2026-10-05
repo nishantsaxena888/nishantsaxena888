@@ -44,6 +44,19 @@ export default function CourseDetail({ content, actionData, session }: any) {
             {course.description}
           </Text>
         )}
+        <Pressable
+          className="sf-action-btn"
+          onPress={() =>
+            // :id resolves from the route param (payload interpolation)
+            actionData?.action?.({
+              key: "enroll",
+              type: "filter",
+              data: { at: new Date().toISOString() },
+            })
+          }
+        >
+          {content?.enroll_label || "Enroll"}
+        </Pressable>
       </View>
       <View className="course-chapters divide-y rounded-lg border">
         {chapters.map((ch: any, i: number) => (
