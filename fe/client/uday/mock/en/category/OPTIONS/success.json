@@ -21,6 +21,18 @@
       "order": {
         "type": "int",
         "default": 0
+      },
+      "description": {
+        "type": "str"
+      },
+      "emoji": {
+        "type": "str"
+      },
+      "color": {
+        "type": "str"
+      },
+      "color_bg": {
+        "type": "str"
       }
     },
     "ui": {
@@ -79,6 +91,27 @@
             "name": "order",
             "componentType": "NumberInput",
             "label": "Order"
+          },
+          {
+            "name": "description",
+            "componentType": "TextInput",
+            "colSpan": 2,
+            "label": "Card description"
+          },
+          {
+            "name": "emoji",
+            "componentType": "TextInput",
+            "label": "Card emoji"
+          },
+          {
+            "name": "color",
+            "componentType": "TextInput",
+            "label": "Accent color"
+          },
+          {
+            "name": "color_bg",
+            "componentType": "TextInput",
+            "label": "Icon background"
           }
         ]
       }
@@ -140,6 +173,27 @@
           "name": "order",
           "componentType": "NumberInput",
           "label": "Order"
+        },
+        {
+          "name": "description",
+          "componentType": "TextInput",
+          "colSpan": 2,
+          "label": "Card description"
+        },
+        {
+          "name": "emoji",
+          "componentType": "TextInput",
+          "label": "Card emoji"
+        },
+        {
+          "name": "color",
+          "componentType": "TextInput",
+          "label": "Accent color"
+        },
+        {
+          "name": "color_bg",
+          "componentType": "TextInput",
+          "label": "Icon background"
         }
       ]
     }

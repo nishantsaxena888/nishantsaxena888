@@ -11,6 +11,7 @@ import CourseList from "./course-list";
 import CourseDetail from "./course-detail";
 import ChapterReader from "./chapter-reader";
 import MdViewer from "./md-viewer";
+import Landing from "./landing";
 
 // Generic storefront building blocks — available to every client's site
 // surface. Type names are domain-neutral UI roles; the domain words
@@ -25,7 +26,10 @@ import MdViewer from "./md-viewer";
 //   header/footer page chrome
 //
 // Learning-platform building blocks (course clients — skillom, uday, …):
-//   course-list     card grid → detail_path route (default /courses/:id)
+//   course-list     card grid → detail_path route (default /courses/:id);
+//                   optional ?<filter_param>=v filters rows on filter_field
+//   landing         content-composed home: hero/journey/features/dashboard/
+//                   dynamic categories grid → path?param=id, footer
 //   course-detail   header + ordered child list → reader_path (/learn/:id)
 //   chapter-reader  md_content → typed widgets (quiz/callouts/video…)
 //                   via md-sections; progress session + lazy entity writes
@@ -60,6 +64,7 @@ export const storefront_components = {
   "login-layout-1": StorefrontAuthLayout,
   // learning platform
   "course-list": CourseList,
+  landing: Landing,
   "course-detail": CourseDetail,
   "chapter-reader": ChapterReader,
   // md++ content anywhere — docs/notes/guides/announcements

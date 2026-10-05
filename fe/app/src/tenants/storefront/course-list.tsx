@@ -3,15 +3,21 @@
 // item in the "recent" session via SessionBridge and navigates to the
 // content.open_pattern route (default /courses/:id). Content drives
 // title/cta — no domain literals baked in.
-import { useNav } from "@/platform/navigation";
+import { useNav, useQuery } from "@/platform/navigation";
 import { Image, Pressable, Text, View } from "@/platform/primitives";
 
 const toItems = (res: any): any[] =>
   Array.isArray(res) ? res : res?.items ?? res?.data ?? [];
 
 export default function CourseList({ content, actionData, session }: any) {
-  const courses = toItems(actionData?.data?.data);
+  const all = toItems(actionData?.data?.data);
   const navigate = useNav().navigate;
+  // Optional query filter — ?category=3 filters rows on content.filter_field
+  // (default category_id); param name itself is content.filter_param.
+  const q = useQuery();
+  const fv = q(content?.filter_param || "category");
+  const ff = content?.filter_field || "category_id";
+  const courses = fv ? all.filter((r) => String(r[ff]) === fv) : all;
 
   const open = (c: any) => {
     session?.update("recent", {
@@ -36,6 +42,14 @@ export default function CourseList({ content, actionData, session }: any) {
   return (
     <View as="section" className="course-list p-6">
       {content?.title && <Text as="h2">{content.title}</Text>}
+      {fv && (
+        <Text as="p" className="text-sm text-muted-foreground">
+          {courses.length} result{courses.length === 1 ? "" : "s"} —{" "}
+          <Pressable className="underline" onPress={() => navigate(content?.detail_path || "/courses")}>
+            show all
+          </Pressable>
+        </Text>
+      )}
       <View className="course-list-grid grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {courses.map((c: any) => (
           <View as="article" key={c.id} className="course-card rounded-lg border bg-card overflow-hidden">

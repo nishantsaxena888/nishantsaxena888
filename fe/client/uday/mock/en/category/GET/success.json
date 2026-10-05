@@ -5,91 +5,143 @@
       "name": "AWS AgentCore",
       "code": "agentcore",
       "icon": "cpu",
-      "order": 1
+      "order": 1,
+      "emoji": "\ud83e\udd16",
+      "color": "#2563eb",
+      "color_bg": "#dbeafe",
+      "description": "AWS AgentCore \u2014 build, secure and operate production AI agents."
     },
     {
       "id": 2,
       "name": "Linux",
       "code": "linux",
       "icon": "terminal",
-      "order": 2
+      "order": 2,
+      "emoji": "\ud83d\udc27",
+      "color": "#0ea5e9",
+      "color_bg": "#e0f2fe",
+      "description": "Linux foundations \u2014 shell, filesystem, permissions."
     },
     {
       "id": 3,
       "name": "Docker",
       "code": "docker",
       "icon": "box",
-      "order": 3
+      "order": 3,
+      "emoji": "\ud83d\udc33",
+      "color": "#0284c7",
+      "color_bg": "#e0f2fe",
+      "description": "Docker \u2014 images, containers, networks, compose stacks."
     },
     {
       "id": 4,
       "name": "Bedrock to Production",
       "code": "bedrock-prod",
       "icon": "sparkles",
-      "order": 4
+      "order": 4,
+      "emoji": "\ud83e\udde0",
+      "color": "#db2777",
+      "color_bg": "#fce7f3",
+      "description": "Bedrock to Production \u2014 GenAI capstone workbooks."
     },
     {
       "id": 5,
       "name": "AWS Masterclass",
       "code": "aws-masterclass",
       "icon": "cloud",
-      "order": 5
+      "order": 5,
+      "emoji": "\u2601\ufe0f",
+      "color": "#f59e0b",
+      "color_bg": "#fef3c7",
+      "description": "AWS Production Masterclass \u2014 hands-on chapters with labs, quizzes and terminals."
     },
     {
       "id": 6,
       "name": "Kubernetes",
       "code": "k8s",
       "icon": "ship",
-      "order": 6
+      "order": 6,
+      "emoji": "\u2388",
+      "color": "#6366f1",
+      "color_bg": "#eef2ff",
+      "description": "Kubernetes \u2014 pods, services, deployments, operators."
     },
     {
       "id": 10,
       "name": "AWS AgentCore \u2014 Complete Series",
       "code": "aws-agentcore",
       "icon": "\u2601\ufe0f",
-      "order": 10
+      "order": 10,
+      "emoji": "\ud83e\udd16",
+      "color": "#2563eb",
+      "color_bg": "#dbeafe",
+      "description": "AWS AgentCore \u2014 build, secure and operate production AI agents."
     },
     {
       "id": 11,
       "name": "Bedrock",
       "code": "bedrock",
       "icon": "\ud83e\udd16",
-      "order": 11
+      "order": 11,
+      "emoji": "\ud83e\udde0",
+      "color": "#8b5cf6",
+      "color_bg": "#f5f3ff",
+      "description": "Amazon Bedrock \u2014 GenAI foundations and patterns."
     },
     {
       "id": 12,
       "name": "Python & DevOps",
       "code": "python-devops",
       "icon": "\ud83d\udc0d",
-      "order": 12
+      "order": 12,
+      "emoji": "\ud83d\udc0d",
+      "color": "#16a34a",
+      "color_bg": "#dcfce7",
+      "description": "Python & DevOps \u2014 scripting, automation, tooling."
     },
     {
       "id": 13,
       "name": "Kubernetes",
       "code": "kubernetes",
       "icon": "\u2638\ufe0f",
-      "order": 13
+      "order": 13,
+      "emoji": "\u2388",
+      "color": "#6366f1",
+      "color_bg": "#eef2ff",
+      "description": "Kubernetes \u2014 pods, services, deployments, operators."
     },
     {
       "id": 14,
       "name": "Bedrock to Production",
       "code": "bedrock-to-production",
       "icon": "\ud83d\ude80",
-      "order": 14
+      "order": 14,
+      "emoji": "\ud83e\udde0",
+      "color": "#db2777",
+      "color_bg": "#fce7f3",
+      "description": "Bedrock to Production \u2014 GenAI capstone workbooks."
     },
     {
       "id": 15,
       "name": "eCommerce Architecture on AWS",
       "code": "ecommerce-architecture",
       "icon": "\ud83d\uded2",
-      "order": 15
+      "order": 15,
+      "emoji": "\ud83d\uded2",
+      "color": "#be185d",
+      "color_bg": "#fce7f3",
+      "description": "eCommerce architecture on AWS \u2014 real system design."
     },
     {
       "id": 16,
       "name": "Microservices on AWS",
       "code": "microservices-aws",
       "icon": "\ud83e\udde9",
-      "order": 16
+      "order": 16,
+      "emoji": "\ud83e\udde9",
+      "color": "#7c3aed",
+      "color_bg": "#ede9fe",
+      "description": "Microservices on AWS \u2014 distributed systems patterns."
     }
   ],
   "page": 1,

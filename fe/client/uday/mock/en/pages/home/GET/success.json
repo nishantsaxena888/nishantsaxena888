@@ -1,40 +1,191 @@
 {
   "meta": {
-    "title": "Uday Learning"
+    "title": "AWS Production Masterclass"
   },
   "config": [
     {
-      "id": "uday-hero-1",
-      "type": "uday-hero",
-      "properties": {
-        "level": "base",
-        "type": "static"
-      },
-      "content": {
-        "title": "Learn by building",
-        "subtitle": "Markdown-driven courses \u2014 the learning client on the same generic platform."
-      }
-    },
-    {
-      "id": "uday-courses-1",
-      "type": "course-list",
+      "id": "uday-landing",
+      "type": "landing",
       "properties": {
         "level": "base",
         "type": "dynamic",
         "action": [
           {
-            "key": "data",
+            "key": "categories",
+            "endpoint": "category",
+            "method": "GET",
+            "queryParams": {
+              "size": 50
+            }
+          },
+          {
+            "key": "courses",
             "endpoint": "course",
             "method": "GET",
             "queryParams": {
-              "size": 9
+              "size": 500
             }
           }
         ]
       },
       "content": {
-        "title": "Featured courses",
-        "detail_path": "/courses"
+        "hero": {
+          "badge": "\ud83d\ude80 Interactive Learning Platform",
+          "title_lead": "AWS Production",
+          "title_accent": "Masterclass",
+          "description": "Build, deploy, secure, scale, and operate a real AWS production environment. 47 chapters. One continuous project. From zero to production-ready architect.",
+          "primary": {
+            "label": "\ud83d\ude80 Start Learning",
+            "to": "/learn/1400"
+          },
+          "secondary": {
+            "label": "\ud83d\udcda Browse Chapters",
+            "to": "#categories"
+          },
+          "stats": [
+            {
+              "value": "47",
+              "label": "Chapters"
+            },
+            {
+              "value": "50+",
+              "label": "Interactive Labs"
+            },
+            {
+              "value": "100+",
+              "label": "Quiz Questions"
+            },
+            {
+              "value": "20+",
+              "label": "Challenges"
+            }
+          ]
+        },
+        "journey": {
+          "title": "Your Learning Journey",
+          "subtitle": "A production-oriented path \u2014 each chapter solves a real problem that naturally introduces the next AWS service.",
+          "stages": [
+            "\ud83c\udfd7\ufe0f Build Network",
+            "\ud83d\udda5\ufe0f Launch App",
+            "\ud83e\udea3 Store Files",
+            "\ud83d\udd10 Secure Access",
+            "\u2696\ufe0f Load Balance",
+            "\ud83c\udf10 Add DNS",
+            "\ud83c\udf0d Add CDN",
+            "\ud83d\udcca Monitor",
+            "\ud83d\uddc3\ufe0f Database",
+            "\ud83d\udd10 Encrypt",
+            "\u26a1 Go Serverless",
+            "\ud83d\udce8 Messaging",
+            "\ud83d\ude80 Containers",
+            "\ud83d\udd04 CI/CD",
+            "\u2699\ufe0f IaC",
+            "\ud83d\udee1\ufe0f Protect",
+            "\ud83c\udfe2 Govern",
+            "\ud83e\udde0 GenAI"
+          ]
+        },
+        "features": {
+          "title": "What Makes This Different",
+          "subtitle": "Not just documentation. A hands-on, interactive learning experience.",
+          "cards": [
+            {
+              "icon": "\ud83d\udda5\ufe0f",
+              "bg": "#fff7ed",
+              "title": "AWS Console Simulator",
+              "desc": "Navigate a simulated AWS Console with guided step-by-step instructions. Learn by doing."
+            },
+            {
+              "icon": "\ud83d\udcbb",
+              "bg": "#eff6ff",
+              "title": "Interactive Terminal",
+              "desc": "Execute simulated AWS CLI, SAM, and CDK commands with realistic output in your browser."
+            },
+            {
+              "icon": "\ud83d\udc68\u200d\ud83d\udcbb",
+              "bg": "#ecfdf5",
+              "title": "Code Editor",
+              "desc": "Write, run, and debug Lambda functions in Python, Node.js, and more with line-by-line explanations."
+            },
+            {
+              "icon": "\ud83d\udcd0",
+              "bg": "#fffbeb",
+              "title": "Architecture Diagrams",
+              "desc": "Interactive diagrams where you click components to inspect event payloads and data flows."
+            },
+            {
+              "icon": "\ud83d\udd27",
+              "bg": "#fdf2f8",
+              "title": "Troubleshooting Labs",
+              "desc": "Real-world production incidents. Investigate logs, metrics, and IAM policies to find root causes."
+            },
+            {
+              "icon": "\ud83c\udfa4",
+              "bg": "#f5f3ff",
+              "title": "Interview Preparation",
+              "desc": "Beginner to Architect-level questions with short answers, deep explanations, and follow-ups."
+            }
+          ]
+        },
+        "dashboard": {
+          "title": "Your Progress",
+          "subtitle": "Track your learning journey across all courses.",
+          "stats": [
+            {
+              "icon": "\ud83d\udcca",
+              "bg": "#fff7ed",
+              "fg": "#f97316",
+              "label": "Chapters Completed",
+              "session": "progress"
+            },
+            {
+              "icon": "\ud83d\udd16",
+              "bg": "#eff6ff",
+              "fg": "#3b82f6",
+              "label": "Bookmarked",
+              "session": "bookmark"
+            },
+            {
+              "icon": "\ud83d\udd58",
+              "bg": "#ecfdf5",
+              "fg": "#10b981",
+              "label": "Recently Viewed",
+              "session": "recent"
+            },
+            {
+              "icon": "\ud83d\udcda",
+              "bg": "#fffbeb",
+              "fg": "#f59e0b",
+              "label": "Courses",
+              "value": "56"
+            },
+            {
+              "icon": "\ud83c\udfc6",
+              "bg": "#fdf2f8",
+              "fg": "#ec4899",
+              "label": "Quizzes Taken",
+              "session": "quiz"
+            },
+            {
+              "icon": "\ud83c\udf96\ufe0f",
+              "bg": "#f5f3ff",
+              "fg": "#8b5cf6",
+              "label": "Achievements",
+              "value": "0"
+            }
+          ]
+        },
+        "categories": {
+          "title": "Course Categories",
+          "subtitle": "Choose a track \u2014 the AWS Production Masterclass or the Bedrock workbooks.",
+          "path": "/courses",
+          "param": "category",
+          "item_label": "courses"
+        },
+        "footer": {
+          "line1": "AWS Production Masterclass \u2014 Interactive Learning Platform",
+          "line2": "Built for learning. Content sourced from AWS documentation and rewritten for interactive instruction.\nAWS, Lambda, and other AWS service names are trademarks of Amazon Web Services, Inc."
+        }
       }
     }
   ]

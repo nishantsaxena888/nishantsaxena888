@@ -51,6 +51,12 @@ entities = {
             "code":  {"type": "str", "unique": True},
             "icon":  {"type": "str"},
             "order": {"type": "int", "default": 0},
+            # display fields for landing/category cards — all optional,
+            # naming matches the landing def's categories.fields mapping
+            "description": {"type": "str"},
+            "emoji":   {"type": "str"},
+            "color":   {"type": "str"},
+            "color_bg": {"type": "str"},
         },
         "ui": {
             "table": {
@@ -71,6 +77,11 @@ entities = {
                      "required": True, "label": "Code"},
                     {"name": "icon", "componentType": "TextInput", "label": "Icon"},
                     {"name": "order", "componentType": "NumberInput", "label": "Order"},
+                    {"name": "description", "componentType": "TextInput",
+                     "colSpan": 2, "label": "Card description"},
+                    {"name": "emoji", "componentType": "TextInput", "label": "Card emoji"},
+                    {"name": "color", "componentType": "TextInput", "label": "Accent color"},
+                    {"name": "color_bg", "componentType": "TextInput", "label": "Icon background"},
                 ]
             },
         },
