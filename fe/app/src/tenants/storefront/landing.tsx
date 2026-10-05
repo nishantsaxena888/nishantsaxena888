@@ -68,6 +68,31 @@ export default function Landing({ content, actionData, session }: any) {
   }
   const catPath = `${cat.path || "/courses"}?${cat.param || "category"}`;
 
+  // kind-aware meta: a "module" category owns one course-collection whose
+  // items are chapters — meta shows chapter count + a progress bar fed by
+  // the progress session. "collection" categories show course counts.
+  const courseCat: Record<string, any> = {};
+  for (const r of toItems(actionData?.data?.[cat.count_key || "courses"]))
+    courseCat[r.id] = r[cat.count_field || "category_id"];
+  const chapterCounts: Record<string, number> = {};
+  for (const r of toItems(actionData?.data?.chapters)) {
+    const catId = courseCat[r.course_id];
+    if (catId != null) chapterCounts[catId] = (chapterCounts[catId] || 0) + 1;
+  }
+  const doneCount = session?.items("progress")?.length ?? 0;
+  const progressIds = new Set(
+    (session?.items("progress") || []).map((r: any) => String(r.id)),
+  );
+  const donePerCat: Record<string, number> = {};
+  if (doneCount) {
+    const chRows = toItems(actionData?.data?.chapters);
+    for (const r of chRows) {
+      if (!progressIds.has(String(r.id))) continue;
+      const catId = courseCat[r.course_id];
+      if (catId != null) donePerCat[catId] = (donePerCat[catId] || 0) + 1;
+    }
+  }
+
   return (
     <View className="landing-page">
       {c.hero && (
@@ -173,25 +198,50 @@ export default function Landing({ content, actionData, session }: any) {
       {c.categories && cats.length > 0 && (
         <Section id="categories" title={cat.title} subtitle={cat.subtitle}>
           <View className="module-grid">
-            {cats.map((r: any) => (
-              <Pressable key={r.id} className="card module-card" onPress={() => go(`${catPath}=${r.id}`)}>
-                <View className="card-body">
-                  <View className="module-icon" style={{ background: r[f.bg], color: r[f.color] }}>
-                    {r[f.icon] || r[f.title]?.[0] || "📦"}
+            {cats.map((r: any) => {
+              const isModule =
+                r[cat.kind_field || "kind"] === (cat.module_value || "module");
+              const n = isModule
+                ? (chapterCounts[r.id] ?? counts[r.id] ?? 0)
+                : (counts[r.id] ?? 0);
+              const label = isModule
+                ? cat.chapter_label || "chapters"
+                : n === 1
+                  ? cat.item_label_singular || (cat.item_label || "courses").replace(/s$/, "")
+                  : cat.item_label || "courses";
+              const pct =
+                isModule && n > 0
+                  ? Math.round(((donePerCat[r.id] ?? 0) / n) * 100)
+                  : undefined;
+              return (
+                <Pressable key={r.id} className="card module-card" onPress={() => go(`${catPath}=${r.id}`)}>
+                  <View className="card-body">
+                    <View className="module-icon" style={{ background: r[f.bg], color: r[f.color] }}>
+                      {r[f.icon] || r[f.title]?.[0] || "📦"}
+                    </View>
+                    <View className="module-title">{r[f.title]}</View>
+                    {r[f.desc] && <View className="module-desc">{r[f.desc]}</View>}
+                    {pct !== undefined && (
+                      <View className="card-progress">
+                        <View className="card-progress-head">
+                          <Text>{cat.progress_label || "Progress"}</Text>
+                          <Text>{pct}%</Text>
+                        </View>
+                        <View className="card-progress-track">
+                          <View
+                            className={`card-progress-fill${pct === 100 ? " complete" : ""}`}
+                            style={{ width: `${pct}%` }}
+                          />
+                        </View>
+                      </View>
+                    )}
+                    <View className="module-meta">
+                      <Text>📦 {n} {label}</Text>
+                    </View>
                   </View>
-                  <View className="module-title">{r[f.title]}</View>
-                  {r[f.desc] && <View className="module-desc">{r[f.desc]}</View>}
-                  <View className="module-meta">
-                    <Text>
-                      📦 {counts[r.id] ?? 0}{" "}
-                      {(counts[r.id] ?? 0) === 1
-                        ? cat.item_label_singular || (cat.item_label || "courses").replace(/s$/, "")
-                        : cat.item_label || "courses"}
-                    </Text>
-                  </View>
-                </View>
-              </Pressable>
-            ))}
+                </Pressable>
+              );
+            })}
           </View>
         </Section>
       )}

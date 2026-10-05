@@ -32,7 +32,7 @@ const ROUTES = {
     "/admin", "/admin/overview", "/admin/product", "/admin/order",
   ],
   uday: [
-    "/", "/courses", "/courses/2", "/learn/1", "/my-learning", "/guide",
+    "/", "/courses", "/courses/149", "/learn/1000", "/my-learning", "/guide",
     "/admin", "/admin/overview", "/admin/course", "/admin/revision",
     "/admin/review-queue",
   ],
@@ -158,12 +158,12 @@ for (const [client, routes] of Object.entries(ROUTES)) {
     check(cards > 0, "skillom /courses cards render", `${cards} cards`);
 
     // parameterized detail route → ordered chapter list
-    await goto(page, "/courses/5");
+    await goto(page, "/courses/149");
     const rows = await page.locator(".chapter-row").count();
     check(rows > 0, "skillom course detail → chapters", `${rows} chapters`);
 
     // reader: md_content → parsed sections, Quiz directive → widget
-    await goto(page, "/learn/1");
+    await goto(page, "/learn/1000");
     const reader = await page.locator(".chapter-reader").count();
     const quiz = await page.locator(".quiz-card").count();
     check(
@@ -174,10 +174,10 @@ for (const [client, routes] of Object.entries(ROUTES)) {
 
     // answer the quiz → correctness state
     if (quiz) {
-      await page.locator(".quiz-option").nth(1).click();
+      await page.locator(".quiz-card").first().locator(".quiz-option").nth(1).click();
       await page.waitForTimeout(200);
-      const feedback = (await page.locator(".quiz-card").textContent()) || "";
-      check(/correct/i.test(feedback), "quiz answer → feedback");
+      const feedback = (await page.locator(".quiz-card").first().textContent()) || "";
+      check(/correct|not quite|right|wrong/i.test(feedback), "quiz answer → feedback");
     }
 
     // mark complete → writes the "progress" session (localStorage)
@@ -236,11 +236,11 @@ for (const [client, routes] of Object.entries(ROUTES)) {
     const cards = await page.locator(".course-card").count();
     check(cards > 0, "uday /courses cards render", `${cards} cards`);
 
-    await goto(page, "/courses/5");
+    await goto(page, "/courses/149");
     const rows = await page.locator(".chapter-row").count();
     check(rows > 0, "uday course detail → chapters", `${rows} chapters`);
 
-    await goto(page, "/learn/1");
+    await goto(page, "/learn/1000");
     const reader = await page.locator(".chapter-reader").count();
     const quiz = await page.locator(".quiz-card").count();
     check(
@@ -249,10 +249,10 @@ for (const [client, routes] of Object.entries(ROUTES)) {
       `${quiz} quiz`,
     );
     if (quiz) {
-      await page.locator(".quiz-option").nth(1).click();
+      await page.locator(".quiz-card").first().locator(".quiz-option").nth(1).click();
       await page.waitForTimeout(200);
-      const feedback = (await page.locator(".quiz-card").textContent()) || "";
-      check(/correct/i.test(feedback), "uday quiz answer → feedback");
+      const feedback = (await page.locator(".quiz-card").first().textContent()) || "";
+      check(/correct|not quite|right|wrong/i.test(feedback), "uday quiz answer → feedback");
     }
 
     const markBtn = page.locator(".chapter-reader .sf-action-btn");

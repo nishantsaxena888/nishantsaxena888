@@ -451,3 +451,18 @@
   font-size: 0.85rem; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 .card-action-btn:hover { border-color: #f97316; background: #fff7ed; }
+
+/* card progress bar (module-kind category cards) */
+.card-progress { margin: 0.5rem 0 0.9rem; }
+.card-progress-head {
+  display: flex; justify-content: space-between;
+  font-size: 0.75rem; color: #64748b; margin-bottom: 0.3rem;
+}
+.card-progress-track {
+  height: 6px; border-radius: 999px; background: #e2e8f0; overflow: hidden;
+}
+.card-progress-fill {
+  height: 100%; background: #f97316; border-radius: 999px;
+  transition: width 0.4s ease;
+}
+.card-progress-fill.complete { background: #10b981; }

@@ -1,114 +1,6 @@
 {
   "items": [
     {
-      "id": 1,
-      "chapter_id": 1,
-      "version_no": 1,
-      "author": "deepti",
-      "status": "published",
-      "md_content": "# Introduction to Amazon Bedrock\n\nAmazon Bedrock is a fully managed service that offers foundation models from Amazon and leading AI companies through a single API.\n\n<VideoSection youtubeId=\"f-rl_4Pd8dw\" title=\"Bedrock overview\" />\n\n## What Bedrock gives you\n\n- Unified API across model providers\n- No infrastructure to manage\n- Knowledge bases, agents, guardrails\n\n```python\nimport boto3\nclient = boto3.client(\"bedrock-runtime\")\nresponse = client.invoke_model(modelId=\"anthropic.claude-3\", body=payload)\n```\n\n<InfoCard title=\"Key idea\">You pay per token \u2014 no GPU provisioning, no model hosting.</InfoCard>\n\n## Quick check\n\n<Quiz question=\"What does Bedrock manage for you?\" options={[\"Your GPU clusters\",\"Foundation model access via API\",\"Your training data\"]} answerIndex={1} explanation=\"Bedrock is a managed API over foundation models.\" />\n\n> **Remember** \u2014 Bedrock \u2260 training platform. It serves *inference + orchestration*.\n",
-      "created_at": "2024-12-12T10:00:00Z"
-    },
-    {
-      "id": 2,
-      "chapter_id": 1,
-      "version_no": 2,
-      "author": "deepti",
-      "status": "in_review",
-      "md_content": "# Introduction to Amazon Bedrock\n\nv2 \u2014 adds model explorer walkthrough\n\n## New section\n\nWork in progress.",
-      "created_at": "2024-12-20T15:30:00Z"
-    },
-    {
-      "id": 3,
-      "chapter_id": 2,
-      "version_no": 1,
-      "author": "nishant",
-      "status": "published",
-      "md_content": "# AgentCore Production-Ready Agents\n\nRuntime, sessions, memory, gateway \u2014 the production checklist.\n\n<InfoCard title=\"Scope\">Everything below is deploy-day material.</InfoCard>",
-      "created_at": "2024-12-14T09:00:00Z"
-    },
-    {
-      "id": 4,
-      "chapter_id": 3,
-      "version_no": 1,
-      "author": "nishant",
-      "status": "published",
-      "md_content": "# Welcome & Series Map\n\nTwelve episodes from prototype to episodic memory.\n\n- Episodes 1-4: foundations\n- Episodes 5-9: tools, memory, eval\n- Episodes 10-12: production\n",
-      "created_at": "2025-01-02T11:00:00Z"
-    },
-    {
-      "id": 5,
-      "chapter_id": 4,
-      "version_no": 1,
-      "author": "nishant",
-      "status": "published",
-      "md_content": "# AgentCore Runtime \u2014 Deploy & Invoke\n\nThe Runtime hosts your agent container and exposes a session-based invoke API.\n\n## Deploy flow\n\n1. Build container with your agent\n2. `agentcore deploy` pushes to Runtime\n3. Invoke with a session id \u2014 memory persists per session\n\n<WarningCard title=\"Cold starts\">First invoke can take 10-20s \u2014 warm with a ping for demos.</WarningCard>\n\n<Quiz question=\"What keeps per-user conversation state?\" options={[\"The container\",\"Session id\",\"The gateway\"]} answerIndex={1} explanation=\"Runtime keys memory to the session id you pass.\" />\n",
-      "created_at": "2025-01-03T09:00:00Z"
-    },
-    {
-      "id": 6,
-      "chapter_id": 5,
-      "version_no": 1,
-      "author": "uday",
-      "status": "published",
-      "md_content": "# Linux Foundations \u2014 Shell & Filesystem\n\nEverything in Linux is a file \u2014 devices, processes, sockets.\n\n## Core commands\n\n```bash\nls -la\npwd\ncd /var/log\ncat syslog | tail -20\n```\n\n<TipCard title=\"Muscle memory\">Learn `ls -lah` and `cd -` early \u2014 you'll use them hundreds of times a day.</TipCard>\n\n1. pwd \u2014 where am I\n2. ls \u2014 what is here\n3. cd \u2014 go somewhere\n4. cat / less \u2014 read files\n\n<Quiz question=\"Which command shows the current directory?\" options={[\"ls\",\"pwd\",\"cd\",\"whoami\"]} answerIndex={1} />\n",
-      "created_at": "2025-01-06T09:00:00Z"
-    },
-    {
-      "id": 7,
-      "chapter_id": 6,
-      "version_no": 1,
-      "author": "uday",
-      "status": "published",
-      "md_content": "# Permissions & Users\n\n`chmod`, `chown`, groups \u2014 the permission model in 20 minutes.\n\n```bash\nchmod 640 app.conf\nchown app:ops app.conf\n```\n\n<Quiz question=\"What does chmod 640 give the group?\" options={[\"read\",\"write\",\"execute\"]} answerIndex={0} />\n",
-      "created_at": "2025-01-07T09:00:00Z"
-    },
-    {
-      "id": 8,
-      "chapter_id": 7,
-      "version_no": 1,
-      "author": "uday",
-      "status": "published",
-      "md_content": "# Images & Containers\n\nAn image is a layered filesystem; a container is a running instance.\n\n```bash\ndocker build -t app:v1 .\ndocker run -p 8080:80 app:v1\n```\n",
-      "created_at": "2025-01-13T09:00:00Z"
-    },
-    {
-      "id": 9,
-      "chapter_id": 8,
-      "version_no": 1,
-      "author": "uday",
-      "status": "published",
-      "md_content": "# Docker Compose Stacks\n\nMulti-service apps in one YAML.\n\n```yaml\nservices:\n  web:\n    image: app:v1\n    ports: [\"8080:80\"]\n  db:\n    image: postgres:15\n```\n",
-      "created_at": "2025-01-14T09:00:00Z"
-    },
-    {
-      "id": 10,
-      "chapter_id": 9,
-      "version_no": 1,
-      "author": "nishant",
-      "status": "published",
-      "md_content": "# IAM \u2014 Accounts, Roles, Policies\n\nIdentity is the perimeter. Roles over keys, always.\n\n<WarningCard title=\"Never\">Long-lived access keys in code. Use roles / instance profiles.</WarningCard>\n\n<Quiz question=\"Best practice for EC2 \u2192 S3 access?\" options={[\"Access keys in env\",\"IAM instance role\",\"Hardcode in AMI\"]} answerIndex={1} />\n",
-      "created_at": "2024-10-02T09:00:00Z"
-    },
-    {
-      "id": 11,
-      "chapter_id": 10,
-      "version_no": 1,
-      "author": "nishant",
-      "status": "published",
-      "md_content": "# Amazon S3 \u2014 Buckets & Storage Classes\n\nObject storage: STANDARD \u2192 INTELLIGENT \u2192 GLACIER.\n\n```bash\naws s3 mb s3://my-bucket\naws s3 cp file.txt s3://my-bucket/\n```\n",
-      "created_at": "2024-10-03T09:00:00Z"
-    },
-    {
-      "id": 12,
-      "chapter_id": 4,
-      "version_no": 2,
-      "author": "nishant",
-      "status": "draft",
-      "md_content": "# AgentCore Runtime Deep-Dive\n\nv2 draft \u2014 adds observability section (WIP).",
-      "created_at": "2025-01-10T09:00:00Z"
-    },
-    {
       "id": 1000,
       "chapter_id": 1000,
       "version_no": 1,
@@ -3662,6 +3554,6 @@
     }
   ],
   "page": 1,
-  "size": 456,
-  "total": 456
+  "size": 444,
+  "total": 444
 }
