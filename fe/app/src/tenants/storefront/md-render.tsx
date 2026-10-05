@@ -14,6 +14,7 @@ import {
   View,
 } from "@/platform/primitives";
 import { mdAnchor, type MdSection } from "./md-sections";
+import MermaidDiagram from "./mermaid-diagram";
 
 const CALLOUT_ICON: Record<string, string> = {
   info: "ℹ️",
@@ -37,9 +38,21 @@ export const resolveSrc = (src: string, base?: string) =>
     ? `${base.replace(/\/?$/, "/")}${src}`
     : src;
 
+// HTML entities commonly found inside imported md — decode before
+// rendering so "Show &amp; Tell" doesn't leak markup.
+export const decodeEntities = (s: string) =>
+  s
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#0?39;|&apos;/g, "'")
+    .replace(/&nbsp;/g, " ");
+
 // Minimal inline md: **bold**, `code`, [text](url). No italic-* parsing
 // (rare in course md, keeps the tokenizer trivial).
-export const Inline = ({ text }: { text: string }) => {
+export const Inline = ({ text: raw }: { text: string }) => {
+  const text = decodeEntities(raw);
   const parts = useMemo(() => {
     const out: any[] = [];
     const re = /(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g;
@@ -158,6 +171,7 @@ const Section = ({
         </Text>
       );
     case "code":
+      if (sec.lang === "mermaid") return <MermaidDiagram code={sec.code} />;
       return (
         <View className="rounded-lg border bg-muted/50 overflow-hidden">
           {sec.lang ? (
@@ -178,6 +192,33 @@ const Section = ({
               <Inline text={it} />
             </Text>
           ))}
+        </View>
+      );
+    case "table":
+      return (
+        <View className="md-table-wrap overflow-x-auto rounded-lg border">
+          <View as="table" className="md-table">
+            <View as="thead">
+              <View as="tr">
+                {sec.header.map((h, i) => (
+                  <Text as="th" key={i}>
+                    <Inline text={h} />
+                  </Text>
+                ))}
+              </View>
+            </View>
+            <View as="tbody">
+              {sec.rows.map((r, i) => (
+                <View as="tr" key={i}>
+                  {r.map((cell, j) => (
+                    <Text as="td" key={j}>
+                      <Inline text={cell} />
+                    </Text>
+                  ))}
+                </View>
+              ))}
+            </View>
+          </View>
         </View>
       );
     case "image":

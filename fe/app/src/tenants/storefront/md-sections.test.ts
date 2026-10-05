@@ -161,3 +161,12 @@ describe("mdAnchor", () => {
     expect(mdAnchor("")).toBe("section");
   });
 });
+
+it("parses GFM tables into header+rows", () => {
+  const md = "| Name | Use |\n| --- | --- |\n| VPC | network |\n| NAT | egress |\n\ntail";
+  const t = parseMd(md).sections.find((s) => s.type === "table");
+  expect(t).toMatchObject({
+    header: ["Name", "Use"],
+    rows: [["VPC", "network"], ["NAT", "egress"]],
+  });
+});

@@ -624,12 +624,23 @@
                   "score": ":score",
                   "total": ":total"
                 }
+              },
+              {
+                "key": "save_notes",
+                "endpoint": "lab_note",
+                "method": "POST",
+                "lazy": true,
+                "payload": {
+                  "chapter_id": ":chapter_id",
+                  "body": ":body"
+                }
               }
             ]
           },
           "content": {
             "title": "Chapter",
-            "back_path": "/courses"
+            "back_path": "/courses",
+            "toc": true
           }
         }
       ]

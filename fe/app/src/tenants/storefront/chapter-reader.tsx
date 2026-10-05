@@ -9,13 +9,13 @@
 // content.reader_path (default /learn/:id). Session writes (progress)
 // go through the SessionBridge prop — the def's lazy actions handle
 // entity writes (e.g. quiz_submission POST).
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useNav } from "@/platform/navigation";
 import { useLanguage } from "@/components/shared/use-language";
 import { Pressable, Text, View } from "@/platform/primitives";
 import { useRenderEngine } from "@/engine/render-engine/features/render-engine-context";
 import { parseMd, type MdSection } from "./md-sections";
-import { MdDoc } from "./md-render";
+import { MdDoc, MdToc } from "./md-render";
 
 const toItems = (res: any): any[] =>
   Array.isArray(res) ? res : res?.items ?? res?.data ?? [];
@@ -24,6 +24,8 @@ export default function ChapterReader({ content, actionData, session }: any) {
   const navigate = useNav().navigate;
   const { t } = useLanguage();
   const { componentMap } = useRenderEngine();
+  const [popup, setPopup] = useState<"detail" | "notes" | null>(null);
+  const [noteDraft, setNoteDraft] = useState("");
   const chapter =
     actionData?.data?.chapter?.data ?? actionData?.data?.chapter;
   const revisions = toItems(actionData?.data?.revisions).filter(
@@ -128,16 +130,29 @@ export default function ChapterReader({ content, actionData, session }: any) {
         </View>
       )}
       <View as="article" className="chapter-reader">
-        <Pressable
-          className="back-link"
-          onPress={() =>
-            navigate(
-              `${content?.back_path || "/courses"}/${chapter?.course_id ?? ""}`,
-            )
-          }
-        >
-          {content?.back_label || t("common.backToCourse")}
-        </Pressable>
+        <View className="chapter-topbar">
+          <Pressable
+            className="back-link"
+            onPress={() =>
+              navigate(
+                `${content?.back_path || "/courses"}/${chapter?.course_id ?? ""}`,
+              )
+            }
+          >
+            {content?.back_label || t("common.backToCourse")}
+          </Pressable>
+          <View className="chapter-topbar-actions">
+            <Pressable className="btn btn-secondary" onPress={() => setPopup("detail")}>
+              📄 {t("popup.detailedChapter")}
+            </Pressable>
+            <Pressable className="btn btn-secondary" onPress={() => setPopup("notes")}>
+              📝 {t("popup.labNotes")}
+            </Pressable>
+            {siblings.length > 0 && (
+              <Text className="reader-side-pct">{pct}%</Text>
+            )}
+          </View>
+        </View>
         <View className="chapter-meta-row">
           {chapter?.difficulty && (
             <Text className={`badge difficulty-${chapter.difficulty}`}>
@@ -205,6 +220,73 @@ export default function ChapterReader({ content, actionData, session }: any) {
           </View>
         </View>
       </View>
+
+      {content?.toc && parsed.sections.length > 0 && (
+        <View as="aside" className="reader-toc">
+          <Text className="reader-sidebar-label">{t("ctx.onThisPage")}</Text>
+          <MdToc sections={parsed.sections} />
+        </View>
+      )}
+
+      {popup && (
+        <View className="reader-modal-overlay" onClick={() => setPopup(null)}>
+          <View
+            className="reader-modal"
+            onClick={(e: any) => e?.stopPropagation?.()}
+          >
+            <View className="reader-modal-head">
+              <Text className="font-semibold">
+                {popup === "detail"
+                  ? `📄 ${t("popup.detailedChapter")}`
+                  : `📝 ${t("popup.labNotes")}`}
+              </Text>
+              <Pressable className="btn btn-secondary" onPress={() => setPopup(null)}>
+                {t("common.close")}
+              </Pressable>
+            </View>
+            {popup === "detail" ? (
+              <View className="reader-modal-body">
+                <MdDoc
+                  sections={parsed.sections}
+                  base={chapter?.content_base}
+                  resolveWidget={resolveWidget}
+                />
+              </View>
+            ) : (
+              <View className="reader-modal-body space-y-3">
+                <textarea
+                  className="reader-notes-input"
+                  rows={10}
+                  placeholder={t("popup.personalNotes")}
+                  value={noteDraft}
+                  onChange={(e) => setNoteDraft(e.target.value)}
+                />
+                <Pressable
+                  className="btn btn-primary"
+                  onPress={() => {
+                    // lazy write action when the def declares one (lab_note
+                    // POST); the session keeps a local copy either way.
+                    actionData?.action?.({
+                      key: content?.notes_action || "save_notes",
+                      type: "filter",
+                      data: { chapter_id: chapter?.id, body: noteDraft },
+                    });
+                    session?.update("recent", {
+                      id: `note-${chapter?.id}`,
+                      name: `Note — ${chapter?.title}`,
+                      kind: "lab_note",
+                      at: new Date().toISOString(),
+                    });
+                    setPopup(null);
+                  }}
+                >
+                  {t("popup.saveClose")}
+                </Pressable>
+              </View>
+            )}
+          </View>
+        </View>
+      )}
     </View>
   );
 }

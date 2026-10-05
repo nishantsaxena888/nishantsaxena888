@@ -10,6 +10,7 @@ export type MdSection =
   | { type: "paragraph"; text: string }
   | { type: "code"; lang: string; code: string }
   | { type: "list"; ordered: boolean; items: string[] }
+  | { type: "table"; header: string[]; rows: string[][] }
   | { type: "image"; src: string; alt: string }
   | { type: "callout"; variant: string; title: string; body: string }
   | { type: "quiz"; question: string; options: string[]; answerIndex: number; explanation?: string }
@@ -236,6 +237,9 @@ const CARD_VARIANT: Record<string, string> = {
   WarningCard: "warning",
   SuccessCard: "success",
   NoteCard: "note",
+  Note: "note",
+  Tip: "tip",
+  Warning: "warning",
   ConceptCard: "concept",
   KeyTakeaways: "key-takeaways",
   SectionCard: "section",
@@ -474,6 +478,23 @@ export function parseMd(md: string): ParsedMd {
     if (isBlank(line)) {
       flushPara();
       i++;
+      continue;
+    }
+
+    // GFM table — | a | b | header row, |---|---| separator, then rows.
+    if (/^\|.*\|\s*$/.test(line.trim())) {
+      const cells = (l: string) =>
+        l.trim().replace(/^\||\|$/g, "").split("|").map((c) => c.trim());
+      const header = cells(line);
+      const rows: string[][] = [];
+      i++;
+      if (i < lines.length && /^\|[\s:|-]+\|\s*$/.test(lines[i].trim())) i++;
+      while (i < lines.length && /^\|.*\|\s*$/.test(lines[i].trim())) {
+        rows.push(cells(lines[i]));
+        i++;
+      }
+      flushPara();
+      sections.push({ type: "table", header, rows });
       continue;
     }
 
