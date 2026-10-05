@@ -510,62 +510,6 @@
               "title": "Achievements",
               "subtitle": "Professional badges earned through mastery.",
               "earned_session": "achievement",
-              "items": [
-                {
-                  "id": "first-steps",
-                  "icon": "👣",
-                  "title": "First Steps",
-                  "desc": "Complete your first lesson section."
-                },
-                {
-                  "id": "module-finisher",
-                  "icon": "🏁",
-                  "title": "Module Finisher",
-                  "desc": "Complete an entire module end-to-end."
-                },
-                {
-                  "id": "five-modules",
-                  "icon": "📚",
-                  "title": "Bookworm",
-                  "desc": "Complete 5 different modules."
-                },
-                {
-                  "id": "half-journey",
-                  "icon": "🗺️",
-                  "title": "Halfway There",
-                  "desc": "Complete at least half of all modules."
-                },
-                {
-                  "id": "hands-on",
-                  "icon": "🔬",
-                  "title": "Hands-On Learner",
-                  "desc": "Finish your first interactive lab."
-                },
-                {
-                  "id": "cli-warrior",
-                  "icon": "⌨️",
-                  "title": "CLI Warrior",
-                  "desc": "Execute 10 commands in the simulated terminal."
-                },
-                {
-                  "id": "fde-architect",
-                  "icon": "🤖",
-                  "title": "Forward Deployed Hero",
-                  "desc": "Complete the Forward Deployed Engineer (FDE) enterprise AI module."
-                },
-                {
-                  "id": "quiz-ace",
-                  "icon": "🧠",
-                  "title": "Quiz Ace",
-                  "desc": "Score 100% on any knowledge check."
-                },
-                {
-                  "id": "production-architect",
-                  "icon": "🏆",
-                  "title": "Production Architect",
-                  "desc": "Reach 90% overall course progress."
-                }
-              ],
               "tone": "alt"
             }
           }
@@ -612,10 +556,9 @@
           },
           "content": {
             "title": "All Courses",
-            "cta_label": "Start learning",
             "detail_path": "/courses",
             "back": {
-              "label": "← Back to Home",
+              "label": "← Back to Course",
               "to": "/"
             },
             "entity": "course",
@@ -632,7 +575,11 @@
                 "method": "delete",
                 "confirm": "Delete {title}?"
               }
-            ]
+            ],
+            "show_status": false,
+            "filter_note": false,
+            "meta_icon": "📄",
+            "category_eyebrow": "Course Category"
           }
         }
       ]

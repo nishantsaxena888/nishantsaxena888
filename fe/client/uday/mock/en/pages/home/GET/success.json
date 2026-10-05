@@ -213,62 +213,6 @@
           "title": "Achievements",
           "subtitle": "Professional badges earned through mastery.",
           "earned_session": "achievement",
-          "items": [
-            {
-              "id": "first-steps",
-              "icon": "\ud83d\udc63",
-              "title": "First Steps",
-              "desc": "Complete your first lesson section."
-            },
-            {
-              "id": "module-finisher",
-              "icon": "\ud83c\udfc1",
-              "title": "Module Finisher",
-              "desc": "Complete an entire module end-to-end."
-            },
-            {
-              "id": "five-modules",
-              "icon": "\ud83d\udcda",
-              "title": "Bookworm",
-              "desc": "Complete 5 different modules."
-            },
-            {
-              "id": "half-journey",
-              "icon": "\ud83d\uddfa\ufe0f",
-              "title": "Halfway There",
-              "desc": "Complete at least half of all modules."
-            },
-            {
-              "id": "hands-on",
-              "icon": "\ud83d\udd2c",
-              "title": "Hands-On Learner",
-              "desc": "Finish your first interactive lab."
-            },
-            {
-              "id": "cli-warrior",
-              "icon": "\u2328\ufe0f",
-              "title": "CLI Warrior",
-              "desc": "Execute 10 commands in the simulated terminal."
-            },
-            {
-              "id": "fde-architect",
-              "icon": "\ud83e\udd16",
-              "title": "Forward Deployed Hero",
-              "desc": "Complete the Forward Deployed Engineer (FDE) enterprise AI module."
-            },
-            {
-              "id": "quiz-ace",
-              "icon": "\ud83e\udde0",
-              "title": "Quiz Ace",
-              "desc": "Score 100% on any knowledge check."
-            },
-            {
-              "id": "production-architect",
-              "icon": "\ud83c\udfc6",
-              "title": "Production Architect",
-              "desc": "Reach 90% overall course progress."
-            }
-          ],
           "tone": "alt"
         }
       }

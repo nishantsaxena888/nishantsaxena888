@@ -259,10 +259,10 @@ export default function Landing({ content, actionData, session }: any) {
         </Section>
       )}
 
-      {c.achievements?.items?.length > 0 && (
+      {c.achievements?.title && (
         <Section tone={c.achievements.tone} title={c.achievements.title} subtitle={c.achievements.subtitle}>
           <View className="achievements-grid">
-            {c.achievements.items.map((a: any, i: number) => {
+            {(c.achievements.items || []).map((a: any, i: number) => {
               const earned = a.id
                 ? (session?.items(c.achievements.earned_session || "achievement") || []).some(
                     (r: any) => r.id === a.id,

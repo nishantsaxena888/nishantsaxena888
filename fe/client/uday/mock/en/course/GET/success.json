@@ -6,7 +6,8 @@
       "title": "Introduction & Series Map",
       "code": "aws-agentcore/introduction",
       "status": "published",
-      "description": "Welcome \u2014 the 12-episode map, the AgentCore pillars and learning paths."
+      "description": "Welcome \u2014 the 12-episode map, the AgentCore pillars and learning paths.",
+      "icon": "\ud83e\udded"
     },
     {
       "id": 101,
@@ -14,7 +15,8 @@
       "title": "EP 01 \u2014 Production-Ready AI Agent",
       "code": "aws-agentcore/ep01-production-agent",
       "status": "published",
-      "description": "The prototype\u2192production gap and a tour of every AgentCore pillar."
+      "description": "The prototype\u2192production gap and a tour of every AgentCore pillar.",
+      "icon": "\ud83d\udee1\ufe0f"
     },
     {
       "id": 102,
@@ -22,7 +24,8 @@
       "title": "EP 02 \u2014 Build an Agentic App (Strands)",
       "code": "aws-agentcore/ep02-strands-agents",
       "status": "published",
-      "description": "Strands Agents SDK, tools, MCP wiring and multi-agent orchestration."
+      "description": "Strands Agents SDK, tools, MCP wiring and multi-agent orchestration.",
+      "icon": "\ud83e\uddec"
     },
     {
       "id": 103,
@@ -30,7 +33,8 @@
       "title": "EP 03 \u2014 Runtime Deep Dive",
       "code": "aws-agentcore/ep03-runtime-deep-dive",
       "status": "published",
-      "description": "agentcore configure/launch/invoke, session isolation, streaming, MCP on Runtime."
+      "description": "agentcore configure/launch/invoke, session isolation, streaming, MCP on Runtime.",
+      "icon": "\ud83d\ude80"
     },
     {
       "id": 104,
@@ -38,7 +42,8 @@
       "title": "EP 04 \u2014 Gateway Deep Dive",
       "code": "aws-agentcore/ep04-gateway-deep-dive",
       "status": "published",
-      "description": "Lambdas and OpenAPI services as MCP tools \u2014 auth, tool search, live wiring."
+      "description": "Lambdas and OpenAPI services as MCP tools \u2014 auth, tool search, live wiring.",
+      "icon": "\ud83c\udf09"
     },
     {
       "id": 105,
@@ -46,7 +51,8 @@
       "title": "EP 05 \u2014 Secure Agent Workflows",
       "code": "aws-agentcore/ep05-secure-workflows",
       "status": "published",
-      "description": "Inbound vs outbound identity, token vault, OAuth credential providers."
+      "description": "Inbound vs outbound identity, token vault, OAuth credential providers.",
+      "icon": "\ud83d\udd10"
     },
     {
       "id": 106,
@@ -54,7 +60,8 @@
       "title": "EP 06 \u2014 Built-in Tools",
       "code": "aws-agentcore/ep06-built-in-tools",
       "status": "published",
-      "description": "Managed Browser Tool (headless Chromium/CDP) and sandboxed Code Interpreter."
+      "description": "Managed Browser Tool (headless Chromium/CDP) and sandboxed Code Interpreter.",
+      "icon": "\ud83e\uddf0"
     },
     {
       "id": 107,
@@ -62,7 +69,8 @@
       "title": "EP 07 \u2014 Memory Deep Dive",
       "code": "aws-agentcore/ep07-memory-deep-dive",
       "status": "published",
-      "description": "Short-term vs long-term memory, strategies, namespaces and hooks."
+      "description": "Short-term vs long-term memory, strategies, namespaces and hooks.",
+      "icon": "\ud83e\udde0"
     },
     {
       "id": 108,
@@ -70,7 +78,8 @@
       "title": "EP 08 \u2014 Prototype to Production",
       "code": "aws-agentcore/ep08-prototype-to-production",
       "status": "published",
-      "description": "CI/CD for agents \u2014 CodeBuild\u2192ECR\u2192Runtime and the full deployment lifecycle."
+      "description": "CI/CD for agents \u2014 CodeBuild\u2192ECR\u2192Runtime and the full deployment lifecycle.",
+      "icon": "\ud83c\udfed"
     },
     {
       "id": 109,
@@ -78,7 +87,8 @@
       "title": "EP 09 \u2014 Observability",
       "code": "aws-agentcore/ep09-observability",
       "status": "published",
-      "description": "OpenTelemetry spans/traces, CloudWatch GenAI dashboard, third-party APM."
+      "description": "OpenTelemetry spans/traces, CloudWatch GenAI dashboard, third-party APM.",
+      "icon": "\ud83d\udce1"
     },
     {
       "id": 110,
@@ -86,7 +96,8 @@
       "title": "EP 10 \u2014 Evaluations",
       "code": "aws-agentcore/ep10-evaluations",
       "status": "published",
-      "description": "Judges, on-demand vs continuous evaluation, score dashboards."
+      "description": "Judges, on-demand vs continuous evaluation, score dashboards.",
+      "icon": "\u2705"
     },
     {
       "id": 111,
@@ -94,7 +105,8 @@
       "title": "EP 11 \u2014 Policy & Tool Controls",
       "code": "aws-agentcore/ep11-tool-controls",
       "status": "published",
-      "description": "Cedar policies on Gateway \u2014 argument-level authorization and audit."
+      "description": "Cedar policies on Gateway \u2014 argument-level authorization and audit.",
+      "icon": "\ud83c\udf32"
     },
     {
       "id": 112,
@@ -102,7 +114,8 @@
       "title": "EP 12 \u2014 Episodic Memory & Patterns",
       "code": "aws-agentcore/ep12-episodic-memory",
       "status": "published",
-      "description": "Episodes, reflections and feedback loops \u2014 agents that learn from experience."
+      "description": "Episodes, reflections and feedback loops \u2014 agents that learn from experience.",
+      "icon": "\ud83d\udcd3"
     },
     {
       "id": 113,
@@ -110,7 +123,8 @@
       "title": "Summary Notes \u2014 Whole Series",
       "code": "aws-agentcore/summary-notes",
       "status": "published",
-      "description": "The entire playlist condensed \u2014 cheatsheet tables, commands, decision guide."
+      "description": "The entire playlist condensed \u2014 cheatsheet tables, commands, decision guide.",
+      "icon": "\ud83d\udcdd"
     },
     {
       "id": 114,
@@ -118,7 +132,8 @@
       "title": "Nishant's Notes",
       "code": "aws-agentcore/nishant-notes",
       "status": "published",
-      "description": "Personal working notes \u2014 drop any .md into doc_nishant_notes/."
+      "description": "Personal working notes \u2014 drop any .md into doc_nishant_notes/.",
+      "icon": "\u270d\ufe0f"
     },
     {
       "id": 115,
@@ -126,7 +141,8 @@
       "title": "Amazon Bedrock AgentCore Practical Workbook",
       "code": "bedrock/workbook",
       "status": "published",
-      "description": "Step-by-step practical guide to building on Bedrock AgentCore."
+      "description": "Step-by-step practical guide to building on Bedrock AgentCore.",
+      "icon": "\ud83e\udd16"
     },
     {
       "id": 116,
@@ -134,7 +150,8 @@
       "title": "AWS Employee Video Playlist \u2014 Summaries",
       "code": "bedrock/aws-employee-video-playlist-summaries",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83c\udfac"
     },
     {
       "id": 117,
@@ -142,7 +159,8 @@
       "title": "Amazon Bedrock AgentCore Practical Workbook (Summarised Notes 2nd Bedrock Notes)",
       "code": "bedrock/summarised-notes-2nd-bedrock-notes",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udcda"
     },
     {
       "id": 118,
@@ -150,7 +168,8 @@
       "title": "Phase 01 \u2014 Linux Foundations",
       "code": "linux/phase-01-linux-foundations",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 119,
@@ -158,7 +177,8 @@
       "title": "Phase 02 \u2014 Linux Essentials",
       "code": "linux/phase-02-linux-essentials",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 120,
@@ -166,7 +186,8 @@
       "title": "Phase 03 \u2014 File Management",
       "code": "linux/phase-03-file-management",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 121,
@@ -174,7 +195,8 @@
       "title": "Phase 04 \u2014 Users And Administration",
       "code": "linux/phase-04-users-and-administration",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 122,
@@ -182,7 +204,8 @@
       "title": "Phase 05 \u2014 Process And Job Management",
       "code": "linux/phase-05-process-and-job-management",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 123,
@@ -190,7 +213,8 @@
       "title": "Phase 05 \u2014 Process And Service Management",
       "code": "linux/phase-05-process-and-service-management",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 124,
@@ -198,7 +222,8 @@
       "title": "Phase 06 \u2014 Package Management",
       "code": "linux/phase-06-package-management",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 125,
@@ -206,7 +231,8 @@
       "title": "Phase 06 \u2014 Software Package Management",
       "code": "linux/phase-06-software-package-management",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 126,
@@ -214,7 +240,8 @@
       "title": "Phase 07 \u2014 Storage Management",
       "code": "linux/phase-07-storage-management",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 127,
@@ -222,7 +249,8 @@
       "title": "Phase 08 \u2014 Networking",
       "code": "linux/phase-08-networking",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 128,
@@ -230,7 +258,8 @@
       "title": "Phase 08 \u2014 Networking And Services",
       "code": "linux/phase-08-networking-and-services",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 129,
@@ -238,7 +267,8 @@
       "title": "Phase 09 \u2014 Security",
       "code": "linux/phase-09-security",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 130,
@@ -246,7 +276,8 @@
       "title": "Phase 10 \u2014 Monitoring",
       "code": "linux/phase-10-monitoring",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 131,
@@ -254,7 +285,8 @@
       "title": "Phase 11 \u2014 Web And Application Servers",
       "code": "linux/phase-11-web-and-application-servers",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 132,
@@ -262,7 +294,8 @@
       "title": "Phase 12 \u2014 Shell Scripting",
       "code": "linux/phase-12-shell-scripting",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 133,
@@ -270,7 +303,8 @@
       "title": "Phase 13 \u2014 Backup And Recovery",
       "code": "linux/phase-13-backup-and-recovery",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 134,
@@ -278,7 +312,8 @@
       "title": "Phase 14 \u2014 Databases",
       "code": "linux/phase-14-databases",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 135,
@@ -286,7 +321,8 @@
       "title": "Phase 15 \u2014 Enterprise Operations",
       "code": "linux/phase-15-enterprise-operations",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 136,
@@ -294,7 +330,8 @@
       "title": "Phase 16 \u2014 Linux In Cloud And DevOps",
       "code": "linux/phase-16-linux-in-cloud-and-devops",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 137,
@@ -302,7 +339,8 @@
       "title": "Phase 17 \u2014 Production Troubleshooting",
       "code": "linux/phase-17-production-troubleshooting",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 138,
@@ -310,7 +348,8 @@
       "title": "Phase 18 \u2014 Production Architecture",
       "code": "linux/phase-18-production-architecture",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 139,
@@ -318,7 +357,8 @@
       "title": "Phase 19 \u2014 Interview Preparation",
       "code": "linux/phase-19-interview-preparation",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 140,
@@ -326,7 +366,8 @@
       "title": "Phase 20 \u2014 Capstone",
       "code": "linux/phase-20-capstone",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udc27"
     },
     {
       "id": 141,
@@ -334,7 +375,8 @@
       "title": "Uday Linux Course",
       "code": "linux/uday-linux-course",
       "status": "published",
-      "description": ""
+      "description": "",
+      "icon": "\ud83d\udcda"
     },
     {
       "id": 142,
@@ -342,7 +384,8 @@
       "title": "Docker \u2014 Containers & Compose",
       "code": "docker/docker",
       "status": "published",
-      "description": "Containers, images, networking, volumes, Dockerfile mastery and Compose."
+      "description": "Containers, images, networking, volumes, Dockerfile mastery and Compose.",
+      "icon": "\ud83d\udc33"
     },
     {
       "id": 143,
@@ -350,7 +393,8 @@
       "title": "Python for DevOps",
       "code": "python-devops/python-devops",
       "status": "published",
-      "description": "Python fundamentals through automation, APIs and DevOps workflows."
+      "description": "Python fundamentals through automation, APIs and DevOps workflows.",
+      "icon": "\ud83d\udc0d"
     },
     {
       "id": 144,
@@ -358,7 +402,8 @@
       "title": "Kubernetes \u2014 From Containers to Production",
       "code": "kubernetes/kubernetes",
       "status": "published",
-      "description": "Kubernetes architecture, kubectl, objects, networking, storage and EKS."
+      "description": "Kubernetes architecture, kubectl, objects, networking, storage and EKS.",
+      "icon": "\u2638\ufe0f"
     },
     {
       "id": 145,
@@ -366,7 +411,8 @@
       "title": "Core Chapters",
       "code": "bedrock-to-production/core-chapters",
       "status": "published",
-      "description": "Main guided chapters of the Bedrock by Deepti course."
+      "description": "Main guided chapters of the Bedrock by Deepti course.",
+      "icon": "\ud83d\uded2"
     },
     {
       "id": 146,
@@ -374,7 +420,8 @@
       "title": "Core Chapters",
       "code": "ecommerce-architecture/core-chapters",
       "status": "published",
-      "description": "Design a complete e-commerce platform on AWS \u2014 cloud-agnostic first, then every AWS service mapped. Interview-ready."
+      "description": "Design a complete e-commerce platform on AWS \u2014 cloud-agnostic first, then every AWS service mapped. Interview-ready.",
+      "icon": "\ud83d\uded2"
     },
     {
       "id": 147,
@@ -382,7 +429,8 @@
       "title": "Choose the Platform \u2014 Lambda vs ECS vs EKS",
       "code": "microservices-aws/choose-platform",
       "status": "published",
-      "description": "Event-driven functions vs serverless containers vs Kubernetes \u2014 the 3-question decision, cost math and cold starts."
+      "description": "Event-driven functions vs serverless containers vs Kubernetes \u2014 the 3-question decision, cost math and cold starts.",
+      "icon": "\u2696\ufe0f"
     },
     {
       "id": 148,
@@ -390,7 +438,8 @@
       "title": "Build & Operate \u2014 re:Invent Session",
       "code": "microservices-aws/build-and-operate",
       "status": "published",
-      "description": "A real microservice on EKS+Lambda+SQS+DynamoDB \u2014 provisioned with CloudFormation, broken live, then observed and rightsized."
+      "description": "A real microservice on EKS+Lambda+SQS+DynamoDB \u2014 provisioned with CloudFormation, broken live, then observed and rightsized.",
+      "icon": "\ud83d\ude80"
     },
     {
       "id": 149,
@@ -398,7 +447,8 @@
       "title": "AWS Production Masterclass",
       "code": "aws-production-masterclass",
       "status": "published",
-      "description": "Build, deploy, secure, scale, and operate a real AWS production environment \u2014 one chapter at a time. 47 chapters. One continuous project."
+      "description": "Build, deploy, secure, scale, and operate a real AWS production environment \u2014 one chapter at a time. 47 chapters. One continuous project.",
+      "icon": "\u2601\ufe0f"
     }
   ],
   "page": 1,

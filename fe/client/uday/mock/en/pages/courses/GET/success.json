@@ -38,10 +38,9 @@
       },
       "content": {
         "title": "All Courses",
-        "cta_label": "Start learning",
         "detail_path": "/courses",
         "back": {
-          "label": "\u2190 Back to Home",
+          "label": "\u2190 Back to Course",
           "to": "/"
         },
         "entity": "course",
@@ -58,7 +57,11 @@
             "method": "delete",
             "confirm": "Delete {title}?"
           }
-        ]
+        ],
+        "show_status": false,
+        "filter_note": false,
+        "meta_icon": "\ud83d\udcc4",
+        "category_eyebrow": "Course Category"
       }
     }
   ]

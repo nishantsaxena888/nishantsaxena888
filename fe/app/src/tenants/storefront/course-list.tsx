@@ -94,8 +94,18 @@ export default function CourseList({ content, actionData, session, action }: any
               {content.back.label || "← Back"}
             </Pressable>
           )}
-          {title && <Text as="h2">{title}</Text>}
-          {fv && (
+          {activeCat && content?.category_eyebrow ? (
+            <View className="doc-header-title">
+              <Text as="span" className="doc-header-icon">{activeCat.emoji}</Text>
+              <View>
+                <Text as="div" className="doc-header-name">{content.category_eyebrow}</Text>
+                <Text as="div" className="doc-header-course">{activeCat.name}</Text>
+              </View>
+            </View>
+          ) : (
+            title && <Text as="h2">{title}</Text>
+          )}
+          {fv && content?.filter_note !== false && (
             <Text as="p" className="catalog-filter-note">
               {courses.length} result{courses.length === 1 ? "" : "s"} —{" "}
               <Pressable
@@ -122,23 +132,23 @@ export default function CourseList({ content, actionData, session, action }: any
                       className="module-icon"
                       style={{ background: cat?.color_bg, color: cat?.color }}
                     >
-                      {cat?.emoji || "📚"}
+                      {c[content?.fields?.icon || "icon"] || cat?.emoji || "📚"}
                     </View>
                     <View className="module-title">{c.title}</View>
                     {c.description && (
                       <View className="module-desc">{c.description}</View>
                     )}
                     <View className="module-meta">
-                      {c.status && (
+                      {content?.show_status !== false && c.status && (
                         <Text className={`badge status-${c.status}`}>{c.status}</Text>
                       )}
-                      {n != null && <Text>📦 {n} chapters</Text>}
+                      {n != null && <Text>{content?.meta_icon || "📦"} {n} chapters</Text>}
                     </View>
-                    {/* visual CTA only — the card itself carries the press,
-                        so this stays a span (no nested interactive elements) */}
-                    <Text className="sf-action-btn">
-                      {content?.cta_label || "Start learning"}
-                    </Text>
+                    {/* visual CTA only when configured — the card itself carries
+                        the press, so this stays a span */}
+                    {content?.cta_label && (
+                      <Text className="sf-action-btn">{content.cta_label}</Text>
+                    )}
                   </View>
                 </Pressable>
                 {allowed.length > 0 && (

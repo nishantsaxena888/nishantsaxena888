@@ -140,6 +140,7 @@ entities = {
             "title":       {"type": "str", "required": True},
             "code":        {"type": "str", "unique": True},
             "description": {"type": "str"},
+            "icon":        {"type": "str"},
             "status":      {"type": "str", "default": "draft",
                             "options": ["draft", "published", "archived"]},
             "created_at":  {"type": "datetime"},

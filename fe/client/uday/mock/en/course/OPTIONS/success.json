@@ -22,6 +22,9 @@
       "description": {
         "type": "str"
       },
+      "icon": {
+        "type": "str"
+      },
       "status": {
         "type": "str",
         "default": "draft",

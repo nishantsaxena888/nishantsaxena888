@@ -358,9 +358,20 @@
 .chapter-reader p, .chapter-reader li { color: #334155; }
 
 /* catalog page — same light surface as course page */
-.catalog-page { background: #f8fafc; color: #334155; margin: calc(-1 * var(--space-4, 1rem)); padding: 1.5rem 0; min-height: 60vh; }
-.catalog-page .catalog-head { max-width: 1200px; margin: 0 auto 1.5rem; padding: 0 1.5rem; }
+.catalog-page { background: #f8fafc; color: #334155; margin: calc(-1 * var(--space-4, 1rem)); padding: 0 0 1.5rem; min-height: 60vh; }
+/* doc-header — sticky bar like the original CategoryPage */
+.catalog-page .catalog-head {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.75rem 1.5rem; background: #fff; border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 1.5rem;
+}
 .catalog-page .catalog-head h2 { font-size: 1.5rem; font-weight: 700; color: #0f172a; }
+.catalog-page .doc-header-title { display: flex; align-items: center; gap: 0.75rem; }
+.catalog-page .doc-header-icon { font-size: 22px; }
+.catalog-page .doc-header-name { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #94a3b8; }
+.catalog-page .doc-header-course { font-size: 1rem; font-weight: 700; color: #0f172a; }
+.catalog-page .module-grid { padding: 0 1.5rem; max-width: 1400px; margin: 0 auto; }
 .catalog-page .catalog-filter-note { font-size: 0.875rem; color: #64748b; margin-top: 0.25rem; }
 .catalog-page .container { padding: 0 1.5rem; }
 .catalog-page .module-card .sf-action-btn { margin-top: 0.75rem; }
@@ -486,4 +497,12 @@
 .chapter-reader pre, .chapter-reader code, .course-page code, .catalog-page code,
 .guide-page pre, .guide-page code, .landing-page code {
   font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.catalog-page .container { max-width: 1400px; }
+.catalog-page .back-link, .course-page .back-link {
+  border: none; background: transparent; padding: 0.45rem 0.75rem;
+}
+.catalog-page .back-link:hover, .course-page .back-link:hover {
+  background: #f1f5f9; color: #334155; border: none;
 }
