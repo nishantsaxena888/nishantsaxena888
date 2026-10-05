@@ -48,3 +48,11 @@ Naya bug fix ho to uska check ek line mein yahan add karo — e2e mein
 - Admin sab clients pe `require_auth: false` hai (dev default) — gate
   logic unit tests mein covered hai, E2E login flow real token store
   verify karta hai.
+- **Hermes `import.meta` parse nahi kar sakta** — `typeof` guard bhi
+  nahi bachata, syntax hi fail hai. Jo bhi shared `src/` file
+  `import.meta` use kare uske saath `.native.<ext>` twin **mandatory**
+  hai (Metro auto-resolves). `verify.sh` ka `check-native-twins.mjs`
+  enforce karta hai; `cd fe/native && npm run test:bundle` poora
+  iOS+Android Hermes bundle machine pe compile karke prove karta hai —
+  bina device ke native import breakage pakadne ka yehi tareeqa hai.
+  `asset.ts` ka missing twin hi woh bug tha jo device pe crash karta.

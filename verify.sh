@@ -26,6 +26,10 @@ echo "== defs: page/component/session contract =="
 (cd fe/app && node scripts/validate-defs.mjs)
 echo "   ok"
 
+echo "== native: import.meta files need .native twins (Hermes can't parse it) =="
+(cd fe/app && node scripts/check-native-twins.mjs)
+echo "   ok"
+
 echo "== unit/contract tests (vitest) =="
 (cd fe/app && npx vitest run)
 echo "   ok"

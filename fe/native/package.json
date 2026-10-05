@@ -8,7 +8,8 @@
     "ios": "expo start --ios",
     "android": "expo start --android",
     "web": "expo start --web",
-    "test:mobile": "maestro test maestro/"
+    "test:mobile": "maestro test maestro/",
+    "test:bundle": "expo export --platform ios --platform android --output-dir /tmp/expo-export-check"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.1.0",
