@@ -1,6 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
 /* uday site surface — auto-bundled by `npm run client -- uday`
    Learning-platform skin: left-accent cards, reading-friendly markdown,
    terminal-ish code blocks. Palette still comes from style-config vars. */
+
+/* Uday_AWS design-system base: Inter + slate-800 body text (the engine's
+   dark-theme defaults leak otherwise) */
+.landing-page, .course-page, .catalog-page, .chapter-reader,
+.sf-session, .sf-session-empty, .guide-page {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #1e293b;
+}
 
 .uday-hero {
   border-left: 6px solid hsl(var(--primary));
@@ -40,7 +50,7 @@
   background: hsl(240 10% 10%);
   color: hsl(150 60% 75%);
   border: 1px solid hsl(240 10% 18%);
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 /* ============================================================
@@ -53,12 +63,13 @@
   --lp-primary-500: #f97316; --lp-primary-600: #ea580c;
   --lp-n-0: #ffffff;   --lp-n-50: #f8fafc;  --lp-n-200: #e2e8f0;
   --lp-n-300: #cbd5e1; --lp-n-400: #94a3b8; --lp-n-500: #64748b;
-  --lp-n-700: #334155; --lp-n-900: #0f172a; --lp-n-950: #020617;
+  --lp-n-700: #334155; --lp-n-800: #1e293b;
+  --lp-n-900: #0f172a; --lp-n-950: #020617;
 
   min-height: 60vh;
   background: var(--lp-n-50);
   margin: calc(-1 * var(--space-4, 1rem));   /* bleed past page padding */
-  color: var(--lp-n-700);
+  color: var(--lp-n-800);
 }
 .landing-page .container { max-width: 1200px; margin: 0 auto; }
 
@@ -129,7 +140,7 @@
 .landing-page .page-section { padding: 4rem 1.5rem; }
 .landing-page .page-section-journey { padding: 2rem 0; }
 .landing-page .page-section-header { text-align: center; margin-bottom: 2.5rem; }
-.landing-page .page-section-header h2 { font-size: 1.875rem; color: var(--lp-n-900); margin-bottom: 0.75rem; }
+.landing-page .page-section-header h2 { font-size: 1.875rem; font-weight: 700; color: var(--lp-n-900); margin-bottom: 0.75rem; }
 .landing-page .page-section-header p { font-size: 1.125rem; color: var(--lp-n-500); max-width: 600px; margin: 0 auto; }
 
 /* journey */
@@ -292,6 +303,7 @@
   display: flex; align-items: center; gap: 0.6rem;
   padding: 0.55rem 0.75rem; border-radius: 0.5rem; cursor: pointer;
   border-left: 3px solid transparent; transition: background 150ms;
+  color: #cbd5e1;
 }
 .reader-side-item:hover { background: rgba(255,255,255,0.05); }
 .reader-side-item.active {
@@ -312,7 +324,7 @@
   padding: 1.75rem 2.5rem; max-width: none; min-width: 0;
 }
 .chapter-reader .back-link {
-  cursor: pointer; font-size: 0.875rem; font-weight: 500; color: #64748b;
+  cursor: pointer; font-size: 0.875rem; font-weight: 500; color: #94a3b8;
 }
 .chapter-reader .back-link:hover { color: #334155; }
 .chapter-reader .chapter-meta-row {
@@ -469,3 +481,9 @@
 .landing-page .page-section { background: #fff; }
 .landing-page .page-section-alt,
 .landing-page .page-section-journey { background: #f8fafc; }
+
+/* Uday_AWS mono font for code blocks (JetBrains Mono per design-system) */
+.chapter-reader pre, .chapter-reader code, .course-page code, .catalog-page code,
+.guide-page pre, .guide-page code, .landing-page code {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
