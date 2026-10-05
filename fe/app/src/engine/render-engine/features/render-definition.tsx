@@ -6,6 +6,7 @@ import { useFormStyleStore } from '@/store/use-form-style';
 import { useConfigStore } from '@/store/use-config-store';
 import { useGenericState } from '@/store/use-generic-state';
 import { currentRole, roleAllowed } from '@/engine/library/rbac';
+import { DefErrorBoundary } from '@/platform/error-boundary';
 
 interface RenderDefinitionProps {
   def: Definition;
@@ -74,10 +75,15 @@ function RenderDefinitionInner({ def, config }: RenderDefinitionProps) {
   }
 
   if (Component) {
+    // Per-def crash boundary — one broken component renders an inline
+    // error and reports via platform/report; the rest of the page stays
+    // mounted instead of bubbling to the route errorElement.
     return (
-      <Component key={def.id} id={def.id} type={def.type} content={def.content} properties={def.properties} actionData={actionData} session={session} config={config} themeName={themeName}>
-        {children}
-      </Component>
+      <DefErrorBoundary label={def.type}>
+        <Component key={def.id} id={def.id} type={def.type} content={def.content} properties={def.properties} actionData={actionData} session={session} config={config} themeName={themeName}>
+          {children}
+        </Component>
+      </DefErrorBoundary>
     );
   }
 

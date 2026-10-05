@@ -89,11 +89,26 @@ fe/client/<name>/
   `datasources.json` + `roles`).
 - **Boundary is enforced by eslint**: app code cannot import `@clients/*`
   (only the three generated `src/tenants/{active,dev-all,mock-active}.ts`
-  may); client code can import only React + relative paths (+ type-only
+  may); client code can import only React + relative paths + the
+  **`@/platform/*` seams** (primitives/navigation/icons/asset — the
+  portability surface; engine/store/components stay blocked) + type-only
   imports — `RenderComponentProps`/`ClientTenant` from
-  `src/tenants/types.ts`). `npm run lint` covers both sides
+  `src/tenants/types.ts`. `npm run lint` covers both sides
   (`fe/eslint.config.js` is the client-side entry — eslint only lints
   under its base path).
+- **`session` prop bridge**: `RenderComponentProps.session` =
+  `{items(name), update(name, value), clear(name)}` — client components
+  read/write configured sessions through props, no store import. Rendered
+  defs also get a per-def crash boundary (`platform/error-boundary`) so a
+  broken client comp shows an inline box and reports via
+  `platform/report` instead of blanking the page.
+- **Parameterized pages**: a menu entry whose `url` is `/stays/:id` (plus
+  `hide: true` to keep it out of nav) resolves via the `/:slug/:id`
+  route; `useRouteParams` inside comps and `:param` placeholders inside
+  dynamic action endpoints/queryParams both resolve per route
+  (`"endpoint": "listing/:id"` → `listing/7`; mock `entity/:id` returns a
+  single record). `useQuery()` reads `?key=` on web and route params on
+  native.
 - **Surface-scoped maps**: `componentsMap[client] = {site, admin}` in
   `src/tenants/index.ts`. Site routes resolve `def.type` against
   `layout + storefront + site_tenant.components`; admin routes against
@@ -196,6 +211,10 @@ and **Electron**. Reusable storefront components never import
 | `primitives.tsx` | `View`, `Text`, `Pressable`, `Anchor`, `Image`, `TextInput`, `ScrollView` — RN-shaped API (`onPress`, `onChangeText`, `to`) | renders `div`/`span`/`button`/`a`/`img`/`input` (semantic via `as` prop) | `primitives.native.tsx` — real RN components; `className` passes through for NativeWind | reuse web |
 | `env.ts` | `env(key)`, `isDev()`, `apiUrl()`, `clientName()`, `setEnvConfig()` — shared code never touches `import.meta.env` | `import.meta.env.*` | `env.native.ts` — app calls `setEnvConfig({apiUrl, client, dev})` at boot | reuse web |
 | `toast.ts` | `toast.{success,error,info,...}` — components never import sonner directly (via `@/lib/toast`) | sonner | `toast.native.ts` — Alert + `"toast"` app event (host renders its own banners) | reuse web |
+| `icons.tsx` | `<Icon name="heart" size={18}/>` — client code never imports lucide directly (can't resolve from `fe/client`, and RN needs the native build) | `lucide-react` (name → component map) | `icons.native.tsx` — `lucide-react-native`/glyph map | reuse web |
+| `asset.ts` | `assetUrl(url)` — normalizes JSON-declared asset URLs (`/clients/...` → `./clients/...` under `file://`, base-prefix under subpath deploys); wired into the `Image` primitive so page JSON needs no changes | `document.baseURI`/`import.meta.env.BASE_URL` | passthrough (native assets resolve differently — screens use `require`/`uri` directly) | essential — `file://` breaks bare `/x` paths |
+| `report.ts` | `setReporter(fn)` / `reportError(err, {source, extra})` — pluggable error sink; default `console.error`. Broken reporters can't crash the app | console | same (pure JS, no `.native` needed) | reuse web |
+| `error-boundary.tsx` | `<DefErrorBoundary label fallback>` — class boundary that reports via `platform/report`; render-engine wraps every def's component so one crash = inline error box, not a blank page | DOM fallback box | `error-boundary.native.tsx` — View/Text fallback | reuse web |
 
 RN host-app checklist (one-time, nothing in shared src changes):
 
@@ -252,6 +271,11 @@ the named strategy (`array_upsert`, `array_toggle`, `array_remove`,
 `<client>_gs_<name>`. `useEntity("cart")` detects registered sessions and
 reads/writes the store instead of HTTP — the entity API contract is the
 same for sessions and sources.
+
+Non-session `useEntity` mutations support `optimistic: true`
+(`UseEntityOptions`): POST/PUT/DELETE patch the local `list` immediately
+and restore the snapshot when the API call errors — the normal
+`onMutationReload` still reconciles afterwards.
 
 ## Theming
 
@@ -489,6 +513,10 @@ lang in the cache namespace.
 - `npm run build` / `npm run build:<name>` — `tsc -b && vite build`
 - `node scripts/check-mocks.mjs` — validate flagged mock files exist,
   def.type names resolve, and dynamic action endpoints exist
+- `node scripts/validate-defs.mjs` (`npm run validate`) — deeper def
+  audit: every `def.type` resolves to a component, menu entities exist,
+  sessions map to reducer strategies, actions name registered endpoints,
+  themes map to style-config endpoints — run inside `verify.sh`
 - `npm run test` / `test:watch` — vitest contract suite (see Testing)
 - `npm run lint` — eslint, both sides of the tenancy boundary
   (`fe/app` + `fe/client` via `fe/eslint.config.js`)

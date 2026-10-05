@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { type Definition } from "./types";
 import { apiClient } from "../../library/api";
 import { useRouteParams } from "@/platform/navigation";
+import { reportError } from "@/platform/report";
 
 // `:param` placeholders in action endpoints / queryParams resolve from
 // the current route's params — so a detail page (/stays/:id) can declare
@@ -102,13 +103,18 @@ export function useDynamicData(def: Definition) {
       } catch (err: any) {
         const msg = err.message || "Unknown error occurred";
         setErrorMap((prev) => ({ ...prev, [actionKey]: msg }));
-        if (isInitialCall) setFirstLoadError(msg);
+        if (isInitialCall) {
+          setFirstLoadError(msg);
+          reportError(err, {
+            source: `dynamic:${def.type}:${actionKey}`,
+          });
+        }
         return { error: true, message: msg, status_code: 500, data: null };
       } finally {
         setLoadingMap((prev) => ({ ...prev, [actionKey]: false }));
       }
     },
-    [isDynamic, actions, searchParameters, routeParams],
+    [isDynamic, actions, searchParameters, routeParams, def.type],
   );
 
   const actionsKey = JSON.stringify(def.properties.action || []);

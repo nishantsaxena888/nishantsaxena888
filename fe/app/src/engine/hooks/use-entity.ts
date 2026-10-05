@@ -24,6 +24,10 @@ export interface UseEntityOptions {
   // useCurdEntity). Falls back to configuration `rbac[entity]`. Spec is
   // the backend shape: {"read": "*", "write": ["admin","editor"]}.
   rbac?: RbacSpec;
+  // Optimistic mutations — POST/PUT/DELETE update the local list before
+  // the API responds and roll back on failure (the eventual reload still
+  // reconciles). Default off: callers opt in per use-entity.
+  optimistic?: boolean;
 }
 
 export interface EntityReloadParams {
@@ -50,6 +54,7 @@ export function useEntity(entity: string, options?: UseEntityOptions) {
     header,
     disabledMethods = [],
     rbac,
+    optimistic = false,
   } = options || {};
 
   const isSession = isRegisteredSession(entity);
@@ -321,12 +326,17 @@ export function useEntity(entity: string, options?: UseEntityOptions) {
       return { data: null, error: true, status_code: 403, message: "POST not permitted" };
     }
     setLoading(true);
+    const snapshot = list;
+    if (optimistic) {
+      setList((prev) => [...prev, { ...payload, _optimistic: true }]);
+    }
     try {
       const res = await apiClient(entity, {
         method: "post",
         payload,
         header,
       });
+      if (res.error && optimistic) setList(snapshot);
       if (onMutationReload && !res.error) {
         await reload();
       }
@@ -346,6 +356,16 @@ export function useEntity(entity: string, options?: UseEntityOptions) {
       return { data: null, error: true, status_code: 403, message: "PUT not permitted" };
     }
     setLoading(true);
+    const snapshot = list;
+    if (optimistic) {
+      setList((prev) =>
+        prev.map((item) =>
+          String(item?.id) === String(updateId)
+            ? { ...item, ...payload, _optimistic: true }
+            : item,
+        ),
+      );
+    }
     try {
       const res = await apiClient(entity, {
         method: "put",
@@ -353,6 +373,7 @@ export function useEntity(entity: string, options?: UseEntityOptions) {
         payload,
         header,
       });
+      if (res.error && optimistic) setList(snapshot);
       if (onMutationReload && !res.error) {
         await reload();
       }
@@ -371,12 +392,19 @@ export function useEntity(entity: string, options?: UseEntityOptions) {
       return { data: null, error: true, status_code: 403, message: "DELETE not permitted" };
     }
     setLoading(true);
+    const snapshot = list;
+    if (optimistic) {
+      setList((prev) =>
+        prev.filter((item) => String(item?.id) !== String(deleteId)),
+      );
+    }
     try {
       const res = await apiClient(entity, {
         method: "delete",
         id: deleteId,
         header,
       });
+      if (res.error && optimistic) setList(snapshot);
       if (onMutationReload && !res.error) {
         await reload();
       }

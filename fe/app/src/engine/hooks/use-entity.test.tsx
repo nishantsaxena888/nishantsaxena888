@@ -65,3 +65,87 @@ describe("useEntity — centralized RBAC", () => {
     expect(result.current.can("delete")).toBe(true);
   });
 });
+
+describe("useEntity — optimistic mutations", () => {
+  const OPEN = { rbac: { read: "*", write: "*" } };
+
+  it("optimistic post shows item before resolve, rolls back on error", async () => {
+    const { result } = renderHook(() =>
+      useEntity("item", {
+        optimistic: true,
+        onMutationReload: false,
+        rbac: OPEN.rbac as any,
+      }),
+    );
+    await waitFor(() => expect(result.current.isSkeleton).toBe(false));
+
+    // Defer the POST response so the optimistic window is observable.
+    let resolvePost: (v: any) => void = () => {};
+    (apiClient as any).mockImplementationOnce(
+      () => new Promise((r) => (resolvePost = r)),
+    );
+
+    let posted: Promise<any> = Promise.resolve();
+    await vi.waitFor(async () => {
+      posted = result.current.onPost({ name: "temp" });
+      expect(
+        result.current.list.some((i: any) => i._optimistic === true),
+      ).toBe(true);
+    });
+
+    resolvePost({ data: null, error: true, status_code: 500, message: "x" });
+    await posted;
+    await waitFor(() =>
+      expect(
+        result.current.list.every((i: any) => i._optimistic !== true),
+      ).toBe(true),
+    );
+  });
+
+  it("optimistic delete hides the row until the response lands", async () => {
+    // GET seeds one row — OPTIONS/other calls fall through to the default.
+    (apiClient as any).mockImplementation(async (_e: string, req: any) =>
+      req.method === "get"
+        ? {
+            data: { items: [{ id: 9, name: "seed" }], total: 1 },
+            error: false,
+            status_code: 200,
+          }
+        : { data: { items: [], total: 0 }, error: false, status_code: 200 },
+    );
+    const { result } = renderHook(() =>
+      useEntity("item", {
+        optimistic: true,
+        onMutationReload: false,
+        rbac: OPEN.rbac as any,
+      }),
+    );
+    await waitFor(() =>
+      expect(result.current.list.some((i: any) => i.id === 9)).toBe(true),
+    );
+
+    let resolveDel: (v: any) => void = () => {};
+    (apiClient as any).mockImplementationOnce(
+      () => new Promise((r) => (resolveDel = r)),
+    );
+    const done = result.current.onDelete(9);
+    await waitFor(() =>
+      expect(result.current.list.some((i: any) => i.id === 9)).toBe(false),
+    );
+
+    resolveDel({ data: null, error: true, status_code: 500, message: "x" });
+    await done;
+    await waitFor(() =>
+      expect(result.current.list.some((i: any) => i.id === 9)).toBe(true),
+    );
+  });
+
+  it("non-optimistic mode leaves the list untouched", async () => {
+    const { result } = renderHook(() =>
+      useEntity("item", { onMutationReload: false, rbac: OPEN.rbac as any }),
+    );
+    await waitFor(() => expect(result.current.isSkeleton).toBe(false));
+    await result.current.onPost({ name: "temp" });
+    expect(result.current.list.some((i: any) => i._optimistic)).toBe(false);
+  });
+});

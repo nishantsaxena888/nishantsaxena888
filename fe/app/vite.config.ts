@@ -14,6 +14,23 @@ export default defineConfig({
     tailwindcss(),
     babel({ presets: [reactCompilerPreset()] }),
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        // Stable vendor split — framework/runtime deps cache independently
+        // of app code, so a client-content-only deploy doesn't invalidate
+        // the browser's vendor cache. (Rolldown: function form only.)
+        manualChunks(id: string) {
+          if (!id.includes("node_modules")) return;
+          if (id.includes("react-dom") || /node_modules\/react\//.test(id) || id.includes("scheduler"))
+            return "vendor-react";
+          if (id.includes("react-router")) return "vendor-router";
+          if (id.includes("zustand")) return "vendor-state";
+          if (id.includes("lucide-react")) return "vendor-icons";
+        },
+      },
+    },
+  },
   resolve: {
     alias: {
       "react": path.resolve(__dirname, "node_modules/react"),
