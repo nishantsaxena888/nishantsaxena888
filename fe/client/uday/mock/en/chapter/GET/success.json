@@ -3252,7 +3252,14 @@
       "title": "AWS IAM \u2014 Secure Access & Permissions",
       "order": 1,
       "content_base": "/chapters/",
-      "published_revision_id": 1397
+      "published_revision_id": 1397,
+      "description": "Security foundation: Users, Groups, Roles, Policies, MFA, least-privilege, and cross-account access.",
+      "icon": "\ud83d\udd10",
+      "difficulty": "beginner",
+      "duration": "1.5 hours",
+      "color": "#ef4444",
+      "color_bg": "#fef2f2",
+      "lessons": 3
     },
     {
       "id": 1398,
@@ -3260,7 +3267,14 @@
       "title": "Amazon S3 \u2014 Store Files & Static Assets",
       "order": 2,
       "content_base": "/chapters/",
-      "published_revision_id": 1398
+      "published_revision_id": 1398,
+      "description": "Object storage: buckets, storage classes, versioning, lifecycle policies, pre-signed URLs, and event notifications.",
+      "icon": "\ud83e\udea3",
+      "difficulty": "beginner",
+      "duration": "1.5 hours",
+      "color": "#22c55e",
+      "color_bg": "#f0fdf4",
+      "lessons": 3
     },
     {
       "id": 1399,
@@ -3268,7 +3282,14 @@
       "title": "Amazon EC2 \u2014 Launch Your First Server",
       "order": 3,
       "content_base": "/chapters/",
-      "published_revision_id": 1399
+      "published_revision_id": 1399,
+      "description": "Virtual servers: instance types, AMIs, Security Groups, EBS, Auto Scaling, and purchasing options.",
+      "icon": "\ud83d\udda5\ufe0f",
+      "difficulty": "beginner",
+      "duration": "1.5 hours",
+      "color": "#f97316",
+      "color_bg": "#fff7ed",
+      "lessons": 3
     },
     {
       "id": 1400,
@@ -3276,7 +3297,14 @@
       "title": "Amazon VPC \u2014 Build Your Network Foundation",
       "order": 4,
       "content_base": "/chapters/",
-      "published_revision_id": 1400
+      "published_revision_id": 1400,
+      "description": "Cloud networking: subnets, route tables, NAT, NACLs vs Security Groups, VPC Endpoints, and peering.",
+      "icon": "\ud83c\udfd7\ufe0f",
+      "difficulty": "beginner",
+      "duration": "1.5 hours",
+      "color": "#6366f1",
+      "color_bg": "#eef2ff",
+      "lessons": 3
     },
     {
       "id": 1401,
@@ -3284,7 +3312,14 @@
       "title": "Amazon CloudWatch \u2014 Monitor Everything",
       "order": 5,
       "content_base": "/chapters/",
-      "published_revision_id": 1401
+      "published_revision_id": 1401,
+      "description": "Metrics, alarms, Logs, Logs Insights, dashboards, custom metrics, and EMF.",
+      "icon": "\ud83d\udcca",
+      "difficulty": "intermediate",
+      "duration": "1.5 hours",
+      "color": "#06b6d4",
+      "color_bg": "#ecfeff",
+      "lessons": 3
     },
     {
       "id": 1402,
@@ -3292,7 +3327,14 @@
       "title": "Amazon RDS \u2014 Relational Databases",
       "order": 6,
       "content_base": "/chapters/",
-      "published_revision_id": 1402
+      "published_revision_id": 1402,
+      "description": "Managed databases: Multi-AZ, Read Replicas, Aurora, RDS Proxy, backups, and Lambda integration.",
+      "icon": "\ud83d\uddc3\ufe0f",
+      "difficulty": "intermediate",
+      "duration": "1.5 hours",
+      "color": "#a855f7",
+      "color_bg": "#faf5ff",
+      "lessons": 3
     },
     {
       "id": 1403,
@@ -3300,7 +3342,14 @@
       "title": "Amazon Route 53 \u2014 DNS & Domain Names",
       "order": 7,
       "content_base": "/chapters/",
-      "published_revision_id": 1403
+      "published_revision_id": 1403,
+      "description": "DNS service: hosted zones, record types, routing policies, health checks, and failover.",
+      "icon": "\ud83c\udf10",
+      "difficulty": "intermediate",
+      "duration": "1.5 hours",
+      "color": "#0ea5e9",
+      "color_bg": "#f0f9ff",
+      "lessons": 3
     },
     {
       "id": 1404,
@@ -3308,7 +3357,14 @@
       "title": "AWS Lambda \u2014 Serverless Compute",
       "order": 8,
       "content_base": "/chapters/",
-      "published_revision_id": 1404
+      "published_revision_id": 1404,
+      "description": "Lambda fundamentals, execution lifecycle, handler, event/context objects, cold starts, runtimes, and your first function.",
+      "icon": "\u26a1",
+      "difficulty": "beginner",
+      "duration": "3 hours",
+      "color": "var(--color-primary-500)",
+      "color_bg": "var(--color-primary-50)",
+      "lessons": 5
     },
     {
       "id": 1405,
@@ -3316,7 +3372,14 @@
       "title": "Amazon API Gateway \u2014 Build REST APIs",
       "order": 9,
       "content_base": "/chapters/",
-      "published_revision_id": 1405
+      "published_revision_id": 1405,
+      "description": "REST APIs, HTTP APIs, Lambda proxy integration, authorization, throttling, and CORS.",
+      "icon": "\ud83c\udf10",
+      "difficulty": "intermediate",
+      "duration": "2.5 hours",
+      "color": "var(--color-accent-500)",
+      "color_bg": "var(--color-accent-50)",
+      "lessons": 3
     },
     {
       "id": 1406,
@@ -3324,7 +3387,14 @@
       "title": "Amazon DynamoDB \u2014 NoSQL Database",
       "order": 10,
       "content_base": "/chapters/",
-      "published_revision_id": 1406
+      "published_revision_id": 1406,
+      "description": "NoSQL data modeling, CRUD operations, Streams, GSI/LSI, and Lambda integration.",
+      "icon": "\ud83d\uddc4\ufe0f",
+      "difficulty": "intermediate",
+      "duration": "3 hours",
+      "color": "#3b82f6",
+      "color_bg": "#eff6ff",
+      "lessons": 3
     },
     {
       "id": 1407,
@@ -3332,7 +3402,14 @@
       "title": "Amazon Cognito \u2014 User Authentication",
       "order": 11,
       "content_base": "/chapters/",
-      "published_revision_id": 1407
+      "published_revision_id": 1407,
+      "description": "User authentication, OAuth 2.0, user pools, identity pools, and Lambda triggers.",
+      "icon": "\ud83d\udd10",
+      "difficulty": "intermediate",
+      "duration": "2 hours",
+      "color": "#8b5cf6",
+      "color_bg": "#f5f3ff",
+      "lessons": 3
     },
     {
       "id": 1408,
@@ -3340,7 +3417,14 @@
       "title": "Amazon SQS \u2014 Message Queues",
       "order": 12,
       "content_base": "/chapters/",
-      "published_revision_id": 1408
+      "published_revision_id": 1408,
+      "description": "Message queuing, producer/consumer, visibility timeout, DLQ, and Lambda event source mapping.",
+      "icon": "\ud83d\udce8",
+      "difficulty": "intermediate",
+      "duration": "2.5 hours",
+      "color": "#ec4899",
+      "color_bg": "#fdf2f8",
+      "lessons": 3
     },
     {
       "id": 1409,
@@ -3348,7 +3432,14 @@
       "title": "Amazon SNS \u2014 Notifications & Fan-Out",
       "order": 13,
       "content_base": "/chapters/",
-      "published_revision_id": 1409
+      "published_revision_id": 1409,
+      "description": "Pub/sub messaging, fan-out patterns, message filtering, and Lambda subscriptions.",
+      "icon": "\ud83d\udce2",
+      "difficulty": "intermediate",
+      "duration": "2 hours",
+      "color": "#14b8a6",
+      "color_bg": "#f0fdfa",
+      "lessons": 3
     },
     {
       "id": 1410,
@@ -3356,7 +3447,14 @@
       "title": "Amazon EventBridge \u2014 Event-Driven Architecture",
       "order": 14,
       "content_base": "/chapters/",
-      "published_revision_id": 1410
+      "published_revision_id": 1410,
+      "description": "Event-driven architecture, event buses, rules, patterns, scheduler, and Lambda targets.",
+      "icon": "\ud83d\udd14",
+      "difficulty": "advanced",
+      "duration": "2.5 hours",
+      "color": "#f59e0b",
+      "color_bg": "#fffbeb",
+      "lessons": 3
     },
     {
       "id": 1411,
@@ -3364,7 +3462,14 @@
       "title": "Amazon ECR \u2014 Container Registry",
       "order": 15,
       "content_base": "/chapters/",
-      "published_revision_id": 1411
+      "published_revision_id": 1411,
+      "description": "Container registry: immutable tags, vulnerability scanning, lifecycle policies, and cross-account access.",
+      "icon": "\ud83d\udce6",
+      "difficulty": "intermediate",
+      "duration": "1.5 hours",
+      "color": "#f43f5e",
+      "color_bg": "#fff1f2",
+      "lessons": 3
     },
     {
       "id": 1412,
@@ -3372,7 +3477,14 @@
       "title": "Amazon ECS \u2014 Container Orchestration",
       "order": 16,
       "content_base": "/chapters/",
-      "published_revision_id": 1412
+      "published_revision_id": 1412,
+      "description": "Container orchestration: clusters, task definitions, services, ALB integration, and launch types.",
+      "icon": "\ud83d\ude80",
+      "difficulty": "intermediate",
+      "duration": "1.5 hours",
+      "color": "#3b82f6",
+      "color_bg": "#eff6ff",
+      "lessons": 3
     },
     {
       "id": 1413,
@@ -3380,7 +3492,14 @@
       "title": "AWS Fargate \u2014 Serverless Containers",
       "order": 17,
       "content_base": "/chapters/",
-      "published_revision_id": 1413
+      "published_revision_id": 1413,
+      "description": "Serverless containers: awsvpc networking, capacity providers, task sizing, and Spot pricing.",
+      "icon": "\u2601\ufe0f",
+      "difficulty": "intermediate",
+      "duration": "1 hour",
+      "color": "#8b5cf6",
+      "color_bg": "#f5f3ff",
+      "lessons": 3
     },
     {
       "id": 1414,
@@ -3388,7 +3507,14 @@
       "title": "Elastic Load Balancing \u2014 Distribute Traffic",
       "order": 18,
       "content_base": "/chapters/",
-      "published_revision_id": 1414
+      "published_revision_id": 1414,
+      "description": "Application traffic routing: ALB vs NLB, target groups, listeners, rules, and health checks.",
+      "icon": "\u2696\ufe0f",
+      "difficulty": "intermediate",
+      "duration": "1.5 hours",
+      "color": "#10b981",
+      "color_bg": "#ecfdf5",
+      "lessons": 3
     },
     {
       "id": 1415,
@@ -3396,7 +3522,14 @@
       "title": "AWS CodeBuild \u2014 CI Build Automation",
       "order": 19,
       "content_base": "/chapters/",
-      "published_revision_id": 1415
+      "published_revision_id": 1415,
+      "description": "Continuous integration: buildspec.yml, environments, artifacts, caching, and ECR integration.",
+      "icon": "\ud83c\udfd7\ufe0f",
+      "difficulty": "intermediate",
+      "duration": "1 hour",
+      "color": "#f59e0b",
+      "color_bg": "#fffbeb",
+      "lessons": 3
     },
     {
       "id": 1416,
@@ -3404,7 +3537,14 @@
       "title": "AWS CodePipeline \u2014 CD Pipeline",
       "order": 20,
       "content_base": "/chapters/",
-      "published_revision_id": 1416
+      "published_revision_id": 1416,
+      "description": "Continuous delivery: stages, actions, artifacts, transitions, manual approvals, and ECS deployments.",
+      "icon": "\ud83d\udd04",
+      "difficulty": "intermediate",
+      "duration": "1.5 hours",
+      "color": "#0ea5e9",
+      "color_bg": "#f0f9ff",
+      "lessons": 3
     },
     {
       "id": 1417,
@@ -3412,7 +3552,14 @@
       "title": "AWS CloudFormation \u2014 Infrastructure as Code",
       "order": 21,
       "content_base": "/chapters/",
-      "published_revision_id": 1417
+      "published_revision_id": 1417,
+      "description": "Infrastructure as Code: templates, stacks, parameters, change sets, drift detection, and SAM.",
+      "icon": "\u2699\ufe0f",
+      "difficulty": "advanced",
+      "duration": "2 hours",
+      "color": "#6366f1",
+      "color_bg": "#eef2ff",
+      "lessons": 3
     },
     {
       "id": 1418,
@@ -3420,7 +3567,14 @@
       "title": "AWS KMS \u2014 Encryption & Key Management",
       "order": 22,
       "content_base": "/chapters/",
-      "published_revision_id": 1418
+      "published_revision_id": 1418,
+      "description": "Key Management Service, encryption at rest, customer managed keys, envelope encryption.",
+      "icon": "\ud83d\udd10",
+      "difficulty": "intermediate",
+      "duration": "75 min",
+      "color": "#f59e0b",
+      "color_bg": "#fef3c7",
+      "lessons": 9
     },
     {
       "id": 1419,
@@ -3428,7 +3582,14 @@
       "title": "AWS STS \u2014 Temporary Credentials & Roles",
       "order": 23,
       "content_base": "/chapters/",
-      "published_revision_id": 1419
+      "published_revision_id": 1419,
+      "description": "Security Token Service, assuming roles, temporary credentials, cross-account access.",
+      "icon": "\ud83c\udfab",
+      "difficulty": "intermediate",
+      "duration": "65 min",
+      "color": "#f59e0b",
+      "color_bg": "#fef3c7",
+      "lessons": 8
     },
     {
       "id": 1420,
@@ -3436,7 +3597,14 @@
       "title": "AWS Secrets Manager \u2014 Manage Credentials",
       "order": 24,
       "content_base": "/chapters/",
-      "published_revision_id": 1420
+      "published_revision_id": 1420,
+      "description": "Securely store and rotate database credentials, API keys, and secrets.",
+      "icon": "\ud83d\udd11",
+      "difficulty": "intermediate",
+      "duration": "60 min",
+      "color": "#f59e0b",
+      "color_bg": "#fef3c7",
+      "lessons": 7
     },
     {
       "id": 1421,
@@ -3444,7 +3612,14 @@
       "title": "AWS Systems Manager \u2014 Operations Hub",
       "order": 25,
       "content_base": "/chapters/",
-      "published_revision_id": 1421
+      "published_revision_id": 1421,
+      "description": "Parameter Store, Session Manager, Run Command \u2014 manage servers without SSH.",
+      "icon": "\ud83d\udee0\ufe0f",
+      "difficulty": "intermediate",
+      "duration": "70 min",
+      "color": "#0ea5e9",
+      "color_bg": "#e0f2fe",
+      "lessons": 6
     },
     {
       "id": 1422,
@@ -3452,7 +3627,14 @@
       "title": "AWS CloudTrail \u2014 Audit API Activity",
       "order": 26,
       "content_base": "/chapters/",
-      "published_revision_id": 1422
+      "published_revision_id": 1422,
+      "description": "Track user activity and API usage across your AWS infrastructure.",
+      "icon": "\ud83d\udccb",
+      "difficulty": "intermediate",
+      "duration": "70 min",
+      "color": "#0ea5e9",
+      "color_bg": "#e0f2fe",
+      "lessons": 6
     },
     {
       "id": 1423,
@@ -3460,7 +3642,14 @@
       "title": "AWS Config \u2014 Resource Compliance",
       "order": 27,
       "content_base": "/chapters/",
-      "published_revision_id": 1423
+      "published_revision_id": 1423,
+      "description": "Assess, audit, and evaluate resource configurations for compliance.",
+      "icon": "\ud83d\udcca",
+      "difficulty": "intermediate",
+      "duration": "65 min",
+      "color": "#0ea5e9",
+      "color_bg": "#e0f2fe",
+      "lessons": 6
     },
     {
       "id": 1424,
@@ -3468,7 +3657,14 @@
       "title": "AWS Backup \u2014 Data Protection & DR",
       "order": 28,
       "content_base": "/chapters/",
-      "published_revision_id": 1424
+      "published_revision_id": 1424,
+      "description": "Centralized backup management, vaults, recovery points, Vault Lock, cross-region copy.",
+      "icon": "\ud83d\udcbe",
+      "difficulty": "intermediate",
+      "duration": "60 min",
+      "color": "#0ea5e9",
+      "color_bg": "#e0f2fe",
+      "lessons": 6
     },
     {
       "id": 1425,
@@ -3476,7 +3672,14 @@
       "title": "Amazon CloudFront \u2014 CDN & Edge Delivery",
       "order": 29,
       "content_base": "/chapters/",
-      "published_revision_id": 1425
+      "published_revision_id": 1425,
+      "description": "Global Content Delivery Network, caching, edge locations, OAC, and Lambda@Edge.",
+      "icon": "\ud83c\udf0d",
+      "difficulty": "intermediate",
+      "duration": "75 min",
+      "color": "#10b981",
+      "color_bg": "#d1fae5",
+      "lessons": 6
     },
     {
       "id": 1426,
@@ -3484,7 +3687,14 @@
       "title": "AWS WAF & Shield \u2014 Web App Security",
       "order": 30,
       "content_base": "/chapters/",
-      "published_revision_id": 1426
+      "published_revision_id": 1426,
+      "description": "Web Application Firewall, DDoS protection, managed rules, rate limiting.",
+      "icon": "\ud83d\udee1\ufe0f",
+      "difficulty": "intermediate",
+      "duration": "60 min",
+      "color": "#10b981",
+      "color_bg": "#d1fae5",
+      "lessons": 6
     },
     {
       "id": 1427,
@@ -3492,7 +3702,14 @@
       "title": "AWS Organizations \u2014 Multi-Account Governance",
       "order": 31,
       "content_base": "/chapters/",
-      "published_revision_id": 1427
+      "published_revision_id": 1427,
+      "description": "Centrally manage and govern multiple AWS accounts with SCPs and Control Tower.",
+      "icon": "\ud83c\udfe2",
+      "difficulty": "intermediate",
+      "duration": "60 min",
+      "color": "#10b981",
+      "color_bg": "#d1fae5",
+      "lessons": 5
     },
     {
       "id": 1428,
@@ -3500,7 +3717,14 @@
       "title": "AWS PrivateLink \u2014 Private Connectivity",
       "order": 32,
       "content_base": "/chapters/",
-      "published_revision_id": 1428
+      "published_revision_id": 1428,
+      "description": "Securely access services over the AWS network without the internet.",
+      "icon": "\ud83d\udd12",
+      "difficulty": "advanced",
+      "duration": "60 min",
+      "color": "#10b981",
+      "color_bg": "#d1fae5",
+      "lessons": 5
     },
     {
       "id": 1429,
@@ -3508,7 +3732,14 @@
       "title": "Amazon ElastiCache \u2014 In-Memory Caching",
       "order": 33,
       "content_base": "/chapters/",
-      "published_revision_id": 1429
+      "published_revision_id": 1429,
+      "description": "In-memory caching with Redis and Memcached. Sub-millisecond latency.",
+      "icon": "\u26a1",
+      "difficulty": "intermediate",
+      "duration": "60 min",
+      "color": "#10b981",
+      "color_bg": "#d1fae5",
+      "lessons": 4
     },
     {
       "id": 1430,
@@ -3516,7 +3747,14 @@
       "title": "Amazon OpenSearch \u2014 Search & Log Analytics",
       "order": 34,
       "content_base": "/chapters/",
-      "published_revision_id": 1430
+      "published_revision_id": 1430,
+      "description": "Search, analyze, and visualize data in real-time with dashboards.",
+      "icon": "\ud83d\udd0d",
+      "difficulty": "advanced",
+      "duration": "60 min",
+      "color": "#10b981",
+      "color_bg": "#d1fae5",
+      "lessons": 4
     },
     {
       "id": 1431,
@@ -3524,7 +3762,14 @@
       "title": "AWS Step Functions \u2014 Workflow Orchestration",
       "order": 35,
       "content_base": "/chapters/",
-      "published_revision_id": 1431
+      "published_revision_id": 1431,
+      "description": "Visual workflow service: state machines, ASL, error handling, retries, parallel execution.",
+      "icon": "\ud83d\udee4\ufe0f",
+      "difficulty": "advanced",
+      "duration": "60 min",
+      "color": "#ec4899",
+      "color_bg": "#fce7f3",
+      "lessons": 4
     },
     {
       "id": 1432,
@@ -3532,7 +3777,14 @@
       "title": "AWS IAM Identity Center \u2014 SSO & Workforce",
       "order": 36,
       "content_base": "/chapters/",
-      "published_revision_id": 1432
+      "published_revision_id": 1432,
+      "description": "Centralized workforce access management, SSO, permission sets.",
+      "icon": "\ud83d\udc54",
+      "difficulty": "intermediate",
+      "duration": "50 min",
+      "color": "#ec4899",
+      "color_bg": "#fce7f3",
+      "lessons": 4
     },
     {
       "id": 1433,
@@ -3540,7 +3792,14 @@
       "title": "Amazon Bedrock & GenAI \u2014 AI-Powered Apps",
       "order": 37,
       "content_base": "/chapters/",
-      "published_revision_id": 1433
+      "published_revision_id": 1433,
+      "description": "Build and scale Generative AI applications with foundation models, RAG, and agents.",
+      "icon": "\ud83e\udde0",
+      "difficulty": "advanced",
+      "duration": "75 min",
+      "color": "#ec4899",
+      "color_bg": "#fce7f3",
+      "lessons": 4
     },
     {
       "id": 1434,
@@ -3548,7 +3807,14 @@
       "title": "AWS Certificate Manager (ACM) \u2014 SSL/TLS Certificates",
       "order": 38,
       "content_base": "/chapters/",
-      "published_revision_id": 1434
+      "published_revision_id": 1434,
+      "description": "Free SSL/TLS certificates, DNS & email validation, auto-renewal, ALB & CloudFront integration.",
+      "icon": "\ud83d\udd12",
+      "difficulty": "intermediate",
+      "duration": "60 min",
+      "color": "#059669",
+      "color_bg": "#ecfdf5",
+      "lessons": 4
     },
     {
       "id": 1435,
@@ -3556,7 +3822,14 @@
       "title": "Amazon EC2 Auto Scaling \u2014 Automatic Capacity",
       "order": 39,
       "content_base": "/chapters/",
-      "published_revision_id": 1435
+      "published_revision_id": 1435,
+      "description": "Launch Templates, ASG configuration, scaling policies, health checks, lifecycle hooks, warm pools.",
+      "icon": "\ud83d\udcc8",
+      "difficulty": "intermediate",
+      "duration": "75 min",
+      "color": "#0284c7",
+      "color_bg": "#f0f9ff",
+      "lessons": 4
     },
     {
       "id": 1436,
@@ -3564,7 +3837,14 @@
       "title": "Amazon EFS \u2014 Elastic File System",
       "order": 40,
       "content_base": "/chapters/",
-      "published_revision_id": 1436
+      "published_revision_id": 1436,
+      "description": "Serverless elastic file storage for EC2, ECS, and Lambda shared across AZs.",
+      "icon": "\ud83d\udcc1",
+      "difficulty": "intermediate",
+      "duration": "80 min",
+      "color": "#d97706",
+      "color_bg": "#fffbeb",
+      "lessons": 4
     },
     {
       "id": 1437,
@@ -3572,7 +3852,14 @@
       "title": "AWS X-Ray \u2014 Distributed Tracing & Observability",
       "order": 41,
       "content_base": "/chapters/",
-      "published_revision_id": 1437
+      "published_revision_id": 1437,
+      "description": "Trace requests across microservices, analyze latency bottlenecks, and debug errors.",
+      "icon": "\ud83d\udcc9",
+      "difficulty": "intermediate",
+      "duration": "70 min",
+      "color": "#7c3aed",
+      "color_bg": "#f5f3ff",
+      "lessons": 4
     },
     {
       "id": 1438,
@@ -3580,7 +3867,14 @@
       "title": "AWS CodeDeploy \u2014 Deployment Automation",
       "order": 42,
       "content_base": "/chapters/",
-      "published_revision_id": 1438
+      "published_revision_id": 1438,
+      "description": "Automate code deployments to EC2, ECS, and AWS Lambda with zero downtime.",
+      "icon": "\ud83d\ude80",
+      "difficulty": "intermediate",
+      "duration": "85 min",
+      "color": "#db2777",
+      "color_bg": "#fdf2f8",
+      "lessons": 4
     },
     {
       "id": 1439,
@@ -3588,7 +3882,14 @@
       "title": "Amazon GuardDuty \u2014 Intelligent Threat Detection",
       "order": 43,
       "content_base": "/chapters/",
-      "published_revision_id": 1439
+      "published_revision_id": 1439,
+      "description": "Continuous security monitoring using ML to detect compromised accounts and resources.",
+      "icon": "\ud83d\udee1\ufe0f",
+      "difficulty": "intermediate",
+      "duration": "65 min",
+      "color": "#dc2626",
+      "color_bg": "#fef2f2",
+      "lessons": 4
     },
     {
       "id": 1440,
@@ -3596,7 +3897,14 @@
       "title": "Amazon Inspector \u2014 Automated Vulnerability Assessment",
       "order": 44,
       "content_base": "/chapters/",
-      "published_revision_id": 1440
+      "published_revision_id": 1440,
+      "description": "Automated vulnerability scanning for EC2 instances, ECR container images, and Lambda functions.",
+      "icon": "\ud83d\udd0d",
+      "difficulty": "intermediate",
+      "duration": "60 min",
+      "color": "#4f46e5",
+      "color_bg": "#eef2ff",
+      "lessons": 4
     },
     {
       "id": 1441,
@@ -3604,7 +3912,14 @@
       "title": "AWS Security Hub \u2014 Centralized Security Posture",
       "order": 45,
       "content_base": "/chapters/",
-      "published_revision_id": 1441
+      "published_revision_id": 1441,
+      "description": "Centralized security state management and automated compliance checks across accounts.",
+      "icon": "\ud83c\udfdb\ufe0f",
+      "difficulty": "advanced",
+      "duration": "75 min",
+      "color": "#0891b2",
+      "color_bg": "#ecfeff",
+      "lessons": 4
     },
     {
       "id": 1442,
@@ -3612,7 +3927,14 @@
       "title": "AWS Resource Access Manager (RAM) \u2014 Resource Sharing",
       "order": 46,
       "content_base": "/chapters/",
-      "published_revision_id": 1442
+      "published_revision_id": 1442,
+      "description": "Share AWS resources across AWS accounts or within your AWS Organization securely.",
+      "icon": "\ud83e\udd1d",
+      "difficulty": "intermediate",
+      "duration": "60 min",
+      "color": "#65a30d",
+      "color_bg": "#f7fee7",
+      "lessons": 4
     },
     {
       "id": 1443,
@@ -3620,7 +3942,14 @@
       "title": "AWS Cost Explorer & Budgets \u2014 Cost Optimization",
       "order": 47,
       "content_base": "/chapters/",
-      "published_revision_id": 1443
+      "published_revision_id": 1443,
+      "description": "Analyze AWS spending, set budget alerts, and enforce cost allocation tags.",
+      "icon": "\ud83d\udcb0",
+      "difficulty": "beginner",
+      "duration": "70 min",
+      "color": "#16a34a",
+      "color_bg": "#f0fdf4",
+      "lessons": 4
     }
   ],
   "page": 1,

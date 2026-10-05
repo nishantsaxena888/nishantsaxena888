@@ -24,6 +24,27 @@
       },
       "published_revision_id": {
         "type": "int"
+      },
+      "description": {
+        "type": "str"
+      },
+      "icon": {
+        "type": "str"
+      },
+      "difficulty": {
+        "type": "str"
+      },
+      "duration": {
+        "type": "str"
+      },
+      "color": {
+        "type": "str"
+      },
+      "color_bg": {
+        "type": "str"
+      },
+      "lessons": {
+        "type": "int"
       }
     },
     "ui": {

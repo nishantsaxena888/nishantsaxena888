@@ -17,6 +17,22 @@
             "queryParams": {
               "size": 100
             }
+          },
+          {
+            "key": "categories",
+            "endpoint": "category",
+            "method": "GET",
+            "queryParams": {
+              "size": 50
+            }
+          },
+          {
+            "key": "chapters",
+            "endpoint": "chapter",
+            "method": "GET",
+            "queryParams": {
+              "size": 500
+            }
           }
         ]
       },

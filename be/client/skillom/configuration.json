@@ -200,7 +200,7 @@
   "pages": {
     "courses": {
       "meta": {
-        "title": "Courses \u2014 Skillom"
+        "title": "Courses — Skillom"
       },
       "config": [
         {
@@ -217,6 +217,22 @@
                 "queryParams": {
                   "size": 100
                 }
+              },
+              {
+                "key": "categories",
+                "endpoint": "category",
+                "method": "GET",
+                "queryParams": {
+                  "size": 50
+                }
+              },
+              {
+                "key": "chapters",
+                "endpoint": "chapter",
+                "method": "GET",
+                "queryParams": {
+                  "size": 500
+                }
               }
             ]
           },
@@ -229,7 +245,7 @@
     },
     "course": {
       "meta": {
-        "title": "Course \u2014 Skillom"
+        "title": "Course — Skillom"
       },
       "config": [
         {
@@ -274,7 +290,7 @@
     },
     "learn": {
       "meta": {
-        "title": "Learn \u2014 Skillom"
+        "title": "Learn — Skillom"
       },
       "config": [
         {
@@ -296,6 +312,14 @@
                 "queryParams": {
                   "chapter_id": ":id",
                   "size": 100
+                }
+              },
+              {
+                "key": "chapters",
+                "endpoint": "chapter",
+                "method": "GET",
+                "queryParams": {
+                  "size": 500
                 }
               },
               {
@@ -335,5 +359,32 @@
         "radius": "0.5rem"
       }
     }
+  },
+  "translations": {
+    "common.close": "Close",
+    "common.backToCourse": "← Back to Course",
+    "sidebar.modules": "Modules",
+    "ctx.onThisPage": "On This Page",
+    "lesson.markAsRead": "☐ Mark as Read",
+    "lesson.sectionComplete": "✅ Section Complete",
+    "quiz.questionOf": "Question {i} of {n}",
+    "quiz.checkAnswer": "Check Answer",
+    "quiz.previous": "← Previous",
+    "quiz.next": "Next →",
+    "quiz.finish": "✓ Finish Quiz",
+    "quiz.results": "Quiz Results",
+    "quiz.correct": "✅ Correct!",
+    "quiz.incorrect": "❌ Incorrect",
+    "quiz.retry": "🔄 Retry",
+    "quiz.correctOf": "{c} of {t} correct",
+    "lab.progress": "Progress",
+    "lab.markComplete": "✓ Mark Complete",
+    "lab.complete": "Lab Complete!",
+    "challenge.allPassed": "All Tests Passed!",
+    "popup.detailedChapter": "Detailed Chapter",
+    "popup.labNotes": "Lab Notes",
+    "nav.home": "Home",
+    "nav.courses": "Courses",
+    "nav.myLearning": "My Learning"
   }
 }

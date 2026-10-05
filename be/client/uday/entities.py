@@ -242,6 +242,15 @@ entities = {
             "content_base": {"type": "str"},
             # current published revision — read path serves this
             "published_revision_id": {"type": "int"},
+            # card/sidebar display metadata — all optional; naming matches
+            # the course-detail/reader content.fields mapping
+            "description": {"type": "str"},
+            "icon":        {"type": "str"},
+            "difficulty":  {"type": "str"},
+            "duration":    {"type": "str"},
+            "color":       {"type": "str"},
+            "color_bg":    {"type": "str"},
+            "lessons":     {"type": "int"},
         },
         "ui": {
             "table": {

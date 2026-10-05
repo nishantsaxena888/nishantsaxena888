@@ -1,10 +1,15 @@
-// Generic course/catalog grid — card grid fed by the def's dynamic
+// Generic course/catalog grid — module-card grid fed by the def's dynamic
 // action (actionData.data.data → entity list). Card action records the
 // item in the "recent" session via SessionBridge and navigates to the
-// content.open_pattern route (default /courses/:id). Content drives
-// title/cta — no domain literals baked in.
+// content.open_pattern route (default /courses/:id). Optional content:
+//   filter_param/filter_field — ?category=3 filters rows on category_id
+//   categories_key/categories_title_field — sibling list lookup used for
+//     the card icon/colors (course.category_id → category.emoji/color)
+//     and the filtered-page title
+//   count_key/count_field — second list grouped by fk for "N chapters"
+//   fields — {icon,color,bg,desc,status,title} record field mapping
 import { useNav, useQuery } from "@/platform/navigation";
-import { Image, Pressable, Text, View } from "@/platform/primitives";
+import { Pressable, Text, View } from "@/platform/primitives";
 
 const toItems = (res: any): any[] =>
   Array.isArray(res) ? res : res?.items ?? res?.data ?? [];
@@ -18,6 +23,20 @@ export default function CourseList({ content, actionData, session }: any) {
   const fv = q(content?.filter_param || "category");
   const ff = content?.filter_field || "category_id";
   const courses = fv ? all.filter((r) => String(r[ff]) === fv) : all;
+
+  // category lookup for card icon/colors + filtered title
+  const cats = toItems(actionData?.data?.[content?.categories_key || "categories"]);
+  const catById: Record<string, any> = {};
+  for (const c of cats) catById[c.id] = c;
+  const counts: Record<string, number> = {};
+  for (const r of toItems(actionData?.data?.[content?.count_key || "chapters"])) {
+    const k = r[content?.count_field || "course_id"];
+    if (k != null) counts[k] = (counts[k] || 0) + 1;
+  }
+  const activeCat = fv ? catById[fv] : null;
+  const title = activeCat
+    ? `${activeCat.emoji ? `${activeCat.emoji} ` : ""}${activeCat.name}`
+    : content?.title;
 
   const open = (c: any) => {
     session?.update("recent", {
@@ -40,38 +59,63 @@ export default function CourseList({ content, actionData, session }: any) {
   }
 
   return (
-    <View as="section" className="course-list p-6">
-      {content?.title && <Text as="h2">{content.title}</Text>}
-      {fv && (
-        <Text as="p" className="text-sm text-muted-foreground">
-          {courses.length} result{courses.length === 1 ? "" : "s"} —{" "}
-          <Pressable className="underline" onPress={() => navigate(content?.detail_path || "/courses")}>
-            show all
-          </Pressable>
-        </Text>
-      )}
-      <View className="course-list-grid grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {courses.map((c: any) => (
-          <View as="article" key={c.id} className="course-card rounded-lg border bg-card overflow-hidden">
-            {c.image && <Image src={c.image} alt={c.title} loading="lazy" />}
-            <View className="p-4 space-y-2">
-              <View className="flex items-center gap-2">
-                <Text as="h3" className="font-semibold flex-1">{c.title}</Text>
-                <Text className="text-xs rounded border px-1.5 py-0.5">{c.status}</Text>
-              </View>
-              {c.description && (
-                <Text as="p" className="text-sm text-muted-foreground">{c.description}</Text>
-              )}
-              <Pressable className="sf-action-btn" onPress={() => open(c)}>
-                {content?.cta_label || "Start learning"}
+    <View as="section" className="course-list catalog-page">
+      <View className="container">
+        <View className="catalog-head">
+          {title && <Text as="h2">{title}</Text>}
+          {fv && (
+            <Text as="p" className="catalog-filter-note">
+              {courses.length} result{courses.length === 1 ? "" : "s"} —{" "}
+              <Pressable
+                className="underline"
+                onPress={() => navigate(content?.detail_path || "/courses")}
+              >
+                show all
               </Pressable>
-            </View>
-          </View>
-        ))}
+            </Text>
+          )}
+        </View>
+        <View className="module-grid">
+          {courses.map((c: any) => {
+            const cat = catById[c.category_id];
+            const n = counts[c.id];
+            return (
+              <Pressable
+                key={c.id}
+                className="card module-card course-card"
+                onPress={() => open(c)}
+              >
+                <View className="card-body">
+                  <View
+                    className="module-icon"
+                    style={{ background: cat?.color_bg, color: cat?.color }}
+                  >
+                    {cat?.emoji || "📚"}
+                  </View>
+                  <View className="module-title">{c.title}</View>
+                  {c.description && (
+                    <View className="module-desc">{c.description}</View>
+                  )}
+                  <View className="module-meta">
+                    {c.status && (
+                      <Text className={`badge status-${c.status}`}>{c.status}</Text>
+                    )}
+                    {n != null && <Text>📦 {n} chapters</Text>}
+                  </View>
+                  {/* visual CTA only — the card itself carries the press,
+                      so this stays a span (no nested interactive elements) */}
+                  <Text className="sf-action-btn">
+                    {content?.cta_label || "Start learning"}
+                  </Text>
+                </View>
+              </Pressable>
+            );
+          })}
+        </View>
+        {!actionData?.loading && courses.length === 0 && (
+          <Text as="p" className="text-muted-foreground">No courses yet.</Text>
+        )}
       </View>
-      {!actionData?.loading && courses.length === 0 && (
-        <Text as="p" className="text-muted-foreground">No courses yet.</Text>
-      )}
     </View>
   );
 }

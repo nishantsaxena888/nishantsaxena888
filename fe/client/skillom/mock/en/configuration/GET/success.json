@@ -217,6 +217,22 @@
                 "queryParams": {
                   "size": 100
                 }
+              },
+              {
+                "key": "categories",
+                "endpoint": "category",
+                "method": "GET",
+                "queryParams": {
+                  "size": 50
+                }
+              },
+              {
+                "key": "chapters",
+                "endpoint": "chapter",
+                "method": "GET",
+                "queryParams": {
+                  "size": 500
+                }
               }
             ]
           },
@@ -299,6 +315,14 @@
                 }
               },
               {
+                "key": "chapters",
+                "endpoint": "chapter",
+                "method": "GET",
+                "queryParams": {
+                  "size": 500
+                }
+              },
+              {
                 "key": "submit_quiz",
                 "endpoint": "quiz_submission",
                 "method": "POST",
@@ -335,5 +359,32 @@
         "radius": "0.5rem"
       }
     }
+  },
+  "translations": {
+    "common.close": "Close",
+    "common.backToCourse": "\u2190 Back to Course",
+    "sidebar.modules": "Modules",
+    "ctx.onThisPage": "On This Page",
+    "lesson.markAsRead": "\u2610 Mark as Read",
+    "lesson.sectionComplete": "\u2705 Section Complete",
+    "quiz.questionOf": "Question {i} of {n}",
+    "quiz.checkAnswer": "Check Answer",
+    "quiz.previous": "\u2190 Previous",
+    "quiz.next": "Next \u2192",
+    "quiz.finish": "\u2713 Finish Quiz",
+    "quiz.results": "Quiz Results",
+    "quiz.correct": "\u2705 Correct!",
+    "quiz.incorrect": "\u274c Incorrect",
+    "quiz.retry": "\ud83d\udd04 Retry",
+    "quiz.correctOf": "{c} of {t} correct",
+    "lab.progress": "Progress",
+    "lab.markComplete": "\u2713 Mark Complete",
+    "lab.complete": "Lab Complete!",
+    "challenge.allPassed": "All Tests Passed!",
+    "popup.detailedChapter": "Detailed Chapter",
+    "popup.labNotes": "Lab Notes",
+    "nav.home": "Home",
+    "nav.courses": "Courses",
+    "nav.myLearning": "My Learning"
   }
 }

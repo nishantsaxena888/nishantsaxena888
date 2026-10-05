@@ -25,6 +25,14 @@
             }
           },
           {
+            "key": "chapters",
+            "endpoint": "chapter",
+            "method": "GET",
+            "queryParams": {
+              "size": 500
+            }
+          },
+          {
             "key": "submit_quiz",
             "endpoint": "quiz_submission",
             "method": "POST",

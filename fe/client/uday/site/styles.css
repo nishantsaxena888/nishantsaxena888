@@ -197,3 +197,164 @@
   color: var(--lp-n-400); border-top: 1px solid var(--lp-n-200);
 }
 .landing-page .app-footer-sub { font-size: 0.75rem; color: var(--lp-n-400); white-space: pre-line; }
+
+/* ============================================================
+   COURSE PAGE + READER — Uday_AWS replica
+   ============================================================ */
+.course-page {
+  background: #f8fafc; color: #334155;
+  margin: calc(-1 * var(--space-4, 1rem));
+  padding: 1.5rem;
+  min-height: 60vh;
+}
+.course-page .course-page-head {
+  display: flex; align-items: flex-start; gap: 1.5rem;
+  max-width: 1200px; margin: 0 auto 1.5rem;
+}
+.course-page .back-link {
+  cursor: pointer; font-size: 0.875rem; font-weight: 500; color: #64748b;
+  white-space: nowrap; padding-top: 0.35rem;
+}
+.course-page .back-link:hover { color: #334155; }
+.course-page .course-page-title { flex: 1; }
+.course-page .course-kicker {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #94a3b8;
+}
+.course-page h1 { font-size: 1.5rem; font-weight: 700; color: #0f172a; }
+.course-page .course-page-desc { font-size: 0.875rem; color: #64748b; margin-top: 0.25rem; }
+.course-page .course-page-side { display: flex; align-items: center; gap: 1rem; }
+.course-page .course-page-pct { font-size: 0.875rem; font-weight: 600; color: #64748b; }
+
+/* module cards (shared look with landing categories) */
+.course-page .module-grid, .landing-page .module-grid, .catalog-page .module-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem; max-width: 1200px; margin: 0 auto;
+}
+.course-page .card.module-card, .catalog-page .card.module-card {
+  background: #fff; border: 1px solid #e2e8f0; border-radius: 1rem;
+  overflow: hidden; transition: all 300ms; text-align: left; cursor: pointer;
+  position: relative; width: 100%;
+}
+.course-page .card.module-card:hover, .catalog-page .card.module-card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); transform: translateY(-2px);
+  border-color: #cbd5e1;
+}
+.course-page .card-body, .catalog-page .card-body { padding: 1.5rem; }
+.course-page .module-number, .catalog-page .module-number {
+  position: absolute; top: 1rem; right: 1rem;
+  width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+  font-size: 0.875rem; font-weight: 700; color: #c2410c;
+  background: #fff7ed; border-radius: 9999px;
+}
+.course-page .module-icon, .catalog-page .module-icon {
+  width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
+  border-radius: 0.75rem; font-size: 1.5rem; margin-bottom: 1rem; background: #f1f5f9;
+}
+.course-page .module-title, .catalog-page .module-title { font-size: 1.125rem; font-weight: 600; color: #0f172a; margin-bottom: 0.5rem; }
+.course-page .module-desc, .catalog-page .module-desc { font-size: 0.875rem; color: #64748b; margin-bottom: 1rem; line-height: 1.6; }
+.course-page .module-meta, .catalog-page .module-meta { display: flex; align-items: center; gap: 1rem; font-size: 0.75rem; color: #94a3b8; margin-top: 0.75rem; }
+.course-page .module-progress, .catalog-page .module-progress { margin-top: 0.75rem; }
+
+/* progress bar */
+.progress-label { display: flex; justify-content: space-between; font-size: 0.75rem; color: #64748b; }
+.progress-label-value { color: #f97316; font-weight: 600; }
+.progress-bar {
+  height: 6px; background: #e2e8f0; border-radius: 9999px; overflow: hidden; margin-top: 4px;
+}
+.progress-bar-fill {
+  height: 100%; border-radius: 9999px;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  transition: width 300ms;
+}
+
+/* badges */
+.badge {
+  display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px;
+  font-size: 0.75rem; font-weight: 500; border-radius: 9999px; border: 1px solid transparent;
+}
+.difficulty-beginner     { background: #d1fae5; color: #047857; }
+.difficulty-intermediate { background: #fef3c7; color: #b45309; }
+.difficulty-advanced     { background: #fee2e2; color: #b91c1c; }
+.difficulty-production-ready, .difficulty-expert { background: #ede9fe; color: #6d28d9; }
+
+/* ---------- reader: dark sidebar + light content ---------- */
+.reader-layout { display: flex; margin: calc(-1 * var(--space-4, 1rem)); min-height: calc(100vh - 56px); align-items: stretch; }
+.reader-sidebar {
+  width: 280px; flex-shrink: 0;
+  background: #0f172a; color: #cbd5e1;
+  padding: 1rem 0.75rem; overflow-y: auto;
+  position: sticky; top: 0; max-height: calc(100vh - 56px);
+}
+.reader-sidebar-label {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: #64748b; padding: 0.5rem 0.75rem;
+}
+.reader-side-item {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.55rem 0.75rem; border-radius: 0.5rem; cursor: pointer;
+  border-left: 3px solid transparent; transition: background 150ms;
+}
+.reader-side-item:hover { background: rgba(255,255,255,0.05); }
+.reader-side-item.active {
+  background: rgba(249,115,22,0.12); border-left-color: #f97316; color: #fff;
+}
+.reader-side-icon { font-size: 1rem; flex-shrink: 0; }
+.reader-side-title {
+  flex: 1; font-size: 0.8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.reader-side-done { color: #34d399; font-size: 0.8rem; }
+.reader-side-pct {
+  font-size: 0.65rem; font-weight: 700; color: #fb923c;
+  background: rgba(249,115,22,0.15); padding: 1px 6px; border-radius: 9999px;
+}
+
+.chapter-reader {
+  flex: 1; background: #f8fafc; color: #334155;
+  padding: 1.75rem 2.5rem; max-width: none; min-width: 0;
+}
+.chapter-reader .back-link {
+  cursor: pointer; font-size: 0.875rem; font-weight: 500; color: #64748b;
+}
+.chapter-reader .back-link:hover { color: #334155; }
+.chapter-reader .chapter-meta-row {
+  display: flex; align-items: center; gap: 0.5rem; margin: 0.75rem 0; flex-wrap: wrap;
+}
+.chapter-reader .chapter-meta-chip {
+  font-size: 0.75rem; color: #475569; background: #e2e8f0;
+  padding: 2px 10px; border-radius: 9999px;
+}
+.chapter-reader .chapter-title { font-size: 1.875rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem; }
+.chapter-reader .chapter-desc { font-size: 1rem; color: #64748b; margin-bottom: 1.25rem; }
+.chapter-reader .chapter-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid #e2e8f0;
+}
+.chapter-reader .chapter-prevnext { display: flex; gap: 0.5rem; }
+.chapter-reader .btn {
+  display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer;
+  border: 1px solid #cbd5e1; border-radius: 0.5rem; padding: 0.5rem 1rem;
+  font-size: 0.875rem; font-weight: 600; transition: all 200ms;
+}
+.chapter-reader .btn-secondary { background: #fff; color: #334155; }
+.chapter-reader .btn-secondary:hover { background: #f1f5f9; }
+.chapter-reader .btn-primary {
+  background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; border-color: transparent;
+}
+.chapter-reader .btn-primary:hover { box-shadow: 0 0 16px rgba(249,115,22,0.35); }
+
+/* markdown body on the light reader surface */
+.chapter-reader h2, .chapter-reader h3, .chapter-reader h4 { color: #0f172a; }
+.chapter-reader p, .chapter-reader li { color: #334155; }
+
+/* catalog page — same light surface as course page */
+.catalog-page { background: #f8fafc; color: #334155; margin: calc(-1 * var(--space-4, 1rem)); padding: 1.5rem 0; min-height: 60vh; }
+.catalog-page .catalog-head { max-width: 1200px; margin: 0 auto 1.5rem; padding: 0 1.5rem; }
+.catalog-page .catalog-head h2 { font-size: 1.5rem; font-weight: 700; color: #0f172a; }
+.catalog-page .catalog-filter-note { font-size: 0.875rem; color: #64748b; margin-top: 0.25rem; }
+.catalog-page .container { padding: 0 1.5rem; }
+.catalog-page .module-card .sf-action-btn { margin-top: 0.75rem; }
+.badge.status-published { background: #d1fae5; color: #047857; }
+.badge.status-draft     { background: #fef3c7; color: #b45309; }
+.badge.status-in_review { background: #dbeafe; color: #1d4ed8; }
+.badge.status-rejected  { background: #fee2e2; color: #b91c1c; }
