@@ -203,7 +203,22 @@
           "param": "category",
           "item_label": "courses",
           "tone": "plain",
-          "module_path": "/courses/:id"
+          "module_path": "/courses/:id",
+          "card_actions": [
+            {
+              "icon": "\u270f\ufe0f",
+              "label": "Edit",
+              "opens": "detail",
+              "method": "put",
+              "path": "/admin/category"
+            },
+            {
+              "icon": "\ud83d\uddd1",
+              "label": "Delete",
+              "method": "delete",
+              "confirm": "Delete {title}?"
+            }
+          ]
         },
         "footer": {
           "line1": "AWS Production Masterclass \u2014 Interactive Learning Platform",

@@ -112,7 +112,7 @@
           },
           "content": {
             "title": "Hello World",
-            "subtitle": "Rendered by RenderEngine from a page definition served by the backend \u2014 component lives in fe/client/hello."
+            "subtitle": "Rendered by RenderEngine from a page definition served by the backend — component lives in fe/client/hello."
           }
         }
       ]
@@ -126,5 +126,19 @@
     {
       "name": "admin"
     }
-  ]
+  ],
+  "rbac": {
+    "overview": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "todo": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    }
+  }
 }

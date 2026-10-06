@@ -58,11 +58,12 @@ const b64urlEncode = (str: string): string => {
 
 // Unsigned dev JWT — 3 segments so jwt-decode never crashes Protected.
 // Only used when the configured endpoint doesn't return a token.
-const devJwt = (email: string): string => {
+const devJwt = (email: string, role?: string): string => {
   const b64 = (o: object) => b64urlEncode(JSON.stringify(o));
   return `${b64({ alg: "none", typ: "JWT" })}.${b64({
     sub: email,
     email,
+    ...(role ? { role } : {}),
     exp: Math.floor(Date.now() / 1000) + 86400,
   })}.dev`;
 };
@@ -125,7 +126,10 @@ export const StorefrontAuthLayout = ({ content }: any) => {
     if (action.login || cardType === "login-card") {
       // Prefer the endpoint's token (the generic backend's /api/login
       // returns a signed JWT); otherwise mint an unsigned dev one.
-      const token = res?.data?.token || devJwt(form.email || "user@local");
+      const token =
+        res?.data?.token ||
+        res?.data?.access_token ||
+        devJwt(form.email || "user@local", cfg.dev_role);
       storage.setItem("token", token);
       // Role claim may have changed — AppProvider re-fetches configuration
       // and re-filters menus for the new role.

@@ -403,5 +403,72 @@
     "common.emptyContent": "No content yet.",
     "catalog.empty": "No courses yet.",
     "cart.freeShipping": "Free"
+  },
+  "roles": [
+    {
+      "name": "viewer",
+      "default": true
+    },
+    {
+      "name": "admin"
+    }
+  ],
+  "rbac": {
+    "overview": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "category": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "course": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "chapter": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "revision": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "comment": {
+      "read": "*",
+      "write": "*"
+    },
+    "course_release": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "enrollment": {
+      "read": "*",
+      "write": "*"
+    },
+    "progress": {
+      "read": "*",
+      "write": "*"
+    },
+    "lab_note": {
+      "read": "*",
+      "write": "*"
+    },
+    "quiz_submission": {
+      "read": "*",
+      "write": "*"
+    }
   }
 }

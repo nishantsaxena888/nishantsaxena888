@@ -88,6 +88,10 @@
             "label": "Date"
           }
         ]
+      },
+      "rbac": {
+        "read": "*",
+        "write": "*"
       }
     }
   },
@@ -154,6 +158,10 @@
           "label": "Date"
         }
       ]
+    },
+    "rbac": {
+      "read": "*",
+      "write": "*"
     }
   }
 }

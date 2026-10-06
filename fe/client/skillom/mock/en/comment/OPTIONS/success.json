@@ -110,6 +110,10 @@
             "label": "Resolved"
           }
         ]
+      },
+      "rbac": {
+        "read": "*",
+        "write": "*"
       }
     }
   },
@@ -191,6 +195,10 @@
           "label": "Resolved"
         }
       ]
+    },
+    "rbac": {
+      "read": "*",
+      "write": "*"
     }
   }
 }

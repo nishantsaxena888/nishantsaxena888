@@ -9,6 +9,7 @@ entities = {
     # Admin landing screen — OPTIONS returns `config` (Definition[]) so the
     # client's grocery-overview component renders instead of default-admin.
     "overview": {
+        "rbac": {"read": "*", "write": ["admin"]},
         "source": "json",
         "fields": {"id": {"type": "int", "primary_key": True}},
         "ui": {},
@@ -33,6 +34,7 @@ entities = {
     },
 
     "category": {
+        "rbac": {"read": "*", "write": ["admin"]},
         "source": "json",
         "fields": {
             "id":   {"type": "int", "primary_key": True},
@@ -66,6 +68,7 @@ entities = {
     },
 
     "product": {
+        "rbac": {"read": "*", "write": ["admin"]},
         "source": "json",
         "fields": {
             "id":       {"type": "int", "primary_key": True},
@@ -118,6 +121,7 @@ entities = {
     },
 
     "customer": {
+        "rbac": {"read": "*", "write": ["admin"]},
         "source": "json",
         "fields": {
             "id":    {"type": "int", "primary_key": True},
@@ -153,6 +157,7 @@ entities = {
     },
 
     "order": {
+        "rbac": {"read": "*", "write": "*"},
         "source": "json",
         "fields": {
             "id":        {"type": "int", "primary_key": True},

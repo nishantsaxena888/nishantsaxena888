@@ -458,5 +458,39 @@
         }
       ]
     }
+  },
+  "rbac": {
+    "overview": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "listing": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "host": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "booking": {
+      "read": "*",
+      "write": "*"
+    },
+    "review": {
+      "read": "*",
+      "write": "*"
+    },
+    "amenity": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    }
   }
 }

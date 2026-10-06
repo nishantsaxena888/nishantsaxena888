@@ -9,6 +9,7 @@ import { useNav } from "@/platform/navigation";
 import { useLanguage } from "@/components/shared/use-language";
 import { Pressable, Text, View } from "@/platform/primitives";
 import { makeTr } from "./utils";
+import RowActions from "./entity-actions";
 
 const toItems = (res: any): any[] =>
   Array.isArray(res) ? res : res?.items ?? res?.data ?? [];
@@ -91,11 +92,8 @@ export default function CourseDetail({ content, actionData, session }: any) {
         {chapters.map((ch: any, i: number) => {
           const pct = done.has(`ch-${ch.id}`) ? 100 : 0;
           return (
-            <Pressable
-              key={ch.id}
-              className="card module-card chapter-row"
-              onPress={() => openChapter(ch)}
-            >
+            <View key={ch.id} className="card module-card chapter-row">
+              <Pressable className="card-hit" onPress={() => openChapter(ch)}>
               <View className="card-body">
                 <View className="module-number">
                   {String(ch.order ?? i + 1).padStart(2, "0")}
@@ -134,13 +132,21 @@ export default function CourseDetail({ content, actionData, session }: any) {
                   {ch.lessons != null && <Text>📝 {ch.lessons} lessons</Text>}
                 </View>
               </View>
-            </Pressable>
+              </Pressable>
+              <RowActions
+                entity={content?.chapter_entity || "chapter"}
+                item={ch}
+                actions={content?.row_actions}
+                detail_path={content?.reader_path || "/learn"}
+                reload={() => actionData?.action?.({ key: content?.chapters_key || "chapters", type: "reload" })}
+              />
+            </View>
           );
         })}
       </View>
       {chapters.length === 0 && (
         <Text as="p" className="p-4 text-muted-foreground">
-          {content?.empty || "No chapters yet."}
+          {content?.empty || t("chapters.empty", "No chapters yet.")}
         </Text>
       )}
     </View>

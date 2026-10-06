@@ -53,6 +53,12 @@
             "label": "Icon"
           }
         ]
+      },
+      "rbac": {
+        "read": "*",
+        "write": [
+          "admin"
+        ]
       }
     }
   },
@@ -93,6 +99,12 @@
           "componentType": "TextInput",
           "label": "Icon"
         }
+      ]
+    },
+    "rbac": {
+      "read": "*",
+      "write": [
+        "admin"
       ]
     }
   }

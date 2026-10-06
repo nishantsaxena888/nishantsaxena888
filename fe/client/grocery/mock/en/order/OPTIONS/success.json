@@ -35,7 +35,7 @@
           "key": "total_amount",
           "type": "text",
           "styles": {
-             "className": "font-bold text-slate-900"
+            "className": "font-bold text-slate-900"
           }
         },
         {
@@ -43,10 +43,22 @@
           "key": "payment_status",
           "type": "status",
           "options": {
-            "paid": { "label": "Paid", "variant": "success" },
-            "pending": { "label": "Pending", "variant": "warning" },
-            "failed": { "label": "Failed", "variant": "destructive" },
-            "refunded": { "label": "Refunded", "variant": "secondary" }
+            "paid": {
+              "label": "Paid",
+              "variant": "success"
+            },
+            "pending": {
+              "label": "Pending",
+              "variant": "warning"
+            },
+            "failed": {
+              "label": "Failed",
+              "variant": "destructive"
+            },
+            "refunded": {
+              "label": "Refunded",
+              "variant": "secondary"
+            }
           }
         },
         {
@@ -54,10 +66,22 @@
           "key": "status",
           "type": "status",
           "options": {
-            "delivered": { "label": "Delivered", "variant": "success" },
-            "shipped": { "label": "Shipped", "variant": "info" },
-            "processing": { "label": "Processing", "variant": "warning" },
-            "cancelled": { "label": "Cancelled", "variant": "destructive" }
+            "delivered": {
+              "label": "Delivered",
+              "variant": "success"
+            },
+            "shipped": {
+              "label": "Shipped",
+              "variant": "info"
+            },
+            "processing": {
+              "label": "Processing",
+              "variant": "warning"
+            },
+            "cancelled": {
+              "label": "Cancelled",
+              "variant": "destructive"
+            }
           }
         }
       ],
@@ -82,66 +106,136 @@
           "label": "Order Number",
           "type": "text",
           "placeholder": "ORD-XXXX",
-          "column": { "md": 6 },
-          "validation": [{ "rule": "required" }]
+          "column": {
+            "md": 6
+          },
+          "validation": [
+            {
+              "rule": "required"
+            }
+          ]
         },
         {
           "name": "order_date",
           "label": "Transaction Date",
           "type": "date",
-          "column": { "md": 6 },
-          "validation": [{ "rule": "required" }]
+          "column": {
+            "md": 6
+          },
+          "validation": [
+            {
+              "rule": "required"
+            }
+          ]
         },
         {
           "name": "customer_id",
           "label": "Customer",
           "type": "dynamic-select",
-          "column": { "md": 12 },
-          "config": { "endpoint": "customer", "bindLabel": "name", "bindValue": "id" },
-          "validation": [{ "rule": "required" }]
+          "column": {
+            "md": 12
+          },
+          "config": {
+            "endpoint": "customer",
+            "bindLabel": "name",
+            "bindValue": "id"
+          },
+          "validation": [
+            {
+              "rule": "required"
+            }
+          ]
         },
         {
           "name": "total_amount",
           "label": "Grand Total",
           "type": "number",
           "placeholder": "0.00",
-          "column": { "md": 6 },
-          "validation": [{ "rule": "required" }]
+          "column": {
+            "md": 6
+          },
+          "validation": [
+            {
+              "rule": "required"
+            }
+          ]
         },
         {
           "name": "payment_method",
           "label": "Payment Method",
           "type": "select",
-          "column": { "md": 6 },
+          "column": {
+            "md": 6
+          },
           "options": [
-            { "label": "Credit Card", "value": "card" },
-            { "label": "Bank Transfer", "value": "bank" },
-            { "label": "Cash", "value": "cash" },
-            { "label": "UPI", "value": "upi" }
+            {
+              "label": "Credit Card",
+              "value": "card"
+            },
+            {
+              "label": "Bank Transfer",
+              "value": "bank"
+            },
+            {
+              "label": "Cash",
+              "value": "cash"
+            },
+            {
+              "label": "UPI",
+              "value": "upi"
+            }
           ]
         },
         {
           "name": "payment_status",
           "label": "Payment Status",
           "type": "select",
-          "column": { "md": 6 },
+          "column": {
+            "md": 6
+          },
           "options": [
-            {"label": "Pending", "value": "pending"},
-            {"label": "Paid", "value": "paid"},
-            {"label": "Failed", "value": "failed"},
-            {"label": "Refunded", "value": "refunded"}
+            {
+              "label": "Pending",
+              "value": "pending"
+            },
+            {
+              "label": "Paid",
+              "value": "paid"
+            },
+            {
+              "label": "Failed",
+              "value": "failed"
+            },
+            {
+              "label": "Refunded",
+              "value": "refunded"
+            }
           ]
         },
         {
           "name": "status",
           "label": "Fulfillment Status",
           "type": "select",
-          "column": { "md": 6 },
+          "column": {
+            "md": 6
+          },
           "options": [
-            {"label": "Processing", "value": "processing"},
-            {"label": "Shipped", "value": "shipped"},
-            {"label": "Delivered", "value": "delivered"},
-            {"label": "Cancelled", "value": "cancelled"}
+            {
+              "label": "Processing",
+              "value": "processing"
+            },
+            {
+              "label": "Shipped",
+              "value": "shipped"
+            },
+            {
+              "label": "Delivered",
+              "value": "delivered"
+            },
+            {
+              "label": "Cancelled",
+              "value": "cancelled"
+            }
           ]
         },
         {
@@ -149,9 +243,23 @@
           "label": "Internal Notes",
           "type": "textarea",
           "placeholder": "Add any internal shipping or billing notes...",
-          "column": { "md": 12 }
+          "column": {
+            "md": 12
+          }
         }
       ]
+    },
+    "rbac": {
+      "read": "*",
+      "write": "*"
+    }
+  },
+  "schema": {
+    "ui": {
+      "rbac": {
+        "read": "*",
+        "write": "*"
+      }
     }
   }
 }

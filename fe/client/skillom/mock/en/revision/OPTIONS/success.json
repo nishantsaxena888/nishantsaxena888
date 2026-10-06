@@ -125,6 +125,12 @@
             "label": "Review Note"
           }
         ]
+      },
+      "rbac": {
+        "read": "*",
+        "write": [
+          "admin"
+        ]
       }
     }
   },
@@ -213,6 +219,12 @@
           "colSpan": 2,
           "label": "Review Note"
         }
+      ]
+    },
+    "rbac": {
+      "read": "*",
+      "write": [
+        "admin"
       ]
     }
   }

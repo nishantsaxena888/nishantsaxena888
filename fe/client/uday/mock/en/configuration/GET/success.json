@@ -500,7 +500,22 @@
               "param": "category",
               "item_label": "courses",
               "tone": "plain",
-              "module_path": "/courses/:id"
+              "module_path": "/courses/:id",
+              "card_actions": [
+                {
+                  "icon": "\u270f\ufe0f",
+                  "label": "Edit",
+                  "opens": "detail",
+                  "method": "put",
+                  "path": "/admin/category"
+                },
+                {
+                  "icon": "\ud83d\uddd1",
+                  "label": "Delete",
+                  "method": "delete",
+                  "confirm": "Delete {title}?"
+                }
+              ]
             },
             "footer": {
               "line1": "AWS Production Masterclass \u2014 Interactive Learning Platform",
@@ -625,7 +640,21 @@
           },
           "content": {
             "title": "Course",
-            "reader_path": "/chapter"
+            "reader_path": "/chapter",
+            "row_actions": [
+              {
+                "icon": "\u270f\ufe0f",
+                "label": "Edit",
+                "opens": "detail",
+                "method": "put"
+              },
+              {
+                "icon": "\ud83d\uddd1",
+                "label": "Delete",
+                "method": "delete",
+                "confirm": "Delete {title}?"
+              }
+            ]
           }
         }
       ]
@@ -699,7 +728,22 @@
               "dark_theme": "uday-dark",
               "light_theme": "default"
             },
-            "reader_path": "/chapter"
+            "reader_path": "/chapter",
+            "chapter_actions": [
+              {
+                "icon": "\u270f\ufe0f",
+                "label": "Edit chapter",
+                "opens": "detail",
+                "method": "put",
+                "path": "/admin/chapter"
+              },
+              {
+                "icon": "\ud83d\uddd1",
+                "label": "Delete chapter",
+                "method": "delete",
+                "confirm": "Delete {title}?"
+              }
+            ]
           }
         }
       ]
@@ -846,11 +890,61 @@
     }
   ],
   "rbac": {
+    "overview": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "category": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
     "course": {
       "read": "*",
       "write": [
         "admin"
       ]
+    },
+    "chapter": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "revision": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "comment": {
+      "read": "*",
+      "write": "*"
+    },
+    "course_release": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "enrollment": {
+      "read": "*",
+      "write": "*"
+    },
+    "progress": {
+      "read": "*",
+      "write": "*"
+    },
+    "lab_note": {
+      "read": "*",
+      "write": "*"
+    },
+    "quiz_submission": {
+      "read": "*",
+      "write": "*"
     }
   }
 }

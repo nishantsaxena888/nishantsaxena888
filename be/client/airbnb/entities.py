@@ -8,6 +8,7 @@ entities = {
     # Admin landing — OPTIONS returns `config` so the client's
     # airbnb-overview component renders instead of default-admin.
     "overview": {
+        "rbac": {"read": "*", "write": ["admin"]},
         "source": "json",
         "fields": {"id": {"type": "int", "primary_key": True}},
         "ui": {},
@@ -36,6 +37,7 @@ entities = {
     },
 
     "listing": {
+        "rbac": {"read": "*", "write": ["admin"]},
         "source": "json",
         "fields": {
             "id":        {"type": "int", "primary_key": True},
@@ -149,6 +151,7 @@ entities = {
     },
 
     "host": {
+        "rbac": {"read": "*", "write": ["admin"]},
         "source": "json",
         "fields": {
             "id":            {"type": "int", "primary_key": True},
@@ -184,6 +187,7 @@ entities = {
     },
 
     "booking": {
+        "rbac": {"read": "*", "write": "*"},
         "source": "json",
         "fields": {
             "id":        {"type": "int", "primary_key": True},
@@ -244,6 +248,7 @@ entities = {
     },
 
     "review": {
+        "rbac": {"read": "*", "write": "*"},
         "source": "json",
         "fields": {
             "id":      {"type": "int", "primary_key": True},
@@ -282,6 +287,7 @@ entities = {
     },
 
     "amenity": {
+        "rbac": {"read": "*", "write": ["admin"]},
         "source": "json",
         "fields": {
             "id":   {"type": "int", "primary_key": True},

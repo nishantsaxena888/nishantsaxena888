@@ -42,8 +42,14 @@
               "label": "स्थिति",
               "type": "status",
               "options": {
-                "active": { "label": "सक्रिय", "variant": "success" },
-                "inactive": { "label": "निष्क्रिय", "variant": "destructive" }
+                "active": {
+                  "label": "सक्रिय",
+                  "variant": "success"
+                },
+                "inactive": {
+                  "label": "निष्क्रिय",
+                  "variant": "destructive"
+                }
               }
             }
           ],
@@ -87,8 +93,14 @@
               "defaultValue": "active",
               "colSpan": 1,
               "options": [
-                { "label": "सक्रिय", "value": "active" },
-                { "label": "निष्क्रिय", "value": "inactive" }
+                {
+                  "label": "सक्रिय",
+                  "value": "active"
+                },
+                {
+                  "label": "निष्क्रिय",
+                  "value": "inactive"
+                }
               ]
             }
           ]
@@ -96,5 +108,23 @@
       },
       "children": []
     }
-  ]
+  ],
+  "content": {
+    "rbac": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    }
+  },
+  "schema": {
+    "ui": {
+      "rbac": {
+        "read": "*",
+        "write": [
+          "admin"
+        ]
+      }
+    }
+  }
 }

@@ -197,6 +197,12 @@
             "label": "Available"
           }
         ]
+      },
+      "rbac": {
+        "read": "*",
+        "write": [
+          "admin"
+        ]
       }
     }
   },
@@ -333,6 +339,12 @@
           "default": true,
           "label": "Available"
         }
+      ]
+    },
+    "rbac": {
+      "read": "*",
+      "write": [
+        "admin"
       ]
     }
   }

@@ -367,5 +367,44 @@
     "lab.progress": "In progress",
     "lab.complete": "✅ Complete",
     "cart.freeShipping": "Free"
+  },
+  "roles": [
+    {
+      "name": "viewer",
+      "default": true
+    },
+    {
+      "name": "admin"
+    }
+  ],
+  "rbac": {
+    "overview": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "category": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "product": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "customer": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "order": {
+      "read": "*",
+      "write": "*"
+    }
   }
 }

@@ -114,6 +114,12 @@
             "label": "Icon background"
           }
         ]
+      },
+      "rbac": {
+        "read": "*",
+        "write": [
+          "admin"
+        ]
       }
     }
   },
@@ -195,6 +201,12 @@
           "componentType": "TextInput",
           "label": "Icon background"
         }
+      ]
+    },
+    "rbac": {
+      "read": "*",
+      "write": [
+        "admin"
       ]
     }
   }

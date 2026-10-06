@@ -136,6 +136,10 @@
             "label": "Status"
           }
         ]
+      },
+      "rbac": {
+        "read": "*",
+        "write": "*"
       }
     }
   },
@@ -235,6 +239,10 @@
           "label": "Status"
         }
       ]
+    },
+    "rbac": {
+      "read": "*",
+      "write": "*"
     }
   }
 }

@@ -275,7 +275,7 @@
           },
           "content": {
             "title": "Fresh today",
-            "subtitle": "Same engine, different client \u2014 this page is a JSON definition served by the backend.",
+            "subtitle": "Same engine, different client — this page is a JSON definition served by the backend.",
             "cta": "Shop deals"
           }
         },
@@ -371,11 +371,33 @@
     }
   ],
   "rbac": {
+    "overview": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "category": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
     "product": {
       "read": "*",
       "write": [
         "admin"
       ]
+    },
+    "customer": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "order": {
+      "read": "*",
+      "write": "*"
     }
   }
 }

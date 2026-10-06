@@ -1,364 +1,403 @@
 {
- "meta": {
-  "client": "grocery",
-  "display_name": "Grocery",
-  "theme": "grocery-light",
-  "language": "en",
-  "currency": "USD",
-  "currency_symbol": "$"
- },
- "admin": {
-  "require_auth": false,
-  "login_redirect": "/admin/product",
-  "logout_redirect": "/"
- },
- "menu": [
-  {
-   "name": "होम",
-   "description": "Storefront",
-   "url": "/",
-   "entity": "home",
-   "public": true,
-   "order": 0
+  "meta": {
+    "client": "grocery",
+    "display_name": "Grocery",
+    "theme": "grocery-light",
+    "language": "en",
+    "currency": "USD",
+    "currency_symbol": "$"
   },
-  {
-   "name": "शॉप",
-   "description": "All products",
-   "url": "/shop",
-   "entity": "pages/shop",
-   "public": true,
-   "order": 1
+  "admin": {
+    "require_auth": false,
+    "login_redirect": "/admin/product",
+    "logout_redirect": "/"
   },
-  {
-   "name": "डील्स",
-   "description": "On sale now",
-   "url": "/deals",
-   "entity": "pages/deals",
-   "public": true,
-   "order": 2
-  },
-  {
-   "name": "कार्ट",
-   "description": "Your cart",
-   "url": "/cart",
-   "entity": "cart",
-   "public": true,
-   "order": 3,
-   "icon": "shopping-cart"
-  },
-  {
-   "name": "चेकआउट",
-   "description": "Checkout",
-   "url": "/checkout",
-   "entity": "checkout",
-   "public": true,
-   "order": 4,
-   "hide": true
-  },
-  {
-   "name": "प्रोफ़ाइल",
-   "description": "My account",
-   "url": "/my-account",
-   "entity": "profile",
-   "public": true,
-   "order": 5,
-   "hide": true
-  },
-  {
-   "name": "लॉगिन",
-   "description": "Sign in",
-   "url": "/login",
-   "entity": "login",
-   "public": true,
-   "order": 6,
-   "auth_page": true,
-   "hide": true
-  },
-  {
-   "name": "साइन अप",
-   "description": "Create account",
-   "url": "/register",
-   "entity": "register",
-   "public": true,
-   "order": 7,
-   "auth_page": true,
-   "hide": true
-  },
-  {
-   "name": "पासवर्ड भूल गए",
-   "description": "Reset password",
-   "url": "/forgot-password",
-   "entity": "forgot-password",
-   "public": true,
-   "order": 8,
-   "hide": true
-  },
-  {
-   "name": "पासवर्ड रीसेट",
-   "description": "Set new password",
-   "url": "/reset-password",
-   "entity": "reset-password",
-   "public": true,
-   "order": 9,
-   "hide": true
-  },
-  {
-   "name": "ईमेल सत्यापित करें",
-   "description": "Verify email",
-   "url": "/verify-email",
-   "entity": "verify-email",
-   "public": true,
-   "order": 10,
-   "hide": true
-  }
- ],
- "admin_menu": [
-  {
-   "name": "Overview",
-   "description": "Store snapshot",
-   "url": "/admin/overview",
-   "entity": "overview",
-   "icon": "layout-dashboard"
-  },
-  {
-   "name": "Products",
-   "description": "Product catalogue",
-   "url": "/admin/product",
-   "entity": "product",
-   "icon": "shopping-basket"
-  },
-  {
-   "name": "Categories",
-   "description": "Category management",
-   "url": "/admin/category",
-   "entity": "category",
-   "icon": "tags"
-  },
-  {
-   "name": "Orders",
-   "description": "Order tracking",
-   "url": "/admin/order",
-   "entity": "order",
-   "icon": "receipt"
-  },
-  {
-   "name": "Customers",
-   "description": "Customer records",
-   "url": "/admin/customer",
-   "entity": "customer",
-   "icon": "users"
-  }
- ],
- "language": [
-  {
-   "name": "English",
-   "code": "en"
-  },
-  {
-   "name": "Hindi",
-   "code": "hi"
-  }
- ],
- "sessions": [
-  {
-   "name": "cart",
-   "persist": true,
-   "method": "array_upsert",
-   "method_config": {
-    "match_key": "id",
-    "on_match": "increment",
-    "increment_field": "qty",
-    "default_fields": {
-     "qty": 1
-    }
-   }
-  }
- ],
- "themes": [
-  {
-   "value": "grocery-light",
-   "label": "Grocery Light",
-   "endpoint": "style-config/grocery-light"
-  },
-  {
-   "value": "default",
-   "label": "Default",
-   "endpoint": "style-config/default"
-  }
- ],
- "style-configs": {
-  "grocery-light": {
-   "theme": "grocery-light",
-   "name": "Grocery Light",
-   "styles": {
-    "background": "90 30% 97%",
-    "foreground": "140 25% 15%",
-    "card": "0 0% 100%",
-    "card-foreground": "140 25% 15%",
-    "popover": "0 0% 100%",
-    "popover-foreground": "140 25% 15%",
-    "primary": "142 70% 32%",
-    "primary-foreground": "0 0% 100%",
-    "secondary": "90 20% 92%",
-    "secondary-foreground": "140 25% 20%",
-    "muted": "90 15% 93%",
-    "muted-foreground": "140 10% 45%",
-    "accent": "140 30% 90%",
-    "accent-foreground": "140 30% 20%",
-    "destructive": "0 84.2% 60.2%",
-    "destructive-foreground": "0 0% 100%",
-    "border": "140 15% 88%",
-    "input": "140 15% 88%",
-    "ring": "142 70% 32%",
-    "radius": "0.6rem",
-    "sidebar-background": "140 30% 16%",
-    "sidebar-foreground": "90 20% 95%",
-    "sidebar-primary": "90 30% 97%",
-    "sidebar-primary-foreground": "140 30% 16%",
-    "sidebar-accent": "140 25% 22%",
-    "sidebar-accent-foreground": "90 20% 95%",
-    "sidebar-border": "140 20% 22%",
-    "sidebar-ring": "142 70% 40%",
-    "menu-active-bg": "90 30% 97%",
-    "menu-active-foreground": "140 30% 16%"
-   }
-  },
-  "default": {
-   "theme": "default",
-   "name": "Default Theme",
-   "styles": {
-    "background": "0 0% 100%",
-    "foreground": "240 10% 10%",
-    "card": "0 0% 100%",
-    "card-foreground": "240 10% 10%",
-    "popover": "0 0% 100%",
-    "popover-foreground": "240 10% 10%",
-    "primary": "240 10% 10%",
-    "primary-foreground": "0 0% 100%",
-    "secondary": "240 5% 96%",
-    "secondary-foreground": "240 10% 10%",
-    "muted": "240 5% 96%",
-    "muted-foreground": "240 5% 45%",
-    "accent": "240 5% 96%",
-    "accent-foreground": "240 10% 10%",
-    "destructive": "0 84.2% 60.2%",
-    "destructive-foreground": "0 0% 100%",
-    "border": "240 6% 90%",
-    "input": "240 6% 90%",
-    "ring": "240 10% 10%",
-    "radius": "0.5rem",
-    "sidebar-background": "240 10% 4%",
-    "sidebar-foreground": "240 5% 96%",
-    "sidebar-primary": "0 0% 100%",
-    "sidebar-primary-foreground": "240 10% 4%",
-    "sidebar-accent": "240 10% 15%",
-    "sidebar-accent-foreground": "240 5% 96%",
-    "sidebar-border": "240 10% 10%",
-    "sidebar-ring": "0 0% 100%",
-    "menu-active-bg": "0 0% 100%",
-    "menu-active-foreground": "240 10% 4%"
-   }
-  }
- },
- "pages": {
-  "home": {
-   "meta": {
-    "title": "Grocery"
-   },
-   "config": [
+  "menu": [
     {
-     "id": "grocery-hero-1",
-     "type": "grocery-hero",
-     "properties": {
-      "level": "base",
-      "type": "static"
-     },
-     "content": {
-      "title": "Fresh today",
-      "subtitle": "Same engine, different client — this page is a JSON definition served by the backend.",
-      "cta": "Shop deals"
-     }
+      "name": "होम",
+      "description": "Storefront",
+      "url": "/",
+      "entity": "home",
+      "public": true,
+      "order": 0
     },
     {
-     "id": "grocery-grid-1",
-     "type": "listing",
-     "properties": {
-      "level": "base",
-      "type": "dynamic",
-      "action": [
-       {
-        "key": "products",
-        "endpoint": "product",
-        "method": "GET",
-        "queryParams": {
-         "size": 8
-        }
-       }
-      ]
-     },
-     "content": {
-      "title": "Featured"
-     }
-    }
-   ]
-  },
-  "shop": {
-   "meta": {
-    "title": "Shop"
-   },
-   "config": [
+      "name": "शॉप",
+      "description": "All products",
+      "url": "/shop",
+      "entity": "pages/shop",
+      "public": true,
+      "order": 1
+    },
     {
-     "id": "grocery-grid-shop",
-     "type": "listing",
-     "properties": {
-      "level": "base",
-      "type": "dynamic",
-      "action": [
-       {
-        "key": "products",
-        "endpoint": "product",
-        "method": "GET",
-        "queryParams": {
-         "size": 24
-        }
-       }
-      ]
-     },
-     "content": {
-      "title": "All products"
-     }
-    }
-   ]
-  },
-  "deals": {
-   "meta": {
-    "title": "Deals"
-   },
-   "config": [
+      "name": "डील्स",
+      "description": "On sale now",
+      "url": "/deals",
+      "entity": "pages/deals",
+      "public": true,
+      "order": 2
+    },
     {
-     "id": "grocery-grid-deals",
-     "type": "listing",
-     "properties": {
-      "level": "base",
-      "type": "dynamic",
-      "action": [
-       {
-        "key": "products",
-        "endpoint": "product",
-        "method": "GET",
-        "queryParams": {
-         "size": 24,
-         "on_sale": true
-        }
-       }
-      ]
-     },
-     "content": {
-      "title": "On sale"
-     }
+      "name": "कार्ट",
+      "description": "Your cart",
+      "url": "/cart",
+      "entity": "cart",
+      "public": true,
+      "order": 3,
+      "icon": "shopping-cart"
+    },
+    {
+      "name": "चेकआउट",
+      "description": "Checkout",
+      "url": "/checkout",
+      "entity": "checkout",
+      "public": true,
+      "order": 4,
+      "hide": true
+    },
+    {
+      "name": "प्रोफ़ाइल",
+      "description": "My account",
+      "url": "/my-account",
+      "entity": "profile",
+      "public": true,
+      "order": 5,
+      "hide": true
+    },
+    {
+      "name": "लॉगिन",
+      "description": "Sign in",
+      "url": "/login",
+      "entity": "login",
+      "public": true,
+      "order": 6,
+      "auth_page": true,
+      "hide": true
+    },
+    {
+      "name": "साइन अप",
+      "description": "Create account",
+      "url": "/register",
+      "entity": "register",
+      "public": true,
+      "order": 7,
+      "auth_page": true,
+      "hide": true
+    },
+    {
+      "name": "पासवर्ड भूल गए",
+      "description": "Reset password",
+      "url": "/forgot-password",
+      "entity": "forgot-password",
+      "public": true,
+      "order": 8,
+      "hide": true
+    },
+    {
+      "name": "पासवर्ड रीसेट",
+      "description": "Set new password",
+      "url": "/reset-password",
+      "entity": "reset-password",
+      "public": true,
+      "order": 9,
+      "hide": true
+    },
+    {
+      "name": "ईमेल सत्यापित करें",
+      "description": "Verify email",
+      "url": "/verify-email",
+      "entity": "verify-email",
+      "public": true,
+      "order": 10,
+      "hide": true
     }
-   ]
-  }
- },
- "site_nav": false
+  ],
+  "admin_menu": [
+    {
+      "name": "Overview",
+      "description": "Store snapshot",
+      "url": "/admin/overview",
+      "entity": "overview",
+      "icon": "layout-dashboard"
+    },
+    {
+      "name": "Products",
+      "description": "Product catalogue",
+      "url": "/admin/product",
+      "entity": "product",
+      "icon": "shopping-basket"
+    },
+    {
+      "name": "Categories",
+      "description": "Category management",
+      "url": "/admin/category",
+      "entity": "category",
+      "icon": "tags"
+    },
+    {
+      "name": "Orders",
+      "description": "Order tracking",
+      "url": "/admin/order",
+      "entity": "order",
+      "icon": "receipt"
+    },
+    {
+      "name": "Customers",
+      "description": "Customer records",
+      "url": "/admin/customer",
+      "entity": "customer",
+      "icon": "users"
+    }
+  ],
+  "language": [
+    {
+      "name": "English",
+      "code": "en"
+    },
+    {
+      "name": "Hindi",
+      "code": "hi"
+    }
+  ],
+  "sessions": [
+    {
+      "name": "cart",
+      "persist": true,
+      "method": "array_upsert",
+      "method_config": {
+        "match_key": "id",
+        "on_match": "increment",
+        "increment_field": "qty",
+        "default_fields": {
+          "qty": 1
+        }
+      }
+    }
+  ],
+  "themes": [
+    {
+      "value": "grocery-light",
+      "label": "Grocery Light",
+      "endpoint": "style-config/grocery-light"
+    },
+    {
+      "value": "default",
+      "label": "Default",
+      "endpoint": "style-config/default"
+    }
+  ],
+  "style-configs": {
+    "grocery-light": {
+      "theme": "grocery-light",
+      "name": "Grocery Light",
+      "styles": {
+        "background": "90 30% 97%",
+        "foreground": "140 25% 15%",
+        "card": "0 0% 100%",
+        "card-foreground": "140 25% 15%",
+        "popover": "0 0% 100%",
+        "popover-foreground": "140 25% 15%",
+        "primary": "142 70% 32%",
+        "primary-foreground": "0 0% 100%",
+        "secondary": "90 20% 92%",
+        "secondary-foreground": "140 25% 20%",
+        "muted": "90 15% 93%",
+        "muted-foreground": "140 10% 45%",
+        "accent": "140 30% 90%",
+        "accent-foreground": "140 30% 20%",
+        "destructive": "0 84.2% 60.2%",
+        "destructive-foreground": "0 0% 100%",
+        "border": "140 15% 88%",
+        "input": "140 15% 88%",
+        "ring": "142 70% 32%",
+        "radius": "0.6rem",
+        "sidebar-background": "140 30% 16%",
+        "sidebar-foreground": "90 20% 95%",
+        "sidebar-primary": "90 30% 97%",
+        "sidebar-primary-foreground": "140 30% 16%",
+        "sidebar-accent": "140 25% 22%",
+        "sidebar-accent-foreground": "90 20% 95%",
+        "sidebar-border": "140 20% 22%",
+        "sidebar-ring": "142 70% 40%",
+        "menu-active-bg": "90 30% 97%",
+        "menu-active-foreground": "140 30% 16%"
+      }
+    },
+    "default": {
+      "theme": "default",
+      "name": "Default Theme",
+      "styles": {
+        "background": "0 0% 100%",
+        "foreground": "240 10% 10%",
+        "card": "0 0% 100%",
+        "card-foreground": "240 10% 10%",
+        "popover": "0 0% 100%",
+        "popover-foreground": "240 10% 10%",
+        "primary": "240 10% 10%",
+        "primary-foreground": "0 0% 100%",
+        "secondary": "240 5% 96%",
+        "secondary-foreground": "240 10% 10%",
+        "muted": "240 5% 96%",
+        "muted-foreground": "240 5% 45%",
+        "accent": "240 5% 96%",
+        "accent-foreground": "240 10% 10%",
+        "destructive": "0 84.2% 60.2%",
+        "destructive-foreground": "0 0% 100%",
+        "border": "240 6% 90%",
+        "input": "240 6% 90%",
+        "ring": "240 10% 10%",
+        "radius": "0.5rem",
+        "sidebar-background": "240 10% 4%",
+        "sidebar-foreground": "240 5% 96%",
+        "sidebar-primary": "0 0% 100%",
+        "sidebar-primary-foreground": "240 10% 4%",
+        "sidebar-accent": "240 10% 15%",
+        "sidebar-accent-foreground": "240 5% 96%",
+        "sidebar-border": "240 10% 10%",
+        "sidebar-ring": "0 0% 100%",
+        "menu-active-bg": "0 0% 100%",
+        "menu-active-foreground": "240 10% 4%"
+      }
+    }
+  },
+  "pages": {
+    "home": {
+      "meta": {
+        "title": "Grocery"
+      },
+      "config": [
+        {
+          "id": "grocery-hero-1",
+          "type": "grocery-hero",
+          "properties": {
+            "level": "base",
+            "type": "static"
+          },
+          "content": {
+            "title": "Fresh today",
+            "subtitle": "Same engine, different client — this page is a JSON definition served by the backend.",
+            "cta": "Shop deals"
+          }
+        },
+        {
+          "id": "grocery-grid-1",
+          "type": "listing",
+          "properties": {
+            "level": "base",
+            "type": "dynamic",
+            "action": [
+              {
+                "key": "products",
+                "endpoint": "product",
+                "method": "GET",
+                "queryParams": {
+                  "size": 8
+                }
+              }
+            ]
+          },
+          "content": {
+            "title": "Featured"
+          }
+        }
+      ]
+    },
+    "shop": {
+      "meta": {
+        "title": "Shop"
+      },
+      "config": [
+        {
+          "id": "grocery-grid-shop",
+          "type": "listing",
+          "properties": {
+            "level": "base",
+            "type": "dynamic",
+            "action": [
+              {
+                "key": "products",
+                "endpoint": "product",
+                "method": "GET",
+                "queryParams": {
+                  "size": 24
+                }
+              }
+            ]
+          },
+          "content": {
+            "title": "All products"
+          }
+        }
+      ]
+    },
+    "deals": {
+      "meta": {
+        "title": "Deals"
+      },
+      "config": [
+        {
+          "id": "grocery-grid-deals",
+          "type": "listing",
+          "properties": {
+            "level": "base",
+            "type": "dynamic",
+            "action": [
+              {
+                "key": "products",
+                "endpoint": "product",
+                "method": "GET",
+                "queryParams": {
+                  "size": 24,
+                  "on_sale": true
+                }
+              }
+            ]
+          },
+          "content": {
+            "title": "On sale"
+          }
+        }
+      ]
+    }
+  },
+  "site_nav": false,
+  "rbac": {
+    "overview": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "category": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "product": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "customer": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "order": {
+      "read": "*",
+      "write": "*"
+    }
+  },
+  "roles": [
+    {
+      "name": "viewer",
+      "default": true
+    },
+    {
+      "name": "admin"
+    }
+  ]
 }

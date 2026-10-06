@@ -596,9 +596,18 @@
     "rbac": {
       "read": "*",
       "write": [
-        "admin",
-        "editor"
+        "admin"
       ]
+    }
+  },
+  "schema": {
+    "ui": {
+      "rbac": {
+        "read": "*",
+        "write": [
+          "admin"
+        ]
+      }
     }
   }
 }

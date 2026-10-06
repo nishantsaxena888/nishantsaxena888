@@ -8,9 +8,23 @@
         "primary_key": true
       }
     },
-    "ui": {}
+    "ui": {
+      "rbac": {
+        "read": "*",
+        "write": [
+          "admin"
+        ]
+      }
+    }
   },
-  "content": {},
+  "content": {
+    "rbac": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    }
+  },
   "config": [
     {
       "id": "hello-overview-1",

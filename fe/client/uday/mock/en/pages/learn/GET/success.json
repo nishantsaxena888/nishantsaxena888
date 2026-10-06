@@ -67,7 +67,22 @@
           "dark_theme": "uday-dark",
           "light_theme": "default"
         },
-        "reader_path": "/chapter"
+        "reader_path": "/chapter",
+        "chapter_actions": [
+          {
+            "icon": "\u270f\ufe0f",
+            "label": "Edit chapter",
+            "opens": "detail",
+            "method": "put",
+            "path": "/admin/chapter"
+          },
+          {
+            "icon": "\ud83d\uddd1",
+            "label": "Delete chapter",
+            "method": "delete",
+            "confirm": "Delete {title}?"
+          }
+        ]
       }
     }
   ]

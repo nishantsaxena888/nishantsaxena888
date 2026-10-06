@@ -94,6 +94,12 @@
             "label": "Snapshot (chapter\u2192revision JSON)"
           }
         ]
+      },
+      "rbac": {
+        "read": "*",
+        "write": [
+          "admin"
+        ]
       }
     }
   },
@@ -162,6 +168,12 @@
           "colSpan": 2,
           "label": "Snapshot (chapter\u2192revision JSON)"
         }
+      ]
+    },
+    "rbac": {
+      "read": "*",
+      "write": [
+        "admin"
       ]
     }
   }

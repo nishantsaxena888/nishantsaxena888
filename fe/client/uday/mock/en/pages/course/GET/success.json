@@ -39,7 +39,21 @@
       },
       "content": {
         "title": "Course",
-        "reader_path": "/chapter"
+        "reader_path": "/chapter",
+        "row_actions": [
+          {
+            "icon": "\u270f\ufe0f",
+            "label": "Edit",
+            "opens": "detail",
+            "method": "put"
+          },
+          {
+            "icon": "\ud83d\uddd1",
+            "label": "Delete",
+            "method": "delete",
+            "confirm": "Delete {title}?"
+          }
+        ]
       }
     }
   ]

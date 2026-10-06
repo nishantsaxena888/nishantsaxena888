@@ -5,7 +5,7 @@
     "theme": "airbnb",
     "language": "en",
     "currency": "INR",
-    "currency_symbol": "\u20b9"
+    "currency_symbol": "₹"
   },
   "home_page": "pages/home",
   "admin": {
@@ -221,13 +221,13 @@
     "listing.out_of_stock": "Not available",
     "listing.empty": "No stays found.",
     "cart.title": "Wishlists",
-    "cart.empty": "Nothing saved yet \u2014 tap a heart on any stay.",
+    "cart.empty": "Nothing saved yet — tap a heart on any stay.",
     "hero.explore": "Explore stays"
   },
   "pages": {
     "home": {
       "meta": {
-        "title": "Airbnb \u2014 Book unique stays"
+        "title": "Airbnb — Book unique stays"
       },
       "config": [
         {
@@ -239,7 +239,7 @@
           },
           "content": {
             "headline": "Find a place you'll love to stay",
-            "subheadline": "Villas, cabins, houseboats and city lofts \u2014 hosted by people who care.",
+            "subheadline": "Villas, cabins, houseboats and city lofts — hosted by people who care.",
             "badge": "Over 8 unique stays live",
             "cta": "Explore stays",
             "ctaUrl": "/stays",
@@ -260,32 +260,32 @@
             "items": [
               {
                 "label": "Trending",
-                "icon": "\ud83d\udd25",
+                "icon": "🔥",
                 "category": "trending"
               },
               {
                 "label": "Beachfront",
-                "icon": "\ud83c\udfd6\ufe0f",
+                "icon": "🏖️",
                 "category": "beachfront"
               },
               {
                 "label": "Cabins",
-                "icon": "\ud83c\udfe1",
+                "icon": "🏡",
                 "category": "cabins"
               },
               {
                 "label": "Amazing pools",
-                "icon": "\ud83c\udfca",
+                "icon": "🏊",
                 "category": "amazing-pools"
               },
               {
                 "label": "Countryside",
-                "icon": "\ud83c\udf3e",
+                "icon": "🌾",
                 "category": "countryside"
               },
               {
                 "label": "City",
-                "icon": "\ud83c\udfd9\ufe0f",
+                "icon": "🏙️",
                 "category": "city"
               }
             ]
@@ -333,37 +333,37 @@
             "items": [
               {
                 "label": "All",
-                "icon": "\u2728",
+                "icon": "✨",
                 "category": ""
               },
               {
                 "label": "Trending",
-                "icon": "\ud83d\udd25",
+                "icon": "🔥",
                 "category": "trending"
               },
               {
                 "label": "Beachfront",
-                "icon": "\ud83c\udfd6\ufe0f",
+                "icon": "🏖️",
                 "category": "beachfront"
               },
               {
                 "label": "Cabins",
-                "icon": "\ud83c\udfe1",
+                "icon": "🏡",
                 "category": "cabins"
               },
               {
                 "label": "Amazing pools",
-                "icon": "\ud83c\udfca",
+                "icon": "🏊",
                 "category": "amazing-pools"
               },
               {
                 "label": "Countryside",
-                "icon": "\ud83c\udf3e",
+                "icon": "🌾",
                 "category": "countryside"
               },
               {
                 "label": "City",
-                "icon": "\ud83c\udfd9\ufe0f",
+                "icon": "🏙️",
                 "category": "city"
               }
             ]
@@ -411,7 +411,7 @@
           "content": {
             "title": "Your wishlist",
             "session": "wishlist",
-            "empty_text": "Nothing saved yet \u2014 tap a heart on any stay."
+            "empty_text": "Nothing saved yet — tap a heart on any stay."
           }
         }
       ]
@@ -456,6 +456,40 @@
             "reserve_session": "trips"
           }
         }
+      ]
+    }
+  },
+  "rbac": {
+    "overview": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "listing": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "host": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    },
+    "booking": {
+      "read": "*",
+      "write": "*"
+    },
+    "review": {
+      "read": "*",
+      "write": "*"
+    },
+    "amenity": {
+      "read": "*",
+      "write": [
+        "admin"
       ]
     }
   }

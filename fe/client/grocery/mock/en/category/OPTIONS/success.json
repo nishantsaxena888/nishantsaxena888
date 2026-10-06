@@ -48,8 +48,14 @@
               "label": "Status",
               "type": "status",
               "options": {
-                "active": { "label": "Active", "variant": "success" },
-                "inactive": { "label": "Inactive", "variant": "destructive" }
+                "active": {
+                  "label": "Active",
+                  "variant": "success"
+                },
+                "inactive": {
+                  "label": "Inactive",
+                  "variant": "destructive"
+                }
               }
             }
           ],
@@ -100,8 +106,14 @@
               "defaultValue": "active",
               "colSpan": 1,
               "options": [
-                { "label": "Active", "value": "active" },
-                { "label": "Inactive", "value": "inactive" }
+                {
+                  "label": "Active",
+                  "value": "active"
+                },
+                {
+                  "label": "Inactive",
+                  "value": "inactive"
+                }
               ]
             }
           ]
@@ -109,5 +121,23 @@
       },
       "children": []
     }
-  ]
+  ],
+  "content": {
+    "rbac": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    }
+  },
+  "schema": {
+    "ui": {
+      "rbac": {
+        "read": "*",
+        "write": [
+          "admin"
+        ]
+      }
+    }
+  }
 }

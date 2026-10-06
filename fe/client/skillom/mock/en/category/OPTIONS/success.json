@@ -81,6 +81,12 @@
             "label": "Order"
           }
         ]
+      },
+      "rbac": {
+        "read": "*",
+        "write": [
+          "admin"
+        ]
       }
     }
   },
@@ -141,6 +147,12 @@
           "componentType": "NumberInput",
           "label": "Order"
         }
+      ]
+    },
+    "rbac": {
+      "read": "*",
+      "write": [
+        "admin"
       ]
     }
   }

@@ -18,6 +18,7 @@ import { useRenderEngine } from "@/engine/render-engine/features/render-engine-c
 import { parseMd, type MdSection } from "./md-sections";
 import { MdDoc, MdToc } from "./md-render";
 import SlideEngine from "./slide-engine";
+import RowActions from "./entity-actions";
 import { makeTr } from "./utils";
 
 const toItems = (res: any): any[] =>
@@ -224,6 +225,16 @@ export default function ChapterReader({ content, actionData, session }: any) {
             <Pressable className="topbar-btn" onPress={() => setPopup("notes")}>
               {tb.notes_label || `🧪 ${t("popup.labNotes","Lab Notes")}`}
             </Pressable>
+            {chapter && content?.chapter_actions && (
+              <RowActions
+                entity={content.chapter_entity || "chapter"}
+                item={chapter}
+                actions={content.chapter_actions}
+                reload={() =>
+                  actionData?.action?.({ key: "chapter", type: "reload" })
+                }
+              />
+            )}
             {tb.theme_toggle !== false && (
               <Pressable
                 className="topbar-btn topbar-btn-theme"

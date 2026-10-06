@@ -24,6 +24,12 @@
       },
       "form": {
         "fields": []
+      },
+      "rbac": {
+        "read": "*",
+        "write": [
+          "admin"
+        ]
       }
     }
   },
@@ -43,6 +49,12 @@
     },
     "form": {
       "fields": []
+    },
+    "rbac": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
     }
   },
   "config": [

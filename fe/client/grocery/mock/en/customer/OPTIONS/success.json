@@ -462,7 +462,9 @@
                 "title": "Address",
                 "entity": "address",
                 "className": "flex-1",
-                "searchParameter": { "customer_id": "$id" },
+                "searchParameter": {
+                  "customer_id": "$id"
+                },
                 "emptyMessage": "Please select an address"
               }
             }
@@ -488,7 +490,9 @@
                 "title": "Contact",
                 "entity": "contact",
                 "className": "flex-1",
-                "searchParameter": { "customer_id": "$id" },
+                "searchParameter": {
+                  "customer_id": "$id"
+                },
                 "emptyMessage": "Please select a contact"
               }
             }
@@ -514,7 +518,9 @@
                 "title": "Branch",
                 "entity": "branch",
                 "className": "flex-1",
-                "searchParameter": { "customer_id": "$id" },
+                "searchParameter": {
+                  "customer_id": "$id"
+                },
                 "emptyMessage": "Please select a branch"
               }
             }
@@ -540,7 +546,9 @@
                 "title": "Custom Product Prices",
                 "entity": "product",
                 "className": "flex-1",
-                "searchParameter": { "customer_id": "$id" },
+                "searchParameter": {
+                  "customer_id": "$id"
+                },
                 "emptyMessage": "Please select custom product prices"
               }
             }
@@ -566,7 +574,9 @@
                 "title": "Discounts",
                 "entity": "discount",
                 "className": "flex-1",
-                "searchParameter": { "customer_id": "$id" },
+                "searchParameter": {
+                  "customer_id": "$id"
+                },
                 "emptyMessage": "Please select a discount"
               }
             }
@@ -591,6 +601,22 @@
           ]
         }
       ]
+    },
+    "rbac": {
+      "read": "*",
+      "write": [
+        "admin"
+      ]
+    }
+  },
+  "schema": {
+    "ui": {
+      "rbac": {
+        "read": "*",
+        "write": [
+          "admin"
+        ]
+      }
     }
   }
 }

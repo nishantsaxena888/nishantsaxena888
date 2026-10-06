@@ -23,6 +23,7 @@
 //   footer      {line1, line2}
 import { useNav } from "@/platform/navigation";
 import { Pressable, Text, View } from "@/platform/primitives";
+import RowActions from "./entity-actions";
 
 const toItems = (res: any): any[] =>
   Array.isArray(res) ? res : res?.items ?? res?.data ?? [];
@@ -219,15 +220,15 @@ export default function Landing({ content, actionData, session }: any) {
                   ? Math.round(((donePerCat[r.id] ?? 0) / n) * 100)
                   : undefined;
               return (
-                <Pressable
-                  key={r.id}
-                  className="card module-card"
-                  onPress={() =>
-                    isModule && cat.module_path && catCourse[r.id]
-                      ? go(cat.module_path.replace(":id", catCourse[r.id]))
-                      : go(`${catPath}=${r.id}`)
-                  }
-                >
+                <View key={r.id} className="card module-card">
+                  <Pressable
+                    className="card-hit"
+                    onPress={() =>
+                      isModule && cat.module_path && catCourse[r.id]
+                        ? go(cat.module_path.replace(":id", catCourse[r.id]))
+                        : go(`${catPath}=${r.id}`)
+                    }
+                  >
                   <View className="card-body">
                     <View className="module-icon" style={{ background: r[f.bg], color: r[f.color] }}>
                       {r[f.icon] || r[f.title]?.[0] || "📦"}
@@ -252,7 +253,16 @@ export default function Landing({ content, actionData, session }: any) {
                       <Text>📦 {n} {label}</Text>
                     </View>
                   </View>
-                </Pressable>
+                  </Pressable>
+                  <RowActions
+                    entity={cat.entity || "category"}
+                    item={r}
+                    actions={cat.card_actions}
+                    reload={() =>
+                      actionData?.action?.({ key: cat.key || "categories", type: "reload" })
+                    }
+                  />
+                </View>
               );
             })}
           </View>

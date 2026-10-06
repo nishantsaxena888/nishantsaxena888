@@ -75,6 +75,10 @@
             "label": "Notes"
           }
         ]
+      },
+      "rbac": {
+        "read": "*",
+        "write": "*"
       }
     }
   },
@@ -131,6 +135,10 @@
           "label": "Notes"
         }
       ]
+    },
+    "rbac": {
+      "read": "*",
+      "write": "*"
     }
   }
 }

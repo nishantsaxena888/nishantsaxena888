@@ -18,6 +18,7 @@ ENTITIES_ORDER = [
 
 entities = {
     "overview": {
+        "rbac": {"read": "*", "write": ["admin"]},
         "source": "json",
         "fields": {"id": {"type": "int", "primary_key": True}},
         "ui": {},
@@ -46,6 +47,7 @@ entities = {
     },
 
     "category": {
+        "rbac": {"read": "*", "write": ["admin"]},
         "source": "json",
         "fields": {
             "id":    {"type": "int", "primary_key": True},
@@ -123,6 +125,7 @@ entities = {
     },
 
     "course": {
+        "rbac": {"read": "*", "write": ["admin"]},
         "source": "json",
         "fields": {
             "id":          {"type": "int", "primary_key": True},
@@ -221,6 +224,7 @@ entities = {
     },
 
     "chapter": {
+        "rbac": {"read": "*", "write": ["admin"]},
         "source": "json",
         "fields": {
             "id":        {"type": "int", "primary_key": True},
@@ -335,6 +339,7 @@ entities = {
     # Rollback = create a new draft revision copying an old version's md;
     # published history is immutable.
     "revision": {
+        "rbac": {"read": "*", "write": ["admin"]},
         "source": "json",
         "fields": {
             "id":           {"type": "int", "primary_key": True},
@@ -492,6 +497,7 @@ entities = {
     # Reviewer comments — anchored to a chapter section slug ("3-9") so the
     # note survives markdown edits that keep section numbers stable.
     "comment": {
+        "rbac": {"read": "*", "write": "*"},
         "source": "json",
         "fields": {
             "id":          {"type": "int", "primary_key": True},
@@ -546,6 +552,7 @@ entities = {
     # Point-in-time course snapshot — {chapter_id: revision_id} map.
     # Users can export a release or roll the course back to it.
     "course_release": {
+        "rbac": {"read": "*", "write": ["admin"]},
         "source": "json",
         "fields": {
             "id":          {"type": "int", "primary_key": True},
@@ -588,6 +595,7 @@ entities = {
     },
 
     "enrollment": {
+        "rbac": {"read": "*", "write": "*"},
         "source": "json",
         "fields": {
             "id":           {"type": "int", "primary_key": True},
@@ -631,6 +639,7 @@ entities = {
     # Per-user section completion — the cart-equivalent session entity when
     # running anonymous; rows here once logged in.
     "progress": {
+        "rbac": {"read": "*", "write": "*"},
         "source": "json",
         "fields": {
             "id":         {"type": "int", "primary_key": True},
@@ -672,6 +681,7 @@ entities = {
     },
 
     "lab_note": {
+        "rbac": {"read": "*", "write": "*"},
         "source": "json",
         "fields": {
             "id":         {"type": "int", "primary_key": True},
@@ -709,6 +719,7 @@ entities = {
     },
 
     "quiz_submission": {
+        "rbac": {"read": "*", "write": "*"},
         "source": "json",
         "fields": {
             "id":           {"type": "int", "primary_key": True},

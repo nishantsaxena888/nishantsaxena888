@@ -96,6 +96,10 @@
             "label": "Total"
           }
         ]
+      },
+      "rbac": {
+        "read": "*",
+        "write": "*"
       }
     }
   },
@@ -165,6 +169,10 @@
           "label": "Total"
         }
       ]
+    },
+    "rbac": {
+      "read": "*",
+      "write": "*"
     }
   }
 }

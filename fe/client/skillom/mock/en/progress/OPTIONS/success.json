@@ -92,6 +92,10 @@
             "label": "Completed"
           }
         ]
+      },
+      "rbac": {
+        "read": "*",
+        "write": "*"
       }
     }
   },
@@ -161,6 +165,10 @@
           "label": "Completed"
         }
       ]
+    },
+    "rbac": {
+      "read": "*",
+      "write": "*"
     }
   }
 }

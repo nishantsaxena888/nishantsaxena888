@@ -9,6 +9,7 @@ entities = {
     # hello-overview component rather than the generic grid. The entity is
     # never CRUD'd; fields/sample_data are nominal.
     "overview": {
+        "rbac": {"read": "*", "write": ["admin"]},
         "source": "json",
         "fields": {"id": {"type": "int", "primary_key": True}},
         "ui": {},
