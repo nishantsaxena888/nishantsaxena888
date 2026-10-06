@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "title": "Grocery"
+  },
+  "config": [
+    {
+      "id": "grocery-hero-1",
+      "type": "grocery-hero",
+      "properties": {
+        "level": "base",
+        "type": "static"
+      },
+      "content": {
+        "title": "Fresh today",
+        "subtitle": "Same engine, different client \u2014 this page is a JSON definition served by the backend.",
+        "cta": "Shop deals"
+      }
+    },
+    {
+      "id": "grocery-grid-1",
+      "type": "product-grid",
+      "properties": {
+        "level": "base",
+        "type": "dynamic",
+        "action": [
+          {
+            "key": "products",
+            "endpoint": "product",
+            "method": "GET",
+            "queryParams": {
+              "size": 8
+            }
+          }
+        ]
+      },
+      "content": {
+        "title": "Featured"
+      }
+    }
+  ]
+}

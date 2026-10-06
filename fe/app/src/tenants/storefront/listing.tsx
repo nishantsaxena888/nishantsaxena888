@@ -33,7 +33,7 @@ export const StorefrontListing = ({ content, properties, actionData }: any) => {
     toast.success(tr("listing.added", `${p.name} added`));
   };
 
-  if (actionData?.loading) return <View className="sf-list-loading"><Text>Loading…</Text></View>;
+  if (actionData?.loading) return <View className="sf-list-loading"><Text>{tr("common.loading", "Loading…")}</Text></View>;
 
   return (
     <View as="section" className="sf-list">

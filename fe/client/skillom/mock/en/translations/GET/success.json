@@ -15,9 +15,9 @@
   "quiz.incorrect": "\u274c Incorrect",
   "quiz.retry": "\ud83d\udd04 Retry",
   "quiz.correctOf": "{c} of {t} correct",
-  "lab.progress": "Progress",
+  "lab.progress": "In progress",
   "lab.markComplete": "\u2713 Mark Complete",
-  "lab.complete": "Lab Complete!",
+  "lab.complete": "\u2705 Complete",
   "challenge.allPassed": "All Tests Passed!",
   "popup.detailedChapter": "Detailed Chapter",
   "popup.labNotes": "Lab Notes",
@@ -27,5 +27,7 @@
   "common.loading": "Loading\u2026",
   "lesson.requires": "Requires:",
   "common.chapter": "Chapter",
-  "common.emptyContent": "No content yet."
+  "common.emptyContent": "No content yet.",
+  "catalog.empty": "No courses yet.",
+  "cart.freeShipping": "Free"
 }

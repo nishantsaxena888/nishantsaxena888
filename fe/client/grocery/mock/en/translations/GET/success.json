@@ -9,7 +9,6 @@
   "header.categories": "Categories",
   "header.suggested_categories": "Suggested Categories",
   "header.logged_account": "Logged Account",
-
   "auth.title": "Welcome Back",
   "auth.sign_in": "Sign In",
   "auth.email": "Email Address",
@@ -18,7 +17,6 @@
   "auth.no_account": "Don't have an account?",
   "auth.sign_up": "Sign Up",
   "auth.or_continue": "Or continue with",
-
   "cart.title": "Shopping Cart",
   "cart.empty": "Your cart is empty",
   "cart.empty_msg": "Browse our collection and add items to your cart to see them here.",
@@ -31,7 +29,6 @@
   "cart.shipping": "Shipping",
   "cart.tax": "Tax",
   "cart.total": "Total",
-
   "checkout.title": "Secure Checkout",
   "checkout.shipping": "Shipping",
   "checkout.payment": "Payment",
@@ -58,7 +55,6 @@
   "checkout.success_title": "Success!",
   "checkout.success_msg": "Thank you for your order. We've sent a confirmation email to your primary email address.",
   "checkout.order_amount": "Order Amount",
-
   "listing.all_items": "All Items",
   "listing.no_matches": "No matches found",
   "listing.widen_search": "Try widening your search filters.",
@@ -88,7 +84,6 @@
   "listing.no_results_desc": "We couldn't find any items matching your filters. Try adjusting your category or price range.",
   "listing.reset_all": "Reset Filters",
   "listing.uncategorized": "Uncategorized",
-
   "detail.reviews": "reviews",
   "detail.add_to_cart": "Add to Cart",
   "detail.fast_delivery": "Fast Delivery",
@@ -102,7 +97,6 @@
   "detail.no_image": "No Image Preview",
   "detail.free_delivery_over": "Free delivery on orders over",
   "detail.offer_ends": "Special Offer Ends:",
-
   "profile.title": "My Profile",
   "profile.vip": "VIP Member",
   "profile.edit": "Edit Profile",
@@ -121,13 +115,11 @@
   "profile.no_orders_msg": "You haven't placed any orders yet with",
   "profile.no_orders_cta": "Start exploring our categories to find amazing deals!",
   "profile.return_to_shop": "Return to Shop",
-
   "wishlist.title": "My Wishlist",
   "wishlist.empty": "Your wishlist is empty",
   "wishlist.empty_msg": "Save the items you love to your wishlist and they'll appear here so you can easily find them later.",
   "wishlist.continue_shopping": "Continue Shopping",
   "wishlist.items_saved": "items saved in your wishlist",
-
   "age.title": "Age Verification",
   "age.requirement": "Legal Entry Requirement",
   "age.instruction_pre": "You must be",
@@ -145,7 +137,6 @@
   "age.license": "Licensed for delivery in NJ only",
   "age.error_incomplete": "Please enter your complete date of birth",
   "age.error_underage": "You must be 21 or older to access this site",
-
   "address.delivery_title": "Delivery Address",
   "address.saved_title": "Saved Addresses",
   "address.manage_msg": "Manage your shipping destinations",
@@ -168,7 +159,6 @@
   "address.cancel": "Cancel",
   "address.empty_msg": "Your address book is empty",
   "address.default_badge": "Default",
-
   "footer.navigation": "Navigation",
   "footer.shop_all": "Shop All",
   "footer.my_profile": "My Profile",
@@ -183,10 +173,13 @@
   "footer.help": "Help & Support",
   "footer.privacy": "Privacy Policy",
   "footer.terms": "Terms of Service",
-
   "hero.explore": "Explore Collection",
-
   "store.name": "FreshMart",
   "store.tagline": "Wholesale",
-  "store.topbar": "Wholesale Prices for Retailers & Distributors"
+  "store.topbar": "Wholesale Prices for Retailers & Distributors",
+  "common.loading": "Loading…",
+  "catalog.empty": "No courses yet.",
+  "lab.progress": "In progress",
+  "lab.complete": "✅ Complete",
+  "cart.freeShipping": "Free"
 }

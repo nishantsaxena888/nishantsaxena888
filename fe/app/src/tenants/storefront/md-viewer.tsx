@@ -15,9 +15,11 @@
 // <GitHubExplorer …/> sections with the directive attrs as props.
 import { useMemo } from "react";
 import { Text, View } from "@/platform/primitives";
+import { useLanguage } from "@/components/shared/use-language";
 import { useRenderEngine } from "@/engine/render-engine/features/render-engine-context";
 import { parseMd, type MdSection } from "./md-sections";
 import { MdDoc, MdToc } from "./md-render";
+import { makeTr } from "./utils";
 
 const pickMd = (raw: any): { md?: string; base?: string } => {
   if (!raw) return {};
@@ -33,6 +35,7 @@ const pickMd = (raw: any): { md?: string; base?: string } => {
 
 export default function MdViewer({ content, actionData }: any) {
   const { componentMap } = useRenderEngine();
+  const tr = makeTr(useLanguage().t);
 
   const source: { md?: string; base?: string } = content?.markdown
     ? { md: content.markdown }
@@ -69,7 +72,7 @@ export default function MdViewer({ content, actionData }: any) {
   if (!source.md && actionData?.loading) {
     return (
       <View as="section" className="md-viewer p-6">
-        <Text>Loading…</Text>
+        <Text>{tr("common.loading", "Loading…")}</Text>
       </View>
     );
   }

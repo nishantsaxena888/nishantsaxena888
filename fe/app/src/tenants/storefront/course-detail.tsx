@@ -8,13 +8,14 @@
 import { useNav } from "@/platform/navigation";
 import { useLanguage } from "@/components/shared/use-language";
 import { Pressable, Text, View } from "@/platform/primitives";
+import { makeTr } from "./utils";
 
 const toItems = (res: any): any[] =>
   Array.isArray(res) ? res : res?.items ?? res?.data ?? [];
 
 export default function CourseDetail({ content, actionData, session }: any) {
   const navigate = useNav().navigate;
-  const { t } = useLanguage();
+  const t = makeTr(useLanguage().t);
   const course = actionData?.data?.course?.data ?? actionData?.data?.course;
   const chapters = toItems(actionData?.data?.chapters)
     .filter((c: any) => !course?.id || c.course_id === course.id)
@@ -45,7 +46,7 @@ export default function CourseDetail({ content, actionData, session }: any) {
   if (actionData?.loading) {
     return (
       <View as="section" className="course-detail p-6">
-        <Text>Loading…</Text>
+        <Text>{t("common.loading", "Loading…")}</Text>
       </View>
     );
   }
@@ -57,7 +58,7 @@ export default function CourseDetail({ content, actionData, session }: any) {
           className="back-link"
           onPress={() => navigate(content?.back_path || "/")}
         >
-          {content?.back_label || t("common.backToCourse")}
+          {content?.back_label || t("common.backToCourse", "← Back to Course")}
         </Pressable>
         <View className="course-page-title">
           <Text className="course-kicker">{content?.kicker || "Course"}</Text>
@@ -112,7 +113,7 @@ export default function CourseDetail({ content, actionData, session }: any) {
                 <View className="module-progress">
                   <View className="progress-label">
                     <Text className="progress-label-title">
-                      {pct === 100 ? "✅ Complete" : t("lab.progress")}
+                      {pct === 100 ? t("lab.complete", "✅ Complete") : t("lab.progress", "In progress")}
                     </Text>
                     <Text className="progress-label-value">{pct}%</Text>
                   </View>

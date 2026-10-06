@@ -275,7 +275,7 @@
           },
           "content": {
             "title": "Fresh today",
-            "subtitle": "Same engine, different client \u2014 this page is a JSON definition served by the backend.",
+            "subtitle": "Same engine, different client — this page is a JSON definition served by the backend.",
             "cta": "Shop deals"
           }
         },
@@ -360,5 +360,12 @@
       ]
     }
   },
-  "site_nav": false
+  "site_nav": false,
+  "translations": {
+    "common.loading": "Loading…",
+    "catalog.empty": "No courses yet.",
+    "lab.progress": "In progress",
+    "lab.complete": "✅ Complete",
+    "cart.freeShipping": "Free"
+  }
 }

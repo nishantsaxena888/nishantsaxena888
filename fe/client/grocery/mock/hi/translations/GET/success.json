@@ -9,7 +9,6 @@
   "header.categories": "श्रेणियाँ",
   "header.suggested_categories": "सुझाई गई श्रेणियाँ",
   "header.logged_account": "लॉग इन खाता",
-
   "auth.title": "वापसी पर स्वागत है",
   "auth.sign_in": "साइन इन",
   "auth.email": "ईमेल पता",
@@ -18,7 +17,6 @@
   "auth.no_account": "खाता नहीं है?",
   "auth.sign_up": "साइन अप",
   "auth.or_continue": "या जारी रखें",
-
   "cart.title": "शॉपिंग कार्ट",
   "cart.empty": "आपका कार्ट खाली है",
   "cart.empty_msg": "हमारे संग्रह को ब्राउज़ करें और अपने कार्ट में आइटम जोड़ें।",
@@ -31,7 +29,6 @@
   "cart.shipping": "शिपिंग",
   "cart.tax": "कर",
   "cart.total": "कुल",
-
   "checkout.title": "सुरक्षित चेकआउट",
   "checkout.shipping": "शिपिंग",
   "checkout.payment": "भुगतान",
@@ -58,7 +55,6 @@
   "checkout.success_title": "सफल!",
   "checkout.success_msg": "आपके ऑर्डर के लिए धन्यवाद। हमने आपके ईमेल पर पुष्टि भेज दी है।",
   "checkout.order_amount": "ऑर्डर राशि",
-
   "listing.all_items": "सभी आइटम",
   "listing.no_matches": "कोई मिलान नहीं मिला",
   "listing.widen_search": "अपने खोज फ़िल्टर का विस्तार करें।",
@@ -88,7 +84,6 @@
   "listing.no_results_desc": "आपके फ़िल्टर से कोई आइटम नहीं मिला। श्रेणी या मूल्य सीमा बदलें।",
   "listing.reset_all": "फ़िल्टर रीसेट करें",
   "listing.uncategorized": "बिना श्रेणी",
-
   "detail.reviews": "समीक्षाएं",
   "detail.add_to_cart": "कार्ट में जोड़ें",
   "detail.fast_delivery": "तेज़ डिलीवरी",
@@ -102,7 +97,6 @@
   "detail.no_image": "कोई छवि नहीं",
   "detail.free_delivery_over": "इस राशि से अधिक पर मुफ़्त डिलीवरी",
   "detail.offer_ends": "ऑफ़र समाप्ति:",
-
   "profile.title": "मेरी प्रोफ़ाइल",
   "profile.vip": "VIP सदस्य",
   "profile.edit": "प्रोफ़ाइल संपादित करें",
@@ -121,13 +115,11 @@
   "profile.no_orders_msg": "आपने अभी तक कोई ऑर्डर नहीं दिया है",
   "profile.no_orders_cta": "अद्भुत सौदे खोजने के लिए हमारी श्रेणियां देखें!",
   "profile.return_to_shop": "दुकान पर वापस जाएं",
-
   "wishlist.title": "मेरी विशलिस्ट",
   "wishlist.empty": "आपकी विशलिस्ट खाली है",
   "wishlist.empty_msg": "अपनी पसंदीदा वस्तुओं को विशलिस्ट में सहेजें।",
   "wishlist.continue_shopping": "खरीदारी जारी रखें",
   "wishlist.items_saved": "आइटम विशलिस्ट में सहेजे गए",
-
   "age.title": "आयु सत्यापन",
   "age.requirement": "कानूनी प्रवेश आवश्यकता",
   "age.instruction_pre": "आपकी उम्र",
@@ -145,7 +137,6 @@
   "age.license": "केवल NJ में डिलीवरी",
   "age.error_incomplete": "कृपया अपनी पूरी जन्म तिथि दर्ज करें",
   "age.error_underage": "इस साइट तक पहुंचने के लिए आपकी उम्र 21 या अधिक होनी चाहिए",
-
   "address.delivery_title": "डिलीवरी पता",
   "address.saved_title": "सहेजे गए पते",
   "address.manage_msg": "अपने शिपिंग गंतव्य प्रबंधित करें",
@@ -168,7 +159,6 @@
   "address.cancel": "रद्द करें",
   "address.empty_msg": "आपकी पता पुस्तिका खाली है",
   "address.default_badge": "डिफ़ॉल्ट",
-
   "footer.navigation": "नेविगेशन",
   "footer.shop_all": "सभी खरीदें",
   "footer.my_profile": "मेरी प्रोफ़ाइल",
@@ -183,10 +173,13 @@
   "footer.help": "सहायता",
   "footer.privacy": "गोपनीयता नीति",
   "footer.terms": "सेवा की शर्तें",
-
   "hero.explore": "संग्रह देखें",
-
   "store.name": "फ्रेशमार्ट",
   "store.tagline": "थोक",
-  "store.topbar": "खुदरा विक्रेताओं और वितरकों के लिए थोक मूल्य"
+  "store.topbar": "खुदरा विक्रेताओं और वितरकों के लिए थोक मूल्य",
+  "common.loading": "लोड हो रहा है…",
+  "catalog.empty": "अभी कोई कोर्स नहीं है।",
+  "lab.progress": "जारी है",
+  "lab.complete": "✅ पूर्ण",
+  "cart.freeShipping": "मुफ़्त"
 }

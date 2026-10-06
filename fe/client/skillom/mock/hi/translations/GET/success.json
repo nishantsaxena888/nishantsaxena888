@@ -15,9 +15,9 @@
   "quiz.incorrect": "❌ गलत",
   "quiz.retry": "🔄 फिर से",
   "quiz.correctOf": "{t} में से {c} सही",
-  "lab.progress": "प्रगति",
+  "lab.progress": "जारी है",
   "lab.markComplete": "✓ पूर्ण चिह्नित करें",
-  "lab.complete": "लैब पूर्ण!",
+  "lab.complete": "✅ पूर्ण",
   "challenge.allPassed": "सभी टेस्ट पास!",
   "popup.detailedChapter": "विस्तृत अध्याय",
   "popup.labNotes": "लैब नोट्स",
@@ -27,5 +27,7 @@
   "common.loading": "लोड हो रहा है…",
   "lesson.requires": "आवश्यक:",
   "common.chapter": "अध्याय",
-  "common.emptyContent": "अभी कोई सामग्री नहीं है।"
+  "common.emptyContent": "अभी कोई सामग्री नहीं है।",
+  "catalog.empty": "अभी कोई कोर्स नहीं है।",
+  "cart.freeShipping": "मुफ़्त"
 }

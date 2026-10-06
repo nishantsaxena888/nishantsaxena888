@@ -18,13 +18,14 @@ import { useRenderEngine } from "@/engine/render-engine/features/render-engine-c
 import { parseMd, type MdSection } from "./md-sections";
 import { MdDoc, MdToc } from "./md-render";
 import SlideEngine from "./slide-engine";
+import { makeTr } from "./utils";
 
 const toItems = (res: any): any[] =>
   Array.isArray(res) ? res : res?.items ?? res?.data ?? [];
 
 export default function ChapterReader({ content, actionData, session }: any) {
   const navigate = useNav().navigate;
-  const { t } = useLanguage();
+  const t = makeTr(useLanguage().t);
   const { theme, setTheme } = useTheme();
   const { componentMap } = useRenderEngine();
   const [popup, setPopup] = useState<"detail" | "notes" | null>(null);
@@ -193,7 +194,7 @@ export default function ChapterReader({ content, actionData, session }: any) {
   if (actionData?.loading && !chapter) {
     return (
       <View as="section" className="chapter-reader p-6">
-        <Text>{content?.loading_label || t("common.loading") || "Loading…"}</Text>
+        <Text>{content?.loading_label || t("common.loading","Loading…")}</Text>
       </View>
     );
   }
@@ -218,10 +219,10 @@ export default function ChapterReader({ content, actionData, session }: any) {
           </View>
           <View className="reader-topbar-actions">
             <Pressable className="topbar-btn" onPress={() => setPopup("detail")}>
-              {tb.details_label || `📄 ${t("popup.detailedChapter")}`}
+              {tb.details_label || `📄 ${t("popup.detailedChapter","Detailed Chapter")}`}
             </Pressable>
             <Pressable className="topbar-btn" onPress={() => setPopup("notes")}>
-              {tb.notes_label || `🧪 ${t("popup.labNotes")}`}
+              {tb.notes_label || `🧪 ${t("popup.labNotes","Lab Notes")}`}
             </Pressable>
             {tb.theme_toggle !== false && (
               <Pressable
@@ -251,7 +252,7 @@ export default function ChapterReader({ content, actionData, session }: any) {
       <View className="reader-layout">
       {siblings.length > 0 && (
         <View as="aside" className="reader-sidebar">
-          <Text className="reader-sidebar-label">{t("sidebar.modules")}</Text>
+          <Text className="reader-sidebar-label">{t("sidebar.modules","Modules")}</Text>
           {siblings.map((s: any, i: number) => (
             <Pressable
               key={s.id}
@@ -281,7 +282,7 @@ export default function ChapterReader({ content, actionData, session }: any) {
                   )
                 }
               >
-                {content?.back_label || t("common.backToCourse")}
+                {content?.back_label || t("common.backToCourse","← Back to Course")}
               </Pressable>
             </View>
           )}
@@ -299,14 +300,14 @@ export default function ChapterReader({ content, actionData, session }: any) {
                 )
               }
             >
-              {content?.back_label || t("common.backToCourse")}
+              {content?.back_label || t("common.backToCourse","← Back to Course")}
             </Pressable>
             <View className="chapter-topbar-actions">
               <Pressable className="btn btn-secondary" onPress={() => setPopup("detail")}>
-                📄 {t("popup.detailedChapter")}
+                📄 {t("popup.detailedChapter","Detailed Chapter")}
               </Pressable>
               <Pressable className="btn btn-secondary" onPress={() => setPopup("notes")}>
-                📝 {t("popup.labNotes")}
+                📝 {t("popup.labNotes","Lab Notes")}
               </Pressable>
               {siblings.length > 0 && (
                 <Text className="reader-side-pct">{pct}%</Text>
@@ -328,13 +329,13 @@ export default function ChapterReader({ content, actionData, session }: any) {
               )}
               {chapter?.prerequisites?.length > 0 && (
                 <Text className="badge badge-accent">
-                  {(content?.requires_label || t("lesson.requires") || "Requires:")}{" "}
+                  {(content?.requires_label || t("lesson.requires","Requires:"))}{" "}
                   {chapter.prerequisites.join(", ")}
                 </Text>
               )}
             </View>
             <Text as="h1">
-              {chapter?.subtitle || chapter?.title || content?.title || t("common.chapter") || "Chapter"}
+              {chapter?.subtitle || chapter?.title || content?.title || t("common.chapter","Chapter")}
             </Text>
             {(chapter?.intro || chapter?.description) && (
               <Text as="p" className="lesson-header-desc">
@@ -343,7 +344,7 @@ export default function ChapterReader({ content, actionData, session }: any) {
             )}
             {chapter?.objectives?.length > 0 && (
               <View className="lesson-objectives">
-                <Text as="h4">🎯 {t("lesson.objectives") || "Learning Objectives"}</Text>
+                <Text as="h4">🎯 {t("lesson.objectives","Learning Objectives")}</Text>
                 <View as="ul">
                   {chapter.objectives.map((o: string, i: number) => (
                     <Text as="li" key={i}>{o}</Text>
@@ -370,7 +371,7 @@ export default function ChapterReader({ content, actionData, session }: any) {
               )}
             </View>
             <Text as="h1" className="chapter-title">
-              {chapter?.title || content?.title || t("common.chapter") || "Chapter"}
+              {chapter?.title || content?.title || t("common.chapter","Chapter")}
             </Text>
             {chapter?.description && (
               <Text as="p" className="chapter-desc">{chapter.description}</Text>
@@ -439,13 +440,13 @@ export default function ChapterReader({ content, actionData, session }: any) {
         )}
         {!actionData?.loading && !slides && parsed.sections.length === 0 && (
           <Text as="p" className="text-muted-foreground">
-            {content?.empty || t("common.emptyContent") || "No content yet."}
+            {content?.empty || t("common.emptyContent","No content yet.")}
           </Text>
         )}
         {!slides && (
           <View className="chapter-foot">
             <Pressable className="sf-action-btn" onPress={markComplete}>
-              {content?.complete_label || t("lesson.markAsRead")}
+              {content?.complete_label || t("lesson.markAsRead","Mark as read")}
             </Pressable>
             <View className="chapter-prevnext">
               {prev && (
@@ -453,7 +454,7 @@ export default function ChapterReader({ content, actionData, session }: any) {
                   className="btn btn-secondary"
                   onPress={() => openChapter(prev)}
                 >
-                  {t("quiz.previous")}
+                  {t("quiz.previous","← Previous")}
                 </Pressable>
               )}
               {next && (
@@ -461,7 +462,7 @@ export default function ChapterReader({ content, actionData, session }: any) {
                   className="btn btn-primary"
                   onPress={() => openChapter(next)}
                 >
-                  {t("quiz.next")}
+                  {t("quiz.next","Next →")}
                 </Pressable>
               )}
             </View>
@@ -472,7 +473,7 @@ export default function ChapterReader({ content, actionData, session }: any) {
 
       {content?.toc && (slides ? slides.length > 0 : parsed.sections.length > 0) && (
         <View as="aside" className="reader-toc">
-          <Text className="reader-sidebar-label">{t("ctx.onThisPage")}</Text>
+          <Text className="reader-sidebar-label">{t("ctx.onThisPage","On this page")}</Text>
           {slides ? (
             <View className="reader-toc-list">
               {slides
@@ -506,11 +507,11 @@ export default function ChapterReader({ content, actionData, session }: any) {
             <View className="reader-modal-head">
               <Text className="font-semibold">
                 {popup === "detail"
-                  ? `📄 ${t("popup.detailedChapter")}`
-                  : `📝 ${t("popup.labNotes")}`}
+                  ? `📄 ${t("popup.detailedChapter","Detailed Chapter")}`
+                  : `📝 ${t("popup.labNotes","Lab Notes")}`}
               </Text>
               <Pressable className="btn btn-secondary" onPress={() => setPopup(null)}>
-                {t("common.close")}
+                {t("common.close","Close")}
               </Pressable>
             </View>
             {popup === "detail" ? (
@@ -526,7 +527,7 @@ export default function ChapterReader({ content, actionData, session }: any) {
                 <textarea
                   className="reader-notes-input"
                   rows={10}
-                  placeholder={t("popup.personalNotes")}
+                  placeholder={t("popup.personalNotes","Personal notes…")}
                   value={noteDraft}
                   onChange={(e) => setNoteDraft(e.target.value)}
                 />
@@ -549,7 +550,7 @@ export default function ChapterReader({ content, actionData, session }: any) {
                     setPopup(null);
                   }}
                 >
-                  {t("popup.saveClose")}
+                  {t("popup.saveClose","Save & close")}
                 </Pressable>
               </View>
             )}

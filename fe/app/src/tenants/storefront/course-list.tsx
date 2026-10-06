@@ -15,11 +15,14 @@
 import { useEntity } from "@/engine";
 import { useNav, useQuery } from "@/platform/navigation";
 import { Pressable, Text, View } from "@/platform/primitives";
+import { useLanguage } from "@/components/shared/use-language";
+import { makeTr } from "./utils";
 
 const toItems = (res: any): any[] =>
   Array.isArray(res) ? res : res?.items ?? res?.data ?? [];
 
 export default function CourseList({ content, actionData, session, action }: any) {
+  const t = makeTr(useLanguage().t);
   const all = toItems(actionData?.data?.data);
   const navigate = useNav().navigate;
   // Optional query filter — ?category=3 filters rows on content.filter_field
@@ -77,7 +80,7 @@ export default function CourseList({ content, actionData, session, action }: any
   if (actionData?.loading) {
     return (
       <View as="section" className="course-list p-6">
-        <Text>Loading…</Text>
+        <Text>{t("common.loading", "Loading…")}</Text>
       </View>
     );
   }
@@ -170,7 +173,7 @@ export default function CourseList({ content, actionData, session, action }: any
           })}
         </View>
         {!actionData?.loading && courses.length === 0 && (
-          <Text as="p" className="text-muted-foreground">No courses yet.</Text>
+          <Text as="p" className="text-muted-foreground">{content?.empty_text || t("catalog.empty", "No courses yet.")}</Text>
         )}
       </View>
     </View>

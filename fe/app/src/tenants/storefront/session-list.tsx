@@ -33,6 +33,18 @@ export const StorefrontSessionList = ({ content, properties }: any) => {
     ? items.reduce((s: number, i: any) => s + (i.price ?? 0) * (i.qty ?? 1), 0)
     : 0;
 
+  // Order summary is commerce-only — it renders when the session's items
+  // carry prices (cart semantics) or the def opts in via content.summary.
+  // Learning lists (recent/progress/bookmark) never show it.
+  // Shipping rule is config: content.shipping = {fee, free_over, label}.
+  const hasPrices = items.some((i: any) => i.price != null);
+  const showSummary =
+    content?.summary !== undefined ? !!content.summary : hasPrices;
+  const shipping = content?.shipping || {};
+  const shipFee = Number(shipping.fee ?? 4.99);
+  const shipFreeOver = shipping.free_over ?? 30;
+  const shipCost = total > shipFreeOver ? 0 : shipFee;
+
   if (!items.length) {
     return (
       <View as="section" className="sf-session-empty">
@@ -78,26 +90,30 @@ export const StorefrontSessionList = ({ content, properties }: any) => {
             </View>
           ))}
         </View>
-        <View as="aside" className="sf-summary-panel">
-          <Text as="h3">{tr("checkout.order_summary", "Order summary")}</Text>
-          <View className="sf-summary-row">
-            <Text>{tr("cart.subtotal", "Subtotal")}</Text>
-            <Text as="strong">{money(total, currency)}</Text>
+        {showSummary && (
+          <View as="aside" className="sf-summary-panel">
+            <Text as="h3">{tr("checkout.order_summary", "Order summary")}</Text>
+            <View className="sf-summary-row">
+              <Text>{tr("cart.subtotal", "Subtotal")}</Text>
+              <Text as="strong">{money(total, currency)}</Text>
+            </View>
+            <View className="sf-summary-row">
+              <Text>{tr("cart.shipping", "Shipping")}</Text>
+              <Text as="strong">
+                {shipCost === 0
+                  ? shipping.label || tr("cart.freeShipping", "Free")
+                  : money(shipCost, currency)}
+              </Text>
+            </View>
+            <View className="sf-summary-total">
+              <Text>{tr("cart.total", "Total")}</Text>
+              <Text as="strong">{money(total + shipCost, currency)}</Text>
+            </View>
+            <Anchor to={checkoutUrl} className="sf-cta sf-summary-btn">
+              {tr("checkout.title", "Checkout")}
+            </Anchor>
           </View>
-          <View className="sf-summary-row">
-            <Text>{tr("cart.shipping", "Shipping")}</Text>
-            <Text as="strong">{total > 30 ? "Free" : money(4.99, currency)}</Text>
-          </View>
-          <View className="sf-summary-total">
-            <Text>{tr("cart.total", "Total")}</Text>
-            <Text as="strong">
-              {money(total + (total > 30 ? 0 : 4.99), currency)}
-            </Text>
-          </View>
-          <Anchor to={checkoutUrl} className="sf-cta sf-summary-btn">
-            {tr("checkout.title", "Checkout")}
-          </Anchor>
-        </View>
+        )}
       </View>
     </View>
   );

@@ -388,9 +388,9 @@
     "quiz.incorrect": "❌ Incorrect",
     "quiz.retry": "🔄 Retry",
     "quiz.correctOf": "{c} of {t} correct",
-    "lab.progress": "Progress",
+    "lab.progress": "In progress",
     "lab.markComplete": "✓ Mark Complete",
-    "lab.complete": "Lab Complete!",
+    "lab.complete": "✅ Complete",
     "challenge.allPassed": "All Tests Passed!",
     "popup.detailedChapter": "Detailed Chapter",
     "popup.labNotes": "Lab Notes",
@@ -400,6 +400,8 @@
     "common.loading": "Loading…",
     "lesson.requires": "Requires:",
     "common.chapter": "Chapter",
-    "common.emptyContent": "No content yet."
+    "common.emptyContent": "No content yet.",
+    "catalog.empty": "No courses yet.",
+    "cart.freeShipping": "Free"
   }
 }
