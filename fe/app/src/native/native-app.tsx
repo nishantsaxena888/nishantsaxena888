@@ -29,7 +29,7 @@ import { LanguageProvider } from "@/components/shared/language-provider";
 import ApiProvider from "@/components/shared/api-provider";
 import AppProvider from "@/components/shared/app-provider";
 import { ThemeProvider } from "@/components/shared/theme-provider";
-import { PublicRenderer } from "@/components/shared/public-renderer";
+import { PublicRenderer } from "@/components/site/public-renderer";
 import { Home } from "@/pages/home/home";
 import { componentsMap } from "@/tenants";
 import { formInput } from "@/components/shared/form-input/form-input";

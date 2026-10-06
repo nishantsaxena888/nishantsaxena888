@@ -1,7 +1,7 @@
 import { RenderEngine } from "@/engine";
 import { AdminSkeleton } from "./admin-skeleton";
 import { useDashboardControl } from "./use-dashboard-control";
-import { NoConfigFound } from "@/components/shared/no-config-found";
+import { NoConfigFound } from "@/components/admin/no-config-found";
 const DashboardControl = ({
   activePage,
   config,
