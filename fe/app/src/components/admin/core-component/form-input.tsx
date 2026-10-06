@@ -34,7 +34,7 @@ import { SearchAutocomplete } from "./search-autocomplete/search-autocomplete";
 import { StringArrayInput } from "./string-array-input/string-array-input";
 import { ThemeSwitcher } from "./theme-switcher/theme-switcher";
 import { TimePicker } from "./time-picker/time-picker";
-import { InputOTP } from "../ui/input-otp";
+import { InputOTP } from "../../ui/input-otp";
 import { AppButton } from "./app-button";
 import { DateTimePicker } from "./datetime-picker";
 import { YouTubeVideo } from "./youtube-video";

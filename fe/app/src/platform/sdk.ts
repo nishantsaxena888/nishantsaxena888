@@ -11,7 +11,7 @@ export { useConfigStore } from "@/store/use-config-store";
 export { useGenericState } from "@/store/use-generic-state";
 export { useLanguage } from "@/components/shared/use-language";
 export { useTheme } from "@/components/shared/use-theme";
-export { LanguageSwitcher } from "@/components/core-component/language-selector/language-switcher";
+export { LanguageSwitcher } from "@/components/shared/language-selector/language-switcher";
 export { toast } from "@/lib/toast";
 
 // Icon glyphs used by client comps — routed through the seam so the client

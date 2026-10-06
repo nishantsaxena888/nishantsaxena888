@@ -38,7 +38,7 @@ import { toast } from "@/lib/toast"
 import { z } from "zod"
 
 import { useIsMobile } from "@/hooks/use-mobile"
-import { SharedBadge } from "@/components/core-component/badge/shared-badge"
+import { SharedBadge } from "@/components/admin/core-component/badge/shared-badge"
 import { Button } from "@/components/ui/button"
 import {
   ChartContainer,
@@ -46,7 +46,7 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart"
-import { InputCheckbox } from "@/components/core-component/input-checkbox/input-checkbox"
+import { InputCheckbox } from "@/components/admin/core-component/input-checkbox/input-checkbox"
 import {
   Drawer,
   DrawerClose,
@@ -64,10 +64,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
-import { SharedActionMenu } from "@/components/core-component/action-menu/action-menu"
-import { SharedPagination } from "@/components/core-component/pagination/shared-pagination"
+import { SharedActionMenu } from "@/components/admin/core-component/action-menu/action-menu"
+import { SharedPagination } from "@/components/admin/core-component/pagination/shared-pagination"
 import { Label } from "@/components/ui/label"
-import { SharedInlineSelect } from "@/components/core-component/inline-select/inline-select"
+import { SharedInlineSelect } from "@/components/admin/core-component/inline-select/inline-select"
 import { Separator } from "@/components/ui/separator"
 import {
   Table,

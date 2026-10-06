@@ -2,7 +2,7 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { buttonStyles } from "./utils/button-style";
-import { useFormConfig } from "@/components/shared/form-render/utils/form-config-context";
+import { useFormConfig } from "@/components/admin/form-render/utils/form-config-context";
 import { Spinner } from "@/components/ui/spinner";
 
 interface AppButtonProps extends React.ComponentProps<typeof Button> {

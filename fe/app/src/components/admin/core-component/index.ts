@@ -47,8 +47,8 @@ export * from "./pagination/shared-pagination";
 export * from "./typography-renderer/typography-renderer";
 export * from "./dynamic-select";
 export * from "./dynamic-multi-select";
-export * from "../ui/input-otp";
+export * from "../../ui/input-otp";
 export * from "./form-input";
 
 export * from "./types";
-export * from "./language-selector";
+// language-selector moved to shared (site+admin) — ../../shared/language-selector

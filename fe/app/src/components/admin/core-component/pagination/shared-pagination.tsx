@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Select } from "@/components/core-component/select/select";
+import { Select } from "@/components/admin/core-component/select/select";
 import { Label } from "@/components/ui/label";
 
 interface SharedPaginationProps<TData> {

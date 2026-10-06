@@ -1,5 +1,5 @@
 // Import existing shared components
-import { DataTable } from "@/components/core-component/data-table/data-table";
+import { DataTable } from "@/components/admin/core-component/data-table/data-table";
 
 export interface SchemaRendererProps {
   schema: any;

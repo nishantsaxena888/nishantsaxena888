@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { OldFormRenderer } from "@/components/shared/old-form-render";
-import type { FormSchema, FieldSchema } from "@/components/shared/old-form-render";
+import { OldFormRenderer } from "@/components/admin/old-form-render";
+import type { FormSchema, FieldSchema } from "@/components/admin/old-form-render";
 
 const baseFields: FieldSchema[] = [
   {

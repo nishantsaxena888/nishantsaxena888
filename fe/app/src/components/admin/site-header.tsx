@@ -4,7 +4,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Palette, Settings2, Moon, Sun } from "lucide-react";
 import { useTheme } from "@/components/shared/use-theme";
 import { ThemeSwitcher } from "nishify";
-import { LanguageSwitcher } from "@/components/core-component/language-selector";
+import { LanguageSwitcher } from "@/components/shared/language-selector";
 import { useFormStyleStore } from "@/store/use-form-style";
 import { FormStyleSettings } from "@/tenants/admin/default-admin/utils/form-style-settings";
 import { cn } from "@/lib/utils";

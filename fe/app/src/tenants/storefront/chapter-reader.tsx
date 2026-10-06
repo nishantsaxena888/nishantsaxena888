@@ -12,7 +12,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNav } from "@/platform/navigation";
 import { useLanguage } from "@/components/shared/use-language";
-import { LanguageSwitcher } from "@/components/core-component/language-selector/language-switcher";
+import { LanguageSwitcher } from "@/components/shared/language-selector/language-switcher";
 import { useTheme } from "@/components/shared/use-theme";
 import { Pressable, Text, View } from "@/platform/primitives";
 import { useRenderEngine } from "@/engine/render-engine/features/render-engine-context";

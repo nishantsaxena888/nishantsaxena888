@@ -2,7 +2,7 @@ import React from "react";
 import { Search, ShoppingCart, User, Heart, Clock, X, Zap } from "lucide-react";
 import { useGenericState } from "@/store/use-generic-state";
 import { useLanguage } from "@/components/shared/use-language";
-import { LanguageSwitcher } from "@/components/core-component/language-selector/language-switcher";
+import { LanguageSwitcher } from "@/components/shared/language-selector/language-switcher";
 import { useConfigStore } from "@/store/use-config-store";
 import { listOf, firstOf, makeTr } from "./utils";
 import { storage } from "@/platform/storage";

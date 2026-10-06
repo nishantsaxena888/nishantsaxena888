@@ -4,7 +4,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { FormRender } from "@/components/shared/form-render";
+import { FormRender } from "@/components/admin/form-render";
 import { toast } from "@/lib/toast";
 
 export const ManyToManyForm = ({
