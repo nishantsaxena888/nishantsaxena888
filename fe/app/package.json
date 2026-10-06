@@ -15,7 +15,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "build:desktop": "ELECTRON=1 npm run build",
-    "electron": "electron electron/main.cjs",
+    "electron": "env -u ELECTRON_RUN_AS_NODE electron electron/main.cjs",
     "pack:desktop": "ELECTRON=1 npm run build && electron-builder",
     "pack:desktop:dir": "ELECTRON=1 npm run build && electron-builder --dir",
     "validate": "node scripts/validate-defs.mjs",

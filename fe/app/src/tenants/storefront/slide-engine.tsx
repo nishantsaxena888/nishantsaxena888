@@ -16,6 +16,7 @@
 import { useEffect, useRef, useState, useId } from "react";
 import { Image, Pressable, Text, TextInput, View } from "@/platform/primitives";
 import { useNav } from "@/platform/navigation";
+import { loadMermaid } from "@/platform/mermaid";
 
 export type SlideLabels = Record<string, string>;
 
@@ -100,17 +101,6 @@ const HTML_TYPES = new Set([
 /* ---------- html blob (text/why/concept/…/cleanup) ---------- */
 
 let mmSeq = 0;
-let mmPromise: Promise<any> | null = null;
-const loadMermaid = () => {
-  if (!mmPromise) {
-    mmPromise = import("mermaid").then((m) => {
-      const lib = m.default || m;
-      lib.initialize({ startOnLoad: false, theme: "neutral" });
-      return lib;
-    });
-  }
-  return mmPromise;
-};
 
 function SlideHtml({ html }: { html: string }) {
   const ref = useRef<any>(null);
@@ -127,6 +117,7 @@ function SlideHtml({ html }: { html: string }) {
     if (!blocks.length) return;
     loadMermaid()
       .then(async (m) => {
+        if (!m) return;
         for (const b of Array.from(blocks) as any[]) {
           const code = b.textContent || "";
           const holder = b.closest("pre") || b;
