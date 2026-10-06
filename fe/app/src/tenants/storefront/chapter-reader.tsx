@@ -134,7 +134,7 @@ export default function ChapterReader({ content, actionData, session }: any) {
   const [seen, setSeen] = useState<{ ch: any; id: string } | null>(null);
   const chapterId = chapter?.id;
   const activeSection =
-    seen?.ch === chapterId ? seen.id : (slides?.[0]?.id ?? null);
+    seen && seen.ch === chapterId ? seen.id : (slides?.[0]?.id ?? null);
 
   // New chapter mounts = new page in the source — scroll back to top.
   useEffect(() => {
