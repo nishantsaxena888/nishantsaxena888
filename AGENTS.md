@@ -42,7 +42,7 @@ fe/app/            generic engine (Vite + React + TS). Single package.json.
                    runtime fallback
   src/tenants/layout/, src/tenants/admin/   layout kit + generic admin
   src/pages/       public/ (site) + protected/ (admin guard) + common
-  src/native/      Expo entry (site screens only)
+  src/react-native-site/  Expo entry (site screens only)
   electron/        desktop shell — loads dist/ over file://
 fe/client/<name>/  configs/client.json (manifest)
                    web/ (tenant.ts + components/ = ALL site comps,

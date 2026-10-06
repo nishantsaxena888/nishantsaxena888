@@ -250,7 +250,7 @@ RN host-app checklist (one-time, nothing in shared src changes):
    `@react-navigation/native-stack`, `@react-native-async-storage/async-storage`
    (`native.d.ts` stubs types so web `tsc` stays green without them installed).
 3. `fe/native/` is the ready Expo scaffold — `npm install && npm run start`
-   there; it boots `src/native/native-app.tsx` (providers + NavigationContainer
+   there; it boots `src/react-native-site/native-app.tsx` (providers + NavigationContainer
    + Stack screens generated from `config.menu`, `initialParams.slug` feeding
    `useRouteParams` so `PublicRenderer` runs unchanged).
 4. Boot: `setEnvConfig({apiUrl, client, dev: __DEV__})` +

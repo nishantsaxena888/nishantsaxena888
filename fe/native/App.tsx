@@ -3,7 +3,7 @@
 // web and Electron builds run.
 import React from "react";
 import { setEnvConfig } from "../app/src/platform/env";
-import NativeApp from "../app/src/native/native-app";
+import NativeApp from "../app/src/react-native-site/native-app";
 
 setEnvConfig({
   apiUrl: process.env.EXPO_PUBLIC_API_URL || "http://localhost:8100",
