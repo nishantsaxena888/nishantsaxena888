@@ -29,6 +29,8 @@
       // physical location (src/common/platform/). Client code imports
       // @/platform/* only (eslint-enforced); internals live in common/.
       "@/platform/*": ["./src/common/platform/*"],
+      "@/tenants": ["./src/common/tenants/index.ts"],
+      "@/tenants/*": ["./src/common/tenants/*"],
       "@/*": ["./src/*"],
       "nishify": ["./src/nishify.ts"],
       "@clients/*": ["../client/*"],

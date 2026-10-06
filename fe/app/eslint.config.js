@@ -48,7 +48,7 @@ export default defineConfig([
               group: ["@clients/*", "../../client/*", "../../../client/*"],
               message:
                 "Engine code must not import client folders — clients are " +
-                "bound through the generated src/tenants/{active,dev-all,mock-active}.ts files.",
+                "bound through the generated src/common/tenants/{active,dev-all,mock-active}.ts files.",
             },
           ],
         },
@@ -58,9 +58,9 @@ export default defineConfig([
   {
     // Generated bindings are the ONLY files allowed to touch @clients/*.
     files: [
-      "src/tenants/active.ts",
-      "src/tenants/dev-all.ts",
-      "src/tenants/mock-active.ts",
+      "src/common/tenants/active.ts",
+      "src/common/tenants/dev-all.ts",
+      "src/common/tenants/mock-active.ts",
     ],
     rules: { "@typescript-eslint/no-restricted-imports": "off" },
   },

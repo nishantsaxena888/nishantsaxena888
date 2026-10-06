@@ -74,7 +74,7 @@ export default {
 };
 ```
 
-Must satisfy `ClientTenant` (`fe/app/src/tenants/types.ts`). Components
+Must satisfy `ClientTenant` (`fe/app/src/common/tenants/types.ts`). Components
 receive `RenderComponentProps`: `{id, type, content, properties,
 actionData, config, themeName, session, children}` — all `any`, all
 optional. Write them engine-optional (`content?.title ?? fallback`) so
@@ -142,7 +142,7 @@ fe/app. Delete `mock/` when the real API takes over.
   useConfigStore, toast, LanguageSwitcher, icon glyphs). No other `@/`
   engine imports, no `../` into other clients — type-only imports of the
   contract (`RenderComponentProps`, `ClientTenant` in
-  `fe/app/src/tenants/types.ts`) are allowed. If a comp needs a service
+  `fe/app/src/common/tenants/types.ts`) are allowed. If a comp needs a service
   the SDK doesn't export, add it to the SDK — don't loosen the rule.
 - Admin needs nothing: `admin/tenant.ts` exports `{ components: {} }` and
   the OPTIONS-driven `default-admin` + media manager cover CRUD screens.

@@ -45,8 +45,8 @@ function mapKeys(file) {
 // def.type against its own web/tenant.ts + layouts/tenant.ts maps.
 // Admin component universe (OPTIONS-driven types resolve here)
 const adminKeys = new Set([
-  ...mapKeys(join(srcDir, "tenants/admin/default-admin/index.ts")),
-  ...mapKeys(join(srcDir, "tenants/admin/admin.ts")),
+  ...mapKeys(join(srcDir, "components/admin/default-admin/index.ts")),
+  ...mapKeys(join(srcDir, "components/admin/admin-map.ts")),
   "default-admin",
 ]);
 

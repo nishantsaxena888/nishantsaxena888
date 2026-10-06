@@ -35,12 +35,14 @@ fe/app/            generic engine (Vite + React + TS). Single package.json.
     shared/        pure-common comps (providers, language-selector,
                    form-input registry, loaders)
     third-party-shadcn/  vendored shadcn lib (components.json points here)
-  src/tenants/storefront/   component KIT (header, listing, course-list,
+  src/common/tenants/storefront/   component KIT (header, listing, course-list,
                    course-detail, chapter-reader, slide-engine,
                    session-list, entity-actions…) — template only, copied
                    into clients by `npm run client -- --new`; NOT a
                    runtime fallback
-  src/tenants/layout/, src/tenants/admin/   layout kit + generic admin
+  src/common/tenants/layout/   layout kit — generic admin comps moved to
+                   src/components/admin/ (default-admin, media-upload,
+                   revision-pipeline, admin-map)
   src/pages/       public/ (site) + protected/ (admin guard) + common
   src/react-native-site/  Expo entry (site screens only)
   electron/        desktop shell — loads dist/ over file://
@@ -101,7 +103,7 @@ cd fe/app && node scripts/check-mocks.mjs
 - Persistence via `platform/storage`; cross-cutting via `emitAppEvent`/
   `onAppEvent`/`reloadApp`; errors via `platform/report`.
 - Client code imports: React + relative + `@/platform/*` + type-only
-  (`src/tenants/types.ts`). eslint enforces.
+  (`src/common/tenants/types.ts`). eslint enforces.
 - UI strings: `t()`/`makeTr(key, fallback)` + `content.*` config + slide
   `labels` prop. **No literals in components.**
 - Dynamic data: `properties.action[]` in page defs → `actionData`; param

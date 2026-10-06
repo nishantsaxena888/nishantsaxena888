@@ -5,8 +5,8 @@
 //   npm run client -- --new <name>   scaffold a new client (fe + be)
 //
 // Generates:
-//   src/tenants/active.ts      — tenant imports + declared styles imports
-//   src/tenants/mock-active.ts — mock glob (empty when manifest mock:false)
+//   src/common/tenants/active.ts      — tenant imports + declared styles imports
+//   src/common/tenants/mock-active.ts — mock glob (empty when manifest mock:false)
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -60,7 +60,7 @@ function activate(name) {
     .join("\n");
 
   writeFileSync(
-    join(appDir, "src/tenants/active.ts"),
+    join(appDir, "src/common/tenants/active.ts"),
     `// GENERATED — do not edit by hand.
 // \`npm run client <name>\` (fe/app) rewrites this file to point at
 // fe/client/<name>/{web,layouts,admin}/. Importing statically keeps the
@@ -73,7 +73,7 @@ export { default as admin_tenant } from "@clients/${name}/admin/tenant";
   );
 
   writeFileSync(
-    join(appDir, "src/tenants/mock-active.ts"),
+    join(appDir, "src/common/tenants/mock-active.ts"),
     `// GENERATED — do not edit by hand.
 // \`npm run client <name>\` rewrites this file.${m.mock ? ` The glob pattern is
 // literal so only fe/client/${name}/mock/ is bundled — other clients' mock
@@ -90,7 +90,7 @@ export const mockFiles: Record<string, unknown> = {};`}
   // is Vite-only; Metro's equivalent is require.context (needs a literal
   // path, so this file is generated per client exactly like the web one).
   writeFileSync(
-    join(appDir, "src/tenants/mock-active.native.ts"),
+    join(appDir, "src/common/tenants/mock-active.native.ts"),
     `// GENERATED — do not edit by hand.
 // \`npm run client <name>\` rewrites this file. Native variant of
 // mock-active.ts — import.meta.glob is Vite-only; require.context is the
@@ -157,7 +157,7 @@ export const clientLoaders: Record<string, ClientLoader> = {
 export const mockGlobs: Record<string, () => Promise<unknown>> =
   import.meta.glob("../../../client/*/mock/**/*.json");
 `;
-  writeFileSync(join(appDir, "src/tenants/dev-all.ts"), dev);
+  writeFileSync(join(appDir, "src/common/tenants/dev-all.ts"), dev);
 
   // Native twin — same loaders (dynamic import() works on Metro), but
   // mockGlobs comes from require.context instead of import.meta.glob.
@@ -179,7 +179,7 @@ export const mockGlobs: Record<string, () => Promise<unknown>> =
     ]),
   );
 `;
-  writeFileSync(join(appDir, "src/tenants/dev-all.native.ts"), devNative);
+  writeFileSync(join(appDir, "src/common/tenants/dev-all.native.ts"), devNative);
 
   // Sync name manifest — getActiveClient consults this to decide whether a
   // localStorage["vite-client"] value is a known (lazily loadable) client
@@ -187,7 +187,7 @@ export const mockGlobs: Record<string, () => Promise<unknown>> =
   // map is empty until the dynamic import resolves, so the override was
   // being deleted before it could ever load.
   writeFileSync(
-    join(appDir, "src/tenants/known-clients.ts"),
+    join(appDir, "src/common/tenants/known-clients.ts"),
     `// GENERATED — do not edit by hand. Names of client folders that
 // existed when the tenant bindings were last generated.
 export const KNOWN_CLIENTS: string[] = ${JSON.stringify(names)};
@@ -200,8 +200,8 @@ export const KNOWN_CLIENTS: string[] = ${JSON.stringify(names)};
 // Copy the engine's component kit into a fresh client folder — the
 // client owns every comp its pages render (full isolation, no runtime
 // fallback). Copied comps import engine services only via @/platform/sdk.
-const KIT_SRC = join(appDir, "src/tenants/storefront");
-const LAYOUT_SRC = join(appDir, "src/tenants/layout");
+const KIT_SRC = join(appDir, "src/common/tenants/storefront");
+const LAYOUT_SRC = join(appDir, "src/common/tenants/layout");
 const KIT_SKIP = /^(index\.(tsx?|ts)|.*\.test\.)/;
 
 const KIT_REWRITES = [

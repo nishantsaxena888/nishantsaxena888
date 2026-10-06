@@ -16,7 +16,7 @@ import { emitAppEvent, onAppEvent, reloadApp } from "./host.native";
 import { hydrateStorage, storage } from "./storage.native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // Same module instance navigation.native gets via the vitest alias.
-import { __navCalls, __resetNav } from "../../test/react-navigation-stub";
+import { __navCalls, __resetNav } from "../test/react-navigation-stub";
 
 describe("primitives.native → react-native-web render", () => {
   it("View/Text render real RN components", () => {

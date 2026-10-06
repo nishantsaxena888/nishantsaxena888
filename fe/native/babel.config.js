@@ -12,6 +12,7 @@ module.exports = function (api) {
         {
           alias: {
             "@/platform": path.resolve(__dirname, "../app/src/common/platform"),
+            "@/tenants": path.resolve(__dirname, "../app/src/common/tenants"),
             "@": path.resolve(__dirname, "../app/src"),
             "@clients": path.resolve(__dirname, "../client"),
           },

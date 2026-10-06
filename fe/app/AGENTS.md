@@ -74,17 +74,17 @@ fe/client/<name>/
 ```
 
 **Full client isolation, no runtime fallback** — every client folder owns
-the complete component set its pages render. `src/tenants/storefront/` and
-`src/tenants/layout/` in the engine are **template kits only**: scaffold
+the complete component set its pages render. `src/common/tenants/storefront/` and
+`src/common/tenants/layout/` in the engine are **template kits only**: scaffold
 (`--new`) copies them into the new client; runtime never resolves a
 def.type from them.
 
 - **Switch client**: `npm run client -- <name>` reads `configs/client.json`,
   validates it (tenants + declared styles exist), regenerates
-  `src/tenants/active.ts` (tenant imports + styles.css imports) and
-  `src/tenants/mock-active.ts` (mock glob literal → only this client's mock
+  `src/common/tenants/active.ts` (tenant imports + styles.css imports) and
+  `src/common/tenants/mock-active.ts` (mock glob literal → only this client's mock
   JSON bundles; `{}` when manifest `mock: false`).
-- **Dev multi-client (lazy)**: `src/tenants/dev-all.ts` (generated) holds
+- **Dev multi-client (lazy)**: `src/common/tenants/dev-all.ts` (generated) holds
   one `() => import()` per client's tenant + styles — every client is its
   own chunk. `ensureClient(name)` in `tenants/index.ts` attaches a client
   on demand (initial `requestedClient()`, and on `client-change`/`storage`
@@ -97,12 +97,12 @@ def.type from them.
   `fe/client/<name>/` + `be/client/<name>/` (working todo entity +
   `datasources.json` + `roles`).
 - **Boundary is enforced by eslint**: app code cannot import `@clients/*`
-  (only the three generated `src/tenants/{active,dev-all,mock-active}.ts`
+  (only the three generated `src/common/tenants/{active,dev-all,mock-active}.ts`
   may); client code can import only React + relative paths + the
   **`@/platform/*` seams** (primitives/navigation/icons/asset — the
   portability surface; engine/store/components stay blocked) + type-only
   imports — `RenderComponentProps`/`ClientTenant` from
-  `src/tenants/types.ts`. `npm run lint` covers both sides
+  `src/common/tenants/types.ts`. `npm run lint` covers both sides
   (`fe/eslint.config.js` is the client-side entry — eslint only lints
   under its base path).
 - **`session` prop bridge**: `RenderComponentProps.session` =
@@ -119,7 +119,7 @@ def.type from them.
   single record). `useQuery()` reads `?key=` on web and route params on
   native.
 - **Surface-scoped maps**: `componentsMap[client] = {site, admin}` in
-  `src/tenants/index.ts`. Site routes resolve `def.type` against
+  `src/common/tenants/index.ts`. Site routes resolve `def.type` against
   `client layouts ∪ client web`; admin routes against
   `client layouts ∪ default_admin ∪ client admin` via
   `AdminSurfaceProvider` mounted at `DashboardRenderer`. All merges are
@@ -129,7 +129,7 @@ def.type from them.
   useEntity, useLanguage, useTheme, useRenderEngine, useGenericState,
   useConfigStore, toast, LanguageSwitcher, icon glyphs. Kit copies and
   client comps must not import engine internals directly.
-- **Component kit** (`src/tenants/storefront/` + `src/tenants/layout/`):
+- **Component kit** (`src/common/tenants/storefront/` + `src/common/tenants/layout/`):
   the canonical generic site/layout blocks — canonical `header`,
   `banner`, `listing`, `session-list`, `form-summary`, `account`,
   `auth-layout`, `footer` + legacy aliases (`hero-section`, `products`,
@@ -141,7 +141,7 @@ def.type from them.
   the generic `SiteNav` down — clients whose pages bring their own
   `header`/`footer` defs set this (grocery does).
 - `ClientTenant`/`RenderComponentProps`/`ClientManifest` contract:
-  `src/tenants/types.ts`.
+  `src/common/tenants/types.ts`.
 - Per-client builds: `npm run build:client -- <name|all>` → `dist/<name>`
   (scripts/build.mjs discovers client folders — no per-client script).
 
@@ -320,7 +320,7 @@ and restore the snapshot when the API call errors — the normal
 
 ## Layout primitives (config-driven page layout)
 
-`src/tenants/layout/` — structural-only comps merged into EVERY client's
+`src/common/tenants/layout/` — structural-only comps merged into EVERY client's
 site+admin maps (before client comps, so clients can override). Page layout
 is pure JSON: defs nest via `children[]` (RenderDefinition already recurses).
 

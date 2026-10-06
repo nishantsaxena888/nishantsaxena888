@@ -6,8 +6,8 @@ import { SidebarInset, SidebarProvider } from "@/components/third-party-shadcn/s
 import { AppSidebar } from "@/components/admin/app-sidebar";
 import { SiteHeader } from "@/components/admin/site-header";
 import { useFormStyleStore } from "@/common/store/use-form-style";
-import DashboardControl from "@/tenants/admin/default-admin/utils/dashboard-control";
-import { MediaManager } from "@/tenants/admin/media-upload/media-manager";
+import DashboardControl from "@/components/admin/default-admin/utils/dashboard-control";
+import { MediaManager } from "@/components/admin/media-upload/media-manager";
 import { AdminSurfaceProvider } from "@/common/engine";
 
 export interface DashboardRendererProps {

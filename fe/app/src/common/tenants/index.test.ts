@@ -8,7 +8,7 @@
 import { describe, expect, it } from "vitest";
 import { storefront_components } from "./storefront";
 import { layout_components } from "./layout";
-import { default_admin_component } from "./admin/admin";
+import { default_admin_component } from "@/components/admin/admin-map";
 import { site_tenant, layouts_tenant } from "./active";
 import { componentsMap } from "./index";
 

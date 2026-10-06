@@ -6,7 +6,7 @@ import { useTheme } from "@/components/shared/use-theme";
 import { ThemeSwitcher } from "nishify";
 import { LanguageSwitcher } from "@/components/shared/language-selector";
 import { useFormStyleStore } from "@/common/store/use-form-style";
-import { FormStyleSettings } from "@/tenants/admin/default-admin/utils/form-style-settings";
+import { FormStyleSettings } from "@/components/admin/default-admin/utils/form-style-settings";
 import { cn } from "@/common/lib/utils";
 
 export function SiteHeader({ activePage }: { activePage: any }) {

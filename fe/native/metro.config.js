@@ -31,6 +31,7 @@ config.resolver.nodeModulesPaths = [
 
 config.resolver.extraNodeModules = {
   "@/platform": path.resolve(__dirname, "../app/src/common/platform"),
+  "@/tenants": path.resolve(__dirname, "../app/src/common/tenants"),
   "@": appSrc,
   "@clients": clientDir,
   // shared src imports web deps — Metro's package heuristics miss these

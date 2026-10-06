@@ -38,6 +38,7 @@ export default defineConfig({
       // Public seam for fe/client — stable even though platform/ lives
       // inside src/common/. Order matters: before the generic "@" alias.
       "@/platform": path.resolve(import.meta.dirname, "./src/common/platform"),
+      "@/tenants": path.resolve(import.meta.dirname, "./src/common/tenants"),
       "@": path.resolve(import.meta.dirname, "./src"),
       "nishify": path.resolve(import.meta.dirname, "./src/nishify.ts"),
       "@clients": path.resolve(import.meta.dirname, "../client"),

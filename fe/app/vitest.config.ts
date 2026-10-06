@@ -16,27 +16,28 @@ export default defineConfig({
       react: path.resolve(__dirname, "node_modules/react"),
       "react-dom": path.resolve(__dirname, "node_modules/react-dom"),
       "@/platform": path.resolve(__dirname, "./src/common/platform"),
+      "@/tenants": path.resolve(__dirname, "./src/common/tenants"),
       "@": path.resolve(__dirname, "./src"),
       nishify: path.resolve(__dirname, "./src/nishify.ts"),
       "@clients": path.resolve(__dirname, "../client"),
       // *.native.* files get their real modules under Metro; in tests they
       // resolve to react-native-web + in-memory stubs so the adapters are
       // actually rendered and exercised, not just type-checked.
-      "react-native": path.resolve(__dirname, "src/test/react-native-stub.ts"),
+      "react-native": path.resolve(__dirname, "src/common/test/react-native-stub.ts"),
       "@react-navigation/native": path.resolve(
         __dirname,
-        "src/test/react-navigation-stub.ts",
+        "src/common/test/react-navigation-stub.ts",
       ),
       "@react-native-async-storage/async-storage": path.resolve(
         __dirname,
-        "src/test/async-storage-stub.ts",
+        "src/common/test/async-storage-stub.ts",
       ),
     },
     dedupe: ["react", "react-dom", "zustand"],
   },
   test: {
     include: ["src/**/*.test.{ts,tsx}", "../client/**/*.test.{ts,tsx}"],
-    setupFiles: ["./src/test/setup.ts"],
+    setupFiles: ["./src/common/test/setup.ts"],
     environmentMatchGlobs: [
       ["src/**/*.test.tsx", "jsdom"],
       ["../client/**/*.test.tsx", "jsdom"],

@@ -1,4 +1,4 @@
-import { default_admin_component } from "./admin/admin";
+import { default_admin_component } from "@/components/admin/admin-map";
 import { client, site_tenant, admin_tenant, layouts_tenant } from "./active";
 import type { ClientTenant } from "./types";
 import { storage } from "@/platform/storage";

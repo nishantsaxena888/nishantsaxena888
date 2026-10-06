@@ -13,8 +13,8 @@
 // A client with no mock/ folder gets an empty map and every call falls
 // through to the real API — the ApiResponse contract never changes.
 import type { ApiConfigMap } from "./api";
-import { mockFiles } from "../../../tenants/mock-active";
-import { client as bakedClient } from "../../../tenants/active";
+import { mockFiles } from "../../tenants/mock-active";
+import { client as bakedClient } from "../../tenants/active";
 import { storage } from "@/platform/storage";
 import { isDev, clientName } from "@/platform/env";
 
@@ -75,7 +75,7 @@ export function ensureClientMocks(name: string): Promise<void> {
   let p = mockLoads.get(name);
   if (!p) {
     p = (async () => {
-      const { mockGlobs } = await import("../../../tenants/dev-all");
+      const { mockGlobs } = await import("../../tenants/dev-all");
       const prefix = `../../../client/${name}/mock/`;
       const loaded = await Promise.all(
         Object.entries(mockGlobs)
