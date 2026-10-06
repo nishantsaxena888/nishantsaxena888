@@ -8,7 +8,7 @@ import AppProvider from "./app-provider";
 import ApiProvider from "./api-provider";
 import AppRouterProvider from "./app-router-provider";
 import { componentsMap } from "@/tenants";
-import { formInput } from "../form-input/form-input";
+import { formInput } from "../shared/form-input/form-input";
 
 const RootProvider = () => {
   useEffect(() => {

@@ -32,7 +32,7 @@ import { ThemeProvider } from "@/components/shared/theme-provider";
 import { PublicRenderer } from "@/components/shared/public-renderer";
 import { Home } from "@/pages/home/home";
 import { componentsMap } from "@/tenants";
-import { formInput } from "@/components/form-input/form-input";
+import { formInput } from "@/components/shared/form-input/form-input";
 import { hydrateStorage } from "@/platform/storage";
 import { registerNavigator } from "@/platform/navigation";
 
