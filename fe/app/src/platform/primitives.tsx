@@ -23,6 +23,7 @@ type Base = {
   children?: React.ReactNode;
   id?: string;
   role?: string;
+  ref?: React.Ref<any>;
   "aria-label"?: string;
   "data-testid"?: string;
 };
@@ -112,10 +113,15 @@ export const Image = ({
 export const TextInput = ({
   value,
   onChangeText,
+  multiline,
   ...rest
 }: Base & {
   value?: string;
   onChangeText?: (v: string) => void;
+  multiline?: boolean;
+  rows?: number;
+  autoComplete?: string;
+  spellCheck?: boolean;
   placeholder?: string;
   type?: string;
   name?: string;
@@ -124,13 +130,20 @@ export const TextInput = ({
   onKeyDown?: (e: any) => void;
   onFocus?: () => void;
   onBlur?: () => void;
-}) => (
-  <input
-    value={value}
-    onChange={(e) => onChangeText?.(e.target.value)}
-    {...rest}
-  />
-);
+}) =>
+  multiline ? (
+    <textarea
+      value={value}
+      onChange={(e) => onChangeText?.(e.target.value)}
+      {...rest}
+    />
+  ) : (
+    <input
+      value={value}
+      onChange={(e) => onChangeText?.(e.target.value)}
+      {...rest}
+    />
+  );
 
 export const ScrollView = (props: Base & React.HTMLAttributes<HTMLElement>) => (
   <View style={{ overflow: "auto", ...(props.style || {}) }} {...props} />

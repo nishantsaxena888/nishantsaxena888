@@ -827,7 +827,11 @@
     "nav.home": "Home",
     "nav.courses": "Courses",
     "nav.myLearning": "My Learning",
-    "lesson.objectives": "Learning Objectives"
+    "lesson.objectives": "Learning Objectives",
+    "common.loading": "Loading…",
+    "lesson.requires": "Requires:",
+    "common.chapter": "Chapter",
+    "common.emptyContent": "No content yet."
   },
   "site_nav": false,
   "roles": [

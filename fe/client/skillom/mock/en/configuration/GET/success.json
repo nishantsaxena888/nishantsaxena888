@@ -396,6 +396,10 @@
     "popup.labNotes": "Lab Notes",
     "nav.home": "Home",
     "nav.courses": "Courses",
-    "nav.myLearning": "My Learning"
+    "nav.myLearning": "My Learning",
+    "common.loading": "Loading\u2026",
+    "lesson.requires": "Requires:",
+    "common.chapter": "Chapter",
+    "common.emptyContent": "No content yet."
   }
 }

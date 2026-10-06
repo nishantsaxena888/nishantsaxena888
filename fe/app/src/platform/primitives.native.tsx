@@ -31,6 +31,7 @@ type Base = {
   children?: React.ReactNode;
   id?: string;
   role?: string;
+  ref?: React.Ref<any>;
   "aria-label"?: string;
   "data-testid"?: string;
 };
@@ -124,9 +125,15 @@ export const TextInput = ({
   onBlur?: () => void;
   secureTextEntry?: boolean;
   keyboardType?: string;
+  multiline?: boolean;
+  autoComplete?: string;
+  spellCheck?: boolean;
+  rows?: number;
 }) => (
   <RNTextInput
     editable={!rest.disabled}
+    multiline={rest.multiline}
+    numberOfLines={rest.rows}
     onChangeText={onChangeText}
     {...nativeProps(rest)}
   />

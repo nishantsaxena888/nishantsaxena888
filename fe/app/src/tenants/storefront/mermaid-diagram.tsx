@@ -49,7 +49,7 @@ export default function MermaidDiagram({ code }: { code: string }) {
   }
   return (
     <View className="mermaid-diagram rounded-lg border p-3 overflow-x-auto">
-      <div ref={ref} />
+      <View ref={ref} />
     </View>
   );
 }

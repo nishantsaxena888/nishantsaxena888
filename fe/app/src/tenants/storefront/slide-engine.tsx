@@ -10,19 +10,80 @@
 //
 // Progress is reported through optional callbacks so the host page can
 // wire its own session/entity writes (quiz submissions, lab completion,
-// command counters).
+// command counters). All UI strings resolve through `labels` —
+// {key: "…", other: "… {var}"} merged over DEFAULT_LABELS — so a page
+// def can restyle the copy per client without touching the engine.
 import { useEffect, useRef, useState, useId } from "react";
-import { Pressable, Text, View } from "@/platform/primitives";
+import { Image, Pressable, Text, TextInput, View } from "@/platform/primitives";
 import { useNav } from "@/platform/navigation";
+
+export type SlideLabels = Record<string, string>;
 
 type Props = {
   sections?: any[];
+  labels?: SlideLabels;
   onQuizComplete?: (sectionId: string, correct: number, total: number) => void;
   onQuizAnswer?: (correct: boolean, index: number) => void;
   onLabComplete?: (sectionId: string) => void;
   onCommand?: () => void;
   onNavigate?: (target: string) => void;
 };
+
+// Engine copy — every string a slide renders. A page def overrides any
+// subset via content.labels; {var} placeholders interpolate per use.
+const DEFAULT_LABELS: SlideLabels = {
+  diagram_hint: "Click components to inspect",
+  diagram_payload: "Event Payload",
+  question: "Question {n}",
+  correct: "✅ Correct",
+  incorrect: "❌ Incorrect",
+  quiz_complete: "Quiz complete: {a}/{b}",
+  run: "Run",
+  copy: "Copy",
+  copied: "✓ Copied",
+  lang_default: "cli",
+  show_expected: "Show expected output",
+  hide_expected: "Hide expected output",
+  common_errors: "⚠️ Common errors ({n})",
+  cause: "Cause:",
+  fix: "Fix:",
+  prevention: "Prevention:",
+  interview_question: "Interview question",
+  terminal_title: "terminal",
+  terminal_mode: "simulated",
+  help_header: "Available commands:",
+  cmd_not_found: 'command not found: {cmd} — type "help" for available commands',
+  code_label: "code",
+  explanations: "📖 Line-by-line explanation ({n})",
+  lab_progress: "Lab Progress",
+  mark_complete: "✓ Mark Complete",
+  completed: "✓ Completed",
+  hint: "💡 Hint",
+  expected: "Expected:",
+  requirements: "Requirements",
+  starter: "starter",
+  run_checks: "Run checks",
+  hints: "💡 Hints ({n})",
+  issue: "Issue {n}",
+  short_answer: "Short Answer:",
+  deep_explanation: "Deep Explanation:",
+  real_example: "📌 Real-world Example:",
+  common_mistake: "⚠️ Common Mistake:",
+  follow_up: "➔ Follow-up:",
+  prev_chapter: "← Previous Chapter",
+  next_chapter: "Next Chapter →",
+  diff_beginner: "🌱 Beginner",
+  diff_intermediate: "📈 Intermediate",
+  diff_advanced: "🚀 Advanced",
+  diff_scenario: "🎯 Scenario-Based",
+  diff_troubleshooting: "🔧 Troubleshooting",
+  diff_general: "❓ Q&A",
+};
+
+const lf = (L: SlideLabels, key: string, vars: Record<string, any> = {}) =>
+  (L[key] ?? key).replace(/\{(\w+)\}/g, (_m, k) =>
+    vars[k] !== undefined ? String(vars[k]) : `{${k}}`,
+  );
 
 const SECTION_ICONS: Record<string, string> = {
   why: "💡", architecture: "📐", concept: "📖", lab: "🔬", console: "🖥️",
@@ -84,13 +145,13 @@ function SlideHtml({ html }: { html: string }) {
   }, [html]);
 
   useEffect(() => {
-    if (!zoom) return;
+    if (!zoom || typeof window === "undefined") return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setZoom(null);
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [zoom]);
 
-  const onClick = (e: any) => {
+  const onPress = (e: any) => {
     const img = e.target?.closest?.("img");
     if (img && !e.target.closest("a")) {
       setZoom({ src: img.currentSrc || img.src, alt: img.alt });
@@ -99,18 +160,18 @@ function SlideHtml({ html }: { html: string }) {
 
   return (
     <>
-      <div
+      <View
         ref={ref}
         className="slide-html"
-        onClick={onClick}
+        onClick={onPress}
         dangerouslySetInnerHTML={{ __html: html }}
       />
       {zoom && (
-        <div className="img-zoom-overlay" onClick={() => setZoom(null)}>
-          <img src={zoom.src} alt={zoom.alt} />
-          {zoom.alt && <div className="img-zoom-caption">{zoom.alt}</div>}
-          <span className="img-zoom-x">✕</span>
-        </div>
+        <Pressable className="img-zoom-overlay" onPress={() => setZoom(null)}>
+          <Image src={zoom.src} alt={zoom.alt} />
+          {zoom.alt && <View className="img-zoom-caption">{zoom.alt}</View>}
+          <Text className="img-zoom-x">✕</Text>
+        </Pressable>
       )}
     </>
   );
@@ -160,7 +221,7 @@ const wrapLabel = (label: string, max = 18) => {
     .map((l) => (l.length > max + 4 ? l.slice(0, max + 3) + "…" : l));
 };
 
-function SlideDiagram({ content = {} }: any) {
+function SlideDiagram({ content = {}, L }: any) {
   const uid = useId().replace(/:/g, "");
   const [selected, setSelected] = useState<any>(null);
   const nodes = content.nodes || [];
@@ -170,15 +231,15 @@ function SlideDiagram({ content = {} }: any) {
   const byId = Object.fromEntries(nodes.map((n: any) => [n.id, n]));
 
   return (
-    <div className="diagram-wrapper">
+    <View className="diagram-wrapper">
       {content.title && (
-        <div className="diagram-titlebar">
-          <span style={{ fontSize: 18 }}>📐</span>
-          <span className="diagram-title">{content.title}</span>
-          <span className="diagram-hint">Click components to inspect</span>
-        </div>
+        <View className="diagram-titlebar">
+          <Text style={{ fontSize: 18 }}>📐</Text>
+          <Text className="diagram-title">{content.title}</Text>
+          <Text className="diagram-hint">{lf(L, "diagram_hint")}</Text>
+        </View>
       )}
-      <div className="diagram-scroll">
+      <View className="diagram-scroll">
         <svg
           width={width}
           height={height}
@@ -263,38 +324,38 @@ function SlideDiagram({ content = {} }: any) {
             );
           })}
         </svg>
-      </div>
+      </View>
       {selected && (
-        <div className="diagram-detail">
-          <div className="diagram-detail-head">
-            <span style={{ fontSize: 24 }}>{decodeEnt(selected.icon || "☁️")}</span>
-            <div>
-              <div className="diagram-detail-label">{decodeEnt(selected.label)}</div>
-              <div className="diagram-detail-type">{selected.type || ""}</div>
-            </div>
-          </div>
+        <View className="diagram-detail">
+          <View className="diagram-detail-head">
+            <Text style={{ fontSize: 24 }}>{decodeEnt(selected.icon || "☁️")}</Text>
+            <View>
+              <Text as="div" className="diagram-detail-label">{decodeEnt(selected.label)}</Text>
+              <Text as="div" className="diagram-detail-type">{selected.type || ""}</Text>
+            </View>
+          </View>
           {selected.description && (
-            <div className="diagram-detail-desc">{selected.description}</div>
+            <View className="diagram-detail-desc">{selected.description}</View>
           )}
           {selected.eventPayload && (
             <>
-              <div className="diagram-detail-payload-label">Event Payload</div>
-              <pre className="diagram-detail-payload">
+              <View className="diagram-detail-payload-label">{lf(L, "diagram_payload")}</View>
+              <View as="pre" className="diagram-detail-payload">
                 {typeof selected.eventPayload === "string"
                   ? selected.eventPayload
                   : JSON.stringify(selected.eventPayload, null, 2)}
-              </pre>
+              </View>
             </>
           )}
-        </div>
+        </View>
       )}
-    </div>
+    </View>
   );
 }
 
 /* ---------- quiz ---------- */
 
-function QuizQuestion({ q, index, onAnswered }: any) {
+function QuizQuestion({ q, index, onAnswered, L }: any) {
   const [selected, setSelected] = useState<string | null>(null);
   const answered = selected !== null;
   const correct = answered && selected === q.correctId;
@@ -304,18 +365,18 @@ function QuizQuestion({ q, index, onAnswered }: any) {
     onAnswered?.(q.id, optId === q.correctId);
   };
   return (
-    <div className="quiz-card">
-      <div className="quiz-header">
-        <div className="quiz-icon">🧠</div>
-        <div>
-          <div className="quiz-type">
-            Question {index + 1}
+    <View className="quiz-card">
+      <View className="quiz-header">
+        <View className="quiz-icon">🧠</View>
+        <View>
+          <View className="quiz-type">
+            {lf(L, "question", { n: index + 1 })}
             {q.difficulty ? ` · ${q.difficulty}` : ""}
-          </div>
-          <div className="quiz-question">{q.question}</div>
-        </div>
-      </div>
-      <div className="quiz-options">
+          </View>
+          <View className="quiz-question">{q.question}</View>
+        </View>
+      </View>
+      <View className="quiz-options">
         {(q.options || []).map((opt: any, i: number) => {
           let cls = "quiz-option";
           if (answered) {
@@ -323,30 +384,30 @@ function QuizQuestion({ q, index, onAnswered }: any) {
             else if (opt.id === selected) cls += " incorrect";
           } else if (opt.id === selected) cls += " selected";
           return (
-            <button key={opt.id || i} type="button" className={cls} onClick={() => choose(opt.id)}>
-              <span className="quiz-option-letter">{String.fromCharCode(65 + i)}</span>
-              <span>{opt.text}</span>
-            </button>
+            <Pressable key={opt.id || i} className={cls} onPress={() => choose(opt.id)}>
+              <Text className="quiz-option-letter">{String.fromCharCode(65 + i)}</Text>
+              <Text>{opt.text}</Text>
+            </Pressable>
           );
         })}
-      </div>
+      </View>
       {answered && (
         <>
-          <div className={`quiz-result ${correct ? "quiz-result-correct" : "quiz-result-incorrect"}`}>
-            {correct ? "✅ Correct" : "❌ Incorrect"}
-          </div>
+          <View className={`quiz-result ${correct ? "quiz-result-correct" : "quiz-result-incorrect"}`}>
+            {correct ? lf(L, "correct") : lf(L, "incorrect")}
+          </View>
           {q.explanation && (
-            <div className="quiz-explanation visible" style={{ marginTop: 12 }}>
+            <View className="quiz-explanation visible" style={{ marginTop: 12 }}>
               {q.explanation}
-            </div>
+            </View>
           )}
         </>
       )}
-    </div>
+    </View>
   );
 }
 
-function SlideQuiz({ content = {}, sectionId, onQuizAnswer, onQuizComplete }: any) {
+function SlideQuiz({ content = {}, sectionId, onQuizAnswer, onQuizComplete, L }: any) {
   const questions = content.questions || [];
   const [answers, setAnswers] = useState<Record<string, boolean>>({});
   const recorded = useRef(false);
@@ -361,35 +422,36 @@ function SlideQuiz({ content = {}, sectionId, onQuizAnswer, onQuizComplete }: an
   }, [answeredCount, correctCount, questions.length, onQuizComplete, sectionId]);
 
   return (
-    <div>
+    <View>
       {content.title && (
-        <div className="progress-label">
-          <span className="progress-label-title">{content.title}</span>
-          <span className="progress-label-value">
+        <View className="progress-label">
+          <Text className="progress-label-title">{content.title}</Text>
+          <Text className="progress-label-value">
             {answeredCount === questions.length && questions.length > 0
-              ? `Quiz complete: ${correctCount}/${questions.length}`
+              ? lf(L, "quiz_complete", { a: correctCount, b: questions.length })
               : `${answeredCount}/${questions.length}`}
-          </span>
-        </div>
+          </Text>
+        </View>
       )}
       {questions.map((q: any, i: number) => (
         <QuizQuestion
           key={q.id || i}
           q={q}
           index={i}
+          L={L}
           onAnswered={(_id: string, ok: boolean) => {
             setAnswers((a) => ({ ...a, [q.id || i]: ok }));
             onQuizAnswer?.(ok, i);
           }}
         />
       ))}
-    </div>
+    </View>
   );
 }
 
 /* ---------- command blocks ---------- */
 
-function CommandBlock({ cmd, onCommand }: any) {
+function CommandBlock({ cmd, onCommand, L }: any) {
   const [copied, setCopied] = useState(false);
   const [output, setOutput] = useState<string | null>(null);
   const [showExpected, setShowExpected] = useState(false);
@@ -408,83 +470,83 @@ function CommandBlock({ cmd, onCommand }: any) {
   };
 
   return (
-    <div>
-      <div className="code-block">
-        <div className="code-block-header">
-          <span className="code-block-lang">{cmd.category || "cli"}</span>
-          <div className="code-block-actions">
+    <View>
+      <View className="code-block">
+        <View className="code-block-header">
+          <Text className="code-block-lang">{cmd.category || lf(L, "lang_default")}</Text>
+          <View className="code-block-actions">
             {cmd.expectedOutput && (
-              <button type="button" className="btn btn-xs btn-ghost" onClick={run}>Run</button>
+              <Pressable className="btn btn-xs btn-ghost" onPress={run}>{lf(L, "run")}</Pressable>
             )}
-            <button type="button" className="btn btn-xs btn-ghost" onClick={copy}>
-              {copied ? "✓ Copied" : "Copy"}
-            </button>
-          </div>
-        </div>
-        <pre><code>{cmd.command}</code></pre>
-      </div>
+            <Pressable className="btn btn-xs btn-ghost" onPress={copy}>
+              {copied ? lf(L, "copied") : lf(L, "copy")}
+            </Pressable>
+          </View>
+        </View>
+        <View as="pre"><Text as="code">{cmd.command}</Text></View>
+      </View>
 
       {cmd.explanation && (
-        <p style={{ fontSize: "var(--text-sm, 0.875rem)", color: "var(--se-n-600, #475569)" }}>
+        <Text as="p" style={{ fontSize: "var(--text-sm, 0.875rem)", color: "var(--se-n-600, #475569)" }}>
           {cmd.explanation}
-        </p>
+        </Text>
       )}
 
       {output !== null && (
-        <div className="terminal" style={{ marginBottom: 12 }}>
-          <div className="terminal-body"><div className="terminal-output">{output}</div></div>
-        </div>
+        <View className="terminal" style={{ marginBottom: 12 }}>
+          <View className="terminal-body"><View className="terminal-output">{output}</View></View>
+        </View>
       )}
 
       {cmd.expectedOutput && !output && (
         <>
-          <button type="button" className="btn btn-xs btn-secondary" onClick={() => setShowExpected((s) => !s)}>
-            {showExpected ? "Hide expected output" : "Show expected output"}
-          </button>
+          <Pressable className="btn btn-xs btn-secondary" onPress={() => setShowExpected((s) => !s)}>
+            {showExpected ? lf(L, "hide_expected") : lf(L, "show_expected")}
+          </Pressable>
           {showExpected && (
-            <div className="terminal" style={{ marginTop: 8 }}>
-              <div className="terminal-body"><div className="terminal-output">{cmd.expectedOutput}</div></div>
-            </div>
+            <View className="terminal" style={{ marginTop: 8 }}>
+              <View className="terminal-body"><View className="terminal-output">{cmd.expectedOutput}</View></View>
+            </View>
           )}
         </>
       )}
 
       {Array.isArray(cmd.commonErrors) && cmd.commonErrors.length > 0 && (
-        <div className={`accordion-item${errorsOpen ? " open" : ""}`} style={{ marginTop: 12 }}>
-          <button type="button" className="accordion-header" onClick={() => setErrorsOpen((s) => !s)}>
-            <span>⚠️ Common errors ({cmd.commonErrors.length})</span>
-            <span className="chevron">▼</span>
-          </button>
-          <div className="accordion-body">
-            <div className="accordion-body-inner">
+        <View className={`accordion-item${errorsOpen ? " open" : ""}`} style={{ marginTop: 12 }}>
+          <Pressable className="accordion-header" onPress={() => setErrorsOpen((s) => !s)}>
+            <Text>{lf(L, "common_errors", { n: cmd.commonErrors.length })}</Text>
+            <Text className="chevron">▼</Text>
+          </Pressable>
+          <View className="accordion-body">
+            <View className="accordion-body-inner">
               {cmd.commonErrors.map((err: any, i: number) => (
-                <div key={i} style={{ marginBottom: 12, fontSize: "var(--text-sm, 0.875rem)" }}>
-                  <strong>{err.error}</strong>
-                  {err.cause && <div><strong>Cause:</strong> {err.cause}</div>}
-                  {err.fix && <div><strong>Fix:</strong> {err.fix}</div>}
-                </div>
+                <View key={i} style={{ marginBottom: 12, fontSize: "var(--text-sm, 0.875rem)" }}>
+                  <Text as="strong">{err.error}</Text>
+                  {err.cause && <View><Text as="strong">{lf(L, "cause")}</Text> {err.cause}</View>}
+                  {err.fix && <View><Text as="strong">{lf(L, "fix")}</Text> {err.fix}</View>}
+                </View>
               ))}
-            </div>
-          </div>
-        </div>
+            </View>
+          </View>
+        </View>
       )}
 
       {cmd.interviewQ && (
-        <div className="alert alert-info" style={{ marginTop: 12 }}>
-          <span className="alert-icon">🎙️</span>
-          <div className="alert-content">
-            <div className="alert-title">Interview question</div>
-            <div className="alert-text">{cmd.interviewQ}</div>
-          </div>
-        </div>
+        <View className="alert alert-info" style={{ marginTop: 12 }}>
+          <Text className="alert-icon">🎙️</Text>
+          <View className="alert-content">
+            <View className="alert-title">{lf(L, "interview_question")}</View>
+            <View className="alert-text">{cmd.interviewQ}</View>
+          </View>
+        </View>
       )}
-    </div>
+    </View>
   );
 }
 
 /* ---------- simulated terminal ---------- */
 
-function SlideTerminal({ content = {}, onCommand }: any) {
+function SlideTerminal({ content = {}, onCommand, L }: any) {
   const commands = content.commands || {};
   const [lines, setLines] = useState<any[]>(() =>
     content.initialText ? [{ kind: "output", text: content.initialText }] : [],
@@ -506,7 +568,7 @@ function SlideTerminal({ content = {}, onCommand }: any) {
     } else if (cmd === "help") {
       next.push({
         kind: "output",
-        text: "Available commands:\n" + Object.keys(commands).join("\n"),
+        text: lf(L, "help_header") + "\n" + Object.keys(commands).join("\n"),
       });
       setLines(next);
     } else if (commands[cmd]) {
@@ -521,7 +583,7 @@ function SlideTerminal({ content = {}, onCommand }: any) {
     } else {
       next.push({
         kind: "error",
-        text: `command not found: ${cmd} — type "help" for available commands`,
+        text: lf(L, "cmd_not_found", { cmd }),
       });
       setLines(next);
     }
@@ -529,17 +591,17 @@ function SlideTerminal({ content = {}, onCommand }: any) {
   };
 
   return (
-    <div className="terminal">
-      <div className="terminal-header">
-        <span className="terminal-dot terminal-dot-red" />
-        <span className="terminal-dot terminal-dot-yellow" />
-        <span className="terminal-dot terminal-dot-green" />
-        <span className="terminal-title">{content.title || "terminal"}</span>
-        <span className="terminal-badge terminal-badge-sim">{content.mode || "simulated"}</span>
-      </div>
-      <div className="terminal-body" ref={bodyRef}>
+    <View className="terminal">
+      <View className="terminal-header">
+        <Text className="terminal-dot terminal-dot-red" />
+        <Text className="terminal-dot terminal-dot-yellow" />
+        <Text className="terminal-dot terminal-dot-green" />
+        <Text className="terminal-title">{content.title || lf(L, "terminal_title")}</Text>
+        <Text className="terminal-badge terminal-badge-sim">{content.mode || lf(L, "terminal_mode")}</Text>
+      </View>
+      <View className="terminal-body" ref={bodyRef}>
         {lines.map((l, i) => (
-          <div
+          <View
             key={i}
             className={
               l.kind === "prompt" ? "terminal-prompt"
@@ -549,27 +611,26 @@ function SlideTerminal({ content = {}, onCommand }: any) {
             }
           >
             {l.text}
-          </div>
+          </View>
         ))}
-        <form className="terminal-input-line" onSubmit={submit}>
-          <span className="terminal-prompt">›</span>
-          <input
+        <View as="form" className="terminal-input-line" onSubmit={submit}>
+          <Text className="terminal-prompt">›</Text>
+          <TextInput
             className="terminal-input"
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChangeText={setInput}
             autoComplete="off"
-            spellCheck={false}
             aria-label="terminal input"
           />
-        </form>
-      </div>
-    </div>
+        </View>
+      </View>
+    </View>
   );
 }
 
 /* ---------- code viewer ---------- */
 
-function SlideCode({ content = {} }: any) {
+function SlideCode({ content = {}, L }: any) {
   const languages = content.languages || [];
   const [activeLang, setActiveLang] = useState(content.defaultLang || languages[0]?.id);
   const [showOutput, setShowOutput] = useState(false);
@@ -577,64 +638,63 @@ function SlideCode({ content = {} }: any) {
   const lang = languages.find((l: any) => l.id === activeLang) || languages[0];
 
   return (
-    <div>
-      <div className="code-block">
-        <div className="code-block-header">
-          <span className="code-block-lang">{content.title || lang?.label || "code"}</span>
-          <div className="code-block-actions">
+    <View>
+      <View className="code-block">
+        <View className="code-block-header">
+          <Text className="code-block-lang">{content.title || lang?.label || lf(L, "code_label")}</Text>
+          <View className="code-block-actions">
             {languages.map((l: any) => (
-              <button
+              <Pressable
                 key={l.id}
-                type="button"
                 className={`btn btn-xs ${l.id === lang?.id ? "btn-secondary" : "btn-ghost"}`}
-                onClick={() => setActiveLang(l.id)}
+                onPress={() => setActiveLang(l.id)}
               >
                 {l.label}
-              </button>
+              </Pressable>
             ))}
-          </div>
-        </div>
-        <pre><code>{lang?.code || ""}</code></pre>
-      </div>
+          </View>
+        </View>
+        <View as="pre"><Text as="code">{lang?.code || ""}</Text></View>
+      </View>
 
       {Array.isArray(lang?.explanations) && lang.explanations.length > 0 && (
-        <div className={`accordion-item${explanationsOpen ? " open" : ""}`}>
-          <button type="button" className="accordion-header" onClick={() => setExplanationsOpen((s) => !s)}>
-            <span>📖 Line-by-line explanation ({lang.explanations.length})</span>
-            <span className="chevron">▼</span>
-          </button>
-          <div className="accordion-body">
-            <div className="accordion-body-inner">
+        <View className={`accordion-item${explanationsOpen ? " open" : ""}`}>
+          <Pressable className="accordion-header" onPress={() => setExplanationsOpen((s) => !s)}>
+            <Text>{lf(L, "explanations", { n: lang.explanations.length })}</Text>
+            <Text className="chevron">▼</Text>
+          </Pressable>
+          <View className="accordion-body">
+            <View className="accordion-body-inner">
               {lang.explanations.map((ex: any, i: number) => (
-                <div key={i} style={{ display: "flex", gap: 12, marginBottom: 10, fontSize: "var(--text-sm, 0.875rem)" }}>
-                  <code style={{ flexShrink: 0 }}>L{ex.line}</code>
-                  <span>{ex.text}</span>
-                </div>
+                <View key={i} style={{ display: "flex", gap: 12, marginBottom: 10, fontSize: "var(--text-sm, 0.875rem)" }}>
+                  <Text as="code" style={{ flexShrink: 0 }}>L{ex.line}</Text>
+                  <Text>{ex.text}</Text>
+                </View>
               ))}
-            </div>
-          </div>
-        </div>
+            </View>
+          </View>
+        </View>
       )}
 
       {content.expectedOutput && (
-        <div style={{ marginTop: 12 }}>
-          <button type="button" className="btn btn-xs btn-secondary" onClick={() => setShowOutput((s) => !s)}>
-            {showOutput ? "Hide expected output" : "Show expected output"}
-          </button>
+        <View style={{ marginTop: 12 }}>
+          <Pressable className="btn btn-xs btn-secondary" onPress={() => setShowOutput((s) => !s)}>
+            {showOutput ? lf(L, "hide_expected") : lf(L, "show_expected")}
+          </Pressable>
           {showOutput && (
-            <div className="terminal" style={{ marginTop: 8 }}>
-              <div className="terminal-body"><div className="terminal-output">{content.expectedOutput}</div></div>
-            </div>
+            <View className="terminal" style={{ marginTop: 8 }}>
+              <View className="terminal-body"><View className="terminal-output">{content.expectedOutput}</View></View>
+            </View>
           )}
-        </div>
+        </View>
       )}
-    </div>
+    </View>
   );
 }
 
 /* ---------- lab checklist ---------- */
 
-function SlideLab({ content = {}, sectionId, onLabComplete }: any) {
+function SlideLab({ content = {}, sectionId, onLabComplete, L }: any) {
   const steps = content.steps || [];
   const [done, setDone] = useState<Record<string, boolean>>({});
   const [openHint, setOpenHint] = useState<Record<string, boolean>>({});
@@ -672,93 +732,91 @@ function SlideLab({ content = {}, sectionId, onLabComplete }: any) {
   const nextOpen = steps.findIndex((s: any, i: number) => !done[s.id || i]);
 
   return (
-    <div className="lab-card">
+    <View className="lab-card">
       {(content.title || content.description) && (
-        <div className="lab-card-head">
-          <div className="lab-card-icon">🧪</div>
-          <div className="lab-card-head-main">
-            <div className="lab-card-badges">
-              <span className={`badge difficulty-${content.difficulty || "beginner"}`}>
+        <View className="lab-card-head">
+          <View className="lab-card-icon">🧪</View>
+          <View className="lab-card-head-main">
+            <View className="lab-card-badges">
+              <Text className={`badge difficulty-${content.difficulty || "beginner"}`}>
                 {content.difficulty || "beginner"}
-              </span>
+              </Text>
               {content.duration && (
-                <span className="badge badge-neutral">⏱ {content.duration}</span>
+                <Text className="badge badge-neutral">⏱ {content.duration}</Text>
               )}
-            </div>
-            {content.title && <div className="lab-card-title">{content.title}</div>}
-            {content.description && <p className="lab-card-desc">{content.description}</p>}
-          </div>
-        </div>
+            </View>
+            {content.title && <View className="lab-card-title">{content.title}</View>}
+            {content.description && <Text as="p" className="lab-card-desc">{content.description}</Text>}
+          </View>
+        </View>
       )}
 
       {steps.length > 0 && (
-        <div className="lab-progress">
-          <div className="progress-label">
-            <span className="progress-label-title">Lab Progress</span>
-            <span className="progress-label-value">{pct}%</span>
-          </div>
-          <div className="progress-bar">
-            <div className="progress-bar-fill" style={{ width: `${pct}%` }} />
-          </div>
-        </div>
+        <View className="lab-progress">
+          <View className="progress-label">
+            <Text className="progress-label-title">{lf(L, "lab_progress")}</Text>
+            <Text className="progress-label-value">{pct}%</Text>
+          </View>
+          <View className="progress-bar">
+            <View className="progress-bar-fill" style={{ width: `${pct}%` }} />
+          </View>
+        </View>
       )}
 
-      <div className="lab-steps" ref={stepsRef}>
+      <View className="lab-steps" ref={stepsRef}>
         {steps.map((step: any, i: number) => {
           const key = step.id || String(i);
           const complete = !!done[key];
           const isCurrent = i === nextOpen;
           return (
-            <div key={key} className={`lab-step${complete ? " done" : ""}${isCurrent ? " current" : ""}`}>
-              <div className="lab-step-num">{complete ? "✓" : i + 1}</div>
-              <div className="lab-step-body">
-                <div className="lab-step-top">
-                  <span className="lab-step-title">{step.title}</span>
-                  <button
-                    type="button"
+            <View key={key} className={`lab-step${complete ? " done" : ""}${isCurrent ? " current" : ""}`}>
+              <View className="lab-step-num">{complete ? "✓" : i + 1}</View>
+              <View className="lab-step-body">
+                <View className="lab-step-top">
+                  <Text className="lab-step-title">{step.title}</Text>
+                  <Pressable
                     className={`btn btn-xs ${complete ? "lab-step-btn-done" : "btn-success"}`}
-                    onClick={() => toggle(key)}
+                    onPress={() => toggle(key)}
                   >
-                    {complete ? "✓ Completed" : "✓ Mark Complete"}
-                  </button>
-                </div>
+                    {complete ? lf(L, "completed") : lf(L, "mark_complete")}
+                  </Pressable>
+                </View>
                 {step.html ? (
-                  <div className="slide-html step-html" dangerouslySetInnerHTML={{ __html: step.html }} />
+                  <View className="slide-html step-html" dangerouslySetInnerHTML={{ __html: step.html }} />
                 ) : (
-                  step.instruction && <p className="step-desc">{step.instruction}</p>
+                  step.instruction && <Text as="p" className="step-desc">{step.instruction}</Text>
                 )}
                 {step.expectedResult && (
-                  <p className="step-desc"><strong>Expected:</strong> {step.expectedResult}</p>
+                  <Text as="p" className="step-desc"><Text as="strong">{lf(L, "expected")}</Text> {step.expectedResult}</Text>
                 )}
                 {step.hint && (
                   <>
-                    <button
-                      type="button"
+                    <Pressable
                       className="btn btn-xs btn-ghost"
-                      onClick={() => setOpenHint((h) => ({ ...h, [key]: !h[key] }))}
+                      onPress={() => setOpenHint((h) => ({ ...h, [key]: !h[key] }))}
                     >
-                      💡 Hint
-                    </button>
+                      {lf(L, "hint")}
+                    </Pressable>
                     {openHint[key] && (
-                      <div className="alert alert-warning" style={{ marginTop: 8, marginBottom: 0 }}>
-                        <span className="alert-icon">💡</span>
-                        <div className="alert-content"><div className="alert-text">{step.hint}</div></div>
-                      </div>
+                      <View className="alert alert-warning" style={{ marginTop: 8, marginBottom: 0 }}>
+                        <Text className="alert-icon">💡</Text>
+                        <View className="alert-content"><View className="alert-text">{step.hint}</View></View>
+                      </View>
                     )}
                   </>
                 )}
-              </div>
-            </div>
+              </View>
+            </View>
           );
         })}
-      </div>
-    </div>
+      </View>
+    </View>
   );
 }
 
 /* ---------- challenge ---------- */
 
-function SlideChallenge({ content = {} }: any) {
+function SlideChallenge({ content = {}, L }: any) {
   const [attempt, setAttempt] = useState(content.starterCode || "");
   const [results, setResults] = useState<any[] | null>(null);
   const [hintsOpen, setHintsOpen] = useState(false);
@@ -774,95 +832,96 @@ function SlideChallenge({ content = {} }: any) {
   };
 
   return (
-    <div className="card">
-      <div className="card-body">
-        {content.description && <p>{content.description}</p>}
+    <View className="card">
+      <View className="card-body">
+        {content.description && <Text as="p">{content.description}</Text>}
         {Array.isArray(content.requirements) && content.requirements.length > 0 && (
           <>
-            <h4 style={{ marginTop: 16, marginBottom: 8 }}>Requirements</h4>
-            <ul>{content.requirements.map((r: string, i: number) => <li key={i}>{r}</li>)}</ul>
+            <Text as="h4" style={{ marginTop: 16, marginBottom: 8 }}>{lf(L, "requirements")}</Text>
+            <View as="ul">{content.requirements.map((r: string, i: number) => <Text as="li" key={i}>{r}</Text>)}</View>
           </>
         )}
         {content.starterCode && (
-          <div className="code-block" style={{ marginTop: 16 }}>
-            <div className="code-block-header">
-              <span className="code-block-lang">{content.language || "code"} — starter</span>
-            </div>
-            <pre><code>{content.starterCode}</code></pre>
-          </div>
+          <View className="code-block" style={{ marginTop: 16 }}>
+            <View className="code-block-header">
+              <Text className="code-block-lang">{content.language || lf(L, "code_label")} — {lf(L, "starter")}</Text>
+            </View>
+            <View as="pre"><Text as="code">{content.starterCode}</Text></View>
+          </View>
         )}
-        <textarea
+        <TextInput
+          multiline
           className="challenge-editor"
           value={attempt}
-          onChange={(e) => { setAttempt(e.target.value); setResults(null); }}
+          onChangeText={(v: string) => { setAttempt(v); setResults(null); }}
           spellCheck={false}
           aria-label="challenge code attempt"
         />
         {testCases.length > 0 && (
-          <button type="button" className="btn btn-primary" onClick={runChecks} style={{ marginTop: 12 }}>
-            Run checks
-          </button>
+          <Pressable className="btn btn-primary" onPress={runChecks} style={{ marginTop: 12 }}>
+            {lf(L, "run_checks")}
+          </Pressable>
         )}
         {results && (
-          <div style={{ marginTop: 16 }}>
+          <View style={{ marginTop: 16 }}>
             {results.map((r, i) => (
-              <div
+              <View
                 key={i}
                 className={`quiz-result ${r.pass ? "quiz-result-correct" : "quiz-result-incorrect"}`}
                 style={{ marginBottom: 6 }}
               >
                 {r.pass ? "✅" : "❌"} {r.description}
-              </div>
+              </View>
             ))}
-          </div>
+          </View>
         )}
         {Array.isArray(content.hints) && content.hints.length > 0 && (
-          <div className={`accordion-item${hintsOpen ? " open" : ""}`} style={{ marginTop: 16 }}>
-            <button type="button" className="accordion-header" onClick={() => setHintsOpen((s) => !s)}>
-              <span>💡 Hints ({content.hints.length})</span>
-              <span className="chevron">▼</span>
-            </button>
-            <div className="accordion-body">
-              <div className="accordion-body-inner">
-                <ul>{content.hints.map((h: string, i: number) => <li key={i}>{h}</li>)}</ul>
-              </div>
-            </div>
-          </div>
+          <View className={`accordion-item${hintsOpen ? " open" : ""}`} style={{ marginTop: 16 }}>
+            <Pressable className="accordion-header" onPress={() => setHintsOpen((s) => !s)}>
+              <Text>{lf(L, "hints", { n: content.hints.length })}</Text>
+              <Text className="chevron">▼</Text>
+            </Pressable>
+            <View className="accordion-body">
+              <View className="accordion-body-inner">
+                <View as="ul">{content.hints.map((h: string, i: number) => <Text as="li" key={i}>{h}</Text>)}</View>
+              </View>
+            </View>
+          </View>
         )}
-      </div>
-    </div>
+      </View>
+    </View>
   );
 }
 
 /* ---------- troubleshooting / interview accordions ---------- */
 
-function SlideTroubleshooting({ content = {} }: any) {
+function SlideTroubleshooting({ content = {}, L }: any) {
   const items = content.items || (Array.isArray(content) ? content : []);
   const [open, setOpen] = useState<Record<number, boolean>>({});
   return (
-    <div>
+    <View>
       {content.intro && (
-        <div className="slide-html" style={{ marginBottom: 16 }}
+        <View className="slide-html" style={{ marginBottom: 16 }}
           dangerouslySetInnerHTML={{ __html: content.intro }} />
       )}
       {items.map((item: any, i: number) => (
-        <div key={i} className={`accordion-item${open[i] ? " open" : ""}`}>
-          <button type="button" className="accordion-header"
-            onClick={() => setOpen((o) => ({ ...o, [i]: !o[i] }))}>
-            <span>⚠️ {item.error || item.title || `Issue ${i + 1}`}</span>
-            <span className="chevron">▼</span>
-          </button>
-          <div className="accordion-body">
-            <div className="accordion-body-inner">
-              {item.cause && <p><strong>Cause:</strong> {item.cause}</p>}
-              {item.fix && <p><strong>Fix:</strong> {item.fix}</p>}
-              {item.prevention && <p><strong>Prevention:</strong> {item.prevention}</p>}
-              {item.html && <div dangerouslySetInnerHTML={{ __html: item.html }} />}
-            </div>
-          </div>
-        </div>
+        <View key={i} className={`accordion-item${open[i] ? " open" : ""}`}>
+          <Pressable className="accordion-header"
+            onPress={() => setOpen((o) => ({ ...o, [i]: !o[i] }))}>
+            <Text>⚠️ {item.error || item.title || lf(L, "issue", { n: i + 1 })}</Text>
+            <Text className="chevron">▼</Text>
+          </Pressable>
+          <View className="accordion-body">
+            <View className="accordion-body-inner">
+              {item.cause && <Text as="p"><Text as="strong">{lf(L, "cause")}</Text> {item.cause}</Text>}
+              {item.fix && <Text as="p"><Text as="strong">{lf(L, "fix")}</Text> {item.fix}</Text>}
+              {item.prevention && <Text as="p"><Text as="strong">{lf(L, "prevention")}</Text> {item.prevention}</Text>}
+              {item.html && <View dangerouslySetInnerHTML={{ __html: item.html }} />}
+            </View>
+          </View>
+        </View>
       ))}
-    </div>
+    </View>
   );
 }
 
@@ -875,66 +934,62 @@ const DIFF_BG: Record<string, string> = {
   scenario: "#fff7ed", troubleshooting: "#f5f3ff", general: "#f1f5f9",
 };
 const DIFF_ORDER = ["beginner", "intermediate", "advanced", "scenario", "troubleshooting"];
-const DIFF_LABELS: Record<string, string> = {
-  beginner: "🌱 Beginner", intermediate: "📈 Intermediate", advanced: "🚀 Advanced",
-  scenario: "🎯 Scenario-Based", troubleshooting: "🔧 Troubleshooting", general: "❓ Q&A",
-};
 
-function InterviewCard({ q, index, level }: any) {
+function InterviewCard({ q, index, level, L }: any) {
   const [open, setOpen] = useState(false);
   return (
-    <div
+    <View
       className={`accordion-item${open ? " open" : ""}`}
       style={{ marginBottom: 8, borderLeft: `3px solid ${DIFF_COLORS[level] || "#6366f1"}` }}
     >
-      <button type="button" className="accordion-header" style={{ padding: "12px 16px" }}
-        onClick={() => setOpen((o) => !o)}>
-        <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <span style={{
+      <Pressable className="accordion-header" style={{ padding: "12px 16px" }}
+        onPress={() => setOpen((o) => !o)}>
+        <Text style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <Text style={{
             fontSize: 12, padding: "2px 8px", borderRadius: 4,
             background: DIFF_BG[level] || "#eef2ff",
             color: DIFF_COLORS[level] || "#6366f1", fontWeight: 600,
           }}>
             {level.charAt(0).toUpperCase() + level.slice(1)}
-          </span>
-          <span>Q{index + 1}: {q.question}</span>
-        </span>
-        <span className="chevron">▼</span>
-      </button>
-      <div className="accordion-body">
-        <div className="accordion-body-inner" style={{ padding: 16 }}>
+          </Text>
+          <Text>Q{index + 1}: {q.question}</Text>
+        </Text>
+        <Text className="chevron">▼</Text>
+      </Pressable>
+      <View className="accordion-body">
+        <View className="accordion-body-inner" style={{ padding: 16 }}>
           {q.shortAnswer && (
-            <div style={{ marginBottom: 12 }}>
-              <strong style={{ color: "#16a34a" }}>Short Answer:</strong><br />{q.shortAnswer}
-            </div>
+            <View style={{ marginBottom: 12 }}>
+              <Text as="strong" style={{ color: "#16a34a" }}>{lf(L, "short_answer")}</Text><br />{q.shortAnswer}
+            </View>
           )}
           {q.deepExplanation && (
-            <div style={{ marginBottom: 12, padding: 12, background: "#f9fafb", borderRadius: 8 }}>
-              <strong>Deep Explanation:</strong><br />{q.deepExplanation}
-            </div>
+            <View style={{ marginBottom: 12, padding: 12, background: "#f9fafb", borderRadius: 8 }}>
+              <Text as="strong">{lf(L, "deep_explanation")}</Text><br />{q.deepExplanation}
+            </View>
           )}
           {q.example && (
-            <div style={{ marginBottom: 12 }}>
-              <strong>📌 Real-world Example:</strong><br />{q.example}
-            </div>
+            <View style={{ marginBottom: 12 }}>
+              <Text as="strong">{lf(L, "real_example")}</Text><br />{q.example}
+            </View>
           )}
           {q.commonMistake && (
-            <div style={{ marginBottom: 12, padding: "8px 12px", background: "#fef2f2", borderRadius: 6, borderLeft: "3px solid #ef4444" }}>
-              <strong>⚠️ Common Mistake:</strong> {q.commonMistake}
-            </div>
+            <View style={{ marginBottom: 12, padding: "8px 12px", background: "#fef2f2", borderRadius: 6, borderLeft: "3px solid #ef4444" }}>
+              <Text as="strong">{lf(L, "common_mistake")}</Text> {q.commonMistake}
+            </View>
           )}
           {q.followUp && (
-            <div style={{ marginTop: 8, padding: "8px 12px", background: "#eef2ff", borderRadius: 6 }}>
-              <strong>➔ Follow-up:</strong> {q.followUp}
-            </div>
+            <View style={{ marginTop: 8, padding: "8px 12px", background: "#eef2ff", borderRadius: 6 }}>
+              <Text as="strong">{lf(L, "follow_up")}</Text> {q.followUp}
+            </View>
           )}
-        </div>
-      </div>
-    </div>
+        </View>
+      </View>
+    </View>
   );
 }
 
-function SlideInterview({ content = {} }: any) {
+function SlideInterview({ content = {}, L }: any) {
   const questions = content.questions || (Array.isArray(content) ? content : []);
   const groups: Record<string, any[]> = {};
   questions.forEach((q: any) => {
@@ -943,67 +998,67 @@ function SlideInterview({ content = {} }: any) {
   });
   if (!questions.some((q: any) => q.difficulty)) {
     return (
-      <div>
+      <View>
         {questions.map((q: any, i: number) => (
-          <InterviewCard key={i} q={q} index={i} level="general" />
+          <InterviewCard key={i} q={q} index={i} level="general" L={L} />
         ))}
-      </div>
+      </View>
     );
   }
   return (
-    <div>
+    <View>
       {DIFF_ORDER.filter((l) => groups[l]?.length).map((level) => (
-        <div key={level} style={{ marginBottom: 24 }}>
-          <h4 style={{ marginBottom: 12, color: DIFF_COLORS[level] || "#334155" }}>
-            {DIFF_LABELS[level] || level}
-          </h4>
+        <View key={level} style={{ marginBottom: 24 }}>
+          <Text as="h4" style={{ marginBottom: 12, color: DIFF_COLORS[level] || "#334155" }}>
+            {lf(L, `diff_${level}`, {}) || level}
+          </Text>
           {groups[level].map((q: any, i: number) => (
-            <InterviewCard key={i} q={q} index={i} level={level} />
+            <InterviewCard key={i} q={q} index={i} level={level} L={L} />
           ))}
-        </div>
+        </View>
       ))}
-    </div>
+    </View>
   );
 }
 
 /* ---------- next/prev nav card ---------- */
 
-function SlideNext({ content = {}, onNavigate }: any) {
+function SlideNext({ content = {}, onNavigate, L }: any) {
   const prev = content.prev;
   const next = content.next || content.nextModule;
   const btn = (entry: any, label: string, cls: string) =>
     entry ? (
-      <button
-        type="button"
+      <Pressable
         className={`lesson-nav-btn ${cls}`}
-        onClick={() => entry.url && onNavigate?.(entry.url)}
+        onPress={() => entry.url && onNavigate?.(entry.url)}
         disabled={!entry.url}
         style={{ textAlign: "left" }}
       >
-        <span className="lesson-nav-btn-label">{label}</span>
-        <span className="lesson-nav-btn-title">{entry.title}</span>
-      </button>
+        <Text className="lesson-nav-btn-label">{label}</Text>
+        <Text className="lesson-nav-btn-title">{entry.title}</Text>
+      </Pressable>
     ) : null;
   return (
-    <div>
+    <View>
       {content.message && (
-        <div className="alert alert-success">
-          <span className="alert-icon">🎉</span>
-          <div className="alert-content"><div className="alert-text">{content.message}</div></div>
-        </div>
+        <View className="alert alert-success">
+          <Text className="alert-icon">🎉</Text>
+          <View className="alert-content"><View className="alert-text">{content.message}</View></View>
+        </View>
       )}
-      <div className="lesson-nav">
-        {btn(prev, "← Previous Chapter", "prev")}
-        {btn(next, "Next Chapter →", "next")}
-      </div>
-    </div>
+      <View className="lesson-nav">
+        {btn(prev, lf(L, "prev_chapter"), "prev")}
+        {btn(next, lf(L, "next_chapter"), "next")}
+      </View>
+    </View>
   );
 }
 
 /* ---------- dispatcher ---------- */
 
-function SlideSection({ section, ctx }: { section: any; ctx: Props }) {
+function SlideSection({ section, ctx }: { section: any; ctx: Props & { L: SlideLabels } }) {
   const c = section.content;
+  const L = ctx.L;
   const icon = section.icon || SECTION_ICONS[section.type] || "📌";
 
   const body = (() => {
@@ -1011,40 +1066,42 @@ function SlideSection({ section, ctx }: { section: any; ctx: Props }) {
       return <SlideHtml html={typeof c === "string" ? c : c?.html || ""} />;
     }
     switch (section.type) {
-      case "architecture":    return <SlideDiagram content={c} />;
-      case "quiz":            return <SlideQuiz content={c} sectionId={section.id} onQuizAnswer={ctx.onQuizAnswer} onQuizComplete={ctx.onQuizComplete} />;
-      case "command":         return <div>{(Array.isArray(c) ? c : c ? [c] : []).map((cmd: any, i: number) => <CommandBlock key={i} cmd={cmd} onCommand={ctx.onCommand} />)}</div>;
-      case "terminal":        return <SlideTerminal content={c} onCommand={ctx.onCommand} />;
-      case "code":            return <SlideCode content={c} />;
-      case "lab":             return <SlideLab content={c} sectionId={section.id} onLabComplete={ctx.onLabComplete} />;
-      case "challenge":       return <SlideChallenge content={c} />;
-      case "troubleshooting": return <SlideTroubleshooting content={c} />;
-      case "interview":       return <SlideInterview content={c} />;
-      case "next":            return <SlideNext content={c} onNavigate={ctx.onNavigate} />;
+      case "architecture":    return <SlideDiagram content={c} L={L} />;
+      case "quiz":            return <SlideQuiz content={c} sectionId={section.id} onQuizAnswer={ctx.onQuizAnswer} onQuizComplete={ctx.onQuizComplete} L={L} />;
+      case "command":         return <View>{(Array.isArray(c) ? c : c ? [c] : []).map((cmd: any, i: number) => <CommandBlock key={i} cmd={cmd} onCommand={ctx.onCommand} L={L} />)}</View>;
+      case "terminal":        return <SlideTerminal content={c} onCommand={ctx.onCommand} L={L} />;
+      case "code":            return <SlideCode content={c} L={L} />;
+      case "lab":             return <SlideLab content={c} sectionId={section.id} onLabComplete={ctx.onLabComplete} L={L} />;
+      case "challenge":       return <SlideChallenge content={c} L={L} />;
+      case "troubleshooting": return <SlideTroubleshooting content={c} L={L} />;
+      case "interview":       return <SlideInterview content={c} L={L} />;
+      case "next":            return <SlideNext content={c} onNavigate={ctx.onNavigate} L={L} />;
       default:                return <SlideHtml html={c?.html || ""} />;
     }
   })();
 
   return (
-    <section
+    <View
+      as="section"
       id={section.id || undefined}
       data-section-id={section.id || undefined}
       className="lesson-section slide-section lesson-anchor"
     >
       {section.title && (
-        <div className="lesson-section-header">
-          <div className="lesson-section-icon">{icon}</div>
-          <h2>{section.title}</h2>
-        </div>
+        <View className="lesson-section-header">
+          <View className="lesson-section-icon">{icon}</View>
+          <Text as="h2">{section.title}</Text>
+        </View>
       )}
-      <div className="lesson-section-body">{body}</div>
-    </section>
+      <View className="lesson-section-body">{body}</View>
+    </View>
   );
 }
 
 export default function SlideEngine(props: Props) {
   const navigate = useNav().navigate;
   const sections = props.sections || [];
+  const L = { ...DEFAULT_LABELS, ...(props.labels || {}) };
   const onNavigate = (url: string) => {
     // orig content uses 'module-XX.html' — map to the reader route
     const m = url.match(/module-(\d+)/);
@@ -1053,10 +1110,10 @@ export default function SlideEngine(props: Props) {
     else navigate(url);
   };
   return (
-    <div className="slide-engine">
+    <View className="slide-engine">
       {sections.map((s: any, i: number) => (
-        <SlideSection key={s.id || i} section={s} ctx={{ ...props, onNavigate }} />
+        <SlideSection key={s.id || i} section={s} ctx={{ ...props, onNavigate, L }} />
       ))}
-    </div>
+    </View>
   );
 }

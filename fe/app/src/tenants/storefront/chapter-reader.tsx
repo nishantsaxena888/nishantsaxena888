@@ -191,7 +191,7 @@ export default function ChapterReader({ content, actionData, session }: any) {
   if (actionData?.loading && !chapter) {
     return (
       <View as="section" className="chapter-reader p-6">
-        <Text>Loading…</Text>
+        <Text>{content?.loading_label || t("common.loading") || "Loading…"}</Text>
       </View>
     );
   }
@@ -256,7 +256,7 @@ export default function ChapterReader({ content, actionData, session }: any) {
               className={`reader-side-item${s.id === chapter?.id ? " active" : ""}`}
               onPress={() => openChapter(s)}
             >
-              <Text className="reader-side-icon">{s.icon || "📄"}</Text>
+              <Text className="reader-side-icon">{s.icon || content?.item_icon || "📄"}</Text>
               <Text className="reader-side-title">
                 {String(s.order ?? i + 1).padStart(2, "0")}. {s.title}
               </Text>
@@ -326,12 +326,13 @@ export default function ChapterReader({ content, actionData, session }: any) {
               )}
               {chapter?.prerequisites?.length > 0 && (
                 <Text className="badge badge-accent">
-                  Requires: {chapter.prerequisites.join(", ")}
+                  {(content?.requires_label || t("lesson.requires") || "Requires:")}{" "}
+                  {chapter.prerequisites.join(", ")}
                 </Text>
               )}
             </View>
             <Text as="h1">
-              {chapter?.subtitle || chapter?.title || content?.title || "Chapter"}
+              {chapter?.subtitle || chapter?.title || content?.title || t("common.chapter") || "Chapter"}
             </Text>
             {(chapter?.intro || chapter?.description) && (
               <Text as="p" className="lesson-header-desc">
@@ -367,7 +368,7 @@ export default function ChapterReader({ content, actionData, session }: any) {
               )}
             </View>
             <Text as="h1" className="chapter-title">
-              {chapter?.title || content?.title || "Chapter"}
+              {chapter?.title || content?.title || t("common.chapter") || "Chapter"}
             </Text>
             {chapter?.description && (
               <Text as="p" className="chapter-desc">{chapter.description}</Text>
@@ -377,6 +378,7 @@ export default function ChapterReader({ content, actionData, session }: any) {
         {slides ? (
           <SlideEngine
             sections={slides}
+            labels={content?.slide_labels}
             onNavigate={(slug: string) => navigate(`${readerPath}/${slug}`)}
             onQuizAnswer={(correct: boolean, i: number) =>
               actionData?.action?.({
@@ -435,7 +437,7 @@ export default function ChapterReader({ content, actionData, session }: any) {
         )}
         {!actionData?.loading && !slides && parsed.sections.length === 0 && (
           <Text as="p" className="text-muted-foreground">
-            {content?.empty || "No content yet."}
+            {content?.empty || t("common.emptyContent") || "No content yet."}
           </Text>
         )}
         {!slides && (

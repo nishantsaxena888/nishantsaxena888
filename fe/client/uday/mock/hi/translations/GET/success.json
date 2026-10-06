@@ -24,5 +24,9 @@
   "nav.home": "होम",
   "nav.courses": "कोर्स",
   "nav.myLearning": "मेरी सीख",
-  "lesson.objectives": "सीखने के उद्देश्य"
+  "lesson.objectives": "सीखने के उद्देश्य",
+  "common.loading": "लोड हो रहा है…",
+  "lesson.requires": "आवश्यक:",
+  "common.chapter": "अध्याय",
+  "common.emptyContent": "अभी कोई सामग्री नहीं है।"
 }
