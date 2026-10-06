@@ -68,7 +68,7 @@
 
   min-height: 60vh;
   background: var(--lp-n-50);
-  margin: calc(-1 * var(--space-4, 1rem));   /* bleed past page padding */
+  margin: 0;
   color: var(--lp-n-800);
 }
 .landing-page .container { max-width: 1200px; margin: 0 auto; }
@@ -213,7 +213,7 @@
    ============================================================ */
 .course-page {
   background: #f8fafc; color: #334155;
-  margin: calc(-1 * var(--space-4, 1rem));
+  margin: 0;
   padding: 1.5rem;
   min-height: 60vh;
 }
@@ -291,7 +291,7 @@
 /* Original layout model: .topbar fixed 56px, .sidebar fixed left 280px,
    .main-content margin-left 280 / margin-top 56, .context-panel fixed
    right 280px at ≥1440px. */
-.reader-layout { display: block; margin: calc(-1 * var(--space-4, 1rem)); }
+.reader-layout { display: block; margin: 0; }
 .reader-sidebar {
   position: fixed; top: 56px; left: 0; bottom: 0; width: 280px;
   background: #0f172a; color: #cbd5e1;
@@ -380,7 +380,7 @@
 .chapter-reader p, .chapter-reader li { color: #1e293b; }
 
 /* catalog page — same light surface as course page */
-.catalog-page { background: #f8fafc; color: #334155; margin: calc(-1 * var(--space-4, 1rem)); padding: 0 0 1.5rem; min-height: 60vh; }
+.catalog-page { background: #f8fafc; color: #334155; margin: 0; padding: 0 0 1.5rem; min-height: 60vh; }
 /* doc-header — sticky bar like the original CategoryPage */
 .catalog-page .catalog-head {
   position: sticky; top: 0; z-index: 50;
@@ -537,7 +537,7 @@
 }
 
 /* ---------- reader topbar — original TopBar (fixed dark bar) ---------- */
-.reader-page { margin: calc(-1 * var(--space-4, 1rem)); }
+.reader-page { margin: 0; }
 .reader-page .reader-layout { margin: 0; }
 .reader-topbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1200;
@@ -833,7 +833,6 @@
 /* overflow fixes */
 .slide-html table { display: block; max-width: 100%; overflow-x: auto; }
 @media (max-width: 640px) {
-  .landing-page, .course-page, .catalog-page { margin-left: 0; margin-right: 0; }
   .course-page { padding: 1rem; }
   .course-page .course-page-head { flex-wrap: wrap; gap: 0.75rem; }
 }
