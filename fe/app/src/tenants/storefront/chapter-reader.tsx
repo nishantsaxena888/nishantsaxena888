@@ -132,6 +132,15 @@ export default function ChapterReader({ content, actionData, session }: any) {
   const [activeSection, setActiveSection] = useState<string | null>(
     slides?.[0]?.id ?? null,
   );
+  // New chapter mounts = new page in the source — start at the top and
+  // reset the TOC highlight to its first section.
+  const chapterId = chapter?.id;
+  useEffect(() => {
+    setActiveSection(slides?.[0]?.id ?? null);
+    if (typeof window !== "undefined") window.scrollTo(0, 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chapterId]);
+
   useEffect(() => {
     if (!slides?.length || typeof IntersectionObserver === "undefined") return;
     if (!activeSection && slides[0]?.id) setActiveSection(slides[0].id);
@@ -176,7 +185,10 @@ export default function ChapterReader({ content, actionData, session }: any) {
 
   const tb = content?.topbar;
 
-  if (actionData?.loading) {
+  // Only the very first load shows a spinner — on sibling navigation the
+  // previous chapter stays mounted while the refetch is in flight
+  // (stale-while-revalidate), otherwise every sidebar click blanks the page.
+  if (actionData?.loading && !chapter) {
     return (
       <View as="section" className="chapter-reader p-6">
         <Text>Loading…</Text>
