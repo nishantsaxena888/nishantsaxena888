@@ -133,7 +133,11 @@ export function useDynamicData(def: Definition) {
   );
 
   const actionsKey = JSON.stringify(def.properties.action || []);
-  const dynamicKey = `${def.properties.type}|${actionsKey}`;
+  // Route params are part of the key so navigating between siblings of
+  // the same detail route (/chapter/module-01 → /chapter/module-02)
+  // refetches — endpoint/queryParam `:param` placeholders resolve
+  // differently per route.
+  const dynamicKey = `${def.properties.type}|${actionsKey}|${JSON.stringify(routeParams)}`;
 
   // Derived-from-def state moves via render-phase adjust; the effect
   // below only fires the async fetches.

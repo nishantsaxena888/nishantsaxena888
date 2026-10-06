@@ -54,6 +54,25 @@ export default function ChapterReader({ content, actionData, session }: any) {
       )
     : 0;
 
+  // Per-module progress — the source tracks section-level reads, so each
+  // sidebar row shows its own % (8% = 1 of 13 sections). Section views are
+  // recorded as `sec-<chapterId>-<sectionId>` progress items by the
+  // scrollspy below.
+  const secsDoneByChapter = progressItems.reduce(
+    (m: Record<number, Set<string>>, p: any) => {
+      const mt = /^sec-(\d+)-(.+)$/.exec(p.id || "");
+      if (mt) (m[+mt[1]] ||= new Set()).add(mt[2]);
+      return m;
+    },
+    {},
+  );
+  const chapterPct = (s: any) => {
+    if (done.has(`ch-${s.id}`)) return 100;
+    const total = Array.isArray(s.sections) ? s.sections.length : 0;
+    if (!total) return 0;
+    return Math.round(((secsDoneByChapter[s.id]?.size ?? 0) / total) * 100);
+  };
+
   // Published copy: prefer the chapter's pinned revision, else latest
   // published, else latest anything (draft preview for authors).
   const rev =
@@ -115,7 +134,9 @@ export default function ChapterReader({ content, actionData, session }: any) {
   );
   useEffect(() => {
     if (!slides?.length || typeof IntersectionObserver === "undefined") return;
-    const obs = new IntersectionObserver(
+    if (!activeSection && slides[0]?.id) setActiveSection(slides[0].id);
+    // highlight zone — narrow band like the source's scroll spy
+    const spy = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
           if (e.isIntersecting) setActiveSection(e.target.id);
@@ -123,11 +144,34 @@ export default function ChapterReader({ content, actionData, session }: any) {
       },
       { rootMargin: "-80px 0px -60% 0px" },
     );
+    // read tracking — a section counts once it scrolls into view
+    const seen = new Set<string>();
+    const read = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting || seen.has(e.target.id)) continue;
+          seen.add(e.target.id);
+          session?.update(content?.progress_session || "progress", {
+            id: `sec-${chapter?.id}-${e.target.id}`,
+            chapter_id: chapter?.id,
+            section_id: e.target.id,
+            at: new Date().toISOString(),
+          });
+        }
+      },
+      { rootMargin: "-56px 0px 0px 0px" },
+    );
     for (const s of slides) {
       const el = s?.id && document.getElementById(s.id);
-      if (el) obs.observe(el);
+      if (el) {
+        spy.observe(el);
+        read.observe(el);
+      }
     }
-    return () => obs.disconnect();
+    return () => {
+      spy.disconnect();
+      read.disconnect();
+    };
   }, [slides]);
 
   const tb = content?.topbar;
@@ -204,11 +248,12 @@ export default function ChapterReader({ content, actionData, session }: any) {
               <Text className="reader-side-title">
                 {String(s.order ?? i + 1).padStart(2, "0")}. {s.title}
               </Text>
-              {done.has(`ch-${s.id}`) && (
+              {chapterPct(s) >= 100 ? (
                 <Text className="reader-side-done">✓</Text>
-              )}
-              {s.id === chapter?.id && !done.has(`ch-${s.id}`) && pct > 0 && (
-                <Text className="reader-side-pct">{pct}%</Text>
+              ) : (
+                chapterPct(s) > 0 && (
+                  <Text className="reader-side-pct">{chapterPct(s)}%</Text>
+                )
               )}
             </Pressable>
           ))}
