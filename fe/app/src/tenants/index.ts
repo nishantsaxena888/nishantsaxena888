@@ -1,26 +1,30 @@
 import { default_admin_component } from "./admin/admin";
-import { storefront_components } from "./storefront";
-import { layout_components } from "./layout";
-import { client, site_tenant, admin_tenant } from "./active";
+import { client, site_tenant, admin_tenant, layouts_tenant } from "./active";
 import type { ClientTenant } from "./types";
 import { storage } from "@/platform/storage";
 import { isDev, clientName } from "@/platform/env";
 
-// Per-client surface maps. The active client's surfaces live in
-// fe/client/<name>/{site,admin}/; site routes resolve def.type against
-// `site`, /admin/* routes against `admin` (generic admin + client admin
-// overrides). Switch client: `npm run client <name>` regenerates
-// ./active.ts.
+// Per-client surface maps. Full client isolation: every client folder owns
+// its complete component set — fe/client/<name>/web (site comps),
+// fe/client/<name>/layouts (layout comps), fe/client/<name>/admin (admin
+// comps). There is NO shared storefront/layout fallback at runtime —
+// site routes resolve def.type against `layouts + web`, /admin/* routes
+// against `layouts + generic admin plumbing + admin`. Switch client:
+// `npm run client <name>` regenerates ./active.ts.
 type Surfaces = Record<"site" | "admin", ClientTenant["components"]>;
 
 const surfaces: Surfaces = {
-  site: { ...layout_components, ...storefront_components, ...site_tenant.components },
-  admin: { ...layout_components, ...default_admin_component, ...admin_tenant.components },
+  site: { ...layouts_tenant.components, ...site_tenant.components },
+  admin: {
+    ...layouts_tenant.components,
+    ...default_admin_component,
+    ...admin_tenant.components,
+  },
 };
 
 export const componentsMap: Record<string, Surfaces> = {
   [client]: surfaces,
-  default: { site: {}, admin: { ...layout_components, ...default_admin_component } },
+  default: { site: {}, admin: { ...default_admin_component } },
 };
 
 // Which client the runtime is asking for — VITE_CLIENT beats
@@ -50,16 +54,19 @@ export async function ensureClient(name: string): Promise<void> {
   const { clientLoaders } = await import("./dev-all");
   const l = clientLoaders[name];
   if (!l) return;
-  const [site, admin] = await Promise.all([l.site(), l.admin()]);
+  const [site, admin, layouts] = await Promise.all([
+    l.site(),
+    l.admin(),
+    l.layouts(),
+  ]);
   await Promise.all(l.styles.map((load) => load()));
   componentsMap[name] = {
     site: {
-      ...layout_components,
-      ...storefront_components,
+      ...layouts.default.components,
       ...site.default.components,
     },
     admin: {
-      ...layout_components,
+      ...layouts.default.components,
       ...default_admin_component,
       ...admin.default.components,
     },

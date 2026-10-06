@@ -7,35 +7,41 @@ import type { ClientTenant } from "./types";
 type TenantModule = { default: ClientTenant };
 type ClientLoader = {
   site: () => Promise<TenantModule>;
+  layouts: () => Promise<TenantModule>;
   admin: () => Promise<TenantModule>;
   styles: (() => Promise<unknown>)[];
 };
 
 export const clientLoaders: Record<string, ClientLoader> = {
   airbnb: {
-    site: () => import("@clients/airbnb/site/tenant"),
+    site: () => import("@clients/airbnb/web/tenant"),
+    layouts: () => import("@clients/airbnb/layouts/tenant"),
     admin: () => import("@clients/airbnb/admin/tenant"),
-    styles: [() => import("@clients/airbnb/site/styles.css"), () => import("@clients/airbnb/admin/styles.css")],
+    styles: [() => import("@clients/airbnb/web/styles.css"), () => import("@clients/airbnb/admin/styles.css")],
   },
   grocery: {
-    site: () => import("@clients/grocery/site/tenant"),
+    site: () => import("@clients/grocery/web/tenant"),
+    layouts: () => import("@clients/grocery/layouts/tenant"),
     admin: () => import("@clients/grocery/admin/tenant"),
-    styles: [() => import("@clients/grocery/site/styles.css"), () => import("@clients/grocery/admin/styles.css")],
+    styles: [() => import("@clients/grocery/web/styles.css"), () => import("@clients/grocery/admin/styles.css")],
   },
   hello: {
-    site: () => import("@clients/hello/site/tenant"),
+    site: () => import("@clients/hello/web/tenant"),
+    layouts: () => import("@clients/hello/layouts/tenant"),
     admin: () => import("@clients/hello/admin/tenant"),
-    styles: [() => import("@clients/hello/site/styles.css"), () => import("@clients/hello/admin/styles.css")],
+    styles: [() => import("@clients/hello/web/styles.css"), () => import("@clients/hello/admin/styles.css")],
   },
   skillom: {
-    site: () => import("@clients/skillom/site/tenant"),
+    site: () => import("@clients/skillom/web/tenant"),
+    layouts: () => import("@clients/skillom/layouts/tenant"),
     admin: () => import("@clients/skillom/admin/tenant"),
-    styles: [() => import("@clients/skillom/site/styles.css"), () => import("@clients/skillom/admin/styles.css")],
+    styles: [() => import("@clients/skillom/web/styles.css"), () => import("@clients/skillom/admin/styles.css")],
   },
   uday: {
-    site: () => import("@clients/uday/site/tenant"),
+    site: () => import("@clients/uday/web/tenant"),
+    layouts: () => import("@clients/uday/layouts/tenant"),
     admin: () => import("@clients/uday/admin/tenant"),
-    styles: [() => import("@clients/uday/site/styles.css"), () => import("@clients/uday/admin/styles.css")],
+    styles: [() => import("@clients/uday/web/styles.css"), () => import("@clients/uday/admin/styles.css")],
   },
 };
 

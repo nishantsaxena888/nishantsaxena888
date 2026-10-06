@@ -1,11 +1,15 @@
 // Tenant composition contract — merge order decides what a def.type
-// resolves to: generic layout → generic surface → client override.
+// resolves to: client layouts → client web/admin surface.
+// Full client isolation: no shared storefront/layout fallback — every
+// client folder carries its own component copies (kit template lives in
+// tenants/storefront + tenants/layout for scaffolding only).
 // Also pins the canonical-type ↔ legacy-alias mapping so old defs keep
 // rendering while new configs use UI-role names.
 import { describe, expect, it } from "vitest";
 import { storefront_components } from "./storefront";
 import { layout_components } from "./layout";
 import { default_admin_component } from "./admin/admin";
+import { site_tenant, layouts_tenant } from "./active";
 import { componentsMap } from "./index";
 
 const sf = storefront_components as Record<string, React.ComponentType<any>>;
@@ -61,19 +65,21 @@ describe("generic component maps", () => {
   });
 });
 
-describe("merge order — client overrides last", () => {
-  it("site map = layout ∪ storefront ∪ client-site", () => {
+describe("merge order — client-owned maps, no shared fallback", () => {
+  it("site map = client layouts ∪ client web", () => {
     const baked = componentsMap[Object.keys(componentsMap).find((k) => k !== "default")!];
-    expect(baked.site.header).toBe(storefront_components.header);
-    expect(baked.site.grid).toBe(layout_components.grid);
+    expect(baked.site.header).toBe(site_tenant.components.header);
+    expect(baked.site.grid).toBe(layouts_tenant.components.grid);
+    // client's copies are their own components — not the kit's
+    expect(baked.site.header).not.toBe(storefront_components.header);
   });
 
-  it("admin map = layout ∪ default-admin ∪ client-admin", () => {
+  it("admin map = client layouts ∪ default-admin ∪ client-admin", () => {
     const baked = componentsMap[Object.keys(componentsMap).find((k) => k !== "default")!];
     expect(baked.admin["default-admin"]).toBe(
       default_admin_component["default-admin"],
     );
-    expect(baked.admin.grid).toBe(layout_components.grid);
+    expect(baked.admin.grid).toBe(layouts_tenant.components.grid);
   });
 
   it("'default' fallback map exists for unknown clients", () => {

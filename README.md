@@ -10,7 +10,9 @@ fe/
     src/tenants/active.ts      ← GENERATED: which client is live
     scripts/client.mjs         ← client switcher
   client/<name>/
-    site/               ← S surface: route "/" — client's components + css
+    configs/client.json ← manifest (surfaces/styles/mock)
+    web/                ← S surface: route "/" — ALL client site comps + css
+    layouts/            ← layout comps (grid/col/…), used by both surfaces
     admin/              ← A surface: route "/admin" — client admin comps
                           (usually empty — generic OPTIONS admin covers it)
 be/
@@ -44,14 +46,15 @@ npm run dev                 # → http://localhost:5173 (site), /admin (admin)
 ## Production build (lean — only the active client's code)
 
 ```bash
-npm run build:hello      # → fe/app/dist/hello
-npm run build:grocery    # → fe/app/dist/grocery
-npm run build:uday       # → fe/app/dist/uday
+npm run build:client -- uday     # → fe/app/dist/uday
+npm run build:client -- grocery  # → fe/app/dist/grocery
+npm run build:client -- all      # → dist/<name> for every client
 ```
 
-Each `build:<name>` script regenerates `tenants/active.ts` first — the
-bundle contains only that client's code. To add another, hardcode one more
-line in `fe/app/package.json` scripts (that's intentional).
+`scripts/build.mjs` activates the client (regenerating
+`tenants/active.ts`) then builds — the bundle contains only that client's
+code. Client names are discovered from `fe/client/<name>/configs/`;
+no per-client script lines needed.
 
 ## Clients shipped
 
@@ -63,8 +66,10 @@ line in `fe/app/package.json` scripts (that's intentional).
 | `uday` | learning | `/`, `/courses`, `/courses/:id`, `/chapter/:slug`, `/my-learning`, `/guide` | overview, category, course, chapter, revision, review-queue, course_release + user data | `uday-overview` — course/chapter/revision rollup |
 | `skillom` | learning | `/`, `/courses`, `/courses/:id`, `/learn/:id`, `/my-learning` | overview, category, course, chapter, revision, review-queue + user data | generic overview |
 
-Each client has **its own site and admin**: site comps live in
-`fe/client/<name>/site/`, admin comps in `fe/client/<name>/admin/`
+Each client has **its own site and admin** — full isolation, no shared
+runtime fallback: site comps live in `fe/client/<name>/web/` (including
+client-owned copies of the generic kit), layout comps in
+`fe/client/<name>/layouts/`, admin comps in `fe/client/<name>/admin/`
 (resolved surface-scoped — a site `def.type` can't leak into admin). A
 custom admin screen = an entity whose OPTIONS returns `config:
 Definition[]` (see the `overview` entity in any `entities.py`) + a
@@ -109,18 +114,20 @@ cd fe/app && node scripts/check-mocks.mjs
 cd fe/app && npm run client -- --new foo
 ```
 
-scaffolds everything: `fe/client/foo/` (client.json manifest, site/admin
-tenants + styles) **and** `be/client/foo/` (entities.py +
-configuration.json with a working todo entity). Then:
+scaffolds everything: `fe/client/foo/` (configs/client.json manifest,
+web/ + layouts/ with the full component kit copied in, admin/ tenants +
+styles) **and** `be/client/foo/` (entities.py + configuration.json with
+a working todo entity). Then:
 
 1. `be/client/foo/entities.py` — replace the todo with your entities
    (`fields` + `ui.table`/`ui.form` + `sample_data`)
 2. `be/client/foo/configuration.json` — `menu`, `admin_menu`, `pages`,
    `themes`/`style-configs`, `sessions`, `admin`, `meta`
-3. `fe/client/foo/site/` — components + `site/tenant.ts` registrations
+3. `fe/client/foo/web/` — components + `web/tenant.ts` registrations
+   (`--new` already copies the full component kit into `web/` +
+   `layouts/` — trim or extend as the client needs)
 4. Optional: `python be/tools/gen_mocks.py foo` then `mock: true` in
-   `fe/client/foo/client.json`; a `build:foo` script line in
-   `fe/app/package.json`
+   `fe/client/foo/configs/client.json`
 5. `npm run client -- foo` (validates the manifest) and run — backend:
    `CLIENT_NAME=foo`
 

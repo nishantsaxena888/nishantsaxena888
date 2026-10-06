@@ -1,34 +1,46 @@
 # fe/client/<name> — client contract
 
-A client is a **dumb folder**: components + css + one manifest. No logic,
-no install, no package.json — selection and wiring live in the generic
-`fe/app`. New client: `npm run client -- --new <name>` scaffolds fe + be.
+A client is a **dumb folder**: components + css + config + mocks. No
+logic, no install, no package.json — selection and wiring live in the
+generic `fe/app`. New client: `npm run client -- --new <name>` scaffolds
+fe + be (with the full component kit copied in).
+
+**Full isolation, no fallback**: every client owns ALL components its
+pages render — including copies of the generic kit (header, listing,
+chapter-reader, grid, ...). There is no shared runtime component map;
+the engine resolves `def.type` against this folder's maps only.
 
 ## Layout
 
 ```
 fe/client/<name>/
-  client.json               ← manifest — declares surfaces/styles/mock
-  site/                     ← S surface — route "/" resolves def.type here
+  configs/
+    client.json             ← manifest — declares surfaces/styles/mock
+  web/                      ← site surface — route "/" defs resolve here
     tenant.ts               ← export default { components: {...} }
-    components/             ← .tsx (+ use-*.ts hooks if logic grows)
-    styles.css              ← bundled when manifest surfaces.site.styles
-  admin/                    ← A surface — route "/admin" resolves def.type here
+    components/             ← kit copies + client-specific .tsx
+    kit.css                 ← copied baseline styles (from the kit)
+    styles.css              ← bundled when manifest surfaces.web.styles
+  layouts/                  ← layout comps used by BOTH surfaces
+    tenant.ts               ← { grid, col, container, section, stack, spacer }
+    components/             ← client-owned layout copies + layout.css
+  admin/                    ← admin surface — "/admin" defs resolve here
     tenant.ts               ← export default { components: {...} }
     components/             ← usually empty: generic OPTIONS admin wins
     styles.css              ← bundled when manifest surfaces.admin.styles
   mock/                     ← client-owned mocks (see Mocking below)
 ```
 
-## client.json (manifest)
+## configs/client.json (manifest)
 
 ```json
 {
   "name": "grocery",
   "title": "Grocery Store",
   "surfaces": {
-    "site":  { "styles": true },
-    "admin": { "styles": true }
+    "web":     { "styles": true },
+    "layouts": { "styles": false },
+    "admin":   { "styles": true }
   },
   "mock": true
 }
@@ -36,9 +48,21 @@ fe/client/<name>/
 
 `npm run client -- <name>` reads this file, **validates** it (tenant.ts
 per surface; styles.css must exist where `styles: true`), then generates
-`tenants/active.ts` (tenant + style imports) and `tenants/mock-active.ts`
-(per-client mock glob — or `{}` when `mock: false`, which drops all mock
-code from the bundle). `name` must equal the folder name.
+`tenants/active.ts` (web + layouts + admin tenant imports, style imports)
+and `tenants/mock-active.ts` (per-client mock glob — or `{}` when
+`mock: false`, which drops all mock code from the bundle). `name` must
+equal the folder name.
+
+## Component resolution (no shared fallback)
+
+```
+site:  layouts_tenant.components ∪ web/tenant.components
+admin: layouts_tenant.components ∪ default-admin ∪ admin/tenant.components
+```
+
+`tenants/storefront/` + `tenants/layout/` in fe/app are **template kits
+only** — `npm run client -- --new` copies them into the new client.
+Runtime never resolves a def.type from the shared kit.
 
 ## tenant.ts contract
 
@@ -52,9 +76,9 @@ export default {
 
 Must satisfy `ClientTenant` (`fe/app/src/tenants/types.ts`). Components
 receive `RenderComponentProps`: `{id, type, content, properties,
-actionData, config, themeName}` — all `any`, all optional. Write them
-engine-optional (`content?.title ?? fallback`) so they also render
-standalone.
+actionData, config, themeName, session, children}` — all `any`, all
+optional. Write them engine-optional (`content?.title ?? fallback`) so
+they also render standalone.
 
 ## Page definitions
 
@@ -112,15 +136,18 @@ fe/app. Delete `mock/` when the real API takes over.
 
 - Cross-client-useful → `fe/app` (generic). Only-this-client → here.
 - **Boundary (eslint-enforced)**: client code imports React packages +
-  own-folder relative paths only. No `@/` engine imports, no `../` into
-  other clients — type-only imports of the contract
-  (`RenderComponentProps`, `ClientTenant` in `fe/app/src/tenants/types.ts`)
-  are allowed. Everything the component needs arrives via props; when a
-  capability is missing, add it generically in `fe/app` and pass it down.
+  own-folder relative paths + the **`@/platform/*` seams** — and the
+  **client SDK** `@/platform/sdk` for engine services (apiClient,
+  useEntity, useLanguage, useTheme, useRenderEngine, useGenericState,
+  useConfigStore, toast, LanguageSwitcher, icon glyphs). No other `@/`
+  engine imports, no `../` into other clients — type-only imports of the
+  contract (`RenderComponentProps`, `ClientTenant` in
+  `fe/app/src/tenants/types.ts`) are allowed. If a comp needs a service
+  the SDK doesn't export, add it to the SDK — don't loosen the rule.
 - Admin needs nothing: `admin/tenant.ts` exports `{ components: {} }` and
   the OPTIONS-driven `default-admin` + media manager cover CRUD screens.
   Add a client admin comp only for screens beyond the generic grid.
 - CSS: prefer theme vars (`bg-primary`, `text-foreground`…) — values come
-  from the client's `style-configs`. Bespoke css → `site/styles.css` /
+  from the client's `style-configs`. Bespoke css → `web/styles.css` /
   `admin/styles.css`; `npm run client -- <name>` bundles them
   automatically when the files exist.

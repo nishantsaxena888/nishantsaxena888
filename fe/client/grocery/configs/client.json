@@ -1,0 +1,16 @@
+{
+  "name": "grocery",
+  "title": "Grocery Store",
+  "surfaces": {
+    "admin": {
+      "styles": true
+    },
+    "web": {
+      "styles": true
+    },
+    "layouts": {
+      "styles": false
+    }
+  },
+  "mock": true
+}

@@ -7,7 +7,7 @@
 // Generates:
 //   src/tenants/active.ts      — tenant imports + declared styles imports
 //   src/tenants/mock-active.ts — mock glob (empty when manifest mock:false)
-import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -17,10 +17,10 @@ const beDir = join(appDir, "../../be/client");
 const arg = process.argv[2];
 const name = process.argv[3] || process.argv[2];
 
-const SURFACES = ["site", "admin"];
+const SURFACES = ["web", "layouts", "admin"];
 
 function readManifest(dir, name) {
-  const p = join(dir, name, "client.json");
+  const p = join(dir, name, "configs/client.json");
   if (!existsSync(p)) return null;
   const m = JSON.parse(readFileSync(p, "utf8"));
   if (m.name !== name) {
@@ -50,7 +50,7 @@ function validate(name, m) {
 function activate(name) {
   const m = readManifest(clientDir, name);
   if (!m) {
-    console.error(`missing: fe/client/${name}/client.json (see fe/client/README.md)`);
+    console.error(`missing: fe/client/${name}/configs/client.json (see fe/client/README.md)`);
     process.exit(1);
   }
   validate(name, m);
@@ -63,10 +63,11 @@ function activate(name) {
     join(appDir, "src/tenants/active.ts"),
     `// GENERATED — do not edit by hand.
 // \`npm run client <name>\` (fe/app) rewrites this file to point at
-// fe/client/<name>/{site,admin}/. Importing statically keeps the
+// fe/client/<name>/{web,layouts,admin}/. Importing statically keeps the
 // bundle lean: only the active client's code and styles are included.
 ${styleImports ? styleImports + "\n" : ""}export const client = "${name}";
-export { default as site_tenant } from "@clients/${name}/site/tenant";
+export { default as site_tenant } from "@clients/${name}/web/tenant";
+export { default as layouts_tenant } from "@clients/${name}/layouts/tenant";
 export { default as admin_tenant } from "@clients/${name}/admin/tenant";
 `,
   );
@@ -117,7 +118,7 @@ export const mockFiles: Record<string, unknown> = {};`}
   // import()s keep every client in its own chunk, so a tree of thousands
   // of clients costs nothing until ensureClient() requests one.
   const names = readdirSync(clientDir)
-    .filter((d) => existsSync(join(clientDir, d, "client.json")))
+    .filter((d) => existsSync(join(clientDir, d, "configs/client.json")))
     .sort();
 
   let dev = `// GENERATED — do not edit by hand.
@@ -129,6 +130,7 @@ import type { ClientTenant } from "./types";
 type TenantModule = { default: ClientTenant };
 type ClientLoader = {
   site: () => Promise<TenantModule>;
+  layouts: () => Promise<TenantModule>;
   admin: () => Promise<TenantModule>;
   styles: (() => Promise<unknown>)[];
 };
@@ -141,7 +143,8 @@ export const clientLoaders: Record<string, ClientLoader> = {
       .map((s) => `() => import("@clients/${n}/${s}/styles.css")`)
       .join(", ");
     dev += `  ${n}: {
-    site: () => import("@clients/${n}/site/tenant"),
+    site: () => import("@clients/${n}/web/tenant"),
+    layouts: () => import("@clients/${n}/layouts/tenant"),
     admin: () => import("@clients/${n}/admin/tenant"),
     styles: [${styleLoads}],
   },\n`;
@@ -194,6 +197,109 @@ export const KNOWN_CLIENTS: string[] = ${JSON.stringify(names)};
   console.log(`active client → ${name} (${m.title || name})`);
 }
 
+// Copy the engine's component kit into a fresh client folder — the
+// client owns every comp its pages render (full isolation, no runtime
+// fallback). Copied comps import engine services only via @/platform/sdk.
+const KIT_SRC = join(appDir, "src/tenants/storefront");
+const LAYOUT_SRC = join(appDir, "src/tenants/layout");
+const KIT_SKIP = /^(index\.(tsx?|ts)|.*\.test\.)/;
+
+const KIT_REWRITES = [
+  ['"@/engine/render-engine/features/render-engine-context"', '"@/platform/sdk"'],
+  ['"@/engine/render-engine/features/types"', '"@/tenants/types"'],
+  ['"@/engine"', '"@/platform/sdk"'],
+  ['"@/store/use-config-store"', '"@/platform/sdk"'],
+  ['"@/store/use-generic-state"', '"@/platform/sdk"'],
+  ['"@/components/shared/use-language"', '"@/platform/sdk"'],
+  ['"@/components/shared/use-theme"', '"@/platform/sdk"'],
+  ['"@/lib/toast"', '"@/platform/sdk"'],
+  ['"@/components/core-component/language-selector/language-switcher"', '"@/platform/sdk"'],
+  ['"lucide-react"', '"@/platform/sdk"'],
+];
+
+function copyKit(srcDir, dstDir, dstName) {
+  mkdirSync(dstDir, { recursive: true });
+  for (const f of readdirSync(srcDir)) {
+    if (KIT_SKIP.test(f) || f === "storefront.css") continue;
+    let s = readFileSync(join(srcDir, f), "utf8");
+    for (const [a, b] of KIT_REWRITES) s = s.split(a).join(b);
+    writeFileSync(join(dstDir, dstName || f), s);
+  }
+}
+
+const WEB_TENANT = (n) => `// ${n} site tenant — every component this client's pages use lives
+// in ./components (client-owned). Generic kit copies + client-specific
+// comps register here; engine resolves def.type against this map.
+import "./kit.css";
+import { StorefrontHeader as Header } from "./components/header";
+import { StorefrontBanner as Banner } from "./components/banner";
+import { StorefrontListing as Listing } from "./components/listing";
+import { StorefrontFooter as Footer } from "./components/footer";
+import { StorefrontSessionList as SessionList } from "./components/session-list";
+import { StorefrontFormSummary as FormSummary } from "./components/form-summary";
+import { StorefrontAccount as Account } from "./components/account";
+import { StorefrontAuthLayout as AuthLayout } from "./components/auth-layout";
+import CourseList from "./components/course-list";
+import Landing from "./components/landing";
+import CourseDetail from "./components/course-detail";
+import ChapterReader from "./components/chapter-reader";
+import MdViewer from "./components/md-viewer";
+import NavBack from "./components/nav-back";
+
+export default {
+  components: {
+    header: Header,
+    banner: Banner,
+    listing: Listing,
+    footer: Footer,
+    "session-list": SessionList,
+    "form-summary": FormSummary,
+    account: Account,
+    "auth-layout": AuthLayout,
+    "hero-section": Banner,
+    products: Listing,
+    "product-grid": Listing,
+    cards: Listing,
+    "card-list": Listing,
+    "card-grid": Listing,
+    items: Listing,
+    "item-list": SessionList,
+    "cart-view": SessionList,
+    checkout: FormSummary,
+    profile: Account,
+    "login-layout-1": AuthLayout,
+    "course-list": CourseList,
+    landing: Landing,
+    "course-detail": CourseDetail,
+    "chapter-reader": ChapterReader,
+    "md-viewer": MdViewer,
+    "nav-back": NavBack,
+  },
+};
+`;
+
+const LAYOUTS_TENANT = (n) => `// ${n} layout tenant — layout comps this client's defs use
+// (grid/col/container/section/stack/spacer). Client-owned copies.
+import "./components/layout.css";
+import Grid from "./components/grid";
+import Col from "./components/col";
+import Container from "./components/container";
+import Section from "./components/section";
+import Stack from "./components/stack";
+import Spacer from "./components/spacer";
+
+export default {
+  components: {
+    grid: Grid,
+    col: Col,
+    container: Container,
+    section: Section,
+    stack: Stack,
+    spacer: Spacer,
+  },
+};
+`;
+
 function scaffold(name) {
   const fe = join(clientDir, name);
   const be = join(beDir, name);
@@ -207,31 +313,48 @@ function scaffold(name) {
     writeFileSync(p, s);
   };
 
-  // --- frontend: dumb folder — components + styles + manifest
-  put(join(fe, "client.json"),
+  // --- frontend: client owns its full component set — web/ (site comps,
+  // kit copies included), layouts/ (layout comps), admin/ (admin comps),
+  // configs/ (client.json manifest), mock/ (optional).
+  put(join(fe, "configs/client.json"),
     JSON.stringify(
       {
         name,
         title: name,
-        surfaces: { site: { styles: true }, admin: { styles: true } },
+        surfaces: {
+          web: { styles: true },
+          layouts: { styles: false },
+          admin: { styles: true },
+        },
         mock: false, // flip true after: python be/tools/gen_mocks.py <name>
       },
       null,
       2,
     ) + "\n",
   );
-  for (const s of SURFACES) {
-    put(join(fe, s, "tenant.ts"),
-      `// ${name} ${s} tenant — ${s}-surface components (def.type → component).
+
+  // web/ — site surface: kit copies + tenant registrations + styles
+  copyKit(KIT_SRC, join(fe, "web/components"));
+  copyFileSync(join(KIT_SRC, "storefront.css"), join(fe, "web/kit.css"));
+  put(join(fe, "web/tenant.ts"), WEB_TENANT(name));
+  put(join(fe, "web/styles.css"),
+    `/* ${name} web surface — auto-bundled by \`npm run client -- ${name}\` */\n`);
+
+  // layouts/ — layout comps (client-owned copies of the engine kit)
+  copyKit(LAYOUT_SRC, join(fe, "layouts/components"));
+  put(join(fe, "layouts/tenant.ts"), LAYOUTS_TENANT(name));
+
+  // admin/ — admin overrides; {} = generic admin plumbing only
+  put(join(fe, "admin/tenant.ts"),
+    `// ${name} admin tenant — admin-surface components (def.type → component).
 // See fe/client/README.md for the contract.
 export default {
   components: {},
 };
 `);
-    put(join(fe, s, "styles.css"),
-      `/* ${name} ${s} surface — auto-bundled by \`npm run client -- ${name}\` */\n`);
-    mkdirSync(join(fe, s, "components"), { recursive: true });
-  }
+  put(join(fe, "admin/styles.css"),
+    `/* ${name} admin surface — auto-bundled by \`npm run client -- ${name}\` */\n`);
+  mkdirSync(join(fe, "admin/components"), { recursive: true });
 
   // --- backend: entities + configuration (the actual product definition)
   put(join(be, "entities.py"),
@@ -335,7 +458,7 @@ entities = {
   );
 
   console.log(`scaffolded ${name}:
-  fe/client/${name}/   client.json + site/ + admin/
+  fe/client/${name}/   configs/client.json + web/ + layouts/ + admin/
   be/client/${name}/   entities.py + configuration.json + datasources.json
 next: npm run client -- ${name}   then CLIENT_NAME=${name} on the backend`);
 }

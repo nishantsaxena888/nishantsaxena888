@@ -60,17 +60,26 @@ Key files:
 ```
 fe/app/                  ← generic engine, THE app (only package.json)
 fe/client/<name>/
-  client.json            ← manifest: {name, surfaces{site,admin}.styles, mock}
-  site/    tenant.ts     ← { components: {def.type → Component} }
-           components/     client site comps
-           styles.css      bundled when manifest surfaces.site.styles
-  admin/   tenant.ts     ← admin overrides; {} = generic admin only
+  configs/client.json    ← manifest: {name, surfaces{web,layouts,admin}.styles, mock}
+  web/     tenant.ts     ← { components: {def.type → Component} } — ALL site comps
+           components/     kit copies + client-specific comps
+           kit.css         copied baseline styles
+           styles.css      bundled when manifest surfaces.web.styles
+  layouts/ tenant.ts     ← { grid, col, container, section, stack, spacer }
+           components/     client-owned layout copies + layout.css
+  admin/   tenant.ts     ← admin comps; {} = generic admin only
            components/
            styles.css      bundled when manifest surfaces.admin.styles
   mock/                  ← client-owned mock tree (see Mocking)
 ```
 
-- **Switch client**: `npm run client -- <name>` reads `client.json`,
+**Full client isolation, no runtime fallback** — every client folder owns
+the complete component set its pages render. `src/tenants/storefront/` and
+`src/tenants/layout/` in the engine are **template kits only**: scaffold
+(`--new`) copies them into the new client; runtime never resolves a
+def.type from them.
+
+- **Switch client**: `npm run client -- <name>` reads `configs/client.json`,
   validates it (tenants + declared styles exist), regenerates
   `src/tenants/active.ts` (tenant imports + styles.css imports) and
   `src/tenants/mock-active.ts` (mock glob literal → only this client's mock
@@ -111,21 +120,30 @@ fe/client/<name>/
   native.
 - **Surface-scoped maps**: `componentsMap[client] = {site, admin}` in
   `src/tenants/index.ts`. Site routes resolve `def.type` against
-  `layout + storefront + site_tenant.components`; admin routes against
-  `layout + default_admin + admin_tenant.components` via
-  `AdminSurfaceProvider` mounted at `DashboardRenderer`. Client wins —
-  registering the same `def.type` overrides the generic comp.
-- **Storefront tenant** (`src/tenants/storefront/`): generic site blocks
-  available to every site surface — canonical `header`, `banner`,
-  `listing`, `session-list`, `form-summary`, `account`, `auth-layout`,
-  `footer` (legacy aliases resolve: `hero-section`, `products`,
-  `cart-view`, `checkout`, `profile`, `login-layout-1`).
+  `client layouts ∪ client web`; admin routes against
+  `client layouts ∪ default_admin ∪ client admin` via
+  `AdminSurfaceProvider` mounted at `DashboardRenderer`. All merges are
+  client-owned — a type missing from a client's maps renders nothing.
+- **Client SDK** (`src/platform/sdk.ts`): the single `@/platform/*`
+  import surface for engine services inside fe/client code — apiClient,
+  useEntity, useLanguage, useTheme, useRenderEngine, useGenericState,
+  useConfigStore, toast, LanguageSwitcher, icon glyphs. Kit copies and
+  client comps must not import engine internals directly.
+- **Component kit** (`src/tenants/storefront/` + `src/tenants/layout/`):
+  the canonical generic site/layout blocks — canonical `header`,
+  `banner`, `listing`, `session-list`, `form-summary`, `account`,
+  `auth-layout`, `footer` + legacy aliases (`hero-section`, `products`,
+  `cart-view`, `checkout`, `profile`, `login-layout-1`) + learning comps
+  (`course-list`, `course-detail`, `chapter-reader`, `landing`,
+  `md-viewer`, `nav-back`) + layout primitives. Copied into every client
+  by `--new`; edit the kit to change what NEW clients get.
 - **`site_nav` config flag**: `configuration.site_nav === false` stands
   the generic `SiteNav` down — clients whose pages bring their own
   `header`/`footer` defs set this (grocery does).
 - `ClientTenant`/`RenderComponentProps`/`ClientManifest` contract:
   `src/tenants/types.ts`.
-- Per-client builds: `npm run build:hello|grocery|uday` → `dist/<name>`.
+- Per-client builds: `npm run build:client -- <name|all>` → `dist/<name>`
+  (scripts/build.mjs discovers client folders — no per-client script).
 
 ## Mocking (client-owned, removable)
 
@@ -520,7 +538,7 @@ lang in the cache namespace.
 
 - `npm run dev` — vite dev server (:5173, `/api` proxied to :8100)
 - `npm run client -- <name>` — switch active client (regenerates bindings)
-- `npm run build` / `npm run build:<name>` — `tsc -b && vite build`
+- `npm run build` / `npm run build:client -- <name|all>` — `tsc -b && vite build`
 - `node scripts/check-mocks.mjs` — validate flagged mock files exist,
   def.type names resolve, and dynamic action endpoints exist
 - `node scripts/validate-defs.mjs` (`npm run validate`) — deeper def

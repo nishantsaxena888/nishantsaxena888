@@ -1,0 +1,16 @@
+{
+  "name": "hello",
+  "title": "Hello",
+  "surfaces": {
+    "admin": {
+      "styles": true
+    },
+    "web": {
+      "styles": true
+    },
+    "layouts": {
+      "styles": false
+    }
+  },
+  "mock": true
+}

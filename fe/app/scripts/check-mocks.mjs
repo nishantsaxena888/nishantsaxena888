@@ -22,21 +22,11 @@ const clients = readdirSync(clientRoot, { withFileTypes: true })
   .filter((d) => d.isDirectory() && (!wanted.length || wanted.includes(d.name)))
   .map((d) => d.name);
 
-// Keep in sync with src/tenants/{layout,storefront,index}.tsx +
-// tenants/admin — generic types resolve without touching client maps.
-const GENERIC_TYPES = new Set([
-  // layout primitives
-  "grid", "col", "container", "section", "stack", "spacer",
-  // storefront (canonical)
-  "header", "footer", "banner", "listing", "session-list",
-  "form-summary", "account", "auth-layout",
-  // storefront course-engine comps (config-driven: actions + content keys)
-  "course-list", "course-detail", "chapter-reader", "md-viewer", "landing", "nav-back",
-  // generic admin map
+// Full client isolation — site/layout types resolve from each client's
+// own web/tenant.ts + layouts/tenant.ts (client-owned component copies).
+// Only the generic admin plumbing stays engine-shared.
+const GENERIC_ADMIN_TYPES = new Set([
   "revision-pipeline",
-  // storefront legacy aliases
-  "hero-section", "products", "product-grid", "cart-view",
-  "checkout", "profile", "login-layout-1",
   // admin/default map
   "default-admin", "iterator", "form", "table", "media-upload",
   // auth-layout card variants (selected by OPTIONS config def.type)
@@ -51,11 +41,13 @@ const LEGACY_TYPES = new Set([
 function tenantTypes(client, surface) {
   const f = join(clientRoot, client, surface, "tenant.ts");
   if (!existsSync(f)) return new Set();
-  const src = readFileSync(f, "utf8");
+  const src = readFileSync(f, "utf8")
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/\/\/[^\n]*/g, "");
   const types = new Set();
   const m = src.match(/components\s*:\s*\{([\s\S]*?)\}\s*,?\s*\}/);
   const block = m ? m[1] : src;
-  for (const k of block.matchAll(/["']([\w-]+)["']\s*:/g)) types.add(k[1]);
+  for (const k of block.matchAll(/["']?([\w-]+)["']?\s*:/g)) types.add(k[1]);
   return types;
 }
 
@@ -81,8 +73,15 @@ for (const client of clients) {
   const langs = readdirSync(mockDir, { withFileTypes: true })
     .filter((d) => d.isDirectory())
     .map((d) => d.name);
-  const siteTypes = tenantTypes(client, "site");
-  const adminTypes = tenantTypes(client, "admin");
+  const siteTypes = new Set([
+    ...tenantTypes(client, "web"),
+    ...tenantTypes(client, "layouts"),
+  ]);
+  const adminTypes = new Set([
+    ...GENERIC_ADMIN_TYPES,
+    ...tenantTypes(client, "layouts"),
+    ...tenantTypes(client, "admin"),
+  ]);
 
   let checked = 0;
   for (const [endpoint, methods] of Object.entries(registry)) {
@@ -125,8 +124,7 @@ for (const client of clients) {
     const defs = page.config;
     for (const def of walkDefs(defs)) {
       // Unknown type → hard failure (renders nothing).
-      const known =
-        GENERIC_TYPES.has(def.type) || siteTypes.has(def.type) || adminTypes.has(def.type);
+      const known = siteTypes.has(def.type) || adminTypes.has(def.type);
       if (!known) {
         failures++;
         console.error(`  UNKNOWN-TYPE ${client} ${rel}: "${def.type}" (def ${def.id ?? "?"})`);

@@ -49,19 +49,21 @@ export interface RenderComponentProps<
   children?: ReactNode;
 }
 
-// What fe/client/<name>/{site,admin}/tenant.ts must default-export —
+// What fe/client/<name>/{web,layouts,admin}/tenant.ts must default-export —
 // def.type (from page definitions / OPTIONS content) → React component.
 export interface ClientTenant {
   components: Record<string, ComponentType<RenderComponentProps>>;
 }
 
-// fe/client/<name>/client.json — the tenant manifest. Everything about the
-// client folder is derived from this file (see scripts/client.mjs).
+// fe/client/<name>/configs/client.json — the tenant manifest. Everything
+// about the client folder is derived from this file (see
+// scripts/client.mjs). Each client owns its full component set under
+// web/ + layouts/ + admin/ — no shared storefront fallback at runtime.
 export interface ClientManifest {
   name: string; // must equal the folder name
   title?: string;
   surfaces: Partial<
-    Record<"site" | "admin", { styles?: boolean }>
+    Record<"web" | "layouts" | "admin", { styles?: boolean }>
   >;
   // true → mock/<lang>/<endpoint>/... is bundled and apiClient serves it.
   mock?: boolean;

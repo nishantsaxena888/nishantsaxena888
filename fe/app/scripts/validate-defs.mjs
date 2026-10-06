@@ -41,11 +41,8 @@ function mapKeys(file) {
   return keys;
 }
 
-// Generic maps shared by every client
-const genericKeys = new Set([
-  ...mapKeys(join(srcDir, "tenants/storefront/index.tsx")),
-  ...mapKeys(join(srcDir, "tenants/layout/index.tsx")),
-]);
+// No shared site/layout registry at runtime — every client resolves
+// def.type against its own web/tenant.ts + layouts/tenant.ts maps.
 // Admin component universe (OPTIONS-driven types resolve here)
 const adminKeys = new Set([
   ...mapKeys(join(srcDir, "tenants/admin/default-admin/index.ts")),
@@ -107,11 +104,12 @@ function validateClient(name) {
   const endpointKnown = (e) =>
     entities.has(e) || sessionNames.has(e) || mocks.has(e);
   const siteKeys = new Set([
-    ...genericKeys,
-    ...mapKeys(join(clientDir, name, "site/tenant.ts")),
+    ...mapKeys(join(clientDir, name, "web/tenant.ts")),
+    ...mapKeys(join(clientDir, name, "layouts/tenant.ts")),
   ]);
   const adminCompKeys = new Set([
     ...adminKeys,
+    ...mapKeys(join(clientDir, name, "layouts/tenant.ts")),
     ...mapKeys(join(clientDir, name, "admin/tenant.ts")),
   ]);
 
@@ -201,7 +199,7 @@ function validateClient(name) {
 }
 
 const clients = readdirSync(clientDir).filter((d) =>
-  existsSync(join(clientDir, d, "client.json")),
+  existsSync(join(clientDir, d, "configs/client.json")),
 );
 const targets = only ? clients.filter((c) => c === only) : clients;
 if (only && targets.length === 0) {

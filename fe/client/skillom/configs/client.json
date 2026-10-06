@@ -1,0 +1,16 @@
+{
+  "name": "skillom",
+  "title": "Skillom",
+  "surfaces": {
+    "admin": {
+      "styles": true
+    },
+    "web": {
+      "styles": true
+    },
+    "layouts": {
+      "styles": false
+    }
+  },
+  "mock": true
+}

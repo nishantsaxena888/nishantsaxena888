@@ -18,17 +18,25 @@ fe/app/            generic engine (Vite + React + TS). Single package.json.
   src/platform/    portability seams — primitives, navigation, storage,
                    host, env, toast, icons, asset, report, mermaid
                    (web impls + .native.* RN variants; Metro resolves)
-  src/tenants/storefront/   generic site blocks (header, listing,
-                   course-list, course-detail, chapter-reader,
-                   slide-engine, session-list, entity-actions…)
-  src/tenants/layout/, src/tenants/admin/   shared layout + generic admin
+  src/tenants/storefront/   component KIT (header, listing, course-list,
+                   course-detail, chapter-reader, slide-engine,
+                   session-list, entity-actions…) — template only, copied
+                   into clients by `npm run client -- --new`; NOT a
+                   runtime fallback
+  src/tenants/layout/, src/tenants/admin/   layout kit + generic admin
+  src/platform/sdk.ts       client SDK — the ONLY engine surface
+                   fe/client/* code may import (@/platform/sdk)
   src/engine/      render-engine, apiClient (mock→axios), use-entity CRUD,
                    sessions reducers, use-dynamic-data
   electron/        desktop shell — loads dist/ over file://
-fe/client/<name>/  site/ (tenant.ts component map + styles.css)
-                   admin/ (overrides; {} = generic admin)
+fe/client/<name>/  configs/client.json (manifest)
+                   web/ (tenant.ts + components/ = ALL site comps,
+                   client-owned kit copies included + styles.css)
+                   layouts/ (tenant.ts + components/ layout copies)
+                   admin/ (tenant.ts; {} = generic admin)
                    mock/ (per-lang API tree: <lang>/<endpoint>/<METHOD>/
                    success.json + config.json registry)
+                   FULL ISOLATION — no shared component fallback
 fe/native/         Expo app (site surfaces; admin is DOM-only)
 be/app.py          generic entity service (FastAPI)
 be/sources.py      JsonSource/SqliteSource/HttpSource

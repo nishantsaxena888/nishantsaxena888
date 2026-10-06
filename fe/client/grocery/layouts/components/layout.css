@@ -1,0 +1,16 @@
+/* Generic layout primitives — structural only. Clients override any of
+   these classes in <client>/site/styles.css (loaded after this file). */
+
+.lx-grid { display: grid; }
+.lx-col { grid-column: span var(--col-span, 12); min-width: 0; }
+.lx-container { width: 100%; max-width: 1200px; margin-inline: auto; }
+.lx-stack { display: flex; flex-direction: column; }
+.lx-section { width: 100%; }
+
+/* Responsive spans — config sets --col-span-md / --col-span-sm inline. */
+@media (max-width: 1024px) {
+  .lx-col[style*="--col-span-md"] { grid-column: span var(--col-span-md); }
+}
+@media (max-width: 640px) {
+  .lx-col[style*="--col-span-sm"] { grid-column: span var(--col-span-sm); }
+}
