@@ -31,6 +31,7 @@ export default function ChapterReader({ content, actionData, session }: any) {
   const { componentMap } = useRenderEngine();
   const [popup, setPopup] = useState<"detail" | "notes" | null>(null);
   const [noteDraft, setNoteDraft] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const chapter =
     actionData?.data?.chapter?.data ?? actionData?.data?.chapter;
   const revisions = toItems(actionData?.data?.revisions).filter(
@@ -205,6 +206,15 @@ export default function ChapterReader({ content, actionData, session }: any) {
       {tb && (
         <View className="reader-topbar">
           <View className="reader-topbar-brand">
+            {siblings.length > 0 && (
+              <Pressable
+                className="topbar-menu-btn"
+                aria-label="Toggle navigation"
+                onPress={() => setSidebarOpen((o) => !o)}
+              >
+                ☰
+              </Pressable>
+            )}
             <Pressable
               className="reader-topbar-logo"
               onPress={() => navigate(tb.home || "/")}
@@ -262,13 +272,19 @@ export default function ChapterReader({ content, actionData, session }: any) {
       )}
       <View className="reader-layout">
       {siblings.length > 0 && (
-        <View as="aside" className="reader-sidebar">
+        <View
+          as="aside"
+          className={`reader-sidebar${sidebarOpen ? " open" : ""}`}
+        >
           <Text className="reader-sidebar-label">{t("sidebar.modules","Modules")}</Text>
           {siblings.map((s: any, i: number) => (
             <Pressable
               key={s.id}
               className={`reader-side-item${s.id === chapter?.id ? " active" : ""}`}
-              onPress={() => openChapter(s)}
+              onPress={() => {
+                setSidebarOpen(false);
+                openChapter(s);
+              }}
             >
               <Text className="reader-side-icon">{s.icon || content?.item_icon || "📄"}</Text>
               <Text className="reader-side-title">

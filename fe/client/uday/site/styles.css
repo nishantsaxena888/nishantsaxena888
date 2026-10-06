@@ -757,8 +757,8 @@
 
 /* diagram */
 .slide-engine .diagram-wrapper { margin-bottom: 2rem; }
-.slide-engine .diagram-titlebar { background: #f97316; color: #fff; padding: 12px 20px; border-radius: 14px 14px 0 0; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1.2px; display: flex; align-items: center; gap: 10px; }
-.slide-engine .diagram-title { flex: 0 0 auto; }
+.slide-engine .diagram-titlebar { background: #f97316; color: #fff; padding: 12px 20px; border-radius: 14px 14px 0 0; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1.2px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.slide-engine .diagram-title { flex: 0 1 auto; min-width: 0; overflow-wrap: anywhere; }
 .slide-engine .diagram-titlebar .diagram-hint { margin-left: auto; font-weight: 400; font-size: 0.75rem; text-transform: none; letter-spacing: 0; opacity: 0.85; }
 .slide-engine .diagram-edge-animated { animation: seFlowArrow 1.8s linear infinite; }
 @keyframes seFlowArrow { to { stroke-dashoffset: -24; } }
@@ -792,3 +792,48 @@
 .reader-toc-item { display: block; padding: 0.25rem 0.5rem; font-size: 0.75rem; color: #64748b; border-left: 2px solid transparent; cursor: pointer; background: none; border-top: none; border-right: none; border-bottom: none; text-align: left; font-family: Inter, -apple-system, 'system-ui', 'Segoe UI', Roboto, sans-serif; transition: all 150ms; }
 .reader-toc-item:hover { color: #1e293b; }
 .reader-toc-item.active { color: #ea580c; border-left-color: #f97316; font-weight: 500; }
+
+/* ===== Responsive (source breakpoints: 1024 tablet, 640 mobile) ===== */
+.topbar-menu-btn {
+  display: none; background: none; border: none; color: #cbd5e1;
+  font-size: 1.125rem; padding: 0.375rem 0.5rem; cursor: pointer;
+  border-radius: 6px; line-height: 1;
+}
+.topbar-menu-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
+
+@media (max-width: 1024px) {
+  .reader-sidebar {
+    transform: translateX(-100%);
+    transition: transform 250ms ease;
+  }
+  .reader-sidebar.open {
+    transform: translateX(0);
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+  }
+  .chapter-reader { margin-left: 0; }
+  .topbar-menu-btn { display: block; }
+  .reader-topbar-title { font-size: 0.8125rem; }
+  .reader-page .module-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  .landing-page .module-grid,
+  .course-page .module-grid,
+  .catalog-page .module-grid,
+  .reader-page .module-grid { grid-template-columns: 1fr; }
+  .landing-page .dashboard-grid { grid-template-columns: 1fr; }
+  .chapter-reader .lesson-container { padding: 1.25rem 1rem; }
+  .chapter-reader .lesson-nav { flex-direction: column; }
+  .reader-page, .reader-layout { margin-left: 0; margin-right: 0; }
+  .catalog-head { padding: 0 1rem; }
+  .catalog-page .module-grid { padding: 0 1rem; }
+  .landing-page .hero h1 { font-size: 1.875rem; }
+}
+
+/* overflow fixes */
+.slide-html table { display: block; max-width: 100%; overflow-x: auto; }
+@media (max-width: 640px) {
+  .landing-page, .course-page, .catalog-page { margin-left: 0; margin-right: 0; }
+  .course-page { padding: 1rem; }
+  .course-page .course-page-head { flex-wrap: wrap; gap: 0.75rem; }
+}
