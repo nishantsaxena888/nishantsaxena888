@@ -9,7 +9,7 @@
 // content.reader_path (default /learn/:id). Session writes (progress)
 // go through the SessionBridge prop — the def's lazy actions handle
 // entity writes (e.g. quiz_submission POST).
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNav } from "@/platform/navigation";
 import { useLanguage } from "@/components/shared/use-language";
 import { useTheme } from "@/components/shared/use-theme";
@@ -17,6 +17,7 @@ import { Pressable, Text, View } from "@/platform/primitives";
 import { useRenderEngine } from "@/engine/render-engine/features/render-engine-context";
 import { parseMd, type MdSection } from "./md-sections";
 import { MdDoc, MdToc } from "./md-render";
+import SlideEngine from "./slide-engine";
 
 const toItems = (res: any): any[] =>
   Array.isArray(res) ? res : res?.items ?? res?.data ?? [];
@@ -70,6 +71,15 @@ export default function ChapterReader({ content, actionData, session }: any) {
     [rev],
   );
 
+  // Structured lesson mode: chapters carrying a typed `sections[]` payload
+  // render through the slide engine (typed interactive sections); markdown
+  // stays available via the "Detailed Chapter" popup. Doc chapters keep
+  // rendering markdown inline as before.
+  const slides: any[] | null =
+    Array.isArray(chapter?.sections) && chapter.sections.length > 0
+      ? chapter.sections
+      : null;
+
   // `md-<tag>` tenant components render extended directives (see
   // md-viewer); unregistered tags degrade to attr callouts.
   const resolveWidget = (sec: Extract<MdSection, { type: "widget" }>) => {
@@ -97,6 +107,28 @@ export default function ChapterReader({ content, actionData, session }: any) {
     });
     navigate(`${readerPath}/${ch.slug || ch.id}`);
   };
+
+  // Scrollspy — the context panel highlights the section in view, same as
+  // the source's LessonViewer → ContextPanel wiring.
+  const [activeSection, setActiveSection] = useState<string | null>(
+    slides?.[0]?.id ?? null,
+  );
+  useEffect(() => {
+    if (!slides?.length || typeof IntersectionObserver === "undefined") return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) setActiveSection(e.target.id);
+        }
+      },
+      { rootMargin: "-80px 0px -60% 0px" },
+    );
+    for (const s of slides) {
+      const el = s?.id && document.getElementById(s.id);
+      if (el) obs.observe(el);
+    }
+    return () => obs.disconnect();
+  }, [slides]);
 
   const tb = content?.topbar;
 
@@ -175,14 +207,29 @@ export default function ChapterReader({ content, actionData, session }: any) {
               {done.has(`ch-${s.id}`) && (
                 <Text className="reader-side-done">✓</Text>
               )}
-              {s.id === chapter?.id && (
+              {s.id === chapter?.id && !done.has(`ch-${s.id}`) && pct > 0 && (
                 <Text className="reader-side-pct">{pct}%</Text>
               )}
             </Pressable>
           ))}
+          {tb && (
+            <View className="reader-sidebar-footer">
+              <Pressable
+                className="back-link"
+                onPress={() =>
+                  navigate(
+                    `${content?.back_path || "/courses"}/${chapter?.course_id ?? ""}`,
+                  )
+                }
+              >
+                {content?.back_label || t("common.backToCourse")}
+              </Pressable>
+            </View>
+          )}
         </View>
       )}
       <View as="article" className="chapter-reader">
+        <View className={slides ? "lesson-container" : undefined}>
         {!tb && (
           <View className="chapter-topbar">
             <Pressable
@@ -208,78 +255,184 @@ export default function ChapterReader({ content, actionData, session }: any) {
             </View>
           </View>
         )}
-        <View className="chapter-meta-row">
-          {chapter?.difficulty && (
-            <Text className={`badge difficulty-${chapter.difficulty}`}>
-              {chapter.difficulty}
+        {slides ? (
+          <View className="lesson-header">
+            <View className="breadcrumbs">
+              <Text className="current">{chapter?.subtitle || chapter?.title}</Text>
+            </View>
+            <View className="lesson-header-meta">
+              <Text className={`badge difficulty-${chapter.difficulty || "beginner"}`}>
+                {chapter.difficulty || "beginner"}
+              </Text>
+              {chapter?.duration && (
+                <Text className="badge badge-neutral">⏱ {chapter.duration}</Text>
+              )}
+              {chapter?.prerequisites?.length > 0 && (
+                <Text className="badge badge-accent">
+                  Requires: {chapter.prerequisites.join(", ")}
+                </Text>
+              )}
+            </View>
+            <Text as="h1">
+              {chapter?.subtitle || chapter?.title || content?.title || "Chapter"}
             </Text>
-          )}
-          {chapter?.duration && (
-            <Text className="chapter-meta-chip">🕐 {chapter.duration}</Text>
-          )}
-          {rev && (
-            <Text className="chapter-meta-chip">
-              v{rev.version_no} · {rev.status}
+            {(chapter?.intro || chapter?.description) && (
+              <Text as="p" className="lesson-header-desc">
+                {chapter.intro || chapter.description}
+              </Text>
+            )}
+            {chapter?.objectives?.length > 0 && (
+              <View className="lesson-objectives">
+                <Text as="h4">🎯 {t("lesson.objectives") || "Learning Objectives"}</Text>
+                <View as="ul">
+                  {chapter.objectives.map((o: string, i: number) => (
+                    <Text as="li" key={i}>{o}</Text>
+                  ))}
+                </View>
+              </View>
+            )}
+          </View>
+        ) : (
+          <>
+            <View className="chapter-meta-row">
+              {chapter?.difficulty && (
+                <Text className={`badge difficulty-${chapter.difficulty}`}>
+                  {chapter.difficulty}
+                </Text>
+              )}
+              {chapter?.duration && (
+                <Text className="chapter-meta-chip">🕐 {chapter.duration}</Text>
+              )}
+              {rev && (
+                <Text className="chapter-meta-chip">
+                  v{rev.version_no} · {rev.status}
+                </Text>
+              )}
+            </View>
+            <Text as="h1" className="chapter-title">
+              {chapter?.title || content?.title || "Chapter"}
             </Text>
-          )}
-        </View>
-        <Text as="h1" className="chapter-title">
-          {chapter?.title || content?.title || "Chapter"}
-        </Text>
-        {chapter?.description && (
-          <Text as="p" className="chapter-desc">{chapter.description}</Text>
+            {chapter?.description && (
+              <Text as="p" className="chapter-desc">{chapter.description}</Text>
+            )}
+          </>
         )}
-        <MdDoc
-          sections={parsed.sections}
-          base={chapter?.content_base}
-          resolveWidget={resolveWidget}
-          onQuizAnswer={(correct, i) =>
-            actionData?.action?.({
-              key: content?.quiz_action || "submit_quiz",
-              type: "filter",
-              data: {
+        {slides ? (
+          <SlideEngine
+            sections={slides}
+            onNavigate={(slug: string) => navigate(`${readerPath}/${slug}`)}
+            onQuizAnswer={(correct: boolean, i: number) =>
+              actionData?.action?.({
+                key: content?.quiz_action || "submit_quiz",
+                type: "filter",
+                data: {
+                  chapter_id: chapter?.id,
+                  quiz_id: `ch${chapter?.id}-q${i}`,
+                  score: correct ? 1 : 0,
+                  total: 1,
+                },
+              })
+            }
+            onQuizComplete={(sectionId: string, correct: number, total: number) =>
+              session?.update(content?.quiz_session || "quizzes", {
+                id: `${chapter?.id}-${sectionId}`,
                 chapter_id: chapter?.id,
-                quiz_id: `ch${chapter?.id}-q${i}`,
-                score: correct ? 1 : 0,
-                total: 1,
-              },
-            })
-          }
-        />
-        {!actionData?.loading && parsed.sections.length === 0 && (
+                score: correct,
+                total,
+                at: new Date().toISOString(),
+              })
+            }
+            onLabComplete={(sectionId: string) =>
+              session?.update(content?.lab_session || "labs", {
+                id: `${chapter?.id}-${sectionId}`,
+                chapter_id: chapter?.id,
+                at: new Date().toISOString(),
+              })
+            }
+            onCommand={() =>
+              session?.update(content?.command_session || "commands", {
+                id: `cmd-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+                chapter_id: chapter?.id,
+                at: new Date().toISOString(),
+              })
+            }
+          />
+        ) : (
+          <MdDoc
+            sections={parsed.sections}
+            base={chapter?.content_base}
+            resolveWidget={resolveWidget}
+            onQuizAnswer={(correct, i) =>
+              actionData?.action?.({
+                key: content?.quiz_action || "submit_quiz",
+                type: "filter",
+                data: {
+                  chapter_id: chapter?.id,
+                  quiz_id: `ch${chapter?.id}-q${i}`,
+                  score: correct ? 1 : 0,
+                  total: 1,
+                },
+              })
+            }
+          />
+        )}
+        {!actionData?.loading && !slides && parsed.sections.length === 0 && (
           <Text as="p" className="text-muted-foreground">
             {content?.empty || "No content yet."}
           </Text>
         )}
-        <View className="chapter-foot">
-          <Pressable className="sf-action-btn" onPress={markComplete}>
-            {content?.complete_label || t("lesson.markAsRead")}
-          </Pressable>
-          <View className="chapter-prevnext">
-            {prev && (
-              <Pressable
-                className="btn btn-secondary"
-                onPress={() => openChapter(prev)}
-              >
-                {t("quiz.previous")}
-              </Pressable>
-            )}
-            {next && (
-              <Pressable
-                className="btn btn-primary"
-                onPress={() => openChapter(next)}
-              >
-                {t("quiz.next")}
-              </Pressable>
-            )}
+        {!slides && (
+          <View className="chapter-foot">
+            <Pressable className="sf-action-btn" onPress={markComplete}>
+              {content?.complete_label || t("lesson.markAsRead")}
+            </Pressable>
+            <View className="chapter-prevnext">
+              {prev && (
+                <Pressable
+                  className="btn btn-secondary"
+                  onPress={() => openChapter(prev)}
+                >
+                  {t("quiz.previous")}
+                </Pressable>
+              )}
+              {next && (
+                <Pressable
+                  className="btn btn-primary"
+                  onPress={() => openChapter(next)}
+                >
+                  {t("quiz.next")}
+                </Pressable>
+              )}
+            </View>
           </View>
+        )}
         </View>
       </View>
 
-      {content?.toc && parsed.sections.length > 0 && (
+      {content?.toc && (slides ? slides.length > 0 : parsed.sections.length > 0) && (
         <View as="aside" className="reader-toc">
           <Text className="reader-sidebar-label">{t("ctx.onThisPage")}</Text>
-          <MdToc sections={parsed.sections} />
+          {slides ? (
+            <View className="reader-toc-list">
+              {slides
+                .filter((s: any) => s.title)
+                .map((s: any, i: number) => (
+                  <Pressable
+                    key={s.id || i}
+                    className={`reader-toc-item${s.id === activeSection ? " active" : ""}`}
+                    onPress={() =>
+                      document
+                        .getElementById(s.id)
+                        ?.scrollIntoView({ behavior: "smooth", block: "start" })
+                    }
+                  >
+                    {s.title}
+                  </Pressable>
+                ))}
+            </View>
+          ) : (
+            <MdToc sections={parsed.sections} />
+          )}
         </View>
       )}
 

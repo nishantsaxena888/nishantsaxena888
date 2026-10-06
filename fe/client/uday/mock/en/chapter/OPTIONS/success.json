@@ -22,6 +22,21 @@
       "slug": {
         "type": "str"
       },
+      "subtitle": {
+        "type": "str"
+      },
+      "intro": {
+        "type": "str"
+      },
+      "prerequisites": {
+        "type": "json"
+      },
+      "objectives": {
+        "type": "json"
+      },
+      "sections": {
+        "type": "json"
+      },
       "content_base": {
         "type": "str"
       },

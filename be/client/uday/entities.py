@@ -239,6 +239,13 @@ entities = {
             "title":     {"type": "str", "required": True},
             "order":     {"type": "int", "default": 0},
             "slug":      {"type": "str"},
+            # structured lesson payload (slide engine) — doc courses keep
+            # md-only revisions; module-course chapters carry typed sections
+            "subtitle":       {"type": "str"},
+            "intro":          {"type": "str"},
+            "prerequisites":  {"type": "json"},
+            "objectives":     {"type": "json"},
+            "sections":       {"type": "json"},
             # media base for relative asset refs inside md_content
             # (imported md references e.g. "image-1.png" — resolves to
             # content_base + src when serving)

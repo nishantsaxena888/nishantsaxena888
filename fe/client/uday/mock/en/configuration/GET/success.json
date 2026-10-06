@@ -826,7 +826,8 @@
     "popup.labNotes": "Lab Notes",
     "nav.home": "Home",
     "nav.courses": "Courses",
-    "nav.myLearning": "My Learning"
+    "nav.myLearning": "My Learning",
+    "lesson.objectives": "Learning Objectives"
   },
   "site_nav": false,
   "roles": [
