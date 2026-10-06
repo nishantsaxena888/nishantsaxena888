@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Slider } from "@/components/third-party-shadcn/slider";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 interface RangeSliderProps {
   value?: number[];
   defaultValue?: number[];

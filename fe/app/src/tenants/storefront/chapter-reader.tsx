@@ -15,7 +15,7 @@ import { useLanguage } from "@/components/shared/use-language";
 import { LanguageSwitcher } from "@/components/shared/language-selector/language-switcher";
 import { useTheme } from "@/components/shared/use-theme";
 import { Pressable, Text, View } from "@/platform/primitives";
-import { useRenderEngine } from "@/engine/render-engine/features/render-engine-context";
+import { useRenderEngine } from "@/common/engine/render-engine/features/render-engine-context";
 import { parseMd, type MdSection } from "./md-sections";
 import { MdDoc, MdToc } from "./md-render";
 import SlideEngine from "./slide-engine";

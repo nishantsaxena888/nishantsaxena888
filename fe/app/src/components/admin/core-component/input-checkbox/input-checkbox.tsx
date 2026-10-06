@@ -1,6 +1,6 @@
 import { Checkbox } from "@/components/third-party-shadcn/checkbox";
 import { Label } from "@/components/third-party-shadcn/label";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 import * as React from "react";
 
 type CheckboxFieldProps = {

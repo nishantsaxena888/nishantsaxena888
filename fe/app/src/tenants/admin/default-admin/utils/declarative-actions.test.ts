@@ -4,7 +4,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const apiClient = vi.fn();
-vi.mock("@/engine", () => ({
+vi.mock("@/common/engine", () => ({
   apiClient: (...a: any[]) => apiClient(...a),
 }));
 

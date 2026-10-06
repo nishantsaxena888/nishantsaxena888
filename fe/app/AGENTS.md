@@ -48,12 +48,12 @@ LanguageProvider
 
 Key files:
 
-- `src/engine/render-engine/` — RenderEngine, RenderDefinition, context,
+- `src/common/engine/render-engine/` — RenderEngine, RenderDefinition, context,
   `AdminSurfaceProvider`
-- `src/engine/library/api.ts` — apiClient (mock routing + axios fallback)
-- `src/engine/library/mock-data.ts` — indexes the generated mock glob
-- `src/engine/library/reducers.ts` — session reducer strategies
-- `src/engine/hooks/use-entity.ts` — CRUD hook (session-aware)
+- `src/common/engine/library/api.ts` — apiClient (mock routing + axios fallback)
+- `src/common/engine/library/mock-data.ts` — indexes the generated mock glob
+- `src/common/engine/library/reducers.ts` — session reducer strategies
+- `src/common/engine/hooks/use-entity.ts` — CRUD hook (session-aware)
 
 ## Tenancy
 
@@ -124,7 +124,7 @@ def.type from them.
   `client layouts ∪ default_admin ∪ client admin` via
   `AdminSurfaceProvider` mounted at `DashboardRenderer`. All merges are
   client-owned — a type missing from a client's maps renders nothing.
-- **Client SDK** (`src/platform/sdk.ts`): the single `@/platform/*`
+- **Client SDK** ( `src/common/platform/sdk.ts`): the single `@/platform/*`
   import surface for engine services inside fe/client code — apiClient,
   useEntity, useLanguage, useTheme, useRenderEngine, useGenericState,
   useConfigStore, toast, LanguageSwitcher, icon glyphs. Kit copies and
@@ -224,7 +224,7 @@ fe/client/<name>/mock/
   Hiding is UX only; the backend is the enforcement. Login/logout
   dispatch `auth-change` → configuration refetches and menus re-filter.
 
-## Platform abstraction (`src/platform/`)
+## Platform abstraction ( `src/common/platform/`)
 
 The seam that makes generic code portable across **web**, **React Native**,
 and **Electron**. Reusable storefront components never import
@@ -292,7 +292,7 @@ Rules for new generic components:
 ```
 
 `AppProvider` → `buildConfigFromSessions()` → `useGenericState.configure()`
-(zustand, `src/store/use-generic-state.ts`). `update("cart", product)` runs
+(zustand, `src/common/store/use-generic-state.ts`). `update("cart", product)` runs
 the named strategy (`array_upsert`, `array_toggle`, `array_remove`,
 `array_prepend_unique`, `replace`, `merge`) and persists to localStorage as
 `<client>_gs_<name>`. `useEntity("cart")` detects registered sessions and
@@ -387,7 +387,7 @@ Admin screens are entity-driven — **the OPTIONS response IS the screen**:
 
 One whitelist shape everywhere: a `roles` array on any config item
 (`"*"` = all, `[]` = none, absent/non-array = unrestricted). The helpers
-live in `src/engine/library/rbac.ts` (`currentRole`, `roleAllowed`,
+live in `src/common/engine/library/rbac.ts` (`currentRole`, `roleAllowed`,
 `visibleByRole`, `methodAllowed`/`rbacMethods`):
 
 | Level | Where | Gate |

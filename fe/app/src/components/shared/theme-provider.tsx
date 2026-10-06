@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo, useCallback } from "react"
-import { apiClient } from "@/engine/library/api"
+import { apiClient } from "@/common/engine/library/api"
 import { setActiveClient } from "@/platform/active-client"
-import { useConfigStore } from "@/store/use-config-store"
+import { useConfigStore } from "@/common/store/use-config-store"
 import { storage } from "@/platform/storage";
 import {
     ThemeProviderContext,

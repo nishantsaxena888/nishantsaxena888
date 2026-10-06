@@ -6,7 +6,7 @@ import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { Button } from "@/components/third-party-shadcn/button";
 import { Input } from "@/components/third-party-shadcn/input";
 import { InputGroup } from "@/components/third-party-shadcn/input-group";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 const DEFAULT_REQUIREMENTS = [
   { regex: /.{12,}/, text: "At least 12 characters" },
   { regex: /[a-z]/, text: "At least 1 lowercase letter" },

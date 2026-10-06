@@ -3,8 +3,8 @@ import { DefaultEditModule } from "./utils/default-editmodule";
 import { DefaultPagination } from "./utils/default-pagination";
 import { ItemsPerPageInfo } from "./utils/item-per-page-info";
 import { AdminSkeleton } from "./utils/admin-skeleton";
-import { toast } from "@/lib/toast";
-import { useFormStyleStore } from "@/store/use-form-style";
+import { toast } from "@/common/lib/toast";
+import { useFormStyleStore } from "@/common/store/use-form-style";
 import { useCurdEntity } from "./utils/use-curd-entity";
 import { useState, useEffect } from "react";
 import { useNav } from "@/platform/navigation";
@@ -14,8 +14,8 @@ import {
   exportCsv,
   runDeclarativeAction,
 } from "./utils/declarative-actions";
-import { useConfigStore } from "@/store/use-config-store";
-import { currentRole, roleAllowed, visibleByRole } from "@/engine/library/rbac";
+import { useConfigStore } from "@/common/store/use-config-store";
+import { currentRole, roleAllowed, visibleByRole } from "@/common/engine/library/rbac";
 
 export const DefaultAdmin = (prop: any) => {
   const {

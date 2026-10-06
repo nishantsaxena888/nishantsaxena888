@@ -1,6 +1,6 @@
 import { Anchor } from "@/platform/primitives";
 import { usePath } from "@/platform/navigation";
-import { useGenericState } from "@/store/use-generic-state";
+import { useGenericState } from "@/common/store/use-generic-state";
 
 // Generic site-surface nav — the S-side counterpart of the admin sidebar.
 // Renders config.data.menu (public items, ordered) + client branding from

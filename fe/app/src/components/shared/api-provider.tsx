@@ -4,13 +4,13 @@ import { useLanguage } from "./use-language";
 import {
   RenderEngineProvider,
   setApiConfiguration,
-} from "@/engine";
+} from "@/common/engine";
 import {
   ensureClient,
   requestedClient,
   tenantsReady,
 } from "@/tenants";
-import { useConfigStore } from "@/store/use-config-store";
+import { useConfigStore } from "@/common/store/use-config-store";
 import { onAppEvent } from "@/platform/host";
 import { apiUrl } from "@/platform/env";
 import { getActiveClient } from "@/platform/active-client";

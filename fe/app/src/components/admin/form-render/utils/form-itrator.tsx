@@ -7,7 +7,7 @@ import {
 // import { type TabHeaderClassNamesType } from "./form-tabs-utils/form-tab-header";
 import { useFormItrator } from "./use-form-itrator";
 import { BlockLayoutForm /* type BlockClassNamesType */ } from "./form-block";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 // import type { LabelsType } from "./form-tabs-utils/form-tab-footer";
 import { useFormConfig } from "./form-config-context";
 

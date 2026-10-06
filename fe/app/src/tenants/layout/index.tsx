@@ -21,7 +21,7 @@
 
 import "./layout.css";
 import type React from "react";
-import type { RenderComponentProps } from "@/engine/render-engine/features/types";
+import type { RenderComponentProps } from "@/common/engine/render-engine/features/types";
 
 import Grid from "./grid";
 import Col from "./col";

@@ -205,15 +205,15 @@ const LAYOUT_SRC = join(appDir, "src/tenants/layout");
 const KIT_SKIP = /^(index\.(tsx?|ts)|.*\.test\.)/;
 
 const KIT_REWRITES = [
-  ['"@/engine/render-engine/features/render-engine-context"', '"@/platform/sdk"'],
-  ['"@/engine/render-engine/features/types"', '"@/tenants/types"'],
-  ['"@/engine"', '"@/platform/sdk"'],
-  ['"@/store/use-config-store"', '"@/platform/sdk"'],
-  ['"@/store/use-generic-state"', '"@/platform/sdk"'],
+  ['"@/common/engine/render-engine/features/render-engine-context"', '"@/platform/sdk"'],
+  ['"@/common/engine/render-engine/features/types"', '"@/tenants/types"'],
+  ['"@/common/engine"', '"@/platform/sdk"'],
+  ['"@/common/store/use-config-store"', '"@/platform/sdk"'],
+  ['"@/common/store/use-generic-state"', '"@/platform/sdk"'],
   ['"@/components/shared/use-language"', '"@/platform/sdk"'],
   ['"@/components/shared/use-theme"', '"@/platform/sdk"'],
-  ['"@/lib/toast"', '"@/platform/sdk"'],
-  ['"@/components/core-component/language-selector/language-switcher"', '"@/platform/sdk"'],
+  ['"@/common/lib/toast"', '"@/platform/sdk"'],
+  ['"@/components/shared/language-selector/language-switcher"', '"@/platform/sdk"'],
   ['"lucide-react"', '"@/platform/sdk"'],
 ];
 

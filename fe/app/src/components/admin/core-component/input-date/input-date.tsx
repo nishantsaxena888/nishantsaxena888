@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/third-party-shadcn/calendar";
 import {

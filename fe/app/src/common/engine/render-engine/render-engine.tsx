@@ -2,7 +2,7 @@ import React from "react";
 import { type Definition } from "./features/types";
 import { useRenderEngine } from "./features/render-engine-context";
 import { RenderDefinition } from "./features/render-definition";
-import { useFormStyleStore } from "@/store/use-form-style";
+import { useFormStyleStore } from "@/common/store/use-form-style";
 
 interface RenderEngineProps {
   data: Definition[];

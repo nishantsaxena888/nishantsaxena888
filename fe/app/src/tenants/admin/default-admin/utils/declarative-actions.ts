@@ -14,7 +14,7 @@
 //   name "bulk_delete" (builtin) — DELETE <entity>/<id> per selected row
 //   name "export_csv"  (builtin) — CSV download, no API call
 //   confirm: string | {title, description} — gates execution
-import { apiClient } from "@/engine";
+import { apiClient } from "@/common/engine";
 
 export const interpolate = (tpl: string | undefined, row: any): string =>
   String(tpl || "").replace(/\{(\w+)\}/g, (_, k) => row?.[k] ?? "");

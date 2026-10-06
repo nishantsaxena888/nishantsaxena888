@@ -2,10 +2,10 @@ import React from 'react';
 import { type  Definition, type RenderComponentProps, type SessionBridge } from './types';
 import { useRenderEngine } from './render-engine-context';
 import { useDynamicData } from './use-dynamic-data';
-import { useFormStyleStore } from '@/store/use-form-style';
-import { useConfigStore } from '@/store/use-config-store';
-import { useGenericState } from '@/store/use-generic-state';
-import { currentRole, roleAllowed } from '@/engine/library/rbac';
+import { useFormStyleStore } from '@/common/store/use-form-style';
+import { useConfigStore } from '@/common/store/use-config-store';
+import { useGenericState } from '@/common/store/use-generic-state';
+import { currentRole, roleAllowed } from '@/common/engine/library/rbac';
 import { DefErrorBoundary } from '@/platform/error-boundary';
 
 interface RenderDefinitionProps {

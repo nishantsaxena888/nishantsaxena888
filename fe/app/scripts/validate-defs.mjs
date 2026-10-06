@@ -52,7 +52,7 @@ const adminKeys = new Set([
 
 // Session reducer strategies — the allowed session.method values.
 function reducerStrategies() {
-  const f = join(srcDir, "engine/library/reducers.ts");
+  const f = join(srcDir, "common/engine/library/reducers.ts");
   if (!existsSync(f)) return new Set();
   const src = stripComments(readFileSync(f, "utf8"));
   const keys = new Set();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from './use-form';
-import { useRenderEngine } from '@/engine/render-engine/features/render-engine-context';
+import { useRenderEngine } from '@/common/engine/render-engine/features/render-engine-context';
 import type { FormSchema, FieldSchema } from './types';
 
 interface OldFormRendererProps {

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Button } from "@/components/third-party-shadcn/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 import { buttonStyles } from "./utils/button-style";
 import { useFormConfig } from "@/components/admin/form-render/utils/form-config-context";
 import { Spinner } from "@/components/third-party-shadcn/spinner";

@@ -1,4 +1,4 @@
-import { apiClient } from "@/engine";
+import { apiClient } from "@/common/engine";
 import { useEffect, useState } from "react";
 export const useDashboardControl = ({ activePage }: { activePage: any }) => {
   const entity = activePage.entity;

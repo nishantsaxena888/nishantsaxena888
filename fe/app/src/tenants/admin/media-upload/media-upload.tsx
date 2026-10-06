@@ -1,6 +1,6 @@
 import React from "react";
 import { Upload, Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 import { Button } from "@/components/third-party-shadcn/button";
 
 import { useMediaUpload } from "./hooks/use-media-upload";

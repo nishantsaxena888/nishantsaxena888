@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { useConfigStore } from "@/store/use-config-store";
+import { useConfigStore } from "@/common/store/use-config-store";
 import { storage } from "@/platform/storage";
 import { reloadApp } from "@/platform/host";
 import {
@@ -46,7 +46,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     useEffect(() => {
         const loadTranslations = async () => {
             try {
-                const { apiClient } = await import("@/engine/library/api");
+                const { apiClient } = await import("@/common/engine/library/api");
                 const res = await apiClient("translations", { method: "get" });
                 setTranslations(res?.error ? {} : (res?.data || {}));
             } catch (err) {

@@ -8,10 +8,10 @@ import userEvent from "@testing-library/user-event";
 
 const onPost = vi.fn();
 const toastInfo = vi.fn();
-vi.mock("@/engine", () => ({
+vi.mock("@/common/engine", () => ({
   useEntity: () => ({ onPost }),
 }));
-vi.mock("@/lib/toast", () => ({
+vi.mock("@/common/lib/toast", () => ({
   toast: { success: vi.fn(), info: (...a: any[]) => toastInfo(...a) },
 }));
 vi.mock("@/components/shared/use-language", () => ({
@@ -19,7 +19,7 @@ vi.mock("@/components/shared/use-language", () => ({
 }));
 
 let configState: any = { meta: { currency_symbol: "$" }, sessions: [{ name: "cart" }] };
-vi.mock("@/store/use-config-store", () => ({
+vi.mock("@/common/store/use-config-store", () => ({
   useConfigStore: (sel: any) => sel({ config: configState }),
 }));
 

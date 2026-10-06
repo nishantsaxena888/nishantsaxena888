@@ -1,4 +1,4 @@
-import { RenderEngine } from "@/engine";
+import { RenderEngine } from "@/common/engine";
 import { AdminSkeleton } from "./admin-skeleton";
 import { useDashboardControl } from "./use-dashboard-control";
 import { NoConfigFound } from "@/components/admin/no-config-found";

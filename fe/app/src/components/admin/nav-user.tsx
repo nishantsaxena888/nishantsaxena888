@@ -22,7 +22,7 @@ import {
   LogOutIcon,
 } from "lucide-react";
 
-import { useAdmin } from "@/engine";
+import { useAdmin } from "@/common/engine";
 
 export function NavUser({
   user: propUser,

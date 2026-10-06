@@ -15,19 +15,34 @@ plus `fe/app/AGENTS.md` (the engine's hard rules — read it before touching
 
 ```
 fe/app/            generic engine (Vite + React + TS). Single package.json.
-  src/platform/    portability seams — primitives, navigation, storage,
+  src/common/      shared infra used by BOTH surfaces (site + admin):
+    platform/      portability seams — primitives, navigation, storage,
                    host, env, toast, icons, asset, report, mermaid
                    (web impls + .native.* RN variants; Metro resolves)
+                   sdk.ts = client SDK — still imported as @/platform/sdk
+                   (alias stays stable for fe/client); the ONLY engine
+                   surface fe/client/* code may import
+    engine/        render-engine, apiClient (mock→axios), use-entity CRUD,
+                   sessions reducers, use-dynamic-data, rbac
+    store/         config-store + generic-state sessions
+    hooks/ lib/    generic utils (cn, toast, confirm-dialog…)
+    types/ test/   contracts + test stubs
+  src/components/  surface-split UI:
+    admin/         admin-only (shell, core-component widgets, form-render,
+                   iterator, typography-renderer)
+    site/          site-only (public-renderer, home-page, dynamic-page,
+                   site-nav, loaders)
+    shared/        pure-common comps (providers, language-selector,
+                   form-input registry, loaders)
+    third-party-shadcn/  vendored shadcn lib (components.json points here)
   src/tenants/storefront/   component KIT (header, listing, course-list,
                    course-detail, chapter-reader, slide-engine,
                    session-list, entity-actions…) — template only, copied
                    into clients by `npm run client -- --new`; NOT a
                    runtime fallback
   src/tenants/layout/, src/tenants/admin/   layout kit + generic admin
-  src/platform/sdk.ts       client SDK — the ONLY engine surface
-                   fe/client/* code may import (@/platform/sdk)
-  src/engine/      render-engine, apiClient (mock→axios), use-entity CRUD,
-                   sessions reducers, use-dynamic-data
+  src/pages/       public/ (site) + protected/ (admin guard) + common
+  src/native/      Expo entry (site screens only)
   electron/        desktop shell — loads dist/ over file://
 fe/client/<name>/  configs/client.json (manifest)
                    web/ (tenant.ts + components/ = ALL site comps,

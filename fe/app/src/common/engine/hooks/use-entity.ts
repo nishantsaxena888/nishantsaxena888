@@ -1,8 +1,8 @@
  
 import { useState, useCallback, useEffect } from "react";
 import { apiClient } from "../library/api";
-import { useGenericState } from "@/store/use-generic-state";
-import { useConfigStore } from "@/store/use-config-store";
+import { useGenericState } from "@/common/store/use-generic-state";
+import { useConfigStore } from "@/common/store/use-config-store";
 import { isRegisteredSession, getSessionMatchKey } from "../library/reducers";
 import { currentRole, methodAllowed, type RbacSpec } from "../library/rbac";
 

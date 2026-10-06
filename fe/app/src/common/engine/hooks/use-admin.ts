@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNav } from "@/platform/navigation";
 import { emitAppEvent } from "@/platform/host";
-import { useConfigStore } from "@/store/use-config-store";
+import { useConfigStore } from "@/common/store/use-config-store";
 import { storage } from "@/platform/storage";
 
 export const useAdmin = () => {

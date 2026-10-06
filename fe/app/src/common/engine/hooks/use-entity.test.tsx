@@ -5,7 +5,7 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import { renderHook, waitFor } from "@testing-library/react";
 import { useEntity } from "./use-entity";
-import { useConfigStore } from "@/store/use-config-store";
+import { useConfigStore } from "@/common/store/use-config-store";
 import { useMemoryStorage } from "@/platform/storage";
 
 const api = vi.hoisted(() => ({ calls: [] as any[] }));

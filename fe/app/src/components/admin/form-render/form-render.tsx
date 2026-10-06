@@ -9,7 +9,7 @@ import { type TabLayoutFormClassNamesType } from "./utils/form-tabs-utils/tab-la
 import { type BlockClassNamesType } from "./utils/form-block";
 import { useFormLogic } from "./utils/use-form-logic";
 import { Button } from "@/components/third-party-shadcn/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 import type { LabelsType } from "./utils/form-tabs-utils/form-tab-footer";
 import { FormConfigProvider } from "./utils/use-form-config";
 import { useFormConfig } from "./utils/form-config-context";

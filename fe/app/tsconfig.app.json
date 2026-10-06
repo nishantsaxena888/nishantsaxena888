@@ -25,6 +25,10 @@
     "noUncheckedSideEffectImports": true,
 
     "paths": {
+      // Public seam for fe/client — stable path regardless of the
+      // physical location (src/common/platform/). Client code imports
+      // @/platform/* only (eslint-enforced); internals live in common/.
+      "@/platform/*": ["./src/common/platform/*"],
       "@/*": ["./src/*"],
       "nishify": ["./src/nishify.ts"],
       "@clients/*": ["../client/*"],

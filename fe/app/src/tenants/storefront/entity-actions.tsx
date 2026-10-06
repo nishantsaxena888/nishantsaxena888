@@ -7,7 +7,7 @@
 // method gates visibility through the entity's rbac spec (useEntity.can),
 // so a viewer never sees an admin-only chip. The backend enforces the
 // same spec server-side; this is the UI mirror.
-import { useEntity } from "@/engine";
+import { useEntity } from "@/common/engine";
 import { useNav } from "@/platform/navigation";
 import { Pressable, View } from "@/platform/primitives";
 

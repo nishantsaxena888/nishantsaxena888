@@ -5,7 +5,7 @@ import {
   DialogTitle,
 } from "@/components/third-party-shadcn/dialog";
 import { FormRender } from "@/components/admin/form-render";
-import { toast } from "@/lib/toast";
+import { toast } from "@/common/lib/toast";
 
 export const ManyToManyForm = ({
   openForm,

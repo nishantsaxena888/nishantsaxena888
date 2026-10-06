@@ -16,7 +16,7 @@
 import { useMemo } from "react";
 import { Text, View } from "@/platform/primitives";
 import { useLanguage } from "@/components/shared/use-language";
-import { useRenderEngine } from "@/engine/render-engine/features/render-engine-context";
+import { useRenderEngine } from "@/common/engine/render-engine/features/render-engine-context";
 import { parseMd, type MdSection } from "./md-sections";
 import { MdDoc, MdToc } from "./md-render";
 import { makeTr } from "./utils";

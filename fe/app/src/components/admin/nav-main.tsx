@@ -16,8 +16,8 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/third-party-shadcn/sidebar";
-import { cn } from "@/lib/utils";
-import { prefetchEntity } from "@/engine/library/api-cache";
+import { cn } from "@/common/lib/utils";
+import { prefetchEntity } from "@/common/engine/library/api-cache";
 
 import { type IconName, Icon } from "@/components/third-party-shadcn/icon-picker";
 import { dynamicIconImports } from "lucide-react/dynamic";

@@ -1,6 +1,6 @@
 import { Fragment } from "react/jsx-runtime";
 import { defaultFormat } from "./utils";
-import { getValueByPath } from "@/lib/get-value-by-path";
+import { getValueByPath } from "@/common/lib/get-value-by-path";
 
  
 export const DataRenderer = ({

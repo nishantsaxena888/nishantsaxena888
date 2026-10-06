@@ -1,6 +1,6 @@
 import { Button } from "@/components/third-party-shadcn/button";
 import { FormItrator } from "./form-itrator";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 import { ChevronDownIcon } from "lucide-react";
 import { useState } from "react";
 import { useFormConfig } from "./form-config-context";

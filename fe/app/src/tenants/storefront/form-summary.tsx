@@ -1,8 +1,8 @@
 import React from "react";
-import { useEntity } from "@/engine";
-import { useGenericState } from "@/store/use-generic-state";
-import { useConfigStore } from "@/store/use-config-store";
-import { toast } from "@/lib/toast";
+import { useEntity } from "@/common/engine";
+import { useGenericState } from "@/common/store/use-generic-state";
+import { useConfigStore } from "@/common/store/use-config-store";
+import { toast } from "@/common/lib/toast";
 import { useLanguage } from "@/components/shared/use-language";
 import { useNav } from "@/platform/navigation";
 import { Pressable, Text, TextInput, View } from "@/platform/primitives";

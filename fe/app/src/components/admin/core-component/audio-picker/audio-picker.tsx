@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 import { Play, Pause, Volume2, VolumeX, Upload, Link2, X, Music, Loader2 } from "lucide-react";
 import { Button } from "@/components/third-party-shadcn/button";
 import { Input } from "@/components/third-party-shadcn/input";

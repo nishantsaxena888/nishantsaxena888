@@ -11,7 +11,7 @@ import {
   TableHead,
 } from "@/components/third-party-shadcn/table";
 import { Checkbox } from "@/components/third-party-shadcn/checkbox";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 import { Pencil, Trash2 } from "lucide-react";
 import { Icon, type IconName } from "@/components/third-party-shadcn/icon-picker";
 import { Button } from "@/components/third-party-shadcn/button";

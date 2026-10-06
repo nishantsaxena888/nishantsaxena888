@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Badge } from "@/components/third-party-shadcn/badge";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 
 export interface SharedBadgeProps extends Omit<React.ComponentProps<typeof Badge>, "variant"> {
   variant?: "default" | "secondary" | "destructive" | "outline" | "ghost" | "link" | "success" | "warning" | "neutral";

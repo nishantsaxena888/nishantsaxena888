@@ -1,9 +1,9 @@
 import React from "react";
 import { Plus, LayoutGrid, List, FolderOpen } from "lucide-react";
 import { Button } from "@/components/third-party-shadcn/button";
-import { cn } from "@/lib/utils";
-import { useMediaManagerStore } from "@/store/use-media-manager";
-import { toast } from "@/lib/toast";
+import { cn } from "@/common/lib/utils";
+import { useMediaManagerStore } from "@/common/store/use-media-manager";
+import { toast } from "@/common/lib/toast";
 
 interface MediaHeaderProps {
   activePageName?: string;

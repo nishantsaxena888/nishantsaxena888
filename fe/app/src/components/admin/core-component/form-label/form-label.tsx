@@ -1,5 +1,5 @@
 import { Label as ShadcnLabel } from "@/components/third-party-shadcn/label";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 
 type LabelFieldProps = {
   htmlFor?: string;

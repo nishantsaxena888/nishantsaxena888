@@ -18,7 +18,7 @@ import {
 } from "@dnd-kit/sortable";
 import { Upload, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/third-party-shadcn/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 import { galleryStyles, type GalleryFile } from "./utils/gallery-style";
 import { GalleryItem } from "./gallery-item";
 

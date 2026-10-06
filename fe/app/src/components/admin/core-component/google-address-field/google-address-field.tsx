@@ -1,10 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 import { FormLabel } from "@/components/admin/core-component/form-label";
 import { SearchAutocomplete } from "@/components/admin/core-component/search-autocomplete";
-import { useGoogleAutocomplete } from "@/hooks/use-google-autocomplete";
+import { useGoogleAutocomplete } from "@/common/hooks/use-google-autocomplete";
 import { parseAddressComponents, type Address } from "./utils/google-api-utils";
 import { containerStyles } from "./utils/input-style";
 import { inputStyles } from "@/components/admin/core-component/input-field/utils/input-style";

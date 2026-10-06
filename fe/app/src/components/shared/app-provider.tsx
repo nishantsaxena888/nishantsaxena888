@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import StaticLoader from "./static-loader";
-import { useConfigStore } from "@/store/use-config-store";
-import { useGenericState } from "@/store/use-generic-state";
-import { apiClient } from "@/engine";
-import { buildConfigFromSessions } from "@/engine/library/reducers";
-import { currentRole, visibleByRole } from "@/engine/library/rbac";
+import { useConfigStore } from "@/common/store/use-config-store";
+import { useGenericState } from "@/common/store/use-generic-state";
+import { apiClient } from "@/common/engine";
+import { buildConfigFromSessions } from "@/common/engine/library/reducers";
+import { currentRole, visibleByRole } from "@/common/engine/library/rbac";
 import { onAppEvent } from "@/platform/host";
 
 type AppProviderProps = {

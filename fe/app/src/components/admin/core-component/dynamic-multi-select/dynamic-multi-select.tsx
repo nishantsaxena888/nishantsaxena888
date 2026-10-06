@@ -13,7 +13,7 @@ import {
   ComboboxValue,
   useComboboxAnchor,
 } from "@/components/third-party-shadcn/combobox";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 import { multiSelectStyles } from "../multi-select/utils/multi-select-style";
 import { useDynamicMultiSelect } from "./hooks/use-dynamic-multi-select";
 import { Spinner } from "@/components/third-party-shadcn/spinner";

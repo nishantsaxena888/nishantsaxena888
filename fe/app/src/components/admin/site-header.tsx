@@ -5,9 +5,9 @@ import { Palette, Settings2, Moon, Sun } from "lucide-react";
 import { useTheme } from "@/components/shared/use-theme";
 import { ThemeSwitcher } from "nishify";
 import { LanguageSwitcher } from "@/components/shared/language-selector";
-import { useFormStyleStore } from "@/store/use-form-style";
+import { useFormStyleStore } from "@/common/store/use-form-style";
 import { FormStyleSettings } from "@/tenants/admin/default-admin/utils/form-style-settings";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 
 export function SiteHeader({ activePage }: { activePage: any }) {
   const { theme, setTheme, themes } = useTheme();

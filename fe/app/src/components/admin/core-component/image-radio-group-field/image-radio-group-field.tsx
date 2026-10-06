@@ -2,7 +2,7 @@
 
 import { Input } from "@/components/third-party-shadcn/input";
 import * as React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 import { assetUrl } from "@/platform/asset";
 
 type Option = {

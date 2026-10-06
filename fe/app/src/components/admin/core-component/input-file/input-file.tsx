@@ -1,6 +1,6 @@
 import * as React from "react";
 import { UploadIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 type FileFieldProps = {
   value?: File | null;
   onChange?: (file: File | null) => void;

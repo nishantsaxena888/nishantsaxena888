@@ -3,12 +3,12 @@
 import { Tag, Truck, MapPin, Layers } from "lucide-react";
 import { useFormConfig } from "@/components/admin/form-render/utils/form-config-context";
 import { useManytoMany } from "./utils/use-many-to-many";
-import { useFormStyleStore } from "@/store/use-form-style";
+import { useFormStyleStore } from "@/common/store/use-form-style";
 import { DefaultPagination } from "@/tenants/admin/default-admin/utils/default-pagination";
 import { ItemsPerPageInfo } from "@/tenants/admin/default-admin/utils/item-per-page-info";
 import { IteratorModule } from "@/components/admin/iterator";
 import { AdminSkeleton } from "@/tenants/admin/default-admin/utils/admin-skeleton";
-import { toast } from "@/lib/toast";
+import { toast } from "@/common/lib/toast";
 import { ManyToManyForm } from "./utils/many-to-many-form";
 import { createPortal } from "react-dom";
 

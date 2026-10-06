@@ -2,11 +2,11 @@ import React from "react";
 import { Info, X, Calendar, User, Trash2, Upload } from "lucide-react";
 import { Input } from "@/components/third-party-shadcn/input";
 import { Button } from "@/components/third-party-shadcn/button";
-import { cn } from "@/lib/utils";
-import { toast } from "@/lib/toast";
+import { cn } from "@/common/lib/utils";
+import { toast } from "@/common/lib/toast";
 import { getDocIcon } from "./media-utils";
 import { assetUrl } from "@/platform/asset";
-import { useConfirmDialog } from "@/hooks/use-confirm-dialog";
+import { useConfirmDialog } from "@/common/hooks/use-confirm-dialog";
 
 interface MediaSidebarProps {
   selectedItem: any;

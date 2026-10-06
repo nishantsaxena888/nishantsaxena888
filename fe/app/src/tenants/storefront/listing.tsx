@@ -1,8 +1,8 @@
 import { Star } from "lucide-react";
-import { useEntity } from "@/engine";
-import { useConfigStore } from "@/store/use-config-store";
+import { useEntity } from "@/common/engine";
+import { useConfigStore } from "@/common/store/use-config-store";
 import { useLanguage } from "@/components/shared/use-language";
-import { toast } from "@/lib/toast";
+import { toast } from "@/common/lib/toast";
 import { Image, Pressable, Text, View } from "@/platform/primitives";
 import { listOf, money, makeTr } from "./utils";
 

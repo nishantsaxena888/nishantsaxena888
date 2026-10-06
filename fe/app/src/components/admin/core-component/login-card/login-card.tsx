@@ -6,7 +6,7 @@ import {
   CardDescription,
   CardFooter,
 } from "@/components/third-party-shadcn/card";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 import { cardStyles } from "./utils/card-style";
 
 type AppCardProps = {

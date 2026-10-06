@@ -1,7 +1,7 @@
 import React from "react";
-import { useEntity } from "@/engine";
-import { useConfigStore } from "@/store/use-config-store";
-import { toast } from "@/lib/toast";
+import { useEntity } from "@/common/engine";
+import { useConfigStore } from "@/common/store/use-config-store";
+import { toast } from "@/common/lib/toast";
 import { useLanguage } from "@/components/shared/use-language";
 import { listOf, money, makeTr } from "./utils";
 import { storage } from "@/platform/storage";

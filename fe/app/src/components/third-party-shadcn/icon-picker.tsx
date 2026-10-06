@@ -5,7 +5,7 @@ import { useState, useMemo, useCallback, useEffect } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/third-party-shadcn/popover";
 import { Button } from "@/components/third-party-shadcn/button";
 import { Input } from "@/components/third-party-shadcn/input";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 import { type LucideProps, type LucideIcon } from 'lucide-react';
 import { DynamicIcon, dynamicIconImports, type IconName } from 'lucide-react/dynamic';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/third-party-shadcn/tooltip";

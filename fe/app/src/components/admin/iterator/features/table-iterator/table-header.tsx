@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { TableHead } from "@/components/third-party-shadcn/table";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 import { ChevronDownIcon, ChevronUpIcon, ChevronsUpDownIcon } from "lucide-react";
 import { storage } from "@/platform/storage";
 

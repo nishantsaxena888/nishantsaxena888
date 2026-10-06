@@ -1,8 +1,8 @@
  
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { useGenericState } from "@/store/use-generic-state";
-import { useConfigStore } from "@/store/use-config-store";
-import { apiClient } from "@/engine";
+import { useGenericState } from "@/common/store/use-generic-state";
+import { useConfigStore } from "@/common/store/use-config-store";
+import { apiClient } from "@/common/engine";
 
 export interface PriceRules {
   tax_rate: number;

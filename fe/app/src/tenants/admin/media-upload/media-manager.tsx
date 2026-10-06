@@ -6,7 +6,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/third-party-shadcn/dialog";
-import { useMediaManagerStore } from "@/store/use-media-manager";
+import { useMediaManagerStore } from "@/common/store/use-media-manager";
 import { MediaUpload } from "./media-upload";
 
 export const MediaManager = () => {

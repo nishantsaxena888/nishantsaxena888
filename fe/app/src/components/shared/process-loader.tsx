@@ -1,4 +1,4 @@
-import { useProcess } from "@/store/use-process";
+import { useProcess } from "@/common/store/use-process";
 import { createPortal } from "react-dom";
 import { Spinner } from "@/components/third-party-shadcn/spinner";
 

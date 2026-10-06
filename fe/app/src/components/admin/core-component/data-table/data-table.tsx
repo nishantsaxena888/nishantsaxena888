@@ -34,10 +34,10 @@ import {
   type VisibilityState,
 } from "@tanstack/react-table"
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
-import { toast } from "@/lib/toast"
+import { toast } from "@/common/lib/toast"
 import { z } from "zod"
 
-import { useIsMobile } from "@/hooks/use-mobile"
+import { useIsMobile } from "@/common/hooks/use-mobile"
 import { SharedBadge } from "@/components/admin/core-component/badge/shared-badge"
 import { Button } from "@/components/third-party-shadcn/button"
 import {

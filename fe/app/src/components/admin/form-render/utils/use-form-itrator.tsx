@@ -1,4 +1,4 @@
-import { useRenderEngine } from "@/engine";
+import { useRenderEngine } from "@/common/engine";
 
 // Field visibility rules — `visible` on a form input. Accepts a single
 // rule {field, operator, value}, an array, or {conditions, logic:"AND"|"OR"}.

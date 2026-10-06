@@ -15,6 +15,7 @@ export default defineConfig({
     alias: {
       react: path.resolve(__dirname, "node_modules/react"),
       "react-dom": path.resolve(__dirname, "node_modules/react-dom"),
+      "@/platform": path.resolve(__dirname, "./src/common/platform"),
       "@": path.resolve(__dirname, "./src"),
       nishify: path.resolve(__dirname, "./src/nishify.ts"),
       "@clients": path.resolve(__dirname, "../client"),

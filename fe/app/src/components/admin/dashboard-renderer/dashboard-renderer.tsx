@@ -5,10 +5,10 @@ import { useDashboardRenderer } from "./utils/use-dashboard-renderer";
 import { SidebarInset, SidebarProvider } from "@/components/third-party-shadcn/sidebar";
 import { AppSidebar } from "@/components/admin/app-sidebar";
 import { SiteHeader } from "@/components/admin/site-header";
-import { useFormStyleStore } from "@/store/use-form-style";
+import { useFormStyleStore } from "@/common/store/use-form-style";
 import DashboardControl from "@/tenants/admin/default-admin/utils/dashboard-control";
 import { MediaManager } from "@/tenants/admin/media-upload/media-manager";
-import { AdminSurfaceProvider } from "@/engine";
+import { AdminSurfaceProvider } from "@/common/engine";
 
 export interface DashboardRendererProps {
   config: any;

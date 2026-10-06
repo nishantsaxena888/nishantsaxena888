@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 import { useFormConfig } from "../form-config-context";
 
 export type TabHeaderClassNamesType = {

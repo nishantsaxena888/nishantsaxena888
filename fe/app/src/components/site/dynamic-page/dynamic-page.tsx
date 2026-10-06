@@ -1,5 +1,5 @@
 import React from "react";
-import { RenderEngine } from "@/engine";
+import { RenderEngine } from "@/common/engine";
 
 interface DynamicPageProps {
   content: any;

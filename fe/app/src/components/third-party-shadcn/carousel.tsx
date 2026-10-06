@@ -3,7 +3,7 @@ import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/common/lib/utils"
 import { Button } from "@/components/third-party-shadcn/button"
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
 

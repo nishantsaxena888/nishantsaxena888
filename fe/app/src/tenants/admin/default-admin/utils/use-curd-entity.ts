@@ -1,6 +1,6 @@
-import { useEntity } from "@/engine";
-import { useConfirmDialog } from "@/hooks/use-confirm-dialog";
-import { useProcess } from "@/store/use-process";
+import { useEntity } from "@/common/engine";
+import { useConfirmDialog } from "@/common/hooks/use-confirm-dialog";
+import { useProcess } from "@/common/store/use-process";
 import { useState, useEffect } from "react";
 
 export const useCurdEntity = ({ config: extra, content }: any) => {

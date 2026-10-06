@@ -5,7 +5,7 @@ import {
   RadioGroup as BaseRadioGroup,
   RadioGroupItem,
 } from "@/components/third-party-shadcn/radio-group";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 type Option = {
   label: string;
   value: string;

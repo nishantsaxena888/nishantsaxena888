@@ -18,7 +18,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/third-party-shadcn/popover";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 import { ScrollArea } from "./scroll-area";
 
 type PhoneInputProps = Omit<

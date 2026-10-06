@@ -1,7 +1,7 @@
 import { FormRender } from "@/components/admin/form-render";
 import { ArrowLeft } from "lucide-react";
-import { toast } from "@/lib/toast";
-import { useFormStyleStore } from "@/store/use-form-style";
+import { toast } from "@/common/lib/toast";
+import { useFormStyleStore } from "@/common/store/use-form-style";
 import { Button } from "@/components/third-party-shadcn/button";
 
 export const DefaultEditModule = ({

@@ -9,7 +9,7 @@ import {
   ComboboxItem,
   ComboboxEmpty,
 } from "@/components/third-party-shadcn/combobox";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 import { dynamicSelectStyles } from "./utils/dynamic-select-style";
 import { useDynamicSelect } from "./hooks/use-dynamic-select";
 import { Spinner } from "@/components/third-party-shadcn/spinner";

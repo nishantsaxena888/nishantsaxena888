@@ -1,5 +1,5 @@
 import React from "react";
-import { useFormStyleStore } from "@/store/use-form-style";
+import { useFormStyleStore } from "@/common/store/use-form-style";
 import {
   Sheet,
   SheetContent,
@@ -24,7 +24,7 @@ import {
   Leaf,
   Sparkle,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 
 export const FormStyleSettings = () => {
   const {

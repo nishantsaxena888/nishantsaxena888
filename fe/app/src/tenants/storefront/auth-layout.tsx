@@ -1,7 +1,7 @@
 import React from "react";
-import { apiClient } from "@/engine";
+import { apiClient } from "@/common/engine";
 import { useLanguage } from "@/components/shared/use-language";
-import { toast } from "@/lib/toast";
+import { toast } from "@/common/lib/toast";
 import { makeTr } from "./utils";
 import { storage } from "@/platform/storage";
 import { useNav } from "@/platform/navigation";

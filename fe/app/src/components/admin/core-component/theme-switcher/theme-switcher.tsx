@@ -17,9 +17,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/third-party-shadcn/popover";
-import { cn } from "@/lib/utils";
+import { cn } from "@/common/lib/utils";
 import { switcherStyles } from "./utils/switcher-style";
-import { useConfigStore } from "@/store/use-config-store";
+import { useConfigStore } from "@/common/store/use-config-store";
 
 export function ThemeSwitcher({
   currentTheme,
