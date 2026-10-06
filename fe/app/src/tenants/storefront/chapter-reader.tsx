@@ -128,27 +128,26 @@ export default function ChapterReader({ content, actionData, session }: any) {
   };
 
   // Scrollspy — the context panel highlights the section in view, same as
-  // the source's LessonViewer → ContextPanel wiring.
-  const [activeSection, setActiveSection] = useState<string | null>(
-    slides?.[0]?.id ?? null,
-  );
-  // New chapter mounts = new page in the source — start at the top and
-  // reset the TOC highlight to its first section.
+  // the source's LessonViewer → ContextPanel wiring. `seen` is tagged with
+  // the chapter id so a sibling navigation falls back to the new
+  // chapter's first section instead of a stale id.
+  const [seen, setSeen] = useState<{ ch: any; id: string } | null>(null);
   const chapterId = chapter?.id;
+  const activeSection =
+    seen?.ch === chapterId ? seen.id : (slides?.[0]?.id ?? null);
+
+  // New chapter mounts = new page in the source — scroll back to top.
   useEffect(() => {
-    setActiveSection(slides?.[0]?.id ?? null);
     if (typeof window !== "undefined") window.scrollTo(0, 0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chapterId]);
 
   useEffect(() => {
     if (!slides?.length || typeof IntersectionObserver === "undefined") return;
-    if (!activeSection && slides[0]?.id) setActiveSection(slides[0].id);
     // highlight zone — narrow band like the source's scroll spy
     const spy = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
-          if (e.isIntersecting) setActiveSection(e.target.id);
+          if (e.isIntersecting) setSeen({ ch: chapter?.id, id: e.target.id });
         }
       },
       { rootMargin: "-80px 0px -60% 0px" },
@@ -181,6 +180,9 @@ export default function ChapterReader({ content, actionData, session }: any) {
       spy.disconnect();
       read.disconnect();
     };
+    // Re-attach only when the section list itself changes — session/content
+    // objects churn on every progress write and must not thrash observers.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slides]);
 
   const tb = content?.topbar;
