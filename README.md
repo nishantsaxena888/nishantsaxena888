@@ -7,7 +7,7 @@ client folder**, never by touching the engine. Modelled on `ns` (frontend),
 ```
 fe/
   app/                  ← GENERIC frontend (ns engine, stripped). Frozen.
-    src/tenants/active.ts      ← GENERATED: which client is live
+    src/common/tenants/active.ts      ← GENERATED: which client is live
     scripts/client.mjs         ← client switcher
   client/<name>/
     configs/client.json ← manifest (surfaces/styles/mock)
@@ -39,7 +39,7 @@ CLIENT_NAME=grocery .venv/bin/python -m uvicorn app:app --port 8100
 
 # frontend — pick the client with the switcher (Vite proxies /api → :8100)
 cd fe/app
-npm run client -- grocery   # rewrites src/tenants/active.ts
+npm run client -- grocery   # rewrites src/common/tenants/active.ts
 npm run dev                 # → http://localhost:5173 (site), /admin (admin)
 ```
 
@@ -101,7 +101,7 @@ Trim `mock/config.json` per endpoint or per method for mixed mode
 `response_type`, `status`, `delay`, `id`, `search_param`.
 
 Only the **active** client's `mock/` is bundled (generated glob in
-`fe/app/src/tenants/mock-active.ts`). Before browser testing, validate
+`fe/app/src/common/tenants/mock-active.ts`). Before browser testing, validate
 every flagged file exists:
 
 ```bash
@@ -190,7 +190,7 @@ CLIENT_NAME=uday .venv/bin/python -m uvicorn app:app --port 8100
 
 # 2. frontend — regenerate the tenant link
 cd fe/app
-npm run client -- uday        # rewrites src/tenants/{active,mock-active}.ts
+npm run client -- uday        # rewrites src/common/tenants/{active,mock-active}.ts
 # — swaps both surfaces: site comps, admin screens, styles, mocks
 # Vite hot-reloads automatically if `npm run dev` is running —
 # no restart needed.
