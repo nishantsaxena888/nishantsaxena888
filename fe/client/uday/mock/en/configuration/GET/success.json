@@ -179,6 +179,18 @@
     {
       "name": "Hindi",
       "code": "hi"
+    },
+    {
+      "name": "Spanish",
+      "code": "es"
+    },
+    {
+      "name": "German",
+      "code": "de"
+    },
+    {
+      "name": "Bengali",
+      "code": "bn"
     }
   ],
   "sessions": [
@@ -343,16 +355,16 @@
           },
           "content": {
             "hero": {
-              "badge": "\ud83d\ude80 Interactive Learning Platform",
+              "badge": "🚀 Interactive Learning Platform",
               "title_lead": "AWS Production",
               "title_accent": "Masterclass",
               "description": "Build, deploy, secure, scale, and operate a real AWS production environment. 47 chapters. One continuous project. From zero to production-ready architect.",
               "primary": {
-                "label": "\ud83d\ude80 Start Learning",
+                "label": "🚀 Start Learning",
                 "to": "/chapter/module-04"
               },
               "secondary": {
-                "label": "\ud83d\udcda Browse Chapters",
+                "label": "📚 Browse Chapters",
                 "to": "#categories"
               },
               "stats": [
@@ -376,26 +388,26 @@
             },
             "journey": {
               "title": "Your Learning Journey",
-              "subtitle": "A production-oriented path \u2014 each chapter solves a real problem that naturally introduces the next AWS service.",
+              "subtitle": "A production-oriented path — each chapter solves a real problem that naturally introduces the next AWS service.",
               "stages": [
-                "\ud83c\udfd7\ufe0f Build Network",
-                "\ud83d\udda5\ufe0f Launch App",
-                "\ud83e\udea3 Store Files",
-                "\ud83d\udd10 Secure Access",
-                "\u2696\ufe0f Load Balance",
-                "\ud83c\udf10 Add DNS",
-                "\ud83c\udf0d Add CDN",
-                "\ud83d\udcca Monitor",
-                "\ud83d\uddc3\ufe0f Database",
-                "\ud83d\udd10 Encrypt",
-                "\u26a1 Go Serverless",
-                "\ud83d\udce8 Messaging",
-                "\ud83d\ude80 Containers",
-                "\ud83d\udd04 CI/CD",
-                "\u2699\ufe0f IaC",
-                "\ud83d\udee1\ufe0f Protect",
-                "\ud83c\udfe2 Govern",
-                "\ud83e\udde0 GenAI"
+                "🏗️ Build Network",
+                "🖥️ Launch App",
+                "🪣 Store Files",
+                "🔐 Secure Access",
+                "⚖️ Load Balance",
+                "🌐 Add DNS",
+                "🌍 Add CDN",
+                "📊 Monitor",
+                "🗃️ Database",
+                "🔐 Encrypt",
+                "⚡ Go Serverless",
+                "📨 Messaging",
+                "🚀 Containers",
+                "🔄 CI/CD",
+                "⚙️ IaC",
+                "🛡️ Protect",
+                "🏢 Govern",
+                "🧠 GenAI"
               ],
               "tone": "alt"
             },
@@ -404,37 +416,37 @@
               "subtitle": "Not just documentation. A hands-on, interactive learning experience.",
               "cards": [
                 {
-                  "icon": "\ud83d\udda5\ufe0f",
+                  "icon": "🖥️",
                   "bg": "#fff7ed",
                   "title": "AWS Console Simulator",
                   "desc": "Navigate a simulated AWS Console with guided step-by-step instructions. Learn by doing."
                 },
                 {
-                  "icon": "\ud83d\udcbb",
+                  "icon": "💻",
                   "bg": "#eff6ff",
                   "title": "Interactive Terminal",
                   "desc": "Execute simulated AWS CLI, SAM, and CDK commands with realistic output in your browser."
                 },
                 {
-                  "icon": "\ud83d\udc68\u200d\ud83d\udcbb",
+                  "icon": "👨‍💻",
                   "bg": "#ecfdf5",
                   "title": "Code Editor",
                   "desc": "Write, run, and debug Lambda functions in Python, Node.js, and more with line-by-line explanations."
                 },
                 {
-                  "icon": "\ud83d\udcd0",
+                  "icon": "📐",
                   "bg": "#fffbeb",
                   "title": "Architecture Diagrams",
                   "desc": "Interactive diagrams where you click components to inspect event payloads and data flows."
                 },
                 {
-                  "icon": "\ud83d\udd27",
+                  "icon": "🔧",
                   "bg": "#fdf2f8",
                   "title": "Troubleshooting Labs",
                   "desc": "Real-world production incidents. Investigate logs, metrics, and IAM policies to find root causes."
                 },
                 {
-                  "icon": "\ud83c\udfa4",
+                  "icon": "🎤",
                   "bg": "#f5f3ff",
                   "title": "Interview Preparation",
                   "desc": "Beginner to Architect-level questions with short answers, deep explanations, and follow-ups."
@@ -447,7 +459,7 @@
               "subtitle": "Track your learning journey across all 47 chapters.",
               "stats": [
                 {
-                  "icon": "\ud83d\udcca",
+                  "icon": "📊",
                   "bg": "#fff7ed",
                   "fg": "#f97316",
                   "label": "Overall Progress",
@@ -456,35 +468,35 @@
                   "suffix": "%"
                 },
                 {
-                  "icon": "\u2328\ufe0f",
+                  "icon": "⌨️",
                   "bg": "#ecfdf5",
                   "fg": "#10b981",
                   "label": "Commands Executed",
                   "value": 0
                 },
                 {
-                  "icon": "\ud83e\udde0",
+                  "icon": "🧠",
                   "bg": "#eff6ff",
                   "fg": "#3b82f6",
                   "label": "Quizzes Taken",
                   "count_key": "quiz_submission"
                 },
                 {
-                  "icon": "\ud83d\udd2c",
+                  "icon": "🔬",
                   "bg": "#fffbeb",
                   "fg": "#f59e0b",
                   "label": "Labs Completed",
                   "value": 0
                 },
                 {
-                  "icon": "\ud83c\udfc6",
+                  "icon": "🏆",
                   "bg": "#fdf2f8",
                   "fg": "#ec4899",
                   "label": "Challenges Solved",
                   "value": 0
                 },
                 {
-                  "icon": "\ud83c\udf96\ufe0f",
+                  "icon": "🎖️",
                   "bg": "#f5f3ff",
                   "fg": "#8b5cf6",
                   "label": "Achievements",
@@ -495,7 +507,7 @@
             },
             "categories": {
               "title": "Course Categories",
-              "subtitle": "Choose a track \u2014 the AWS Production Masterclass or the Bedrock workbooks.",
+              "subtitle": "Choose a track — the AWS Production Masterclass or the Bedrock workbooks.",
               "path": "/courses",
               "param": "category",
               "item_label": "courses",
@@ -503,14 +515,14 @@
               "module_path": "/courses/:id",
               "card_actions": [
                 {
-                  "icon": "\u270f\ufe0f",
+                  "icon": "✏️",
                   "label": "Edit",
                   "opens": "detail",
                   "method": "put",
                   "path": "/admin/category"
                 },
                 {
-                  "icon": "\ud83d\uddd1",
+                  "icon": "🗑",
                   "label": "Delete",
                   "method": "delete",
                   "confirm": "Delete {title}?"
@@ -518,7 +530,7 @@
               ]
             },
             "footer": {
-              "line1": "AWS Production Masterclass \u2014 Interactive Learning Platform",
+              "line1": "AWS Production Masterclass — Interactive Learning Platform",
               "line2": "Built for learning. Content sourced from AWS documentation and rewritten for interactive instruction.\nAWS, Lambda, and other AWS service names are trademarks of Amazon Web Services, Inc."
             },
             "achievements": {
@@ -533,7 +545,7 @@
     },
     "courses": {
       "meta": {
-        "title": "Courses \u2014 Uday"
+        "title": "Courses — Uday"
       },
       "config": [
         {
@@ -573,19 +585,19 @@
             "title": "All Courses",
             "detail_path": "/courses",
             "back": {
-              "label": "\u2190 Back to Course",
+              "label": "← Back to Course",
               "to": "/"
             },
             "entity": "course",
             "card_actions": [
               {
-                "icon": "\u270f\ufe0f",
+                "icon": "✏️",
                 "label": "Edit",
                 "opens": "detail",
                 "method": "put"
               },
               {
-                "icon": "\ud83d\uddd1",
+                "icon": "🗑",
                 "label": "Delete",
                 "method": "delete",
                 "confirm": "Delete {title}?"
@@ -593,7 +605,7 @@
             ],
             "show_status": false,
             "filter_note": false,
-            "meta_icon": "\ud83d\udcc4",
+            "meta_icon": "📄",
             "category_eyebrow": "Course Category"
           }
         }
@@ -601,7 +613,7 @@
     },
     "course": {
       "meta": {
-        "title": "Course \u2014 Uday"
+        "title": "Course — Uday"
       },
       "config": [
         {
@@ -643,13 +655,13 @@
             "reader_path": "/chapter",
             "row_actions": [
               {
-                "icon": "\u270f\ufe0f",
+                "icon": "✏️",
                 "label": "Edit",
                 "opens": "detail",
                 "method": "put"
               },
               {
-                "icon": "\ud83d\uddd1",
+                "icon": "🗑",
                 "label": "Delete",
                 "method": "delete",
                 "confirm": "Delete {title}?"
@@ -661,7 +673,7 @@
     },
     "learn": {
       "meta": {
-        "title": "Learn \u2014 Uday"
+        "title": "Learn — Uday"
       },
       "config": [
         {
@@ -722,7 +734,7 @@
             "back_path": "/courses",
             "toc": true,
             "topbar": {
-              "logo": "\ud83d\ude80 Masterclass",
+              "logo": "🚀 Masterclass",
               "title_tpl": "Chapter {no}: {title}",
               "home": "/",
               "dark_theme": "uday-dark",
@@ -731,14 +743,14 @@
             "reader_path": "/chapter",
             "chapter_actions": [
               {
-                "icon": "\u270f\ufe0f",
+                "icon": "✏️",
                 "label": "Edit chapter",
                 "opens": "detail",
                 "method": "put",
                 "path": "/admin/chapter"
               },
               {
-                "icon": "\ud83d\uddd1",
+                "icon": "🗑",
                 "label": "Delete chapter",
                 "method": "delete",
                 "confirm": "Delete {title}?"
@@ -750,7 +762,7 @@
     },
     "my-learning": {
       "meta": {
-        "title": "My Learning \u2014 Uday"
+        "title": "My Learning — Uday"
       },
       "config": [
         {
@@ -761,7 +773,7 @@
             "type": "static"
           },
           "content": {
-            "label": "\u2190 Back to Home",
+            "label": "← Back to Home",
             "to": "/"
           }
         },
@@ -814,7 +826,7 @@
     },
     "guide": {
       "meta": {
-        "title": "Guide \u2014 Uday"
+        "title": "Guide — Uday"
       },
       "config": [
         {
@@ -825,7 +837,7 @@
             "type": "static"
           },
           "content": {
-            "label": "\u2190 Back to Home",
+            "label": "← Back to Home",
             "to": "/"
           }
         },
@@ -839,7 +851,7 @@
           "content": {
             "title": "Authoring in md++",
             "toc": true,
-            "markdown": "# Guide\n\n## 1. Overview\n\nPages are **JSON definitions**; content is `markdown + embedded directives` \u2014 *no code per page*.\n\n> **Note** \u2014 blocks like this are plain blockquotes.\n\n<InfoCard title=\"Reusable\">\nDirectives become real widgets.\n</InfoCard>\n\n## 2. Quiz\n\n<Quiz question=\"Where does page content live?\" options={[\"in code\",\"in configuration + content\"]} answerIndex={1} explanation=\"Pages are defs; md++ supplies content.\"/>\n\n## 3. Custom widgets\n\nClients register `md-<tag>` comps; unregistered tags degrade to callouts.\n\n<GitHubExplorer repo=\"nishantsaxena888/platform\" ref=\"nishant\" files={[\"fe/app/src/tenants/storefront/md-render.tsx\"]}/>\n\n- lists\n- code\n```bash\nnpm run e2e\n```"
+            "markdown": "# Guide\n\n## 1. Overview\n\nPages are **JSON definitions**; content is `markdown + embedded directives` — *no code per page*.\n\n> **Note** — blocks like this are plain blockquotes.\n\n<InfoCard title=\"Reusable\">\nDirectives become real widgets.\n</InfoCard>\n\n## 2. Quiz\n\n<Quiz question=\"Where does page content live?\" options={[\"in code\",\"in configuration + content\"]} answerIndex={1} explanation=\"Pages are defs; md++ supplies content.\"/>\n\n## 3. Custom widgets\n\nClients register `md-<tag>` comps; unregistered tags degrade to callouts.\n\n<GitHubExplorer repo=\"nishantsaxena888/platform\" ref=\"nishant\" files={[\"fe/app/src/tenants/storefront/md-render.tsx\"]}/>\n\n- lists\n- code\n```bash\nnpm run e2e\n```"
           }
         }
       ]
@@ -847,24 +859,24 @@
   },
   "translations": {
     "common.close": "Close",
-    "common.backToCourse": "\u2190 Back to Course",
+    "common.backToCourse": "← Back to Course",
     "sidebar.modules": "Modules",
     "ctx.onThisPage": "On This Page",
-    "lesson.markAsRead": "\u2610 Mark as Read",
-    "lesson.sectionComplete": "\u2705 Section Complete",
+    "lesson.markAsRead": "☐ Mark as Read",
+    "lesson.sectionComplete": "✅ Section Complete",
     "quiz.questionOf": "Question {i} of {n}",
     "quiz.checkAnswer": "Check Answer",
-    "quiz.previous": "\u2190 Previous",
-    "quiz.next": "Next \u2192",
-    "quiz.finish": "\u2713 Finish Quiz",
+    "quiz.previous": "← Previous",
+    "quiz.next": "Next →",
+    "quiz.finish": "✓ Finish Quiz",
     "quiz.results": "Quiz Results",
-    "quiz.correct": "\u2705 Correct!",
-    "quiz.incorrect": "\u274c Incorrect",
-    "quiz.retry": "\ud83d\udd04 Retry",
+    "quiz.correct": "✅ Correct!",
+    "quiz.incorrect": "❌ Incorrect",
+    "quiz.retry": "🔄 Retry",
     "quiz.correctOf": "{c} of {t} correct",
     "lab.progress": "In progress",
-    "lab.markComplete": "\u2713 Mark Complete",
-    "lab.complete": "\u2705 Complete",
+    "lab.markComplete": "✓ Mark Complete",
+    "lab.complete": "✅ Complete",
     "challenge.allPassed": "All Tests Passed!",
     "popup.detailedChapter": "Detailed Chapter",
     "popup.labNotes": "Lab Notes",
@@ -872,7 +884,7 @@
     "nav.courses": "Courses",
     "nav.myLearning": "My Learning",
     "lesson.objectives": "Learning Objectives",
-    "common.loading": "Loading\u2026",
+    "common.loading": "Loading…",
     "lesson.requires": "Requires:",
     "common.chapter": "Chapter",
     "common.emptyContent": "No content yet.",

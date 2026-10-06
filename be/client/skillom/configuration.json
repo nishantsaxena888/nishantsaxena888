@@ -168,6 +168,18 @@
     {
       "name": "Hindi",
       "code": "hi"
+    },
+    {
+      "name": "Spanish",
+      "code": "es"
+    },
+    {
+      "name": "German",
+      "code": "de"
+    },
+    {
+      "name": "Bengali",
+      "code": "bn"
     }
   ],
   "sessions": [
