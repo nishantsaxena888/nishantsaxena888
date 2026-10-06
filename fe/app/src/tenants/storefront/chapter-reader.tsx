@@ -12,6 +12,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNav } from "@/platform/navigation";
 import { useLanguage } from "@/components/shared/use-language";
+import { LanguageSwitcher } from "@/components/core-component/language-selector/language-switcher";
 import { useTheme } from "@/components/shared/use-theme";
 import { Pressable, Text, View } from "@/platform/primitives";
 import { useRenderEngine } from "@/engine/render-engine/features/render-engine-context";
@@ -244,6 +245,11 @@ export default function ChapterReader({ content, actionData, session }: any) {
                   actionData?.action?.({ key: "chapter", type: "reload" })
                 }
               />
+            )}
+            {tb.language_picker && (
+              <View className="topbar-lang">
+                <LanguageSwitcher />
+              </View>
             )}
             {tb.theme_toggle !== false && (
               <Pressable

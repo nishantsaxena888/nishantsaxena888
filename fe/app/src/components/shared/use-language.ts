@@ -17,7 +17,7 @@ export const LANGUAGES: Language[] = [
 
 export const FLAGS: Record<string, string> = {
     en: "🇺🇸", hi: "🇮🇳", es: "🇪🇸", fr: "🇫🇷", de: "🇩🇪",
-    ar: "🇸🇦", pt: "🇧🇷", ja: "🇯🇵", zh: "🇨🇳",
+    ar: "🇸🇦", pt: "🇧🇷", ja: "🇯🇵", zh: "🇨🇳", bn: "🇧🇩",
 };
 
 export interface LanguageContextType {

@@ -738,7 +738,8 @@
               "title_tpl": "Chapter {no}: {title}",
               "home": "/",
               "dark_theme": "uday-dark",
-              "light_theme": "default"
+              "light_theme": "default",
+              "language_picker": true
             },
             "reader_path": "/chapter",
             "chapter_actions": [

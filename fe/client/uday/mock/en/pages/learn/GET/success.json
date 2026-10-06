@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Learn \u2014 Uday"
+    "title": "Learn — Uday"
   },
   "config": [
     {
@@ -61,23 +61,24 @@
         "back_path": "/courses",
         "toc": true,
         "topbar": {
-          "logo": "\ud83d\ude80 Masterclass",
+          "logo": "🚀 Masterclass",
           "title_tpl": "Chapter {no}: {title}",
           "home": "/",
           "dark_theme": "uday-dark",
-          "light_theme": "default"
+          "light_theme": "default",
+          "language_picker": true
         },
         "reader_path": "/chapter",
         "chapter_actions": [
           {
-            "icon": "\u270f\ufe0f",
+            "icon": "✏️",
             "label": "Edit chapter",
             "opens": "detail",
             "method": "put",
             "path": "/admin/chapter"
           },
           {
-            "icon": "\ud83d\uddd1",
+            "icon": "🗑",
             "label": "Delete chapter",
             "method": "delete",
             "confirm": "Delete {title}?"
