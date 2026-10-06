@@ -256,13 +256,13 @@ export default function ChapterReader({ content, actionData, session }: any) {
                 className="topbar-btn topbar-btn-theme"
                 onPress={() =>
                   setTheme(
-                    theme === (tb.dark_theme || "uday-dark")
+                    theme === (tb.dark_theme || "dark")
                       ? tb.light_theme || "default"
-                      : tb.dark_theme || "uday-dark",
+                      : tb.dark_theme || "dark",
                   )
                 }
               >
-                {theme === (tb.dark_theme || "uday-dark") ? "☀️" : "🌙"}
+                {theme === (tb.dark_theme || "dark") ? "☀️" : "🌙"}
               </Pressable>
             )}
             {siblings.length > 0 && (
