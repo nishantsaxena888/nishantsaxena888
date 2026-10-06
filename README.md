@@ -58,8 +58,10 @@ line in `fe/app/package.json` scripts (that's intentional).
 | Client | Kind | Site pages | Admin entities | Admin landing |
 |---|---|---|---|---|
 | `hello` | smoke test | `/` | overview, todo | `hello-overview` — todo counts |
-| `grocery` | e-commerce | `/`, `/shop`, `/deals` | overview, product, category, order, customer | `grocery-overview` — revenue/stock stats |
-| `uday` | learning | `/`, `/courses`, `/lessons` | overview, course, lesson, quiz | `uday-overview` — course/lesson/quiz rollup |
+| `grocery` | e-commerce | `/`, `/shop`, `/deals`, `/cart`, `/checkout`, `/my-account` + auth | overview, product, category, order, customer | `grocery-overview` — revenue/stock stats |
+| `airbnb` | stays | `/`, `/stays`, `/stays/:id`, `/wishlist` | overview, listing, host, booking, review, amenity | generic overview |
+| `uday` | learning | `/`, `/courses`, `/courses/:id`, `/chapter/:slug`, `/my-learning`, `/guide` | overview, category, course, chapter, revision, review-queue, course_release + user data | `uday-overview` — course/chapter/revision rollup |
+| `skillom` | learning | `/`, `/courses`, `/courses/:id`, `/learn/:id`, `/my-learning` | overview, category, course, chapter, revision, review-queue + user data | generic overview |
 
 Each client has **its own site and admin**: site comps live in
 `fe/client/<name>/site/`, admin comps in `fe/client/<name>/admin/`
@@ -83,7 +85,8 @@ API. Flag absent or false → real API. Flagged but file missing → 404
 
 ```bash
 # regenerate a client's whole mock tree from its backend definition
-python be/tools/gen_mocks.py hello grocery uday
+# (skip grocery — its mock tree is hand-maintained; regen overwrites it)
+python be/tools/gen_mocks.py hello uday
 ```
 
 The generator flags **every** endpoint+method — the client runs fully
@@ -124,19 +127,49 @@ configuration.json with a working todo entity). Then:
 That's it — no engine code changes. Pages come from `pages` defs
 (`def.type` → component), admin screens come from entity OPTIONS.
 
-## Verify
+## Platforms
 
-With the three dev servers running (parallel section above):
+The same engine serves three surfaces:
 
 ```bash
-cd fe/app
-node scripts/smoke-ui.mjs    # headless Chromium — all 21 routes
-node scripts/check-mocks.mjs # offline: every flagged mock has a file
+# web — npm run dev (multi-client lazy loads in dev)
+# desktop — Electron shell over the same bundle
+cd fe/app && npm run build:desktop && npm run electron
+# mobile — Expo app in fe/native (site surfaces; admin is DOM-only)
+cd fe/native && npm install && npm run start
 ```
 
-The smoke test renders every site page and every `admin_menu` entity page
-for all three clients, failing on console errors, page errors, or 404s —
-including the expected not-found route.
+Shared code targets the `src/platform/` seams (primitives, navigation,
+storage, host, env, icons, mermaid…) — web impls on one side, `.native.*`
+RN variants on the other.
+
+## Capabilities
+
+- **Sessions**: configured client-side collections (`progress`, `bookmark`,
+  `recent`, `cart`…) — components read/write via the `session` prop bridge.
+- **RBAC + CRUD**: `roles` in configuration + per-entity `rbac` in
+  entities.py; enforced by the backend, mirrored in OPTIONS →
+  `useEntity.can()`; generic `RowActions` (`row_actions`/`card_actions`
+  in page defs).
+- **Themes**: `themes` + `style-config/<theme>` mocks set CSS vars on
+  `:root` + a `theme-<name>` class on `<html>` (uday ships `uday-dark`).
+- **Languages**: `language[]` per client — uday/skillom have
+  en/hi/es/de/bn; per-endpoint mock fallback to `en`. Content translation
+  workflow: `docs/antigravity-course-translation-prompt.md`.
+
+## Verify
+
+```bash
+./verify.sh                        # tsc + lint + unit — ALL CHECKS PASS
+cd fe/app && npm run e2e           # all clients, routes + flows — ALL E2E PASS
+cd fe/app && node scripts/check-mocks.mjs   # offline: every flagged mock has a file
+cd fe/app && node scripts/smoke-ui.mjs      # headless Chromium smoke
+```
+
+The e2e suite renders every site page and every `admin_menu` entity page
+for all clients plus interaction flows (quiz answers, session writes,
+review-queue transitions, admin CRUD), failing on console errors, page
+errors, or 404s — including the expected not-found route.
 
 ## Switch client
 
@@ -160,7 +193,9 @@ npm run client -- uday        # rewrites src/tenants/{active,mock-active}.ts
 |---|---|---|
 | Hello | `hello` | `hello` |
 | Grocery | `grocery` | `grocery` |
+| Airbnb | `airbnb` | `airbnb` |
 | Uday | `uday` | `uday` |
+| Skillom | `skillom` | `skillom` |
 
 The names always match: `fe/client/<name>` and `be/client/<name>` are the
 same `<name>`.
