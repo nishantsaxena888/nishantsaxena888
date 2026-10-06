@@ -6,16 +6,16 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
+} from "@/components/third-party-shadcn/popover";
+import { Input } from "@/components/third-party-shadcn/input";
+import { Button } from "@/components/third-party-shadcn/button";
+import { ScrollArea } from "@/components/third-party-shadcn/scroll-area";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "@/components/ui/input-group";
+} from "@/components/third-party-shadcn/input-group";
 import { EMOJI_DATA, type Emoji } from "./utils/emoji-data";
 import { Smile, Search } from "lucide-react";
 

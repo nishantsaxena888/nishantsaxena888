@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Slider } from "@/components/ui/slider";
+import { Slider } from "@/components/third-party-shadcn/slider";
 import { cn } from "@/lib/utils";
 interface RangeSliderProps {
   value?: number[];

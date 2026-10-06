@@ -1,4 +1,4 @@
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/third-party-shadcn/skeleton";
 
 export const AdminSkeleton = () => {
   return (

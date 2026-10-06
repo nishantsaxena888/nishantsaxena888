@@ -1,6 +1,6 @@
 "use client";
 
-import { IconPicker as UIIconPicker, type IconName } from "@/components/ui/icon-picker";
+import { IconPicker as UIIconPicker, type IconName } from "@/components/third-party-shadcn/icon-picker";
 
 interface IconPickerProps {
     value?: string;

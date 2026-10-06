@@ -1,7 +1,7 @@
 import React from "react";
 import { Anchor, Pressable } from "@/platform/primitives";
 import { useNav } from "@/platform/navigation";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/third-party-shadcn/button";
 import { Home, ArrowLeft, Ghost } from "lucide-react";
 
 export const NotFound = () => {

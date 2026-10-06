@@ -5,7 +5,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from "@/components/ui/dialog";
+} from "@/components/third-party-shadcn/dialog";
 import { useMediaManagerStore } from "@/store/use-media-manager";
 import { MediaUpload } from "./media-upload";
 

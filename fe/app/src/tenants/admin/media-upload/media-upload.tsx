@@ -1,7 +1,7 @@
 import React from "react";
 import { Upload, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/third-party-shadcn/button";
 
 import { useMediaUpload } from "./hooks/use-media-upload";
 import { MediaHeader } from "./components/media-header";

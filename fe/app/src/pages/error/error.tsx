@@ -4,7 +4,7 @@ import { reloadApp } from "@/platform/host";
 import { motion, AnimatePresence } from "framer-motion";
 import { AlertCircle, ArrowLeft, RefreshCw, ChevronDown, ChevronUp, Terminal } from "lucide-react";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/third-party-shadcn/button";
 
 export const Error = () => {
     const error: any = useRouteError();

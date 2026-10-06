@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Check, ChevronDown, Palette } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/third-party-shadcn/button";
 import {
   Command,
   CommandEmpty,
@@ -11,12 +11,12 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from "@/components/third-party-shadcn/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/components/third-party-shadcn/popover";
 import { cn } from "@/lib/utils";
 import { switcherStyles } from "./utils/switcher-style";
 import { useConfigStore } from "@/store/use-config-store";

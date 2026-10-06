@@ -1,6 +1,6 @@
 import { useProcess } from "@/store/use-process";
 import { createPortal } from "react-dom";
-import { Spinner } from "@/components/ui/spinner";
+import { Spinner } from "@/components/third-party-shadcn/spinner";
 
 export const ProcessLoader = () => {
   const { process } = useProcess();

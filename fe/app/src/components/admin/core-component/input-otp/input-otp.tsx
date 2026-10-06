@@ -6,7 +6,7 @@ import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from "@/components/ui/input-otp";
+} from "@/components/third-party-shadcn/input-otp";
 type OtpFieldProps = {
   value?: string;
   onChange?: (value: string) => void;

@@ -8,8 +8,8 @@ import { useFormStyleStore } from "@/store/use-form-style";
 import { useCurdEntity } from "./utils/use-curd-entity";
 import { useState, useEffect } from "react";
 import { useNav } from "@/platform/navigation";
-import { Button } from "@/components/ui/button";
-import { Icon, type IconName } from "@/components/ui/icon-picker";
+import { Button } from "@/components/third-party-shadcn/button";
+import { Icon, type IconName } from "@/components/third-party-shadcn/icon-picker";
 import {
   exportCsv,
   runDeclarativeAction,

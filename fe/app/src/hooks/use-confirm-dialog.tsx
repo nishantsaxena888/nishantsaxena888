@@ -9,7 +9,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+} from "@/components/third-party-shadcn/alert-dialog";
 import { useState, useCallback } from "react";
 
 type ConfirmOptions = {

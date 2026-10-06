@@ -9,12 +9,12 @@ import {
   TableHeader,
   TableRow,
   TableHead,
-} from "@/components/ui/table";
-import { Checkbox } from "@/components/ui/checkbox";
+} from "@/components/third-party-shadcn/table";
+import { Checkbox } from "@/components/third-party-shadcn/checkbox";
 import { cn } from "@/lib/utils";
 import { Pencil, Trash2 } from "lucide-react";
-import { Icon, type IconName } from "@/components/ui/icon-picker";
-import { Button } from "@/components/ui/button";
+import { Icon, type IconName } from "@/components/third-party-shadcn/icon-picker";
+import { Button } from "@/components/third-party-shadcn/button";
 
 export const TableIterator = ({
   visibleColumns,

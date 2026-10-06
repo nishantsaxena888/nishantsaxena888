@@ -5,7 +5,7 @@ import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+} from "@/components/third-party-shadcn/collapsible";
 import {
   SidebarGroup,
   SidebarMenu,
@@ -15,11 +15,11 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from "@/components/ui/sidebar";
+} from "@/components/third-party-shadcn/sidebar";
 import { cn } from "@/lib/utils";
 import { prefetchEntity } from "@/engine/library/api-cache";
 
-import { type IconName, Icon } from "@/components/ui/icon-picker";
+import { type IconName, Icon } from "@/components/third-party-shadcn/icon-picker";
 import { dynamicIconImports } from "lucide-react/dynamic";
 
 interface NavItem {

@@ -3,7 +3,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from "@/components/third-party-shadcn/dialog";
 import { FormRender } from "@/components/admin/form-render";
 import { toast } from "@/lib/toast";
 

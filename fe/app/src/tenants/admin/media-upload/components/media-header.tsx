@@ -1,6 +1,6 @@
 import React from "react";
 import { Plus, LayoutGrid, List, FolderOpen } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/third-party-shadcn/button";
 import { cn } from "@/lib/utils";
 import { useMediaManagerStore } from "@/store/use-media-manager";
 import { toast } from "@/lib/toast";

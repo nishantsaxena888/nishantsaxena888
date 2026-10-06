@@ -23,7 +23,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
+} from "@/components/third-party-shadcn/sidebar";
 
 const iconMap: Record<string, React.ReactNode> = {
   home: <LayoutDashboardIcon />,

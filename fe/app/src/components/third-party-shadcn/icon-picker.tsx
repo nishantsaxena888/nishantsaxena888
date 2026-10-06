@@ -2,16 +2,16 @@
 
 import * as React from "react";
 import { useState, useMemo, useCallback, useEffect } from "react";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/third-party-shadcn/popover";
+import { Button } from "@/components/third-party-shadcn/button";
+import { Input } from "@/components/third-party-shadcn/input";
 import { cn } from "@/lib/utils";
 import { type LucideProps, type LucideIcon } from 'lucide-react';
 import { DynamicIcon, dynamicIconImports, type IconName } from 'lucide-react/dynamic';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/third-party-shadcn/tooltip";
 import type { IconData } from "./icons-data";
 import { useVirtualizer, type VirtualItem } from '@tanstack/react-virtual';
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/third-party-shadcn/skeleton";
 import Fuse from 'fuse.js';
 import { useDebounceValue } from "usehooks-ts";
 

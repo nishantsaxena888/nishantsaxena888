@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Button } from "@/components/third-party-shadcn/button";
+import { Separator } from "@/components/third-party-shadcn/separator";
+import { SidebarTrigger } from "@/components/third-party-shadcn/sidebar";
 import { Palette, Settings2, Moon, Sun } from "lucide-react";
 import { useTheme } from "@/components/shared/use-theme";
 import { ThemeSwitcher } from "nishify";

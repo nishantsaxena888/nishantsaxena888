@@ -12,7 +12,7 @@ import {
   ComboboxList,
   ComboboxValue,
   useComboboxAnchor,
-} from "@/components/ui/combobox";
+} from "@/components/third-party-shadcn/combobox";
 import { cn } from "@/lib/utils";
 type Option = {
   label: string;

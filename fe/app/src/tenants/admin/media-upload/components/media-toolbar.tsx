@@ -1,7 +1,7 @@
 import React from "react";
 import { Search, Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/components/third-party-shadcn/button";
+import { Input } from "@/components/third-party-shadcn/input";
 
 interface MediaToolbarProps {
   filterType: string;

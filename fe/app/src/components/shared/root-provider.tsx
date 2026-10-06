@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/third-party-shadcn/tooltip";
+import { Toaster } from "@/components/third-party-shadcn/sonner";
 import { ProcessLoader } from "./process-loader";
 import { LanguageProvider } from "./language-provider";
 import { ThemeProvider } from "./theme-provider";

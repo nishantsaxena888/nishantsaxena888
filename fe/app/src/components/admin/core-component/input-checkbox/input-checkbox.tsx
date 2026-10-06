@@ -1,5 +1,5 @@
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/third-party-shadcn/checkbox";
+import { Label } from "@/components/third-party-shadcn/label";
 import { cn } from "@/lib/utils";
 import * as React from "react";
 

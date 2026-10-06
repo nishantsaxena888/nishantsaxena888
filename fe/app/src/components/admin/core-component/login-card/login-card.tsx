@@ -5,7 +5,7 @@ import {
   CardTitle,
   CardDescription,
   CardFooter,
-} from "@/components/ui/card";
+} from "@/components/third-party-shadcn/card";
 import { cn } from "@/lib/utils";
 import { cardStyles } from "./utils/card-style";
 

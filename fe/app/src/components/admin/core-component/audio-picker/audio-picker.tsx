@@ -3,9 +3,9 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Play, Pause, Volume2, VolumeX, Upload, Link2, X, Music, Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Slider } from "@/components/ui/slider";
+import { Button } from "@/components/third-party-shadcn/button";
+import { Input } from "@/components/third-party-shadcn/input";
+import { Slider } from "@/components/third-party-shadcn/slider";
 import { formatTime, isValidAudioFile, isValidFileSize } from "./utils/audio-utils";
 
 interface AudioPickerProps {

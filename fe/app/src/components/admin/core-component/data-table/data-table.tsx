@@ -39,13 +39,13 @@ import { z } from "zod"
 
 import { useIsMobile } from "@/hooks/use-mobile"
 import { SharedBadge } from "@/components/admin/core-component/badge/shared-badge"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/third-party-shadcn/button"
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
-} from "@/components/ui/chart"
+} from "@/components/third-party-shadcn/chart"
 import { InputCheckbox } from "@/components/admin/core-component/input-checkbox/input-checkbox"
 import {
   Drawer,
@@ -56,19 +56,19 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/drawer"
+} from "@/components/third-party-shadcn/drawer"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
+} from "@/components/third-party-shadcn/dropdown-menu"
+import { Input } from "@/components/third-party-shadcn/input"
 import { SharedActionMenu } from "@/components/admin/core-component/action-menu/action-menu"
 import { SharedPagination } from "@/components/admin/core-component/pagination/shared-pagination"
-import { Label } from "@/components/ui/label"
+import { Label } from "@/components/third-party-shadcn/label"
 import { SharedInlineSelect } from "@/components/admin/core-component/inline-select/inline-select"
-import { Separator } from "@/components/ui/separator"
+import { Separator } from "@/components/third-party-shadcn/separator"
 import {
   Table,
   TableBody,
@@ -76,13 +76,13 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@/components/third-party-shadcn/table"
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/components/ui/tabs"
+} from "@/components/third-party-shadcn/tabs"
 import { GripVerticalIcon, CircleCheckIcon, LoaderIcon, Columns3Icon, ChevronDownIcon, PlusIcon, TrendingUpIcon } from "lucide-react"
 
 const schema = z.object({

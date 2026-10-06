@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from "@/components/third-party-shadcn/textarea";
 import { cn } from "@/lib/utils";
 
 type TextAreaFieldProps = {

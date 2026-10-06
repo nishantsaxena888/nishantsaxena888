@@ -17,7 +17,7 @@ import {
   rectSortingStrategy,
 } from "@dnd-kit/sortable";
 import { Upload, Plus, Trash2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/third-party-shadcn/button";
 import { cn } from "@/lib/utils";
 import { galleryStyles, type GalleryFile } from "./utils/gallery-style";
 import { GalleryItem } from "./gallery-item";

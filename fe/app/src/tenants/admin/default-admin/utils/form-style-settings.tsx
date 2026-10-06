@@ -5,10 +5,10 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
+} from "@/components/third-party-shadcn/sheet";
+import { Button } from "@/components/third-party-shadcn/button";
+import { Label } from "@/components/third-party-shadcn/label";
+import { Slider } from "@/components/third-party-shadcn/slider";
 import {
   Settings2,
   RotateCcw,

@@ -1,18 +1,18 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from "@/components/third-party-shadcn/calendar";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "@/components/ui/input-group";
+} from "@/components/third-party-shadcn/input-group";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/components/third-party-shadcn/popover";
 
 function toDate(value: Date | string | undefined): Date | undefined {
   if (!value) return undefined;

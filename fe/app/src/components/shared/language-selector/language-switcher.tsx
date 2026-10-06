@@ -1,5 +1,5 @@
 import { ChevronDown, Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/third-party-shadcn/button";
 import {
   useLanguage,
   type Language,

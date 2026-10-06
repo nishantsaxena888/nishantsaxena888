@@ -1,7 +1,7 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Input } from "@/components/third-party-shadcn/input";
+import { Label } from "@/components/third-party-shadcn/label";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { assetUrl } from "@/platform/asset";

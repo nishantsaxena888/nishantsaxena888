@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { Slider } from "@/components/ui/slider";
-import { Input } from "@/components/ui/input";
+import { Slider } from "@/components/third-party-shadcn/slider";
+import { Input } from "@/components/third-party-shadcn/input";
 import { cn } from "@/lib/utils";
 interface InputPriceRangeProps {
   value?: [number, number];

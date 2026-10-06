@@ -10,7 +10,7 @@ import {
   ComboboxList,
   ComboboxItem,
   ComboboxEmpty,
-} from "@/components/ui/combobox";
+} from "@/components/third-party-shadcn/combobox";
 import { inputStyles, listStyles } from "./utils/input-style";
 
 export type SearchAutocompleteProps<T> = {

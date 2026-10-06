@@ -3,9 +3,9 @@
 import * as React from "react";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { InputGroup } from "@/components/ui/input-group";
+import { Button } from "@/components/third-party-shadcn/button";
+import { Input } from "@/components/third-party-shadcn/input";
+import { InputGroup } from "@/components/third-party-shadcn/input-group";
 import { cn } from "@/lib/utils";
 const DEFAULT_REQUIREMENTS = [
   { regex: /.{12,}/, text: "At least 12 characters" },

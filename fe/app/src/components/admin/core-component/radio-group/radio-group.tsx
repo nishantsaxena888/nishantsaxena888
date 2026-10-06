@@ -4,7 +4,7 @@ import * as React from "react";
 import {
   RadioGroup as BaseRadioGroup,
   RadioGroupItem,
-} from "@/components/ui/radio-group";
+} from "@/components/third-party-shadcn/radio-group";
 import { cn } from "@/lib/utils";
 type Option = {
   label: string;

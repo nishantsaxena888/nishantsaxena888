@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/third-party-shadcn/button";
 import { FormItrator } from "./form-itrator";
 import { cn } from "@/lib/utils";
 import { ChevronDownIcon } from "lucide-react";

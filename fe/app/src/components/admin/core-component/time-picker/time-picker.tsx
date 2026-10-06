@@ -8,16 +8,16 @@ import {
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "@/components/ui/input-group";
+} from "@/components/third-party-shadcn/input-group";
 
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/components/third-party-shadcn/popover";
 
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/third-party-shadcn/scroll-area";
+import { Button } from "@/components/third-party-shadcn/button";
 import { useTimePicker } from "./hook/use-time-picker";
 
 interface TimePickerProps {

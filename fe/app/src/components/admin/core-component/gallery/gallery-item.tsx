@@ -1,7 +1,7 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Trash2, GripVertical, File as FileIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/third-party-shadcn/button";
 import { cn } from "@/lib/utils";
 import { type GalleryStyle, type GalleryFile } from "./utils/gallery-style";
 import { assetUrl } from "@/platform/asset";

@@ -7,7 +7,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/third-party-shadcn/select";
 import { cn } from "@/lib/utils";
 
 export interface InlineSelectOption {

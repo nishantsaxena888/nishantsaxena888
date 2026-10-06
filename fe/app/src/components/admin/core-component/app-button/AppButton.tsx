@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/third-party-shadcn/button";
 import { cn } from "@/lib/utils";
 import { buttonStyles } from "./utils/button-style";
 import { useFormConfig } from "@/components/admin/form-render/utils/form-config-context";
-import { Spinner } from "@/components/ui/spinner";
+import { Spinner } from "@/components/third-party-shadcn/spinner";
 
 interface AppButtonProps extends React.ComponentProps<typeof Button> {
   themeName?: string;

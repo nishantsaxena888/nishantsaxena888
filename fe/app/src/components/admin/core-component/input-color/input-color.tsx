@@ -6,21 +6,21 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+} from "@/components/third-party-shadcn/popover";
+import { Input } from "@/components/third-party-shadcn/input";
+import { Button } from "@/components/third-party-shadcn/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/third-party-shadcn/dropdown-menu";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "@/components/ui/input-group";
+} from "@/components/third-party-shadcn/input-group";
 import { Pipette, ChevronDown } from "lucide-react";
 import {
   hexToRgb,

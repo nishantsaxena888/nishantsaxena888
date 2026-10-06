@@ -1,4 +1,4 @@
-import { Label as ShadcnLabel } from "@/components/ui/label";
+import { Label as ShadcnLabel } from "@/components/third-party-shadcn/label";
 import { cn } from "@/lib/utils";
 
 type LabelFieldProps = {

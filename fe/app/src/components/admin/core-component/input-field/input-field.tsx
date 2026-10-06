@@ -1,4 +1,4 @@
-import { Input } from "@/components/ui/input";
+import { Input } from "@/components/third-party-shadcn/input";
 import { cn } from "@/lib/utils";
 
 type InputFieldProps = {

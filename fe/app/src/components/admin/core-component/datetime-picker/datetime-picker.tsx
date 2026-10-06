@@ -3,20 +3,20 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { CalendarIcon, Clock } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from "@/components/third-party-shadcn/calendar";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "@/components/ui/input-group";
+} from "@/components/third-party-shadcn/input-group";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Button } from "@/components/ui/button";
+} from "@/components/third-party-shadcn/popover";
+import { ScrollArea } from "@/components/third-party-shadcn/scroll-area";
+import { Button } from "@/components/third-party-shadcn/button";
 import { useTimePicker } from "../time-picker/hook/use-time-picker";
 
 interface DateTimePickerProps {

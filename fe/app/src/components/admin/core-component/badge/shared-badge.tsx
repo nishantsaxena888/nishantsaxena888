@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/third-party-shadcn/badge";
 import { cn } from "@/lib/utils";
 
 export interface SharedBadgeProps extends Omit<React.ComponentProps<typeof Badge>, "variant"> {

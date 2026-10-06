@@ -2,7 +2,7 @@
 import React from "react";
 import { NotFound } from "@/pages/not-found/not-found";
 import { useDashboardRenderer } from "./utils/use-dashboard-renderer";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/third-party-shadcn/sidebar";
 import { AppSidebar } from "@/components/admin/app-sidebar";
 import { SiteHeader } from "@/components/admin/site-header";
 import { useFormStyleStore } from "@/store/use-form-style";

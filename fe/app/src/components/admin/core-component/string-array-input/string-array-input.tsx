@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { Plus, X } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Input } from "@/components/third-party-shadcn/input";
+import { Button } from "@/components/third-party-shadcn/button";
 import { cn } from "@/lib/utils";
 
 interface StringArrayInputProps {

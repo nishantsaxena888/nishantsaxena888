@@ -5,23 +5,23 @@ import { TableIterator } from "./features/table-iterator";
 import type { IteratorColumn, IteratorConfig } from "./features/type";
 import { useIterator } from "./features/use-iterator";
 import { useIteratorOptions } from "./features/use-options";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/third-party-shadcn/tabs";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
   DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/third-party-shadcn/dropdown-menu";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
+} from "@/components/third-party-shadcn/select";
+import { Button } from "@/components/third-party-shadcn/button";
+import { Input } from "@/components/third-party-shadcn/input";
+import { Checkbox } from "@/components/third-party-shadcn/checkbox";
 import {
   Columns3Icon,
   PlusIcon,

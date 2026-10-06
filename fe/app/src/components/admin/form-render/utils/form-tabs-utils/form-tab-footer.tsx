@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/third-party-shadcn/button";
 import { useFormTabFooter } from "./use-form-tab-footer";
 import { cn } from "@/lib/utils";
 import { useFormConfig } from "../form-config-context";

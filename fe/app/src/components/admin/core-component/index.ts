@@ -47,7 +47,7 @@ export * from "./pagination/shared-pagination";
 export * from "./typography-renderer/typography-renderer";
 export * from "./dynamic-select";
 export * from "./dynamic-multi-select";
-export * from "../../ui/input-otp";
+export * from "../../third-party-shadcn/input-otp";
 export * from "./form-input";
 
 export * from "./types";

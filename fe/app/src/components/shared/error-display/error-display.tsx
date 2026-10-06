@@ -6,7 +6,7 @@ import {
   RefreshCcw,
   ShieldAlert,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/third-party-shadcn/button";
 
 interface ErrorDisplayProps {
   error: any;

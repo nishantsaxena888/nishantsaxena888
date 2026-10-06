@@ -1,5 +1,5 @@
 "use client";
-import { PhoneInput } from "@/components/ui/phone-input";
+import { PhoneInput } from "@/components/third-party-shadcn/phone-input";
 import { cn } from "@/lib/utils";
 type PhoneFieldProps = {
   value?: string;
