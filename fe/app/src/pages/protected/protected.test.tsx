@@ -5,7 +5,7 @@ const navigate = vi.fn();
 vi.mock("@/platform/navigation", () => ({
   useNav: () => ({ navigate }),
 }));
-vi.mock("@/components/shared/dashboard-renderer", () => ({
+vi.mock("@/components/admin/dashboard-renderer", () => ({
   DashboardRenderer: () => <div>admin-surface</div>,
 }));
 

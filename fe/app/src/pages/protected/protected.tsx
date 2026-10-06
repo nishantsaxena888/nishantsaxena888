@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from "react";
 import { useNav } from "@/platform/navigation";
-import { DashboardRenderer } from "@/components/shared/dashboard-renderer";
+import { DashboardRenderer } from "@/components/admin/dashboard-renderer";
 import { storage } from "@/platform/storage";
 import { onAppEvent } from "@/platform/host";
 

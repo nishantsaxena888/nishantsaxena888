@@ -1,4 +1,4 @@
-import { IteratorModule } from "@/components/shared/iterator";
+import { IteratorModule } from "@/components/admin/iterator";
 import { DefaultEditModule } from "./utils/default-editmodule";
 import { DefaultPagination } from "./utils/default-pagination";
 import { ItemsPerPageInfo } from "./utils/item-per-page-info";

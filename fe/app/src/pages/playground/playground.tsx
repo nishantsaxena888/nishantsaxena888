@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IteratorModule } from "../../components/shared/iterator/iterator-module";
+import { IteratorModule } from "../../components/admin/iterator/iterator-module";
 import { FormPlayground } from "./form-playground";
 
 const dummyData = [

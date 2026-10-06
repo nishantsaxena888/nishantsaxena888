@@ -6,7 +6,7 @@ import { useManytoMany } from "./utils/use-many-to-many";
 import { useFormStyleStore } from "@/store/use-form-style";
 import { DefaultPagination } from "@/tenants/admin/default-admin/utils/default-pagination";
 import { ItemsPerPageInfo } from "@/tenants/admin/default-admin/utils/item-per-page-info";
-import { IteratorModule } from "@/components/shared/iterator";
+import { IteratorModule } from "@/components/admin/iterator";
 import { AdminSkeleton } from "@/tenants/admin/default-admin/utils/admin-skeleton";
 import { toast } from "@/lib/toast";
 import { ManyToManyForm } from "./utils/many-to-many-form";
